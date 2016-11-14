@@ -40,7 +40,7 @@ public class HomeController {
 
 		
 		System.out.println("시작페이지 컨트롤러 타기");
-		return "index";
+		return "home.index";
 	}
 
 	

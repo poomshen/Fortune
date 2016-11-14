@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+   <definition name="home.*" template="/WEB-INF/views/inc/layout.jsp">
+	   	<put-attribute name="header"  value="/WEB-INF/views/inc/header.jsp" />
+    	<put-attribute name="footer"  value="/WEB-INF/views/inc/footer.jsp" />
+    	<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+  	</definition>
+    <definition name="fortune.*" template="/WEB-INF/views/emp/inc/layout.jsp">
+    	<put-attribute name="header"  value="/WEB-INF/views/inc/header.jsp" />
+    	<put-attribute name="aside"  value="/WEB-INF/views/inc/aside.jsp" />
+    	<put-attribute name="content" value="/WEB-INF/views/emp/{1}.jsp" />
+  </definition>
+</tiles-definitions>   
