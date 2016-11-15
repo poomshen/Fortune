@@ -26,12 +26,26 @@ h1, h2 {
 }
 
 h3 {
-	font-size: 30px;
+    font-size: 50px;
     font-weight: 700;
-    color: #666;
+    color: #fff;
     line-height: 34px;
 }
+label {
+    display: inline-block;
+    max-width: 100%;
+  
+    /* font-weight: 700; */
+    color: #fff;
+}
 
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 300px;
+    margin-bottom: 0;
+}
 img { max-width: 100%; }
 
 ::-moz-selection { background: #8ec1cd; color: #fff; text-shadow: none; }
@@ -223,6 +237,7 @@ nav a:focus { color: #eee; outline: 0; }
 .top-content {
 	padding: 250px 0;
 }
+
 
 .top-content-text {
 	width: 700px;

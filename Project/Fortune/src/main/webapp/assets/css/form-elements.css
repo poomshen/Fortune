@@ -130,3 +130,40 @@ button.btn:focus {
 	background:background: rgba(245, 245, 245, 0.33);
 	color: #fff;
 }
+div.moco {
+    position: relative;
+    background-color: rgba(245, 245, 245, 0.91);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+div.con {
+		padding: 120px 0;
+
+}
+.moco-header {
+    min-height: 16.43px;
+    padding: 15px;
+
+}
+
+.moco-body {
+    position: relative;
+    /* padding: 15px; */
+}
+
+.welll {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    /* background-color: rgba(255, 255, 255, 0); */
+    /* border: 1px solid #e3e3e3; */
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    /* box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05); */
+}
