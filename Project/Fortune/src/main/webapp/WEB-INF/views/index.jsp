@@ -63,7 +63,7 @@
 
 							<div class="r-form-1-bottom">
 
-								<form role="form" action="#" method="post">
+								<form role="form" action="main.htm" method="post">
 									<div class="form-group">
 										<label class="sr-only" for="r-form-1-first-name">First
 											name</label>

@@ -24,7 +24,7 @@ public class HomeController {
 	public String index() {
 
 		
-		System.out.println("�떆�옉�럹�씠吏� 而⑦듃濡ㅻ윭 ��湲�");
+		System.out.println("index 컨트롤러");
 		return "index";
 	}
 
@@ -32,8 +32,18 @@ public class HomeController {
 	public String sign() {
 
 		
-		System.out.println("�떆�옉�럹�씠吏� 而⑦듃濡ㅻ윭 ��湲�");
+		System.out.println("회원가입 컨트롤러");
 		return "sign";
 	}
+	
+
+	@RequestMapping(value = "/main.htm", method = RequestMethod.POST)
+	public String main() {
+
+		
+		System.out.println("메뉴 컨트롤러");
+		return "home.main";
+	}
+
 
 }
