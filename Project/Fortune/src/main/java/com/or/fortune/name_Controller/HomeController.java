@@ -19,29 +19,31 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-/*	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
-	}*/
+
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String index() {
 
 		
-		System.out.println("시작페이지 컨트롤러 타기");
+		System.out.println("index 컨트롤러");
+		return "index";
+	}
+
+	@RequestMapping(value = "/sign.htm", method = RequestMethod.POST)
+	public String sign() {
+
+		
+		System.out.println("회원가입 컨트롤러");
+		return "sign";
+	}
+	
+
+	@RequestMapping(value = "/main.htm", method = RequestMethod.POST)
+	public String main() {
+
+		
+		System.out.println("메뉴 컨트롤러");
 		return "home.main";
 	}
 
-	
+
 }

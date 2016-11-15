@@ -33,6 +33,8 @@
 
 <body>
 
+
+
 	<!-- Loader -->
 	<div class="loader" style="display: none;">
 		<div class="loader-img" style="display: none;"></div>
@@ -40,88 +42,165 @@
 
 
 	<!-- Top content -->
-	<div class="top-content"
+	<div class="con"
 		style="position: relative; z-index: 0; background: none;">
-		<div class="top-content-text wow fadeInUp animated"
-			style="visibility: visible; animation-name: fadeInUp;">
+	<!-- 		<div class="moco"> -->
+        		
+        				<h3 class="modal-title" id="modal-login-label">join</h3>
+    			
+        			<div class="moco-body">
+        			<!-- 	 <div class="container"> -->
 
-			<br /><!-- 
-			<img src="assets/img/logo/fortune.png"/> -->
-			<h1>
-				<a href="">fortune</a>
-			</h1>
+ <form class=" form-horizontal" action=" " method="post"  id="contact_form">
+<fieldset>
 
+<!-- Text input-->
 
-			<div class="top-content-bottom-link">
-				<div class="login_box">
+<div class="form-group">
+  <label class="col-md-4 control-label">이름</label>  
+  <div class="col-md-5 inputGroupContainer">
+  <div class="input-group">
+  <span class="addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="first_name"  class="form-control hvr-glow"  type="text">
+    </div>
+  </div>
+</div>
 
-					<div class="content_wrap">
+<!-- Text input-->
 
-						<div
-							class="col-sm-6 col-sm-offset-3 r-form-1-box wow fadeInUp animated"
-							style="visibility: visible; animation-name: fadeInUp;">
+<div class="form-group">
+  <label class="col-md-4 control-label" >ID</label> 
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+  <span class="addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="last_name" class="form-control hvr-glow"  type="text">
+    </div>
+  </div>
+</div>
 
-							<div class="r-form-1-bottom">
-
-								<form role="form" action="main.htm" method="post">
-									<div class="form-group">
-										<label class="sr-only" for="r-form-1-first-name">First
-											name</label>
-
-
-										<!-- 	<div class="input-group margin-bottom-sm row">
-										 <input type="text"
-												name="r-form-1-first-name" 
-											class="form-control hvr-glow"
-												id="r-form-1-first-name">	<span class="addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-										</div> -->
-
-										<div class="input-group">
-											<span class="addon"><i
-												class="fa fa-user" aria-hidden="true"></i></span>
-											<div class="form-group">
-												<label class="sr-only" for="r-form-1-email">Email</label> <input
-													type="text" name="r-form-1-email"
-													class="form-control hvr-glow" id="r-form-1-email">
-											</div>
-										</div>
-										<div class="input-group">
-											<span class="addon"><i
-												class="fa fa-key" aria-hidden="true"></i></span>
-											<div class="form-group">
-												<label class="sr-only" for="r-form-1-email">Email</label> <input
-													type="text" name="r-form-1-email"
-													class="form-control hvr-glow" id="r-form-1-email">
-											</div>
-										</div>
-									</div>
+<!-- Text input-->
+       <div class="form-group">
+  <label class="col-md-4 control-label">패스워드</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  <input name="email"class="form-control hvr-glow"  type="text">
+    </div>
+  </div>
+</div>
 
 
-									<!-- <button type="button" class="btn hvr-forward" data-toggle="modal" data-target="#myModal">sign</button>
-									 -->
-									
-									<button type="submit" formaction="sign.htm" class="btn hvr-forward" >sign</button>
-									
-									 &nbsp; &nbsp; &nbsp;
-									<button type="submit" class="btn hvr-forward">login</button>
-									
+<!-- Text input-->
+       
+<div class="form-group">
+  <label class="col-md-4 control-label">전화번호</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="addon"><i class="glyphicon glyphicon-earphone"></i></span>
+  <input name="phone"  class="form-control hvr-glow" type="text">
+    </div>
+  </div>
+</div>
 
-								</form>
-							</div>
-						</div>
-					</div>
+<!-- Text input-->
+      
+<div class="form-group">
+  <label class="col-md-4 control-label">생년월일</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
+  <input name="address"  class="form-control hvr-glow" type="text">
+    </div>
+  </div>
+</div>
 
-				</div>
-			</div>
+<!-- Text input-->
+ 
+<div class="form-group">
+  <label class="col-md-4 control-label">입사일</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
+  <input name="city" class="form-control"  type="text">
+    </div>
+  </div>
+</div>
 
-		</div>
+<!-- Select Basic -->
+   
+<div class="form-group"> 
+  <label class="col-md-4 control-label">팀번호</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="state" class="form-control selectpicker" >
+      <option value=" " >Please select your state</option>
+      <option>1</option>
+      <option>2</option>
+      <option >3</option>
+ 
+    </select>
+  </div>
+</div>
+</div>
 
-	</div>
-	
+<div class="form-group"> 
+  <label class="col-md-4 control-label">직급번호</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="state" class="form-control selectpicker" >
+      <option value=" " >Please select your state</option>
+      <option>1</option>
+      <option>2</option>
+      <option >3</option>
+ 
+    </select>
+  </div>
+</div>
+</div>
+
+
+<!-- radio checks -->
+ <div class="form-group">
+                        <label class="col-md-4 control-label">성별</label>
+                        <div class="col-md-4">
+                    
+                                <label>
+                                    <input type="radio" name="hosting" value="female" />female
+                               </label>
+                        
+                      
+                                <label>
+                                    <input type="radio" name="hosting" value="male" /> male
+                                </label>
+                        
+                        </div>
+                    </div>
+
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="control-label"></label>
+  
+    <button type="submit" class="btn hvr-forward" >sign</button>
+ 
+</div>
+
+</fieldset>
+</form>
+</div>
+   <!-- /.container -->
+  
+	                    
+        			</div>
+
+
 	<div class="backstretch"
-		style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 609px; width: 972px; z-index: -999998; position: absolute;">
+		style="left: 0px;top: 0px;overflow: hidden;margin: 0px;padding: 0px;height: 1230px;width: 1400px; z-index: -999998;position: absolute;">
 		<img src="assets/img/backgrounds/1.jpg"
-			style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1082.67px; height: 609px; max-height: none; max-width: none; z-index: -999999; top: 0px; left: -55.3333px;">
+			style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1400px; height: 1000px; max-height: none; max-width: none; z-index: -999999; top: 0px; left: -55.3333px;">
 	</div>
 
 
@@ -438,7 +517,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="scroll-to-top">
-						<a class="scroll-link" href="#top-content"><i
+						<a class="scroll-link" href="#top-content2"><i
 							class="fa fa-chevron-up"></i></a>
 					</div>
 				</div>
@@ -475,8 +554,6 @@
 	<script src="assets/js/masonry.pkgd.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
 
-
- 
 
 
 
