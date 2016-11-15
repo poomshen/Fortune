@@ -1,0 +1,47 @@
+ALTER TABLE collabo_users
+	ADD
+		CONSTRAINT FK_collabo_TO_collabo_users
+		FOREIGN KEY (
+			collaboration_no
+		)
+		REFERENCES collaboration (
+			collaboration_no
+		);
+ALTER TABLE file_room
+	ADD
+		CONSTRAINT FK_collabo_req_TO_file_room
+		FOREIGN KEY (
+			collabo_request_NO
+		)
+		REFERENCES collabo_request (
+			collabo_request_NO
+		);
+ALTER TABLE meeting_users
+	ADD
+		CONSTRAINT FK_meet_det_TO_meeting_users
+		FOREIGN KEY (
+			meeting_no
+		)
+		REFERENCES meeting_detail (
+			meeting_no
+		);
+ALTER TABLE collabo_history
+	ADD
+		CONSTRAINT FK_coll_req_TO_collabo_history
+		FOREIGN KEY (
+			collabo_request_NO
+		)
+		REFERENCES collabo_request (
+			collabo_request_NO
+		);
+ALTER TABLE collabo_history
+	ADD
+		CONSTRAINT FK_collabo_TO_collabo_history
+		FOREIGN KEY (
+			collaboration_NO
+		)
+		REFERENCES collaboration (
+			collaboration_no
+		);
+
+
