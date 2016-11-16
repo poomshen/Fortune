@@ -96,7 +96,7 @@
                                     <a class="active" href="blank.html">Blank Page</a>
                                 </li>
                                 <li>
-                                    <a href="login.html">Login Page</a>
+                                    <a href="login.htm">Login Page</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

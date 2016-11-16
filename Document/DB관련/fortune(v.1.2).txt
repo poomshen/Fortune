@@ -1,0 +1,883 @@
+/* 사용자 */
+CREATE TABLE users (
+	user_ID VARCHAR2(100) NOT NULL, /* ID */
+	user_password VARCHAR2(500) NOT NULL, /* 패스워드 */
+	user_name VARCHAR2(200) NOT NULL, /* 이름 */
+	user_gender VARCHAR2(10) NOT NULL, /* 성별 */
+	user_date DATE NOT NULL, /* 생년월일 */
+	user_phone VARCHAR2(200) NOT NULL, /* 전화번호 */
+	user_join TIMESTAMP NOT NULL, /* 입사일 */
+	position_No NUMBER, /* 직급번호 */
+	team_No NUMBER, /* 팀 번호 */
+	dept_No NUMBER, /* 부서번호 */
+	role_no NUMBER NOT NULL /* 사용자권한번호 */
+);
+
+COMMENT ON TABLE users IS '사용자';
+
+COMMENT ON COLUMN users.user_ID IS 'ID';
+
+COMMENT ON COLUMN users.user_password IS '패스워드';
+
+COMMENT ON COLUMN users.user_name IS '이름';
+
+COMMENT ON COLUMN users.user_gender IS '성별';
+
+COMMENT ON COLUMN users.user_date IS '생년월일';
+
+COMMENT ON COLUMN users.user_phone IS '전화번호';
+
+COMMENT ON COLUMN users.user_join IS '입사일';
+
+COMMENT ON COLUMN users.position_No IS '직급번호';
+
+COMMENT ON COLUMN users.team_No IS '팀 번호';
+
+COMMENT ON COLUMN users.dept_No IS '부서번호';
+
+COMMENT ON COLUMN users.role_no IS '사용자권한번호';
+
+CREATE UNIQUE INDEX PK_users
+	ON users (
+		user_ID ASC
+	);
+
+ALTER TABLE users
+	ADD
+		CONSTRAINT PK_users
+		PRIMARY KEY (
+			user_ID
+		);
+
+/* 부서 */
+CREATE TABLE dept (
+	dept_No NUMBER NOT NULL, /* 부서번호 */
+	user_ID VARCHAR2(100) NOT NULL, /* 부장 아이디 */
+	dept_name VARCHAR2(100) NOT NULL /* 부서명 */
+);
+
+COMMENT ON TABLE dept IS '부서';
+
+COMMENT ON COLUMN dept.dept_No IS '부서번호';
+
+COMMENT ON COLUMN dept.user_ID IS '부장 아이디';
+
+COMMENT ON COLUMN dept.dept_name IS '부서명';
+
+CREATE UNIQUE INDEX PK_dept
+	ON dept (
+		dept_No ASC
+	);
+
+ALTER TABLE dept
+	ADD
+		CONSTRAINT PK_dept
+		PRIMARY KEY (
+			dept_No
+		);
+
+/* 협업 요청 */
+CREATE TABLE collabo_req (
+	collabo_req_index NUMBER NOT NULL, /* 구분자 */
+	collabo_req_no NUMBER NOT NULL, /* 요청번호 */
+	user_ID VARCHAR2(100) NOT NULL, /* 요청자 */
+	collabo_req_date TIMESTAMP NOT NULL, /* 요청날자 */
+	collabo_req_title VARCHAR2(200) NOT NULL, /* 요청글 제목 */
+	collabo_req_text VARCHAR2(4000) NOT NULL, /* 요청 글  */
+	collabo_req_state VARCHAR2(200) NOT NULL, /* 진행상태 */
+	collabo_req_ID VARCHAR2(100) NOT NULL /* 협업수신자 */
+);
+
+COMMENT ON TABLE collabo_req IS '협업 요청';
+
+COMMENT ON COLUMN collabo_req.collabo_req_index IS '구분자';
+
+COMMENT ON COLUMN collabo_req.collabo_req_no IS '요청번호';
+
+COMMENT ON COLUMN collabo_req.user_ID IS '요청자';
+
+COMMENT ON COLUMN collabo_req.collabo_req_date IS '요청날자';
+
+COMMENT ON COLUMN collabo_req.collabo_req_title IS '요청글 제목';
+
+COMMENT ON COLUMN collabo_req.collabo_req_text IS '요청 글 ';
+
+COMMENT ON COLUMN collabo_req.collabo_req_state IS '진행상태';
+
+COMMENT ON COLUMN collabo_req.collabo_req_ID IS '협업수신자';
+
+CREATE UNIQUE INDEX PK_collabo_req
+	ON collabo_req (
+		collabo_req_index ASC,
+		collabo_req_no ASC
+	);
+
+ALTER TABLE collabo_req
+	ADD
+		CONSTRAINT PK_collabo_req
+		PRIMARY KEY (
+			collabo_req_index,
+			collabo_req_no
+		);
+
+/* 팀 */
+CREATE TABLE team (
+	team_NO NUMBER NOT NULL, /* 팀 번호 */
+	user_ID VARCHAR2(100) NOT NULL, /* 팀장 아이디 */
+	dept_No NUMBER NOT NULL, /* 부서번호 */
+	team_name VARCHAR2(100) NOT NULL /* 팀명 */
+);
+
+COMMENT ON TABLE team IS '팀';
+
+COMMENT ON COLUMN team.team_NO IS '팀 번호';
+
+COMMENT ON COLUMN team.user_ID IS '팀장 아이디';
+
+COMMENT ON COLUMN team.dept_No IS '부서번호';
+
+COMMENT ON COLUMN team.team_name IS '팀명';
+
+CREATE UNIQUE INDEX PK_team
+	ON team (
+		team_NO ASC
+	);
+
+ALTER TABLE team
+	ADD
+		CONSTRAINT PK_team
+		PRIMARY KEY (
+			team_NO
+		);
+
+/* 사용자 권한 */
+CREATE TABLE role (
+	role_no NUMBER NOT NULL, /* 사용자권한번호 */
+	role VARCHAR2(200) NOT NULL /* 권한 */
+);
+
+COMMENT ON TABLE role IS '사용자 권한';
+
+COMMENT ON COLUMN role.role_no IS '사용자권한번호';
+
+COMMENT ON COLUMN role.role IS '권한';
+
+CREATE UNIQUE INDEX PK_role
+	ON role (
+		role_no ASC
+	);
+
+ALTER TABLE role
+	ADD
+		CONSTRAINT PK_role
+		PRIMARY KEY (
+			role_no
+		);
+
+/* 직급 */
+CREATE TABLE position (
+	position_No NUMBER NOT NULL, /* 직급번호 */
+	position_name VARCHAR2(100) NOT NULL /* 직급명 */
+);
+
+COMMENT ON TABLE position IS '직급';
+
+COMMENT ON COLUMN position.position_No IS '직급번호';
+
+COMMENT ON COLUMN position.position_name IS '직급명';
+
+CREATE UNIQUE INDEX PK_position
+	ON position (
+		position_No ASC
+	);
+
+ALTER TABLE position
+	ADD
+		CONSTRAINT PK_position
+		PRIMARY KEY (
+			position_No
+		);
+
+/* 협업 */
+CREATE TABLE collabo (
+	collabo_no NUMBER NOT NULL, /* 협업번호 */
+	collabo_req_index NUMBER, /* 구분자 */
+	collabo_req_no NUMBER, /* 요청번호 */
+	user_ID VARCHAR2(100) NOT NULL, /* 협업담당자 */
+	collabo_start TIMESTAMP NOT NULL, /* 협업시작날 */
+	collabo_end TIMESTAMP NOT NULL, /* 협업종료일 */
+	collabo_state VARCHAR2(200) NOT NULL /* 협업진행상태 */
+);
+
+COMMENT ON TABLE collabo IS '협업';
+
+COMMENT ON COLUMN collabo.collabo_no IS '협업번호';
+
+COMMENT ON COLUMN collabo.collabo_req_index IS '구분자';
+
+COMMENT ON COLUMN collabo.collabo_req_no IS '요청번호';
+
+COMMENT ON COLUMN collabo.user_ID IS '협업담당자';
+
+COMMENT ON COLUMN collabo.collabo_start IS '협업시작날';
+
+COMMENT ON COLUMN collabo.collabo_end IS '협업종료일';
+
+COMMENT ON COLUMN collabo.collabo_state IS '협업진행상태';
+
+CREATE UNIQUE INDEX PK_collabo
+	ON collabo (
+		collabo_no ASC
+	);
+
+ALTER TABLE collabo
+	ADD
+		CONSTRAINT PK_collabo
+		PRIMARY KEY (
+			collabo_no
+		);
+
+/* 참가자 */
+CREATE TABLE collabo_users (
+	collabo_no NUMBER NOT NULL, /* 협업번호 */
+	user_ID VARCHAR2(100) NOT NULL /* 참가자 */
+);
+
+COMMENT ON TABLE collabo_users IS '참가자';
+
+COMMENT ON COLUMN collabo_users.collabo_no IS '협업번호';
+
+COMMENT ON COLUMN collabo_users.user_ID IS '참가자';
+
+CREATE UNIQUE INDEX PK_collabo_users
+	ON collabo_users (
+		collabo_no ASC,
+		user_ID ASC
+	);
+
+ALTER TABLE collabo_users
+	ADD
+		CONSTRAINT PK_collabo_users
+		PRIMARY KEY (
+			collabo_no,
+			user_ID
+		);
+
+/* 자료실 */
+CREATE TABLE file_room (
+	collabo_req_index NUMBER NOT NULL, /* 구분자 */
+	collabo_req_no NUMBER NOT NULL, /* 요청번호 */
+	user_ID VARCHAR2(100) NOT NULL, /* 올린이 */
+	file_room_date TIMESTAMP NOT NULL, /* 올린날짜 */
+	file_room_name VARCHAR2(200) NOT NULL, /* 파일명 */
+	file_room_src VARCHAR2(200) NOT NULL /* 경로명 */
+);
+
+COMMENT ON TABLE file_room IS '자료실';
+
+COMMENT ON COLUMN file_room.collabo_req_index IS '구분자';
+
+COMMENT ON COLUMN file_room.collabo_req_no IS '요청번호';
+
+COMMENT ON COLUMN file_room.user_ID IS '올린이';
+
+COMMENT ON COLUMN file_room.file_room_date IS '올린날짜';
+
+COMMENT ON COLUMN file_room.file_room_name IS '파일명';
+
+COMMENT ON COLUMN file_room.file_room_src IS '경로명';
+
+/* 일정 */
+CREATE TABLE schedule (
+	schedule_no NUMBER NOT NULL, /* 일정번호 */
+	collabo_no NUMBER NOT NULL, /* 협업번호 */
+	schedule_start TIMESTAMP NOT NULL, /* 시작일 */
+	schedule_end TIMESTAMP NOT NULL /* 종료일 */
+);
+
+COMMENT ON TABLE schedule IS '일정';
+
+COMMENT ON COLUMN schedule.schedule_no IS '일정번호';
+
+COMMENT ON COLUMN schedule.collabo_no IS '협업번호';
+
+COMMENT ON COLUMN schedule.schedule_start IS '시작일';
+
+COMMENT ON COLUMN schedule.schedule_end IS '종료일';
+
+CREATE UNIQUE INDEX PK_schedule
+	ON schedule (
+		schedule_no ASC
+	);
+
+ALTER TABLE schedule
+	ADD
+		CONSTRAINT PK_schedule
+		PRIMARY KEY (
+			schedule_no
+		);
+
+/* 일반업무 */
+CREATE TABLE work (
+	work_no NUMBER NOT NULL, /* 업무번호 */
+	schedule_no NUMBER NOT NULL, /* 일정번호 */
+	work_title VARCHAR2(200) NOT NULL, /* 업무제목 */
+	work_text VARCHAR2(4000) NOT NULL /* 업무내용 */
+);
+
+COMMENT ON TABLE work IS '일반업무';
+
+COMMENT ON COLUMN work.work_no IS '업무번호';
+
+COMMENT ON COLUMN work.schedule_no IS '일정번호';
+
+COMMENT ON COLUMN work.work_title IS '업무제목';
+
+COMMENT ON COLUMN work.work_text IS '업무내용';
+
+CREATE UNIQUE INDEX PK_work
+	ON work (
+		work_no ASC
+	);
+
+ALTER TABLE work
+	ADD
+		CONSTRAINT PK_work
+		PRIMARY KEY (
+			work_no
+		);
+
+/* 업무당담자자 */
+CREATE TABLE work_users (
+	work_no NUMBER NOT NULL, /* 업무번호 */
+	user_ID VARCHAR2(100) NOT NULL /* ID */
+);
+
+COMMENT ON TABLE work_users IS '업무당담자자';
+
+COMMENT ON COLUMN work_users.work_no IS '업무번호';
+
+COMMENT ON COLUMN work_users.user_ID IS 'ID';
+
+CREATE UNIQUE INDEX PK_work_users
+	ON work_users (
+		work_no ASC,
+		user_ID ASC
+	);
+
+ALTER TABLE work_users
+	ADD
+		CONSTRAINT PK_work_users
+		PRIMARY KEY (
+			work_no,
+			user_ID
+		);
+
+/* 댓글 */
+CREATE TABLE work_comment (
+	work_comment_no NUMBER NOT NULL, /* 댓글번호 */
+	work_no NUMBER NOT NULL, /* 업무번호 */
+	user_ID VARCHAR2(100) NOT NULL, /* 작성자 */
+	work_comment_text VARCHAR2(4000) NOT NULL, /* 글내용 */
+	work_comment_date TIMESTAMP NOT NULL /* 작성시간 */
+);
+
+COMMENT ON TABLE work_comment IS '댓글';
+
+COMMENT ON COLUMN work_comment.work_comment_no IS '댓글번호';
+
+COMMENT ON COLUMN work_comment.work_no IS '업무번호';
+
+COMMENT ON COLUMN work_comment.user_ID IS '작성자';
+
+COMMENT ON COLUMN work_comment.work_comment_text IS '글내용';
+
+COMMENT ON COLUMN work_comment.work_comment_date IS '작성시간';
+
+CREATE UNIQUE INDEX PK_work_comment
+	ON work_comment (
+		work_comment_no ASC
+	);
+
+ALTER TABLE work_comment
+	ADD
+		CONSTRAINT PK_work_comment
+		PRIMARY KEY (
+			work_comment_no
+		);
+
+/* 회의업무 */
+CREATE TABLE meeting (
+	meeting_no NUMBER NOT NULL, /* 회의업무번호 */
+	schedule_no NUMBER NOT NULL, /* 일정번호 */
+	meeting_place_no NUMBER NOT NULL /* 회의장소번호 */
+);
+
+COMMENT ON TABLE meeting IS '회의업무';
+
+COMMENT ON COLUMN meeting.meeting_no IS '회의업무번호';
+
+COMMENT ON COLUMN meeting.schedule_no IS '일정번호';
+
+COMMENT ON COLUMN meeting.meeting_place_no IS '회의장소번호';
+
+CREATE UNIQUE INDEX PK_meeting
+	ON meeting (
+		meeting_no ASC
+	);
+
+ALTER TABLE meeting
+	ADD
+		CONSTRAINT PK_meeting
+		PRIMARY KEY (
+			meeting_no
+		);
+
+/* 회의장소 */
+CREATE TABLE meeting_place (
+	meeting_place_no NUMBER NOT NULL, /* 회의장소번호 */
+	meeting_place_name VARCHAR2(200) NOT NULL /* 회의장소 */
+);
+
+COMMENT ON TABLE meeting_place IS '회의장소';
+
+COMMENT ON COLUMN meeting_place.meeting_place_no IS '회의장소번호';
+
+COMMENT ON COLUMN meeting_place.meeting_place_name IS '회의장소';
+
+CREATE UNIQUE INDEX PK_meeting_place
+	ON meeting_place (
+		meeting_place_no ASC
+	);
+
+ALTER TABLE meeting_place
+	ADD
+		CONSTRAINT PK_meeting_place
+		PRIMARY KEY (
+			meeting_place_no
+		);
+
+/* 회의상세 */
+CREATE TABLE meet_detail (
+	meeting_no NUMBER NOT NULL, /* 회의업무번호 */
+	meeting_text VARCHAR2(4000) NOT NULL /* 회의내용 */
+);
+
+COMMENT ON TABLE meet_detail IS '회의상세';
+
+COMMENT ON COLUMN meet_detail.meeting_no IS '회의업무번호';
+
+COMMENT ON COLUMN meet_detail.meeting_text IS '회의내용';
+
+CREATE UNIQUE INDEX PK_meet_detail
+	ON meet_detail (
+		meeting_no ASC
+	);
+
+ALTER TABLE meet_detail
+	ADD
+		CONSTRAINT PK_meet_detail
+		PRIMARY KEY (
+			meeting_no
+		);
+
+/* 참석인원 */
+CREATE TABLE meet_users (
+	meeting_no NUMBER NOT NULL, /* 회의업무번호 */
+	user_ID VARCHAR2(100) NOT NULL /* 참석자 */
+);
+
+COMMENT ON TABLE meet_users IS '참석인원';
+
+COMMENT ON COLUMN meet_users.meeting_no IS '회의업무번호';
+
+COMMENT ON COLUMN meet_users.user_ID IS '참석자';
+
+CREATE UNIQUE INDEX PK_meet_users
+	ON meet_users (
+		meeting_no ASC,
+		user_ID ASC
+	);
+
+ALTER TABLE meet_users
+	ADD
+		CONSTRAINT PK_meet_users
+		PRIMARY KEY (
+			meeting_no,
+			user_ID
+		);
+
+/* 협업히스토리 */
+CREATE TABLE history (
+	collaboration_NO NUMBER NOT NULL, /* 협업번호 */
+	collabo_req_index NUMBER NOT NULL, /* 구분자 */
+	collabo_req_no NUMBER, /* 요청번호 */
+	history_date TIMESTAMP NOT NULL, /* 날짜 */
+	history_title VARCHAR2(200) NOT NULL, /* 히스토리제목 */
+	history_text VARCHAR2(4000) NOT NULL, /* 히스토리내용 */
+	user_ID VARCHAR2(100) NOT NULL /* 작성자 */
+);
+
+COMMENT ON TABLE history IS '협업히스토리';
+
+COMMENT ON COLUMN history.collaboration_NO IS '협업번호';
+
+COMMENT ON COLUMN history.collabo_req_index IS '구분자';
+
+COMMENT ON COLUMN history.collabo_req_no IS '요청번호';
+
+COMMENT ON COLUMN history.history_date IS '날짜';
+
+COMMENT ON COLUMN history.history_title IS '히스토리제목';
+
+COMMENT ON COLUMN history.history_text IS '히스토리내용';
+
+COMMENT ON COLUMN history.user_ID IS '작성자';
+
+/* 공지사항 */
+CREATE TABLE notice (
+	notice_No NUMBER NOT NULL, /* 게시번호 */
+	user_ID VARCHAR2(100) NOT NULL, /* ID */
+	notice_title VARCHAR2(500) NOT NULL, /* 글제목 */
+	notice_text VARCHAR2(4000) NOT NULL, /* 글내용 */
+	notice_hits NUMBER NOT NULL, /* 조회수 */
+	notice_date TIMESTAMP NOT NULL, /* 작성일 */
+	notice_file_name VARCHAR2(200), /* 파일명 */
+	notice_file_src VARCHAR2(200) /* 파일경로 */
+);
+
+COMMENT ON TABLE notice IS '공지사항';
+
+COMMENT ON COLUMN notice.notice_No IS '게시번호';
+
+COMMENT ON COLUMN notice.user_ID IS 'ID';
+
+COMMENT ON COLUMN notice.notice_title IS '글제목';
+
+COMMENT ON COLUMN notice.notice_text IS '글내용';
+
+COMMENT ON COLUMN notice.notice_hits IS '조회수';
+
+COMMENT ON COLUMN notice.notice_date IS '작성일';
+
+COMMENT ON COLUMN notice.notice_file_name IS '파일명';
+
+COMMENT ON COLUMN notice.notice_file_src IS '파일경로';
+
+CREATE UNIQUE INDEX PK_notice
+	ON notice (
+		notice_No ASC
+	);
+
+ALTER TABLE notice
+	ADD
+		CONSTRAINT PK_notice
+		PRIMARY KEY (
+			notice_No
+		);
+
+ALTER TABLE users
+	ADD
+		CONSTRAINT FK_team_TO_users
+		FOREIGN KEY (
+			team_No
+		)
+		REFERENCES team (
+			team_NO
+		);
+
+ALTER TABLE users
+	ADD
+		CONSTRAINT FK_dept_TO_users
+		FOREIGN KEY (
+			dept_No
+		)
+		REFERENCES dept (
+			dept_No
+		);
+
+ALTER TABLE users
+	ADD
+		CONSTRAINT FK_position_TO_users
+		FOREIGN KEY (
+			position_No
+		)
+		REFERENCES position (
+			position_No
+		);
+
+ALTER TABLE users
+	ADD
+		CONSTRAINT FK_role_TO_users
+		FOREIGN KEY (
+			role_no
+		)
+		REFERENCES role (
+			role_no
+		);
+
+ALTER TABLE dept
+	ADD
+		CONSTRAINT FK_users_TO_dept
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE collabo_req
+	ADD
+		CONSTRAINT FK_users_TO_collabo_req
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE collabo_req
+	ADD
+		CONSTRAINT FK_users_TO_collabo_req2
+		FOREIGN KEY (
+			collabo_req_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE team
+	ADD
+		CONSTRAINT FK_dept_TO_team
+		FOREIGN KEY (
+			dept_No
+		)
+		REFERENCES dept (
+			dept_No
+		);
+
+ALTER TABLE team
+	ADD
+		CONSTRAINT FK_users_TO_team
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE collabo
+	ADD
+		CONSTRAINT FK_users_TO_collabo
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE collabo
+	ADD
+		CONSTRAINT FK_collabo_req_TO_collabo
+		FOREIGN KEY (
+			collabo_req_index,
+			collabo_req_no
+		)
+		REFERENCES collabo_req (
+			collabo_req_index,
+			collabo_req_no
+		);
+
+ALTER TABLE collabo_users
+	ADD
+		CONSTRAINT FK_users_TO_collabo_users
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE collabo_users
+	ADD
+		CONSTRAINT FK_collabo_TO_collabo_users
+		FOREIGN KEY (
+			collabo_no
+		)
+		REFERENCES collabo (
+			collabo_no
+		);
+
+ALTER TABLE file_room
+	ADD
+		CONSTRAINT FK_collabo_req_TO_file_room
+		FOREIGN KEY (
+			collabo_req_index,
+			collabo_req_no
+		)
+		REFERENCES collabo_req (
+			collabo_req_index,
+			collabo_req_no
+		);
+
+ALTER TABLE file_room
+	ADD
+		CONSTRAINT FK_users_TO_file_room
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE schedule
+	ADD
+		CONSTRAINT FK_collabo_TO_schedule
+		FOREIGN KEY (
+			collabo_no
+		)
+		REFERENCES collabo (
+			collabo_no
+		);
+
+ALTER TABLE work
+	ADD
+		CONSTRAINT FK_schedule_TO_work
+		FOREIGN KEY (
+			schedule_no
+		)
+		REFERENCES schedule (
+			schedule_no
+		);
+
+ALTER TABLE work_users
+	ADD
+		CONSTRAINT FK_work_TO_work_users
+		FOREIGN KEY (
+			work_no
+		)
+		REFERENCES work (
+			work_no
+		);
+
+ALTER TABLE work_users
+	ADD
+		CONSTRAINT FK_users_TO_work_users
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE work_comment
+	ADD
+		CONSTRAINT FK_work_TO_work_comment
+		FOREIGN KEY (
+			work_no
+		)
+		REFERENCES work (
+			work_no
+		);
+
+ALTER TABLE work_comment
+	ADD
+		CONSTRAINT FK_users_TO_work_comment
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE meeting
+	ADD
+		CONSTRAINT FK_schedule_TO_meeting
+		FOREIGN KEY (
+			schedule_no
+		)
+		REFERENCES schedule (
+			schedule_no
+		);
+
+ALTER TABLE meeting
+	ADD
+		CONSTRAINT FK_meeting_place_TO_meeting
+		FOREIGN KEY (
+			meeting_place_no
+		)
+		REFERENCES meeting_place (
+			meeting_place_no
+		);
+
+ALTER TABLE meet_detail
+	ADD
+		CONSTRAINT FK_meeting_TO_meet_detail
+		FOREIGN KEY (
+			meeting_no
+		)
+		REFERENCES meeting (
+			meeting_no
+		);
+
+ALTER TABLE meet_users
+	ADD
+		CONSTRAINT FK_users_TO_meet_users
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE meet_users
+	ADD
+		CONSTRAINT FK_meet_detail_TO_meet_users
+		FOREIGN KEY (
+			meeting_no
+		)
+		REFERENCES meet_detail (
+			meeting_no
+		);
+
+ALTER TABLE history
+	ADD
+		CONSTRAINT FK_collabo_req_TO_history
+		FOREIGN KEY (
+			collabo_req_index,
+			collabo_req_no
+		)
+		REFERENCES collabo_req (
+			collabo_req_index,
+			collabo_req_no
+		);
+
+ALTER TABLE history
+	ADD
+		CONSTRAINT FK_collabo_TO_history
+		FOREIGN KEY (
+			collaboration_NO
+		)
+		REFERENCES collabo (
+			collabo_no
+		);
+
+ALTER TABLE history
+	ADD
+		CONSTRAINT FK_users_TO_history
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
+
+ALTER TABLE notice
+	ADD
+		CONSTRAINT FK_users_TO_notice
+		FOREIGN KEY (
+			user_ID
+		)
+		REFERENCES users (
+			user_ID
+		);
