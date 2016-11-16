@@ -1,0 +1,93 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-11월-16-2016   
+--------------------------------------------------------
+REM INSERTING into DEPT
+SET DEFINE OFF;
+Insert into DEPT (DEPT_NO,DEPT_NAME) values (10,'개발부');
+Insert into DEPT (DEPT_NO,DEPT_NAME) values (20,'영업부');
+Insert into DEPT (DEPT_NO,DEPT_NAME) values (30,'품질관리부');
+Insert into DEPT (DEPT_NO,DEPT_NAME) values (40,'디자인부');
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-11월-16-2016   
+--------------------------------------------------------
+REM INSERTING into COLLABO_REQUEST
+SET DEFINE OFF;
+Insert into COLLABO_REQUEST (COLLABO_REQUEST_NO,USER_ID,COLLABO_REQUEST_DATE,COLLABO_REQUEST_TITLE,COLLABO_REQUEST_TEXT,COLLABO_REQUEST_STATE) values (2,'sung2@gmail.com',to_timestamp('16/11/15 18:36:08.955000000','RR/MM/DD HH24:MI:SS.FF'),'하하하하하게 해줭
+','이런면 안되','대기');
+Insert into COLLABO_REQUEST (COLLABO_REQUEST_NO,USER_ID,COLLABO_REQUEST_DATE,COLLABO_REQUEST_TITLE,COLLABO_REQUEST_TEXT,COLLABO_REQUEST_STATE) values (1,'sung@gmail.com',to_timestamp('16/11/15 17:30:57.657000000','RR/MM/DD HH24:MI:SS.FF'),'이것좀 해줭
+','이렇게해서 해줭
+','수락');
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-11월-16-2016   
+--------------------------------------------------------
+REM INSERTING into POSITION
+SET DEFINE OFF;
+Insert into POSITION (POSITION_NO,POSITION_NAME) values (1,'사원');
+Insert into POSITION (POSITION_NO,POSITION_NAME) values (2,'대리');
+Insert into POSITION (POSITION_NO,POSITION_NAME) values (3,'부장');
+
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-11월-16-2016   
+--------------------------------------------------------
+REM INSERTING into ROLE
+SET DEFINE OFF;
+Insert into ROLE (ROLE_NO,ROLE) values (0,'manager');
+Insert into ROLE (ROLE_NO,ROLE) values (1,'boss');
+Insert into ROLE (ROLE_NO,ROLE) values (2,'dept');
+Insert into ROLE (ROLE_NO,ROLE) values (3,'team');
+Insert into ROLE (ROLE_NO,ROLE) values (4,'user');
+Insert into ROLE (ROLE_NO,ROLE) values (5,'nouser');
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-11월-16-2016   
+--------------------------------------------------------
+REM INSERTING into TEAM
+SET DEFINE OFF;
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (101,10,'개발1팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (102,10,'개발2팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (103,10,'개발2팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (201,20,'영업1팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (202,20,'영업2팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (203,20,'영업3팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (301,30,'품질관리1팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (302,30,'품질관리2팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (303,30,'품질관리3팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (401,40,'디자인1팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (402,40,'디자인2팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (403,40,'디자인3팀');
+Insert into TEAM (TEAM_NO,DEPT_NO,TEAM_NAME) values (404,40,'디자인4팀');
+
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-11월-16-2016   
+--------------------------------------------------------
+REM INSERTING into USERS
+SET DEFINE OFF;
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('sung@gmail.com','1234','이성준','남자',to_date('16/11/15','RR/MM/DD'),'010-2637-9821',to_timestamp('16/11/15 17:27:30.000000000','RR/MM/DD HH24:MI:SS.FF'),3,null,40,2);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('sung1@gmail.com','1234','이성준','남자',to_date('16/11/15','RR/MM/DD'),'010-2637-9821',to_timestamp('16/11/15 17:27:56.000000000','RR/MM/DD HH24:MI:SS.FF'),3,null,30,2);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('sung2@gmail.com','1234','이성준','남자',to_date('16/11/15','RR/MM/DD'),'010-2637-9821',to_timestamp('16/11/15 17:28:04.000000000','RR/MM/DD HH24:MI:SS.FF'),3,null,20,2);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('sung3@gmail.com','1234','이성준','남자',to_date('16/11/15','RR/MM/DD'),'010-2637-9821',to_timestamp('16/11/15 17:28:13.000000000','RR/MM/DD HH24:MI:SS.FF'),3,null,10,2);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('개발1팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:30:09.000000000','RR/MM/DD HH24:MI:SS.FF'),2,101,10,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test4@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:30:12.000000000','RR/MM/DD HH24:MI:SS.FF'),1,201,20,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test5@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:30:12.000000000','RR/MM/DD HH24:MI:SS.FF'),1,202,20,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test1@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:27:56.000000000','RR/MM/DD HH24:MI:SS.FF'),1,101,10,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test6@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:30:12.000000000','RR/MM/DD HH24:MI:SS.FF'),1,203,20,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test2@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:29:14.000000000','RR/MM/DD HH24:MI:SS.FF'),1,102,10,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test3@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:29:14.000000000','RR/MM/DD HH24:MI:SS.FF'),1,103,10,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('개발2팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:30:16.000000000','RR/MM/DD HH24:MI:SS.FF'),2,102,10,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('개발3팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:30:22.000000000','RR/MM/DD HH24:MI:SS.FF'),2,103,10,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('영업1팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:30:34.000000000','RR/MM/DD HH24:MI:SS.FF'),2,201,20,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test7@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:30:34.000000000','RR/MM/DD HH24:MI:SS.FF'),1,301,30,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test8@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:30:34.000000000','RR/MM/DD HH24:MI:SS.FF'),1,302,30,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test9@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:30:35.000000000','RR/MM/DD HH24:MI:SS.FF'),1,303,30,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('영업2팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:30:41.000000000','RR/MM/DD HH24:MI:SS.FF'),2,202,20,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('영업3팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:30:45.000000000','RR/MM/DD HH24:MI:SS.FF'),2,203,20,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('품질관리1팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:31:04.000000000','RR/MM/DD HH24:MI:SS.FF'),2,301,30,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test10@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:31:05.000000000','RR/MM/DD HH24:MI:SS.FF'),1,401,40,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test11@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:31:05.000000000','RR/MM/DD HH24:MI:SS.FF'),1,402,40,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test12@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:31:05.000000000','RR/MM/DD HH24:MI:SS.FF'),1,403,40,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('test13@naver.com','1234','김중완','남자',to_date('16/11/15','RR/MM/DD'),'010-8450-7529',to_timestamp('16/11/15 17:31:05.000000000','RR/MM/DD HH24:MI:SS.FF'),1,403,40,4);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('품질관리2팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:31:10.000000000','RR/MM/DD HH24:MI:SS.FF'),2,302,30,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('품질관리3팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:31:16.000000000','RR/MM/DD HH24:MI:SS.FF'),2,303,30,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('디자인1팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:31:33.000000000','RR/MM/DD HH24:MI:SS.FF'),2,401,40,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('디자인2팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:31:41.000000000','RR/MM/DD HH24:MI:SS.FF'),2,402,40,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('디자인3팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:31:46.000000000','RR/MM/DD HH24:MI:SS.FF'),2,403,40,3);
+Insert into USERS (USER_ID,USER_PASSWORD,USER_NAME,USER_GENDER,USER_DATE,USER_PHONE,USER_JOIN,POSITION_NO,TEAM_NO,DEPT_NO,ROLE_NO) values ('디자인4팀장','1234','이명철','남자',to_date('16/11/15','RR/MM/DD'),'010-9086-1028',to_timestamp('16/11/15 17:31:52.000000000','RR/MM/DD HH24:MI:SS.FF'),2,404,40,3);
