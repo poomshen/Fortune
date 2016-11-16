@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fortune.notice_DAO.Notice_DAO">
+	<select id="listNotice" resultType="com.fortune.notice_DTO.Notice_DTO">
+		SELECT * FROM NOTICE ORDER BY NOTICE_DATE DESC
+	</select>
+	
+	
+	<insert id="writeNotice">
+		INSERT INTO NOTICE (NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_FILE_NAME, NOTICE_FILE_SRC) 
+					VALUES (NOTICE_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6})
+	</insert>
+	
+	
+	<delete id="deleteNotice">
+		DELETE FROM NOTICE WHERE USER_ID = #{param1}
+	</delete>
+	
+	
+</mapper>
