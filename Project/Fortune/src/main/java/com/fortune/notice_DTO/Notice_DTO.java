@@ -11,14 +11,14 @@ import java.sql.Timestamp;
 
 public class Notice_DTO {
 
-	int notice_no; //게시번호
-	String user_id; //ID
-	String notice_title; //글제목
-	String notice_text; //글내용
-	int notice_hits; //조회수
-	Timestamp notice_date; //작성일
-	String notice_file_name; //파일명
-	String notice_file_src; //파일경로
+	private int notice_no; //게시번호
+	private String user_id; //ID
+	private String notice_title; //글제목
+	private String notice_text; //글내용
+	private int notice_hits; //조회수
+	private Timestamp notice_date; //작성일
+	private String notice_file_name; //파일명
+	private String notice_file_src; //파일경로
 	
 	public Notice_DTO(){
 		

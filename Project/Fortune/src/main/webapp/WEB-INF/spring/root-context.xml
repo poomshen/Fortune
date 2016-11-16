@@ -19,7 +19,7 @@
 
 		<property name="dataSource" ref="driverManagerDataSource"></property>
 
-		<property name="mapperLocations" value="classpath*:kr/co/mycom/model/mapper/*xml" />
+		<property name="mapperLocations" value="classpath*:com/or/fortune/XML_DAO/*xml" />
 
 	</bean>
 

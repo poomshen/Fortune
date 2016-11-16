@@ -2,22 +2,60 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.fortune.notice_DAO.Notice_DAO">
-	<select id="listNotice" resultType="com.fortune.notice_DTO.Notice_DTO">
-		SELECT * FROM NOTICE ORDER BY NOTICE_DATE DESC
+	
+	<!-- 게시물 개수  -->
+	<select id="getCountNotice" resultType="Integer">	
+		SELECT COUNT(*) CNT 
+		FROM NOTICE 
+		WHERE ${param1} LIKE '%${param2}%'
 	</select>
 	
+	<!-- 전체 게시물  -->
+	<select id="listNotice" resultType="com.fortune.notice_DTO.Notice_DTO">
+		SELECT * FROM
+			 		(SELECT ROWNUM NUM, N.* 
+			  			FROM 
+			     			 ( SELECT * 
+			       				 FROM NOTICE 
+			       					 WHERE ${param2} LIKE '%${param3}%' ORDER BY NOTICE_DATE DESC
+		          				 ) N
+     						) WHERE NUM BETWEEN 1 + (${param1} - 1) * 5 AND 5 + (${param1} - 1) * 5
+	</select>
 	
-	<insert id="writeNotice">
-		INSERT INTO NOTICE (NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_FILE_NAME, NOTICE_FILE_SRC) 
-					VALUES (NOTICE_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6})
-	</insert>
-	
-	
-	<delete id="deleteNotice">
-		DELETE FROM NOTICE WHERE USER_ID = #{param1}
+	<!-- 게시물 삭제 -->
+	<delete id="deleteNotice">	
+	 	DELETE NOTICE WHERE NOTICE_NO=#{notice_seq}
 	</delete>
 	
+	<!-- 게시물 수정 -->
+	<update id="updateNotice" >
+	UPDATE NOTICE 
+	SET NOTICE_TITLE=#{notice_title}, 
+	    NOTICE_TEXT=#{notice_text}, 
+	    NOTICE_FILE_NAME=#{notice_file_name} , 
+	    NOTICE_FILE_SRC=#{notice_file_src,jdbcType=VARCHAR}  
+	WHERE NOTICE_NO=#{notice_seq}
+	</update>
 	
+	<!-- 게시물 상세 -->
+	<select id="detailNotice" resultType="com.fortune.notice_DTO.Notice_DTO">
+     	SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_seq}
+	</select>
+
+	<!-- 게시물 입력 -->
+	<insert id="insertNotice">
+	<!--  
+		public int insert(Notice n)
+		Notice n Parameter  타입 생략
+		INSERT INTO NOTICES(SEQ, TITLE, CONTENT, WRITER, REGDATE, HIT, FILESRC ,FILESRC2 )
+	    VALUES( (SELECT MAX(TO_NUMBER(SEQ))+1 FROM NOTICES), ?, ?, 'kosta', SYSDATE, 0, ?, ?)
+	-->
+	
+		<selectKey order="BEFORE" keyProperty="notice_no" resultType="String">
+			SELECT MAX(TO_NUMBER(notice_seq))+1 FROM NOTICE
+		</selectKey>
+		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_DATE, NOTICE_FILE_NAME, NOTICE_FILE_SRC)
+	    VALUES( #{notice_seq}, #{user_id}, #{notice_title}, #{notice_text}, 0, SYSDATE, #{notice_file_name}, #{notice_file_src,jdbcType=VARCHAR})
+	</insert>
 </mapper>

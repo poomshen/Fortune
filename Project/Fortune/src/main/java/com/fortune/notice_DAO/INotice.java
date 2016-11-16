@@ -7,23 +7,24 @@
 
 package com.fortune.notice_DAO;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
 
 import com.fortune.notice_DTO.Notice_DTO;
 
-
-public interface NoticeAction {
+public interface INotice {
 	
-	//글목록보기
-	public ArrayList<Notice_DTO> listNotice();
-	
-	//글작성하기
-	public void writeNotice(String user_id, String notice_title, String notice_text);
-	
-	//작성글보기
-	public Notice_DTO viewNotice(String user_id);
-	
-	//글삭제하기
-	public void deleteNotice(String user_id);
+	//게시물 개수
+	public int getCountNotice(String field, String query) throws ClassNotFoundException, SQLException;
+	//전체 게시물
+	public List<Notice_DTO> listNotice(int page, String field, String query) throws ClassNotFoundException, SQLException;
+	//게시물 삭제
+	public int deleteNotice(String notice_no) throws ClassNotFoundException, SQLException;
+	//게시물 수정
+	public int updateNotice(Notice_DTO ndto) throws ClassNotFoundException, SQLException;
+	//게시물 상세
+	public Notice_DTO detailNotice(String seq) throws ClassNotFoundException, SQLException;
+	//게시물 입력
+	public int insertNotice(Notice_DTO ndto) throws ClassNotFoundException, SQLException;
 
 }
