@@ -17,7 +17,7 @@
 
 	<context:component-scan base-package="com.fortune.name_Controller" />
 	<context:component-scan base-package="com.fortune.notice_Controller" />
-	<context:component-scan base-package="JoinController" />	
+	<context:component-scan base-package="com.fortune.join_Controller" />	
 	
 	
 	
