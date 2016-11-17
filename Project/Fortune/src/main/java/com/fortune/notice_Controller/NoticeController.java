@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fortune.notice_DAO.INotice;
 import com.fortune.notice_DTO.Notice_DTO;
 
+import dao.NoticeDao;
+import vo.Notice;
+
 @Controller
 public class NoticeController {
 
@@ -157,5 +160,21 @@ public class NoticeController {
 		// <property name="maxUploadSize" value="10485760"/>
 		// </bean>
 	}
+
+    //글상세보기
+	 @RequestMapping("noticeDetail.htm")
+	 public String noticeDetail(String seq , Model model ) throws ClassNotFoundException, SQLException{
+		 
+		 //Mybatis 적용
+		 NoticeDao noticeDao = sqlsession.getMapper(NoticeDao.class);
+		 Notice notice = noticeDao.getNotice(seq);
+		 model.addAttribute("notice", notice);
+		 //return "noticeDetail.jsp";
+		 
+		 //Tiles
+		  return "customer.noticeDetail";
+		 //View
+		 //${notice.title}
+	 }
 
 }
