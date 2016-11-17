@@ -80,7 +80,7 @@
 
 <!-- Text input-->
        <div class="form-group">
-  <label class="col-md-4 control-label">패스워드</label>  
+  <label class="col-md-4 control-label">패스워드</label>  
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -105,7 +105,7 @@
 <!-- Text input-->
       
 <div class="form-group">
-  <label class="col-md-4 control-label">생년월일</label>  
+  <label class="col-md-4 control-label">ìëìì¼</label>  
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
@@ -117,7 +117,7 @@
 <!-- Text input-->
  
 <div class="form-group">
-  <label class="col-md-4 control-label">입사일</label>  
+  <label class="col-md-4 control-label">ìì¬ì¼</label>  
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
@@ -129,7 +129,7 @@
 <!-- Select Basic -->
    
 <div class="form-group"> 
-  <label class="col-md-4 control-label">팀번호</label>
+  <label class="col-md-4 control-label">íë²í¸</label>
     <div class="col-md-4 selectContainer">
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
@@ -145,7 +145,7 @@
 </div>
 
 <div class="form-group"> 
-  <label class="col-md-4 control-label">직급번호</label>
+  <label class="col-md-4 control-label">ì§ê¸ë²í¸</label>
     <div class="col-md-4 selectContainer">
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
@@ -163,7 +163,7 @@
 
 <!-- radio checks -->
  <div class="form-group">
-                        <label class="col-md-4 control-label">성별</label>
+                        <label class="col-md-4 control-label">ì±ë³</label>
                         <div class="col-md-4">
                     
                                 <label>
@@ -530,7 +530,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-7 footer-copyright">
-					© Riona Bootstrap Template by <a href="http://azmind.com">Azmind</a>.
+					Â© Riona Bootstrap Template by <a href="http://azmind.com">Azmind</a>.
 				</div>
 				<div class="col-sm-5 footer-social">
 					<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
