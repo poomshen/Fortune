@@ -5,7 +5,7 @@
 * @Desc : 공지사항게시판 DTO
 */
 
-package com.fortune.notice_DTO;
+package com.fortune.Table_DTO;
 
 import java.sql.Timestamp;
 

@@ -11,18 +11,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.notice_DAO.INotice;
-import com.fortune.notice_DTO.Notice_DTO;
 
 @Controller
 public class NoticeController {
@@ -157,5 +154,19 @@ public class NoticeController {
 		// <property name="maxUploadSize" value="10485760"/>
 		// </bean>
 	}
+
+    //글상세보기
+	 @RequestMapping("noticeDetail.htm")
+	 public String noticeDetail(String notice_no, Model model) throws ClassNotFoundException, SQLException{
+		 
+		 System.out.println("NoticeController의 noticeDetail을 탑니다~");
+		 
+		 //Mybatis 적용
+		 INotice noticeDao = sqlSession.getMapper(INotice.class);
+		 Notice_DTO noticeDetail = noticeDao.detailNotice(notice_no);
+		 model.addAttribute("noticeDetail", noticeDetail);
+
+		  return "notice/noticeDetail";	
+	 }
 
 }

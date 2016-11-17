@@ -12,7 +12,7 @@
 	</select>
 	
 	<!-- 전체 게시물  -->
-	<select id="listNotice" resultType="com.fortune.notice_DTO.Notice_DTO">
+	<select id="listNotice" resultType="com.fortune.Table_DTO.Notice_DTO">
 		SELECT * FROM
 			 		(SELECT ROWNUM NUM, N.* 
 			  			FROM 
@@ -39,7 +39,7 @@
 	</update>
 	
 	<!-- 게시물 상세 -->
-	<select id="detailNotice" resultType="com.fortune.notice_DTO.Notice_DTO">
+	<select id="detailNotice" resultType="com.fortune.Table_DTO.Notice_DTO">
      	SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_seq}
 	</select>
 

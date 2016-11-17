@@ -10,7 +10,7 @@ package com.fortune.notice_DAO;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.fortune.notice_DTO.Notice_DTO;
+import com.fortune.Table_DTO.Notice_DTO;
 
 public interface INotice {
 	
