@@ -11,7 +11,8 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-
+pom.properties
+MANIFEST.MF
 # Exclude maven wrapper
 !/.mvn/wrapper/maven-wrapper.jar
 

@@ -1,4 +1,4 @@
-package com.or.fortune.name_Controller;
+package com.fortune.name_Controller;
 
 import java.text.DateFormat;
 import java.util.Date;

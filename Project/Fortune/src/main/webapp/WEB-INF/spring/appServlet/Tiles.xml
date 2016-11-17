@@ -12,6 +12,6 @@
     <definition name="fortune.*" template="/WEB-INF/views/emp/inc/layout.jsp">
     	<put-attribute name="header"  value="/WEB-INF/views/inc/header.jsp" />
     	<put-attribute name="aside"  value="/WEB-INF/views/inc/aside.jsp" />
-    	<put-attribute name="content" value="/WEB-INF/views/emp/{1}.jsp" />
+    	<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
   </definition>
 </tiles-definitions>   
