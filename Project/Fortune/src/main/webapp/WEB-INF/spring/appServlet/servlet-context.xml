@@ -15,7 +15,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 
-	<context:component-scan base-package="com.or.fortune.name_Controller" />
+	<context:component-scan base-package="com.fortune.name_Controller" />
 	<context:component-scan base-package="com.fortune.notice_Controller" />
 
 	
