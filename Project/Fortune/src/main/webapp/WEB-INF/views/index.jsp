@@ -52,29 +52,20 @@
 			</h1>
 
 
-			<div class="top-content-bottom-link">
-				<div class="login_box">
+			<div class="top-content-bottom-link"> 
 
-					<div class="content_wrap">
-
+<!-- 
 						<div
 							class="col-sm-6 col-sm-offset-3 r-form-1-box wow fadeInUp animated"
 							style="visibility: visible; animation-name: fadeInUp;">
 
 							<div class="r-form-1-bottom">
-
+ -->
 								<form role="form" action="main.htm" method="post">
-									<div class="form-group">
+									<div class="col-sm-12 form-group container" style="margin-left:19%">
 										<label class="sr-only" for="r-form-1-first-name">First
 											name</label>
-
-
-										<!-- 	<div class="input-group margin-bottom-sm row">
-										 <input type="text"
-												name="r-form-1-first-name" 
-											class="form-control hvr-glow"
-												id="r-form-1-first-name">	<span class="addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-										</div> -->
+									
 
 										<div class="input-group">
 											<span class="addon"><i
@@ -92,30 +83,26 @@
 												<label class="sr-only" for="r-form-1-email">Email</label> <input
 													type="text" name="r-form-1-email"
 													class="form-control hvr-glow" id="r-form-1-email">
-											</div>
+										</div>
 										</div>
 									</div>
 
-
-									<!-- <button type="button" class="btn hvr-forward" data-toggle="modal" data-target="#myModal">sign</button>
-									 -->
-									
+									<div style="margin-left:-3%">
 									<button type="submit" formaction="sign.htm" class="btn hvr-forward" >sign</button>
 									
 									 &nbsp; &nbsp; &nbsp;
 									<button type="submit" class="btn hvr-forward">login</button>
-									
+									</div>
 
 								</form>
-							</div>
-						</div>
+		<!-- 
 					</div>
 
 				</div>
 			</div>
-
+ -->
 		</div>
-
+</div>
 	</div>
 	
 	<div class="backstretch"
@@ -374,7 +361,7 @@
 						style="visibility: visible; animation-name: fadeInUp;">
 						<span></span>
 					</div>
-					<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
+					<p>Ut wisi enim ad minim veniam, quis gostrud exerci tation
 						ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
 						consequat. Ut wisi enim ad minim veniam, quis nostrud.</p>
 				</div>

@@ -35,6 +35,9 @@
 
 
 
+	<div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 1500px; width: 1600px; z-index: -999998; position: absolute;">
+	<img src="assets/img/backgrounds/1.jpg" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1500px; height: 980px; max-height: none; max-width: none; z-index: -999999; left: -51.6984px; top: 0px;"></div>
+	
 	<!-- Loader -->
 	<div class="loader" style="display: none;">
 		<div class="loader-img" style="display: none;"></div>
@@ -58,7 +61,7 @@
 
 <div class="form-group">
   <label class="col-md-4 control-label">이름</label>  
-  <div class="col-md-5 inputGroupContainer">
+  <div class="col-md-5 inputGroupContainer"  style="margin-left:2%">
   <div class="input-group">
   <span class="addon"><i class="glyphicon glyphicon-user"></i></span>
   <input  name="first_name"  class="form-control hvr-glow"  type="text">
@@ -70,7 +73,7 @@
 
 <div class="form-group">
   <label class="col-md-4 control-label" >ID</label> 
-    <div class="col-md-4 inputGroupContainer">
+    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
     <div class="input-group">
   <span class="addon"><i class="glyphicon glyphicon-user"></i></span>
   <input name="last_name" class="form-control hvr-glow"  type="text">
@@ -80,8 +83,13 @@
 
 <!-- Text input-->
        <div class="form-group">
+<<<<<<< HEAD
   <label class="col-md-4 control-label">패스워드</label>  
     <div class="col-md-4 inputGroupContainer">
+=======
+  <label class="col-md-4 control-label">패스워드</label>  
+    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
+>>>>>>> 236c2602d7ad95e7c62614bafdbdfdf1f66c9a4d
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-envelope"></i></span>
   <input name="email"class="form-control hvr-glow"  type="text">
@@ -94,7 +102,7 @@
        
 <div class="form-group">
   <label class="col-md-4 control-label">전화번호</label>  
-    <div class="col-md-4 inputGroupContainer">
+    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-earphone"></i></span>
   <input name="phone"  class="form-control hvr-glow" type="text">
@@ -105,8 +113,13 @@
 <!-- Text input-->
       
 <div class="form-group">
+<<<<<<< HEAD
   <label class="col-md-4 control-label">ìëìì¼</label>  
     <div class="col-md-4 inputGroupContainer">
+=======
+  <label class="col-md-4 control-label">생년월일</label>  
+    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
+>>>>>>> 236c2602d7ad95e7c62614bafdbdfdf1f66c9a4d
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
   <input name="address"  class="form-control hvr-glow" type="text">
@@ -117,8 +130,13 @@
 <!-- Text input-->
  
 <div class="form-group">
+<<<<<<< HEAD
   <label class="col-md-4 control-label">ìì¬ì¼</label>  
     <div class="col-md-4 inputGroupContainer">
+=======
+  <label class="col-md-4 control-label">입사일</label>  
+    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
+>>>>>>> 236c2602d7ad95e7c62614bafdbdfdf1f66c9a4d
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
   <input name="city" class="form-control"  type="text">
@@ -129,8 +147,13 @@
 <!-- Select Basic -->
    
 <div class="form-group"> 
+<<<<<<< HEAD
   <label class="col-md-4 control-label">íë²í¸</label>
     <div class="col-md-4 selectContainer">
+=======
+  <label class="col-md-4 control-label">팀번호</label>
+    <div class="col-md-4 selectContainer" style="margin-left:2%">
+>>>>>>> 236c2602d7ad95e7c62614bafdbdfdf1f66c9a4d
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
     <select name="state" class="form-control selectpicker" >
@@ -145,8 +168,13 @@
 </div>
 
 <div class="form-group"> 
+<<<<<<< HEAD
   <label class="col-md-4 control-label">ì§ê¸ë²í¸</label>
     <div class="col-md-4 selectContainer">
+=======
+  <label class="col-md-4 control-label">직급번호</label>
+    <div class="col-md-4 selectContainer" style="margin-left:2%">
+>>>>>>> 236c2602d7ad95e7c62614bafdbdfdf1f66c9a4d
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
     <select name="state" class="form-control selectpicker" >
@@ -163,8 +191,13 @@
 
 <!-- radio checks -->
  <div class="form-group">
+<<<<<<< HEAD
                         <label class="col-md-4 control-label">ì±ë³</label>
                         <div class="col-md-4">
+=======
+                        <label class="col-md-4 control-label">성별</label>
+                        <div class="col-md-4" style="margin-left:2%">
+>>>>>>> 236c2602d7ad95e7c62614bafdbdfdf1f66c9a4d
                     
                                 <label>
                                     <input type="radio" name="hosting" value="female" />female
@@ -196,15 +229,7 @@
 	                    
         			</div>
 
-
-	<div class="backstretch"
-		style="left: 0px;top: 0px;overflow: hidden;margin: 0px;padding: 0px;height: 1230px;width: 1400px; z-index: -999998;position: absolute;">
-		<img src="assets/img/backgrounds/1.jpg"
-			style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1400px; height: 1000px; max-height: none; max-width: none; z-index: -999999; top: 0px; left: -55.3333px;">
-	</div>
-
-
-	<!-- What we do -->
+<!-- What we do -->
 	<div class="what-we-do-container section-container">
 		<div class="container">
 			<div class="row">
