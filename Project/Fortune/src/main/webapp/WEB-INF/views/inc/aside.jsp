@@ -19,7 +19,7 @@
                             <a href="#"><i class="fa fa-table fa-fw"></i>일정</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-edit fa-fw"></i>공지 사항</a>
+                            <a href="noticeList.htm"><i class="fa fa-edit fa-fw"></i>공지 사항</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>관리<span class="fa arrow"></span></a>
