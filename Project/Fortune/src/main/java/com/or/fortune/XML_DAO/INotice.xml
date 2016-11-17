@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fortune.notice_DAO.Notice_DAO">
+    "http://mybatis.org/dtd/mybatis-3-mappier.dtd">
+<mapper namespace="com.fortune.notice_DAO.INotice">
 	
 	<!-- 게시물 개수  -->
 	<select id="getCountNotice" resultType="Integer">	
@@ -52,10 +52,10 @@
 	    VALUES( (SELECT MAX(TO_NUMBER(SEQ))+1 FROM NOTICES), ?, ?, 'kosta', SYSDATE, 0, ?, ?)
 	-->
 	
-		<selectKey order="BEFORE" keyProperty="notice_no" resultType="String">
+		<!-- <selectKey order="BEFORE" keyProperty="notice_no" resultType="String">
 			SELECT MAX(TO_NUMBER(notice_seq))+1 FROM NOTICE
-		</selectKey>
-		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_DATE, NOTICE_FILE_NAME, NOTICE_FILE_SRC)
-	    VALUES( #{notice_seq}, #{user_id}, #{notice_title}, #{notice_text}, 0, SYSDATE, #{notice_file_name}, #{notice_file_src,jdbcType=VARCHAR})
+		</selectKey> -->
+		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_DATE)
+	    VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE)
 	</insert>
 </mapper>

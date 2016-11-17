@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fortune.notice_DAO.INotice;
 import com.fortune.notice_DTO.Notice_DTO;
@@ -30,12 +31,12 @@ public class NoticeController {
 	private SqlSession sqlSession;
 
 	// 공지사항 글목록보기
-	@RequestMapping("/noticeList")
+	@RequestMapping("/noticeList.htm")
 	public String noticeList(String pg, String f, String q, Model model) throws ClassNotFoundException, SQLException {
 
 		// 게시판 기본 설정(기본값 처리)/////////////
 		int page = 1;
-		String field = "TITLE";
+		String field = "NOTICE_TITLE";
 		String query = "%%";
 		//////////////////////////////////////
 		if (pg != null && pg.equals("")) {
@@ -56,24 +57,27 @@ public class NoticeController {
 		List<Notice_DTO> noticeList = noticeDao.listNotice(page, field, query);
 		model.addAttribute("noticeList", noticeList);
 
-		return "notice.noticeList";
+		return "notice/noticeList";
 	}
 
 	// 글등록 화면 처리
 	@RequestMapping(value="noticeWrite.htm", method=RequestMethod.GET)
 	public String noticeInsert() {
 		System.out.println("글쓰기 매핑");
-		return "notice.noticeWrite";
+		return "notice/noticeWrite";
 	}
 
 	// 글등록 처리(실제 글등록 처리)
 	@RequestMapping(value="noticeWrite.htm", method=RequestMethod.POST)
-	public String noticeInsert(Notice_DTO ndto, HttpServletRequest request)
+	public String noticeInsert(Notice_DTO ndto)
 			throws IOException, ClassNotFoundException, SQLException {
 
 		System.out.println("실제 글 등록 처리");
-		System.out.println("n : " + ndto.getNotice_title());
-		System.out.println("n : " + ndto.getNotice_text());
+		System.out.println(ndto.getNotice_title());
+		System.out.println(ndto.getNotice_text());
+//		System.out.println("n : " + ndto.getNotice_title());
+//		System.out.println("n : " + ndto.getNotice_text());
+		
 		/*System.out.println("n : " + ndto.getFiles().get(0).getName()); // 첨부
 																	// 파일(CommonsMultipartFile
 																	// > file)

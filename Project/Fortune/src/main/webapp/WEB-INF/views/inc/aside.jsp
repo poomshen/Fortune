@@ -21,7 +21,7 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="noticelist.htm">noticedto.notice_no</a>
+                                    <a href="noticeList.htm">공지사항</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Morris.js Charts</a>
