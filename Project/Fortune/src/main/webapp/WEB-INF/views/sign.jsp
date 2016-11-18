@@ -127,9 +127,9 @@
     <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
-        <input type="text" name="year" id="year" size="5" class="form-control hvr-glow">년&nbsp;
-		<input type="text" name="month" id="month" size="5" class="form-control hvr-glow">월&nbsp;
-		<input type="text" name="day" id="day" size="5" class="form-control hvr-glow">일&nbsp;
+        <input type="text" name="year" id="year" size="5" class="form-control hvr-glow">
+		<input type="text" name="month" id="month" size="5" class="form-control hvr-glow">
+		<input type="text" name="day" id="day" size="5" class="form-control hvr-glow">
 		<input type="hidden" name="birthday" id="birthday">
     </div>
   </div>
@@ -165,9 +165,11 @@
 	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
 			    <select name="deptno" id="deptno" class="form-control selectpicker">
 						<option value="">부서명을 선택하세요</option>
-						<option value="1">개발부</option>
-						<option value="2">영업부</option>
-						<option value="3">기획부</option>
+						
+						<option value="10">개발부</option>
+						<option value="20">영업부</option>
+						<option value="30">품질관리부</option>
+						<option value="40">디자인부</option>
 				</select><br>
 	  	</div>
 	</div>
@@ -232,9 +234,7 @@
 						style="visibility: visible; animation-name: fadeInUp;">
 						<span></span>
 					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Ut enim ad minim veniam, quis nostrud exercitation.</p>
+					<p>이예지 바보</p>
 				</div>
 			</div>
 			<div class="row">

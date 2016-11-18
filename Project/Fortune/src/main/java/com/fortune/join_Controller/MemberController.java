@@ -6,13 +6,10 @@
 
 package com.fortune.join_Controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.member_DAO.IJoin;
@@ -22,25 +19,11 @@ public class MemberController {
 	
 	@Autowired
 	public SqlSession sqlsession;
-	
-	@RequestMapping("/index.htm")
-	public String joinForm(HttpSession session){
-		System.out.println("view단 전달!!");		
 		
-		return "index";
-	}
-	
-	@RequestMapping("/joinform.htm")
-	public String Joinform(){
-		System.out.println("joinform 도착");
-		
-		return "JoinForm";
-	}
-	
 	@RequestMapping("/JoinSubmit.htm")
 	public String addMember(Join_DTO dto){
-		System.out.println("member insert!!!!!!!!!!!");
-	
+		System.out.println("join submit 버튼 눌렀음");
+		
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		dao.insertMember(dto);
 		
@@ -49,6 +32,9 @@ public class MemberController {
 		
 		return "redirect:index.htm";
 	}
+	
+	
+	/*
 	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.POST)
 	public String loginSubmit(HttpSession session,Join_DTO dto){
 		System.out.println("로그인 버튼 눌렀고요");
@@ -118,6 +104,6 @@ public class MemberController {
 		dao.updateMember(dto);
 		
 		return "loginOk";
-	}
+	}*/
 
 }
