@@ -39,7 +39,8 @@ public class ProController {
 	@RequestMapping(value = "writerequest.htm", method = RequestMethod.POST)
 	public String regRequest(Request_DTO n, HttpServletRequest request)
 			throws IOException, ClassNotFoundException, SQLException {
-
+			
+			System.out.println("집으로");
 		try {
 			// 실DB저장
 			proservice.regRequest(n, request);
@@ -92,8 +93,10 @@ public class ProController {
 			 System.out.println("수락했다.");
 		 Request_DTO proDto = proservice.Accept(collabo_req_index);
 		 model.addAttribute("list", proDto);
+		 System.out.println("여기는 !!");
+		 System.out.println(proDto.toString());
 		 
-		  return "redirect:writeresponse.htm"; //리스트 화면 (controller 타서 데이터 출력)
+		  return "request.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	
 		
 	//거절 하기

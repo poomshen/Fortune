@@ -18,10 +18,16 @@
 <!-- MetisMenu CSS -->
 <link href="bower_components/metisMenu/dist/metisMenu.min.css"
 	rel="stylesheet">
+	
+<!-- Custom CSS -->
+<link href="dist/css/sb-admin-2.css" rel="stylesheet">
 
+<!-- Custom Fonts -->
+<link href="bower_components/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
 
 	
-
+</head>
 <body>
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="aside" />
@@ -40,13 +46,10 @@
 	</div>
 	<!-- /#page-wrapper -->
 	
-<!-- Custom CSS -->
-<link href="dist/css/sb-admin-2.css" rel="stylesheet">
 
-<!-- Custom Fonts -->
-<link href="bower_components/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
-</head>
+
+
+
 
 <!-- Metis Menu Plugin JavaScript -->
 	<script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>

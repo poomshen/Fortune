@@ -28,7 +28,7 @@
  			}
  		});
 		 
-	 }  
+	 }   
  
 </script>
 
@@ -60,7 +60,7 @@
 	</dl>
 	
 	<p><a href="requestList.htm">목록</a></p>
-	<p><a href="accept.htm?collabo_req_index=${list.collabo_req_index}&collabo_req_no=${list.collabo_req_no}" name="collabo_req_state">수락</a></p> 
+	<p><a href="accept.htm?collabo_req_index=${list.collabo_req_index}" name="collabo_req_state">수락</a></p> 
 	<p><a data-toggle="modal" data-target="#myModal2" onclick="regAjaxCall(${list.collabo_req_index})">수락</a></p>
 	<p><a  href="refuse.htm?collabo_req_index=${list.collabo_req_index}" name="collabo_req_state">거절</a></p>
 	
