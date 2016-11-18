@@ -14,8 +14,18 @@ public class With_DTO {
 	private Date collabo_start;
 	private Date collabo_end;
 	private String collabo_state;
+	private String collabo_req_id;
 	
 	
+	
+	
+	
+	public String getCollabo_req_id() {
+		return collabo_req_id;
+	}
+	public void setCollabo_req_id(String collabo_req_id) {
+		this.collabo_req_id = collabo_req_id;
+	}
 	public String getCollabo_no() {
 		return collabo_no;
 	}

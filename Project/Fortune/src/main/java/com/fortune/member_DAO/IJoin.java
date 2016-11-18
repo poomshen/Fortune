@@ -1,6 +1,11 @@
 package com.fortune.member_DAO;
 
+import java.util.ArrayList;
+
+import com.fortune.Table_DTO.Dept_DTO;
+import com.fortune.Table_DTO.Jobtitle_DTO;
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Team_DTO;
 
 public interface IJoin {
 
@@ -10,4 +15,7 @@ public interface IJoin {
 	int updateMember(Join_DTO joinDto);
 	Join_DTO memberInfo(Join_DTO joinDto);
 	Join_DTO login(Join_DTO joinDto);
+	ArrayList<Dept_DTO> searchDept();
+	ArrayList<Team_DTO> searchTeam();
+	ArrayList<Jobtitle_DTO> searchTitle();
 }

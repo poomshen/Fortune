@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +41,8 @@ public class ProController {
 	@RequestMapping(value = "writerequest.htm", method = RequestMethod.POST)
 	public String regRequest(Request_DTO n, HttpServletRequest request)
 			throws IOException, ClassNotFoundException, SQLException {
-
+			
+			System.out.println("집으로");
 		try {
 			// 실DB저장
 			proservice.regRequest(n, request);
@@ -52,9 +55,9 @@ public class ProController {
 
 	// 요청한 프로젝트들을 리스트로 담아서 뿌려주는 역할을 해준다.
 	@RequestMapping("requestList.htm") // /customer/notice.htm
-	public String getRequest(String pg, String f, String q, Model model) throws ClassNotFoundException, SQLException {
+	public String getRequest(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 
-		List<Request_DTO> list = proservice.getRequest(pg, f, q);
+		List<Request_DTO> list = proservice.getRequest(pg, f, q, session);
 		model.addAttribute("list", list); // 자동 forward
 		
 		return "request.requestList";
@@ -92,8 +95,10 @@ public class ProController {
 			 System.out.println("수락했다.");
 		 Request_DTO proDto = proservice.Accept(collabo_req_index);
 		 model.addAttribute("list", proDto);
+		 System.out.println("여기는 !!");
+		 System.out.println(proDto.toString());
 		 
-		  return "redirect:writeresponse.htm"; //리스트 화면 (controller 타서 데이터 출력)
+		  return "request.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	
 		
 	//거절 하기

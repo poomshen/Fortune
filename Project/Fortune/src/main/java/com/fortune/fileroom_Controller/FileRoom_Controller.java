@@ -56,7 +56,7 @@ public class FileRoom_Controller {
 		mv.addObject("block", block);
 		mv.addObject("from_page", from_page);
 		mv.addObject("to_page", to_page);
-		mv.setViewName("/fileView/file");
+		mv.setViewName("fileView.file");
 		
 		return mv;
 	}

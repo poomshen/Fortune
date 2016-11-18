@@ -9,10 +9,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Session;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
@@ -29,12 +32,16 @@ public class ProService {
 	private SqlSession sqlsession;
 	
 	
-	public List<Request_DTO> getRequest(String pg , String f , String q ) throws ClassNotFoundException , SQLException {
+	public List<Request_DTO> getRequest(String pg , String f , String q, HttpSession session ) throws ClassNotFoundException , SQLException {
+		System.out.println("집에 갑시다.");
+		
+		
 		
 		//게시판 기본 설정(기본값 처리)/////////////
 		int page = 1;
-		String field = "collabo_req_title";
-		String query ="%%";
+		String field = "user_ID";
+		//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
+		String query ="%"+session.getAttribute("id")+"%";
 		//////////////////////////////////////
 		if(pg != null && pg.equals("")){
 			page = Integer.parseInt(pg);
@@ -52,6 +59,7 @@ public class ProService {
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
 		List<Request_DTO> list= proDao.getRequest(page, field, query);
 		
+
 		return list;
 	}
 		
@@ -106,8 +114,11 @@ public class ProService {
 		   SQLException {
 		  System.out.println("seq : " + collabo_req_index);
 		  ProDao proDao = sqlsession.getMapper(ProDao.class);
-		 proDao.accept(collabo_req_index); 
-		 Request_DTO proDto = proDao.getResponse(collabo_req_index);
+		 proDao.accept(collabo_req_index);  
+		 Request_DTO proDto = proDao.getResponse(collabo_req_index); //다른테이블 가져옴 index값을 받아온 정보를
+		 System.out.println("index : " + proDto.getCollabo_req_index());
+		 System.out.println("no : " + proDto.getCollabo_req_no());
+		 
 		 return proDto;
 		 } 
 		 

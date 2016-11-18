@@ -1,26 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 
 
 <script type="text/javascript">
-     function regAjaxCall(a){
+     function proAjaxCall(a){
 
    	 $.ajax({
  			type: "get",
- 			url:  "accept.htm",
+ 			url:  "ProDetail.htm",
  			cache: false,				
  			data:"collabo_req_index="+a,
  		    success:function(data){ //callback  
  		    	 console.log(data);
- 		    	 $("#menuView2").empty();
+ 		    	 $("#menuView").empty();
  		        
- 		        $("#menuView2").append($('#menuView2').html(data)); 
+ 		        $("#menuView").append($('#menuView').html(data)); 
  		         
  		     },
  			error: function(){						
@@ -28,46 +30,57 @@
  			}
  		});
 		 
-	 }   
+	 }  
  
 </script>
+
 
 
 <title>Insert title here</title>
 </head>
 <body>
+<table class="article-list margin-small">
+		<caption class="hidden">공지사항</caption>
+		<thead>
+			<tr>
+				<th class="collabo_req_index">번호</th>
+				<th class="collabo_req_title">제목</th>
+				<th class="title">제목2</th>
+				<th class="user_ID">작성자</th>
+				<th class="collabo_req_date">작성일</th>
+				<th class="collabo_req_state">진행상태</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${list}" var="n">
+				<tr>
+					<td class="collabo_req_index">${n.collabo_req_index}</td>
+				<td> <a href="ProDetail.htm?collabo_req_index=${n.collabo_req_index}">${n.collabo_req_title}</a> </td>
+				
+				<td><a data-toggle="modal" data-target="#myModal" onclick="proAjaxCall(${n.collabo_req_index})">${n.collabo_req_title}</a></td>					
+					
+				
+				
 
-<div>
-	<dl>
-		<dt>프로젝트 제목</dt>
-		<dd>${list.collabo_req_title}</dd>
-	</dl>
-	<dl>
-		<dt>프로젝트 내용</dt>
-		<dd>${list.collabo_req_text}</dd>
-	</dl>
-	<dl>
-		<dt>프로젝트 작성자</dt>
-		<dd>${list.user_ID}</dd>
-	</dl>
-	<dl>
-		<dt>프로젝트 작성일</dt>
-		<dd>${list.collabo_req_date}</dd>
-	</dl>
-	<dl>
-		<dt>프로젝트 진행상태</dt>
-		<dd>${list.collabo_req_state}</dd>
-	</dl>
-	
-	<p><a href="requestList.htm">목록</a></p>
-	<p><a href="accept.htm?collabo_req_index=${list.collabo_req_index}" name="collabo_req_state">수락</a></p> 
-	<p><a data-toggle="modal" data-target="#myModal2" onclick="regAjaxCall(${list.collabo_req_index})">수락</a></p>
-	<p><a  href="refuse.htm?collabo_req_index=${list.collabo_req_index}" name="collabo_req_state">거절</a></p>
-	
-	
+					<td class="user_ID">${n.user_ID}</td>
+					<td class="collabo_req_date">${n.collabo_req_date}</td>
+					
+					<td class="collabo_req_state">${n.collabo_req_state}</td>
+					
+					
+				</tr>	
+			</c:forEach>
+			
+			
+			
+			
+			
+		</tbody>
+	</table>
 	<div class="container">
   <!-- Modal -->
-  <div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
@@ -79,7 +92,7 @@
         </div>
         <div class="modal-body">
         
-               <p><div id="menuView2">아아</div></p>
+               <p><div id="menuView">아아</div></p>
                           
               
                
@@ -98,8 +111,8 @@
   
 </div>
 	
-
-</div>
+	
+	<a href="index.htm">요청하러가기 ?</a>
 
 </body>
 </html>

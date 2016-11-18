@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 
 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -112,7 +111,8 @@
 <form action="writeresponse.htm" method="post">
 <input type="hidden" name="collabo_req_index" value="${list.collabo_req_index}">
 <input type="hidden" name="collabo_req_no" value="${list.collabo_req_no}">
-작성자 : <input type="text" name="user_ID"><br>
+<input type="hidden" name="collabo_req_id" value="${list.user_ID}">
+작성자 : <input type="text" name="user_ID" value="${list.user_ID}" readonly="readonly"><br>
 끝  날짜 : <input type="text" name="collabo_start" id="startDate">
 - <input type="text" name="collabo_end" id="endDate"><br>  
 진행 상태 :<input type="text" value="대기" name="collabo_state" readonly="readonly"><br>
