@@ -21,6 +21,9 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/media-queries.css">
 <link rel="stylesheet" href="assets/css/hover.css">
+ <link rel="stylesheet" href="assets/css/style6.css">
+		
+
 
 <!-- Favicon and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.png">
@@ -40,19 +43,7 @@
 <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css">
 </head>
-<script type="text/javascript">	
-	function birth(){
-	
-		var y = document.getElementById("year").value;
-		var m = document.getElementById("month").value;
-		var d = document.getElementById("day").value;
-		var b = y+'-'+m+'-'+d;
-		document.getElementById("birthday").value = b;
-		//alert(document.getElementById("birthday").value);
-	}	
-	
-	
-</script>
+
 <body>
 
 
@@ -98,6 +89,12 @@
 </span>
 </div>
 </div>
+
+
+
+
+
+
 
 <!-- 비밀번호  입력-->
 <div class="form-group">
@@ -201,66 +198,58 @@
 
 
 <!--부서명 입력-->
+<!--select id 변경 : 변경불가 -->
 <div class="form-group">
-<div class="inner-addon left-addon" style="margin-left:37%">
-<span class="field">
-<span class="addon"style="
-    padding-bottom: 0px;
-"><i class="glyphicon glyphicon-calendar"></i></span> 
- <select name="deptno" id="deptno"  >
-						<option value="" class="blue">부서명을 선택하세요</option>
-						<option value="1">개발부</option>
-						<option value="2">영업부</option>
-						<option value="3">기획부</option>
-</select><br>
-<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone">부서 선택</label>
-
-</span>
-	  	</div>
-	</div>
-
-
-
-<div class="form-group"> 
- <label class="col-md-4 control-label" style="
-    padding-top: 20px;
-">팀</label>
-    <div class="col-md-4 selectContainer" style="margin-left:2%">
-	    <div class="input-group">
-	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
-			    <select name="teamnum" id="teamnum" class="form-control selectpicker">
-					<option value="">팀을 선택하세요</option>
-					<option value="1">1팀</option>
-					<option value="2">2팀</option>
-					<option value="3">3팀</option>
-				</select><br>
-	  	</div>
-	</div>
+<div class="col-sm-3 col-sm-offset-1" style="margin-left:10%">
+			<section class="main clearfix">
+					<div class="fleft">
+					<select name="deptno" id="cd-dropdown" class="cd-select">
+						<option value="-1" selected>부서명을 선택하세요</option>
+						<option value="1" style="text-align:center">개발부</option>
+						<option value="2" style="text-align:center">영업부</option>
+						<option value="3" style="text-align:center">기획부</option>
+			
+					</select>
+				</div>
+			</section>
 </div>
 
-<div class="form-group"> 
- <label class="col-md-4 control-label" style="
-    padding-top: 20px;
-">직급</label>
-    <div class="col-md-4 selectContainer" style="margin-left:2%">
-	    <div class="input-group">
-	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
-			    <select name="jobnum" id="jobnum" class="form-control selectpicker">
-					<option value="">직급을 선택하세요</option>
-					<option value="1">사원</option>
-					<option value="2">대리</option>
-					<option value="3">과장</option>
-					<option value="4">차장</option>
-					<option value="5">부장</option>
-				</select><br>
-	  	</div>
-	</div>
+<div class="col-sm-3">
+			<section class="main clearfix">
+					<div class="fleft">
+					<select name="teamnum" id="cd-dropdown2" class="cd-select">
+						<option value="-1" selected>팀을 선택하세요</option>
+						<option value="1" style="text-align:center">1팀</option>
+						<option value="2" style="text-align:center">2팀</option>
+						<option value="3" style="text-align:center">3팀</option>
+			
+					</select>
+				</div>
+			</section>
+</div>
+
+<div class="col-sm-3">
+			<section class="main clearfix">
+					<div class="fleft">
+					<select name="jobnum" name="deptno" id="cd-dropdown3" class="cd-select">
+						<option value="-1" selected>직급을 선택하세요</option>
+						<option value="1" style="text-align:center">사원</option>
+						<option value="2" style="text-align:center">대리</option>
+						<option value="3" style="text-align:center">과장</option>
+							<option value="4" style="text-align:center">차장</option>
+					<option value="5" style="text-align:center">부장</option>
+			
+					</select>
+				</div>
+			</section>
+</div>
+
 </div>
 
 <!-- Button -->
 <div class="form-group">
   <label class="control-label"></label>  
-    <button type="submit" name="joinbtn" id="joinbtn" onclick='birth();' class="btn hvr-forward" >join</button>
+    <button type="submit" name="joinbtn" id="joinbtn" onclick='birth();' class="btn hvr-forward" style="margin-top:200px" >join</button>
 </div>
 
 </fieldset>
@@ -614,9 +603,45 @@
 	<script src="assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="assets/js/masonry.pkgd.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
+	<script src="assets/js/modernizr.custom.63321.js"></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script> 
 <script src="ios-7-date-picker.js"></script>
-
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.dropdown.js"></script>
+		<script type="text/javascript">
+			
+		$( function() {
+			
+			$( '#cd-dropdown' ).dropdown( {
+				gutter : 5,
+				stack : false,
+				delay : 100,
+				slidingIn : 100
+			} );
+			$( '#cd-dropdown2' ).dropdown( {
+				gutter : 5,
+				stack : false,
+				delay : 100,
+				slidingIn : 100
+			} );
+			
+			$( '#cd-dropdown3' ).dropdown( {
+				gutter : 5,
+				stack : false,
+				delay : 100,
+				slidingIn : 100
+			} );
+		});
+		function birth(){
+			
+			var y = document.getElementById("year").value;
+			var m = document.getElementById("month").value;
+			var d = document.getElementById("day").value;
+			var b = y+'-'+m+'-'+d;
+			document.getElementById("birthday").value = b;
+			//alert(document.getElementById("birthday").value);
+		}	
+		</script>
 
 
 </body>

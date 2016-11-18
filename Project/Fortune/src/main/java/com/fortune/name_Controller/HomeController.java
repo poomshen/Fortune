@@ -25,6 +25,7 @@ public class HomeController {
 
 		
 		System.out.println("index 컨트롤러");
+	/*	return "index";*/
 		return "index";
 	}
 
