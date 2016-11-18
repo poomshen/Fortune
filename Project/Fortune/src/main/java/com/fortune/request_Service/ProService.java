@@ -106,7 +106,7 @@ public class ProService {
 		   SQLException {
 		  System.out.println("seq : " + collabo_req_index);
 		  ProDao proDao = sqlsession.getMapper(ProDao.class);
-		 int re =  proDao.accept(collabo_req_index); //여기에서 delete 사용하여 삭제 함
+		 int re =  proDao.accept(collabo_req_index); 
 		 return re;
 		 } 
 		 

@@ -4,13 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
- 
 <title>Insert title here</title>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 	$(function(){
 		
@@ -45,7 +48,7 @@
 			      var mDate = new Date(td[0], td[1],td[2]);
 			      var nDate = new Date(td[0], td[1],td[2]);
 			    
-			      nDate.setDate(mDate.getDate() + 6);
+			      nDate.setDate(mDate.getDate() + 365);
  			     $("#endDate").datepicker( "option", "maxDate", nDate );
   				
 			      });
@@ -107,7 +110,8 @@
 
 
 <form action="writeresponse.htm" method="post">
-
+<input type="hidden" name="collabo_req_index" value="${collabo_req_index}">
+<input type="hidden" name="collabo_req_no" value="${collabo_req_no}">
 작성자 : <input type="text" name="user_ID"><br>
 끝  날짜 : <input type="text" name="collabo_start" id="startDate">
 - <input type="text" name="collabo_end" id="endDate"><br>  

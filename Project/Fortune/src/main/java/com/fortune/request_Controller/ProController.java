@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,14 +85,15 @@ public class ProController {
 	 }
 	 
 	//수락 하기
-		 @RequestMapping("accept.htm")
+	 @Transactional
+	@RequestMapping("accept.htm")
 		 public String Accept(String collabo_req_index) throws ClassNotFoundException,
 		   SQLException {
 			 System.out.println("수락했다.");
 		 proservice.Accept(collabo_req_index);
 		 
 		  return "redirect:writeresponse.htm"; //리스트 화면 (controller 타서 데이터 출력)
-		 }	 
+		 }	
 		
 	//거절 하기
 		 @RequestMapping("refuse.htm")

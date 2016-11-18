@@ -75,23 +75,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>	
 	
 	
-	<insert id="insertResponse">
+	<insert id="insertResponse" >
 	
 	
-	<selectKey order="BEFORE" keyProperty="collabo_no" resultType="String">
+<!-- 	<selectKey order="BEFORE" keyProperty="collabo_no" resultType="String">
 		SELECT MAX(TO_NUMBER(collabo_no))+1 FROM collabo
-	</selectKey>
+	</selectKey> -->
 	<choose>
 	<when test="collabo_no == null">
 		Insert into collabo(collabo_no,collabo_req_index,collabo_req_no,user_ID,
 							  collabo_start, collabo_end, collabo_state)
-		VALUES(1,3,2, #{user_ID}, #{collabo_start}, #{collabo_end}, #{collabo_state})
+		VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no}, #{user_ID}, #{collabo_start}, #{collabo_end}, #{collabo_state})
 	</when>
 	
 	<otherwise>
 		Insert into collabo(collabo_no,collabo_req_index,collabo_req_no,user_ID,
 							  collabo_start, collabo_end, collabo_state)
-		VALUES(#{collabo_no},3,2, #{user_ID}, #{collabo_start}, #{collabo_end}, #{collabo_state})
+		VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no}, #{user_ID}, #{collabo_start}, #{collabo_end}, #{collabo_state})
 	</otherwise>
 	</choose>
 	
