@@ -23,7 +23,7 @@ public class Upload_Controller {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	@RequestMapping(value="/uploadfile.htm", method=RequestMethod.POST ,produces="application/json")
+	@RequestMapping(value="/uploadfile.ajax", method=RequestMethod.POST ,produces="application/json")
 	@ResponseBody
 	public HashMap<String, Object> uploadFile(MultipartHttpServletRequest request) throws Exception {
 		System.out.println("uploadFile 컨트롤러");

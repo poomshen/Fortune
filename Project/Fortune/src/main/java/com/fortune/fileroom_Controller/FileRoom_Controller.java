@@ -17,9 +17,9 @@ public class FileRoom_Controller {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	@RequestMapping(value="/filemain.htm")
-	public ModelAndView home(String pg){
-		System.out.println("home 컨트롤러");
+	@RequestMapping(value="/mainfile.htm")
+	public ModelAndView mainFile(String pg){
+		System.out.println("mainFile 컨트롤러");
 		
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		int page = 1;

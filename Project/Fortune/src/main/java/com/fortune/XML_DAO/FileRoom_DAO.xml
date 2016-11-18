@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.fortune.fileroom_DAO.IFileRoom">
 	<insert id="insertFile" parameterType="com.fortune.Table_DTO.FileRoom_DTO">
-		insert into file_room values(1, 1, '김태현',sysdate, #{file_room_name}, 1, #{file_room_ext})
+		insert into file_room values(1, 1, 'sung@gmail.com',sysdate, #{file_room_name}, 7, #{file_room_ext})
 	</insert>
 
 	<!-- <select id="infofilesrcs" resultType="com.kosta.model.FileDTO">
