@@ -73,7 +73,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	-->
 	SELECT * FROM collabo_req WHERE collabo_req_index= #{collabo_req_index}
 	</select>	
+
 	
+	<select id="getResponse" resultType="com.fortune.Table_DTO.Request_DTO">
+	
+	SELECT * FROM collabo_req WHERE collabo_req_index= #{collabo_req_index}
+	</select>	
 	
 	<insert id="insertResponse" >
 	

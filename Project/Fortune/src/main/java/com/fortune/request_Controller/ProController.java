@@ -87,10 +87,11 @@ public class ProController {
 	//수락 하기
 	 @Transactional
 	@RequestMapping("accept.htm")
-		 public String Accept(String collabo_req_index) throws ClassNotFoundException,
+		 public String Accept(String collabo_req_index, Model model) throws ClassNotFoundException,
 		   SQLException {
 			 System.out.println("수락했다.");
-		 proservice.Accept(collabo_req_index);
+		 Request_DTO proDto = proservice.Accept(collabo_req_index);
+		 model.addAttribute("list", proDto);
 		 
 		  return "redirect:writeresponse.htm"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	
@@ -119,13 +120,16 @@ public class ProController {
 		 
 		// 프로젝트를 요청해주는 클래스 이다.
 			@RequestMapping(value = "writeresponse.htm", method = RequestMethod.POST)
-			public String regResponse(With_DTO n)
+			public String regResponse(With_DTO n, String collabo_req_index)
 					throws IOException, ClassNotFoundException, SQLException {
 					System.out.println("과연 이곳으로 오는가?");
-				System.out.println(n.toString());
 				
+					System.out.println("dlv:"+ collabo_req_index);
+					System.out.println(n.toString());
+					 proservice.regResponse(n, collabo_req_index);
+					
 					// 실DB저장
-				proservice.regResponse(n);
+				
 				
 				return "redirect:requestList.htm";
 
