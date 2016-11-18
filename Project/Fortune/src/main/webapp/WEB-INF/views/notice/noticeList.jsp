@@ -24,6 +24,6 @@
 	</tr>
 	</c:forEach>
 </table>
-<p><a href="noticeWrite.htm">글작성하기</a></p>
+<p><a href="noticeInsert.htm">글작성하기</a></p>
 </body>
 </html>

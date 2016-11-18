@@ -54,6 +54,6 @@
 			SELECT MAX(TO_NUMBER(notice_seq))+1 FROM NOTICE
 		</selectKey> -->
 		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_DATE, NOTICE_FILENAME)
-	    VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE, #{notice_filename,jdbcType=VARCHAR})
+	    VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE, #{notice_filename})
 	</insert>
 </mapper>
