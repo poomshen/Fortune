@@ -110,8 +110,8 @@
 
 
 <form action="writeresponse.htm" method="post">
-<input type="hidden" name="collabo_req_index" value="${collabo_req_index}">
-<input type="hidden" name="collabo_req_no" value="${collabo_req_no}">
+<input type="hidden" name="collabo_req_index" value="${list.collabo_req_index}">
+<input type="hidden" name="collabo_req_no" value="${list.collabo_req_no}">
 작성자 : <input type="text" name="user_ID"><br>
 끝  날짜 : <input type="text" name="collabo_start" id="startDate">
 - <input type="text" name="collabo_end" id="endDate"><br>  

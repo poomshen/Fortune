@@ -102,12 +102,13 @@ public class ProService {
 	 }
 	 
 	//글 수락
-		 public int Accept(String collabo_req_index) throws ClassNotFoundException,
+		 public Request_DTO Accept(String collabo_req_index) throws ClassNotFoundException,
 		   SQLException {
 		  System.out.println("seq : " + collabo_req_index);
 		  ProDao proDao = sqlsession.getMapper(ProDao.class);
-		 int re =  proDao.accept(collabo_req_index); 
-		 return re;
+		 proDao.accept(collabo_req_index); 
+		 Request_DTO proDto = proDao.getResponse(collabo_req_index);
+		 return proDto;
 		 } 
 		 
 		//글 거절
@@ -121,7 +122,7 @@ public class ProService {
 	 
 	
 		//글요청
-		 public With_DTO regResponse(With_DTO n)
+		 public Request_DTO regResponse(With_DTO n, String collabo_req_index)
 				   throws IOException, ClassNotFoundException, SQLException {
 		 
 			 System.out.println("실제 글 등록 처리"); 
@@ -138,7 +139,9 @@ public class ProService {
 		
 			  ProDao proDao = sqlsession.getMapper(ProDao.class);
 			  proDao.insertResponse(n);
-			  return n;
+			    Request_DTO proDto = proDao.getResponse(collabo_req_index);
+			   
+			  return proDto;
 		
 			 
 		 }	 
