@@ -24,14 +24,14 @@ public class Notice_DTO {
 	private String notice_filename; //파일명
 	
 	//파일 업로드 신규 추가///////////////////////////////
-	private MultipartFile noticeFile;
+	private MultipartFile file;
 	
-	public MultipartFile getNoticeFile() {
-		return noticeFile;
+	public MultipartFile getFile() {
+		return file;
 	}
 
-	public void setNoticeFile(MultipartFile noticeFile) {
-		this.noticeFile = noticeFile;
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 	////////////////////////////////////////////////
 
@@ -40,7 +40,7 @@ public class Notice_DTO {
 	}
 
 	public Notice_DTO(int notice_no, String user_id, String notice_title, String notice_text, int notice_hits,
-			Timestamp notice_date, String notice_filename, MultipartFile noticeFile) {
+			Timestamp notice_date, String notice_filename, MultipartFile file) {
 		this.notice_no = notice_no;
 		this.user_id = user_id;
 		this.notice_title = notice_title;
@@ -48,7 +48,7 @@ public class Notice_DTO {
 		this.notice_hits = notice_hits;
 		this.notice_date = notice_date;
 		this.notice_filename = notice_filename;
-		this.noticeFile = noticeFile;
+		this.file = file;
 	}
 
 	public int getNotice_no() {

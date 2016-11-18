@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<td>첨부파일</td>
-				<td><input type="file" name="noticeFile" id="noticeFile" ></td>
+				<td><input type="file" name="file" id="file" ></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="저장">
