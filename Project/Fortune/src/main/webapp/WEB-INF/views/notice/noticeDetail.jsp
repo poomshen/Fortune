@@ -1,41 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div id="content">
-	<h2>공지사항</h2>
+	<h2>공지사항상세페이지</h2>
 	<div>
 		<dl>
 			<dt>제목</dt>
-			<dd>${notice.title}</dd>
+			<dd>${noticeDetail.notice_title}</dd>
 		</dl>
 		<dl>
 			<dt>작성일</dt>
-			<dd>${notice.regdate}</dd>
+			<dd>${noticeDetail.notice_date}</dd>
 		</dl>
-		<dl class="article-detail-row half-row">
-			<dt>작성자</dt>
-			<dd class="article-detail-data half-data">${notice.writer}</dd>
-		</dl>
-		<dl class="article-detail-row half-row">
+		<dl>
 			<dt>조회수</dt>
-			<dd class="article-detail-data half-data">${notice.hit}</dd>
+			<dd>${noticeDetail.notice_hits}</dd>
 		</dl>
 		<dl>
-			<dt>첨부파일_1</dt>
-			<dd>
-				<a href="download.htm?p=upload&f=${notice.fileSrc}">${notice.fileSrc}</a>
-			</dd>
-		</dl>
-		<dl>
-			<dt>첨부파일_2</dt>
-			<dd>
-				<a href="download.htm?p=upload&f=${notice.fileSrc2}">${notice.fileSrc2}</a>
-			</dd>
-		</dl>
-		<div class="article-content">${notice.content}</div>
+			<dt>첨부파일</dt>
+				<dd>
+					<a href="download.htm?p=upload&f=${notice.fileSrc}">${notice.fileSrc}</a>
+				</dd>
+		</dl>		
+		<div>${noticeDetail.notice_text}</div>
 	</div>
-	<p class="article-comment margin-small">
-		<a class="btn-list button" href="notice.htm">목록</a> <a
-			class="btn-edit button" href="noticeEdit.htm?seq=${notice.seq}">수정</a>
-		<a class="btn-del button" href="noticeDel.htm?seq=${notice.seq}">삭제</a>
+	<p>
+		<a href="noticeList.htm">목록으로 돌아가기</a>
+		<a href="noticeUpdate.htm?notice_no=${noticeDetail.notice_no}">수정하기</a>
+		<a href="noticeDelete.htm?notice_no=${noticeDetail.notice_no}">삭제하기</a>
 	</p>
 </div>

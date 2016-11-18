@@ -26,5 +26,7 @@ public interface INotice {
 	public Notice_DTO detailNotice(String notice_no) throws ClassNotFoundException, SQLException;
 	//게시물 입력
 	public int insertNotice(Notice_DTO ndto) throws ClassNotFoundException, SQLException;
+/*	//조회수
+	public void upHit(String notice_no) throws ClassNotFoundException, SQLException;*/
 
 }
