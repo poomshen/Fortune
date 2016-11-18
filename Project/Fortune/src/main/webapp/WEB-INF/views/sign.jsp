@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+   request.setCharacterEncoding("UTF-8");
+%>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,11 +35,24 @@
 <link rel="stylesheet"
 	href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
-
+<script type="text/javascript">	
+	function birth(){
+	
+		var y = document.getElementById("year").value;
+		var m = document.getElementById("month").value;
+		var d = document.getElementById("day").value;
+		var b = y+'-'+m+'-'+d;
+		document.getElementById("birthday").value = b;
+		//alert(document.getElementById("birthday").value);
+	}	
+</script>
 <body>
 
 
 
+	<div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 1500px; width: 1600px; z-index: -999998; position: absolute;">
+	<img src="assets/img/backgrounds/1.jpg" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1500px; height: 980px; max-height: none; max-width: none; z-index: -999999; left: -51.6984px; top: 0px;"></div>
+	
 	<!-- Loader -->
 	<div class="loader" style="display: none;">
 		<div class="loader-img" style="display: none;"></div>
@@ -46,146 +64,152 @@
 		style="position: relative; z-index: 0; background: none;">
 	<!-- 		<div class="moco"> -->
         		
-        				<h3 class="modal-title" id="modal-login-label">join</h3>
+        				<h3 class="modal-title" id="modal-login-label">JOIN</h3>
     			
         			<div class="moco-body">
         			<!-- 	 <div class="container"> -->
 
- <form class=" form-horizontal" action=" " method="post"  id="contact_form">
+ <form class="form-horizontal" action="JoinSubmit.htm" method="post"  id="contact_form">
+			
+
 <fieldset>
 
 <!-- Text input-->
 
 <div class="form-group">
-  <label class="col-md-4 control-label">이름</label>  
-  <div class="col-md-5 inputGroupContainer">
+  <label class="col-md-4 control-label">아이디</label>  
+  <div class="col-md-5 inputGroupContainer"  style="margin-left:2%">
   <div class="input-group">
   <span class="addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="first_name"  class="form-control hvr-glow"  type="text">
+  <input type="text" name="id" id="id" class="form-control hvr-glow"><br>
     </div>
   </div>
 </div>
 
 <!-- Text input-->
-
 <div class="form-group">
-  <label class="col-md-4 control-label" >ID</label> 
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-  <span class="addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="last_name" class="form-control hvr-glow"  type="text">
-    </div>
-  </div>
+  <label class="col-md-4 control-label" >비밀번호</label> 
+    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
+   	 <div class="input-group">
+ 		<span class="addon"><i class="glyphicon glyphicon-user"></i></span>
+  		<input type="text" name="pwd" id="pwd" class="form-control hvr-glow"><br>
+    	</div>
+  	</div>
 </div>
 
 <!-- Text input-->
-       <div class="form-group">
-  <label class="col-md-4 control-label">패스워드</label>  
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email"class="form-control hvr-glow"  type="text">
-    </div>
-  </div>
-</div>
-
-
-<!-- Text input-->
-       
 <div class="form-group">
-  <label class="col-md-4 control-label">전화번호</label>  
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="addon"><i class="glyphicon glyphicon-earphone"></i></span>
-  <input name="phone"  class="form-control hvr-glow" type="text">
-    </div>
-  </div>
+  <label class="col-md-4 control-label">이름</label>  
+    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
+   	 <div class="input-group">
+   	 	<span class="addon"><i class="glyphicon glyphicon-envelope"></i></span>
+ 		<input type="text" name="name" id="name" class="form-control hvr-glow"><br>
+     </div>
+  	</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label">성별</label>  
+    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
+    	<div class="input-group">
+       	 <span class="addon"><i class="glyphicon glyphicon-earphone"></i></span>
+  			<input type="radio" name="gender" id="gender" value="male" checked>male
+			<input type="radio" name="gender" id="gender" value="female">female<br>	    	
+    	</div>
+  	</div>
 </div>
 
 <!-- Text input-->
       
 <div class="form-group">
   <label class="col-md-4 control-label">생년월일</label>  
-    <div class="col-md-4 inputGroupContainer">
+    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="address"  class="form-control hvr-glow" type="text">
+        <input type="text" name="year" id="year" size="5" class="form-control hvr-glow">년&nbsp;
+		<input type="text" name="month" id="month" size="5" class="form-control hvr-glow">월&nbsp;
+		<input type="text" name="day" id="day" size="5" class="form-control hvr-glow">일&nbsp;
+		<input type="hidden" name="birthday" id="birthday">
     </div>
   </div>
 </div>
 
 <!-- Text input-->
- 
 <div class="form-group">
-  <label class="col-md-4 control-label">입사일</label>  
-    <div class="col-md-4 inputGroupContainer">
+  <label class="col-md-4 control-label">전화번호</label>  
+    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="city" class="form-control"  type="text">
+        <input type="text" name="phone" id="phone" class="form-control"><br>
     </div>
   </div>
 </div>
 
-<!-- Select Basic -->
-   
+<!-- Text input-->
 <div class="form-group"> 
-  <label class="col-md-4 control-label">팀번호</label>
-    <div class="col-md-4 selectContainer">
-    <div class="input-group">
-        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
-    <select name="state" class="form-control selectpicker" >
-      <option value=" " >Please select your state</option>
-      <option>1</option>
-      <option>2</option>
-      <option >3</option>
- 
-    </select>
-  </div>
+  <label class="col-md-4 control-label">입사일</label>
+    <div class="col-md-4 selectContainer" style="margin-left:2%">
+    	<div class="input-group">
+        	<span class="addon"><i class="glyphicon glyphicon-list"></i></span>
+        	<input type="date" name="enterdate" id="enterdate"><br>			
+  		</div>
+	</div>
 </div>
-</div>
+
 
 <div class="form-group"> 
-  <label class="col-md-4 control-label">직급번호</label>
-    <div class="col-md-4 selectContainer">
-    <div class="input-group">
-        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
-    <select name="state" class="form-control selectpicker" >
-      <option value=" " >Please select your state</option>
-      <option>1</option>
-      <option>2</option>
-      <option >3</option>
- 
-    </select>
-  </div>
+  <label class="col-md-4 control-label">부서</label>
+    <div class="col-md-4 selectContainer" style="margin-left:2%">
+	    <div class="input-group">
+	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
+			    <select name="deptno" id="deptno" class="form-control selectpicker">
+						<option value="">부서명을 선택하세요</option>
+						<option value="1">개발부</option>
+						<option value="2">영업부</option>
+						<option value="3">기획부</option>
+				</select><br>
+	  	</div>
+	</div>
 </div>
+
+
+<div class="form-group"> 
+  <label class="col-md-4 control-label">팀</label>
+    <div class="col-md-4 selectContainer" style="margin-left:2%">
+	    <div class="input-group">
+	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
+			    <select name="teamnum" id="teamnum" class="form-control selectpicker">
+					<option value="">팀을 선택하세요</option>
+					<option value="1">1팀</option>
+					<option value="2">2팀</option>
+					<option value="3">3팀</option>
+				</select><br>
+	  	</div>
+	</div>
 </div>
 
-
-<!-- radio checks -->
- <div class="form-group">
-                        <label class="col-md-4 control-label">성별</label>
-                        <div class="col-md-4">
-                    
-                                <label>
-                                    <input type="radio" name="hosting" value="female" />female
-                               </label>
-                        
-                      
-                                <label>
-                                    <input type="radio" name="hosting" value="male" /> male
-                                </label>
-                        
-                        </div>
-                    </div>
-
-
+<div class="form-group"> 
+  <label class="col-md-4 control-label">직급</label>
+    <div class="col-md-4 selectContainer" style="margin-left:2%">
+	    <div class="input-group">
+	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
+			    <select name="jobnum" id="jobnum" class="form-control selectpicker">
+					<option value="">직급을 선택하세요</option>
+					<option value="1">사원</option>
+					<option value="2">대리</option>
+					<option value="3">과장</option>
+					<option value="4">차장</option>
+					<option value="5">부장</option>
+				</select><br>
+	  	</div>
+	</div>
+</div>
 
 <!-- Button -->
 <div class="form-group">
-  <label class="control-label"></label>
-  
-    <button type="submit" class="btn hvr-forward" >sign</button>
- 
+  <label class="control-label"></label>  
+    <button type="submit" name="joinbtn" id="joinbtn" onclick='birth();' class="btn hvr-forward" >join</button>
 </div>
 
 </fieldset>
@@ -196,15 +220,7 @@
 	                    
         			</div>
 
-
-	<div class="backstretch"
-		style="left: 0px;top: 0px;overflow: hidden;margin: 0px;padding: 0px;height: 1230px;width: 1400px; z-index: -999998;position: absolute;">
-		<img src="assets/img/backgrounds/1.jpg"
-			style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1400px; height: 1000px; max-height: none; max-width: none; z-index: -999999; top: 0px; left: -55.3333px;">
-	</div>
-
-
-	<!-- What we do -->
+<!-- What we do -->
 	<div class="what-we-do-container section-container">
 		<div class="container">
 			<div class="row">
@@ -530,7 +546,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-7 footer-copyright">
-					© Riona Bootstrap Template by <a href="http://azmind.com">Azmind</a>.
+					Â© Riona Bootstrap Template by <a href="http://azmind.com">Azmind</a>.
 				</div>
 				<div class="col-sm-5 footer-social">
 					<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i

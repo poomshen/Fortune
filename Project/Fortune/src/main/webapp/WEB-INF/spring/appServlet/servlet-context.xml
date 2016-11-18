@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<resources mapping="/resources/**" location="/resources/" />
+	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
 
 
 	<context:component-scan base-package="com.or.fortune.name_Controller" />
-
+	<context:component-scan base-package="com.fortune.name_Controller" />
+	<context:component-scan base-package="com.fortune.notice_Controller" />
+	<context:component-scan base-package="com.fortune.fileroom_Controller" />
+	<context:component-scan base-package="com.fortune.join_Controller" />	
+	
+	<!-- 요청 스캔
+		이름 : 이승훈
+		일자 : 2016-11-17
+		목적 : scan 을 하여 사용하게 한다.
+	 -->
+	<context:component-scan base-package="com.fortune.request_Controller"/>
+	<context:component-scan base-package="com.fortune.request_DAO"/>
+	<context:component-scan base-package="com.fortune.request_Service"/>
+	
+	
+	
 	<!-- Tiles 설정하기 -->
 	<beans:bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
@@ -26,12 +42,39 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
+	
 	<beans:bean id="urlBasedViewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</beans:bean>
 	<!-- Tiles 설정 END -->
+	
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	
+	
+	
+	
 
 
+	<!-- transaction start -->
+	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  	 	<beans:property name="dataSource" ref="driverManagerDataSource" />
+    </beans:bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <!-- transaction end -->
+
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
 </beans:beans>

@@ -19,7 +19,7 @@
 
 		<property name="dataSource" ref="driverManagerDataSource"></property>
 
-		<property name="mapperLocations" value="classpath*:kr/co/mycom/model/mapper/*xml" />
+		<property name="mapperLocations" value="classpath*:com/fortune/XML_DAO/*xml" />
 
 	</bean>
 
@@ -32,9 +32,11 @@
 	</bean>
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/" />
-		<property name="suffix" value=".jsp" />
+
+	
+	<!-- 공통빈 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
 	</bean>
 </beans>
