@@ -10,7 +10,10 @@
                                     <a href="writerequest.htm">프로젝트 생성</a>
                                 </li>
                                 <li>
-                                    <a href="#"> </a>
+                                    <a href="requestList.htm">성준이형 쫒아내자</a>
+                                </li>
+                                <li>
+                                    <a href="requestList.htm">성준이형 일본으로 보내버리자</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

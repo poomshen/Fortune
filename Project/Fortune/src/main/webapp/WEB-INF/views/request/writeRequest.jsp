@@ -19,7 +19,7 @@
                 CKEDITOR.replace( 'collabo_req_text' );
             </script>
 
-작성자 : <input type="text" name="user_ID"><br>
+작성자 : <input type="text" name="user_ID" value="${sessionScope.id}"><br>
 진행 상태 :<input type="text" value="대기" name="collabo_req_state" readonly="readonly"><br>
 
 

@@ -9,10 +9,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Session;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
@@ -29,7 +32,7 @@ public class ProService {
 	private SqlSession sqlsession;
 	
 	
-	public List<Request_DTO> getRequest(String pg , String f , String q ) throws ClassNotFoundException , SQLException {
+	public List<Request_DTO> getRequest(String pg , String f , String q, HttpSession session ) throws ClassNotFoundException , SQLException {
 		System.out.println("집에 갑시다.");
 		
 		
@@ -38,7 +41,7 @@ public class ProService {
 		int page = 1;
 		String field = "user_ID";
 		//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
-		String query ="%"+"%%"+"%";
+		String query ="%"+session.getAttribute("id")+"%";
 		//////////////////////////////////////
 		if(pg != null && pg.equals("")){
 			page = Integer.parseInt(pg);
