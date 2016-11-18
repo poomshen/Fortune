@@ -114,7 +114,6 @@
 </script>
 </head>
 <body>
-	<div>
 		<form name="multiform" id="multiform" action="uploadfile.ajax" method="POST" enctype="multipart/form-data">
 			<input type="file" name="file" />
 			<input type="submit" id="upload_btn" value="업로드"/>
@@ -122,7 +121,7 @@
 		<form name="deleteform" id="deleteform" action="deletefile.ajax" method="POST">
 			<input type="submit" id="delete_btn" value="삭제"/><br>
 		</form>
-	</div>
+	
 	<hr>
 	<div id="result">
 		<c:forEach items="${list}" var="flist">
