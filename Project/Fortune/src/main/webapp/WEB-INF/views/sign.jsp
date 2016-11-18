@@ -34,6 +34,11 @@
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
 <link rel="stylesheet"
 	href="path/to/font-awesome/css/font-awesome.min.css">
+	
+	<link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css">
 </head>
 <script type="text/javascript">	
 	function birth(){
@@ -45,6 +50,8 @@
 		document.getElementById("birthday").value = b;
 		//alert(document.getElementById("birthday").value);
 	}	
+	
+	
 </script>
 <body>
 
@@ -74,108 +81,150 @@
 
 <fieldset>
 
-<!-- Text input-->
+<!-- 아이디  입력-->
 
 <div class="form-group">
-  <label class="col-md-4 control-label">아이디</label>  
-  <div class="col-md-5 inputGroupContainer"  style="margin-left:2%">
-  <div class="input-group">
-  <span class="addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input type="text" name="id" id="id" class="form-control hvr-glow"><br>
-    </div>
-  </div>
+<div class="inner-addon left-addon" style="margin-left:37%">
+<span class="field">
+ 
+
+<span class="addon"style="
+    padding-bottom: 0px;
+"><i class="glyphicon glyphicon-user"></i></span>
+    <input type="text" id="id" name="id" class="form-control" style="
+    width: 340px;margin-left:20px;
+"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
+
+</span>
+</div>
 </div>
 
-<!-- Text input-->
+<!-- 비밀번호  입력-->
 <div class="form-group">
-  <label class="col-md-4 control-label" >비밀번호</label> 
-    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
-   	 <div class="input-group">
- 		<span class="addon"><i class="glyphicon glyphicon-user"></i></span>
-  		<input type="text" name="pwd" id="pwd" class="form-control hvr-glow"><br>
+<div class="inner-addon left-addon" style="margin-left:37%">
+<span class="field">
+ <span class="addon"style="
+    padding-bottom: 0px;
+"><i class="glyphicon glyphicon-lock"></i></span> 
+    <input type="text" name="pwd" id="pwd" class="form-control" style="
+    width: 340px;margin-left:20px;
+"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 입력</label>
+
+</span>
+</div>
+
+</div>
+
+<!-- 이름 입력-->
+<div class="form-group">
+<div class="inner-addon left-addon" style="margin-left:37%">
+<span class="field">
+<span class="addon"style="
+    padding-bottom: 0px;
+"><i class="glyphicon glyphicon-font"></i></span> 
+   <input type="text" name="name" id="name" class="form-control" style="
+    width: 340px;margin-left:20px;
+">
+
+ <label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">이름 입력</label>
+   </span>
+   </div>
+   </div>
+<!--성별 입력-->
+<div class="form-group">
+<div class="inner-addon left-addon" style="margin-left:2%">
+<span class="field">
+
+  			<input type="radio" name="gender" id="gender" value="male" checked 
+ 
+>남자
+			<input type="radio" name="gender" id="gender" value="female"
+ 
+>여자<br>	 
+			
+ <label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);" for="gender">성별 입력</label>
+ </span>
+ </div>
+    	
     	</div>
-  	</div>
-</div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label">이름</label>  
-    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
-   	 <div class="input-group">
-   	 	<span class="addon"><i class="glyphicon glyphicon-envelope"></i></span>
- 		<input type="text" name="name" id="name" class="form-control hvr-glow"><br>
-     </div>
-  	</div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label">성별</label>  
-    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
-    	<div class="input-group">
-       	 <span class="addon"><i class="glyphicon glyphicon-earphone"></i></span>
-  			<input type="radio" name="gender" id="gender" value="male" checked>male
-			<input type="radio" name="gender" id="gender" value="female">female<br>	    	
-    	</div>
-  	</div>
-</div>
-
-<!-- Text input-->
+<!-- 생년월일 입력-->
       
 <div class="form-group">
-  <label class="col-md-4 control-label">생년월일</label>  
-    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
-    <div class="input-group">
-        <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
-        <input type="text" name="year" id="year" size="5" class="form-control hvr-glow">년&nbsp;
-		<input type="text" name="month" id="month" size="5" class="form-control hvr-glow">월&nbsp;
-		<input type="text" name="day" id="day" size="5" class="form-control hvr-glow">일&nbsp;
+<div class="inner-addon left-addon row" style="margin-left:33%">
+<span class="field">
+
+   
+   <div class="col-sm-2"><input type="text" name="year" id="year" size="5" class="form-control hvr-glow">생년</div> 
+    <div class="col-sm-2"><input type="text" name="month" id="month" size="5" class="form-control hvr-glow">월
+		</div>  <div class="col-sm-2"><input type="text" name="day" id="day" size="5" class="form-control hvr-glow">일</div>
 		<input type="hidden" name="birthday" id="birthday">
+<label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);">생년월일 입력</label>
+ 
+   </span>
+     
     </div>
   </div>
-</div>
 
-<!-- Text input-->
+<!-- 전화번호 입력 -->
 <div class="form-group">
-  <label class="col-md-4 control-label">전화번호</label>  
-    <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
-    <div class="input-group">
-        <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
-        <input type="text" name="phone" id="phone" class="form-control"><br>
-    </div>
+<div class="inner-addon left-addon" style="margin-left:37%">
+<span class="field">
+<span class="addon"style="
+    padding-bottom: 0px;
+"><i class="glyphicon glyphicon-phone"></i></span> 
+   <input type="text" name="phone" id="phone" class="form-control" style="
+    width: 340px;margin-left:20px;
+"> 
+
+<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone">전화번호 입력</label>
+</span>
   </div>
 </div>
 
-<!-- Text input-->
-<div class="form-group"> 
-  <label class="col-md-4 control-label">입사일</label>
-    <div class="col-md-4 selectContainer" style="margin-left:2%">
-    	<div class="input-group">
-        	<span class="addon"><i class="glyphicon glyphicon-list"></i></span>
-        	<input type="date" name="enterdate" id="enterdate"><br>			
-  		</div>
+<!-- 입사일 입력-->
+<div class="form-group">
+<div class="inner-addon left-addon" style="margin-left:37%">
+<span class="field">
+<span class="addon"style="
+    padding-bottom: 0px;
+"><i class="glyphicon glyphicon-calendar"></i></span> 
+ <input type="date" name="enterdate" id="enterdate" class="form-control" style="
+    width: 340px;margin-left:20px;
+">
+	
+<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="enterdate">입사일 입력</label>
+
+	</span>
 	</div>
 </div>
 
 
-<div class="form-group"> 
-  <label class="col-md-4 control-label">부서</label>
-    <div class="col-md-4 selectContainer" style="margin-left:2%">
-	    <div class="input-group">
-	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
-			    <select name="deptno" id="deptno" class="form-control selectpicker">
-						<option value="">부서명을 선택하세요</option>
+<!--부서명 입력-->
+<div class="form-group">
+<div class="inner-addon left-addon" style="margin-left:37%">
+<span class="field">
+<span class="addon"style="
+    padding-bottom: 0px;
+"><i class="glyphicon glyphicon-calendar"></i></span> 
+ <select name="deptno" id="deptno"  >
+						<option value="" class="blue">부서명을 선택하세요</option>
 						<option value="1">개발부</option>
 						<option value="2">영업부</option>
 						<option value="3">기획부</option>
-				</select><br>
+</select><br>
+<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone">부서 선택</label>
+
+</span>
 	  	</div>
 	</div>
-</div>
+
 
 
 <div class="form-group"> 
-  <label class="col-md-4 control-label">팀</label>
+ <label class="col-md-4 control-label" style="
+    padding-top: 20px;
+">팀</label>
     <div class="col-md-4 selectContainer" style="margin-left:2%">
 	    <div class="input-group">
 	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
@@ -190,7 +239,9 @@
 </div>
 
 <div class="form-group"> 
-  <label class="col-md-4 control-label">직급</label>
+ <label class="col-md-4 control-label" style="
+    padding-top: 20px;
+">직급</label>
     <div class="col-md-4 selectContainer" style="margin-left:2%">
 	    <div class="input-group">
 	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
@@ -270,12 +321,6 @@
 	</div>
 
 	<!-- Our process -->
-
-
-	<!-- Clients -->
-
-
-	<!-- Counters -->
 
 
 	<!-- Portfolio -->
@@ -569,7 +614,8 @@
 	<script src="assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="assets/js/masonry.pkgd.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
-
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script> 
+<script src="ios-7-date-picker.js"></script>
 
 
 

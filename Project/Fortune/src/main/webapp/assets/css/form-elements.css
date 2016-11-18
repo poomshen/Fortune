@@ -7,7 +7,7 @@ textarea {
     border: none;
     border-bottom: 1.5px solid rgba(255, 255, 255, 0.56);
     background: none;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato',sans-serif,FontAwesome;
     font-size: 22px;
     font-weight: 400;
     color: #fff;
@@ -36,9 +36,9 @@ textarea:focus {
     
 }
 
-input[type="text"]:-moz-placeholder, textarea:-moz-placeholder { color: #ccc; }
-input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder { color: #ccc; }
-input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: #ccc; }
+input[type="text"]:-moz-placeholder, textarea:-moz-placeholder { color:  rgba(255, 255, 255, 0.53); }
+input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder { color: rgba(255, 255, 255, 0.53); }
+input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.53); }
 
 input.btn {
 	
@@ -69,6 +69,51 @@ input.btn {
 	
 	
 	
+}
+
+div.left-addon .glyphicon {
+    left: 0px;
+}
+div.inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+}
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    -moz-osx-font-smoothing: grayscale;
+}
+div.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+div.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+div.left-addon .glyphicon  { left:  0px;}
+div.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+div.left-addon input  { padding-left:  30px; }
+div.right-addon input { padding-right: 30px; }
+span.field label {
+  display: none;
+}
+span.field input:focus ~ label {
+  display: block;
 }
 
 button.btn {

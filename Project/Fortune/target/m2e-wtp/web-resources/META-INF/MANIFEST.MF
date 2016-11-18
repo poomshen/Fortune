@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< Updated upstream
 Built-By: kosta
 Build-Jdk: 1.8.0_91
+=======
+Built-By: yeji
+Build-Jdk: 1.8.0_101
+>>>>>>> Stashed changes
 Created-By: Maven Integration for Eclipse
 
