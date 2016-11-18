@@ -5,8 +5,7 @@ var array = [];
 array.push(
 		{
 		title: 'All Day Event',
-		start: '2016-11-01',
-		id: 0
+		start: '2016-11-01'
 		//backgroundColor: 'red',
 		//borderColor: 'blue'
 		}
@@ -40,30 +39,34 @@ function loadCalendar() {
 				if(check){
 					var scheduleusers = [];
 					$("input[name='uesrchk']:checked").each(function(i){
-						schedulesers.push($(this).val());
+						scheduleusers.push($(this).val());
 					});
+                    console.log(scheduleusers)
+                    console.log($('#modal_text').val())
 
 					var newschedule = {
-							"title" : $('#modal_title').val(),
+							"title": $('#modal_title').val(),
+							"text": $('#modal_text').val(),
 							"start": start.format("YYYY-MM-DD"),
 							"end": end.format('YYYY-MM-DD'),
 							"scheduleusers": scheduleusers
 					}
 					
-/*					$.ajax({
+					$.ajax({
 						type: 'post',
 						url: 'select.ajax',
 						data: newschedule,
 						success : function(data) {
 							eventData = {
-									//title: data.collabo_no,
+									id: data.schedule_no,
+									title: data.work_title,
 									start: data.schedule_start,
 									end: data.schedule_end
 							}
 							alert('controller 타고온 데이터 : ' + eventData.title)
-							$('#calendar').fullCalendar('renderEvent', eventData , true);
+							calendar.fullCalendar('renderEvent', eventData , true);
 						}
-					});*/
+					});
 					
 				check=false;
 				}
@@ -110,6 +113,3 @@ function loadCalendar() {
 	});
 
 }
-	
-	
-//}); //jquery 끝

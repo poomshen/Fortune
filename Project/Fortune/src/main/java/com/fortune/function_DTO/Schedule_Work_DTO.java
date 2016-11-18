@@ -1,21 +1,28 @@
-package com.or.fortune.fullcalendar_DTO;
+package com.fortune.function_DTO;
 
-public class work_DTO {
-	private int work_no;
+public class Schedule_Work_DTO {
 	private int schedule_no;
+	private String schedule_start;
+	private String schedule_end;
 	private String work_title;
 	private String work_text;
-	public int getWork_no() {
-		return work_no;
-	}
-	public void setWork_no(int work_no) {
-		this.work_no = work_no;
-	}
 	public int getSchedule_no() {
 		return schedule_no;
 	}
 	public void setSchedule_no(int schedule_no) {
 		this.schedule_no = schedule_no;
+	}
+	public String getSchedule_start() {
+		return schedule_start;
+	}
+	public void setSchedule_start(String schedule_start) {
+		this.schedule_start = schedule_start;
+	}
+	public String getSchedule_end() {
+		return schedule_end;
+	}
+	public void setSchedule_end(String schedule_end) {
+		this.schedule_end = schedule_end;
 	}
 	public String getWork_title() {
 		return work_title;
