@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fortune.member_DAO.IJoin">
+<!-- 멤버 추가 -->
+ <insert id="insertMember" parameterType="com.fortune.Table_DTO.Join_DTO">
+ 	 insert into member(id, pwd, name, gender, birthday, phone, enterdate, deptno, teamnum, jobnum)
+ 		values(#{id},#{pwd},#{name},#{gender},#{birthday},#{phone},#{enterdate},#{deptno},#{teamnum},#{jobnum})    
+  </insert>
+ 
+<!-- 로그인 -->
+ <select id="login" parameterType="com.fortune.Table_DTO.Join_DTO" resultType="com.fortune.Table_DTO.Join_DTO">
+ 	select id from member
+ 	where id=#{id} AND pwd=#{pwd}
+ </select>
+ <!-- 멤버 삭제 -->
+ <delete id="deleteMember" parameterType="String">
+ 	delete from member
+ 		   where id=#{id}
+ </delete>
+ 
+ <!-- 멤버 정보 -->
+ <select id="memberInfo" parameterType="com.fortune.Table_DTO.Join_DTO" resultType="com.fortune.Table_DTO.Join_DTO">
+ 	select id, pwd, name, gender, birthday, phone, enterdate, deptno, teamnum, jobnum from member
+ 	where id=#{id}
+ </select>
+ 
+ <!-- 멤버 수정 -->
+ <update id="updateMember" parameterType="com.fortune.Table_DTO.Join_DTO" >
+ 	update member set pwd=#{pwd}, phone=#{phone}, deptno=#{deptno}, teamnum=#{teamnum}, jobnum=#{jobnum}
+ 	where id=#{id}
+ </update>
+</mapper>
