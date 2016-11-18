@@ -34,8 +34,12 @@ public class HomeController {
 
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String index() {
-	
-		System.out.println("index 화면 보여줌");
+
+
+		
+		System.out.println("index 컨트롤러");
+	/*	return "index";*/
+
 		return "index";
 	}
 
