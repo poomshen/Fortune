@@ -22,25 +22,11 @@ public class MemberController {
 	
 	@Autowired
 	public SqlSession sqlsession;
-	
-	@RequestMapping("/index.htm")
-	public String joinForm(HttpSession session){
-		System.out.println("view단 전달!!");		
 		
-		return "index";
-	}
-	
-	@RequestMapping("/joinform.htm")
-	public String Joinform(){
-		System.out.println("joinform 도착");
-		
-		return "JoinForm";
-	}
-	
 	@RequestMapping("/JoinSubmit.htm")
 	public String addMember(Join_DTO dto){
-		System.out.println("member insert!!!!!!!!!!!");
-	
+		System.out.println("join submit 버튼 눌렀음");
+		
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		dao.insertMember(dto);
 		
@@ -49,16 +35,19 @@ public class MemberController {
 		
 		return "redirect:index.htm";
 	}
+	
+	
+	
 	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.POST)
 	public String loginSubmit(HttpSession session,Join_DTO dto){
 		System.out.println("로그인 버튼 눌렀고요");
 		
-		Join_DTO result = null;
+		Join_DTO result = new Join_DTO();
 	
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		result = dao.login(dto);
 		System.out.println("login dao 동작 완료");
-		
+		//System.out.println("result값 : " + result);
 		if(result == null){
 			System.out.println("로그인 실패");
 			
@@ -70,11 +59,12 @@ public class MemberController {
 			
 			//System.out.println("result값 : "+result);
 			
-			return "loginOk";
+			return "home.main";
 		}
 		
 	
 	}
+	
 	@RequestMapping("/logOut.htm")
 	public String logOut(HttpSession session){
 		
@@ -97,6 +87,7 @@ public class MemberController {
 		return "redirect:index.htm";
 		
 	}
+	/*
 	@RequestMapping("/updateMember.htm")
 	public String updateMemberView(Join_DTO dto, HttpSession session){
 		
@@ -118,6 +109,6 @@ public class MemberController {
 		dao.updateMember(dto);
 		
 		return "loginOk";
-	}
+	}*/
 
 }

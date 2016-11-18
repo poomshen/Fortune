@@ -10,6 +10,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                
             </div>
             <!-- /.navbar-header -->
 
@@ -214,8 +215,10 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="logOut.htm"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
+                        <li class="divider"></li>
+                        <li><a href="deleteMemember.htm"><i class="fa fa-times fa-fw"></i>delete ID</a>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>

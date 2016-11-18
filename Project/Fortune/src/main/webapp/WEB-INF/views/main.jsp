@@ -8,5 +8,6 @@
 </head>
 <body>
  안녕 하세요
+ ${sessionScope.id} 
 </body>
 </html>

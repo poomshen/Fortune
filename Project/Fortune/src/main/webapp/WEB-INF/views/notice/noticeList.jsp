@@ -18,12 +18,12 @@
 	<c:forEach items="${noticeList}" var="noticedto">
 	<tr>
 		<td class="notice_seq">${noticedto.notice_no}</td>
-		<td class="notice_title"><a href="noticeDetail.htm?notice_seq=${noticedto.notice_no}">${noticedto.notice_title}</a></td>
+		<td class="notice_title"><a href="noticeDetail.htm?notice_no=${noticedto.notice_no}">${noticedto.notice_title}</a></td>
 		<td class="notice_date">${noticedto.notice_date}</td>
 		<td class="notice_hits">${noticedto.notice_hits}</td>
 	</tr>
 	</c:forEach>
 </table>
-<p><a href="noticeWrite.htm">글작성하기</a></p>
+<p><a href="noticeInsert.htm">글작성하기</a></p>
 </body>
 </html>

@@ -25,22 +25,20 @@
 	
 	<!-- 게시물 삭제 -->
 	<delete id="deleteNotice">	
-	 	DELETE NOTICE WHERE NOTICE_NO=#{notice_seq}
+	 	DELETE NOTICE WHERE NOTICE_NO=#{notice_no}
 	</delete>
 	
 	<!-- 게시물 수정 -->
 	<update id="updateNotice" >
 	UPDATE NOTICE 
 	SET NOTICE_TITLE=#{notice_title}, 
-	    NOTICE_TEXT=#{notice_text}, 
-	    NOTICE_FILE_NAME=#{notice_file_name} , 
-	    NOTICE_FILE_SRC=#{notice_file_src,jdbcType=VARCHAR}  
-	WHERE NOTICE_NO=#{notice_seq}
+	    NOTICE_TEXT=#{notice_text} 
+	WHERE NOTICE_NO=#{notice_no}
 	</update>
 	
 	<!-- 게시물 상세 -->
 	<select id="detailNotice" resultType="com.fortune.Table_DTO.Notice_DTO">
-     	SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_seq}
+     	SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_no}
 	</select>
 
 	<!-- 게시물 입력 -->
@@ -55,7 +53,7 @@
 		<!-- <selectKey order="BEFORE" keyProperty="notice_no" resultType="String">
 			SELECT MAX(TO_NUMBER(notice_seq))+1 FROM NOTICE
 		</selectKey> -->
-		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_DATE)
-	    VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE)
+		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_DATE, NOTICE_FILENAME)
+	    VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE, #{notice_filename})
 	</insert>
 </mapper>
