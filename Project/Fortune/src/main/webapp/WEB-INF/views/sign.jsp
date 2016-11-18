@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    request.setCharacterEncoding("UTF-8");
 %>
@@ -164,12 +165,10 @@
 	    <div class="input-group">
 	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
 			    <select name="deptno" id="deptno" class="form-control selectpicker">
-						<option value="">부서명을 선택하세요</option>
-						
-						<option value="10">개발부</option>
-						<option value="20">영업부</option>
-						<option value="30">품질관리부</option>
-						<option value="40">디자인부</option>
+						<option value="">부서명을 선택하세요</option>	
+					 	<c:forEach var="i" items="${dept}">				
+							<option value="${i.dept_no}">${i.dept_name}</option>
+						</c:forEach> 	
 				</select><br>
 	  	</div>
 	</div>
@@ -183,9 +182,9 @@
 	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
 			    <select name="teamnum" id="teamnum" class="form-control selectpicker">
 					<option value="">팀을 선택하세요</option>
-					<option value="1">1팀</option>
-					<option value="2">2팀</option>
-					<option value="3">3팀</option>
+						<c:forEach var="i" items="${team}">
+							<option value="${i.team_no}">${i.team_name}</option>
+						</c:forEach>
 				</select><br>
 	  	</div>
 	</div>

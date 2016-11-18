@@ -32,4 +32,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	update USERS set USER_PASSWORD=#{pwd}, USER_PHONE=#{phone}, DEPT_NO=#{deptno}, TEAM_NO=#{teamnum}, POSITION_NO=#{jobnum}
  	where USER_ID=#{id}
  </update>
+ 
+ <!-- Dept 정보 가져오기 -->
+ <select id="searchDept" parameterType="com.fortune.Table_DTO.Dept_DTO" resultType="com.fortune.Table_DTO.Dept_DTO">
+ 	select dept_no, dept_name from dept
+ </select>
+ 
+  <!-- Team 정보 가져오기 -->
+ <select id="searchTeam" parameterType="com.fortune.Table_DTO.Team_DTO" resultType="com.fortune.Table_DTO.Team_DTO">
+ 	select TEAM_NO, DEPT_NO, team_name from team
+ </select>
+ 
+  <!-- 직함 정보 가져오기 -->
+ <select id="searchTitle" parameterType="com.fortune.Table_DTO.Jobtitle_DTO" resultType="com.fortune.Table_DTO.Jobtitle_DTO">
+ 	select POSITION_NO, POSITION_NAME from position
+ </select>
 </mapper>
