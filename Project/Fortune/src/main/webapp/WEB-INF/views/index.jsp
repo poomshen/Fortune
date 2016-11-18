@@ -76,18 +76,16 @@
 											<span class="addon"><i
 												class="fa fa-user" aria-hidden="true"></i></span>
 											<div class="form-group">
-												<label class="sr-only" for="r-form-1-email">Email</label> <input
-													type="text" name="r-form-1-email"
-													class="form-control hvr-glow" id="r-form-1-email">
+												<label class="sr-only" for="r-form-1-email">id</label> 
+												<input type="text" name="id" class="form-control hvr-glow" id="r-form-1-email">
 											</div>
 										</div>
 										<div class="input-group">
 											<span class="addon"><i
 												class="fa fa-key" aria-hidden="true"></i></span>
 											<div class="form-group">
-												<label class="sr-only" for="r-form-1-email">Email</label> <input
-													type="text" name="r-form-1-email"
-													class="form-control hvr-glow" id="r-form-1-email">
+												<label class="sr-only" for="r-form-1-email">pwd</label> 
+												<input type="text" name="pwd" class="form-control hvr-glow" id="r-form-1-email">
 										</div>
 										</div>
 									</div>
@@ -96,7 +94,7 @@
 									<button type="submit" formaction="sign.htm" class="btn hvr-forward" >sign</button>
 									
 									 &nbsp; &nbsp; &nbsp;
-									<button type="submit" class="btn hvr-forward">login</button>
+									<button type="submit" formaction="loginSubmit.htm" class="btn hvr-forward">login</button>
 									</div>
 
 								</form>
