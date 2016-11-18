@@ -7,13 +7,11 @@
 <title>공지사항 글쓰기</title>
 </head>
 <body>
-	noticeWrite.jsp
-	<br />
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart/form-data">
 		<table width="500" cellpadding="0" cellspacing="0" border="1">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="notice_title" id="notice_title" size="100" value="asd"></td>
+				<td><input type="text" name="notice_title" id="notice_title" size="100"></td>
 			</tr>
 			<tr>
 				<td>내용</td>
@@ -21,11 +19,11 @@
 			</tr>
 			<tr>
 				<td>첨부파일</td>
-				<td><input type="file" name="notice_file_name" id="notice_file_name" ></td>
+				<td><input type="file" name="noticeFile" id="noticeFile" ></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="저장">
-					&nbsp;&nbsp; <a href="notice/noticeList">공지사항 목록보기</a></td>
+				<a href="notice/noticeList.htm">공지사항 목록보기</a></td>
 			</tr>
 		</table>
 	</form>
