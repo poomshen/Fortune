@@ -16,7 +16,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i>일정</a>
+                            <a href="schedule.htm"><i class="fa fa-table fa-fw"></i>일정</a>
                         </li>
                         <li>
                             <a href="noticeList.htm"><i class="fa fa-edit fa-fw"></i>공지 사항</a>
