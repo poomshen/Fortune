@@ -197,11 +197,9 @@
 	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
 			    <select name="jobnum" id="jobnum" class="form-control selectpicker">
 					<option value="">직급을 선택하세요</option>
-					<option value="1">사원</option>
-					<option value="2">대리</option>
-					<option value="3">과장</option>
-					<option value="4">차장</option>
-					<option value="5">부장</option>
+						<c:forEach var="i" items="${position}">
+							<option value="${i.position_no}">${i.position_name}</option>
+						</c:forEach>	
 				</select><br>
 	  	</div>
 	</div>

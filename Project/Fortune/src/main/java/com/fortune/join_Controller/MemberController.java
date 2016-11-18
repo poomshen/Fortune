@@ -6,10 +6,13 @@
 
 package com.fortune.join_Controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.member_DAO.IJoin;
@@ -34,17 +37,17 @@ public class MemberController {
 	}
 	
 	
-	/*
+	
 	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.POST)
 	public String loginSubmit(HttpSession session,Join_DTO dto){
 		System.out.println("로그인 버튼 눌렀고요");
 		
-		Join_DTO result = null;
+		Join_DTO result = new Join_DTO();
 	
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		result = dao.login(dto);
 		System.out.println("login dao 동작 완료");
-		
+		System.out.println("result값 : " + result);
 		if(result == null){
 			System.out.println("로그인 실패");
 			
@@ -56,11 +59,12 @@ public class MemberController {
 			
 			//System.out.println("result값 : "+result);
 			
-			return "loginOk";
+			return "home.main";
 		}
 		
 	
 	}
+	
 	@RequestMapping("/logOut.htm")
 	public String logOut(HttpSession session){
 		
@@ -69,7 +73,7 @@ public class MemberController {
 		
 		return "redirect:index.htm";
 	}
-	
+	/*
 	@RequestMapping("/deleteMemember.htm")
 	public String deleteMemberView(HttpSession session){
 		

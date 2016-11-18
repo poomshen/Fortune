@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fortune.Table_DTO.Dept_DTO;
 import com.fortune.Table_DTO.Jobtitle_DTO;
@@ -60,6 +59,7 @@ public class HomeController {
 		ArrayList<Jobtitle_DTO> jdto = new ArrayList<Jobtitle_DTO>();
 		IJoin jdao = sqlsession.getMapper(IJoin.class);
 		jdto = dao.searchTitle();
+		m.addAttribute("position", jdto);
 		
 		return "sign";
 	}
