@@ -2,6 +2,28 @@ var content = "";
 var array = [];
 
 
+$(window).load(function() {
+   $.ajax({
+	      url : 'calendarload.ajax',
+	      type : 'post',
+	      dataType : 'json',
+	      success : function(data) {
+	         $.each(data.data, function(index, obj) {
+	            var item = {
+	               id : obj.id,
+	               title : obj.title,
+	               start : obj.sstart,
+	               end: obj.eend
+	            };
+	            array.push(item);
+	         });
+	         //ajax데이터를 받기 위해 여기서 풀캘린더 로드
+	         loadCalendar();
+	      }
+	   });
+	
+});
+
 array.push(
 		{
 		title: 'All Day Event',
