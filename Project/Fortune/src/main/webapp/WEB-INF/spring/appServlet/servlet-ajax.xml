@@ -15,7 +15,7 @@
 	<annotation-driven />
 	
 	<context:component-scan base-package="com.or.fortune.fullcalendar_Controller" />
-
+	<context:component-scan base-package="com.fortune.fileroom_Controller" />
 
 
 </beans:beans>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    request.setCharacterEncoding("UTF-8");
 %>
@@ -127,9 +128,9 @@
     <div class="col-md-4 inputGroupContainer" style="margin-left:2%">
     <div class="input-group">
         <span class="addon"><i class="glyphicon glyphicon-home"></i></span>
-        <input type="text" name="year" id="year" size="5" class="form-control hvr-glow">년&nbsp;
-		<input type="text" name="month" id="month" size="5" class="form-control hvr-glow">월&nbsp;
-		<input type="text" name="day" id="day" size="5" class="form-control hvr-glow">일&nbsp;
+        <input type="text" name="year" id="year" size="5" class="form-control hvr-glow">
+		<input type="text" name="month" id="month" size="5" class="form-control hvr-glow">
+		<input type="text" name="day" id="day" size="5" class="form-control hvr-glow">
 		<input type="hidden" name="birthday" id="birthday">
     </div>
   </div>
@@ -164,10 +165,10 @@
 	    <div class="input-group">
 	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
 			    <select name="deptno" id="deptno" class="form-control selectpicker">
-						<option value="">부서명을 선택하세요</option>
-						<option value="1">개발부</option>
-						<option value="2">영업부</option>
-						<option value="3">기획부</option>
+						<option value="">부서명을 선택하세요</option>	
+					 	<c:forEach var="i" items="${dept}">				
+							<option value="${i.dept_no}">${i.dept_name}</option>
+						</c:forEach> 	
 				</select><br>
 	  	</div>
 	</div>
@@ -181,9 +182,9 @@
 	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
 			    <select name="teamnum" id="teamnum" class="form-control selectpicker">
 					<option value="">팀을 선택하세요</option>
-					<option value="1">1팀</option>
-					<option value="2">2팀</option>
-					<option value="3">3팀</option>
+						<c:forEach var="i" items="${team}">
+							<option value="${i.team_no}">${i.team_name}</option>
+						</c:forEach>
 				</select><br>
 	  	</div>
 	</div>
@@ -196,11 +197,9 @@
 	        <span class="addon"><i class="glyphicon glyphicon-list"></i></span>
 			    <select name="jobnum" id="jobnum" class="form-control selectpicker">
 					<option value="">직급을 선택하세요</option>
-					<option value="1">사원</option>
-					<option value="2">대리</option>
-					<option value="3">과장</option>
-					<option value="4">차장</option>
-					<option value="5">부장</option>
+						<c:forEach var="i" items="${position}">
+							<option value="${i.position_no}">${i.position_name}</option>
+						</c:forEach>	
 				</select><br>
 	  	</div>
 	</div>
@@ -232,9 +231,7 @@
 						style="visibility: visible; animation-name: fadeInUp;">
 						<span></span>
 					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Ut enim ad minim veniam, quis nostrud exercitation.</p>
+					<p>이예지 바보</p>
 				</div>
 			</div>
 			<div class="row">
