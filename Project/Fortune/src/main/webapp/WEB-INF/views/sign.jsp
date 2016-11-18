@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    request.setCharacterEncoding("UTF-8");
 %>
@@ -197,6 +198,7 @@
 </div>
 
 
+
 <!--부서명 입력-->
 <!--select id 변경 : 변경불가 -->
 <div class="form-group">
@@ -205,13 +207,14 @@
 					<div class="fleft">
 					<select name="deptno" id="cd-dropdown" class="cd-select">
 						<option value="-1" selected>부서명을 선택하세요</option>
-						<option value="1" style="text-align:center">개발부</option>
-						<option value="2" style="text-align:center">영업부</option>
-						<option value="3" style="text-align:center">기획부</option>
 			
+				<c:forEach var="i" items="${dept}">				
+							<option style="text-align:center" value="${i.dept_no}">${i.dept_name}</option>
+						</c:forEach> 
 					</select>
 				</div>
 			</section>
+
 </div>
 
 <div class="col-sm-3">
@@ -219,9 +222,9 @@
 					<div class="fleft">
 					<select name="teamnum" id="cd-dropdown2" class="cd-select">
 						<option value="-1" selected>팀을 선택하세요</option>
-						<option value="1" style="text-align:center">1팀</option>
-						<option value="2" style="text-align:center">2팀</option>
-						<option value="3" style="text-align:center">3팀</option>
+				<c:forEach var="i" items="${team}">
+							<option style="text-align:center" value="${i.team_no}">${i.team_name}</option>
+						</c:forEach>
 			
 					</select>
 				</div>
@@ -233,16 +236,18 @@
 					<div class="fleft">
 					<select name="jobnum" name="deptno" id="cd-dropdown3" class="cd-select">
 						<option value="-1" selected>직급을 선택하세요</option>
-						<option value="1" style="text-align:center">사원</option>
-						<option value="2" style="text-align:center">대리</option>
-						<option value="3" style="text-align:center">과장</option>
-							<option value="4" style="text-align:center">차장</option>
-					<option value="5" style="text-align:center">부장</option>
+					<c:forEach var="i" items="${position}">
+							<option style="text-align:center" value="${i.position_no}">${i.position_name}</option>
+						</c:forEach>	
 			
 					</select>
 				</div>
 			</section>
 </div>
+
+
+
+
 
 </div>
 
@@ -272,9 +277,7 @@
 						style="visibility: visible; animation-name: fadeInUp;">
 						<span></span>
 					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Ut enim ad minim veniam, quis nostrud exercitation.</p>
+					<p>이예지 바보</p>
 				</div>
 			</div>
 			<div class="row">
