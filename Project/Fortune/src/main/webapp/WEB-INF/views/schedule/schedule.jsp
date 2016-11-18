@@ -31,7 +31,9 @@
 $(document).ready(function() {
 	
 	//fullcalendar 불러오는 함수
-	loadCalendar();	
+	loadCalendar();
+	
+	
 	
 });
 </script>
@@ -66,8 +68,7 @@ body {
 
 
 
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modal_btn" >
-			</button>
+			<input type="hidden" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modal_btn" >
 			
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" role="dialog">
@@ -82,7 +83,11 @@ body {
 						<div class="modal-body">
 							<input type="radio" name="worktype"> 업무 일정 <input type="radio" name="worktype"> 회의 일정 <br>
 							<label>일정 제목 : </label> <input type="text" id="modal_title"><br>
-							<label>일정 내용  : </label> <textarea rows="5" cols="30"></textarea><br>
+							<label>일정 내용 : </label> <textarea rows="5" cols="30"></textarea><br>
+							<label>참가 인원 : </label>
+								<input type="checkbox" name="userchk" value="이명철1">AA
+								<input type="checkbox" name="userchk" value="이명철2">BB
+							<br>
 							<button type="button" class="btn btn-default" id="modal_ok"
 								data-dismiss="modal">등록</button>
 						</div>
@@ -95,7 +100,8 @@ body {
 
 			<!-- 업우상세 보여주는 div 영역 -->
 			<div class="col-sm-5">
-				<h3>일 정</h3>
+				<label> 일 정 </label>
+				<button id="update">수정</button><button id="delete">삭제</button>
 				<div id="content"></div>
 			</div>
 		</div>

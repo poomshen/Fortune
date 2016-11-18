@@ -6,8 +6,9 @@ array.push(
 		{
 		title: 'All Day Event',
 		start: '2016-11-01',
-		backgroundColor: 'red',
-		borderColor: 'blue'
+		id: 0
+		//backgroundColor: 'red',
+		//borderColor: 'blue'
 		}
 	)
 
@@ -37,29 +38,34 @@ function loadCalendar() {
 			
 			$('#modal_ok').click(function(){
 				if(check){
-					eventData = {
-						title: $('#modal_title').val(),
-						start: start,
-						end: end
+					var scheduleusers = [];
+					$("input[name='uesrchk']:checked").each(function(i){
+						schedulesers.push($(this).val());
+					});
+
+					var newschedule = {
+							"title" : $('#modal_title').val(),
+							"start": start.format("YYYY-MM-DD"),
+							"end": end.format('YYYY-MM-DD'),
+							"scheduleusers": scheduleusers
 					}
-				
-					$.ajax({
+					
+/*					$.ajax({
 						type: 'post',
 						url: 'select.ajax',
-						data: 'STtitle='+eventData.title+'&STstart='+eventData.start+'&STend='+eventData.end,
+						data: newschedule,
 						success : function(data) {
 							eventData = {
-									title: data.collabo_no,
+									//title: data.collabo_no,
 									start: data.schedule_start,
 									end: data.schedule_end
 							}
 							alert('controller 타고온 데이터 : ' + eventData.title)
-							
+							$('#calendar').fullCalendar('renderEvent', eventData , true);
 						}
-					});
+					});*/
 					
 				check=false;
-				$('#calendar').fullCalendar('renderEvent', eventData , false);
 				}
 			});
 			
@@ -81,10 +87,19 @@ function loadCalendar() {
 	        //alert('Event: ' + calEvent.title); //일정의 정보 표현 ex) ~.title, ~.start, ~.end 값등 사용가능
 	        //alert('View: ' + view.name); //달력의 정보 표현 ex) view.name = november 2016, view.title = month
 	        //$(this).css('background-color', 'green'); //일정의 스타일을 바꿀 수 있음 ex) border-color, background-color ...
+			var check2= true;
 			
 	        content += '<table class="table table-hover"><tr><th>제목</th></tr><tr><td>' + calEvent.title + '</td></tr></table>'
 	        $('#content').html(content)
 	        
+	        $('#delete').click(function(){
+	        	if(check2){
+	        		console.log('a')
+	        		calendar.fullCalendar('removeEvents', calEvent.id);
+	        		check= false;
+	        	}
+	        	
+	        });
 
 	        
 	    },
