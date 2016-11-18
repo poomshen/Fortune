@@ -47,7 +47,7 @@ public class MemberController {
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		result = dao.login(dto);
 		System.out.println("login dao 동작 완료");
-		System.out.println("result값 : " + result);
+		//System.out.println("result값 : " + result);
 		if(result == null){
 			System.out.println("로그인 실패");
 			
@@ -73,7 +73,7 @@ public class MemberController {
 		
 		return "redirect:index.htm";
 	}
-	/*
+	
 	@RequestMapping("/deleteMemember.htm")
 	public String deleteMemberView(HttpSession session){
 		
@@ -87,6 +87,7 @@ public class MemberController {
 		return "redirect:index.htm";
 		
 	}
+	/*
 	@RequestMapping("/updateMember.htm")
 	public String updateMemberView(Join_DTO dto, HttpSession session){
 		
