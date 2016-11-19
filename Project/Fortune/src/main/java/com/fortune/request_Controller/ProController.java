@@ -1,15 +1,15 @@
 package com.fortune.request_Controller;
 
-
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
+import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
 import com.fortune.request_Service.ProService;
+
+
 
 
 @Controller
@@ -113,7 +115,29 @@ public class ProController {
 		 }	 	
 		 
 		
-		 //협업 요청 게시판 수정하기
+	//협업 요청 게시판 수정화면 보여주는 클래스입니다.
+		 @RequestMapping(value = "proEdit.htm", method = RequestMethod.GET)
+		 public String proEdit(String collabo_req_index, Model model)
+		   throws ClassNotFoundException, SQLException {
+		 
+			 
+			 
+			 Request_DTO req_Dto =  proservice.proEdit(collabo_req_index);
+			  model.addAttribute("list", req_Dto);	
+		 
+		  return "request.proEdit";
+		 }
+
+	//게시판 실제 수정처리
+		 @RequestMapping(value = "proEdit.htm", method = RequestMethod.POST)
+		 public String proEdit(Request_DTO n) throws ClassNotFoundException,
+		   SQLException, IOException {
+			 System.out.println("일로 타는데?");
+			 System.out.println(n.toString() );
+			proservice.proEdit(n);
+		  return "redirect:requestList.htm";
+	    	 
+		 }
 		 
 		 
 		 

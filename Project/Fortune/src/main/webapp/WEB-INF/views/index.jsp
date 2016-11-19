@@ -93,7 +93,7 @@
 									</div>
 
 									<div style="margin-left:-3%">
-									<button type="submit" formaction="sign.htm" class="btn hvr-forward" >sign</button>
+									<button type="submit" formaction="sign.htm" class="btn hvr-forward" >join</button>
 									
 									 &nbsp; &nbsp; &nbsp;
 									<button type="submit" formaction="loginSubmit.htm" class="btn hvr-forward">login</button>
