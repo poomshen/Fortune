@@ -92,9 +92,10 @@ public class MemberController {
 	public String updateMemberView(HttpSession session){
 		
 		System.out.println("id값 받아서 edit view단 보여줄거임");
-		Join_DTO dto = (Join_DTO)session.getAttribute("info");
+		Join_DTO dto = (Join_DTO) session.getAttribute("info");
 		
-		/*IJoin dao = sqlsession.getMapper(IJoin.class);*/	
+		System.out.println("dto값이 뭔데 그러냐 " + dto);
+	
 		System.out.println("id : " + dto.getUser_id());
 		
 		return "home.edit";
