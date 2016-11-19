@@ -1,5 +1,6 @@
 package com.fortune.request_Controller;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -8,7 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -112,6 +113,10 @@ public class ProController {
 		 }	 	
 		 
 		
+		 //협업 요청 게시판 수정하기
+		 
+		 
+		 
 	/////////////////////////////////////////////////////////////////////////
 		 
 		// 프로젝트를 요청해주는 클래스 이다.
