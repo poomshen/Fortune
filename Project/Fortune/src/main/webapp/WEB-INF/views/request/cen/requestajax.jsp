@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
 <title>Insert title here</title>
 </head>
 <body>
- ${sessionScope.id.id} 님 안녕 하세요\^0^/
- <br>
- 부서번호 : ${sessionScope.id.deptno}
- 직함번호 : ${sessionScope.id.jobnum}
- 팀번호    : ${sessionScope.id.teamnum}
-  
- 
+<div id="main">
+			<div >
+				<!-- Content  -->
+				<tiles:insertAttribute name="content" />
+			</div>
+</div>
 </body>
 </html>

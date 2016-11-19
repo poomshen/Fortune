@@ -80,21 +80,12 @@
 <span class="field">
  
 
-<span class="addon"style="
-    padding-bottom: 0px;
-"><i class="glyphicon glyphicon-user"></i></span>
-    <input type="text" id="id" name="id" class="form-control" style="
-    width: 340px;margin-left:20px;
-"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
-
+<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
+    <input type="text" id="id" name="id" class="form-control" style="width: 340px;margin-left:20px;">
+    <label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
 </span>
 </div>
 </div>
-
-
-
-
-
 
 
 <!-- 비밀번호  입력-->

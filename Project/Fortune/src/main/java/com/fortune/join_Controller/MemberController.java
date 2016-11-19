@@ -55,7 +55,7 @@ public class MemberController {
 		}else{
 			System.out.println("로그인 성공!!!!!!!");			
 			
-			session.setAttribute("id", dto.getId());
+			session.setAttribute("id", result);
 			
 			//System.out.println("result값 : "+result);
 			
@@ -96,7 +96,7 @@ public class MemberController {
 		IJoin dao = sqlsession.getMapper(IJoin.class);	
 		System.out.println("id : " + dto.getId());
 		session.setAttribute("info", dao.memberInfo(dto));
-		return "edit";
+		return "home.edit";
 		
 	}
 		
@@ -108,6 +108,6 @@ public class MemberController {
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		dao.updateMember(dto);
 		
-		return "loginOk";
+		return "home.main";
 	}
 }
