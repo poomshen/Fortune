@@ -32,12 +32,11 @@ public class FullCalendarController {
             throws ClassNotFoundException, SQLException{
 
 		
-        System.out.println("작업자: 이명철 // 위치 : FullCalendarController // 내용 : 캘린더 select함수 호출: 일정 insert작업");
+        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 캘린더 select함수 호출: 일정 insert작업");
         
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
 		Schedule_Work_DTO swdto = new Schedule_Work_DTO();
         //아래 임시로 1로 박음
-		swdto.setSchedule_no(1);
         swdto.setSchedule_start(start);
         swdto.setSchedule_end(end);
         swdto.setWork_title(title);
@@ -58,17 +57,18 @@ public class FullCalendarController {
      * 추가 내용 : 
      * version : v1.0
     */
-	
 	@RequestMapping(value="calendarload.ajax", method = RequestMethod.POST)
-    public @ResponseBody Schedule_Work_DTO calendarload(){
+    public @ResponseBody List<Schedule_Work_DTO> calendarload() throws ClassNotFoundException, SQLException{
 		
-        System.out.println("작업자: 이명철 // 위치 : FullCalendarController // 내용 : fullcalendar로드할 DB데이터 select");
+        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : fullcalendar로드할 DB데이터 select");
         
         Schedule_Work_DTO swdto = new Schedule_Work_DTO();
+        IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
         
+        List<Schedule_Work_DTO> schedulelist = fullcalendarDAO.selectSWList();
         
-        
-        return swdto;
+        return schedulelist;
+        //return null;
 	}
 	
 	

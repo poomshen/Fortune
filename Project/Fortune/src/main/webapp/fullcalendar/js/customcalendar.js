@@ -1,29 +1,5 @@
 var content = "";
 var array = [];
-
-
-$(window).load(function() {
-   $.ajax({
-	      url : 'calendarload.ajax',
-	      type : 'post',
-	      dataType : 'json',
-	      success : function(data) {
-	         $.each(data.data, function(index, obj) {
-	            var item = {
-	               id : obj.id,
-	               title : obj.title,
-	               start : obj.sstart,
-	               end: obj.eend
-	            };
-	            array.push(item);
-	         });
-	         //ajax데이터를 받기 위해 여기서 풀캘린더 로드
-	         loadCalendar();
-	      }
-	   });
-	
-});
-
 array.push(
 		{
 		title: 'All Day Event',
@@ -34,9 +10,26 @@ array.push(
 	)
 
 
-
 function loadCalendar() {
-		
+
+	$.ajax({
+		url : 'calendarload.ajax',
+		type : 'post',
+		success : function(data) {
+			$.each(data, function(index, obj) {
+				var item = {
+						id : obj.schedule_no,
+						title : obj.work_title,
+						start : obj.schedule_start,
+						end: obj.schedule_end
+				};
+				array.push(item);
+			});
+			console.log(array)
+		}
+	});
+	
+	
 	var calendar = $('#calendar').fullCalendar({
 		theme: true,
 		defaultDate: '2016-11-03',
