@@ -1,9 +1,11 @@
 package com.fortune.request_Service;
 
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,10 +17,15 @@ import org.apache.catalina.Session;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+
 import com.fortune.request_DAO.ProDao;
 
 
@@ -155,6 +162,30 @@ public class ProService {
 		
 			 
 		 }	 
+		 //글수정 화면
+		 @RequestMapping(value = "proEdit.htm", method = RequestMethod.GET)
+		 public Request_DTO proEdit(String collabo_req_index)
+		   throws ClassNotFoundException, SQLException {
+		 
+			 ProDao proDao = sqlsession.getMapper(ProDao.class);
+			  Request_DTO req_Dto = proDao.getProDto(collabo_req_index);
+			  
+		 
+		  return req_Dto;
+		 }
+		 
+		 //실제 글수정 
+		 @RequestMapping(value = "noticeEdit.htm", method = RequestMethod.POST)
+		 public Request_DTO proEdit(Request_DTO n) throws ClassNotFoundException,
+		   SQLException, IOException {
+
+			
+			 ProDao proDao = sqlsession.getMapper(ProDao.class);
+			 proDao.update(n);
+		  return n;
+	    	 
+		 }
+		 
 		 
 		 //////////////////////////////////////////////////////////////
 		 

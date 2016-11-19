@@ -12,18 +12,17 @@
 
 <script type="text/javascript">
      function proAjaxCall(a){
+    	 $("#menuView").empty();
 
    	 $.ajax({
+   		 
  			type: "get",
  			url:  "ProDetail.htm",
  			cache: false,				
  			data:"collabo_req_index="+a,
  		    success:function(data){ //callback  
- 		    	 console.log(data);
- 		    	 $("#menuView").empty();
- 		        
- 		        $("#menuView").append($('#menuView').html(data)); 
- 		         
+				$("#menuView").append($('#menuView').html(data)); 
+ 		      
  		     },
  			error: function(){						
  				alert('Error while request..'	);
@@ -55,7 +54,7 @@
 		<tbody>
 			<c:forEach items="${list}" var="n">
 				<tr>
-				<td> <a href="ProDetail.htm?collabo_req_index=${n.collabo_req_index}">${n.collabo_req_title}</a> </td>
+				<td class="collabo_req_index">${n.collabo_req_index} </td>
 				
 				<td><a data-toggle="modal" data-target="#myModal" onclick="proAjaxCall(${n.collabo_req_index})">${n.collabo_req_title}</a></td>					
 					
