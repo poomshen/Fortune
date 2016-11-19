@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
 import com.fortune.request_DAO.ProDao;
@@ -40,8 +41,9 @@ public class ProService {
 		//게시판 기본 설정(기본값 처리)/////////////
 		int page = 1;
 		String field = "user_ID";
+		Join_DTO ids = (Join_DTO)session.getAttribute("id");
 		//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
-		String query ="%"+session.getAttribute("id")+"%";
+		String query ="%"+ids.getId()+"%";
 		//////////////////////////////////////
 		if(pg != null && pg.equals("")){
 			page = Integer.parseInt(pg);
@@ -167,8 +169,9 @@ public class ProService {
 				//게시판 기본 설정(기본값 처리)/////////////
 				int page = 1;
 				String field = "user_ID";
+				Join_DTO ids = (Join_DTO)session.getAttribute("id");
 				//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
-				String query ="%"+session.getAttribute("id")+"%";
+				String query ="%"+ids.getId()+"%";
 				//////////////////////////////////////
 				if(pg != null && pg.equals("")){
 					page = Integer.parseInt(pg);
