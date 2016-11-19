@@ -65,125 +65,45 @@ public class NoticeController {
 		return "notice/noticeList";
 	}
 
-	// 글등록 화면 처리
-	@RequestMapping(value = "noticeInsert.htm", method = RequestMethod.GET)
-	public String noticeInsert() {
+	//공지사항등록 화면처리
+	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.GET)
+	public String noticeInsert(){
 		System.out.println("NoticeController의 noticeInsert를 탑니다~");
-		return "notice/noticeInsert";
+		return "notice/noticeInsert";		
 	}
-
-/*	// 글등록 처리(실제 글등록 처리)
-	@RequestMapping(value = "noticeInsert.htm", method = RequestMethod.POST)
-	public String noticeInsert(Notice_DTO ndto, MultipartHttpServletRequest request)
-			throws IOException, ClassNotFoundException, SQLException {
-
-		System.out.println("NoticeController의 noticeInsert를 타고, 글등록을 할꺼다!~");
-		System.out.println(ndto.getNotice_title());
-		System.out.println(ndto.getNotice_text());
-		System.out.println(ndto.getNoticeFile().getName());
-
-		MultipartFile noticeFile = ndto.getNoticeFile();
-		String notice_filename = new String();
-
-		if (noticeFile != null && noticeFile.getSize() != 0) {
-
-			String nfName = noticeFile.getOriginalFilename();
-			String path = request.getServletContext().getRealPath("/notice");
-			String fullpath = path + "\\" + nfName;
-
-			System.out.println(nfName + " / " + path + " / " + fullpath);
-
-			if (!nfName.equals("")) {
-				// 서버에 파일 쓰기 작업
-				FileOutputStream fs = new FileOutputStream(fullpath);
-				fs.write(noticeFile.getBytes());
-				fs.close();
-			}
-			notice_filename.add(nfName); // 실 DB Insert 작업시 .. 파일명
-		}
-		}
-
-	ndto.
-		INotice noticeDao = sqlSession.getMapper(INotice.class);
-
-		String notice_filename = noticeFile.getOriginalFilename();
-		System.out.println("공지사항게시판 첨부파일이름 : " + notice_filename);
-
-		noticeDao.insertNotice(ndto);
+	
+	//공지사항등록 실제처리
+	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.POST)
+	public String noticeInsert(Notice_DTO ndto, HttpServletRequest request) throws IOException, ClassNotFoundException, SQLException {
+		
+		System.out.println("NoticeController의 noticeInsert를 타서, 실제로 글작성을 할꺼지롱!");
+	    System.out.println("ndto : " + ndto.getNotice_title()); 
+	    System.out.println("ndto : " + ndto.getNotice_text());
+	    System.out.println("ndto : " + ndto.getFile().getOriginalFilename()); 
+	    
+	    MultipartFile mf = ndto.getFile();	   
+	    
+	    if(mf != null && mf.getSize() != 0){
+	    	String fname = mf.getOriginalFilename();
+	    	String path = request.getServletContext().getRealPath("/notice");
+	    	String fullpath = path + "\\" + fname;
+	    	System.out.println(fname + " / " + path + " / " + fullpath);
+	    	
+	    	if(!fname.equals("")){
+				 //서버에 파일 쓰기 작업 
+				  FileOutputStream fs = new FileOutputStream(fullpath);
+				  fs.write(mf.getBytes());
+				  fs.close();
+			  }	
+	    	ndto.setNotice_filename(fname);
+	    }
+	    
+	    INotice noticeDao = sqlSession.getMapper(INotice.class);
+	    
+	    noticeDao.insertNotice(ndto);
 		return "redirect:noticeList.htm";
-	}
-*/
-
-
-	 // 글등록 처리(실제 글등록 처리)
-	 @RequestMapping(value="noticeInsert.htm", method=RequestMethod.POST)
-	 public String noticeInsert(Notice_DTO ndto, MultipartHttpServletRequest request)
-	   throws IOException, ClassNotFoundException, SQLException {
-
-		System.out.println("NoticeController의 noticeInsert를 타고, 글등록을 할꺼다!~");
-		System.out.println("ndto : " + ndto.getNotice_title()); 
-		System.out.println("ndto : " + ndto.getNotice_text());
-		System.out.println("ndto getName : " + ndto.getFile().getName()); 
-		System.out.println("ndto getOriginalFilename : " + ndto.getFile().getOriginalFilename()); 
-
-		MultipartFile mf = request.getFile("file");
-		INotice noticeDao = sqlSession.getMapper(INotice.class);
-
-		String fname = mf.getOriginalFilename();
-		System.out.println("fname : " + fname);
 		
-		//확장자 구하는 부분
-		//int lastindexof = mf.getOriginalFilename().lastIndexOf(".");
-		//int length = mf.getOriginalFilename().length();
-		//String substr = mf.getOriginalFilename().substring(lastindexof, length);
-		
-		String upload_path = request.getSession().getServletContext().getRealPath("upload");
-		File file = new File(upload_path + "/" + fname);
-		file = renameFile(file);
-		
-		if (mf.getSize() != 0) {
-			mf.transferTo(file);
-		}
-		
-		//DB insert 시작
-		Notice_DTO nfdto = new Notice_DTO();
-		nfdto.setNotice_filename(file.getName());
-		noticeDao.insertNotice(nfdto);
-		
-		//View 화면에 뿌려주기 위한 list
-		int page = 1;
-		int row_size = 5;
-
-		//int total_count = noticeDao.countFile();	//file 개수
-		//System.out.println("totalcount : " + total_count);
-
-		// ... 목록
-		//int all_page = (int) Math.ceil(total_count / (double) row_size); // 페이지수
-		// int totalPage = total/rowSize + (total%rowSize==0?0:1);
-		//System.out.println("페이지수 : " + all_page);
-
-		//int block = 5; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
-		// [10] >>
-		//int from_page = ((page - 1) / block * block) + 1; // 보여줄 페이지의 시작
-		// ((1-1)/10*10)
-		//int to_page = ((page - 1) / block * block) + block; // 보여줄 페이지의 끝
-		//if (to_page > all_page) { // 예) 20>17
-		//	to_page = all_page;
-		//}
-		
-		return fname;
-		
-		
-	 }
-
-	 
-
-
-	
-	
-	
-	
-	
+	}	
 	
 	// 글상세보기
 	@RequestMapping("noticeDetail.htm")
