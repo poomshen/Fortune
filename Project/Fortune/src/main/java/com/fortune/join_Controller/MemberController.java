@@ -55,7 +55,7 @@ public class MemberController {
 		}else{
 			System.out.println("로그인 성공!!!!!!!");			
 			
-			session.setAttribute("id", dto.getId());
+			session.setAttribute("id", result);
 			
 			//System.out.println("result값 : "+result);
 			
@@ -87,16 +87,16 @@ public class MemberController {
 		return "redirect:index.htm";
 		
 	}
-	/*
+	
 	@RequestMapping("/updateMember.htm")
 	public String updateMemberView(Join_DTO dto, HttpSession session){
 		
-		System.out.println("id값 전달하고난 컨트롤러~_~");
+		System.out.println("id값 받아서 edit view단 보여줄거임");
 		
 		IJoin dao = sqlsession.getMapper(IJoin.class);	
 		System.out.println("id : " + dto.getId());
 		session.setAttribute("info", dao.memberInfo(dto));
-		return "updateInfo";
+		return "home.edit";
 		
 	}
 		
@@ -108,7 +108,6 @@ public class MemberController {
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		dao.updateMember(dto);
 		
-		return "loginOk";
-	}*/
-
+		return "home.main";
+	}
 }
