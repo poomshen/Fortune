@@ -11,6 +11,7 @@ public class Join_DTO {
 	private int deptno;
 	private int jobnum;
 	private int teamnum;
+	private int rolenum;
 	
 	public String getId() {
 		return id;
@@ -54,6 +55,12 @@ public class Join_DTO {
 	public void setEnterdate(String enterdate) {
 		this.enterdate = enterdate;
 	}
+	public int getDeptno() {
+		return deptno;
+	}
+	public void setDeptno(int deptno) {
+		this.deptno = deptno;
+	}
 	public int getJobnum() {
 		return jobnum;
 	}
@@ -66,19 +73,19 @@ public class Join_DTO {
 	public void setTeamnum(int teamnum) {
 		this.teamnum = teamnum;
 	}
-
-	public int getDeptno() {
-		return deptno;
+	public int getRolenum() {
+		return rolenum;
 	}
-	public void setDeptno(int deptno) {
-		this.deptno = deptno;
+	public void setRolenum(int rolenum) {
+		this.rolenum = rolenum;
 	}
 	@Override
 	public String toString() {
-		return "JoinDTO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", gender=" + gender + ", birthday=" + birthday
-				+ ", phone=" + phone + ", enterdate=" + enterdate + ", deptno=" + deptno + ", jobnum=" + jobnum
-				+ ", teamnum=" + teamnum + ", toString()=" + super.toString() + "]";
+		return "Join_DTO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", gender=" + gender + ", birthday="
+				+ birthday + ", phone=" + phone + ", enterdate=" + enterdate + ", deptno=" + deptno + ", jobnum="
+				+ jobnum + ", teamnum=" + teamnum + ", rolenum=" + rolenum + "]";
 	}
-
+	
+	
 	
 }
