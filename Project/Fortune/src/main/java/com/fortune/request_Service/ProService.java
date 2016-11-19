@@ -63,8 +63,7 @@ public class ProService {
 		return list;
 	}
 		
-	//상세보기
-	
+	//협업요청 상세보기
 	
 	public Request_DTO ProDetail(String collabo_req_index) throws ClassNotFoundException, SQLException{
 		 
@@ -115,7 +114,7 @@ public class ProService {
 		  System.out.println("seq : " + collabo_req_index);
 		  ProDao proDao = sqlsession.getMapper(ProDao.class);
 		 proDao.accept(collabo_req_index);  
-		 Request_DTO proDto = proDao.getResponse(collabo_req_index); //다른테이블 가져옴 index값을 받아온 정보를
+		 Request_DTO proDto = proDao.detailResponse(collabo_req_index); //다른테이블 가져옴 index값을 받아온 정보를
 		 System.out.println("index : " + proDto.getCollabo_req_index());
 		 System.out.println("no : " + proDto.getCollabo_req_no());
 		 
@@ -150,7 +149,7 @@ public class ProService {
 		
 			  ProDao proDao = sqlsession.getMapper(ProDao.class);
 			  proDao.insertResponse(n);
-			    Request_DTO proDto = proDao.getResponse(collabo_req_index);
+			    Request_DTO proDto = proDao.detailResponse(collabo_req_index);
 			   
 			  return proDto;
 		
@@ -158,8 +157,37 @@ public class ProService {
 		 }	 
 		 
 		 
-		 
-		 
+		 //전체 협업 리스트
+		 public List<With_DTO> listResponse(String pg , String f , String q, HttpSession session ) throws ClassNotFoundException , SQLException {
+				System.out.println("집에 갑시다.");
+				
+				
+				
+				//게시판 기본 설정(기본값 처리)/////////////
+				int page = 1;
+				String field = "user_ID";
+				//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
+				String query ="%"+session.getAttribute("id")+"%";
+				//////////////////////////////////////
+				if(pg != null && pg.equals("")){
+					page = Integer.parseInt(pg);
+				}
+				if(f != null && f.equals("")){
+					field = f;
+				}
+				if(q != null && q.equals("")){
+					query = q;
+				}
+				
+				System.out.println(page + " / " + field + " / " + query);
+				
+				//Mybatis 적용
+				ProDao proDao = sqlsession.getMapper(ProDao.class);
+				List<With_DTO> list= proDao.listResponse(page, field, query);
+				
+
+				return list;
+			}
 		 
 	
 	

@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50 
 </select>
 
-
+<!-- 요청번호 수정해야 합니다. ! -->
 <insert id="insert">
 	
 	
@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>	
 
 	
-	<select id="getResponse" resultType="com.fortune.Table_DTO.Request_DTO">
+	<select id="detailResponse" resultType="com.fortune.Table_DTO.Request_DTO">
 	
 	SELECT * FROM collabo_req WHERE collabo_req_index= #{collabo_req_index}
 	</select>	
@@ -102,7 +102,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 </insert>
 	
-	
+	<select id="listResponse" resultType="com.fortune.Table_DTO.With_DTO" >
+		SELECT * FROM (SELECT ROWNUM NUM, N.* FROM 
+			( SELECT * FROM collabo WHERE ${param2} 
+			LIKE '%${param3}%' ORDER BY collabo_start DESC ) N ) 
+			WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50 
+</select>
 	
 	
 </mapper>
