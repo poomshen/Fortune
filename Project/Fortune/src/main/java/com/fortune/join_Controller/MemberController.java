@@ -87,16 +87,16 @@ public class MemberController {
 		return "redirect:index.htm";
 		
 	}
-	/*
+	
 	@RequestMapping("/updateMember.htm")
 	public String updateMemberView(Join_DTO dto, HttpSession session){
 		
-		System.out.println("id값 전달하고난 컨트롤러~_~");
+		System.out.println("id값 받아서 edit view단 보여줄거임");
 		
 		IJoin dao = sqlsession.getMapper(IJoin.class);	
 		System.out.println("id : " + dto.getId());
 		session.setAttribute("info", dao.memberInfo(dto));
-		return "updateInfo";
+		return "edit";
 		
 	}
 		
@@ -109,6 +109,5 @@ public class MemberController {
 		dao.updateMember(dto);
 		
 		return "loginOk";
-	}*/
-
+	}
 }

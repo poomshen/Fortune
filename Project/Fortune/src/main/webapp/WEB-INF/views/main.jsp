@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
- 안녕 하세요
- ${sessionScope.id} 
+ ${sessionScope.id} 님 안녕 하세요\^0^/
 </body>
 </html>
