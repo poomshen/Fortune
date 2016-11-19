@@ -51,26 +51,5 @@ public class FullCalendarController {
         return swdto;
 	}
 	
-	
-    /* 작업자 : 이명철  // 최초 작업일 : 11.18 // 최종 작업일 : 11.18
-     * 작업 내용 : 최초 fullcalendar 로드될 때 => DB저장된 일정 불러오기
-     * 추가 내용 : 
-     * version : v1.0
-    */
-	@RequestMapping(value="calendarload.ajax", method = RequestMethod.POST)
-    public @ResponseBody List<Schedule_Work_DTO> calendarload() throws ClassNotFoundException, SQLException{
-		
-        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : fullcalendar로드할 DB데이터 select");
-        
-        Schedule_Work_DTO swdto = new Schedule_Work_DTO();
-        IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
-        
-        List<Schedule_Work_DTO> schedulelist = fullcalendarDAO.selectSWList();
-        
-        return schedulelist;
-        //return null;
-	}
-	
-	
-	
+
 }

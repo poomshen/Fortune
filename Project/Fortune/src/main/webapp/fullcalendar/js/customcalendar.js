@@ -3,32 +3,14 @@ var array = [];
 array.push(
 		{
 		title: 'All Day Event',
-		start: '2016-11-01'
+		start: '2016-11-01 10:11:10'
 		//backgroundColor: 'red',
 		//borderColor: 'blue'
 		}
 	)
 
 
-function loadCalendar() {
-
-	$.ajax({
-		url : 'calendarload.ajax',
-		type : 'post',
-		success : function(data) {
-			$.each(data, function(index, obj) {
-				var item = {
-						id : obj.schedule_no,
-						title : obj.work_title,
-						start : obj.schedule_start,
-						end: obj.schedule_end
-				};
-				array.push(item);
-			});
-			console.log(array)
-		}
-	});
-	
+function loadCalendar() {	
 	
 	var calendar = $('#calendar').fullCalendar({
 		theme: true,
@@ -124,7 +106,7 @@ function loadCalendar() {
 	 // 작업자: 이명철  // 최근 수정일: 16-11-10 --------------------- E N D ------------------------
 
 	 
-		events: array	
+		events: array
 	});
 
 }

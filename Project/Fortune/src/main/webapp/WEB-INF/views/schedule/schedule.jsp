@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,6 +17,43 @@
 <script src="fullcalendar/js/customcalendar.js" ></script>
 <script>
 $(document).ready(function() {
+	
+/* 	$.ajax({
+		url : 'calendarload.ajax',
+		type : 'post',
+		success : function(data) {
+			$.each(data, function(index, obj) {
+				var item = {
+						id : obj.schedule_no,
+						title : obj.work_title,
+						start : obj.schedule_start,
+						end: obj.schedule_end
+				};
+				array.push(item);
+			});
+			console.log(array)
+			console.log('aa')
+		}
+	}); */
+	
+ 	<c:forEach items="${sclist}" var="scdto">
+		var vid = ${scdto.schedule_no};
+		var vtitle = ${scdto.work_title};
+		var vstart = String(${scdto.schedule_start});
+		var vend = String(${scdto.schedule_end});
+		
+		var item = 	{
+				id: vid,
+				title: String(vtitle),
+				start: String(vstart),
+				end: String(vend)
+			}
+ 		array.push(item)
+		
+	</c:forEach>
+		console.log(array);
+
+
 	
 	//fullcalendar 불러오는 함수
 	loadCalendar();
