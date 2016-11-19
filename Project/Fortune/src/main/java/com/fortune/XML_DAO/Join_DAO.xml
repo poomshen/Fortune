@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <!-- 로그인 -->
  <select id="login" parameterType="com.fortune.Table_DTO.Join_DTO" resultType="com.fortune.Table_DTO.Join_DTO">
- 	select USER_ID id from USERS
+ 	select USER_ID id ,POSITION_NO jobnum, TEAM_NO teamnum, DEPT_NO deptno,ROLE_NO rolenum from USERS
  	where USER_ID=#{id} AND USER_PASSWORD=#{pwd}
  </select>
  <!-- 멤버 삭제 -->

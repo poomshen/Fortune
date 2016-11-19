@@ -11,7 +11,9 @@
 <script src="<%=request.getContextPath() %>/js/jquery.form.min.js"></script>
 <!-- jQuery MultiFile Plugin import -->
 <script src="<%=request.getContextPath() %>/js/jQuery.MultiFile.min.js"></script>
-
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://bootsnipp.com/dist/bootsnipp.min.css?ver=7d23ff901039aef6293954d33d23c066">
 <script>
 	$(function() {
 		$('#upload_btn').click(function() {
@@ -53,28 +55,39 @@
 			});
 		});
 	});
-
+	
 	function output(data) {
 		$('#result').empty();
+		$("#result").append("<div class=row>");
 		if (data.file && data.file.length != 0) {
 			$.each(data.file, function(index, item) {
-				$("#result").append("<input type=checkbox name=filename id=filename value="+ item.file_room_name +">");
 				if(item.file_room_ext == ".docx"){
-					$("#result").append("<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/docx.jpg style=width:100px;height:100px>" + "</a>");
+					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/docx.jpg style=width:100px;height:100px>" + "</a></div></div>";
 				}else if(item.file_room_ext == ".hwp"){
-					$("#result").append("<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/hwp.jpg style=width:100px;height:100px>" + "</a>");
+					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/hwp.jpg style=width:100px;height:100px>" + "</a></div></div>";
 				}else if(item.file_room_ext == ".pptx"){
-					$("#result").append("<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/pptx.jpg style=width:100px;height:100px>" + "</a>");
+					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/pptx.jpg style=width:100px;height:100px>" + "</a></div></div>";
 				}else if(item.file_room_ext == ".zip"){
-					$("#result").append("<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/zip.jpg style=width:100px;height:100px>" + "</a>");
+					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/zip.jpg style=width:100px;height:100px>" + "</a></div></div>";
 				}else{
-					$("#result").append("<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=upload/"+ item.file_room_name +" style=width:100px;height:100px>" + "</a>");
+					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=upload/"+ item.file_room_name +" style=width:100px;height:100px>" + "</a></div></div>";
 				}
-				$("#result").append(item.file_room_name);
+				$("#result").append("<div class=col-sm-3 style=float:left>");
+				$("#result").append("<div class=thumbnail bootsnipp-thumb>"+
+						"<div><p class=lead snipp-title>"+
+						"<input type=checkbox name=filename id=filename value="+ item.file_room_name +">"+
+						item.file_room_name+"</p></div>"+result);
+				
+				/* 
+				
+				
+				$("#result").append(item.file_room_name); */
 				//$("#result").append("<a href=filedelete.htm?filename=" + item.filesrc + ">" + item.filesrc + "</a>");
-				$("#result").append("<br/>");
+				
+				//$("#result").append("<br/>");
 			});
 		}
+		
 		
 		$("#result").append("<table width=600>");
 		$("#result").append("<tr>");
@@ -108,6 +121,7 @@
 		$("#result").append("</tr>");
 		$("#result").append("</table>");
 		
+		$("#result").append("</div>");
 		//$('#multiform')[0].reset();
 		//$('#multiform input:file').MultiFile('reset');
 	}
