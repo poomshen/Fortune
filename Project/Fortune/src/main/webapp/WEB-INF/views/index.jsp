@@ -81,7 +81,9 @@
 											</div>
 										</div>
 										<div class="input-group">
-											<span class="addon"><i
+											<span class="addon" style="
+    padding-right: 6px;
+" ><i
 												class="fa fa-key" aria-hidden="true"></i></span>
 											<div class="form-group">
 												<label class="sr-only" for="r-form-1-email">pwd</label> 
@@ -464,11 +466,6 @@
 	<script src="assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="assets/js/masonry.pkgd.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
-
-
- 
-
-
 
 </body>
 </html>
