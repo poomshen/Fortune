@@ -81,7 +81,9 @@
 											</div>
 										</div>
 										<div class="input-group">
-											<span class="addon"><i
+											<span class="addon" style="
+    padding-right: 6px;
+" ><i
 												class="fa fa-key" aria-hidden="true"></i></span>
 											<div class="form-group">
 												<label class="sr-only" for="r-form-1-email">pwd</label> 
@@ -91,7 +93,7 @@
 									</div>
 
 									<div style="margin-left:-3%">
-									<button type="submit" formaction="sign.htm" class="btn hvr-forward" >sign</button>
+									<button type="submit" formaction="sign.htm" class="btn hvr-forward" >join</button>
 									
 									 &nbsp; &nbsp; &nbsp;
 									<button type="submit" formaction="loginSubmit.htm" class="btn hvr-forward">login</button>
@@ -464,11 +466,6 @@
 	<script src="assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="assets/js/masonry.pkgd.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
-
-
- 
-
-
 
 </body>
 </html>
