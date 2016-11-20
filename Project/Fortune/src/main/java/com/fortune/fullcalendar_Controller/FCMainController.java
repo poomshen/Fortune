@@ -20,16 +20,14 @@ public class FCMainController {
 	@Autowired
 	public SqlSession sqlsession;
 	
+	
+    /* 작업자 : 이명철  // 최초 작업일 : 11.19 // 최종 작업일 : 11.19
+     * 작업 내용 : Controller 패키지 위치 변경
+     * version : v1.0
+    */
 	@RequestMapping(value= "/schedule.htm", method = RequestMethod.GET)
 	public String schedule(ModelMap map) throws ClassNotFoundException, SQLException {
-		System.out.println("위치 : FCMainController // 내용 : 캘린더 화면으로 넘어감 + DB에서 일정 가져옴 // 작업자: 이명철");
-		
-        
-        Schedule_Work_DTO swdto = new Schedule_Work_DTO();
-        IFullCalendar fullcalendarDAO = sqlsession.getMapper(IFullCalendar.class);
-        
-        List<Schedule_Work_DTO> schedulelist = fullcalendarDAO.selectSWList();
-        map.addAttribute("sclist", schedulelist);
+		System.out.println("위치 : FCMainController // 내용 : 캘린더 화면으로 넘어가는 부분 // 작업자: 이명철");
 		
 		return "schedule/schedule";
 	}
@@ -37,9 +35,5 @@ public class FCMainController {
 	
 	
 	
-    /* 작업자 : 이명철  // 최초 작업일 : 11.18 // 최종 작업일 : 11.18
-     * 작업 내용 : 최초 fullcalendar 로드될 때 => DB저장된 일정 불러오기
-     * 추가 내용 : 
-     * version : v1.0
-    */
+
 }

@@ -1,11 +1,13 @@
 package com.fortune.fullcalendar_Controller;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,11 +34,10 @@ public class FullCalendarController {
             throws ClassNotFoundException, SQLException{
 
 		
-        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 캘린더 select함수 호출: 일정 insert작업");
+        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 캘린더 select함수 호출: 일정 insert작업");        
         
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
 		Schedule_Work_DTO swdto = new Schedule_Work_DTO();
-        //아래 임시로 1로 박음
         swdto.setSchedule_start(start);
         swdto.setSchedule_end(end);
         swdto.setWork_title(title);
@@ -46,9 +47,29 @@ public class FullCalendarController {
         i += fullcalendarDAO.insertWork(swdto);
         
         //users 정보값만 넘어오고 DB작업은 안함
-        System.out.println(users.get(0) + "/" + users.get(1));
+        //System.out.println(users.get(0) + "/" + users.get(1));
 	
         return swdto;
+	}
+	
+	
+	
+	
+    /* 작업자 : 이명철  // 최초 작업일 : 11.18 // 최종 작업일 : 11.19
+     * 작업 내용 : 최초 fullcalendar 로드될 때 => DB저장된 일정 불러오기
+     * 추가 내용 : 
+     * version : v1.0
+    */
+	@RequestMapping(value="calendarload.ajax", method = RequestMethod.POST)
+	public @ResponseBody List<Schedule_Work_DTO> schedule() throws ClassNotFoundException, SQLException {
+		System.out.println("위치 : FullCalendarController // 내용 : DB에서 일정 가져옴 // 작업자: 이명철");
+        
+        Schedule_Work_DTO swdto = new Schedule_Work_DTO();
+        IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+        
+        List<Schedule_Work_DTO> schedulelist = fullcalendarDAO.selectSWList();
+		
+		return schedulelist;
 	}
 	
 

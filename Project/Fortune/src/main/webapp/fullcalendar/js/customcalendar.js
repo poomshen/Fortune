@@ -1,14 +1,5 @@
-var content = "";
+var content = "<table class='table table-hover'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
 var array = [];
-array.push(
-		{
-		title: 'All Day Event',
-		start: '2016-11-01 10:11:10'
-		//backgroundColor: 'red',
-		//borderColor: 'blue'
-		}
-	)
-
 
 function loadCalendar() {	
 	
@@ -31,6 +22,8 @@ function loadCalendar() {
 			var check = true;
 			//모달 띄우는 함수
 			var test = $('#modal_btn').click();
+			$('#modal_title').val("");
+			$('#modal_text').val("");
 			
 			$('#modal_ok').click(function(){
 				if(check){
@@ -38,8 +31,6 @@ function loadCalendar() {
 					$("input[name='uesrchk']:checked").each(function(i){
 						scheduleusers.push($(this).val());
 					});
-                    console.log(scheduleusers)
-                    console.log($('#modal_text').val())
 
 					var newschedule = {
 							"title": $('#modal_title').val(),
@@ -60,7 +51,11 @@ function loadCalendar() {
 									start: data.schedule_start,
 									end: data.schedule_end
 							}
-							alert('controller 타고온 데이터 : ' + eventData.title)
+							
+					        content += '<tr><td>**일정(미구현)</td><td>' + data.work_title;
+					        content += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"';
+					        content += ' onclick="test(' + data.schedule_no + ')" >상세보기</a></td></tr>';
+					        $('#content').html(content)
 							calendar.fullCalendar('renderEvent', eventData , true);
 						}
 					});
@@ -89,8 +84,8 @@ function loadCalendar() {
 	        //$(this).css('background-color', 'green'); //일정의 스타일을 바꿀 수 있음 ex) border-color, background-color ...
 			var check2= true;
 			
-	        content += '<table class="table table-hover"><tr><th>제목</th></tr><tr><td>' + calEvent.title + '</td></tr></table>'
-	        $('#content').html(content)
+	        //content += '<table class="table table-hover"><tr><th>제목</th></tr><tr><td>' + calEvent.title + '</td></tr></table>'
+	        //$('#content').html(content)
 	        
 	        $('#delete').click(function(){
 	        	if(check2){
@@ -102,6 +97,21 @@ function loadCalendar() {
 	        });
 
 	        
+	    },
+	    
+	    header: {
+	        left: 'prev,next today myCustomButton',
+	        center: 'title',
+	        right: 'month,agendaWeek,agendaDay'
+	    },
+	    
+	    customButtons: {
+	        myCustomButton: {
+	            text: 'custom!',
+	            click: function() {
+	                alert('clicked the custom button!');
+	            }
+	        }
 	    },
 	 // 작업자: 이명철  // 최근 수정일: 16-11-10 --------------------- E N D ------------------------
 
