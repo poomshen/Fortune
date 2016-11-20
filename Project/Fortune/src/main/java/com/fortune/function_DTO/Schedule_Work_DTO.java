@@ -8,6 +8,7 @@ public class Schedule_Work_DTO {
 	private String work_text;
 	
 	
+	
 	public int getSchedule_no() {
 		return schedule_no;
 	}

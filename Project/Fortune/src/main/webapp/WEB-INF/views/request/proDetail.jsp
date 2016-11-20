@@ -34,9 +34,8 @@
 	
 	<p><a href="requestList.htm">목록</a></p>
 	<p><a href="accept.htm?collabo_req_index=${list.collabo_req_index}" name="collabo_req_state">수락</a></p> 
-	
 	<p><a  href="refuse.htm?collabo_req_index=${list.collabo_req_index}" name="collabo_req_state">거절</a></p>
-	
+	<p><a href="proEdit.htm?collabo_req_index=${list.collabo_req_index}">수정</a></p>
 
 
 </body>
