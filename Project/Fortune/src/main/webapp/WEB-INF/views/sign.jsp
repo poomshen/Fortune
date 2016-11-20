@@ -81,7 +81,7 @@
  
 
 <span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
-    <input type="text" id="id" name="id" class="form-control" style="width: 340px;margin-left:20px;">
+    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;">
     <label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
 </span>
 </div>
@@ -95,7 +95,7 @@
  <span class="addon"style="
     padding-bottom: 0px;
 "><i class="glyphicon glyphicon-lock"></i></span> 
-    <input type="text" name="pwd" id="pwd" class="form-control" style="
+    <input type="text" name="user_password" id="pwd" class="form-control" style="
     width: 340px;margin-left:20px;
 "><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 입력</label>
 
@@ -111,7 +111,7 @@
 <span class="addon"style="
     padding-bottom: 0px;
 "><i class="glyphicon glyphicon-font"></i></span> 
-   <input type="text" name="name" id="name" class="form-control" style="
+   <input type="text" name="user_name" id="name" class="form-control" style="
     width: 340px;margin-left:20px;
 ">
 
@@ -124,10 +124,10 @@
 <div class="inner-addon left-addon" style="margin-left:2%">
 <span class="field">
 
-           <input type="radio" name="gender" id="gender" value="male" checked 
+           <input type="radio" name="user_gender" id="gender" value="male" checked 
  
 >남자
-         <input type="radio" name="gender" id="gender" value="female"
+         <input type="radio" name="user_gender" id="gender" value="female"
  
 >여자<br>    
          
@@ -147,7 +147,7 @@
    <div class="col-sm-2"><input type="text" name="year" id="year" size="5" class="form-control hvr-glow">생년</div> 
     <div class="col-sm-2"><input type="text" name="month" id="month" size="5" class="form-control hvr-glow">월
       </div>  <div class="col-sm-2"><input type="text" name="day" id="day" size="5" class="form-control hvr-glow">일</div>
-      <input type="hidden" name="birthday" id="birthday">
+      <input type="hidden" name="user_date" id="birthday">
 <label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);">생년월일 입력</label>
  
    </span>
@@ -162,7 +162,7 @@
 <span class="addon"style="
     padding-bottom: 0px;
 "><i class="glyphicon glyphicon-phone"></i></span> 
-   <input type="text" name="phone" id="phone" class="form-control" style="
+   <input type="text" name="user_phone" id="phone" class="form-control" style="
     width: 340px;margin-left:20px;
 "> 
 
@@ -178,7 +178,7 @@
 <span class="addon"style="
     padding-bottom: 0px;
 "><i class="glyphicon glyphicon-calendar"></i></span> 
- <input type="date" name="enterdate" id="enterdate" class="form-control" style="
+ <input type="date" name="user_join" id="enterdate" class="form-control" style="
     width: 340px;margin-left:20px;
 ">
    
@@ -196,12 +196,11 @@
 <div class="col-sm-3 col-sm-offset-1" style="margin-left:10%">
          <section class="main clearfix">
                <div class="fleft">
-               <select name="deptno" id="cd-dropdown" class="cd-select">
-                  <option value="-1" selected>부서명을 선택하세요</option>
-         
-            <c:forEach var="i" items="${dept}">            
-                     <option style="text-align:center" value="${i.dept_no}">${i.dept_name}</option>
-                  </c:forEach> 
+               <select name="dept_no" id="cd-dropdown" class="cd-select">
+                <option value="-1" selected>부서명을 선택하세요</option>
+            	<c:forEach var="i" items="${dept}">            
+                   <option style="text-align:center" value="${i.dept_no}">${i.dept_name}</option>
+                </c:forEach> 
                </select>
             </div>
          </section>
@@ -211,7 +210,7 @@
 <div class="col-sm-3">
          <section class="main clearfix">
                <div class="fleft">
-               <select name="teamnum" id="cd-dropdown2" class="cd-select">
+               <select name="team_no" id="cd-dropdown2" class="cd-select">
                   <option value="-1" selected>팀을 선택하세요</option>
             <c:forEach var="i" items="${team}">
                      <option style="text-align:center" value="${i.team_no}">${i.team_name}</option>
@@ -225,7 +224,7 @@
 <div class="col-sm-3">
          <section class="main clearfix">
                <div class="fleft">
-               <select name="jobnum" name="deptno" id="cd-dropdown3" class="cd-select">
+               <select name="position_no"  id="cd-dropdown3" class="cd-select">
                   <option value="-1" selected>직급을 선택하세요</option>
                <c:forEach var="i" items="${position}">
                      <option style="text-align:center" value="${i.position_no}">${i.position_name}</option>
