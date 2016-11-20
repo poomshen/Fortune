@@ -64,6 +64,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</update>
 	
+	
+	<update id="update" parameterType="com.fortune.Table_DTO.Request_DTO">
+	
+	UPDATE COLLABO_REQ SET
+	 collabo_req_title=#{collabo_req_title},
+	 collabo_req_text=#{collabo_req_text}
+	 WHERE collabo_req_index=#{collabo_req_index}
+	
+	</update>
+	
 
 	<select id="getProDto" resultType="com.fortune.Table_DTO.Request_DTO">
 	<!-- 
@@ -108,6 +118,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			LIKE '%${param3}%' ORDER BY collabo_start DESC ) N ) 
 			WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50 
 </select>
+
+
+
+
 	
 	
 </mapper>

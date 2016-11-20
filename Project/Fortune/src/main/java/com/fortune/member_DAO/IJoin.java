@@ -18,4 +18,7 @@ public interface IJoin {
 	ArrayList<Dept_DTO> searchDept();
 	ArrayList<Team_DTO> searchTeam();
 	ArrayList<Jobtitle_DTO> searchTitle();
+	
+	//회원가입 유효성검사
+	Join_DTO idchk(String user_id);
 }
