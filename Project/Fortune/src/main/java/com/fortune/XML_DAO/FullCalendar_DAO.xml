@@ -10,7 +10,7 @@
 <insert id="insertSchedule">
 <!-- schedule 테이블 insert // COLLABO_NO는 임의로 1로 넣음 -->
 INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
-    VALUES((select count(*)+1 from schedule), 1, #{schedule_start}, #{schedule_end})
+    VALUES((select max(schedule_no)+1 from schedule), 1, #{schedule_start}, #{schedule_end})
 </insert>
 <!-- 일정(일반업무)등록 -2 -->
 <insert id="insertWork">
@@ -25,6 +25,7 @@ INSERT INTO work(SCHEDULE_NO, WORK_TITLE, WORK_TEXT)
 	SCHEDULE S JOIN WORK W 
 	ON S.SCHEDULE_NO = W.SCHEDULE_NO 
 	WHERE S.COLLABO_NO = 1
+	ORDER BY SCHEDULE_START
 </select>
 
 
