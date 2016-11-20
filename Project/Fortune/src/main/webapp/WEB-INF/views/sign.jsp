@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Riona - One Page Bootstrap Business Template</title>
+<title>회원가입 페이지</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -39,10 +39,26 @@
 <link rel="stylesheet"
    href="path/to/font-awesome/css/font-awesome.min.css">
    
-   <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 5px; 
+    text-align: right;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    
+    }
+    
+</style>
+
 </head>
 
 <body>
@@ -76,32 +92,39 @@
 <!-- 아이디  입력-->
 
 <div class="form-group">
-<div class="inner-addon left-addon" style="margin-left:37%">
-<span class="field">
- 
-
-<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
-    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;">
-    <label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
-</span>
+	<div class="inner-addon left-addon" style="margin-left:37%">
+		<span class="field">
+			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
+			    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;"> 
+			    <input type="button" id="idchk" name="idchk" class="button" value="아이디 중복확인" onclick="idchkclk()">
+			    <label id="idselect" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
+				
+		</span>
+	</div>
 </div>
-</div>
-
 
 <!-- 비밀번호  입력-->
 <div class="form-group">
-<div class="inner-addon left-addon" style="margin-left:37%">
-<span class="field">
- <span class="addon"style="
-    padding-bottom: 0px;
-"><i class="glyphicon glyphicon-lock"></i></span> 
-    <input type="text" name="user_password" id="pwd" class="form-control" style="
-    width: 340px;margin-left:20px;
-"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 입력</label>
-
-</span>
+	<div class="inner-addon left-addon" style="margin-left:37%">
+		<span class="field">
+		 <span class="addon"style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
+		    <input type="text" name="user_password" id="pwd" class="form-control" style="
+		    width: 340px;margin-left:20px;
+		"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 입력</label>
+		</span>
+	</div>
 </div>
 
+<!-- 비밀번호  확인-->
+<div class="form-group">
+	<div class="inner-addon left-addon" style="margin-left:37%">
+		<span class="field">
+		 <span class="addon"style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
+		    <input type="text" name="user_password_chk" id="pwd" class="form-control" style="
+		    width: 340px;margin-left:20px;
+		"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 확인</label>
+		</span>
+	</div>
 </div>
 
 <!-- 이름 입력-->
@@ -166,7 +189,7 @@
     width: 340px;margin-left:20px;
 "> 
 
-<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone">전화번호 입력</label>
+<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone">핸드폰 번호 입력</label>
 </span>
   </div>
 </div>
@@ -634,6 +657,30 @@
          document.getElementById("birthday").value = b;
          //alert(document.getElementById("birthday").value);
       }   
+      
+      function idchkclk() { 
+		alert($('#id').val().toLowerCase());
+		console.log($('#id').val().toLowerCase());
+		
+    	  $.ajax({
+    		  type:"get",
+    		  url:"idchk.ajax",
+    		  data:{"user_id": $('#id').val().toLowerCase()},
+    		  success:function(data){
+    			  console.log(data);
+    			  if(data == "yes"){
+    			  $("#idselect").html("중복되는 아이디입니다");
+    			  }else{
+    				  $("#idselect").html("사용가능한 아이디 입니다");
+    			  }
+    		  },
+    		  error:function(){
+    			  $("#idselect").html("에러 입니다");
+    		  }
+    	  });
+		
+		
+	}
       </script>
 
 

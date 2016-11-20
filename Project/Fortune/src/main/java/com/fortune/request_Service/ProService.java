@@ -50,7 +50,7 @@ public class ProService {
 		String field = "user_ID";
 		Join_DTO ids = (Join_DTO)session.getAttribute("id");
 		//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
-		String query ="%"+ids.getId()+"%";
+		String query ="%"+ids.getUser_id()+"%";
 		//////////////////////////////////////
 		if(pg != null && pg.equals("")){
 			page = Integer.parseInt(pg);
@@ -202,7 +202,7 @@ public class ProService {
 				String field = "user_ID";
 				Join_DTO ids = (Join_DTO)session.getAttribute("id");
 				//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
-				String query ="%"+ids.getId()+"%";
+				String query ="%"+ids.getUser_id()+"%";
 				//////////////////////////////////////
 				if(pg != null && pg.equals("")){
 					page = Integer.parseInt(pg);

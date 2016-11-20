@@ -42,4 +42,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <select id="searchTitle" parameterType="com.fortune.Table_DTO.Jobtitle_DTO" resultType="com.fortune.Table_DTO.Jobtitle_DTO">
  	select POSITION_NO, POSITION_NAME from position order by POSITION_NO asc
  </select>
+ 
+ <!-- 아이디 중복체크 -->
+ <select id="idchk" parameterType="String" resultType="com.fortune.Table_DTO.Join_DTO">
+ 	select USER_ID from users
+ 	where USER_ID=#{user_id}
+ </select>
 </mapper>
