@@ -40,7 +40,7 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/sign.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/sign.htm")
 	public String sign(Model m) {
 	
 		System.out.println("joinform 보여줌");

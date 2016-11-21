@@ -13,10 +13,14 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-	
+	<!-- ajax쓸 때 return 주소 설정하는 객체 -->
 	<context:component-scan base-package="com.fortune.fullcalendar_Controller" />
-	<context:component-scan base-package="com.or.fortune.fullcalendar_Controller" />
+	<beans:bean name="jsonview" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+	 
+	
 	<context:component-scan base-package="com.fortune.fileroom_Controller" />
 	<context:component-scan base-package="com.fortune.Ajax_Controller" />
+	
 
+	
 </beans:beans>
