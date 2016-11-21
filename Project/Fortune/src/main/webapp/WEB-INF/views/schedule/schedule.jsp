@@ -17,11 +17,12 @@
 <script src="fullcalendar/js/customcalendar.js" ></script>
 <script>
 $(document).ready(function() {
-	
-/* 	$.ajax({
+	//화면 로드시 일정을 DB에서 불러오는 코드 
+ 	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
 		success : function(data) {
+			console.log(data)
 			$.each(data, function(index, obj) {
 				var item = {
 						id : obj.schedule_no,
@@ -30,35 +31,22 @@ $(document).ready(function() {
 						end: obj.schedule_end
 				};
 				array.push(item);
+		        content += '<tr><td>**일정(미구현)</td><td>' + obj.work_title;
+		        content += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"';
+		        content += ' onclick="test(' + obj.schedule_no + ')" >상세보기</a></td></tr>';
 			});
-			console.log(array)
-			console.log('aa')
+	        $('#content').html(content)
+
+	        //fullcalendar 불러오는 함수
+			loadCalendar();
 		}
-	}); */
-	
- 	<c:forEach items="${sclist}" var="scdto">
-		var vid = ${scdto.schedule_no};
-		var vtitle = ${scdto.work_title};
-		var vstart = String(${scdto.schedule_start});
-		var vend = String(${scdto.schedule_end});
-		
-		var item = 	{
-				id: vid,
-				title: String(vtitle),
-				start: String(vstart),
-				end: String(vend)
-			}
- 		array.push(item)
-		
-	</c:forEach>
-		console.log(array);
+	});
 
-
-	
-	//fullcalendar 불러오는 함수
-	loadCalendar();
-	
 });
+
+function test( value ){
+	$('#detail_modal_id').val( value );
+}
 </script>
 
 
@@ -89,11 +77,10 @@ body {
 			</div>
 
 
-
-
+			<!-- 일정등록 버튼 -->
 			<input type="hidden" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modal_btn" >
-			
-			<!-- Modal -->
+
+			<!-- 일정등록 내용 Modal -->
 			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog">
 
@@ -118,16 +105,46 @@ body {
 
 				</div>
 			</div>
+			
+			
+			
+			<!-- 상세보기 내용 Modal -->
+			<div class="modal fade" id="myModal2" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">일 정 상 세</h4>
+						</div>
+						<div class="modal-body">
+							<label>일정 제목 : </label> <input type="text" id="detail_modal_title"><br>
+							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="detail_modal_text"></textarea><br>
+							<label>참가 인원 : </label> <input type="text" id="detail_modal_users"><br>
+							<label>id값 (hidden처리 예정) : </label> <input type="text" id="detail_modal_id"><br>
+							<button type="button" class="btn btn-default" id="detail_modal_update"
+								data-dismiss="modal">수정</button>
+							<button type="button" class="btn btn-default" id="detail_modal_delete"
+								data-dismiss="modal">삭제</button>
+						</div>
+					</div>
+
+				</div>
+			</div>			
 
 
 
 			<!-- 업우상세 보여주는 div 영역 -->
 			<div class="col-sm-5">
-				<label> 일 정 </label>
-				<button id="update">수정</button><button id="delete">삭제</button>
+				<div class="row">
+					<label> 일반 / 회의 (선택 미구현)</label>
+				</div>
+
 				<div id="content"></div>
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

@@ -59,13 +59,7 @@
 
 			<div class="top-content-bottom-link"> 
 
-<!-- 
-						<div
-							class="col-sm-6 col-sm-offset-3 r-form-1-box wow fadeInUp animated"
-							style="visibility: visible; animation-name: fadeInUp;">
 
-							<div class="r-form-1-bottom">
- -->
 								<form role="form" action="main.htm" method="post">
 									<div class="col-sm-12 form-group container" style="margin-left:19%">
 										<label class="sr-only" for="r-form-1-first-name">First
@@ -77,7 +71,7 @@
 												class="fa fa-user" aria-hidden="true"></i></span>
 											<div class="form-group">
 												<label class="sr-only" for="r-form-1-email">id</label> 
-												<input type="text" name="id" class="form-control hvr-glow" id="r-form-1-email">
+												<input type="text" name="user_id" class="form-control hvr-glow" id="r-form-1-email">
 											</div>
 										</div>
 										<div class="input-group">
@@ -87,7 +81,7 @@
 												class="fa fa-key" aria-hidden="true"></i></span>
 											<div class="form-group">
 												<label class="sr-only" for="r-form-1-email">pwd</label> 
-												<input type="text" name="pwd" class="form-control hvr-glow" id="r-form-1-email">
+												<input type="text" name="user_password" class="form-control hvr-glow" id="r-form-1-email">
 										</div>
 										</div>
 									</div>
