@@ -59,13 +59,7 @@
 
 			<div class="top-content-bottom-link"> 
 
-<!-- 
-						<div
-							class="col-sm-6 col-sm-offset-3 r-form-1-box wow fadeInUp animated"
-							style="visibility: visible; animation-name: fadeInUp;">
 
-							<div class="r-form-1-bottom">
- -->
 								<form role="form" action="main.htm" method="post">
 									<div class="col-sm-12 form-group container" style="margin-left:19%">
 										<label class="sr-only" for="r-form-1-first-name">First
