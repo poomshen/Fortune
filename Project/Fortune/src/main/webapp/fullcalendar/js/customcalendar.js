@@ -2,6 +2,31 @@
 var content = "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
 var array = [];
 
+
+function fcontent() {
+	var content2 = "";
+	content2 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
+	$('#content').empty();
+	$.ajax({
+		url : 'calendarload.ajax',
+		type : 'post',
+		success : function(data) {
+			console.log(data)
+			$.each(data, function(index, obj) {				
+		        content2 += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
+		        content2 += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"';
+		        content2 += ' onclick="test(' + obj.schedule_no;
+		        content2 += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end +"'";
+		        content2 += ')" >상세보기</a></td></tr>';
+			});
+	        $('#content').html(content2)
+		}
+	});
+}
+
+
+
+
 function loadCalendar() {	
 	
 	//캘린더 호출
@@ -47,15 +72,95 @@ function loadCalendar() {
 		eventClick: function(calEvent, jsEvent, view) {
 	        //alert('Event: ' + calEvent.title); //일정의 정보 표현 ex) ~.title, ~.start, ~.end 값등 사용가능
 	        //alert('View: ' + view.name); //달력의 정보 표현 ex) view.name = november 2016, view.title = month
-	        //$(this).css('background-color', 'green'); //일정의 스타일을 바꿀 수 있음 ex) border-color, background-color ...
+			//$(this).css('background-color', 'rgb(58, 135, 173)'); //일정의 스타일을 바꿀 수 있음 ex) border-color, background-color ...
 			
-			console.log(calEvent);
+			
+			//모든 일정의 배경색을 reg(58, 135, 173)으로 설정
+			$('.fc-event-container').children().css('background-color', 'rgb(58, 135, 173)');
+			
+			//클릭된 일정의 배경색을 red로 설정
+			$(this).css('background-color', 'red');
+			
+			
+			var content3 = "";
+			content3 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
+			$('#content').empty();
+			$.ajax({
+				url : 'eventclick.ajax',
+				type : 'post',
+	            data : {
+					"schedule_no": calEvent.id,
+	            },
+				success : function(obj) {
+					console.log(obj)
+					content3 += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
+					content3 += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"';
+					content3 += ' onclick="test(' + obj.schedule_no;
+					content3 += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end +"'";
+					content3 += ')" >상세보기</a></td></tr>';
+					
+			        $('#content').html(content3)
+				}
+			});
+
+			
+			
+
 		},
 		// 작업자: 이명철  // 최근 수정일: 16-11-21 --------------------- E N D ------------------------
+		
+		
+		
+		
+		
+		
+		// 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
+		// 작업내용: 날짜 드래그 이벤트
+		eventDrop : function(calevent) {
+	         $.ajax({
+	        	type : 'post',
+	            url : 'dragupdate.ajax',
+	            data : {
+					"schedule_no": calevent.id,
+	            	"schedule_start" : calevent.start.format('YYYY-MM-DD'),
+	                "schedule_end" : calevent.end.format('YYYY-MM-DD')
+	            },
+	            success : function(data) {
+	            console.log("날짜이동성공");
+	            fcontent();
+	            }
+	            
+	         });
+
+	      },
+		// 작업자: 이명철  // 최근 수정일: 16-11-21 --------------------- E N D ------------------------		
+		
 	    
+	      
+	      
+	      
 	    
-	    
-	    
+		// 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
+		// 작업내용: 날짜 늘리는 이벤트
+		eventResize : function(calevent) {
+		     $.ajax({
+	        	type : 'post',
+	            url : 'dragupdate.ajax',
+	            data : {
+					"schedule_no": calevent.id,
+	            	"schedule_start" : calevent.start.format('YYYY-MM-DD'),
+	                "schedule_end" : calevent.end.format('YYYY-MM-DD')
+	            },
+	            success : function(data) {
+	            console.log("날짜 길이 조정 성공");
+	            fcontent();
+	            }
+		     });
+		},
+		// 작업자: 이명철  // 최근 수정일: 16-11-21 --------------------- E N D ------------------------	
+		
+		
+		
 	    
 	    
 		// 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
@@ -70,7 +175,7 @@ function loadCalendar() {
 	            	var check = confirm('일정을 삭제 하시겠습니까?');
 	            	if(check){
 
-	            		var id = $('#detail_modal_id').val()
+	            		var id = $('#detail_modal_id').val();
 	            		calendar.fullCalendar('removeEvents', id);
 	            		
 	            		$('#tr'+id).remove();
@@ -81,32 +186,60 @@ function loadCalendar() {
 							data: "id="+id,
 							success : function(data) {
 								console.log('삭제성공');
+								fcontent();
 							}
-						});		
+						});
 	            		
 	            	}
 
 	            })
 	        },
 	        
-	        
+	        // 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
 	        //업데이트 함수
 	        updateEvent: {
 	            click: $('#detail_modal_update').click(function(){
 	            	
 	            	var check = confirm('일정을 수정 하시겠습니까?');
 	            	if(check){
+	            		var id = $('#detail_modal_id').val();
+	            		var calEvent;
+	            		for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
+	            			if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
+	            				calEvent = calendar.fullCalendar( 'getEventSources' )[0].events[i];
+	            				calendar.fullCalendar( 'getEventSources' )[0].events[i].title =$('#detail_modal_title').val();
+	            				calendar.fullCalendar('updateEvent', calEvent);
+	            				var j = i;
+	            			}
+	            		}
 	            		
-	            		var id = $('#detail_modal_id').val()
-	            		console.log(array[0].title)
-	            		console.log(array[0])
-	            		//array[0].title = '업데이트야'
-	            		//$('#calendar').fullCalendar('updateEvent', events);
+            		console.log(calendar.fullCalendar( 'getEventSources' )[0].events[j].title)
+            		
+					var updateschedule = {
+						"title": $('#detail_modal_title').val(),
+						"text": $('#detail_modal_text').val(),
+						"schedule_no": $('#detail_modal_id').val(),
+		                "schedule_start" : $('#detail_modal_start').val(),
+		                "schedule_end" : $('#detail_modal_end').val()
+					}
+            		
+            		$.ajax({
+						type: 'post',
+						url: 'update.ajax',
+						data: updateschedule,
+						success : function(data) {
+							console.log('업데이트 성공');
+							fcontent();
+						}
+					});
+            		
+            		
 	            	}
 	            	
 	            })
 	        },
 	        
+	        // 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
 	        //일정등록 함수
 	    	insertEvent: {
 	    		click: $('#modal_ok').click(function(){
@@ -135,25 +268,17 @@ function loadCalendar() {
 									start: data.schedule_start,
 									end: data.schedule_end
 							}
-							var title = data.work_title
-							var text = data.work_text
-					        content += '<tr id=tr' +data.schedule_no+ '><td>**일정(미구현)</td><td>' + title;
-					        content += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"'; 
-					        content += ' onclick="test(' + data.schedule_no;
-					        content += ",'" + title + "','" + text +"'";
-					        content += ')" >상세보기</a></td></tr>';
-					        
-					        
-					        
-					        $('#content').html(content)
+
 							calendar.fullCalendar('renderEvent', eventData , true);
+							console.log('insert 성공')
+							fcontent();
 						}
-					});						
+					});
 				})
 	    	}
 	    },
 	 // 작업자: 이명철  // 최근 수정일: 16-11-21 --------------------- E N D ------------------------
-
+	 // ------------------------------------------------------------------------------------
 	 
 	    
 	    

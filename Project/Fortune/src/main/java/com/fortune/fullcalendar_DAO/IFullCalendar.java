@@ -19,4 +19,14 @@ public interface IFullCalendar {
 	public int deleteWork(String id) throws ClassNotFoundException, SQLException;
 	public int deleteSchedule(String id) throws ClassNotFoundException, SQLException;
     
+	//일정 업데이트
+	public int updateWork(Schedule_Work_DTO swdto) throws ClassNotFoundException, SQLException;
+		
+	//일정 드래그(일정 이동, 일정 늘리기) 업데이트 dragupdate
+	public int updateSchedule(Schedule_Work_DTO swdto) throws ClassNotFoundException, SQLException;
+	
+	//클릭한 일정내용 호출
+	public Schedule_Work_DTO selectClick(String id) throws ClassNotFoundException, SQLException;
+	
+	
 }
