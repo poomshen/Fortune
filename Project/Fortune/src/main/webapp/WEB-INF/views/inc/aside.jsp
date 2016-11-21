@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="navbar-default sidebar" role="navigation">
+<div class="navbar-default sidebar" style="border-color:#444; background-color:#444; width:170px; height:644px;" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>프로젝트<span class="fa arrow"></span></a>
+                            <a href="#" ><i class="fa fa-bar-chart-o fa-fw"></i>프로젝트<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="writerequest.htm">프로젝트 생성</a>
