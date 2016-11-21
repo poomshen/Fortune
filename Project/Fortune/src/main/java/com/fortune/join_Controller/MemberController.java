@@ -38,7 +38,7 @@ public class MemberController {
 	
 	
 	
-	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.POST)
+	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session,Join_DTO dto){
 		System.out.println("로그인 버튼 눌렀고요");
 		
