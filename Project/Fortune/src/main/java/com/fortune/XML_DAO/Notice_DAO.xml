@@ -53,7 +53,14 @@
 		<!-- <selectKey order="BEFORE" keyProperty="notice_no" resultType="String">
 			SELECT MAX(TO_NUMBER(notice_seq))+1 FROM NOTICE
 		</selectKey> -->
-		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_DATE, NOTICE_FILENAME)
-	    VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE, #{notice_filename})
+		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_DATE, NOTICE_FILENAME_ORG, NOTICE_FILENAME_RE, NOTICE_FILEEXT)
+	    VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE, #{notice_filename_org}, #{notice_filename_re}, #{notice_fileext})
 	</insert>
+	
+	<!-- 파일다운로드 -->
+	<select id="fileDownloadNotice" resultType="com.fortune.Table_DTO.Notice_DTO">
+     	SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_no}
+	</select>
+	
+	
 </mapper>
