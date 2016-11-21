@@ -79,7 +79,7 @@ public class Delete_Controller {
 		
 		//View 화면에 뿌려주기 위한 list
 		int page = 1;
-		int row_size = 5;
+		int row_size = 9;
 
 		int total_count = fileromm_DAO.countFile(); // file 개수
 		System.out.println("total_count : " + total_count);

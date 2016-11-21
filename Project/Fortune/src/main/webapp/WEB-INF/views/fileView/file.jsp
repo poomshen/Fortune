@@ -11,9 +11,8 @@
 <script src="<%=request.getContextPath() %>/js/jquery.form.min.js"></script>
 <!-- jQuery MultiFile Plugin import -->
 <script src="<%=request.getContextPath() %>/js/jQuery.MultiFile.min.js"></script>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://bootsnipp.com/dist/bootsnipp.min.css?ver=7d23ff901039aef6293954d33d23c066">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="http://bootsnipp.com/dist/scripts.min.js"></script>
 <script>
 	$(function() {
 		$('#upload_btn').click(function() {
@@ -34,11 +33,11 @@
 		
 		$('#delete_btn').click(function() {
 			var checkboxValues = [];
-				$("input[name='filename']:checked").each(function(i) {
+			
+			$("input[name='filename']:checked").each(function(i) {
 				checkboxValues.push($(this).val());
 			});
-				
-			//console.log(allData);
+			
 			$('#deleteform').ajaxForm({
 				cache : false,
 				data : {"checkArray": checkboxValues},
@@ -57,143 +56,143 @@
 	});
 	
 	function output(data) {
-		$('#result').empty();
-		$("#result").append("<div class=row>");
+		$('#divrow1').empty();
+		$('#divrow2').empty();
 		if (data.file && data.file.length != 0) {
 			$.each(data.file, function(index, item) {
 				if(item.file_room_ext == ".docx"){
-					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/docx.jpg style=width:100px;height:100px>" + "</a></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/docx.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
 				}else if(item.file_room_ext == ".hwp"){
-					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/hwp.jpg style=width:100px;height:100px>" + "</a></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/hwp.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
+				}else if(item.file_room_ext == ".xlsx"){
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/xlsx.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
 				}else if(item.file_room_ext == ".pptx"){
-					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/pptx.jpg style=width:100px;height:100px>" + "</a></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/pptx.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
 				}else if(item.file_room_ext == ".zip"){
-					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=images/zip.jpg style=width:100px;height:100px>" + "</a></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/zip.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
+				}else if(item.file_room_ext == ".jpg" || item.file_room_ext == ".png" || item.file_room_ext == ".bmp" || item.file_room_ext == ".gif"){
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=upload/"+ item.file_room_name +" style=width:400px;height:200px>" + "</a></div></div></div>";
 				}else{
-					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img src=upload/"+ item.file_room_name +" style=width:100px;height:100px>" + "</a></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/file.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
 				}
-				$("#result").append("<div class=col-sm-3 style=float:left>");
-				$("#result").append("<div class=thumbnail bootsnipp-thumb>"+
-						"<div><p class=lead snipp-title>"+
-						"<input type=checkbox name=filename id=filename value="+ item.file_room_name +">"+
-						item.file_room_name+"</p></div>"+result);
-				
-				/* 
-				
-				
-				$("#result").append(item.file_room_name); */
-				//$("#result").append("<a href=filedelete.htm?filename=" + item.filesrc + ">" + item.filesrc + "</a>");
-				
-				//$("#result").append("<br/>");
+				$("#divrow1").append("<div class=col-lg-4 style=float:left>"+
+						"<div class=thumbnail bootsnipp-thumb>"+
+						"<div><input type=checkbox name=filename id=filename value='" + item.file_room_name + "'>" + item.file_room_name + /* <p class=lead snipp-title> *//* "</p>"+ */
+						result);
 			});
 		}
 		
-		
-		$("#result").append("<table width=600>");
-		$("#result").append("<tr>");
-		$("#result").append("<td align=center>");
+		$("#divrow2").append("<table width=600>");
+		$("#divrow2").append("<tr>");
+		$("#divrow2").append("<td align=center>");
 		
 		if(data.pg > data.block){
-			$("#result").append("[<a href=mainfile.htm?pg=1>◀◀</a>]");
-			$("#result").append("[<a href=mainfile.htm?pg="+data.from_page-1+">◀</a>]");		
+			$("#divrow2").append("[<a href=mainfile.htm?pg=1>◀◀</a>]");
+			$("#divrow2").append("[<a href=mainfile.htm?pg="+data.from_page-1+">◀</a>]");		
 		}else if(data.pg <= data.block){
-			$("#result").append("[<span style=color: gray>◀◀</span>]");
-			$("#result").append("[<span style=color: gray>◀</span>]");
+			$("#divrow2").append("[<span style=color: gray>◀◀</span>]");
+			$("#divrow2").append("[<span style=color: gray>◀</span>]");
 		}
 		
 		for(var i = data.from_page; i <= data.to_page; i++){
 			if(data.pg == i){
-				$("#result").append("["+i+"]");
+				$("#divrow2").append("["+i+"]");
 			}else if(data.pg != i){
-				$("#result").append("[<a href=mainfile.htm?pg="+i+">"+i+"</a>]");
+				$("#divrow2").append("[<a href=mainfile.htm?pg="+i+">"+i+"</a>]");
 			}
 		}
 		
 		if(data.to_page < data.all_page){
-			$("#result").append("[<a href=mainfile.htm?pg="+data.to_page+1+">▶</a>]");
-			$("#result").append("[<a href=mainfile.htm?pg="+data.all_page+">▶▶</a>]");
+			$("#divrow2").append("[<a href=mainfile.htm?pg="+data.to_page+1+">▶</a>]");
+			$("#divrow2").append("[<a href=mainfile.htm?pg="+data.all_page+">▶▶</a>]");
 		}else if(data.to_page >= data.all_page){
-			$("#result").append("[<span style=color: gray>▶</span>]");
-			$("#result").append("[<span style=color: gray>▶▶</span>]");
+			$("#divrow2").append("[<span style=color: gray>▶</span>]");
+			$("#divrow2").append("[<span style=color: gray>▶▶</span>]");
 		}
 		
-		$("#result").append("</td>");
-		$("#result").append("</tr>");
-		$("#result").append("</table>");
-		
-		$("#result").append("</div>");
-		//$('#multiform')[0].reset();
-		//$('#multiform input:file').MultiFile('reset');
+		$("#divrow2").append("</td>");
+		$("#divrow2").append("</tr>");
+		$("#divrow2").append("</table>");
 	}
 </script>
 </head>
 <body>
-		<form name="multiform" id="multiform" action="uploadfile.ajax" method="POST" enctype="multipart/form-data">
-			<input type="file" name="file" />
-			<input type="submit" id="upload_btn" value="업로드"/>
-		</form>
-		<form name="deleteform" id="deleteform" action="deletefile.ajax" method="POST">
-			<input type="submit" id="delete_btn" value="삭제"/><br>
-		</form>
-	
+	<form name="multiform" id="multiform" action="uploadfile.ajax" method="POST" enctype="multipart/form-data">
+		<input type="file" name="file" />
+		<input type="submit" id="upload_btn" value="업로드"/>
+	</form>
+	<form name="deleteform" id="deleteform" action="deletefile.ajax" method="POST">
+		<input type="submit" id="delete_btn" value="삭제"/><br>
+	</form>
+	<form name="searchform" id="searchform" action="searchfile.htm" method="POST">
+		<select name="dept_no" id="cd-dropdown" class="cd-select">
+			<option value="-1" selected>선택하세요.</option>
+			<option style="text-align:center" value="file_room_name">파일이름</option>
+			<option style="text-align:center" value="file_room_date">등록날짜</option>
+		</select>
+		<input type="text" name="searchvalue">
+		<input type="submit" id="search_btn" value="검색">
+	</form>
 	<hr>
 	<div id="result">
-		<c:forEach items="${list}" var="flist">
-		<input type="checkbox" name="filename" id="filename" value="${flist.file_room_name}">
-			<c:choose>
-				<c:when test="${flist.file_room_ext == '.docx'}">
-           			<a href="downloadfile.htm?filename=${flist.file_room_name}"><img src="images/docx.jpg" style="width:100px;height:100px"></a>
-       			</c:when>
-       			<c:when test="${flist.file_room_ext == '.hwp'}">
-           			<a href="downloadfile.htm?filename=${flist.file_room_name}"><img src="images/hwp.jpg" style="width:100px;height:100px"></a>
-				</c:when>
-       			<c:when test="${flist.file_room_ext == '.pptx'}">
-           			<a href="downloadfile.htm?filename=${flist.file_room_name}"><img src="images/pptx.jpg" style="width:100px;height:100px"></a>
-				</c:when>
-				<c:when test="${flist.file_room_ext == '.zip'}">
-           			<a href="downloadfile.htm?filename=${flist.file_room_name}"><img src="images/zip.jpg" style="width:100px;height:100px"></a>
-				</c:when>
-       			<c:otherwise>
-           			<a href="downloadfile.htm?filename=${flist.file_room_name}"><img src="upload/${flist.file_room_name}" style="width:100px;height:100px"></a>
-				</c:otherwise>
-			</c:choose>
-			${flist.file_room_name}<br>
-			<%-- <a href="filedelete.htm?filename=${flist.filesrc}">${flist.filesrc}</a><br> --%>
-		</c:forEach>
-		<table width="600">
-			<tr>
-				<td align="center">
-					<c:if test="${pg>block}">
+		<div id="divrow1" class="row">
+			<c:forEach items="${list}" var="flist">
+				<div class="col-lg-4" style="float: left">
+					<div class="thumbnail bootsnipp-thumb">
+						<div>
+							<!-- <p class="lead snipp-title"> --><input type="checkbox" name="filename" id="filename" value="${flist.file_room_name}">${flist.file_room_name}<!-- </p> -->
+							<c:choose>
+								<c:when test="${flist.file_room_ext == '.docx'}">
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/docx.jpg" style="width: 400px; height: 200px"></a>
+								</c:when>
+								<c:when test="${flist.file_room_ext == '.xlsx'}">
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/xlsx.jpg" style="width: 400px; height: 200px"></a>
+								</c:when>
+								<c:when test="${flist.file_room_ext == '.hwp'}">
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/hwp.jpg" style="width: 400px; height: 200px"></a>
+								</c:when>
+								<c:when test="${flist.file_room_ext == '.pptx'}">
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/pptx.jpg" style="width: 400px; height: 200px"></a>
+								</c:when>
+								<c:when test="${flist.file_room_ext == '.zip'}">
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/zip.jpg" style="width: 400px; height: 200px"></a>
+								</c:when>
+								<c:when test="${flist.file_room_ext == '.jpg' || flist.file_room_ext == '.png' || flist.file_room_ext == '.bmp' || flist.file_room_ext == '.gif'}">
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy	src="upload/${flist.file_room_name}" style="width: 400px; height: 200px"></a>
+								</c:when>
+								<c:otherwise>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/file.jpg" style="width: 400px; height: 200px"></a>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+		<div id="divrow2" class="row">
+			<table width="600">
+				<tr>
+					<td align="center"><c:if test="${pg>block}">
 						[<a href="mainfile.htm?pg=1">◀◀</a>]
 						[<a href="mainfile.htm?pg=${from_page-1}">◀</a>]		
-					</c:if> 
-					<c:if test="${pg<=block}">
+					</c:if> <c:if test="${pg<=block}">
 						[<span style="color: gray">◀◀</span>]	
 						[<span style="color: gray">◀</span>]
-					</c:if>
-					<c:forEach begin="${from_page}" end="${to_page}" var="i">
-						<c:if test="${i==pg}">[${i}]</c:if>
-						<c:if test="${i!=pg}">
+					</c:if> <c:forEach begin="${from_page}" end="${to_page}" var="i">
+							<c:if test="${i==pg}">[${i}]</c:if>
+							<c:if test="${i!=pg}">
 							[<a href="mainfile.htm?pg=${i}">${i}</a>]
 						</c:if>
-					</c:forEach>
-					<c:if test="${to_page<all_page}">
+						</c:forEach> <c:if test="${to_page<all_page}">
 						[<a href="mainfile.htm?pg=${to_page+1}">▶</a>]
 						[<a href="mainfile.htm?pg=${all_page}">▶▶</a>]
-					</c:if>
-					<c:if test="${to_page>=all_page}">
+					</c:if> <c:if test="${to_page>=all_page}">
 						[<span style="color: gray">▶</span>]
 						[<span style="color: gray">▶▶</span>]
-					</c:if>
-				</td>
-			</tr>
-		</table>
-
-		<!-- 		<hr>
-		<form name="downform" id="downform" action="filedownload.htm" method="POST">
-			<input type="button" id="btnSubmit" value="전송"/><br/>
-		</form>
-		<hr> -->
+					</c:if></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 </html>

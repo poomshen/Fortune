@@ -13,7 +13,7 @@
 <script type="text/javascript">
      function proAjaxCall(a){
     	 $("#menuView").empty();
-
+  	
    	 $.ajax({
    		 
  			type: "get",
