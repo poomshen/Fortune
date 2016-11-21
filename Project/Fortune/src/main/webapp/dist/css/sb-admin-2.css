@@ -7,7 +7,10 @@
 body {
     background-color: #f8f8f8;
 }
-
+a {
+    color: #f8f8f8;
+    text-decoration: none;
+}
 #wrapper {
     width: 100%;
 }
@@ -15,15 +18,15 @@ body {
 #page-wrapper {
     padding: 0 15px;
     min-height: 568px;
-    background-color: #fff;
+    background-color: #f8f8f8;
 }
 
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
-        margin: 0 0 0 250px;
+        margin: 0 0 0 200px;
         padding: 0 30px;
-        border-left: 1px solid #e7e7e7;
+ 
     }
 }
 
@@ -94,9 +97,7 @@ body {
     padding: 15px;
 }
 
-.sidebar ul li {
-    border-bottom: 1px solid #e7e7e7;
-}
+
 
 .sidebar ul li a.active {
     background-color: #eee;
@@ -131,7 +132,7 @@ body {
     .sidebar {
         z-index: 1;
         position: absolute;
-        width: 250px;
+        width: 200px;
         margin-top: 51px;
     }
 
@@ -288,7 +289,7 @@ table.dataTable thead .sorting:after {
     padding-top: 10px;
     padding-bottom: 10px;
     border: 1px solid #ddd;
-    background-color: #eee!important;
+    background-color: #400040!important;
 }
 
 .show-grid {
