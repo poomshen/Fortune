@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +16,7 @@
 <script src="fullcalendar/js/customcalendar.js" ></script>
 <script>
 $(document).ready(function() {
+	
 	//화면 로드시 일정을 DB에서 불러오는 코드 
  	$.ajax({
 		url : 'calendarload.ajax',
@@ -31,12 +31,14 @@ $(document).ready(function() {
 						end: obj.schedule_end
 				};
 				array.push(item);
-		        content += '<tr><td>**일정(미구현)</td><td>' + obj.work_title;
+				
+		        content += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
 		        content += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"';
-		        content += ' onclick="test(' + obj.schedule_no + ')" >상세보기</a></td></tr>';
+		        content += ' onclick="test(' + obj.schedule_no;
+		        content += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end +"'";
+		        content += ')" >상세보기</a></td></tr>';
 			});
 	        $('#content').html(content)
-
 	        //fullcalendar 불러오는 함수
 			loadCalendar();
 		}
@@ -44,9 +46,15 @@ $(document).ready(function() {
 
 });
 
-function test( value ){
-	$('#detail_modal_id').val( value );
+function test(id, title, text, start, end){
+	$('#detail_modal_id').val(id);
+	$('#detail_modal_title').val(title);
+	$('#detail_modal_text').val(text);
+	$('#detail_modal_start').val(start);
+	$('#detail_modal_end').val(end);
 }
+
+
 </script>
 
 
@@ -100,6 +108,8 @@ body {
 							<br>
 							<button type="button" class="btn btn-default" id="modal_ok"
 								data-dismiss="modal">등록</button>
+							<input type="hidden" id="modal_start">
+							<input type="hidden" id="modal_end">
 						</div>
 					</div>
 
@@ -123,6 +133,9 @@ body {
 							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="detail_modal_text"></textarea><br>
 							<label>참가 인원 : </label> <input type="text" id="detail_modal_users"><br>
 							<label>id값 (hidden처리 예정) : </label> <input type="text" id="detail_modal_id"><br>
+							<label>start값 (hidden처리 예정) : </label> <input type="text" id="detail_modal_start"><br>
+							<label>end값 (hidden처리 예정) : </label> <input type="text" id="detail_modal_end"><br>
+							
 							<button type="button" class="btn btn-default" id="detail_modal_update"
 								data-dismiss="modal">수정</button>
 							<button type="button" class="btn btn-default" id="detail_modal_delete"
