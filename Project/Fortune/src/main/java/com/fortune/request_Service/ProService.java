@@ -48,7 +48,7 @@ public class ProService {
 		//게시판 기본 설정(기본값 처리)/////////////
 		int page = 1;
 		String field = "user_ID";
-		Join_DTO ids = (Join_DTO)session.getAttribute("id");
+		Join_DTO ids = (Join_DTO)session.getAttribute("info");
 		//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
 		String query ="%"+ids.getUser_id()+"%";
 		//////////////////////////////////////
@@ -200,7 +200,7 @@ public class ProService {
 				//게시판 기본 설정(기본값 처리)/////////////
 				int page = 1;
 				String field = "user_ID";
-				Join_DTO ids = (Join_DTO)session.getAttribute("id");
+				Join_DTO ids = (Join_DTO)session.getAttribute("info");
 				//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
 				String query ="%"+ids.getUser_id()+"%";
 				//////////////////////////////////////

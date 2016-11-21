@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,12 +30,21 @@ $(document).ready(function() {
 						end: obj.schedule_end
 				};
 				array.push(item);
-		        content += '<tr><td>**일정(미구현)</td><td>' + obj.work_title;
+				
+				var detailvalue = {
+						'id': obj.schedule_no,
+						'title': obj.work_title,
+						'text': obj.work_text
+				}
+				var title = obj.work_title
+				var text = obj.work_text
+		        content += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + title;
 		        content += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"';
-		        content += ' onclick="test(' + obj.schedule_no + ')" >상세보기</a></td></tr>';
+		        content += ' onclick="test(' + obj.schedule_no;
+		        content += ",'" + title + "','" + text +"'";
+		        content += ')" >상세보기</a></td></tr>';
 			});
 	        $('#content').html(content)
-
 	        //fullcalendar 불러오는 함수
 			loadCalendar();
 		}
@@ -44,8 +52,10 @@ $(document).ready(function() {
 
 });
 
-function test( value ){
-	$('#detail_modal_id').val( value );
+function test(id, title, text){
+	$('#detail_modal_id').val(id);
+	$('#detail_modal_title').val(title);
+	$('#detail_modal_text').val(text);
 }
 </script>
 
@@ -100,6 +110,8 @@ body {
 							<br>
 							<button type="button" class="btn btn-default" id="modal_ok"
 								data-dismiss="modal">등록</button>
+							<input type="hidden" id="modal_start">
+							<input type="hidden" id="modal_end">
 						</div>
 					</div>
 

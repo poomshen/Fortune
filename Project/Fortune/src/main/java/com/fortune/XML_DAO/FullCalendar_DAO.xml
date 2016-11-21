@@ -18,6 +18,10 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 INSERT INTO work(SCHEDULE_NO, WORK_TITLE, WORK_TEXT)
     VALUES((select max(schedule_no) from schedule), #{work_title}, #{work_text})
 </insert>
+<!-- 일정(일반업무)등록-3 // 등록 후 schedule_no select작업 -->
+<select id="selectScheduleno" resultType="com.fortune.Table_DTO.Schedule_DTO">
+	select max(schedule_no)+1 as"schedule_no" from schedule
+</select>
 
 <!-- 모든 일정(일반업무) select -->
 <select id="selectSWList" resultType="com.fortune.function_DTO.Schedule_Work_DTO">
@@ -28,6 +32,14 @@ INSERT INTO work(SCHEDULE_NO, WORK_TITLE, WORK_TEXT)
 	ORDER BY SCHEDULE_START
 </select>
 
+<!-- 일정 delete 작업 -1 -->
+<delete id="deleteWork">
+	delete from work where schedule_no = #{id}
+</delete>
+<!-- 일정 delete 작업 -2 -->
+<delete id="deleteSchedule">
+	delete from schedule where schedule_no = #{id}
+</delete>
 
 
 
