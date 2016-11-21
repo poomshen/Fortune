@@ -11,8 +11,6 @@
 <script src="<%=request.getContextPath() %>/js/jquery.form.min.js"></script>
 <!-- jQuery MultiFile Plugin import -->
 <script src="<%=request.getContextPath() %>/js/jQuery.MultiFile.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="http://bootsnipp.com/dist/scripts.min.js"></script>
 <script>
 	$(function() {
 		$('#upload_btn').click(function() {
