@@ -122,8 +122,8 @@
 	<form name="deleteform" id="deleteform" action="deletefile.ajax" method="POST">
 		<input type="submit" id="delete_btn" value="삭제"/><br>
 	</form>
-	<form name="searchform" id="searchform" action="searchfile.htm" method="POST">
-		<select name="dept_no" id="cd-dropdown" class="cd-select">
+	<form name="searchform" id="searchform" action="searchfile.htm" method="get">
+		<select name="selectvalue" id="selectvalue" class="cd-select">
 			<option value="-1" selected>선택하세요.</option>
 			<option style="text-align:center" value="file_room_name">파일이름</option>
 			<option style="text-align:center" value="file_room_date">등록날짜</option>
