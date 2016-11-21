@@ -23,16 +23,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.fortune.fileroom_DAO.IFileRoom">
 	<insert id="insertFile" parameterType="com.fortune.Table_DTO.FileRoom_DTO">
-		insert into file_room values(1, 1, 'sung@gmail.com',sysdate, #{file_room_name}, 13, #{file_room_ext})
+		insert into file_room values(1, 1, 'sung@gmail.com',sysdate, #{file_room_name}, (SELECT MAX(TO_NUMBER(file_room_no))+1 FROM file_room), #{file_room_ext})
 	</insert>
 
-	<!-- <select id="infofilesrcs" resultType="com.kosta.model.FileDTO">
-		select * from uploadtest order by fileno desc 
+	<!-- <select id="listFiles" parameterType="integer" resultType="com.fortune.Table_DTO.FileRoom_DTO">
+		select * from file_room order by file_room_no desc 
 	</select> -->
 	
 	<select id="listFiles" parameterType="integer" resultType="com.fortune.Table_DTO.FileRoom_DTO">
 		select * from (select rownum num, n.* from (select * from file_room order by file_room_no desc) n)
-		 where num between 1 + (#{page} - 1) * 5 and 5 + (#{page} - 1) * 5
+		 where num between 1 + (#{page} - 1) * 9 and 9 + (#{page} - 1) * 9
 	</select>
 	
 	

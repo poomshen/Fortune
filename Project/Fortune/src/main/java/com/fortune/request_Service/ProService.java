@@ -1,9 +1,11 @@
 package com.fortune.request_Service;
 
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,10 +17,16 @@ import org.apache.catalina.Session;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+
 import com.fortune.request_DAO.ProDao;
 
 
@@ -40,8 +48,9 @@ public class ProService {
 		//게시판 기본 설정(기본값 처리)/////////////
 		int page = 1;
 		String field = "user_ID";
+		Join_DTO ids = (Join_DTO)session.getAttribute("info");
 		//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
-		String query ="%"+session.getAttribute("id")+"%";
+		String query ="%"+ids.getUser_id()+"%";
 		//////////////////////////////////////
 		if(pg != null && pg.equals("")){
 			page = Integer.parseInt(pg);
@@ -63,8 +72,7 @@ public class ProService {
 		return list;
 	}
 		
-	//상세보기
-	
+	//협업요청 상세보기
 	
 	public Request_DTO ProDetail(String collabo_req_index) throws ClassNotFoundException, SQLException{
 		 
@@ -115,7 +123,7 @@ public class ProService {
 		  System.out.println("seq : " + collabo_req_index);
 		  ProDao proDao = sqlsession.getMapper(ProDao.class);
 		 proDao.accept(collabo_req_index);  
-		 Request_DTO proDto = proDao.getResponse(collabo_req_index); //다른테이블 가져옴 index값을 받아온 정보를
+		 Request_DTO proDto = proDao.detailResponse(collabo_req_index); //다른테이블 가져옴 index값을 받아온 정보를
 		 System.out.println("index : " + proDto.getCollabo_req_index());
 		 System.out.println("no : " + proDto.getCollabo_req_no());
 		 
@@ -150,16 +158,71 @@ public class ProService {
 		
 			  ProDao proDao = sqlsession.getMapper(ProDao.class);
 			  proDao.insertResponse(n);
-			    Request_DTO proDto = proDao.getResponse(collabo_req_index);
+			    Request_DTO proDto = proDao.detailResponse(collabo_req_index);
 			   
 			  return proDto;
 		
 			 
 		 }	 
+		 //글수정 화면
+		 @RequestMapping(value = "proEdit.htm", method = RequestMethod.GET)
+		 public Request_DTO proEdit(String collabo_req_index)
+		   throws ClassNotFoundException, SQLException {
+		 
+			 ProDao proDao = sqlsession.getMapper(ProDao.class);
+			  Request_DTO req_Dto = proDao.getProDto(collabo_req_index);
+			  
+		 
+		  return req_Dto;
+		 }
+		 
+		 //실제 글수정 
+		 @RequestMapping(value = "noticeEdit.htm", method = RequestMethod.POST)
+		 public Request_DTO proEdit(Request_DTO n) throws ClassNotFoundException,
+		   SQLException, IOException {
+
+			
+			 ProDao proDao = sqlsession.getMapper(ProDao.class);
+			 proDao.update(n);
+		  return n;
+	    	 
+		 }
 		 
 		 
+		 //////////////////////////////////////////////////////////////
 		 
-		 
+		 //전체 협업 리스트
+		 public List<With_DTO> listResponse(String pg , String f , String q, HttpSession session ) throws ClassNotFoundException , SQLException {
+				System.out.println("집에 갑시다.");
+				
+				
+				
+				//게시판 기본 설정(기본값 처리)/////////////
+				int page = 1;
+				String field = "user_ID";
+				Join_DTO ids = (Join_DTO)session.getAttribute("info");
+				//아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
+				String query ="%"+ids.getUser_id()+"%";
+				//////////////////////////////////////
+				if(pg != null && pg.equals("")){
+					page = Integer.parseInt(pg);
+				}
+				if(f != null && f.equals("")){
+					field = f;
+				}
+				if(q != null && q.equals("")){
+					query = q;
+				}
+				
+				System.out.println(page + " / " + field + " / " + query);
+				
+				//Mybatis 적용
+				ProDao proDao = sqlsession.getMapper(ProDao.class);
+				List<With_DTO> list= proDao.listResponse(page, field, query);
+				
+
+				return list;
+			}
 		 
 	
 	

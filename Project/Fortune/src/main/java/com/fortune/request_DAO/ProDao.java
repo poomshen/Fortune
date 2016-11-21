@@ -17,7 +17,7 @@ public interface ProDao {
 		//게시물 삭제
 		public String delete(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//게시물 수정
-		public int update(Request_DTO notice) throws ClassNotFoundException, SQLException;
+		public int update(Request_DTO n) throws ClassNotFoundException, SQLException;
 		//게시물 상세
 		public Request_DTO getProDto(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//게시물 입력
@@ -26,11 +26,13 @@ public interface ProDao {
 		public int accept(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//거절 하기
 		public int refuse(String collabo_req_index) throws ClassNotFoundException, SQLException;
-		//게시물 입력
+		//게시물 입력 요청
 		public int insertResponse(With_DTO n) throws ClassNotFoundException, SQLException;
-		//게시물 상세
-		public Request_DTO getResponse(String collabo_req_index) throws ClassNotFoundException, SQLException;
-				
-
-
+		//게시물 상세 요청
+		public Request_DTO detailResponse(String collabo_req_index) throws ClassNotFoundException, SQLException;
+		//전체 게시물 협업
+		public List<With_DTO> listResponse(int page, String field, String query) throws ClassNotFoundException, SQLException;	
+		
+		
+		
 }

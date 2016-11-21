@@ -12,18 +12,17 @@
 
 <script type="text/javascript">
      function proAjaxCall(a){
-
+    	 $("#menuView").empty();
+  	
    	 $.ajax({
+   		 
  			type: "get",
  			url:  "ProDetail.htm",
  			cache: false,				
  			data:"collabo_req_index="+a,
  		    success:function(data){ //callback  
- 		    	 console.log(data);
- 		    	 $("#menuView").empty();
- 		        
- 		        $("#menuView").append($('#menuView').html(data)); 
- 		         
+				$("#menuView").append($('#menuView').html(data)); 
+ 		      
  		     },
  			error: function(){						
  				alert('Error while request..'	);
@@ -44,8 +43,8 @@
 		<thead>
 			<tr>
 				<th class="collabo_req_index">번호</th>
-				<th class="collabo_req_title">제목</th>
-				<th class="title">제목2</th>
+				
+				<th class="title">제목</th>
 				<th class="user_ID">작성자</th>
 				<th class="collabo_req_date">작성일</th>
 				<th class="collabo_req_state">진행상태</th>
@@ -55,8 +54,7 @@
 		<tbody>
 			<c:forEach items="${list}" var="n">
 				<tr>
-					<td class="collabo_req_index">${n.collabo_req_index}</td>
-				<td> <a href="ProDetail.htm?collabo_req_index=${n.collabo_req_index}">${n.collabo_req_title}</a> </td>
+				<td class="collabo_req_index">${n.collabo_req_index} </td>
 				
 				<td><a data-toggle="modal" data-target="#myModal" onclick="proAjaxCall(${n.collabo_req_index})">${n.collabo_req_title}</a></td>					
 					
@@ -112,7 +110,7 @@
 </div>
 	
 	
-	<a href="index.htm">요청하러가기 ?</a>
+	<a href="requestList.htm">요청</a>
 
 </body>
 </html>

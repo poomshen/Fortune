@@ -34,16 +34,13 @@ public class HomeController {
 
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String index() {
-
-
-		
+	
 		System.out.println("index 컨트롤러");
-	/*	return "index";*/
 
 		return "index";
 	}
 
-	@RequestMapping(value = "/sign.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/sign.htm")
 	public String sign(Model m) {
 	
 		System.out.println("joinform 보여줌");
@@ -75,13 +72,5 @@ public class HomeController {
 		System.out.println("메뉴 컨트롤러");
 		return "home.main";
 	}
-	
-	@RequestMapping(value= "/schedule.htm", method = RequestMethod.GET)
-	public String lmc() {
-		
-		System.out.println("위치 : HomeController // 내용 : 이명철 캘린더 테스트");
-		return "schedule/schedule";
-	}
-
 
 }

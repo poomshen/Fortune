@@ -1,8 +1,10 @@
 /*
-* @Class : NoticeController
+* @Class : NoticeInsert_Controller
 * @Date : 2016.11.16
+* 		  2016.11.19 수정중
 * @Author : 김지율
-* @Desc : 공지사항게시판 Controller
+* @Desc : 공지사항게시판 Insert Controller
+* 		  11.19 파일업로드 기능구현 헷갈려서, 컨트롤러 각각 분리..
 */
 
 package com.fortune.notice_Controller;
@@ -30,45 +32,15 @@ import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.notice_DAO.INotice;
 
 @Controller
-public class NoticeController {
+public class NoticeInsert_Controller {
 
 	@Autowired
 	private SqlSession sqlSession;
 
-	// 공지사항 글목록보기
-	@RequestMapping("/noticeList.htm")
-	public String noticeList(String pg, String f, String q, Model model) throws ClassNotFoundException, SQLException {
-
-		// 게시판 기본 설정(기본값 처리)/////////////
-		int page = 1;
-		String field = "NOTICE_TITLE";
-		String query = "%%";
-		//////////////////////////////////////
-		if (pg != null && pg.equals("")) {
-			page = Integer.parseInt(pg);
-		}
-		if (f != null && f.equals("")) {
-			field = f;
-		}
-		if (q != null && q.equals("")) {
-			query = q;
-		}
-
-		System.out.println(page + " / " + field + " / " + query);
-
-		System.out.println("NoticeController의 noticeList를 탑니다~");
-
-		INotice noticeDao = sqlSession.getMapper(INotice.class);
-		List<Notice_DTO> noticeList = noticeDao.listNotice(page, field, query);
-		model.addAttribute("noticeList", noticeList);
-
-		return "notice/noticeList";
-	}
-
 	//공지사항등록 화면처리
 	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.GET)
 	public String noticeInsert(){
-		System.out.println("NoticeController의 noticeInsert를 탑니다~");
+		System.out.println("NoticeInsertController를 GET방식으로 탑니다~");
 		return "notice/noticeInsert";		
 	}
 	
@@ -76,7 +48,7 @@ public class NoticeController {
 	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.POST)
 	public String noticeInsert(Notice_DTO ndto, HttpServletRequest request) throws IOException, ClassNotFoundException, SQLException {
 		
-		System.out.println("NoticeController의 noticeInsert를 타서, 실제로 글작성을 할꺼지롱!");
+		System.out.println("NoticeInsertController를 POST방식으로 탑니다~");
 	    System.out.println("ndto : " + ndto.getNotice_title()); 
 	    System.out.println("ndto : " + ndto.getNotice_text());
 	    System.out.println("ndto : " + ndto.getFile().getOriginalFilename()); 
@@ -101,57 +73,10 @@ public class NoticeController {
 	    INotice noticeDao = sqlSession.getMapper(INotice.class);
 	    
 	    noticeDao.insertNotice(ndto);
-		return "redirect:noticeList.htm";
-		
-	}	
-	
-	// 글상세보기
-	@RequestMapping("noticeDetail.htm")
-	public String noticeDetail(String notice_no, Model model) throws ClassNotFoundException, SQLException {
-
-		System.out.println("NoticeController의 noticeDetail을 탑니다~");
-
-		INotice noticeDao = sqlSession.getMapper(INotice.class);
-		Notice_DTO noticeDetail = noticeDao.detailNotice(notice_no);
-		model.addAttribute("noticeDetail", noticeDetail);
-
-		return "notice/noticeDetail";
-	}
-
-	// 글삭제하기
-	@RequestMapping("noticeDelete.htm")
-	public String noticeDelete(String notice_no) throws ClassNotFoundException, SQLException {
-		System.out.println("notice_no : " + notice_no);
-
-		INotice noticeDao = sqlSession.getMapper(INotice.class);
-		noticeDao.deleteNotice(notice_no);
-		return "redirect:noticeList.htm"; // 리스트 화면 (controller 타서 데이터 출력)
-	}
-
-	// 글 수정하기
-	@RequestMapping(value = "noticeUpdate.htm", method = RequestMethod.GET)
-	public String noticeUpdate(String notice_no, Model model) throws ClassNotFoundException, SQLException {
-
-		System.out.println("NoticeController의 noticeUpdate를 탑니다~");
-
-		INotice noticeDao = sqlSession.getMapper(INotice.class);
-		Notice_DTO noticeUpdate = noticeDao.detailNotice(notice_no);
-		model.addAttribute("noticeUpdate", noticeUpdate);
-
-		System.out.println(noticeUpdate.getNotice_title());
-		return "notice/noticeUpdate";
-	}
-
-	// 게시판 실제 수정처리
-	@RequestMapping(value = "noticeUpdate.htm", method = RequestMethod.POST)
-	public String noticeUpdate(Notice_DTO ndto) throws ClassNotFoundException, SQLException, IOException {
-
-		INotice noticeDao = sqlSession.getMapper(INotice.class);
-		noticeDao.updateNotice(ndto);
-		return "redirect:noticeDetail.htm?notice_no=" + ndto.getNotice_no();
-
+		return "redirect:noticeList.htm";		
 	}
 	
+	//파일명변경
 	public File renameFile(File f) { // File f는 원본 파일
 		if (createNewFile(f))
 			return f; // 생성된 f가 중복되지 않으면 리턴

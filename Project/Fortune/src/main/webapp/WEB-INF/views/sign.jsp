@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Riona - One Page Bootstrap Business Template</title>
+<title>회원가입 페이지</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -39,10 +39,27 @@
 <link rel="stylesheet"
    href="path/to/font-awesome/css/font-awesome.min.css">
    
-   <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css">
+
+<link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 5px; 
+    text-align: right;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    
+    }
+    
+</style>
+
 </head>
 
 <body>
@@ -76,41 +93,39 @@
 <!-- 아이디  입력-->
 
 <div class="form-group">
-<div class="inner-addon left-addon" style="margin-left:37%">
-<span class="field">
- 
-
-<span class="addon"style="
-    padding-bottom: 0px;
-"><i class="glyphicon glyphicon-user"></i></span>
-    <input type="text" id="id" name="id" class="form-control" style="
-    width: 340px;margin-left:20px;
-"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
-
-</span>
+	<div class="inner-addon left-addon" style="margin-left:37%">
+		<span class="field">
+			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
+			    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;"> 
+			    <input type="button" id="idchk" name="idchk" class="button" value="아이디 중복확인" onclick="idchkclk()">
+			    <label id="idselect" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
+				
+		</span>
+	</div>
 </div>
-</div>
-
-
-
-
-
-
 
 <!-- 비밀번호  입력-->
 <div class="form-group">
-<div class="inner-addon left-addon" style="margin-left:37%">
-<span class="field">
- <span class="addon"style="
-    padding-bottom: 0px;
-"><i class="glyphicon glyphicon-lock"></i></span> 
-    <input type="text" name="pwd" id="pwd" class="form-control" style="
-    width: 340px;margin-left:20px;
-"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 입력</label>
-
-</span>
+	<div class="inner-addon left-addon" style="margin-left:37%">
+		<span class="field">
+		 <span class="addon"style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
+		    <input type="text" name="user_password" id="pwd" class="form-control" style="
+		    width: 340px;margin-left:20px;
+		"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 입력</label>
+		</span>
+	</div>
 </div>
 
+<!-- 비밀번호  확인-->
+<div class="form-group">
+	<div class="inner-addon left-addon" style="margin-left:37%">
+		<span class="field">
+		 <span class="addon"style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
+		    <input type="text" name="user_password_chk" id="pwd" class="form-control" style="
+		    width: 340px;margin-left:20px;
+		"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 확인</label>
+		</span>
+	</div>
 </div>
 
 <!-- 이름 입력-->
@@ -120,7 +135,7 @@
 <span class="addon"style="
     padding-bottom: 0px;
 "><i class="glyphicon glyphicon-font"></i></span> 
-   <input type="text" name="name" id="name" class="form-control" style="
+   <input type="text" name="user_name" id="name" class="form-control" style="
     width: 340px;margin-left:20px;
 ">
 
@@ -133,12 +148,9 @@
 <div class="inner-addon left-addon" style="margin-left:2%">
 <span class="field">
 
-           <input type="radio" name="gender" id="gender" value="male" checked 
- 
->남자
-         <input type="radio" name="gender" id="gender" value="female"
- 
->여자<br>    
+
+<input type="radio" name="user_gender" id="gender" value="male" checked >남자
+<input type="radio" name="user_gender" id="gender" value="female">여자<br>    
          
  <label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);" for="gender">성별 입력</label>
  </span>
@@ -156,7 +168,7 @@
    <div class="col-sm-2"><input type="text" name="year" id="year" size="5" class="form-control hvr-glow">생년</div> 
     <div class="col-sm-2"><input type="text" name="month" id="month" size="5" class="form-control hvr-glow">월
       </div>  <div class="col-sm-2"><input type="text" name="day" id="day" size="5" class="form-control hvr-glow">일</div>
-      <input type="hidden" name="birthday" id="birthday">
+      <input type="hidden" name="user_date" id="birthday">
 <label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);">생년월일 입력</label>
  
    </span>
@@ -171,11 +183,11 @@
 <span class="addon"style="
     padding-bottom: 0px;
 "><i class="glyphicon glyphicon-phone"></i></span> 
-   <input type="text" name="phone" id="phone" class="form-control" style="
+   <input type="text" name="user_phone" id="phone" class="form-control" style="
     width: 340px;margin-left:20px;
 "> 
 
-<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone">전화번호 입력</label>
+<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone">핸드폰 번호 입력</label>
 </span>
   </div>
 </div>
@@ -187,7 +199,7 @@
 <span class="addon"style="
     padding-bottom: 0px;
 "><i class="glyphicon glyphicon-calendar"></i></span> 
- <input type="date" name="enterdate" id="enterdate" class="form-control" style="
+ <input type="date" name="user_join" id="enterdate" class="form-control" style="
     width: 340px;margin-left:20px;
 ">
    
@@ -205,12 +217,11 @@
 <div class="col-sm-3 col-sm-offset-1" style="margin-left:10%">
          <section class="main clearfix">
                <div class="fleft">
-               <select name="deptno" id="cd-dropdown" class="cd-select">
-                  <option value="-1" selected>부서명을 선택하세요</option>
-         
-            <c:forEach var="i" items="${dept}">            
-                     <option style="text-align:center" value="${i.dept_no}">${i.dept_name}</option>
-                  </c:forEach> 
+               <select name="dept_no" id="cd-dropdown" class="cd-select">
+                <option value="-1" selected>부서명을 선택하세요</option>
+            	<c:forEach var="i" items="${dept}">            
+                   <option style="text-align:center" value="${i.dept_no}">${i.dept_name}</option>
+                </c:forEach> 
                </select>
             </div>
          </section>
@@ -220,7 +231,7 @@
 <div class="col-sm-3">
          <section class="main clearfix">
                <div class="fleft">
-               <select name="teamnum" id="cd-dropdown2" class="cd-select">
+               <select name="team_no" id="cd-dropdown2" class="cd-select">
                   <option value="-1" selected>팀을 선택하세요</option>
             <c:forEach var="i" items="${team}">
                      <option style="text-align:center" value="${i.team_no}">${i.team_name}</option>
@@ -234,7 +245,7 @@
 <div class="col-sm-3">
          <section class="main clearfix">
                <div class="fleft">
-               <select name="jobnum" name="deptno" id="cd-dropdown3" class="cd-select">
+               <select name="position_no"  id="cd-dropdown3" class="cd-select">
                   <option value="-1" selected>직급을 선택하세요</option>
                <c:forEach var="i" items="${position}">
                      <option style="text-align:center" value="${i.position_no}">${i.position_name}</option>
@@ -644,6 +655,29 @@
          document.getElementById("birthday").value = b;
          //alert(document.getElementById("birthday").value);
       }   
+      function idchkclk() { 
+		alert($('#id').val().toLowerCase());
+		console.log($('#id').val().toLowerCase());
+		
+    	  $.ajax({
+    		  type:"get",
+    		  url:"idchk.ajax",
+    		  data:{"user_id": $('#id').val().toLowerCase()},
+    		  success:function(data){
+    			  console.log(data);
+    			  if(data == "yes"){
+    			  $("#idselect").html("중복되는 아이디입니다");
+    			  }else{
+    				  $("#idselect").html("사용가능한 아이디 입니다");
+    			  }
+    		  },
+    		  error:function(){
+    			  $("#idselect").html("에러 입니다");
+    		  }
+    	  });
+		
+		
+	}
       </script>
 
 
