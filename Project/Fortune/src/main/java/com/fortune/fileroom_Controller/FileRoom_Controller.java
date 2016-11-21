@@ -27,7 +27,7 @@ public class FileRoom_Controller {
 		if (str_pg != null) {
 			page = Integer.parseInt(str_pg);
 		}
-		int row_size = 5;
+		int row_size = 9;
 
 		int total_count = fileromm_DAO.countFile();	//file 개수
 		System.out.println("totalcount : " + total_count);

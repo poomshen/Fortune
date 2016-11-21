@@ -16,14 +16,22 @@
 	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
 
 
-	<context:component-scan base-package="com.or.fortune.name_Controller" />
 	<context:component-scan base-package="com.fortune.name_Controller" />
 	<context:component-scan base-package="com.fortune.notice_Controller" />
 	<context:component-scan base-package="com.fortune.fileroom_Controller" />
 	<context:component-scan base-package="com.fortune.join_Controller" />	
+	<context:component-scan base-package="com.fortune.fullcalendar_Controller" />
 	
 	
 	
+	<!-- 요청 스캔
+		이름 : 이승훈
+		일자 : 2016-11-17
+		목적 : scan 을 하여 사용하게 한다.
+	 -->
+	<context:component-scan base-package="com.fortune.request_Controller"/>
+	<context:component-scan base-package="com.fortune.request_DAO"/>
+	<context:component-scan base-package="com.fortune.request_Service"/>
 	
 	
 	

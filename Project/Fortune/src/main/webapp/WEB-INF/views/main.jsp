@@ -7,7 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
- 안녕 하세요
- ${sessionScope.id} 
+ ${sessionScope.info.user_id} 님 안녕 하세요\^0^/
+ <br>
+ 부서번호 : ${sessionScope.info.dept_no}
+ 직함번호 : ${sessionScope.info.position_no}
+ 팀번호    : ${sessionScope.info.team_no}
+  
+ 
 </body>
 </html>

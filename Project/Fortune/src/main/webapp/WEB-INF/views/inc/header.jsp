@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; border-color:#f8f8f8; background-color:rgba(248,248,248,0); box-shadow: 2px 2px 5px hsla(0,0%,0%,0.58);">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -16,8 +16,8 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <a class="dropdown-toggle" style="color:#417ca5;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
@@ -67,8 +67,8 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <a class="dropdown-toggle" style="color:#417ca5;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
                         <li>
@@ -146,8 +146,8 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <a class="dropdown-toggle" style="color:#417ca5;;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
@@ -206,11 +206,11 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <a class="dropdown-toggle" style="color:#417ca5;;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="updateMember.htm"><i class="fa fa-user fa-fw"></i> Edit Profile</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
@@ -218,7 +218,7 @@
                         <li><a href="logOut.htm"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="deleteMemember.htm"><i class="fa fa-times fa-fw"></i>delete ID</a>
+                        <li><a href="deleteMemember.htm"><i class="fa fa-times fa-fw"></i> delete ID</a>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>

@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="navbar-default sidebar" role="navigation">
+<div class="navbar-default sidebar" style="border-color:#444; background-color:#417ca5; width:170px; height:644px;" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>프로젝트<span class="fa arrow"></span></a>
+                            <a href="#" ><i class="fa fa-bar-chart-o fa-fw hvr-pop"></i>프로젝트<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#"> </a>
+                                    <a href="writerequest.htm hvr-pop">프로젝트 생성</a>
                                 </li>
                                 <li>
-                                    <a href="#"> </a>
+                                    <a href="requestList.htm">협업요청 리스트</a>
+                                </li>
+                                <li>
+                                    <a href="responseList.htm">협업 리스트</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -60,7 +63,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="mainfile.htm"><i class="fa fa-files-o fa-fw"></i>자료실</a>
                             <!-- /.nav-second-level -->
                         </li>

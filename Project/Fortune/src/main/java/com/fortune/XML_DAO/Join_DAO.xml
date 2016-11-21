@@ -7,30 +7,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 멤버 추가 -->
  <insert id="insertMember" parameterType="com.fortune.Table_DTO.Join_DTO">
  	 insert into USERS(USER_ID, USER_PASSWORD, USER_NAME, USER_GENDER, USER_DATE, USER_PHONE, USER_JOIN, DEPT_NO, TEAM_NO, POSITION_NO, ROLE_NO)
- 		values(#{id},#{pwd},#{name},#{gender},#{birthday},#{phone},#{enterdate},#{deptno},#{teamnum},#{jobnum},5)    
+ 		values(#{user_id},#{user_password},#{user_name},#{user_gender},#{user_date},#{user_phone},#{user_join},#{dept_no},#{team_no},#{position_no},5)    
   </insert>
  
 <!-- 로그인 -->
  <select id="login" parameterType="com.fortune.Table_DTO.Join_DTO" resultType="com.fortune.Table_DTO.Join_DTO">
- 	select USER_ID id from USERS
- 	where USER_ID=#{id} AND USER_PASSWORD=#{pwd}
+ 	select USER_ID, USER_PASSWORD, USER_NAME, USER_GENDER, USER_DATE, USER_PHONE, USER_JOIN, DEPT_NO, TEAM_NO, POSITION_NO from USERS 
+ 	where USER_ID=#{user_id} AND USER_PASSWORD=#{user_password}
  </select>
  <!-- 멤버 삭제 -->
  <delete id="deleteMember" parameterType="String">
  	delete from USERS
- 		   where USER_ID=#{id}
+ 		   where USER_ID=#{user_id}
  </delete>
+
  
- <!-- 멤버 정보 -->
- <select id="memberInfo" parameterType="com.fortune.Table_DTO.Join_DTO" resultType="com.fortune.Table_DTO.Join_DTO">
- 	select USER_ID, USER_PASSWORD, USER_NAME, USER_GENDER, USER_DATE, USER_PHONE, USER_JOIN, DEPT_NO, TEAM_NO, POSITION_NO from USERS 
- 	where USER_ID=#{id}
- </select>
- 
- <!-- 멤버 수정 -->
+ <!-- 회원이 자기 정보 수정 -->
  <update id="updateMember" parameterType="com.fortune.Table_DTO.Join_DTO" >
- 	update USERS set USER_PASSWORD=#{pwd}, USER_PHONE=#{phone}, DEPT_NO=#{deptno}, TEAM_NO=#{teamnum}, POSITION_NO=#{jobnum}
- 	where USER_ID=#{id}
+ 	update USERS set USER_PASSWORD=#{user_password}, USER_PHONE=#{user_phone}
+ 	where USER_ID=#{user_id}
  </update>
  
  <!-- Dept 정보 가져오기 -->
@@ -46,5 +41,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 직함 정보 가져오기 -->
  <select id="searchTitle" parameterType="com.fortune.Table_DTO.Jobtitle_DTO" resultType="com.fortune.Table_DTO.Jobtitle_DTO">
  	select POSITION_NO, POSITION_NAME from position order by POSITION_NO asc
+ </select>
+ 
+ <!-- 아이디 중복체크 -->
+ <select id="idchk" parameterType="String" resultType="com.fortune.Table_DTO.Join_DTO">
+ 	select USER_ID from users
+ 	where USER_ID=#{user_id}
  </select>
 </mapper>
