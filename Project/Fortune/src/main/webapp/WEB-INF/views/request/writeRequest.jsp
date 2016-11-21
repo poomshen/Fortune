@@ -19,9 +19,9 @@
                 CKEDITOR.replace( 'collabo_req_text' );
             </script>
 
-작성자 : <input type="text" name="user_ID" value="${sessionScope.id.id}"><br>
-진행 상태 :<input type="text" value="대기" name="collabo_req_state" readonly="readonly"><br>
-
+작성자 : <input type="text" name="user_ID" value="${sessionScope.info.user_id}"><br>
+진행 상태 :<input type="text" value="대기" name="collabo_req_state" readonly="readonly">&nbsp;
+수신자 : <input type="text" name="collabo_req_ID" ><br>
 
 <input type="submit" value="submit"><br>
 <p><a href="requestList.htm">취소하기</a></p>

@@ -32,7 +32,8 @@ public interface ProDao {
 		public Request_DTO detailResponse(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//전체 게시물 협업
 		public List<With_DTO> listResponse(int page, String field, String query) throws ClassNotFoundException, SQLException;	
-		
-		
+		//담당자 선택 
+		public int insertmanager(String collabo_req_index)throws ClassNotFoundException, SQLException;
+
 		
 }

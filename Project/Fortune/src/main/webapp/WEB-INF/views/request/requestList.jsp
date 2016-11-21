@@ -46,7 +46,9 @@
 				
 				<th class="title">제목</th>
 				<th class="user_ID">작성자</th>
+				
 				<th class="collabo_req_date">작성일</th>
+				<th class="collabo_req_ID">답장자</th>
 				<th class="collabo_req_state">진행상태</th>
 				
 			</tr>
@@ -60,10 +62,11 @@
 					
 				
 				
-
-					<td class="user_ID">${n.user_ID}</td>
-					<td class="collabo_req_date">${n.collabo_req_date}</td>
 					
+					<td class="user_ID">${n.user_ID}</td>
+					
+					<td class="collabo_req_date">${n.collabo_req_date}</td>
+					<td class="collabo_req_ID">${n.collabo_req_ID}</td>
 					<td class="collabo_req_state">${n.collabo_req_state}</td>
 					
 					

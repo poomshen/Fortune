@@ -30,13 +30,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<when test="collabo_req_index == null">
 		Insert into collabo_req(collabo_req_index,collabo_req_no,user_ID, collabo_req_title,
 							  collabo_req_text, collabo_req_date, collabo_req_ID, collabo_req_state)
-		VALUES(1,1, #{user_ID}, #{collabo_req_title}, #{collabo_req_text}, SYSDATE ,'sung@gmail.com', #{collabo_req_state})
+		VALUES(1,1, #{user_ID}, #{collabo_req_title}, #{collabo_req_text}, SYSDATE ,#{collabo_req_ID}, #{collabo_req_state})
 	</when>
 	
 	<otherwise>
 	Insert into collabo_req(collabo_req_index,collabo_req_no,user_ID, collabo_req_title,
 							  collabo_req_text, collabo_req_date, collabo_req_ID, collabo_req_state)
-		VALUES(#{collabo_req_index},1, #{user_ID}, #{collabo_req_title}, #{collabo_req_text}, SYSDATE ,'sung@gmail.com', #{collabo_req_state})
+		VALUES(#{collabo_req_index},1, #{user_ID}, #{collabo_req_title}, #{collabo_req_text}, SYSDATE ,#{collabo_req_ID}, #{collabo_req_state})
 	</otherwise>
 	</choose>
 	
@@ -119,7 +119,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50 
 </select>
 
+<insert id="insertmanager" >
 
+		Insert into collabo(user_ID) VALUES(#{user_ID})
+
+</insert>
 
 
 	

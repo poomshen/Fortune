@@ -24,6 +24,10 @@
 		<dd>${list.user_ID}</dd>
 	</dl>
 	<dl>
+		<dt>프로젝트 전송받을 사람</dt>
+		<dd>${list.collabo_req_ID}</dd>
+	</dl>
+	<dl>
 		<dt>프로젝트 작성일</dt>
 		<dd>${list.collabo_req_date}</dd>
 	</dl>
@@ -31,7 +35,7 @@
 		<dt>프로젝트 진행상태</dt>
 		<dd>${list.collabo_req_state}</dd>
 	</dl>
-	
+</div>
 	<p><a href="requestList.htm">목록</a></p>
 	<p><a href="accept.htm?collabo_req_index=${list.collabo_req_index}" name="collabo_req_state">수락</a></p> 
 	<p><a  href="refuse.htm?collabo_req_index=${list.collabo_req_index}" name="collabo_req_state">거절</a></p>
