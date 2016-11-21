@@ -19,6 +19,18 @@
 <!-- Custom Fonts -->
 <link href="bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
+	
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+
+ 
+	
+	
+<link rel="stylesheet" href="assets/css/hover.css">
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
@@ -49,5 +61,7 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
+	
+	
 </body>
 </html>
