@@ -59,13 +59,7 @@
 
 			<div class="top-content-bottom-link"> 
 
-<!-- 
-						<div
-							class="col-sm-6 col-sm-offset-3 r-form-1-box wow fadeInUp animated"
-							style="visibility: visible; animation-name: fadeInUp;">
 
-							<div class="r-form-1-bottom">
- -->
 								<form role="form" action="main.htm" method="post">
 									<div class="col-sm-12 form-group container" style="margin-left:19%">
 										<label class="sr-only" for="r-form-1-first-name">First
@@ -77,7 +71,7 @@
 												class="fa fa-user" aria-hidden="true"></i></span>
 											<div class="form-group">
 												<label class="sr-only" for="r-form-1-email">id</label> 
-												<input type="text" name="user_id" class="form-control hvr-glow" id="r-form-1-email" tabindex="1">
+												<input type="text" name="user_id" class="form-control hvr-glow" id="r-form-1-email">
 											</div>
 										</div>
 										<div class="input-group">
@@ -87,16 +81,16 @@
 												class="fa fa-key" aria-hidden="true"></i></span>
 											<div class="form-group">
 												<label class="sr-only" for="r-form-1-email">pwd</label> 
-												<input type="text" name="user_password" class="form-control hvr-glow" id="r-form-1-email" tabindex="2">
+												<input type="text" name="user_password" class="form-control hvr-glow" id="r-form-1-email">
 										</div>
 										</div>
 									</div>
 
 									<div style="margin-left:-3%">
-									<button type="submit" formaction="sign.htm" class="btn hvr-forward" tabindex="4">join</button>
+									<button type="submit" formaction="sign.htm" class="btn hvr-forward" >join</button>
 									
 									 &nbsp; &nbsp; &nbsp;
-									<button type="submit" formaction="loginSubmit.htm" class="btn hvr-forward" tabindex="3">login</button>
+									<button type="submit" formaction="loginSubmit.htm" class="btn hvr-forward">login</button>
 									</div>
 
 								</form>

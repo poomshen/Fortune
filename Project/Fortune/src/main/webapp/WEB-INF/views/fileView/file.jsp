@@ -33,7 +33,8 @@
 		
 		$('#delete_btn').click(function() {
 			var checkboxValues = [];
-				$("input[name='filename']:checked").each(function(i) {
+			
+			$("input[name='filename']:checked").each(function(i) {
 				checkboxValues.push($(this).val());
 			});
 			
@@ -61,21 +62,22 @@
 		if (data.file && data.file.length != 0) {
 			$.each(data.file, function(index, item) {
 				if(item.file_room_ext == ".docx"){
-					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img class=lazy src=images/docx.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/docx.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
 				}else if(item.file_room_ext == ".hwp"){
-					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img class=lazy src=images/hwp.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/hwp.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
 				}else if(item.file_room_ext == ".pptx"){
-					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img class=lazy src=images/pptx.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/pptx.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
 				}else if(item.file_room_ext == ".zip"){
-					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img class=lazy src=images/zip.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/zip.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
+				}else if(item.file_room_ext == ".jpg" || item.file_room_ext == ".png" || item.file_room_ext == ".bmp" || item.file_room_ext == ".gif"){
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=upload/"+ item.file_room_name +" style=width:320px;height:240px>" + "</a></div></div></div>";
 				}else{
-					var result = "<a href=downloadfile.htm?filename=" + item.file_room_name + ">" + "<img class=lazy src=upload/"+ item.file_room_name +" style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/file.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
 				}
 				$("#divrow1").append("<div class='col-sm-12 col-xs-12 col-md-4 col-lg-3' style=float:left>"+
 						"<div class=thumbnail bootsnipp-thumb>"+
-						"<div><p class=lead snipp-title>"+
-						"<input type=checkbox name=filename id=filename value="+ item.file_room_name +">"+
-						item.file_room_name+"</p>"+result);
+						"<div><p class=lead snipp-title><input type=checkbox name=filename id=filename value='" + item.file_room_name + "'>" + item.file_room_name + "</p>"+
+						result);
 			});
 		}
 		
@@ -130,31 +132,25 @@
 					style="float: left">
 					<div class="thumbnail bootsnipp-thumb">
 						<div>
-							<p class="lead snipp-title">
-								<input type="checkbox" name="filename" id="filename"
-									value="${flist.file_room_name}">${flist.file_room_name}
-							</p>
+							<p class="lead snipp-title"><input type="checkbox" name="filename" id="filename" value="${flist.file_room_name}">${flist.file_room_name}</p>
 							<c:choose>
 								<c:when test="${flist.file_room_ext == '.docx'}">
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img
-										src="images/docx.jpg" style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/docx.jpg" style="width: 320px; height: 240px"></a>
 								</c:when>
 								<c:when test="${flist.file_room_ext == '.hwp'}">
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img
-										src="images/hwp.jpg" style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/hwp.jpg" style="width: 320px; height: 240px"></a>
 								</c:when>
 								<c:when test="${flist.file_room_ext == '.pptx'}">
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img
-										src="images/pptx.jpg" style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/pptx.jpg" style="width: 320px; height: 240px"></a>
 								</c:when>
 								<c:when test="${flist.file_room_ext == '.zip'}">
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img
-										src="images/zip.jpg" style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/zip.jpg" style="width: 320px; height: 240px"></a>
+								</c:when>
+								<c:when test="${flist.file_room_ext == '.jpg' || flist.file_room_ext == '.png' || flist.file_room_ext == '.bmp' || flist.file_room_ext == '.gif'}">
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy	src="upload/${flist.file_room_name}" style="width: 320px; height: 240px"></a>
 								</c:when>
 								<c:otherwise>
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img
-										src="upload/${flist.file_room_name}"
-										style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/file.jpg" style="width: 320px; height: 240px"></a>
 								</c:otherwise>
 							</c:choose>
 						</div>
