@@ -38,7 +38,6 @@
 				checkboxValues.push($(this).val());
 			});
 			
-			//console.log(allData);
 			$('#deleteform').ajaxForm({
 				cache : false,
 				data : {"checkArray": checkboxValues},
@@ -62,21 +61,23 @@
 		if (data.file && data.file.length != 0) {
 			$.each(data.file, function(index, item) {
 				if(item.file_room_ext == ".docx"){
-					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/docx.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/docx.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
 				}else if(item.file_room_ext == ".hwp"){
-					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/hwp.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/hwp.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
+				}else if(item.file_room_ext == ".xlsx"){
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/xlsx.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
 				}else if(item.file_room_ext == ".pptx"){
-					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/pptx.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/pptx.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
 				}else if(item.file_room_ext == ".zip"){
-					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/zip.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/zip.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
 				}else if(item.file_room_ext == ".jpg" || item.file_room_ext == ".png" || item.file_room_ext == ".bmp" || item.file_room_ext == ".gif"){
-					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=upload/"+ item.file_room_name +" style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=upload/"+ item.file_room_name +" style=width:400px;height:200px>" + "</a></div></div></div>";
 				}else{
-					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/file.jpg style=width:320px;height:240px>" + "</a></div></div></div>";
+					var result = "<a href='downloadfile.htm?filename=" + item.file_room_name + "'>" + "<img class=lazy src=images/file.jpg style=width:400px;height:200px>" + "</a></div></div></div>";
 				}
-				$("#divrow1").append("<div class='col-sm-12 col-xs-12 col-md-4 col-lg-3' style=float:left>"+
+				$("#divrow1").append("<div class=col-lg-4 style=float:left>"+
 						"<div class=thumbnail bootsnipp-thumb>"+
-						"<div><p class=lead snipp-title><input type=checkbox name=filename id=filename value='" + item.file_room_name + "'>" + item.file_room_name + "</p>"+
+						"<div><input type=checkbox name=filename id=filename value='" + item.file_room_name + "'>" + item.file_room_name + /* <p class=lead snipp-title> *//* "</p>"+ */
 						result);
 			});
 		}
@@ -116,41 +117,51 @@
 </script>
 </head>
 <body>
-		<form name="multiform" id="multiform" action="uploadfile.ajax" method="POST" enctype="multipart/form-data">
-			<input type="file" name="file" />
-			<input type="submit" id="upload_btn" value="업로드"/>
-		</form>
-		<form name="deleteform" id="deleteform" action="deletefile.ajax" method="POST">
-			<input type="submit" id="delete_btn" value="삭제"/><br>
-		</form>
-	
+	<form name="multiform" id="multiform" action="uploadfile.ajax" method="POST" enctype="multipart/form-data">
+		<input type="file" name="file" />
+		<input type="submit" id="upload_btn" value="업로드"/>
+	</form>
+	<form name="deleteform" id="deleteform" action="deletefile.ajax" method="POST">
+		<input type="submit" id="delete_btn" value="삭제"/><br>
+	</form>
+	<form name="searchform" id="searchform" action="searchfile.htm" method="POST">
+		<select name="dept_no" id="cd-dropdown" class="cd-select">
+			<option value="-1" selected>선택하세요.</option>
+			<option style="text-align:center" value="file_room_name">파일이름</option>
+			<option style="text-align:center" value="file_room_date">등록날짜</option>
+		</select>
+		<input type="text" name="searchvalue">
+		<input type="submit" id="search_btn" value="검색">
+	</form>
 	<hr>
 	<div id="result">
 		<div id="divrow1" class="row">
 			<c:forEach items="${list}" var="flist">
-				<div class="col-sm-12 col-xs-12 col-md-4 col-lg-3"
-					style="float: left">
+				<div class="col-lg-4" style="float: left">
 					<div class="thumbnail bootsnipp-thumb">
 						<div>
-							<p class="lead snipp-title"><input type="checkbox" name="filename" id="filename" value="${flist.file_room_name}">${flist.file_room_name}</p>
+							<!-- <p class="lead snipp-title"> --><input type="checkbox" name="filename" id="filename" value="${flist.file_room_name}">${flist.file_room_name}<!-- </p> -->
 							<c:choose>
 								<c:when test="${flist.file_room_ext == '.docx'}">
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/docx.jpg" style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/docx.jpg" style="width: 400px; height: 200px"></a>
+								</c:when>
+								<c:when test="${flist.file_room_ext == '.xlsx'}">
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/xlsx.jpg" style="width: 400px; height: 200px"></a>
 								</c:when>
 								<c:when test="${flist.file_room_ext == '.hwp'}">
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/hwp.jpg" style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/hwp.jpg" style="width: 400px; height: 200px"></a>
 								</c:when>
 								<c:when test="${flist.file_room_ext == '.pptx'}">
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/pptx.jpg" style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/pptx.jpg" style="width: 400px; height: 200px"></a>
 								</c:when>
 								<c:when test="${flist.file_room_ext == '.zip'}">
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/zip.jpg" style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/zip.jpg" style="width: 400px; height: 200px"></a>
 								</c:when>
 								<c:when test="${flist.file_room_ext == '.jpg' || flist.file_room_ext == '.png' || flist.file_room_ext == '.bmp' || flist.file_room_ext == '.gif'}">
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy	src="upload/${flist.file_room_name}" style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy	src="upload/${flist.file_room_name}" style="width: 400px; height: 200px"></a>
 								</c:when>
 								<c:otherwise>
-									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/file.jpg" style="width: 320px; height: 240px"></a>
+									<a href="downloadfile.htm?filename=${flist.file_room_name}"><img class=lazy src="images/file.jpg" style="width: 400px; height: 200px"></a>
 								</c:otherwise>
 							</c:choose>
 						</div>
