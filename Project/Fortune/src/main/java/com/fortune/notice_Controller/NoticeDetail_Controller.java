@@ -1,9 +1,8 @@
 /*
 * @Class : NoticeDetail_Controller
-* @Date : 2016.11.19
+* @Date : 2016.11.16
 * @Author : 김지율
 * @Desc : 공지사항게시판 Detail Controller
-* 		  11.19 분리작업 진행중
 */
 
 package com.fortune.notice_Controller;
@@ -24,12 +23,12 @@ public class NoticeDetail_Controller {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	// 글상세보기
+
+	// 공지사항글 상세보기
 	@RequestMapping("noticeDetail.htm")
 	public String noticeDetail(String notice_no, Model model) throws ClassNotFoundException, SQLException {
 
-		System.out.println("NoticeDetailController를 탑니다~");
+		System.out.println("NoticeController의 noticeDetail을 탑니다~");
 
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
 		Notice_DTO noticeDetail = noticeDao.detailNotice(notice_no);

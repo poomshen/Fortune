@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.member_DAO.IJoin;
+import com.fortune.password_Service.PassWord_Service;
 
 @Controller
 public class MemberController {
@@ -30,7 +31,8 @@ public class MemberController {
 	@RequestMapping("/JoinSubmit.htm")
 	public String addMember(Join_DTO dto){
 		System.out.println("join submit 버튼 눌렀음");
-		
+		PassWord_Service passWord_Service = new PassWord_Service();
+		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		dao.insertMember(dto);
 		
@@ -102,7 +104,8 @@ public class MemberController {
 	public String updateMemberSubmit(Join_DTO dto){
 		
 		System.out.println("update Controller 왔음~!~!~!");
-		
+		PassWord_Service passWord_Service = new PassWord_Service();
+		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		dao.updateMember(dto);
 		
