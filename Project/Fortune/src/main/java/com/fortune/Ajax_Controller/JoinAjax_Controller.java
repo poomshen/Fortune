@@ -43,7 +43,6 @@ public class JoinAjax_Controller {
 		}else{
 			return "fail";
 		}
-		
-	
 	}
+
 }
