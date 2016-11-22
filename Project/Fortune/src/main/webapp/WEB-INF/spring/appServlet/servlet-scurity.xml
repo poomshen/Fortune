@@ -16,13 +16,16 @@
 	default-target-url="/loginSubmit.htm"
 	always-use-default-target="true"
 />
-<security:logout logout-success-url="/main.htm"/>
+<security:logout logout-success-url="/logOut.htm"/>
 <security:logout/>
 <security:intercept-url pattern="/authority.htm" access="hasRole('ROLE_DEPT')"/>
 </security:http>
 
+
 <security:authentication-manager>
+
 <security:authentication-provider>
+	<security:password-encoder hash="sha"></security:password-encoder>
 	<security:jdbc-user-service data-source-ref="driverManagerDataSource"
 		users-by-username-query="select m.user_ID as username ,m.user_password as password,r.role_no as enabled from users m join role r on
 								m.role_no = r.role_no where m.user_id = ?" 
@@ -30,6 +33,5 @@
 									 m.role_no = r.role_no where m.user_id = ?"/>
 </security:authentication-provider>
 </security:authentication-manager>
-  					 
   					 
 </beans>
