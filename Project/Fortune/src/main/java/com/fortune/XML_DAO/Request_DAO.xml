@@ -99,14 +99,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<choose>
 	<when test="collabo_no == null">
 		Insert into collabo(collabo_no,collabo_req_index,collabo_req_no,user_ID,
-							  collabo_start, collabo_end, collabo_state, collabo_req_id)
-		VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no}, #{user_ID}, #{collabo_start}, #{collabo_end}, #{collabo_state}, #{collabo_req_id})
+							  collabo_start, collabo_end, collabo_state, collabo_req_ID)
+		VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no}, null, #{collabo_start}, #{collabo_end}, #{collabo_state}, #{collabo_req_ID})
 	</when>
 	
 	<otherwise>
 		Insert into collabo(collabo_no,collabo_req_index,collabo_req_no,user_ID,
-							  collabo_start, collabo_end, collabo_state)
-		VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no}, #{user_ID}, #{collabo_start}, #{collabo_end}, #{collabo_state} , #{collabo_req_id})
+							  collabo_start, collabo_end, collabo_state, collabo_req_ID)
+		VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no}, null, #{collabo_start}, #{collabo_end}, #{collabo_state} , #{collabo_req_ID})
 	</otherwise>
 	</choose>
 	
@@ -119,11 +119,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50 
 </select>
 
-<insert id="insertmanager" >
 
-		Insert into collabo(user_ID) VALUES(#{user_ID})
+<!-- 담당자 보여주는 태그 -->
+<select id="managerDto" resultType="com.fortune.Table_DTO.With_DTO">
+	
+	SELECT * FROM collabo WHERE collabo_req_index= #{collabo_req_index}
+	</select>
 
-</insert>
+
+<!-- 담당자 선택 -->
+<update id="updatemanager" >
+	UPDATE collabo SET
+	 user_ID=#{user_ID}
+	 WHERE collabo_req_index=#{collabo_req_index}
+	
+	</update>
 
 
 	

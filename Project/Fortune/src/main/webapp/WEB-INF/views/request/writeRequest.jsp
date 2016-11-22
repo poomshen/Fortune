@@ -5,6 +5,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+<script type="text/javascript">
+	function promodify(){
+		
+		if($('#collabo_req_title').val() == ""){
+			alert("제목 입력바랍니다 ");
+			$('#collabo_req_title').focus();
+			return false;			
+		
+		}else if($('#collabo_req_ID').val() == ""){
+					alert("수신자 입력바랍니다. ");
+					$('#collabo_req_ID').focus();
+					return false;			
+
+		}else{
+			alert("완료");
+			promodifyform.submit();
+			return true;
+		}
+	}
+
+	
+	
+
+</script>
 <title>Insert title here</title>
 
 
@@ -12,18 +36,18 @@
 </head>
 <body>
 <div class="container">
-<form action="" method="post">
-프로젝트 제목 :<input type="text" name="collabo_req_title"><br>
-프로젝트 내용 :<textarea rows="20" cols="20" name="collabo_req_text"></textarea>
+<form action="" method="post" name="promodifyform">
+프로젝트 제목 :<input type="text" name="collabo_req_title" id="collabo_req_title"><br>
+프로젝트 내용 :<textarea rows="20" cols="20" name="collabo_req_text" ></textarea>
             <script>
                 CKEDITOR.replace( 'collabo_req_text' );
             </script>
 
 작성자 : <input type="text" name="user_ID" value="${sessionScope.info.user_id}"><br>
 진행 상태 :<input type="text" value="대기" name="collabo_req_state" readonly="readonly">&nbsp;
-수신자 : <input type="text" name="collabo_req_ID" ><br>
+수신자 : <input type="text" name="collabo_req_ID" id="collabo_req_ID"><br>
 
-<input type="submit" value="submit"><br>
+<input type="button" value="submit"  onclick="promodify()"><br>
 <p><a href="requestList.htm">취소하기</a></p>
 
 

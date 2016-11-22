@@ -14,12 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.request_DAO.ProDao;
 import com.fortune.request_Service.ProService;
 
 
@@ -32,7 +35,8 @@ public class ProController {
 	@Autowired
 	private ProService proservice;
 
-
+	
+	
 	@RequestMapping("/writerequest.htm")
 	public String writeForm() {
 			System.out.println("여기에 들어갈까나 ?");
@@ -173,15 +177,43 @@ public class ProController {
 			// 프로젝트의 협업상태를 보여주는 클래스이다.
 			
 			@RequestMapping("responseList.htm") // /customer/notice.htm
-			public String listResponse(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+			public String listResponse( String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 
-				List<With_DTO> list = proservice.listResponse(pg, f, q, session);
+				List<With_DTO> list = proservice.listResponse( pg, f, q, session);
+				
 				model.addAttribute("list", list); // 자동 forward
 				
 				return "request.responseList";
 
 			}	
 			
+			 @RequestMapping(value = "insertmanager.htm", method= RequestMethod.GET)
+			 public String InsertManager(String collabo_req_index, Model model)
+			   throws ClassNotFoundException, SQLException {
+			 
+				 //아 힘들다..
+				 
+				 With_DTO req_Dto =  proservice.managerDto(collabo_req_index);
+				 					
+				  model.addAttribute("list", req_Dto);	
+				  System.out.println(req_Dto.toString());
+			  return "cen.proManager";
+			 }
+			
+			
+			
+			
+			//담당자 선택역할을 한다.
+			@RequestMapping( value="insertmanager.htm", method = RequestMethod.POST)
+			 public String InsertManager(With_DTO m) throws ClassNotFoundException,
+			   SQLException {
+				System.out.println(m.toString()+"흠냐");
+				 proservice.InsertManager(m);
+				 System.out.println(m.toString()+"흠냐");
+				 
+				  return "redirect:responseList.htm"; //리스트 화면 (controller 타서 데이터 출력)
+				
+			 }
 			
 	
 }

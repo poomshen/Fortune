@@ -7,6 +7,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+
+<script type="text/javascript">
+     function proAjaxManager(a){
+    	 
+  	
+   	 $.ajax({
+   		 
+ 			type: "get",
+ 			url:  "insertmanager.htm",
+ 			cache: false,				
+ 			data:"collabo_req_index="+a,
+ 		    success:function(data){ //callback  
+ 		    	
+ 		    	$('#menuView').empty();
+ 		    
+				$("#menuView").append($('#menuView').html(data)); 
+ 		      
+ 		     },
+ 			error: function(){						
+ 				alert('Error while request..'	);
+ 			}
+ 		});
+		 
+	 }  
+</script>
 
 
 <title>Insert title here</title>
@@ -36,12 +64,23 @@
 					<td class="collabo_no">${n.collabo_no}</td>
 					<td class="collabo_req_index">${n.collabo_req_index}</td>
 					<td class="collabo_req_no">${n.collabo_req_no}</td>
-
-					<td class="user_ID">${n.user_ID}</td>
+		
+		
+	<c:choose>
+		<c:when test="${n.user_ID  == null}">
+			<td class="user_ID"><button data-toggle="modal" data-target="#myModal" onclick="proAjaxManager(${n.collabo_req_index})">담당</button></td>
+		</c:when>
+		<c:otherwise>
+			<td class="user_ID">${n.user_ID}<button data-toggle="modal" data-target="#myModal" onclick="proAjaxManager(${n.collabo_req_index})">담당</button></td>
+		</c:otherwise>
+	</c:choose>
+				
+	
+				
 					<td class="collabo_start">${n.collabo_start}</td>
 					<td class="collabo_end">${n.collabo_end}</td>
 					<td class="collabo_req_state">${n.collabo_state}</td>
-					<td class="collabo_req_id">${n.collabo_req_id}</td>
+					<td class="collabo_req_id">${n.collabo_req_ID}</td>
 					<td class="collabo_cal"><a href="schedule.htm"><button>Click</button></a></td>
 					
 					
@@ -54,7 +93,30 @@
 			
 		</tbody>
 	</table>
-	
+	<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">협업모음 프로젝트</h4>
+          
+        </div>
+        <div class="modal-body">
+        	<div id="menuView"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
 	
 	
 	<a href="responseList.htm">리스트</a>

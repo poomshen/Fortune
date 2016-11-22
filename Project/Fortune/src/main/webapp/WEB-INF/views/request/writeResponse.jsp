@@ -14,7 +14,31 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+
+function proAdd(){
+	
+	if($('#startDate').val() == ""){
+		alert(" 날짜 입력해주세요");
+		$('#startDate').focus();
+		return false;
+	}
+	else if($('#endDate').val() == "" ){
+		alert(" 날짜 입력해주세요");
+		$('#endDate').focus();
+		return false;
+	}
+	else{
+		proaddform.submit();
+		return true;
+	}
+	
+	
+}
+
+
 	$(function(){
+		
+		
 		
 
 		
@@ -47,7 +71,7 @@
 			      var mDate = new Date(td[0], td[1],td[2]);
 			      var nDate = new Date(td[0], td[1],td[2]);
 			    
-			      nDate.setDate(mDate.getDate() + 365);
+			      nDate.setDate(mDate.getDate() + 365); //몇일까지 정하기
  			     $("#endDate").datepicker( "option", "maxDate", nDate );
   				
 			      });
@@ -108,15 +132,16 @@
 <body>
 
 
-<form action="writeresponse.htm" method="post">
+<form action="writeresponse.htm" method="post" name="proaddform">
 <input type="hidden" name="collabo_req_index" value="${list.collabo_req_index}">
 <input type="hidden" name="collabo_req_no" value="${list.collabo_req_no}">
-수락자 : <input type="text" name="collabo_req_id" value="${list.user_ID}" readonly="readonly"><br>
+
+수락자 : <input type="text" name="collabo_req_ID" value="${list.collabo_req_ID}" readonly="readonly"><br>
 끝  날짜 : <input type="text" name="collabo_start" id="startDate">
 - <input type="text" name="collabo_end" id="endDate"><br>  
 진행 상태 :<input type="text" value="대기" name="collabo_state" readonly="readonly"><br>
 
-<input type="submit" value="submit">
+<input type="button" value="submit" onclick="proAdd()">
 <p><a href="requestList.htm">취소하기</a></p>
 </form>
 

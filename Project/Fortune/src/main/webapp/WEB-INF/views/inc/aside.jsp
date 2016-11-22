@@ -7,7 +7,7 @@
                             <a href="#" ><i class="fa fa-bar-chart-o fa-fw hvr-pop"></i>프로젝트<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="writerequest.htm hvr-pop">프로젝트 생성</a>
+                                    <a href="writerequest.htm">프로젝트 생성</a>
                                 </li>
                                 <li>
                                     <a href="requestList.htm">협업요청 리스트</a>
