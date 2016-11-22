@@ -7,7 +7,7 @@
                         <li>
                             <a href="#" ><i class="fa fa-bar-chart-o fa-fw hvr-pop"></i>프로젝트<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                            	<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+                            	<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
                                 <li>
                                     <a href="writerequest.htm hvr-pop">프로젝트 생성</a>
                                 </li>
@@ -29,18 +29,22 @@
                         <li>
                             <a href="noticeList.htm"><i class="fa fa-edit fa-fw"></i>공지 사항</a>
                         </li>
+                        <security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                            	<security:authorize access="hasAnyRole('ROLE_ADMIN')">
                                 <li>
-                                    <a href="authority.htm">권한 부여</a>
+                                    <a href="authority.htm">전체 권한 부여</a>
                                 </li>
+                                </security:authorize>
                                 <li>
-                                    <a href="#">Grid</a>
+                                    <a href="#">부서장 팀장 선출</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        </security:authorize>
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i>조직도<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
