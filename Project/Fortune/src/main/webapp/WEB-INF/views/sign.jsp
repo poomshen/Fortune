@@ -162,10 +162,10 @@
 		<span class="field">	 
 		   <div class="col-sm-2">
 		   	<!-- <input type="text" name="year" id="year" size="5" class="form-control hvr-glow" required="required">생년 -->	   	
-		   	<select style="width: 100px" name="year" required="required">
+		   	<select style="width: 100px" name="year" id="year" required="required">
 			   	<option value="-1">생년 선택 </option>
 			   	<c:forEach var="i" begin="1970" end="2000">		   	
-			    	<option value="i">${i}</option>	
+			    	<option value="${i}">${i}</option>	
 			   	</c:forEach>
 		  	</select>년
 		  	</div>
@@ -175,21 +175,22 @@
 		   	<select style="width: 100px" name="month" id="month" required="required">
 			   	<option value="-1">월 선택</option>
 			   	<c:forEach var="i" begin="1" end="12">		   	
-			    	<option value="i">${i}</option>	
+			    	<option value="${i}">${i}</option>	
 			   	</c:forEach>
 		  	</select>월
 		   </div>  
 		   
 		   <div class="col-sm-2">
 		   	<!-- <input type="text" name="day" id="day" size="5" class="form-control hvr-glow" required="required">일 -->
-		   	<select style="width: 100px" name="month" id="month" required="required">
+		   	<select style="width: 100px" name="day" id="day" required="required">
 			   	<option value="-1">일 선택</option>
 			   	<c:forEach var="i" begin="1" end="31">		   	
-			    	<option value="i">${i}</option>	
+			    	<option value="${i}">${i}</option>	
 			   	</c:forEach>
 		  	</select>일
 		   </div>
 		   <input type="hidden" name="user_date" id="birthday">
+		  <!--  <input type="button" onclick="birth()" value="생일값"> -->
 		   <label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);">생년월일 입력</label> 	
 		</span>	     
     </div>
@@ -197,35 +198,25 @@
 
 <!-- 전화번호 입력 -->
 <div class="form-group">
-<div class="inner-addon left-addon" style="margin-left:37%">
-<span class="field">
-<span class="addon"style="
-    padding-bottom: 0px;
-"><i class="glyphicon glyphicon-phone"></i></span> 
-   <input type="text" name="user_phone" id="phone" class="form-control" style="
-    width: 340px;margin-left:20px;
-"> 
-
-<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone">핸드폰 번호 입력</label>
-</span>
-  </div>
+	<div class="inner-addon left-addon" style="margin-left:37%">
+		<span class="field">
+			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-phone"></i></span> 
+			<input type="text" name="user_phone" id="phone" class="form-control" style="width: 340px;margin-left:20px;" required="required"> 
+			
+			<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone">핸드폰 번호 입력</label>
+		</span>
+	</div>
 </div>
 
 <!-- 입사일 입력-->
 <div class="form-group">
-<div class="inner-addon left-addon" style="margin-left:37%">
-<span class="field">
-<span class="addon"style="
-    padding-bottom: 0px;
-"><i class="glyphicon glyphicon-calendar"></i></span> 
- <input type="date" name="user_join" id="enterdate" class="form-control" style="
-    width: 340px;margin-left:20px;
-">
-   
-<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="enterdate">입사일 입력</label>
-
-   </span>
-   </div>
+	<div class="inner-addon left-addon" style="margin-left:37%">
+		<span class="field">
+			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-calendar"></i></span> 
+				<input type="date" name="user_join" id="enterdate" class="form-control" style="width: 340px;margin-left:20px;" required="required"> 
+				<label class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="enterdate">입사일 입력</label>
+		</span>
+	</div>
 </div>
 
 
@@ -244,7 +235,6 @@
                </select>
             </div>
          </section>
-
 </div>
 
 <div class="col-sm-3">
@@ -671,24 +661,25 @@
          var m = document.getElementById("month").value;
          var d = document.getElementById("day").value;
          var b = y+'-'+m+'-'+d;
+         
          document.getElementById("birthday").value = b;
          //alert(document.getElementById("birthday").value);
       }   
       //아이디 유효성 검사
       function idchkclk() { 
-		alert($('#id').val().toLowerCase());
-		console.log($('#id').val().toLowerCase());
+		//alert($('#id').val().toLowerCase());
+		//console.log($('#id').val().toLowerCase());
 		
     	  $.ajax({
     		  type:"get",
     		  url:"idchk.ajax",
     		  data:{"user_id": $('#id').val().toLowerCase()},
     		  success:function(data){
-    			  console.log(data);
+    			  //console.log(data);
     			  if(data == "yes"){
-    			  $("#idselect").html("중복되는 아이디입니다");
+    			  	$("#idselect").html("중복되는 아이디입니다");
     			  }else{
-    				  $("#idselect").html("사용가능한 아이디 입니다");
+    				$("#idselect").html("사용가능한 아이디 입니다");
     				  /* $('#nextchk').val()= "okay"; */
     			  }
     		  },
@@ -720,12 +711,12 @@
 					$('#pwdchklb').html("에러에요");
 				}	
 		});
-		console.log( "처음값 :>"+ $('#user_password').val()+"<");
+		/* console.log( "처음값 :>"+ $('#user_password').val()+"<");
 		console.log( "두번째값 :>"+ $('#user_password_chk').val()+"<");	
-		
+		 */
     });
     
-      
+ 
    
       </script>
 

@@ -74,10 +74,10 @@ public class MemberController {
 	public String deleteMemberView(HttpSession session){
 		
 		IJoin dao = sqlsession.getMapper(IJoin.class);
+		Join_DTO dto = (Join_DTO)session.getAttribute("info");
+		System.out.println("id값 : "+dto.getUser_id());
+		dao.deleteMember(dto.getUser_id());
 		
-		System.out.println("id값 : "+session.getAttribute("id"));
-		dao.deleteMember((String) session.getAttribute("id"));
-		System.out.println("삭제할 id :" + session.getAttribute("id") );
 		System.out.println("삭제완료!!~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 		return "redirect:index.htm";
