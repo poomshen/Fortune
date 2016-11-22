@@ -21,6 +21,7 @@
 	<context:component-scan base-package="com.fortune.fileroom_Controller" />
 	<context:component-scan base-package="com.fortune.join_Controller" />	
 	<context:component-scan base-package="com.fortune.fullcalendar_Controller" />
+	<context:component-scan base-package="com.fortune.authority_Controller" />
 	
 	
 	

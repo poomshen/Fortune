@@ -5,14 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>자료실</title>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- jQuery Form Plugin import -->
 <script src="<%=request.getContextPath() %>/js/jquery.form.min.js"></script>
 <!-- jQuery MultiFile Plugin import -->
 <script src="<%=request.getContextPath() %>/js/jQuery.MultiFile.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="http://bootsnipp.com/dist/scripts.min.js"></script>
 <script>
 	$(function() {
 		$('#upload_btn').click(function() {
@@ -58,6 +56,7 @@
 	function output(data) {
 		$('#divrow1').empty();
 		$('#divrow2').empty();
+		$('#upload-file-info').html("");
 		if (data.file && data.file.length != 0) {
 			$.each(data.file, function(index, item) {
 				if(item.file_room_ext == ".docx"){
@@ -117,21 +116,27 @@
 </script>
 </head>
 <body>
+
 	<form name="multiform" id="multiform" action="uploadfile.ajax" method="POST" enctype="multipart/form-data">
-		<input type="file" name="file" />
-		<input type="submit" id="upload_btn" value="업로드"/>
+		<label class="btn btn-primary" for="my-file-selector">
+    		<input id="my-file-selector" type="file" name="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
+    		파일 선택
+    	</label>
+		<span class='label label-info' id="upload-file-info"></span>
+		<input type="submit" class="btn btn-primary" id="upload_btn" value="업로드"/>
 	</form>
+
 	<form name="deleteform" id="deleteform" action="deletefile.ajax" method="POST">
-		<input type="submit" id="delete_btn" value="삭제"/><br>
+		<input type="submit" class="btn btn-primary" id="delete_btn" value="삭제"/><br>
 	</form>
-	<form name="searchform" id="searchform" action="searchfile.htm" method="POST">
-		<select name="dept_no" id="cd-dropdown" class="cd-select">
-			<option value="-1" selected>선택하세요.</option>
+	
+	<form name="searchform" id="searchform" action="searchfile.htm" method="get">
+		<select name="selectvalue" id="selectvalue" class="cd-select">
 			<option style="text-align:center" value="file_room_name">파일이름</option>
 			<option style="text-align:center" value="file_room_date">등록날짜</option>
 		</select>
 		<input type="text" name="searchvalue">
-		<input type="submit" id="search_btn" value="검색">
+		<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
 	</form>
 	<hr>
 	<div id="result">
@@ -172,24 +177,28 @@
 		<div id="divrow2" class="row">
 			<table width="600">
 				<tr>
-					<td align="center"><c:if test="${pg>block}">
+					<td align="center">
+					<c:if test="${pg>block}">
 						[<a href="mainfile.htm?pg=1">◀◀</a>]
 						[<a href="mainfile.htm?pg=${from_page-1}">◀</a>]		
 					</c:if> <c:if test="${pg<=block}">
 						[<span style="color: gray">◀◀</span>]	
 						[<span style="color: gray">◀</span>]
-					</c:if> <c:forEach begin="${from_page}" end="${to_page}" var="i">
-							<c:if test="${i==pg}">[${i}]</c:if>
-							<c:if test="${i!=pg}">
+					</c:if> 
+					<c:forEach begin="${from_page}" end="${to_page}" var="i">
+						<c:if test="${i==pg}">[${i}]</c:if>
+						<c:if test="${i!=pg}">
 							[<a href="mainfile.htm?pg=${i}">${i}</a>]
 						</c:if>
-						</c:forEach> <c:if test="${to_page<all_page}">
+					</c:forEach> 
+					<c:if test="${to_page<all_page}">
 						[<a href="mainfile.htm?pg=${to_page+1}">▶</a>]
 						[<a href="mainfile.htm?pg=${all_page}">▶▶</a>]
 					</c:if> <c:if test="${to_page>=all_page}">
 						[<span style="color: gray">▶</span>]
 						[<span style="color: gray">▶▶</span>]
-					</c:if></td>
+					</c:if>
+					</td>
 				</tr>
 			</table>
 		</div>

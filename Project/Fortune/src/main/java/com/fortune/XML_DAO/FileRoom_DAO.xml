@@ -35,12 +35,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where num between 1 + (#{page} - 1) * 9 and 9 + (#{page} - 1) * 9
 	</select>
 	
-	
 	<delete id="deleteFile" parameterType="com.fortune.Table_DTO.FileRoom_DTO">
 		delete file_room where file_room_name = #{file_room_name}
 	</delete>
 	
 	<select id="countFile" resultType="integer">
 		select count(*) from file_room
+	</select>
+	
+	<select id="searchNameListFiles" parameterType="String" resultType="com.fortune.Table_DTO.FileRoom_DTO">
+		select * from file_room where file_room_name like '%'||#{searchvalue}||'%'
+	</select>
+	
+	<select id="searchDateListFiles" parameterType="String" resultType="com.fortune.Table_DTO.FileRoom_DTO">
+		select * from file_room where to_char(file_room_date)= to_date(#{searchvalue},'YY/MM/DD')
 	</select>
 </mapper>
