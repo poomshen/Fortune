@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import com.fortune.fileroom_DAO.IFileRoom;
 public class Upload_Controller {
 	
 	@Autowired
+	//@Resource
 	private SqlSession sqlsession;
 	
 	@RequestMapping(value="/uploadfile.ajax", method=RequestMethod.POST ,produces="application/json")
