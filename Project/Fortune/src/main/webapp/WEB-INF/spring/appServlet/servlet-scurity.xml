@@ -8,24 +8,25 @@
   					 http://www.springframework.org/schema/security/spring-security.xsd">
 <security:http>
 <security:csrf disabled="true"/>
-<security:form-login login-processing-url="/index.htm" 
+<security:form-login 
+	login-processing-url="/index.htm"
 	username-parameter="user_id"
 	password-parameter="user_password"
 	authentication-failure-url="/index.htm?error"
-	default-target-url="/main.htm"
-	 always-use-default-target="true"
+	default-target-url="/loginSubmit.htm"
+	always-use-default-target="true"
 />
 <security:logout logout-success-url="/main.htm"/>
 <security:logout/>
-<security:intercept-url pattern="/noticeList.htm" access="hasRole('dept')"/>
+<security:intercept-url pattern="/noticeList.htm" access="hasRole('ROLE_DEPT')"/>
 </security:http>
 
 <security:authentication-manager>
 <security:authentication-provider>
 	<security:jdbc-user-service data-source-ref="driverManagerDataSource"
-		users-by-username-query="select m.user_ID as username ,m.user_password as password,1 as enabled from users m join role r on
+		users-by-username-query="select m.user_ID as username ,m.user_password as password,r.role_no as enabled from users m join role r on
 								m.role_no = r.role_no where m.user_id = ?" 
-		authorities-by-username-query="select m.user_id as username ,r.role  from users m join role r on
+		authorities-by-username-query="select m.user_id ,r.role as role_name  from users m join role r on
 									 m.role_no = r.role_no where m.user_id = ?"/>
 </security:authentication-provider>
 </security:authentication-manager>

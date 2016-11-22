@@ -60,7 +60,7 @@
 
 			<div class="top-content-bottom-link">
 				
-				<form role="form" action="" method="post">
+				<form role="form" action="" method="post" name ="f">
 					<div class="col-sm-12 form-group container"
 						style="margin-left: 19%">
 						<label class="sr-only" for="r-form-1-first-name">First
@@ -84,6 +84,11 @@
 									type="password" name="user_password"
 									class="form-control hvr-glow" id="r-form-1-email" tabindex="2"
 									onkeydown="onKeydown();">
+									 <c:if test="${param.error != null}">
+                                    <div>
+                                   		    로그인 실패 <br>
+                                    </div>
+                                 </c:if>
 							</div>
 						</div>
 					</div>
