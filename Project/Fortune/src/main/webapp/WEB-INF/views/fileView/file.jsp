@@ -56,6 +56,7 @@
 	function output(data) {
 		$('#divrow1').empty();
 		$('#divrow2').empty();
+		$('#upload-file-info').html("");
 		if (data.file && data.file.length != 0) {
 			$.each(data.file, function(index, item) {
 				if(item.file_room_ext == ".docx"){
@@ -115,21 +116,27 @@
 </script>
 </head>
 <body>
+
 	<form name="multiform" id="multiform" action="uploadfile.ajax" method="POST" enctype="multipart/form-data">
-		<input type="file" name="file" />
-		<input type="submit" id="upload_btn" value="업로드"/>
+		<label class="btn btn-primary" for="my-file-selector">
+    		<input id="my-file-selector" type="file" name="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
+    		파일 선택
+    	</label>
+		<span class='label label-info' id="upload-file-info"></span>
+		<input type="submit" class="btn btn-primary" id="upload_btn" value="업로드"/>
 	</form>
+
 	<form name="deleteform" id="deleteform" action="deletefile.ajax" method="POST">
-		<input type="submit" id="delete_btn" value="삭제"/><br>
+		<input type="submit" class="btn btn-primary" id="delete_btn" value="삭제"/><br>
 	</form>
+	
 	<form name="searchform" id="searchform" action="searchfile.htm" method="get">
 		<select name="selectvalue" id="selectvalue" class="cd-select">
-			<option value="-1" selected>선택하세요.</option>
 			<option style="text-align:center" value="file_room_name">파일이름</option>
 			<option style="text-align:center" value="file_room_date">등록날짜</option>
 		</select>
 		<input type="text" name="searchvalue">
-		<input type="submit" id="search_btn" value="검색">
+		<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
 	</form>
 	<hr>
 	<div id="result">
