@@ -72,5 +72,6 @@ public class HomeController {
 		System.out.println("메뉴 컨트롤러");
 		return "home.main";
 	}
-
+	
+	
 }

@@ -5,19 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src='fullcalendar/js/lib/jquery.min.js'></script>
-<link href='fullcalendar/css/fullcalendar.css' rel='stylesheet' />
-<link href='fullcalendar/css/fullcalendar.print.css' rel='stylesheet' media='print' />
-<link href='fullcalendar/css/jquery-ui.min.css' rel='stylesheet' />
-<script src='fullcalendar/js/lib/moment.min.js'></script>
-<script src='fullcalendar/js/fullcalendar.min.js'></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-<script src="fullcalendar/js/customcalendar.js" ></script>
 <script>
+
+
+
+
+
 $(document).ready(function() {
-	
-	//화면 로드시 일정을 DB에서 불러오는 코드 
+
+//화면 로드시 일정을 DB에서 불러오는 코드 
  	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
@@ -43,7 +39,6 @@ $(document).ready(function() {
 			loadCalendar();
 		}
 	});
-
 });
 
 function test(id, title, text, start, end){
