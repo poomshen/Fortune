@@ -65,7 +65,7 @@ public class HomeController {
 		return "sign";
 	}
 	
-	@RequestMapping(value = "/main.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/main.htm", method = RequestMethod.GET)
 	public String main() {
 
 		

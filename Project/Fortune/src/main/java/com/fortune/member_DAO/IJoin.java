@@ -13,6 +13,7 @@ public interface IJoin {
 	int insertMember(Join_DTO joinDto);
 	int deleteMember(String id);
 	int updateMember(Join_DTO joinDto);
+	Join_DTO searchMember(String user_id);
 	Join_DTO memberInfo(Join_DTO joinDto);
 	Join_DTO login(Join_DTO joinDto);
 	ArrayList<Dept_DTO> searchDept();
