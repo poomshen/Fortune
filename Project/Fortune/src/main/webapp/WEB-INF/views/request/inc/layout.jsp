@@ -9,11 +9,7 @@
 <title>Insert title here</title>
 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-  <!-- jQuery -->
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <!-- Bootstrap Core JavaScript -->
-	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+ 
 
 <!-- MetisMenu CSS -->
 <link href="bower_components/metisMenu/dist/metisMenu.min.css"
@@ -49,6 +45,8 @@
 
 
 
+ <!-- Bootstrap Core JavaScript -->
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 
 <!-- Metis Menu Plugin JavaScript -->

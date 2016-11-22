@@ -9,7 +9,7 @@
                             <ul class="nav nav-second-level">
                             	<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
                                 <li>
-                                    <a href="writerequest.htm hvr-pop">프로젝트 생성</a>
+                                    <a href="writerequest.htm">프로젝트 생성</a>
                                 </li>
                             	</security:authorize>
                             	<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
