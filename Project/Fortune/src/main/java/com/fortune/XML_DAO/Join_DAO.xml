@@ -49,4 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	where USER_ID=#{user_id}
  </select>
  
+ <select id="searchMember" parameterType="String" resultType="com.fortune.Table_DTO.Join_DTO">
+ 	select USER_ID, USER_NAME, USER_GENDER, USER_DATE, USER_PHONE, USER_JOIN, DEPT_NO, TEAM_NO, POSITION_NO from USERS 
+ 	where USER_ID=#{user_id}
+ </select>
 </mapper>

@@ -12,7 +12,14 @@ public class Join_DTO {
 	private int team_no;
 	private int position_no;
 	private int role_no;
+	private String role;
 	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
@@ -84,6 +91,6 @@ public class Join_DTO {
 		return "Join_DTO [user_id=" + user_id + ", user_password=" + user_password + ", user_name=" + user_name
 				+ ", user_gender=" + user_gender + ", user_date=" + user_date + ", user_phone=" + user_phone
 				+ ", user_join=" + user_join + ", dept_no=" + dept_no + ", team_no=" + team_no + ", role_no=" + role_no
-				+ ", position_no=" + position_no + "]";
+				+ ", position_no=" + position_no +  ", role=" + role + "]";
 	}
 }

@@ -39,6 +39,7 @@
 <link rel="stylesheet"
    href="path/to/font-awesome/css/font-awesome.min.css">
    
+
 <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -144,12 +145,9 @@
 <div class="inner-addon left-addon" style="margin-left:2%">
 <span class="field">
 
-           <input type="radio" name="user_gender" id="gender" value="male" checked 
- 
->남자
-         <input type="radio" name="user_gender" id="gender" value="female"
- 
->여자<br>    
+
+<input type="radio" name="user_gender" id="gender" value="male" checked >남자
+<input type="radio" name="user_gender" id="gender" value="female">여자<br>    
          
  <label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);" for="gender">성별 입력</label>
  </span>
