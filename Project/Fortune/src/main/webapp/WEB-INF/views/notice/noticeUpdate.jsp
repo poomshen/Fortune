@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <div>
 	<h2>공지사항수정페이지</h2>
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart/form-data">
 		<div>
 			<dl>
 				<dt>제목</dt>
@@ -12,9 +12,7 @@
 			</dl>
 			<dl>
 				<dt>첨부파일</dt>
-				<dd>
-				<input type="file" name="file" id="File" value="${noticeUpdate.notice_date}">
-				</dd>
+				<dd>${noticeUpdate.notice_filename_org}</dd>
 			</dl>			
 			<div>
 				<textarea id="notice_text" name="notice_text">

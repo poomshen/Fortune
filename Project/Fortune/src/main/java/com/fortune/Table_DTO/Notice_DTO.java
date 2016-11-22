@@ -1,10 +1,10 @@
 /*
 * @Class : Notice_DTO
-* @Date : 2016.11.15
-* 		  2016.11.19 수정
+* @Date : 2016.11.15 작성
+* 		  2016.11.21 수정
 * @Author : 김지율
 * @Desc : 공지사항게시판 DTO
-* 		  notice_fileext 컬럼 추가 이후 수정작업 진행중
+* 		  2016.11.21 수정내용은, 파일명 변경을 위해서 컬럼 추가, 파일확장자컬럼 추가, 첨부파일 추가
 */
 
 package com.fortune.Table_DTO;
@@ -17,29 +17,40 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class Notice_DTO {
 
-	private int notice_no; //공지글 번호
-	private String user_id; //관리자ID
-	private String notice_title; //공지글 제목
+	private int notice_no; //게시번호
+	private String user_id; //ID
+	private String notice_title; //글제목
 	private String notice_text; //글내용
 	private int notice_hits; //조회수
-	private Timestamp notice_date; //공지글 작성일
-	private String notice_filename; //첨부파일명
-	private String notice_fileext; //첨부파일확장자
-	private MultipartFile file; //파일업로드
+	private Timestamp notice_date; //작성일
+	private String notice_filename_org; //원본파일명
+	private String notice_filename_re; //변경파일명
+	private String notice_fileext; //파일 확장자
+	private MultipartFile file; //첨부파일업로드
 	
+	@Override
+	public String toString() {
+		return "Notice_DTO [notice_no=" + notice_no + ", user_id=" + user_id + ", notice_title=" + notice_title
+				+ ", notice_text=" + notice_text + ", notice_hits=" + notice_hits + ", notice_date=" + notice_date
+				+ ", notice_filename_org=" + notice_filename_org + ", notice_filename_re=" + notice_filename_re
+				+ ", notice_fileext=" + notice_fileext + ", file=" + file + "]";
+	}
+
 	public Notice_DTO(){
 		
 	}
 
 	public Notice_DTO(int notice_no, String user_id, String notice_title, String notice_text, int notice_hits,
-			Timestamp notice_date, String notice_filename, String notice_fileext, MultipartFile file) {
+			Timestamp notice_date, String notice_filename_org, String notice_filename_re, String notice_fileext,
+			MultipartFile file) {
 		this.notice_no = notice_no;
 		this.user_id = user_id;
 		this.notice_title = notice_title;
 		this.notice_text = notice_text;
 		this.notice_hits = notice_hits;
 		this.notice_date = notice_date;
-		this.notice_filename = notice_filename;
+		this.notice_filename_org = notice_filename_org;
+		this.notice_filename_re = notice_filename_re;
 		this.notice_fileext = notice_fileext;
 		this.file = file;
 	}
@@ -92,12 +103,20 @@ public class Notice_DTO {
 		this.notice_date = notice_date;
 	}
 
-	public String getNotice_filename() {
-		return notice_filename;
+	public String getNotice_filename_org() {
+		return notice_filename_org;
 	}
 
-	public void setNotice_filename(String notice_filename) {
-		this.notice_filename = notice_filename;
+	public void setNotice_filename_org(String notice_filename_org) {
+		this.notice_filename_org = notice_filename_org;
+	}
+
+	public String getNotice_filename_re() {
+		return notice_filename_re;
+	}
+
+	public void setNotice_filename_re(String notice_filename_re) {
+		this.notice_filename_re = notice_filename_re;
 	}
 
 	public String getNotice_fileext() {
@@ -115,4 +134,5 @@ public class Notice_DTO {
 	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
+	
 }
