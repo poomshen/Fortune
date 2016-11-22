@@ -28,7 +28,7 @@
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#"> Icons</a>
+                                    <a href="authority.htm">권한 부여</a>
                                 </li>
                                 <li>
                                     <a href="#">Grid</a>
