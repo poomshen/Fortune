@@ -84,9 +84,7 @@
                  <div class="moco-body">
                  <!--     <div class="container"> -->
 
- <form class="form-horizontal" action="JoinSubmit.htm" method="post"  id="contact_form">
-         
-
+<form class="form-horizontal" action="JoinSubmit.htm" method="post"  id="contact_form">
 <fieldset>
 
 <!-- 아이디  입력-->
@@ -94,11 +92,11 @@
 <div class="form-group">
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
-			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
+			<span class="addon" style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
 			    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;"> 
-			    <input type="button" id="idchk" name="idchk" class="button" value="아이디 중복확인" onclick="idchkclk()">
+			    <input type="button" id="idchk" name="idchk" class="button" value="아이디 중복확인" onclick="idchkclk()" required="required">
 			    <label id="idselect" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
-				
+				<!-- <input type="hidden" id="nextchk" value="다음걸로 못넘어가게하는거">  -->
 		</span>
 	</div>
 </div>
@@ -108,9 +106,9 @@
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
 		 <span class="addon"style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
-		    <input type="text" name="user_password" id="pwd" class="form-control" style="
-		    width: 340px;margin-left:20px;
-		"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 입력</label>
+		    <input type="text" name="user_password" id="user_password" class="form-control" style="
+		    width: 340px;margin-left:20px;" required="required">
+		    <label class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 입력</label>
 		</span>
 	</div>
 </div>
@@ -120,9 +118,9 @@
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
 		 <span class="addon"style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
-		    <input type="text" name="user_password_chk" id="pwd" class="form-control" style="
-		    width: 340px;margin-left:20px;
-		"><label  class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 확인</label>
+		    <input type="text" name="user_password_chk" id="user_password_chk" class="form-control" style="
+		    width: 340px;margin-left:20px;" required="required">
+		    <label id="pwdchklb" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 확인</label>
 		</span>
 	</div>
 </div>
@@ -135,8 +133,7 @@
     padding-bottom: 0px;
 "><i class="glyphicon glyphicon-font"></i></span> 
    <input type="text" name="user_name" id="name" class="form-control" style="
-    width: 340px;margin-left:20px;
-">
+    width: 340px;margin-left:20px;" required="required">
 
  <label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">이름 입력</label>
    </span>
@@ -163,20 +160,42 @@
 <!-- 생년월일 입력-->
       
 <div class="form-group">
-<div class="inner-addon left-addon row" style="margin-left:33%">
-<span class="field">
-
-   
-   <div class="col-sm-2"><input type="text" name="year" id="year" size="5" class="form-control hvr-glow">생년</div> 
-    <div class="col-sm-2"><input type="text" name="month" id="month" size="5" class="form-control hvr-glow">월
-      </div>  <div class="col-sm-2"><input type="text" name="day" id="day" size="5" class="form-control hvr-glow">일</div>
-      <input type="hidden" name="user_date" id="birthday">
-<label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);">생년월일 입력</label>
- 
-   </span>
-     
+	<div class="inner-addon left-addon row" style="margin-left:35%">
+		<span class="field">	 
+		   <div class="col-sm-2">
+		   	<!-- <input type="text" name="year" id="year" size="5" class="form-control hvr-glow" required="required">생년 -->	   	
+		   	<select style="width: 100px" name="year" required="required">
+			   	<option value="-1">생년 선택 </option>
+			   	<c:forEach var="i" begin="1970" end="2000">		   	
+			    	<option value="i">${i}</option>	
+			   	</c:forEach>
+		  	</select>년
+		  	</div>
+		  	
+		   <div class="col-sm-2">
+		   	<!-- <input type="text" name="month" id="month" size="5" class="form-control hvr-glow" required="required">월 -->
+		   	<select style="width: 100px" name="month" id="month" required="required">
+			   	<option value="-1">월 선택</option>
+			   	<c:forEach var="i" begin="1" end="12">		   	
+			    	<option value="i">${i}</option>	
+			   	</c:forEach>
+		  	</select>월
+		   </div>  
+		   
+		   <div class="col-sm-2">
+		   	<!-- <input type="text" name="day" id="day" size="5" class="form-control hvr-glow" required="required">일 -->
+		   	<select style="width: 100px" name="month" id="month" required="required">
+			   	<option value="-1">일 선택</option>
+			   	<c:forEach var="i" begin="1" end="31">		   	
+			    	<option value="i">${i}</option>	
+			   	</c:forEach>
+		  	</select>일
+		   </div>
+		   <input type="hidden" name="user_date" id="birthday">
+		   <label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);">생년월일 입력</label> 	
+		</span>	     
     </div>
-  </div>
+</div>
 
 <!-- 전화번호 입력 -->
 <div class="form-group">
@@ -657,7 +676,7 @@
          document.getElementById("birthday").value = b;
          //alert(document.getElementById("birthday").value);
       }   
-      
+      //아이디 유효성 검사
       function idchkclk() { 
 		alert($('#id').val().toLowerCase());
 		console.log($('#id').val().toLowerCase());
@@ -672,6 +691,7 @@
     			  $("#idselect").html("중복되는 아이디입니다");
     			  }else{
     				  $("#idselect").html("사용가능한 아이디 입니다");
+    				  /* $('#nextchk').val()= "okay"; */
     			  }
     		  },
     		  error:function(){
@@ -681,6 +701,34 @@
 		
 		
 	}
+
+    $('#user_password_chk').keyup(function(){
+    	//alert('keydown test');
+    	//$('#pwdchklb').html("이거 바뀌나???");
+		$.ajax({
+			type:"get",
+			url:"pwdchk.ajax",
+			data:{"user_password":$('#user_password').val(),
+				"user_password_chk":$('#user_password_chk').val()},		
+			success:function(data){
+				console.log(data);
+					if(data=="ok"){
+						$('#pwdchklb').html("비밀번호 통과");
+					}else{
+						$('#pwdchklb').html("비밀번호가 일치하지 않습니다");
+					}
+				},
+				error:function(){
+					$('#pwdchklb').html("에러에요");
+				}	
+		});
+		console.log( "처음값 :>"+ $('#user_password').val()+"<");
+		console.log( "두번째값 :>"+ $('#user_password_chk').val()+"<");	
+		
+    });
+    
+      
+   
       </script>
 
 

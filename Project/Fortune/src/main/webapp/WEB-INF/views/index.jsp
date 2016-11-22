@@ -80,8 +80,7 @@
 							<div class="form-group">
 								<label class="sr-only" for="r-form-1-email">pwd</label> <input
 									type="password" name="user_password"
-									class="form-control hvr-glow" id="r-form-1-email" tabindex="2"
-									onkeydown="onKeydown();">
+									class="form-control hvr-glow" id="r-form-1-email" tabindex="2">
 							</div>
 						</div>
 					</div>
