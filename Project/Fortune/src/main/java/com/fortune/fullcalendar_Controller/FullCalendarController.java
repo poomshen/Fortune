@@ -96,5 +96,78 @@ public class FullCalendarController {
 		return jsonview;
 	}
 	
+	
+	
+    /* 작업자 : 이명철  // 최초 작업일 : 11.21 // 최종 작업일 : 11.21
+     * 작업 내용 : 일정 제목, 내용, 참여자 update작업 // 참여자 작업안됨
+     * 추가 내용 : 
+     * version : v1.0
+    */
+	@RequestMapping(value="update.ajax", method = RequestMethod.POST)
+	public @ResponseBody Schedule_Work_DTO update(@RequestParam(value="title") String title, 
+			@RequestParam(value="text") String text, @RequestParam(value="schedule_no") int schedule_no, 
+			@RequestParam(value="schedule_start") String schedule_start, @RequestParam(value="schedule_end") String schedule_end)  
+			throws ClassNotFoundException, SQLException {
+		System.out.println("위치 : FullCalendarController // 내용 : (일정 제목, 내용, 참여자) update작업 // 작업자: 이명철");
+        
+	    IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+		
+	    Schedule_Work_DTO swdto = new Schedule_Work_DTO();
+	    
+	    swdto.setWork_title(title);
+	    swdto.setWork_text(text);
+	    swdto.setSchedule_no(schedule_no);
+	    swdto.setSchedule_start(schedule_start);
+	    swdto.setSchedule_end(schedule_end);
+	    
+	    int i = fullcalendarDAO.updateWork(swdto);
+	    
+		return swdto;
+	}
+	
+	
+	
+	
+    /* 작업자 : 이명철  // 최초 작업일 : 11.21 // 최종 작업일 : 11.21
+     * 작업 내용 : 드래그 할때 start, end 날짜 업데이트 update작업 // 참여자 작업안됨
+     * 추가 내용 : 
+     * version : v1.0
+    */
+	@RequestMapping(value="dragupdate.ajax", method = RequestMethod.POST)
+	public @ResponseBody Schedule_Work_DTO dragupdate(@RequestParam(value="schedule_no") int schedule_no, 
+			@RequestParam(value="schedule_start") String schedule_start, @RequestParam(value="schedule_end") String schedule_end)  
+			throws ClassNotFoundException, SQLException {
+		System.out.println("위치 : FullCalendarController // 내용 : 드래그 할 때 update작업 // 작업자: 이명철");
+        
+	    IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+		
+	    Schedule_Work_DTO swdto = new Schedule_Work_DTO();
+	    
+	    swdto.setSchedule_no(schedule_no);
+	    swdto.setSchedule_start(schedule_start);
+	    swdto.setSchedule_end(schedule_end);
+	    
+	    int i = fullcalendarDAO.updateSchedule(swdto);
+	    
+		return swdto;
+	}
+	
+	
+	
+	/* 작업자 : 이명철  // 최초 작업일 : 11.21 // 최종 작업일 : 11.21
+     * 작업 내용 : fullcalendar에서 eventclick 호출 : 선택한 일정 호출
+     * version : v1.0
+    */
+	@RequestMapping(value="eventclick.ajax", method = RequestMethod.POST)
+    public @ResponseBody Schedule_Work_DTO eventclick(@RequestParam(value="schedule_no") String schedule_no)
+            throws ClassNotFoundException, SQLException{
+        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 캘린더 fullcalendar함수 호출: 선택한 일정 호출");        
+        
+        IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+        
+        Schedule_Work_DTO swdto = fullcalendarDAO.selectClick(schedule_no);
+	
+        return swdto;
+	}
 
 }

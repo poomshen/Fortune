@@ -13,4 +13,8 @@ public interface IFileRoom {
 	public int deleteFile(FileRoom_DTO fileroom_DTO);
 	//파일 개수
 	public int countFile();
+	//파일 이름검색
+	public List<FileRoom_DTO> searchNameListFiles(String searchvalue);
+	//파일 날짜검색
+	public List<FileRoom_DTO> searchDateListFiles(String searchvalue);
 }
