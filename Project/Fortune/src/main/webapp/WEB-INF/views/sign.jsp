@@ -96,6 +96,7 @@
 			<span class="addon" style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
 			    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;" required="required"> 
 			    <input type="button" id="idchk" name="idchk" class="button" value="아이디 중복확인" onclick="idchkclk()">
+			   
 			    <label id="idselect" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
 				<!-- <input type="hidden" id="nextchk" value="다음걸로 못넘어가게하는거">  -->
 		</span>
@@ -128,18 +129,15 @@
 
 <!-- 이름 입력-->
 <div class="form-group">
-<div class="inner-addon left-addon" style="margin-left:37%">
-<span class="field">
-<span class="addon"style="
-    padding-bottom: 0px;
-"><i class="glyphicon glyphicon-font"></i></span> 
-   <input type="text" name="user_name" id="name" class="form-control" style="
-    width: 340px;margin-left:20px;" required="required">
+	<div class="inner-addon left-addon" style="margin-left:37%">
+		<span class="field">
+			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-font"></i></span> 
+			<input type="text" name="user_name" id="name" class="form-control" style="width: 340px;margin-left:20px;" required="required">
+			<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">이름 입력</label>
+		</span>
+	</div>
+</div>
 
- <label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">이름 입력</label>
-   </span>
-   </div>
-   </div>
 <!--성별 입력-->
 <div class="form-group">
 <div class="inner-addon left-addon" style="margin-left:2%">
@@ -636,6 +634,8 @@
    <script type="text/javascript">
          
       $( function() {
+    	
+    	 $('#idchk').hide();
          
          $( '#cd-dropdown' ).dropdown( {
             gutter : 5,
@@ -699,7 +699,7 @@
     //아이디 이메일 형식 검사
     $('#id').keyup(function(){
 	var idRex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-	console.log($('#id').val());
+	//console.log($('#id').val());
     	
     	if(idRex.test($('#id').val())){
     		$('#idselect').html("이메일 중복검사 버튼을 눌러주세요");
@@ -709,9 +709,8 @@
     		$('#idchk').hide();
     	} 
     });
-      
-      
 
+ 
     //password 두개 일치하는지 확인
     $('#user_password_chk').keyup(function(){
     	//alert('keydown test');
@@ -738,6 +737,8 @@
 		 */
     });
     
+
+    
     //핸드폰번호 유효성 검사
      $('#phone').keyup(function(){
 
@@ -753,9 +754,6 @@
     	});
   
     
-    	if( ($('#id').val()) == null ){
-    		$('#idchk').hide();
-    	}
 
       </script>
 
