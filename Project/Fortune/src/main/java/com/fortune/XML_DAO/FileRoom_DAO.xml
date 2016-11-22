@@ -44,11 +44,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="searchNameListFiles" parameterType="String" resultType="com.fortune.Table_DTO.FileRoom_DTO">
-		select * from file_room where file_room_name like '%${searchvalue}%'
+		select * from file_room where file_room_name like '%'||#{searchvalue}||'%'
 	</select>
 	
 	<select id="searchDateListFiles" parameterType="String" resultType="com.fortune.Table_DTO.FileRoom_DTO">
-		select * from file_room where file_room_date between #{searchvalue} and '16/11/20'
-		<!-- select * from file_room where FILE_ROOM_date between '16/11/19' and '16/11/20' -->
+		select * from file_room where to_char(file_room_date)= to_date(#{searchvalue},'YY/MM/DD')
 	</select>
 </mapper>

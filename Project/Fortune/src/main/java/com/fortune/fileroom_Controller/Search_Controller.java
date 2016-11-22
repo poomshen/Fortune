@@ -40,12 +40,12 @@ public class Search_Controller {
 			list = fileromm_DAO.searchDateListFiles(searchvalue);
 		}
 		
-		System.out.println(list);
+		System.out.println(list.size());
 		//View 화면에 뿌려주기 위한 list
 		int page = 1;
 		int row_size = 9;
 
-		int total_count = fileromm_DAO.countFile();	//file 개수
+		int total_count = list.size();	//file 개수
 		System.out.println("totalcount : " + total_count);
 
 		// ... 목록
