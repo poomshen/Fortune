@@ -3,6 +3,7 @@ package com.fortune.request_DAO;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
 
@@ -36,6 +37,12 @@ public interface ProDao {
 		public With_DTO managerDto(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//담당자 선택 
 		public int updatemanager(With_DTO m)throws ClassNotFoundException, SQLException;
+		//수신자 부장 리스트 
+		public List<Join_DTO> listEffect() throws ClassNotFoundException, SQLException;
+		//담당자 팀장 리스트 
+		public List<Join_DTO> listManager() throws ClassNotFoundException, SQLException;
 
+		
+		
 		
 }

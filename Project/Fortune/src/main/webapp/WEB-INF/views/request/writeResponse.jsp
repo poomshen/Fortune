@@ -9,14 +9,13 @@
 
 
 
-
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 
 function proAdd(){
-	
 	if($('#startDate').val() == ""){
 		alert(" 날짜 입력해주세요");
 		$('#startDate').focus();
@@ -139,7 +138,7 @@ function proAdd(){
 수락자 : <input type="text" name="collabo_req_ID" value="${list.collabo_req_ID}" readonly="readonly"><br>
 끝  날짜 : <input type="text" name="collabo_start" id="startDate">
 - <input type="text" name="collabo_end" id="endDate"><br>  
-진행 상태 :<input type="text" value="대기" name="collabo_state" readonly="readonly"><br>
+진행 상태 :<input type="text" value="진행중" name="collabo_state" readonly="readonly"><br>
 
 <input type="button" value="submit" onclick="proAdd()">
 <p><a href="requestList.htm">취소하기</a></p>

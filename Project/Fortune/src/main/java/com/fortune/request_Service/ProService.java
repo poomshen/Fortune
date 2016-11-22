@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
@@ -90,7 +91,7 @@ public class ProService {
 		// 실DB저장
 
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
-
+		
 		proDao.insert(n);
 
 		return n;
@@ -227,5 +228,29 @@ public class ProService {
 		 proDao.updatemanager(m);
 		return m;
 	}
+	
+	//수신자 리스트  클래스입니다.
+	public List<Join_DTO> listEffect(Model model) 
+			throws ClassNotFoundException, SQLException{
+		
+		ProDao checking_DAO = sqlsession.getMapper(ProDao.class);
+		List<Join_DTO> list = checking_DAO.listEffect();
+		
+		System.out.println(list);
+		
+		return list;
+	}
+	
+	//담당자 리스트  클래스입니다.
+	public List<Join_DTO> listManager(Model model) 
+			throws ClassNotFoundException, SQLException{
+			
+			ProDao checking_DAO = sqlsession.getMapper(ProDao.class);
+			List<Join_DTO> list = checking_DAO.listManager();
+			System.out.println("私たちは今も悪い道を行っているのか..?");
+			//System.out.println(list);
+			
+			return list;
+		}
 
 }

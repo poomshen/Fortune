@@ -21,7 +21,8 @@
 		<property name="mapperLocations" value="classpath*:com/fortune/XML_DAO/*xml" />
 
 	</bean>
-
+	
+<bean name="jsonview" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
 
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

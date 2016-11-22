@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -19,8 +21,15 @@
 		
 		<input type="hidden" name="collabo_req_ID" value="${list.collabo_req_ID}">
 			
-		담당자 선택 :<input name="user_ID" value="">
+		
+		담당자 선택 :<select id="user_ID" name="user_ID">
+				<c:forEach items="${listmanager}" var="list">
+				<option value="${list.user_id}">${list.user_id}</option>
+				</c:forEach>
+				</select>
+		
 		<input type="submit" value="submit">
+		
 		
 	
 	
