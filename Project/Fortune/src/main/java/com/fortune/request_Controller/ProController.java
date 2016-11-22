@@ -14,12 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
 
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.request_DAO.ProDao;
 import com.fortune.request_Service.ProService;
 
 
@@ -32,10 +36,13 @@ public class ProController {
 	@Autowired
 	private ProService proservice;
 
-
+	
+	
 	@RequestMapping("/writerequest.htm")
-	public String writeForm() {
+	public String writeForm(Model model) throws ClassNotFoundException, SQLException {
 			System.out.println("여기에 들어갈까나 ?");
+			List<Join_DTO> list = proservice.listEffect(model);
+			model.addAttribute("list", list);
 		return "request.writeRequest";
 
 	}
@@ -49,6 +56,8 @@ public class ProController {
 		try {
 			// 실DB저장
 			proservice.regRequest(n, request);
+			
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -159,7 +168,7 @@ public class ProController {
 					System.out.println("과연 이곳으로 오는가?");
 				
 					System.out.println("dlv:"+ collabo_req_index);
-					System.out.println(n.toString());
+					/*System.out.println(n.toString());*/
 					 proservice.regResponse(n, collabo_req_index);
 					
 					// 실DB저장
@@ -173,14 +182,55 @@ public class ProController {
 			// 프로젝트의 협업상태를 보여주는 클래스이다.
 			
 			@RequestMapping("responseList.htm") // /customer/notice.htm
-			public String listResponse(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+			public String listResponse( String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 
-				List<With_DTO> list = proservice.listResponse(pg, f, q, session);
-				model.addAttribute("list", list); // 자동 forward
+				List<With_DTO> list = proservice.listResponse( pg, f, q, session);
+			
+				
+				model.addAttribute("list", list); // 리스트 협업상태
+				
+				
+				/*System.out.println("리스트 협업상태 : "+list);*/
 				
 				return "request.responseList";
 
 			}	
+			
+			//담당자 선택역할을 하는 클래스입니다.
+			 @RequestMapping(value = "insertmanager.htm", method= RequestMethod.GET)
+			 public String InsertManager(String collabo_req_index, Model model)
+			   throws ClassNotFoundException, SQLException {
+			 
+				 //아 힘들다..
+				 
+				 With_DTO req_Dto =  proservice.managerDto(collabo_req_index);
+					List<Join_DTO> listmanager = proservice.listManager(model); 
+				 
+					model.addAttribute("listmanager", listmanager); // 담당자 리스트 
+				  model.addAttribute("list", req_Dto);	//협업상태 보여준다.
+				  
+				 /* System.out.println(req_Dto.toString());
+				  System.out.println("담당자 : "+listmanager.toString());*/
+				  
+				  
+			  return "cen.proManager";
+			 }
+			
+			
+			
+			
+			//담당자 선택역할을 한다.
+			@RequestMapping( value="insertmanager.htm", method = RequestMethod.POST)
+			 public String InsertManager(With_DTO m) throws ClassNotFoundException,
+			   SQLException {
+				
+				 proservice.InsertManager(m);
+				/* System.out.println(m.toString()+"흠냐");*/
+				 
+				  return "redirect:responseList.htm"; //리스트 화면 (controller 타서 데이터 출력)
+				
+			 }
+			
 			
 			
 	
