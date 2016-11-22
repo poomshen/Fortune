@@ -37,7 +37,7 @@ public class NoticeUpdate_Controller {
 		model.addAttribute("noticeUpdate", noticeUpdate);
 
 		System.out.println(noticeUpdate.getNotice_title());
-		return "notice/noticeUpdate";
+		return "notice.noticeUpdate";
 	}
 
 	// 게시판 실제 수정처리

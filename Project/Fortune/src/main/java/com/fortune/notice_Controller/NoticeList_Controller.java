@@ -67,7 +67,7 @@ public class NoticeList_Controller {
 		mv.addObject("block", block);
 		mv.addObject("from_page", from_page);
 		mv.addObject("to_page", to_page);
-		mv.setViewName("notice/noticeList");
+		mv.setViewName("notice.noticeList");
 		
 		return mv;
 
