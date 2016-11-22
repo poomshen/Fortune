@@ -29,7 +29,7 @@ public class FCMainController {
 	public String schedule(ModelMap map) throws ClassNotFoundException, SQLException {
 		System.out.println("위치 : FCMainController // 내용 : 캘린더 화면으로 넘어가는 부분 // 작업자: 이명철");
 		
-		return "schedule/schedule";
+		return "schedule.schedule";
 	}
 	
 	
