@@ -34,7 +34,8 @@ public class ProService {
 	@Autowired
 	private SqlSession sqlsession;
 
-	public List<Request_DTO> getRequest(String pg, String f, String q, HttpSession session)
+	//협업 답장자 리스트 입니다.
+	public List<Request_DTO> getRequest(String pg, String f, String q,String st, HttpSession session)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("집에 갑시다.");
 
@@ -42,8 +43,11 @@ public class ProService {
 		int page = 1;
 		String field = "collabo_req_ID";
 		Join_DTO ids = (Join_DTO) session.getAttribute("info");
+		
 		// 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
+		
 		String query = "%" + ids.getUser_id() + "%";
+		String st_query ="%%";
 		//////////////////////////////////////
 		if (pg != null && pg.equals("")) {
 			page = Integer.parseInt(pg);
@@ -54,17 +58,109 @@ public class ProService {
 		if (q != null && q.equals("")) {
 			query = q;
 		}
+		if (st != null) {
+			st_query = st;
+		}
 
-		System.out.println(page + " / " + field + " / " + query);
+		System.out.println(page + " / " + field + " / " + query + "/"+ st_query);
 
 		// Mybatis 적용
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
 
-		List<Request_DTO> list = proDao.getRequest(page, field, query);
+		List<Request_DTO> list = proDao.getRequest(page, field, query,st_query);
 
 		return list;
 	}
+	
+	//협업 작성자 리스트 입니다.
+		public List<Request_DTO> listReplyRequest(String pg, String f, String q,String st, HttpSession session)
+				throws ClassNotFoundException, SQLException {
+			System.out.println("집에 갑시다.");
 
+			// 게시판 기본 설정(기본값 처리)/////////////
+			int page = 1;
+			String field = "user_ID";
+			Join_DTO ids = (Join_DTO) session.getAttribute("info");
+			// 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
+			String query = "%" + ids.getUser_id() + "%";
+			String st_query = "%%"; //대기 , 수락 , 거절 결정
+			//////////////////////////////////////
+			if (pg != null && pg.equals("")) {
+				page = Integer.parseInt(pg);
+			}
+			if (f != null && f.equals("")) {
+				field = f;
+			}
+			if (q != null && q.equals("")) {
+				query = q;
+			}
+			if (st != null) {
+				st_query = st;
+			}
+
+			System.out.println(page + " / " + field + " / " + query+" / "+st_query);
+
+			// Mybatis 적용
+			ProDao proDao = sqlsession.getMapper(ProDao.class);
+
+			List<Request_DTO> list = proDao.getRequest(page, field, query, st_query);
+
+			return list;
+		}
+
+		//협업 전체 리스트 입니다.
+				public List<Request_DTO> listallRequest(String pg, String f, String q,String st, HttpSession session)
+						throws ClassNotFoundException, SQLException {
+					System.out.println("집에 갑시다.");
+
+					// 게시판 기본 설정(기본값 처리)/////////////
+					int page = 1;
+					String field = "user_ID";
+					Join_DTO ids = (Join_DTO) session.getAttribute("info");
+					// 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
+					String query = "%" + "" + "%";
+					String st_query ="%%";
+					//////////////////////////////////////
+					if (pg != null && pg.equals("")) {
+						page = Integer.parseInt(pg);
+					}
+					if (f != null && f.equals("")) {
+						field = f;
+					}
+					if (q != null && q.equals("")) {
+						query = q;
+					}
+					if (st != null) {
+						st_query = st;
+					}
+					System.out.println("***"+st);
+					System.out.println(page + " / " + field + " / " + query+"/"+st_query);
+
+					// Mybatis 적용
+					ProDao proDao = sqlsession.getMapper(ProDao.class);
+
+					List<Request_DTO> list = proDao.getRequest(page, field, query,st_query);
+
+					return list;
+				}
+	
+	
+	
+			//대기 , 수락 , 거절 클래스 입니다.
+				public Request_DTO kindState(String collabo_req_state) throws ClassNotFoundException, SQLException {
+
+					ProDao proDao = sqlsession.getMapper(ProDao.class);
+					Request_DTO proDto = proDao.kindState(collabo_req_state);
+
+					// Tiles
+					return proDto;
+					// View
+
+				}
+				
+				
+				
+	
 	// 협업요청 상세보기
 
 	public Request_DTO ProDetail(String collabo_req_index) throws ClassNotFoundException, SQLException {
@@ -111,11 +207,8 @@ public class ProService {
 		System.out.println("seq : " + collabo_req_index);
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
 		proDao.accept(collabo_req_index);
-		Request_DTO proDto = proDao.detailResponse(collabo_req_index); // 다른테이블
-																		// 가져옴
-																		// index값을
-																		// 받아온
-																		// 정보를
+		Request_DTO proDto = proDao.detailResponse(collabo_req_index); 
+		
 		System.out.println("index : " + proDto.getCollabo_req_index());
 		System.out.println("no : " + proDto.getCollabo_req_no());
 
@@ -252,5 +345,7 @@ public class ProService {
 			
 			return list;
 		}
+	
+	
 
 }

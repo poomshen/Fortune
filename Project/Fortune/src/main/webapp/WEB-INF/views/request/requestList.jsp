@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -54,6 +55,8 @@
 					<th class="collabo_req_date">작성일</th>
 					<th class="collabo_req_ID">답장자</th>
 					<th class="collabo_req_state">진행상태</th>
+					
+				
 
 				</tr>
 			</thead>
@@ -73,7 +76,7 @@
 						<td class="collabo_req_date">${n.collabo_req_date}</td>
 						<td class="collabo_req_ID">${n.collabo_req_ID}</td>
 						<td class="collabo_req_state">${n.collabo_req_state}</td>
-
+		
 
 					</tr>
 				</c:forEach>
@@ -121,8 +124,22 @@
 
 	</div>
 
+<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
+	<a href="writerequest.htm" class="btn btn-success">요청</a>
+</security:authorize>
 
-	<a href="requestList.htm">요청</a>
+	<a href="listReplyRequest.htm" class="btn btn-success">답장자리스트</a>
+	<a href="requestList.htm" class="btn btn-success">작성자리스트</a>
+	<a href="listallRequest.htm" class="btn btn-success">전체리스트</a>
+
+<%-- <c:forEach items="${all}" var="c">
+	<c:if test="${c.collabo_req_state=='대기'}">
+		<td class="collabo_req_state">${c.collabo_req_state = '대기'}</td>
+	</c:if>
+</c:forEach> --%>
+	<a href="listReplyRequest.htm?st=대기" class="btn btn-success">대기</a>
+	<a href="listReplyRequest.htm?st=수락" class="btn btn-success">수락</a>
+	<a href="listReplyRequest.htm?st=거절" class="btn btn-success">거절</a>
 
 </body>
 </html>
