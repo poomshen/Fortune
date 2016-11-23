@@ -6,14 +6,18 @@ import java.util.List;
 import com.fortune.Table_DTO.Schedule_DTO;
 import com.fortune.function_DTO.Schedule_Work_DTO;
 
+import Work_Users_DTO.Work_Users_DTO;
+
 public interface IFullCalendar {
-	//일정등록(schedule + work) 등록
+	//일정등록(schedule + work + work_users) 등록
 	public int insertSchedule(Schedule_Work_DTO swdto) throws ClassNotFoundException, SQLException;
 	public int insertWork(Schedule_Work_DTO swdto) throws ClassNotFoundException, SQLException;
 	public Schedule_DTO selectScheduleno() throws ClassNotFoundException, SQLException;
+	public void insertWork_Users(Work_Users_DTO wudto)throws ClassNotFoundException, SQLException;
 	
 	//모든 일정내용 호출
 	public List<Schedule_Work_DTO> selectSWList() throws ClassNotFoundException, SQLException;
+	public List<Work_Users_DTO> selectWUList() throws ClassNotFoundException, SQLException;
 	
 	//일정 삭제
 	public int deleteWork(String id) throws ClassNotFoundException, SQLException;

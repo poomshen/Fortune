@@ -62,8 +62,14 @@ body {
 }
 
 #calendar {
-	max-width: 90%;
+	width: 100%;
+	height: 100%;
 	margin: 0 auto;
+}
+
+div{
+	padding-left: 0px;
+	padding-right: 5px;
 }
 
 </style>
@@ -72,10 +78,10 @@ body {
 	<br>
 	<br>
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row" style="padding-right: 0px;">
 
 			<!-- calendar 보여 주는 div 영역 -->
-			<div class="col-sm-7">
+			<div class="col-sm-7" style="padding-left: 0px;">
 					<div id='calendar'></div>
 			</div>
 
@@ -118,7 +124,7 @@ body {
 				<div class="modal-dialog">
 
 					<!-- Modal content-->
-					<div class="modal-content">
+					<div class="modal-content" style="width: 150%;">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">일 정 상 세</h4>
@@ -127,13 +133,13 @@ body {
 							<label>일정 제목 : </label> <input type="text" id="detail_modal_title"><br>
 							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="detail_modal_text"></textarea><br>
 							<label>참가 인원 : </label> <input type="text" id="detail_modal_users"><br>
-							<label>id값 (hidden처리 예정) : </label> <input type="text" id="detail_modal_id"><br>
-							<label>start값 (hidden처리 예정) : </label> <input type="text" id="detail_modal_start"><br>
-							<label>end값 (hidden처리 예정) : </label> <input type="text" id="detail_modal_end"><br>
+							<input type="hidden" id="detail_modal_id">
+							<input type="hidden" id="detail_modal_start">
+							<input type="hidden" id="detail_modal_end"><br>
 							
-							<button type="button" class="btn btn-default" id="detail_modal_update"
+							<button type="button" class="" id="detail_modal_update"
 								data-dismiss="modal">수정</button>
-							<button type="button" class="btn btn-default" id="detail_modal_delete"
+							<button type="button" class="" id="detail_modal_delete"
 								data-dismiss="modal">삭제</button>
 						</div>
 					</div>
@@ -144,12 +150,12 @@ body {
 
 
 			<!-- 업우상세 보여주는 div 영역 -->
-			<div class="col-sm-5">
-				<div class="row">
-					<label> 일반 / 회의 (선택 미구현)</label>
+			<div class="col-sm-5" style="padding-right: 0px;">
+				<div class="row" style="padding-right: 0px;">
+					<label style="height: 32px; margin-top: 10px;"> &nbsp;&nbsp;&nbsp; 일반 / 회의 (선택 미구현)</label>
 				</div>
 
-				<div id="content"></div>
+				<div id="content" style="overflow: scroll; width: 100%; height: 560px; overflow-x: hidden; padding-left: 0px; padding-right: 0px;"></div>
 			</div>
 		</div>
 	</div>
