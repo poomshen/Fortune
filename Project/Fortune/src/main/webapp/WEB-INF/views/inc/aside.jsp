@@ -45,7 +45,7 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i>조직도<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">부서</a>
+                                    <a href="dept.htm">부서</a>
                                 </li>
                                 <li>
                                     <a href="#">팀 <span class="fa arrow"></span></a>
