@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Role_DTO;
 import com.fortune.authority_DAO.IAuthority;
+import com.fortune.role_DAO.IRole;
 
 @Controller
 public class Update_Controller {
@@ -28,12 +30,19 @@ public class Update_Controller {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		System.out.println("user_id : " + user_id);
 		System.out.println("role_no : " + role_no);
+		
 		IAuthority authority_DAO = sqlsession.getMapper(IAuthority.class);
 		int row = authority_DAO.updateAuthority(user_id, role_no);
 		
+		IRole role_DAO = sqlsession.getMapper(IRole.class);
+		List<Role_DTO> roleList = role_DAO.listRole();
+		System.out.println(roleList);
+		
+		List<Join_DTO> authorityList = authority_DAO.listUsersAuthority();
+		result.put("authorityList", authorityList);
+		result.put("roleList", roleList);
+		
 		if(row > 0){
-			List<Join_DTO> list = authority_DAO.listUsersAuthority();
-			result.put("list", list);
 			result.put("msg", "수정 성공");
 		}else{
 			result.put("msg", "수정 실패");
