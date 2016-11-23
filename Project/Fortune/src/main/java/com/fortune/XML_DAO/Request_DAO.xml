@@ -14,15 +14,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getRequest" resultType="com.fortune.Table_DTO.Request_DTO">
 		SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
-		( SELECT * FROM collabo_req WHERE ${param2}
-		LIKE '%${param3}%' ORDER BY collabo_req_date DESC ) N )
-		WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50
+		( SELECT * FROM collabo_req WHERE (${param2}
+		LIKE '%${param3}%' AND collabo_req_state LIKE '%${param4}%') ORDER BY collabo_req_date DESC ) N )
+		WHERE NUM BETWEEN 1 + (${param1} - 1) * 500 AND 500 + (${param1} - 1) * 500
 	</select>
+<!-- SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
+		( SELECT * FROM collabo_req WHERE( user_ID
+		LIKE '%sung@gmail.com%' and collabo_req_state like '%%') ORDER BY collabo_req_date DESC ) N )
+		WHERE NUM BETWEEN 1 + (1 - 1) * 50 AND 50 + (1 - 1) * 50; -->
+
 
 	<!-- 요청번호 수정해야 합니다. ! -->
 	<insert id="insert">
-
-
 		<selectKey order="BEFORE" keyProperty="collabo_req_index"
 			resultType="String">
 			SELECT MAX(TO_NUMBER(collabo_req_index))+1 FROM collabo_req
@@ -45,7 +48,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{collabo_req_state})
 			</otherwise>
 		</choose>
-
 	</insert>
 
 
@@ -81,12 +83,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 
+	
 	<select id="getProDto" resultType="com.fortune.Table_DTO.Request_DTO">
 		<!-- public Notice getNotice(String seq) parameter 1개 생략 : 사용 parameter 
 			이름 :seq param1 은 안되요 (x) -->
 		SELECT * FROM collabo_req WHERE collabo_req_index=
 		#{collabo_req_index}
 	</select>
+	
+	<!-- 대기,수락 , 거절 을 하였을 때 띄어주는 것이다. -->
+	<select id="kindState" resultType="com.fortune.Table_DTO.Request_DTO">
+		SELECT * FROM collabo_req WHERE collabo_req_state= #{collabo_req_state}
+	</select>
+
+
+
 
 
 	<select id="detailResponse" resultType="com.fortune.Table_DTO.Request_DTO">

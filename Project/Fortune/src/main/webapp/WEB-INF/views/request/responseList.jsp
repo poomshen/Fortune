@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -64,19 +65,19 @@
 					<td class="collabo_no">${n.collabo_no}</td>
 					<td class="collabo_req_index">${n.collabo_req_index}</td>
 					<td class="collabo_req_no">${n.collabo_req_no}</td>
-		
-		
+		<td class="user_ID">${n.user_ID}
+<security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
 	<c:choose>
 		<c:when test="${n.user_ID  == null}">
-			<td class="user_ID"><button data-toggle="modal" data-target="#myModal" onclick="proAjaxManager(${n.collabo_req_index})">담당</button></td>
+			<button data-toggle="modal" data-target="#myModal" onclick="proAjaxManager(${n.collabo_req_index})">담당</button>
 		</c:when>
 		<c:otherwise>
-			<td class="user_ID">${n.user_ID}<button data-toggle="modal" data-target="#myModal" onclick="proAjaxManager(${n.collabo_req_index})">담당</button></td>
+			<button data-toggle="modal" data-target="#myModal" onclick="proAjaxManager(${n.collabo_req_index})">담당</button>	
 		</c:otherwise>
 	</c:choose>
-				
-	
-				
+			</security:authorize>
+					</td>
+					
 					<td class="collabo_start">${n.collabo_start}</td>
 					<td class="collabo_end">${n.collabo_end}</td>
 					<td class="collabo_req_state">${n.collabo_state}</td>
