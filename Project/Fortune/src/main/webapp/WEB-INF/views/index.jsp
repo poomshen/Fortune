@@ -35,6 +35,11 @@
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
 <link rel="stylesheet"
 	href="path/to/font-awesome/css/font-awesome.min.css">
+	
+<script src="dist/js/websoket.js"></script>
+
+
+
 </head>
 
 <body>
@@ -56,7 +61,7 @@
 			<h1>
 				<a href="">fortune</a>
 			</h1>
-
+			
 
 			<div class="top-content-bottom-link">
 				
@@ -73,16 +78,15 @@
 							<div class="form-group">
 								<label class="sr-only" for="r-form-1-email">id</label> <input
 									type="text" name="user_id" class="form-control hvr-glow"
-									id="r-form-1-email" tabindex="1">
+									id="user_id" tabindex="1">
 							</div>
 						</div>
 						<div class="input-group">
-							<span class="addon" style="padding-right: 6px;"><i
-								class="fa fa-key" aria-hidden="true"></i></span>
+							<span class="addon" style="padding-right: 6px;"><i class="glyphicon glyphicon-lock"></i></span>
 							<div class="form-group">
 								<label class="sr-only" for="r-form-1-email">pwd</label> <input
 									type="password" name="user_password"
-									class="form-control hvr-glow" id="r-form-1-email" tabindex="2"
+									class="form-control hvr-glow" id="user_password" tabindex="2"
 									onkeydown="onKeydown();">
 									 <c:if test="${param.error != null}">
                                     <div>
@@ -95,6 +99,7 @@
 
 					<div style="margin-left: -3%">
 						<input type="button" onclick="joins()" class="btn hvr-forward" tabindex="4" value="join">
+
 						&nbsp; &nbsp; &nbsp;						
 						<button type="submit"  class="btn hvr-forward" tabindex="3" >login</button>
 					</div>

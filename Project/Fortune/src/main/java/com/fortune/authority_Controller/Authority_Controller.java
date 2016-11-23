@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Role_DTO;
 import com.fortune.authority_DAO.IAuthority;
+import com.fortune.role_DAO.IRole;
 
 @Controller
 public class Authority_Controller {
@@ -22,11 +24,16 @@ public class Authority_Controller {
 		System.out.println("mainAuthority 컨트롤러");
 		
 		IAuthority authority_DAO = sqlsession.getMapper(IAuthority.class);
-		List<Join_DTO> list = authority_DAO.listUsersAuthority();
-		System.out.println(list);
+		List<Join_DTO> authorityList = authority_DAO.listUsersAuthority();
+		System.out.println(authorityList);
+		
+		IRole role_DAO = sqlsession.getMapper(IRole.class);
+		List<Role_DTO> roleList = role_DAO.listRole();
+		System.out.println(roleList);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("list", list);
+		mv.addObject("authorityList", authorityList);
+		mv.addObject("roleList", roleList);
 		mv.setViewName("admin.authority");
 		return mv;
 	}

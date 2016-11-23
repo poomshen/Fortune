@@ -94,8 +94,9 @@
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
 			<span class="addon" style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
-			    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;"> 
-			    <input type="button" id="idchk" name="idchk" class="button" value="아이디 중복확인" onclick="idchkclk()" required="required">
+			    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;" required="required"> 
+			    <input type="button" id="idchk" name="idchk" class="button" value="아이디 중복확인" onclick="idchkclk()">
+			   
 			    <label id="idselect" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
 				<!-- <input type="hidden" id="nextchk" value="다음걸로 못넘어가게하는거">  -->
 		</span>
@@ -128,18 +129,15 @@
 
 <!-- 이름 입력-->
 <div class="form-group">
-<div class="inner-addon left-addon" style="margin-left:37%">
-<span class="field">
-<span class="addon"style="
-    padding-bottom: 0px;
-"><i class="glyphicon glyphicon-font"></i></span> 
-   <input type="text" name="user_name" id="name" class="form-control" style="
-    width: 340px;margin-left:20px;" required="required">
+	<div class="inner-addon left-addon" style="margin-left:37%">
+		<span class="field">
+			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-font"></i></span> 
+			<input type="text" name="user_name" id="name" class="form-control" style="width: 340px;margin-left:20px;" required="required">
+			<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">이름 입력</label>
+		</span>
+	</div>
+</div>
 
- <label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">이름 입력</label>
-   </span>
-   </div>
-   </div>
 <!--성별 입력-->
 <div class="form-group">
 <div class="inner-addon left-addon" style="margin-left:2%">
@@ -202,8 +200,8 @@
 		<span class="field">
 			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-phone"></i></span> 
 			<input type="text" name="user_phone" id="phone" class="form-control" style="width: 340px;margin-left:20px;" required="required"> 
-			
-			<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone">핸드폰 번호 입력</label>
+			<!-- <input type="button" id="phonebtn" value="전화번호체크" onclick="phonechk()" > -->
+			<label class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone" id="phonelbl">핸드폰 번호 입력</label>
 		</span>
 	</div>
 </div>
@@ -627,13 +625,17 @@
    <script src="assets/js/masonry.pkgd.min.js"></script>
    <script src="assets/js/scripts.js"></script>
    <script src="assets/js/modernizr.custom.63321.js"></script>
-<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script> 
-<script src="ios-7-date-picker.js"></script>
+   <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script> 
+   <script src="ios-7-date-picker.js"></script>
    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-      <script type="text/javascript" src="assets/js/jquery.dropdown.js"></script>
-      <script type="text/javascript">
+   <script type="text/javascript" src="assets/js/jquery.dropdown.js"></script>
+   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+   
+   <script type="text/javascript">
          
       $( function() {
+    	
+    	 $('#idchk').hide();
          
          $( '#cd-dropdown' ).dropdown( {
             gutter : 5,
@@ -655,6 +657,8 @@
             slidingIn : 100
          } );
       });
+      
+      //년,월,일 합치기
       function birth(){
          
          var y = document.getElementById("year").value;
@@ -665,35 +669,52 @@
          document.getElementById("birthday").value = b;
          //alert(document.getElementById("birthday").value);
       }   
-      //아이디 유효성 검사
+      
+      //아이디 중복 검사
       function idchkclk() { 
-		//alert($('#id').val().toLowerCase());
-		//console.log($('#id').val().toLowerCase());
-		
-    	  $.ajax({
-    		  type:"get",
-    		  url:"idchk.ajax",
-    		  data:{"user_id": $('#id').val().toLowerCase()},
-    		  success:function(data){
-    			  //console.log(data);
-    			  if(data == "yes"){
-    			  	$("#idselect").html("중복되는 아이디입니다");
-    			  }else{
-    				$("#idselect").html("사용가능한 아이디 입니다");
-    				  /* $('#nextchk').val()= "okay"; */
-    			  }
-    		  },
-    		  error:function(){
-    			  $("#idselect").html("에러 입니다");
-    		  }
-    	  });
-		
-		
-	}
+    			//alert($('#id').val().toLowerCase());
+    			//console.log($('#id').val().toLowerCase());
+    			
+    	    	  $.ajax({
+    	    		  type:"get",
+    	    		  url:"idchk.ajax",
+    	    		  data:{"user_id": $('#id').val().toLowerCase()},
+    	    		  success:function(data){
+    	    			  //console.log(data);
+    	    			  if(data == "yes"){
+    	    			  	/* $("#idselect").html("중복되는 아이디입니다"); */
+    	    			  	alert('중복되는 아이디입니다');
+    	    			  }else{
+    	    				/* $("#idselect").html("사용가능한 아이디 입니다"); */
+    	    				  /* $('#nextchk').val()= "okay"; */
+    	    				alert('사용가능한 아이디 입니다'); 
+    	    			  }
+    	    		  },
+    	    		  error:function(){
+    	    			  $("#idselect").html("에러 입니다");	
+    	    		  }
+    	    	  });	
+    		}
+    
+    //아이디 이메일 형식 검사
+    $('#id').keyup(function(){
+	var idRex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+	//console.log($('#id').val());
+    	
+    	if(idRex.test($('#id').val())){
+    		$('#idselect').html("이메일 중복검사 버튼을 눌러주세요");
+    		$('#idchk').show();		  		
+    	}else{
+    		$('#idselect').html("알맞은 이메일 형식으로 작성해주세요");
+    		$('#idchk').hide();
+    	} 
+    });
 
+ 
+    //password 두개 일치하는지 확인
     $('#user_password_chk').keyup(function(){
     	//alert('keydown test');
-    	//$('#pwdchklb').html("이거 바뀌나???");
+    	
 		$.ajax({
 			type:"get",
 			url:"pwdchk.ajax",
@@ -716,8 +737,24 @@
 		 */
     });
     
- 
-   
+
+    
+    //핸드폰번호 유효성 검사
+     $('#phone').keyup(function(){
+
+    	 var phoneRex = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
+    	 
+    	 //console.log("phone value: " + $('#phone').val());
+    		if(phoneRex.test($('#phone').val())){
+    			$('#phonelbl').html("전화번호가 유효합니다");	
+        	}else{
+        		$('#phonelbl').html("ex)010-xxxx-xxxx 형식으로 작성해주세요");       	
+        	}
+    		
+    	});
+  
+    
+
       </script>
 
 
