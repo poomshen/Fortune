@@ -84,7 +84,7 @@ public class FullCalendarController {
            
         }
         
-        map.put("count", sadto);
+        map.put("alarm", sadto);
         
     
         return map;

@@ -54,16 +54,16 @@ function onOpen(evt) {
 }
 function onMessage(evt) {
 
-	alert("메세지"+evt.data);
+	alert("메세지 : "+evt.data);
 }
 function onClose(evt) {
 	appendMessage("연결을 끊었습니다.");
 }
 
-function send(selectId) {
+function send(alarm) {
 /* 	var selectId="sungjun@gmail.com/mclee@gmail.com"; */
 
-	wsocket.send(selectId);
+	wsocket.send(alarm);
 	
 }
 
