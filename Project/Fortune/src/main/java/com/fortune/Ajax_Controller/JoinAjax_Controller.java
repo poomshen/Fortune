@@ -1,5 +1,8 @@
 package com.fortune.Ajax_Controller;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.function_DTO.Schedule_Work_DTO;
+import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.member_DAO.IJoin;
 
 @Controller
@@ -37,17 +42,21 @@ public class JoinAjax_Controller {
 		}
 	}
 	
-	   @RequestMapping(value="ws.ajax", method = RequestMethod.POST)
-	   public View wsajax() {
-	      
+	
+	@RequestMapping(value="ws.ajax", method = RequestMethod.POST)
+    public @ResponseBody Select_Alarm_DTO ajax(@RequestParam(value="selectId[]") List<String> selectId,
+         @RequestParam(value="work_type") String work_type)
+            throws ClassNotFoundException, SQLException{
+	
 	      System.out.println("아작스 탔지?");
 	      
-	      return jsonview;
+	      return null;
+	      
 	   }
 	@RequestMapping("/pwdchk.ajax")
 	public @ResponseBody String pwdchk(@RequestParam(value="user_password") String user_password, @RequestParam(value="user_password_chk") String user_password_chk){
 		System.out.println("pwd 중복 체크");
-		System.out.println("user_password : " + user_password);
+		System.out.println("user_password :" + user_password);
 		System.out.println("user_password 두번째값 : " + user_password_chk);
 		
 		if(user_password.equals(user_password_chk)){
