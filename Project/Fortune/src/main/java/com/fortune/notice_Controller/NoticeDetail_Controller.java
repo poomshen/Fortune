@@ -34,7 +34,7 @@ public class NoticeDetail_Controller {
 		Notice_DTO noticeDetail = noticeDao.detailNotice(notice_no);
 		model.addAttribute("noticeDetail", noticeDetail);
 
-		return "notice/noticeDetail";
+		return "notice.noticeDetail";
 	}
 
 }
