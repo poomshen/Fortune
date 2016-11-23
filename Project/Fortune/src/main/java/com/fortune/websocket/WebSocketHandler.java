@@ -27,7 +27,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	      log("접속 성공" + session.getId() + "웹소켓 세션 아이디");
 	      String userid = (String) session.getAttributes().get("userId");
 
-	      users.put("websession", session);
+	      users.put(userid, session);
 	      ids.put(session.getId(), userid);
 		
 	/*
@@ -61,14 +61,16 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	       System.out.println("session 객체 : "+session.getId());
 	      
 	       System.out.println(selectedid.length);
-	       System.out.println(selectedid[0]);
-	       System.out.println(selectedid[1]);
-	       
+
+	       System.out.println("user size:"+users.size());
 	       
 	       
 	       
 	        for (WebSocketSession s : users.values()) { //users.values()           
 	           for(int i =0; i < selectedid.length; i++){
+	        	   
+	        	   System.out.println("s아이디>"+ids.get(s.getId())+"<");
+	        	   System.out.println("selectId>"+selectedid[i]+"<");
 	              if( ids.get(s.getId()).equals(selectedid[i]) ){
 	                 System.out.println(selectedid[i]);
 	                 s.sendMessage(  new TextMessage("aaa")  );

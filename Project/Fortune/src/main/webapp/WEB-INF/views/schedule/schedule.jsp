@@ -98,8 +98,8 @@ body {
 							<label>일정 제목 : </label> <input type="text" id="modal_title"><br>
 							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="modal_text"></textarea><br>
 							<label>참가 인원 : </label>
-								<input type="checkbox" name="uesrchk" value="이명철1">AA
-								<input type="checkbox" name="uesrchk" value="이명철2">BB
+								<input type="checkbox" name="uesrchk" value="yeji">yeji
+								<input type="checkbox" name="uesrchk" value="개발1팀장">개발1팀장
 							<br>
 							<button type="button" class="btn btn-default" id="modal_ok"
 								data-dismiss="modal">등록</button>
