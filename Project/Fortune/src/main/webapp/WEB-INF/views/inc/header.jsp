@@ -16,12 +16,13 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
+               
                     <a class="dropdown-toggle" style="color:#417ca5;" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
-                            <a href="#">
+                            <a href="alarm.htm">
                                 <div>
                                     <strong>John Smith</strong>
                                     <span class="pull-right text-muted">

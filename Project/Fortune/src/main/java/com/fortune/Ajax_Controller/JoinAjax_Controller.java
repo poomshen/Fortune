@@ -4,8 +4,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.member_DAO.IJoin;
@@ -15,6 +17,9 @@ public class JoinAjax_Controller {
 
 	@Autowired
 	public SqlSession sqlsession;
+	
+	   @Autowired
+	   private View jsonview;
 	
 	@RequestMapping("/idchk.ajax")
 	public @ResponseBody String idchk(Join_DTO dto){
@@ -32,6 +37,13 @@ public class JoinAjax_Controller {
 		}
 	}
 	
+	   @RequestMapping(value="ws.ajax", method = RequestMethod.POST)
+	   public View wsajax() {
+	      
+	      System.out.println("아작스 탔지?");
+	      
+	      return jsonview;
+	   }
 	@RequestMapping("/pwdchk.ajax")
 	public @ResponseBody String pwdchk(@RequestParam(value="user_password") String user_password, @RequestParam(value="user_password_chk") String user_password_chk){
 		System.out.println("pwd 중복 체크");
@@ -43,7 +55,6 @@ public class JoinAjax_Controller {
 		}else{
 			return "fail";
 		}
-		
-	
 	}
+
 }

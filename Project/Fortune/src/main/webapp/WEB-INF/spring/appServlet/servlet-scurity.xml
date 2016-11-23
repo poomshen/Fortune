@@ -18,7 +18,7 @@
 />
 <security:logout logout-success-url="/logOut.htm"/>
 <security:logout/>
-<security:intercept-url pattern="/authority.htm" access="hasRole('ROLE_SUPERMGR','ROLE_ADMIN')"/>
+<security:intercept-url pattern="/authority.htm" access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')"/>
 </security:http>
 
 
