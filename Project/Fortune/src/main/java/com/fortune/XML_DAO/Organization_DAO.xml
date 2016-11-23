@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.fortune.organization_DAO.IOrganization">
 
 <select id="showdept" parameterType="integer" resultType="com.fortune.Table_DTO.Join_DTO">  
-select USER_ID from users
+select USER_ID, USER_NAME, USER_PHONE, DEPT_NO, TEAM_NO, POSITION_NO from users
 where DEPT_NO=#{dept_no}
 </select>
 
