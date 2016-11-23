@@ -15,10 +15,14 @@
 
 <!-- Custom CSS -->
 <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+<!-- link rel="stylesheet" type="text/css" href="dist/css/sidebar.css">
 
-<!-- Custom Fonts -->
+<link rel="stylesheet" type="text/css" href="dist/css/normalize.css">
+
+Custom Fonts-->
 <link href="bower_components/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
+	rel="stylesheet" type="text/css"> 
+
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
@@ -39,8 +43,8 @@
 	<!-- /#page-wrapper -->
 
 	<!-- jQuery -->
-	<!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> -->
-
+	<!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> 
+ -->
 	<!-- Bootstrap Core JavaScript -->
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -49,5 +53,8 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
+	<script src="dist/js/modernizr.custom.js"></script>
+	<script src="dist/js/draggabilly.pkgd.min.js"></script>
+	<script src="dist/js/dragdrop.js"></script>
 </body>
 </html>
