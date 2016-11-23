@@ -20,6 +20,9 @@
                                 <li>
                                     <a href="responseList.htm">협업 리스트</a>
                                 </li>
+                                <li>
+                                    <a href="historyList.htm">히스토리 리스트</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

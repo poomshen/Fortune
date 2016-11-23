@@ -21,7 +21,13 @@
 	<context:component-scan base-package="com.fortune.Ajax_Controller" />
 	<context:component-scan base-package="com.fortune.authority_Controller" />
 
-
+	<!-- 히스토리
+		이름 : 이성준
+		일자 : 2016-11-23
+		목적 : 히스토리 를 입력하게 한다.
+	 -->
+	<context:component-scan base-package="com.fortune.history_Service"></context:component-scan>
+	
 
 	
 </beans:beans>

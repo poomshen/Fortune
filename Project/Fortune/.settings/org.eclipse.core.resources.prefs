@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/fortune/name_Controller/HomeController.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/history/historyList.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/index.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/sign.jsp=UTF-8
 encoding//src/main/webapp/assets/css/style.css=UTF-8
