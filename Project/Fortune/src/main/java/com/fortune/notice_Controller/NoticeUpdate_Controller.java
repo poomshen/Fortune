@@ -1,9 +1,8 @@
 /*
 * @Class : NoticeUpdate_Controller
-* @Date : 2016.11.19
+* @Date : 2016.11.16
 * @Author : 김지율
 * @Desc : 공지사항게시판 Update Controller
-* 		  11.19 분리작업 진행중
 */
 
 package com.fortune.notice_Controller;
@@ -27,11 +26,11 @@ public class NoticeUpdate_Controller {
 	@Autowired
 	private SqlSession sqlSession;
 
-	// 공지글 수정하기
+	// 글 수정하기
 	@RequestMapping(value="noticeUpdate.htm", method=RequestMethod.GET)
 	public String noticeUpdate(String notice_no, Model model) throws ClassNotFoundException, SQLException {
 
-		System.out.println("NoticeUpdateController를 GET방식으로 탑니다~");
+		System.out.println("NoticeController의 noticeUpdate를  GET방식으로 탑니다~");
 
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
 		Notice_DTO noticeUpdate = noticeDao.detailNotice(notice_no);
@@ -45,7 +44,7 @@ public class NoticeUpdate_Controller {
 	@RequestMapping(value="noticeUpdate.htm", method=RequestMethod.POST)
 	public String noticeUpdate(Notice_DTO ndto) throws ClassNotFoundException, SQLException, IOException {
 
-		System.out.println("NoticeUpdateController를 POST방식으로 탑니다~");
+		System.out.println("NoticeController의 noticeUpdate를  POST방식으로 타서 실제수정 할꺼지롱~");
 		
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
 		noticeDao.updateNotice(ndto);

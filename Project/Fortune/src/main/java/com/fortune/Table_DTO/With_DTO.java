@@ -9,23 +9,16 @@ public class With_DTO {
 	private String collabo_req_index;
 	private String collabo_req_no;
 	private String user_ID;
-	private String collabo_start2;
-	private String collabo_end2;
 	private Date collabo_start;
 	private Date collabo_end;
 	private String collabo_state;
-	private String collabo_req_id;
+	private String collabo_req_ID;
 	
 	
 	
 	
 	
-	public String getCollabo_req_id() {
-		return collabo_req_id;
-	}
-	public void setCollabo_req_id(String collabo_req_id) {
-		this.collabo_req_id = collabo_req_id;
-	}
+	
 	public String getCollabo_no() {
 		return collabo_no;
 	}
@@ -56,18 +49,7 @@ public class With_DTO {
 	public void setCollabo_state(String collabo_state) {
 		this.collabo_state = collabo_state;
 	}
-	public String getCollabo_start2() {
-		return collabo_start2;
-	}
-	public void setCollabo_start2(String collabo_start2) {
-		this.collabo_start2 = collabo_start2;
-	}
-	public String getCollabo_end2() {
-		return collabo_end2;
-	}
-	public void setCollabo_end2(String collabo_end2) {
-		this.collabo_end2 = collabo_end2;
-	}
+	
 	public Date getCollabo_start() {
 		return collabo_start;
 	}
@@ -80,13 +62,23 @@ public class With_DTO {
 	public void setCollabo_end(Date collabo_end) {
 		this.collabo_end = collabo_end;
 	}
+	public String getCollabo_req_ID() {
+		return collabo_req_ID;
+	}
+	public void setCollabo_req_ID(String collabo_req_ID) {
+		this.collabo_req_ID = collabo_req_ID;
+	}
 	
 	@Override
 	public String toString() {
-		return "ReDto [collabo_no=" + collabo_no + ", collabo_req_index=" + collabo_req_index + ", collabo_req_no="
+		return "With_DTO [collabo_no=" + collabo_no + ", collabo_req_index=" + collabo_req_index + ", collabo_req_no="
 				+ collabo_req_no + ", user_ID=" + user_ID + ", collabo_start=" + collabo_start + ", collabo_end="
-				+ collabo_end + ", collabo_state=" + collabo_state + "]";
+				+ collabo_end + ", collabo_state=" + collabo_state + ", collabo_req_ID=" + collabo_req_ID + "]";
 	}
+	
+	
+	
+	
 	
 	
 	

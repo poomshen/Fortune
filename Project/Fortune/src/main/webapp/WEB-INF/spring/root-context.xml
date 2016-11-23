@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:security="http://www.springframework.org/schema/security" 
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<security:global-method-security pre-post-annotations="enabled" />
 
 	<bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
@@ -21,7 +27,8 @@
 		<property name="mapperLocations" value="classpath*:com/fortune/XML_DAO/*xml" />
 
 	</bean>
-
+	
+<bean name="jsonview" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
 
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

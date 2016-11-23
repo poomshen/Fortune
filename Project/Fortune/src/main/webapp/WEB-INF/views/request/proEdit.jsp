@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <title>Insert title here</title>
 </head>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    request.setCharacterEncoding("UTF-8");
 %>
@@ -63,7 +64,8 @@
 			
 
 			<div class="top-content-bottom-link">
-				<form id="login" role="form" method="post">
+				
+				<form role="form" action="" method="post" name ="f">
 					<div class="col-sm-12 form-group container"
 						style="margin-left: 19%">
 						<label class="sr-only" for="r-form-1-first-name">First
@@ -86,16 +88,20 @@
 									type="password" name="user_password"
 									class="form-control hvr-glow" id="user_password" tabindex="2"
 									onkeydown="onKeydown();">
+									 <c:if test="${param.error != null}">
+                                    <div>
+                                   		    로그인 실패 <br>
+                                    </div>
+                                 </c:if>
 							</div>
 						</div>
 					</div>
 
 					<div style="margin-left: -3%">
 						<input type="button" onclick="joins()" class="btn hvr-forward" tabindex="4" value="join">
-						&nbsp; &nbsp; &nbsp;
-						
-						<button type="submit" formaction="loginSubmit.htm" class="btn hvr-forward" tabindex="3" value="login">						
-						login</button>
+
+						&nbsp; &nbsp; &nbsp;						
+						<button type="submit"  class="btn hvr-forward" tabindex="3" >login</button>
 					</div>
 
 				</form>
