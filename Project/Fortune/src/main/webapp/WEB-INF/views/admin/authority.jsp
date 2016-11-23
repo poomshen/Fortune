@@ -18,11 +18,13 @@
 			type : 'get',
 			data : {"user_id" : $('#user_id'+index).val(), "role_no" : $('#role_no'+index).val()},
 			success : function(data) {
+				alert(data.msg);
 				console.log("success");
 				console.log(data);
 				output(data);
 			},
 			error : function(e) {
+				alert(data.msg);
 				console.log("error");
 				console.log(e);
 			}
@@ -32,29 +34,19 @@
 	function output(data) {
 		$('#result').empty();
 		var str = "";
-		$.each(data.list, function(index, item) {
-			if(item.role_no == '0'){
-				var result0 = "selected=selected";
-			}else if(item.role_no == '1'){
-				var result1 = "selected=selected";
-			}else if(item.role_no == '2'){
-				var result2 = "selected=selected";
-			}else if(item.role_no == '3'){
-				var result3 = "selected=selected";
-			}else if(item.role_no == '4'){
-				var result4 = "selected=selected";
-			}else if(item.role_no == '5'){
-				var result5 = "selected=selected";
-			}
+		
+		$.each(data.authorityList, function(index, aitem) {
+			var opt = "";
+			$.each(data.roleList, function(index, ritem) {
+				var result = "";
+				if(aitem.role_no == ritem.role_no){
+					result = " selected=selected";
+				}
+				opt += "<option value="+ritem.role_no+result+">"+ritem.role+"</option>";
+			});
 			
-			str += "<tr><td align=center><input type=hidden id=user_id"+index+" name=user_id"+index+" value="+item.user_id+">"+item.user_id+"</td>"+
-					"<td align=center><select name=role_no"+index+" class=role_no"+index+" id=role_no"+index+" class=cd-select>"+
-					"<option value=0 "+ result0 +">manager</option>"+
-					"<option value=1 "+ result1 +">boss</option>"+
-					"<option value=2 "+ result2 +">dept</option>"+
-					"<option value=3 "+ result3 +">team</option>"+
-					"<option value=4 "+ result4 +">user</option>"+
-					"<option value=5 "+ result5 +">nouser</option>"+
+			str += "<tr><td align=center><input type=hidden id=user_id"+index+" name=user_id"+index+" value="+aitem.user_id+">"+aitem.user_id+"</td>"+
+					"<td align=center><select name=role_no"+index+" class=role_no"+index+" id=role_no"+index+" class=cd-select>"+opt+
 					"</select><input type=submit class=update_btn value=수정 onclick=updatebtn("+index+")></td></tr>";
 		});
 		
@@ -70,17 +62,14 @@
 				<th align="center">회원 아이디</th>
 				<th align="center">권한</th>
 			</tr>
-			<c:forEach items="${list}" var="alist" varStatus="status">
+			<c:forEach items="${authorityList}" var="alist" varStatus="status">
 				<tr>
 					<td align="center"><input type="hidden" id="user_id${status.index}" name="user_id${status.index}" value="${alist.user_id}">${alist.user_id}</td>
 					<td align="center">
 					<select name="role_no${status.index}" class="role_no${status.index}" id="role_no${status.index}" class="cd-select">
-							<option value="0" ${alist.role_no == '0' ? 'selected="selected"' : ''}>manager</option>
-							<option value="1" ${alist.role_no == '1' ? 'selected="selected"' : ''}>boss</option>
-							<option value="2" ${alist.role_no == '2' ? 'selected="selected"' : ''}>dept</option>
-							<option value="3" ${alist.role_no == '3' ? 'selected="selected"' : ''}>team</option>
-							<option value="4" ${alist.role_no == '4' ? 'selected="selected"' : ''}>user</option>
-							<option value="5" ${alist.role_no == '5' ? 'selected="selected"' : ''}>nouser</option>
+						<c:forEach items="${roleList}" var="rlist">
+							<option value="${rlist.role_no}" ${alist.role_no == rlist.role_no ? 'selected="selected"' : ''}>${rlist.role}</option>
+						</c:forEach>
 					</select>
 					<input type="submit" class="update_btn" value="수정" onclick="updatebtn(${status.index})"></td>
 				</tr>
