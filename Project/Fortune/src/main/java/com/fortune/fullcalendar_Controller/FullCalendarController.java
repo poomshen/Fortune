@@ -89,7 +89,7 @@ public class FullCalendarController {
            fullcalendarDAO.insertWork_Users(wudto);
         }
         
-        map.put("count", sadto);
+        map.put("alarm", sadto);
         
     
         return map;
