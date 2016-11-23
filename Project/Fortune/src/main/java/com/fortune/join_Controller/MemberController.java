@@ -44,8 +44,11 @@ public class MemberController {
 	
 	
 	
+
+
 	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session ,Authentication authentication ){
+
 		System.out.println("로그인 버튼 눌렀고요");
 		UserDetails details = (UserDetails)authentication.getPrincipal();
 		String user_id = details.getUsername();
@@ -58,8 +61,9 @@ public class MemberController {
 			
 		session.setAttribute("info", result);
 			
+			return "home.main";
+		
 			
-		return "home.main";
 	
 	}
 	
