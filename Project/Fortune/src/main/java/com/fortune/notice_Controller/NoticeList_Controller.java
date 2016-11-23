@@ -71,31 +71,6 @@ public class NoticeList_Controller {
 		
 		return mv;
 
-/*
-		// 게시판 기본 설정(기본값 처리)/////////////
-		int page = 1;
-		String field = "NOTICE_TITLE";
-		String query = "%%";
-		//////////////////////////////////////
-		if (pg != null && pg.equals("")) {
-			page = Integer.parseInt(pg);
-		}
-		if (f != null && f.equals("")) {
-			field = f;
-		}
-		if (q != null && q.equals("")) {
-			query = q;
-		}
-
-		System.out.println(page + " / " + field + " / " + query);
-
-		
-
-		INotice noticeDao = sqlSession.getMapper(INotice.class);
-		List<Notice_DTO> noticeList = noticeDao.listNotice(page, field, query);
-		model.addAttribute("noticeList", noticeList);
-
-		return "notice/noticeList";*/
 	}
 
 }
