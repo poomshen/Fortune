@@ -16,7 +16,7 @@ import com.fortune.history_DAO.IHistory;
 * @Filename Name : HistoryController
 * @date:2016. 11. 23. 
 * @author: 이성준
-* @description : 히스토리를 남기기 위해 ajax 이 사용되기 위한 서비스 
+* @description : 히스토리를 남기기 위해 ajax 이 사용되기 위한 컨틀롤러
 */
 @Controller
 public class HistoryController {
@@ -26,6 +26,7 @@ public class HistoryController {
  	
 	@RequestMapping("historyList.htm")
 	public String historyList(Model model){
+		
 		
 		IHistory  history = SqlSession.getMapper(IHistory.class);
 		ArrayList<HistoryFunction_DTO> list =  history.historyAllList();
