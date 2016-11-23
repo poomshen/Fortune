@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo_req WHERE (${param2}
 		LIKE '%${param3}%' AND collabo_req_state LIKE '%${param4}%') ORDER BY collabo_req_date DESC ) N )
-		WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50
+		WHERE NUM BETWEEN 1 + (${param1} - 1) * 500 AND 500 + (${param1} - 1) * 500
 	</select>
 <!-- SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo_req WHERE( user_ID

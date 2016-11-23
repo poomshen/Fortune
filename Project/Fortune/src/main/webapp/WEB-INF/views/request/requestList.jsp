@@ -128,18 +128,20 @@
 	<a href="writerequest.htm" class="btn btn-success">요청</a>
 </security:authorize>
 
-	<a href="listReplyRequest.htm" class="btn btn-success">답장자리스트</a>
-	<a href="requestList.htm" class="btn btn-success">작성자리스트</a>
-	<a href="listallRequest.htm" class="btn btn-success">전체리스트</a>
+	<a href="listReplyRequest.htm" class="btn btn-success">작성자 리스트</a>
+	<a href="requestList.htm" class="btn btn-success">답장자 리스트</a>
+	<a href="listallRequest.htm" class="btn btn-success">전체 리스트</a>
 
 <%-- <c:forEach items="${all}" var="c">
 	<c:if test="${c.collabo_req_state=='대기'}">
 		<td class="collabo_req_state">${c.collabo_req_state = '대기'}</td>
 	</c:if>
 </c:forEach> --%>
-	<a href="listReplyRequest.htm?st=대기" class="btn btn-success">대기</a>
-	<a href="listReplyRequest.htm?st=수락" class="btn btn-success">수락</a>
-	<a href="listReplyRequest.htm?st=거절" class="btn btn-success">거절</a>
+
+
+	<a href="listallRequest.htm?st=대기" class="btn btn-success">대기(전체전용)</a>
+	<a href="listallRequest.htm?st=수락" class="btn btn-success">수락(전체전용)</a>
+	<a href="listallRequest.htm?st=거절" class="btn btn-success">거절(전체전용)</a>
 
 </body>
 </html>

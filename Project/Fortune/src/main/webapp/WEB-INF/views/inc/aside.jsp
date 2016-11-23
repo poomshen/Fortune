@@ -17,7 +17,7 @@
                                 <li>
                                <a href="#">협업요청 리스트<span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level">
-                                   <li> <a href="listReplyRequest.htm">답장자요청 리스트</a></li>
+                                   <li> <a href="listReplyRequest.htm">작성자요청 리스트</a></li>
                                    <li> <a href="requestList.htm">답장자요청 리스트</a></li>
                                    <li> <a href="listallRequest.htm">전체 리스트</a></li>
                                 </ul>
