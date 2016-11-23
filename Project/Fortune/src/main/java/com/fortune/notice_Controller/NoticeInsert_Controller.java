@@ -38,7 +38,7 @@ public class NoticeInsert_Controller {
 	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.GET)
 	public String noticeInsert() {
 		System.out.println("NoticeController의 noticeInsert를 탑니다~");
-		return "notice/noticeInsert";
+		return "notice.noticeInsert";
 	}
 
 	// 공지사항등록 실제처리
