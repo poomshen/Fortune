@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,5 +75,36 @@ public class HomeController {
 		System.out.println("메뉴 컨트롤러");
 		return "home.main";
 	}
+	@RequestMapping(value = "/alarm.htm", method = RequestMethod.GET)
+	public String test() {
+
+		
+		System.out.println("alarm jsp 보여주기 컨트롤러");
+		return "home.alarm";
+	}
+	
+	@RequestMapping(value = "/send.htm", method = RequestMethod.POST)
+	public String send(HttpServletRequest request,Model model) {
+
+		
+	
+		String[] selector = request.getParameterValues("selector");
+	
+		
+		model.addAttribute("selector",selector);
+		
+		/*값 넘어오는지 확인*/
+	
+	/*	for(int i=0;i<selectors.length;i++)
+		{System.out.println("selector : "+selectors[i]);}*/
+		
+		/*세션에 값을 저장*/
+	   
+	/*	 session.setAttribute("selector", selectors);*/
+		
+		System.out.println("selector 컨트롤러 끝");
+		return "home.alarm";
+	}
+
 
 }

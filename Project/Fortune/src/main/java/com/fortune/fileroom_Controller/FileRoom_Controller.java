@@ -19,7 +19,7 @@ public class FileRoom_Controller {
 	
 	@RequestMapping(value="/mainfile.htm")
 	public ModelAndView mainFile(String pg){
-		System.out.println("mainFile 컨트롤러");
+		System.out.println("mainFile 而⑦듃濡ㅻ윭");
 		
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		int page = 1;
@@ -29,24 +29,24 @@ public class FileRoom_Controller {
 		}
 		int row_size = 9;
 
-		int total_count = fileromm_DAO.countFile();	//file 개수
+		int total_count = fileromm_DAO.countFile();	//file 媛쒖닔
 		System.out.println("totalcount : " + total_count);
 
-		// ... 목록
-		int all_page = (int) Math.ceil(total_count / (double) row_size); // 페이지수
+		// ... 紐⑸줉
+		int all_page = (int) Math.ceil(total_count / (double) row_size); // �럹�씠吏��닔
 		// int totalPage = total/rowSize + (total%rowSize==0?0:1);
-		System.out.println("페이지수 : " + all_page);
+		System.out.println("�럹�씠吏��닔 : " + all_page);
 
-		int block = 5; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
+		int block = 5; // �븳�럹�씠吏��뿉 蹂댁뿬以� 踰붿쐞 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
 		// [10] >>
-		int from_page = ((page - 1) / block * block) + 1; // 보여줄 페이지의 시작
+		int from_page = ((page - 1) / block * block) + 1; // 蹂댁뿬以� �럹�씠吏��쓽 �떆�옉
 		// ((1-1)/10*10)
-		int to_page = ((page - 1) / block * block) + block; // 보여줄 페이지의 끝
-		if (to_page > all_page) { // 예) 20>17
+		int to_page = ((page - 1) / block * block) + block; // 蹂댁뿬以� �럹�씠吏��쓽 �걹
+		if (to_page > all_page) { // �삁) 20>17
 			to_page = all_page;
 		}
 
-		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page);	//file 리스트
+		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page);	//file 由ъ뒪�듃
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);
@@ -56,7 +56,7 @@ public class FileRoom_Controller {
 		mv.addObject("block", block);
 		mv.addObject("from_page", from_page);
 		mv.addObject("to_page", to_page);
-		mv.setViewName("fileView.file");
+		mv.setViewName("fileView.file_test");
 		
 		return mv;
 	}

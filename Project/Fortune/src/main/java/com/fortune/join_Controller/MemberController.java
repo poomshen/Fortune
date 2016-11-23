@@ -40,10 +40,12 @@ public class MemberController {
 	
 	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.POST)
 	public String loginSubmit(HttpSession session,Join_DTO dto){
+		
+		
 		System.out.println("로그인 버튼 눌렀고요");
 		
 		Join_DTO result = new Join_DTO();
-	
+		
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		result = dao.login(dto);
 		System.out.println("login dao 동작 완료");
@@ -58,7 +60,7 @@ public class MemberController {
 			session.setAttribute("info", result);
 			
 			//System.out.println("result값 : "+result);
-			
+			session.setAttribute("connect", "connect");
 			return "home.main";
 		}
 		
