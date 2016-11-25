@@ -28,7 +28,10 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
 	<context:component-scan base-package="com.fortune.join_Controller" />	
 	<context:component-scan base-package="com.fortune.fullcalendar_Controller" />
 	<context:component-scan base-package="com.fortune.authority_Controller" />
-		<context:component-scan base-package="com.fortune.alarm_Controller" />
+	<context:component-scan base-package="com.fortune.alarm_Controller" />
+
+	<context:component-scan base-package="com.fortune.organization_Controller" />
+
 	
 	
 	<!-- 요청 스캔
@@ -41,6 +44,13 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
 	<context:component-scan base-package="com.fortune.request_Service"/>
 	
 	<context:component-scan base-package="com.fortune.websocket" />
+	
+	<!-- 히스토리
+		이름 : 이성준
+		일자 : 2016-11-23
+		목적 : 히스토리 를 보게 한다.
+	 -->
+	<context:component-scan base-package="com.fortune.history_Controller"></context:component-scan>
 	
  	<websocket:handlers>
 		<websocket:mapping handler="chatHandler" path="/chat-ws.htm" />

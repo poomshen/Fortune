@@ -66,15 +66,56 @@ public class ProController {
 	}
 
 	// 요청한 프로젝트들을 리스트로 담아서 뿌려주는 역할을 해준다.
+	 @Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
-	public String getRequest(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+	public String requestList(String pg, String f, String q, String st,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 
-		List<Request_DTO> list = proservice.getRequest(pg, f, q, session);
+		
+		List<Request_DTO> list = proservice.getRequest(pg, f, q, st, session);
+		System.out.println("아아ㄷ아"+st);
 		model.addAttribute("list", list); // 자동 forward
 		
 		return "request.requestList";
 
 	}
+	//답장자
+	 @Transactional
+	@RequestMapping("listReplyRequest.htm") // /customer/notice.htm
+	public String listReplyRequest( String pg, String f, String q,String st, HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+		
+			
+		List<Request_DTO> list = proservice.listReplyRequest(pg, f, q,st, session);
+		System.out.println("아아ㅇ아"+st);
+		model.addAttribute("list", list); // 자동 forward
+		
+		return "request.requestList";
+
+	}
+	//전체
+	 @Transactional
+	@RequestMapping("listallRequest.htm") // /customer/notice.htm
+	public String listallRequest( String pg, String f, String q, String st,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+		
+		System.out.println("아아ㄴ아"+st);
+		List<Request_DTO> list = proservice.listallRequest(pg, f, q, st, session);
+		System.out.println("커피를 타보자");
+		model.addAttribute("list", list); // 자동 forward
+		return "request.requestList";
+
+	}
+	
+	/*//test 대기 수락 거절 클래스
+	@RequestMapping("kindState.htm")
+	public String kindState(String collabo_req_state, String pg, String f, String q,HttpSession session , Model model) throws ClassNotFoundException, SQLException {
+
+		 proservice.listallRequest(pg, f, q, session); //전체
+		 proservice.kindState(collabo_req_state);
+
+		// Tiles
+		return "request.requestList";
+		// View
+
+	}*/
 
 	// 글상세보기
 	@RequestMapping("ProDetail.htm")

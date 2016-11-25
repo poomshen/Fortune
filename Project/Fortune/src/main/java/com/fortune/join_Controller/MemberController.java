@@ -68,8 +68,6 @@ public class MemberController {
 		System.out.println("login dao 동작 완료");
 		
 		
-		
-			
 		session.setAttribute("info", result);
 		
 		//추가사항  
@@ -112,6 +110,7 @@ public class MemberController {
 		Join_DTO dto = (Join_DTO)session.getAttribute("info");
 		System.out.println("id값 : "+dto.getUser_id());
 		dao.deleteMember(dto.getUser_id());
+		
 		
 		System.out.println("삭제완료!!~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
