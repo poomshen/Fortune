@@ -138,34 +138,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<!-- 담당자 보여주는 태그 -->
+	<!--만든 목적: 담당자 선택해주려면 보여주어야 하는데 그것을 기반으로 만들었습니다.
+		날짜 일자:2016-11-22 
+	-->
 	<select id="managerDto" resultType="com.fortune.Table_DTO.With_DTO">
 
 		SELECT * FROM collabo WHERE collabo_req_index= #{collabo_req_index}
 	</select>
 
 
-	<!-- 담당자 선택 -->
+	<!--만든 목적: 담당자 선택을해야하는데 데이터가 필요하였다.
+		날짜 일자:2016-11-23 
+	 -->
 	<update id="updatemanager">
 		UPDATE collabo SET
 		user_ID=#{user_ID}
 		WHERE collabo_req_index=#{collabo_req_index}
 
 	</update>
-
+	<!-- 만든 목적:부장 전용이라는 데이터를 뽑는데 사용되는 데이터 입니다..
+	        날짜 일자:2016-11-23 
+	-->
 	<select id="listEffect" resultType="com.fortune.Table_DTO.Join_DTO">
 
 		select user_ID , user_password,user_name,user_gender,user_date,user_phone,user_join,position_No,
     team_No,dept_No,role_no from users where ROLE_NO = 2
 
 	</select>
-
+	<!-- 만든 목적: 팀장 전용이라는 데이터를 뽑는데 사용되는 데이터 입니다..
+		 날짜 일자: 2016-11-23 
+	-->
 	<select id="listManager" resultType="com.fortune.Table_DTO.Join_DTO">
 
 		select user_ID , user_password,user_name,user_gender,user_date,user_phone,user_join,position_No,
     team_No,dept_No,role_no from users where ROLE_NO = 3
 
 	</select>
+	
+	<!-- 만든 목적: 대기에서 진행중으로 바꿔주는 데이터 입니다. 
+		 날짜 일자: 2016-11-25
+	 -->
+	 
+	<update id="manager">
+		UPDATE collabo SET
+		collabo_state='진행중'
+		WHERE collabo_req_index=#{collabo_req_index}
+	</update>
+
+	<!--만든 목적: 담당자가 정해지면 참가자를 지정할수 있어야 하기에 만들었습니다.
+		날짜 일자: 2016-11-25 
+	 -->
+	
+	
+
 
 
 
