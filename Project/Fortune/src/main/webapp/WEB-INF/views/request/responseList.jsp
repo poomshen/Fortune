@@ -82,7 +82,7 @@
 					<td class="collabo_end">${n.collabo_end}</td>
 					<td class="collabo_req_state">${n.collabo_state}</td>
 					<td class="collabo_req_id">${n.collabo_req_ID}</td>
-					<td class="collabo_cal"><a href="schedule.htm"><button>Click</button></a></td>
+					<td class="collabo_cal"><a href="schedule.htm?collabo_no=${n.collabo_no}"><button>Click</button></a></td>
 					
 					
 				</tr>	
