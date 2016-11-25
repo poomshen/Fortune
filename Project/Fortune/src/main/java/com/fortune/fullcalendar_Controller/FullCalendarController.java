@@ -75,7 +75,7 @@ public class FullCalendarController {
        
         for(int i=0;i<selectId.length;i++){
         	adto.setUser_id(selectId[i]);
-        	adto.setWork_type(1);
+        	adto.setWork_type("1");
         	alarmDAO.insertAlarm(adto);
         	//select한 아이디값에 따라 count가 다르므로 해당 count값을 저장해주어야함
         
