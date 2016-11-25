@@ -86,8 +86,7 @@
 							<div class="form-group">
 								<label class="sr-only" for="r-form-1-email">pwd</label> <input
 									type="password" name="user_password"
-									class="form-control hvr-glow" id="user_password" tabindex="2"
-									onkeydown="onKeydown();">
+									class="form-control hvr-glow" id="user_password" tabindex="2">
 									 <c:if test="${param.error != null}">
                                     <div>
                                    		    로그인 실패 <br>

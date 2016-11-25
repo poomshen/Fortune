@@ -15,12 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	select USER_ID, USER_PASSWORD, USER_NAME, USER_GENDER, USER_DATE, USER_PHONE, USER_JOIN, DEPT_NO, TEAM_NO, POSITION_NO from USERS 
  	where USER_ID=#{user_id} AND USER_PASSWORD=#{user_password}
  </select>
+ 
  <!-- 멤버 삭제 -->
  <delete id="deleteMember" parameterType="String">
  	delete from USERS
  		   where USER_ID=#{user_id}
  </delete>
-
  
  <!-- 회원이 자기 정보 수정 -->
  <update id="updateMember" parameterType="com.fortune.Table_DTO.Join_DTO" >
