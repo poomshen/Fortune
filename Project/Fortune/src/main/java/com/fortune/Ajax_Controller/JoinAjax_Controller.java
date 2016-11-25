@@ -43,16 +43,6 @@ public class JoinAjax_Controller {
 	}
 	
 	
-	@RequestMapping(value="ws.ajax", method = RequestMethod.POST)
-    public @ResponseBody Select_Alarm_DTO ajax(@RequestParam(value="selectId[]") List<String> selectId,
-         @RequestParam(value="work_type") String work_type)
-            throws ClassNotFoundException, SQLException{
-	
-	      System.out.println("아작스 탔지?");
-	      
-	      return null;
-	      
-	   }
 	@RequestMapping("/pwdchk.ajax")
 	public @ResponseBody String pwdchk(@RequestParam(value="user_password") String user_password, @RequestParam(value="user_password_chk") String user_password_chk){
 		System.out.println("pwd 중복 체크");

@@ -67,7 +67,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	        	   System.out.println("---------------------");
 	              if( ids.get(s.getId()).equals(selectedId[i]) ){
 	                 System.out.println(selectedId[i]);
-	                 s.sendMessage(new TextMessage(selectedId[i]+"님"+id_count_type[2]+"요청"+selectedCount[i]+"건 알림 발생") );
+	                 s.sendMessage(new TextMessage(id_count_type[2]+"/"+selectedCount[i]+"건 알림 발생") );
 	              }
 	           }
 	           
