@@ -222,51 +222,46 @@
 <!--부서명 입력-->
 <!--select id 변경 : 변경불가 -->
 <div class="form-group">
-<div class="col-sm-3 col-sm-offset-1" style="margin-left:10%">
-         <section class="main clearfix">
-               <div class="fleft">
-               <select name="dept_no" id="cd-dropdown" class="cd-select">
-                <option value="-1" selected>부서명을 선택하세요</option>
-            	<c:forEach var="i" items="${dept}">            
-                   <option style="text-align:center" value="${i.dept_no}">${i.dept_name}</option>
-                </c:forEach> 
-               </select>
-            </div>
-         </section>
-</div>
-
-<div class="col-sm-3">
-         <section class="main clearfix">
-               <div class="fleft">
-               <select name="team_no" id="cd-dropdown2" class="cd-select">
-                  <option value="-1" selected>팀을 선택하세요</option>
-            <c:forEach var="i" items="${team}">
-                     <option style="text-align:center" value="${i.team_no}">${i.team_name}</option>
-                  </c:forEach>
-         
-               </select>
-            </div>
-         </section>
-</div>
-
-<div class="col-sm-3">
-         <section class="main clearfix">
-               <div class="fleft">
-               <select name="position_no"  id="cd-dropdown3" class="cd-select">
-                  <option value="-1" selected>직급을 선택하세요</option>
-               <c:forEach var="i" items="${position}">
-                     <option style="text-align:center" value="${i.position_no}">${i.position_name}</option>
-                  </c:forEach>   
-         
-               </select>
-            </div>
-         </section>
-</div>
-
-
-
-
-
+	<div class="col-sm-3 col-sm-offset-1" style="margin-left:10%">
+	         <section class="main clearfix">
+	               <div class="fleft">
+	               <select name="dept_no" id="cd-dropdown" class="cd-select">
+	                <option value="-1" selected>부서명을 선택하세요</option>
+	            	<c:forEach var="i" items="${dept}">            
+	                   <option style="text-align:center" value="${i.dept_no}">${i.dept_name}</option>
+	                </c:forEach> 
+	               </select>
+	            </div>
+	         </section>
+	</div>
+	
+	<div class="col-sm-3">
+	         <section class="main clearfix">
+	               <div class="fleft">
+	               <select name="team_no" id="cd-dropdown2" class="cd-select">
+	                  <option value="-1" selected>팀을 선택하세요</option>
+	            <c:forEach var="i" items="${team}">
+	                     <option style="text-align:center" value="${i.team_no}">${i.team_name}</option>
+	                  </c:forEach>
+	         
+	               </select>
+	            </div>
+	         </section>
+	</div>
+	
+	<div class="col-sm-3">
+	         <section class="main clearfix">
+	               <div class="fleft">
+	               <select name="position_no"  id="cd-dropdown3" class="cd-select">
+	                  <option value="-1" selected>직급을 선택하세요</option>
+	               <c:forEach var="i" items="${position}">
+	                     <option style="text-align:center" value="${i.position_no}">${i.position_name}</option>
+	                  </c:forEach>   
+	         
+	               </select>
+	            </div>
+	         </section>
+	</div>
 </div>
 
 <!-- Button -->
