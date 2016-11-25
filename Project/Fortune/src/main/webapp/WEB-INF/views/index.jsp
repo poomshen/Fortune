@@ -80,7 +80,7 @@
 							<span class="addon"><i class="glyphicon glyphicon-lock" ></i></span>
 							<div class="form-group">
 								<label class="sr-only" for="r-form-1-email">pwd</label> 
-								<input type="password" name="user_password" style="background-color:transparent;" class="form-control hvr-glow" id="user_password" tabindex="2">
+								<input type="password" name="user_password" style="background-color:transparent; color:#fff; border: none; border-bottom: 1.5px solid rgba(255, 255, 255, 0.56);" class="form-control hvr-glow" id="user_password" tabindex="2">
 									<c:if test="${param.error != null}">
                                     <div>
                                    		    로그인 실패 <br>
