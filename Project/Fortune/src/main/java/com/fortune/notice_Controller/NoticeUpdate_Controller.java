@@ -28,7 +28,7 @@ public class NoticeUpdate_Controller {
 
 	// 글 수정하기
 	@RequestMapping(value="noticeUpdate.htm", method=RequestMethod.GET)
-	public String noticeUpdate(String notice_no, Model model) throws ClassNotFoundException, SQLException {
+	public String noticeUpdate(int notice_no, Model model) throws ClassNotFoundException, SQLException {
 
 		System.out.println("NoticeController의 noticeUpdate를  GET방식으로 탑니다~");
 

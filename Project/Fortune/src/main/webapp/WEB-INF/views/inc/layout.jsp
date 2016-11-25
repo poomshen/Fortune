@@ -67,59 +67,11 @@ function appendMessage(msg) {
 	
 $(document).ready(function() {
 		connect();
-	/* 
-	console.log(msg);
-	
-	
-	if(msg!=null){send();};*/
-
-
-	/* $('#alarm').click(function(){
-		
-		var selectId=[];
-		
-		$("input[name='selectId']:checked").each(function(i){
-		
-			selectId.push($(this).val());//체크된것만 뽑아서 배열에 넣어주기
-		
+		$("#alarmList li").click(function() {
+		    alert(this.id); 
+		    
+		    window.location.href = "alarmCheck.htm?work_type="+this.id;
 		});
-		alert(selectId+$('#work_type').val());
-	 	  $.ajax({
-	 	      url : 'ws.ajax',
-	 	      type : 'post',
-	 	      data :{
-	 	    	  
-	 	    	  selectId:selectId,
-	 	    	  
-	 	    	  work_type:$('#work_type').val()
-	 	    	  
-	 	      		},
-	 	      
-	 	      success : function(data) {
-	 	      
-	 	  
-	 	  		send(selectId);
-	 	      		
-	 	      }
-	});
-	 	   */
-	 	  
-	 	  
-	 	  
-/* 	  $.ajax({
-      url : 'ws.ajax',
-      type : 'post',
-      success : function(data) {
-      
-    	  //selectId에는 check한 id가 들어가야함
-    	  //ex)var selectId="sungjun@gmail.com/mclee@gmail.com";
-    	  send(selectId);
-      		
-      }
-	 
-	  }); */
-	  
-  
 
 });
 
@@ -137,17 +89,8 @@ $(document).ready(function() {
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-12">
-					<form>
-					<input type="checkbox" value="a" name="selectId">
-					
-					<input type="checkbox" value="b" name="selectId">
-					
-					<input type="checkbox" value="c" name="selectId">
-					
-					<input type="text" id="work_type" name="work_type">
-					<input type="button" onclick='alarm();' name="alarm" id="alarm" value="alarm">
-					</form>
-					<tiles:insertAttribute name="content" />
+				
+							<tiles:insertAttribute name="content" />
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>

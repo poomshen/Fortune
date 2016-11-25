@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +21,6 @@ import com.fortune.fileroom_DAO.IFileRoom;
 public class Upload_Controller {
 	
 	@Autowired
-	//@Resource
 	private SqlSession sqlsession;
 	
 	@RequestMapping(value="/uploadfile.ajax", method=RequestMethod.POST ,produces="application/json")
@@ -33,7 +30,6 @@ public class Upload_Controller {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		MultipartFile mf = request.getFile("file");
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
-				
 		String file_name = mf.getOriginalFilename();
 		System.out.println("file_name : " + file_name);
 		

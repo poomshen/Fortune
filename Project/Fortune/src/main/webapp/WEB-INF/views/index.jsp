@@ -33,10 +33,9 @@
 	href="assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
-<link rel="stylesheet"
-	href="path/to/font-awesome/css/font-awesome.min.css">
+
 	
-<script src="dist/js/websoket.js"></script>
+
 
 
 
@@ -66,28 +65,22 @@
 			<div class="top-content-bottom-link">
 				
 				<form role="form" action="" method="post" name ="f">
-					<div class="col-sm-12 form-group container"
-						style="margin-left: 19%">
-						<label class="sr-only" for="r-form-1-first-name">First
-							name</label>
-
+					<div class="col-sm-12 form-group container"	style="margin-left: 19%">
+						<label class="sr-only" for="r-form-1-first-name">First name</label>
 
 						<div class="input-group">
-							<span class="addon"><i class="fa fa-user"
-								aria-hidden="true"></i></span>
+							<span class="addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
 							<div class="form-group">
-								<label class="sr-only" for="r-form-1-email">id</label> <input
-									type="text" name="user_id" class="form-control hvr-glow"
-									id="user_id" tabindex="1">
+								<label class="sr-only" for="r-form-1-email">id</label> 
+								<input type="text" name="user_id" style="background-color:transparent;" class="form-control hvr-glow" id="user_id" tabindex="1">
 							</div>
 						</div>
 						<div class="input-group">
-							<span class="addon" style="padding-right: 6px;"><i class="glyphicon glyphicon-lock"></i></span>
+							<span class="addon"><i class="glyphicon glyphicon-lock" ></i></span>
 							<div class="form-group">
-								<label class="sr-only" for="r-form-1-email">pwd</label> <input
-									type="password" name="user_password"
-									class="form-control hvr-glow" id="user_password" tabindex="2">
-									 <c:if test="${param.error != null}">
+								<label class="sr-only" for="r-form-1-email">pwd</label> 
+								<input type="password" name="user_password" style="background-color:transparent; color:#fff; border: none; border-bottom: 1.5px solid rgba(255, 255, 255, 0.56);" class="form-control hvr-glow" id="user_password" tabindex="2">
+									<c:if test="${param.error != null}">
                                     <div>
                                    		    로그인 실패 <br>
                                     </div>
@@ -466,7 +459,7 @@
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
 	<script src="assets/js/wow.min.js"></script>
-	<script src="assets/js/retina-1.1.0.min.js"></script>
+
 	<script src="assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="assets/js/masonry.pkgd.min.js"></script>
 	<script src="assets/js/scripts.js"></script>

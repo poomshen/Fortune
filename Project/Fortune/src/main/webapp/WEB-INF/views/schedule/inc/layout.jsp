@@ -54,7 +54,38 @@ function onOpen(evt) {
 }
 function onMessage(evt) {
 
-	alert("메세지 : "+evt.data);
+	
+	//console.log(evt.data);
+	
+	  $.ajax({
+		  
+		  type:"post",
+		  dataType: "html",
+		  url:"newAlarm.htm",
+		  data:{"newAlarm": evt.data},
+		  success:function(data){
+		  
+			  
+			  console.log("성공");
+			  console.log(data);
+			  
+			  
+			  $('#alarm').empty();
+			  
+			  
+			  $('#alarm').html(data);
+			 
+			  
+			 
+		
+		  }
+	  });	
+	
+	//$('#blink').addClass("blink_me notification_count");
+	//$('#blink').html("5");
+	
+	
+	//alert("메세지 : "+evt.data);
 }
 function onClose(evt) {
 	appendMessage("연결을 끊었습니다.");

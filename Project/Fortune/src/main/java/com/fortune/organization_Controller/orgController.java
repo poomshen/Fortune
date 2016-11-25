@@ -7,10 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fortune.Table_DTO.Dept_DTO;
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.member_DAO.IJoin;
 import com.fortune.organization_DAO.IOrganization;
 
 @Controller
@@ -19,6 +22,7 @@ public class orgController {
 	@Autowired
 	public SqlSession sqlSession;
 	
+	@Transactional
 	@RequestMapping("/dept.htm")
 	public String deptshow(HttpSession session,Model model){
 		System.out.println("부서 view단 이동");
@@ -33,6 +37,12 @@ public class orgController {
 			System.out.println("해당 아이디값 : "+ deptmember.get(i));
 		}*/
 		model.addAttribute("deptlist", deptmember);
+		
+		ArrayList<Dept_DTO> dto2 = new ArrayList<Dept_DTO>();
+		IJoin dao2 = sqlSession.getMapper(IJoin.class);
+		dto2 = dao2.searchDept();
+		model.addAttribute("dept", dto2);
+		
 		
 		return "business.business";
 	}
