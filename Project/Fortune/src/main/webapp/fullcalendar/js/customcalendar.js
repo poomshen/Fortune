@@ -3,6 +3,7 @@ var content = "<table class='table table-striped'><tr><th>구분</th><th>제목<
 var array = [];
 
 
+
 function fcontent() {
 	var content2 = "";
 	content2 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
@@ -12,11 +13,15 @@ function fcontent() {
 		type : 'post',
 		success : function(data) {
 			console.log(data)
-			$.each(data, function(index, obj) {				
+			$.each(data.schedulelist, function(index, obj) {
+				var userid ="";
+				
 		        content2 += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
 		        content2 += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"';
 		        content2 += ' onclick="test(' + obj.schedule_no;
-		        content2 += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end +"'";
+		        content2 += ",'" + obj.work_title + "','" + obj.work_text;
+		        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
+		        content2 += "','" + obj.users + "'" ;
 		        content2 += ')" >상세보기</a></td></tr>';
 			});
 	        $('#content').html(content2)
@@ -27,8 +32,7 @@ function fcontent() {
 
 
 
-function loadCalendar() {	
-	
+function loadCalendar() {
 	//캘린더 호출
 	var calendar = $('#calendar').fullCalendar({
 		//캐린더의 기본 속성값 지정
@@ -80,6 +84,7 @@ function loadCalendar() {
 			
 			//클릭된 일정의 배경색을 red로 설정
 			$(this).css('background-color', 'red');
+			
 			
 			
 			var content3 = "";
@@ -247,7 +252,7 @@ function loadCalendar() {
 					var scheduleusers="";
 					var count=",";
 					var work_type="";
-					$("input[name='uesrchk']:checked").each(function(i){
+					$("input[name='userchk']:checked").each(function(i){
 
 						scheduleusers += $(this).val()+"/";
 					

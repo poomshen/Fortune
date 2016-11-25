@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import com.fortune.role_DAO.IRole;
 
 @Controller
 public class Update_Controller {
-
+	private static final Logger logger =  Logger.getLogger(Update_Controller.class);
 	@Autowired
 	private SqlSession sqlsession;
 	
@@ -31,21 +32,25 @@ public class Update_Controller {
 		System.out.println("user_id : " + user_id);
 		System.out.println("role_no : " + role_no);
 		
-		IAuthority authority_DAO = sqlsession.getMapper(IAuthority.class);
-		int row = authority_DAO.updateAuthority(user_id, role_no);
-		
-		IRole role_DAO = sqlsession.getMapper(IRole.class);
-		List<Role_DTO> roleList = role_DAO.listRole();
-		System.out.println(roleList);
-		
-		List<Join_DTO> authorityList = authority_DAO.listUsersAuthority();
-		result.put("authorityList", authorityList);
-		result.put("roleList", roleList);
-		
-		if(row > 0){
-			result.put("msg", "수정 성공");
-		}else{
-			result.put("msg", "수정 실패");
+		try{
+			IAuthority authority_DAO = sqlsession.getMapper(IAuthority.class);
+			int row = authority_DAO.updateAuthority(user_id, role_no);
+			
+			IRole role_DAO = sqlsession.getMapper(IRole.class);
+			List<Role_DTO> roleList = role_DAO.listRole();
+			System.out.println(roleList);
+			
+			List<Join_DTO> authorityList = authority_DAO.listUsersAuthority();
+			result.put("authorityList", authorityList);
+			result.put("roleList", roleList);
+			
+			if(row > 0){
+				result.put("msg", "수정 성공");
+			}else{
+				result.put("msg", "수정 실패");
+			}
+		}catch (Exception e) {
+			logger.error("[Update_Controller]");
 		}
 		
 		return result;

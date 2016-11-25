@@ -6,9 +6,15 @@ public class Schedule_Work_DTO {
 	private String schedule_end;
 	private String work_title;
 	private String work_text;
+	private String users;
 	
 	
-	
+	public String getUsers() {
+		return users;
+	}
+	public void setUsers(String users) {
+		this.users = users;
+	}
 	public int getSchedule_no() {
 		return schedule_no;
 	}
