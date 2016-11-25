@@ -36,8 +36,7 @@
    href="assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
    href="assets/ico/apple-touch-icon-57-precomposed.png">
-<link rel="stylesheet"
-   href="path/to/font-awesome/css/font-awesome.min.css">
+
    
 
 <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css">
@@ -62,12 +61,14 @@
 
 </head>
 
-<body>
+<body style="
+    height: 800px;
+">
 
 
 
-   <div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 1500px; width: 1600px; z-index: -999998; position: absolute;">
-   <img src="assets/img/backgrounds/1.jpg" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1500px; height: 980px; max-height: none; max-width: none; z-index: -999999; left: -51.6984px; top: 0px;"></div>
+   <div class="backstretch" style="left: 0px;top: 0px;overflow: hidden;margin: 0px;padding: 0px;height: 1000px;width: 1600px;z-index: -999998;position: absolute;">
+   <img src="assets/img/backgrounds/1.jpg" style="position: absolute;margin: 0px;padding: 0px;border: none;width: 1500px;height: 1200px;max-height: none;max-width: none;z-index: -999999;left: -51.6984px;top: 0px;"></div>
    
    <!-- Loader -->
    <div class="loader" style="display: none;">
@@ -76,8 +77,7 @@
 
 
    <!-- Top content -->
-   <div class="con"
-      style="position: relative; z-index: 0; background: none;">
+   <div class="con" style="position: relative;z-index: 0;background: none;padding-bottom: 0px;">
    <!--       <div class="moco"> -->
               
                     <h3 class="modal-title" id="modal-login-label">JOIN</h3>
@@ -85,7 +85,7 @@
                  <div class="moco-body">
                  <!--     <div class="container"> -->
 
-<form class="form-horizontal" action="JoinSubmit.htm" method="post"  id="contact_form">
+<form class="form-horizontal" action="JoinSubmit.htm" method="post" id="contact_form">
 <fieldset>
 
 <!-- 아이디  입력-->
@@ -95,7 +95,7 @@
 		<span class="field">
 			<span class="addon" style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
 			    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;" required="required"> 
-			    <input type="button" id="idchk" name="idchk" class="button" value="아이디 중복확인" onclick="idchkclk()">
+			    <input type="button" id="idchk" name="idchk" class="button" value="아이디 중복확인" onclick="idchkclk()" style="display: none;">
 			   
 			    <label id="idselect" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
 				<!-- <input type="hidden" id="nextchk" value="다음걸로 못넘어가게하는거">  -->
@@ -107,7 +107,7 @@
 <div class="form-group">
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
-		 <span class="addon"style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
+		 <span class="addon" style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
 		    <input type="text" name="user_password" id="user_password" class="form-control" style="
 		    width: 340px;margin-left:20px;" required="required">
 		    <label class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 입력</label>
@@ -119,7 +119,7 @@
 <div class="form-group">
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
-		 <span class="addon"style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
+		 <span class="addon" style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
 		    <input type="text" name="user_password_chk" id="user_password_chk" class="form-control" style="
 		    width: 340px;margin-left:20px;" required="required">
 		    <label id="pwdchklb" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 확인</label>
@@ -131,9 +131,9 @@
 <div class="form-group">
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
-			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-font"></i></span> 
+			<span class="addon" style="padding-bottom: 0px;"><i class="glyphicon glyphicon-font"></i></span> 
 			<input type="text" name="user_name" id="name" class="form-control" style="width: 340px;margin-left:20px;" required="required">
-			<label class="col-md-4 control-label"style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">이름 입력</label>
+			<label class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">이름 입력</label>
 		</span>
 	</div>
 </div>
@@ -144,10 +144,10 @@
 <span class="field">
 
 
-<input type="radio" name="user_gender" id="gender" value="male" checked >남자
+<input type="radio" name="user_gender" id="gender" value="male" checked="">남자
 <input type="radio" name="user_gender" id="gender" value="female">여자<br>    
          
- <label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);" for="gender">성별 입력</label>
+ <label class="col-md-4 control-label" style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);" for="gender">성별 입력</label>
  </span>
  </div>
        
@@ -162,9 +162,69 @@
 		   	<!-- <input type="text" name="year" id="year" size="5" class="form-control hvr-glow" required="required">생년 -->	   	
 		   	<select style="width: 100px" name="year" id="year" required="required">
 			   	<option value="-1">생년 선택 </option>
-			   	<c:forEach var="i" begin="1970" end="2000">		   	
-			    	<option value="${i}">${i}</option>	
-			   	</c:forEach>
+			   			   	
+			    	<option value="1970">1970</option>	
+			   			   	
+			    	<option value="1971">1971</option>	
+			   			   	
+			    	<option value="1972">1972</option>	
+			   			   	
+			    	<option value="1973">1973</option>	
+			   			   	
+			    	<option value="1974">1974</option>	
+			   			   	
+			    	<option value="1975">1975</option>	
+			   			   	
+			    	<option value="1976">1976</option>	
+			   			   	
+			    	<option value="1977">1977</option>	
+			   			   	
+			    	<option value="1978">1978</option>	
+			   			   	
+			    	<option value="1979">1979</option>	
+			   			   	
+			    	<option value="1980">1980</option>	
+			   			   	
+			    	<option value="1981">1981</option>	
+			   			   	
+			    	<option value="1982">1982</option>	
+			   			   	
+			    	<option value="1983">1983</option>	
+			   			   	
+			    	<option value="1984">1984</option>	
+			   			   	
+			    	<option value="1985">1985</option>	
+			   			   	
+			    	<option value="1986">1986</option>	
+			   			   	
+			    	<option value="1987">1987</option>	
+			   			   	
+			    	<option value="1988">1988</option>	
+			   			   	
+			    	<option value="1989">1989</option>	
+			   			   	
+			    	<option value="1990">1990</option>	
+			   			   	
+			    	<option value="1991">1991</option>	
+			   			   	
+			    	<option value="1992">1992</option>	
+			   			   	
+			    	<option value="1993">1993</option>	
+			   			   	
+			    	<option value="1994">1994</option>	
+			   			   	
+			    	<option value="1995">1995</option>	
+			   			   	
+			    	<option value="1996">1996</option>	
+			   			   	
+			    	<option value="1997">1997</option>	
+			   			   	
+			    	<option value="1998">1998</option>	
+			   			   	
+			    	<option value="1999">1999</option>	
+			   			   	
+			    	<option value="2000">2000</option>	
+			   	
 		  	</select>년
 		  	</div>
 		  	
@@ -172,9 +232,31 @@
 		   	<!-- <input type="text" name="month" id="month" size="5" class="form-control hvr-glow" required="required">월 -->
 		   	<select style="width: 100px" name="month" id="month" required="required">
 			   	<option value="-1">월 선택</option>
-			   	<c:forEach var="i" begin="1" end="12">		   	
-			    	<option value="${i}">${i}</option>	
-			   	</c:forEach>
+			   			   	
+			    	<option value="1">1</option>	
+			   			   	
+			    	<option value="2">2</option>	
+			   			   	
+			    	<option value="3">3</option>	
+			   			   	
+			    	<option value="4">4</option>	
+			   			   	
+			    	<option value="5">5</option>	
+			   			   	
+			    	<option value="6">6</option>	
+			   			   	
+			    	<option value="7">7</option>	
+			   			   	
+			    	<option value="8">8</option>	
+			   			   	
+			    	<option value="9">9</option>	
+			   			   	
+			    	<option value="10">10</option>	
+			   			   	
+			    	<option value="11">11</option>	
+			   			   	
+			    	<option value="12">12</option>	
+			   	
 		  	</select>월
 		   </div>  
 		   
@@ -182,14 +264,74 @@
 		   	<!-- <input type="text" name="day" id="day" size="5" class="form-control hvr-glow" required="required">일 -->
 		   	<select style="width: 100px" name="day" id="day" required="required">
 			   	<option value="-1">일 선택</option>
-			   	<c:forEach var="i" begin="1" end="31">		   	
-			    	<option value="${i}">${i}</option>	
-			   	</c:forEach>
+			   			   	
+			    	<option value="1">1</option>	
+			   			   	
+			    	<option value="2">2</option>	
+			   			   	
+			    	<option value="3">3</option>	
+			   			   	
+			    	<option value="4">4</option>	
+			   			   	
+			    	<option value="5">5</option>	
+			   			   	
+			    	<option value="6">6</option>	
+			   			   	
+			    	<option value="7">7</option>	
+			   			   	
+			    	<option value="8">8</option>	
+			   			   	
+			    	<option value="9">9</option>	
+			   			   	
+			    	<option value="10">10</option>	
+			   			   	
+			    	<option value="11">11</option>	
+			   			   	
+			    	<option value="12">12</option>	
+			   			   	
+			    	<option value="13">13</option>	
+			   			   	
+			    	<option value="14">14</option>	
+			   			   	
+			    	<option value="15">15</option>	
+			   			   	
+			    	<option value="16">16</option>	
+			   			   	
+			    	<option value="17">17</option>	
+			   			   	
+			    	<option value="18">18</option>	
+			   			   	
+			    	<option value="19">19</option>	
+			   			   	
+			    	<option value="20">20</option>	
+			   			   	
+			    	<option value="21">21</option>	
+			   			   	
+			    	<option value="22">22</option>	
+			   			   	
+			    	<option value="23">23</option>	
+			   			   	
+			    	<option value="24">24</option>	
+			   			   	
+			    	<option value="25">25</option>	
+			   			   	
+			    	<option value="26">26</option>	
+			   			   	
+			    	<option value="27">27</option>	
+			   			   	
+			    	<option value="28">28</option>	
+			   			   	
+			    	<option value="29">29</option>	
+			   			   	
+			    	<option value="30">30</option>	
+			   			   	
+			    	<option value="31">31</option>	
+			   	
 		  	</select>일
 		   </div>
 		   <input type="hidden" name="user_date" id="birthday">
 		  <!--  <input type="button" onclick="birth()" value="생일값"> -->
-		   <label class="col-md-4 control-label"style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);">생년월일 입력</label> 	
+		   <label class="col-md-4 control-label" style="text-align:center;margin-left:32%;color: rgba(255, 255, 255, 0.53);">생년월일 입력</label> 	
 		</span>	     
     </div>
 </div>
@@ -198,7 +340,7 @@
 <div class="form-group">
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
-			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-phone"></i></span> 
+			<span class="addon" style="padding-bottom: 0px;"><i class="glyphicon glyphicon-phone"></i></span> 
 			<input type="text" name="user_phone" id="phone" class="form-control" style="width: 340px;margin-left:20px;" required="required"> 
 			<!-- <input type="button" id="phonebtn" value="전화번호체크" onclick="phonechk()" > -->
 			<label class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="phone" id="phonelbl">핸드폰 번호 입력</label>
@@ -210,7 +352,7 @@
 <div class="form-group">
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
-			<span class="addon"style="padding-bottom: 0px;"><i class="glyphicon glyphicon-calendar"></i></span> 
+			<span class="addon" style="padding-bottom: 0px;"><i class="glyphicon glyphicon-calendar"></i></span> 
 				<input type="date" name="user_join" id="enterdate" class="form-control" style="width: 340px;margin-left:20px;" required="required"> 
 				<label class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="enterdate">입사일 입력</label>
 		</span>
@@ -222,6 +364,7 @@
 <!--부서명 입력-->
 <!--select id 변경 : 변경불가 -->
 <div class="form-group">
+<<<<<<< HEAD
 	<div class="col-sm-3 col-sm-offset-1" style="margin-left:10%">
 	         <section class="main clearfix">
 	               <div class="fleft">
@@ -262,12 +405,97 @@
 	            </div>
 	         </section>
 	</div>
+=======
+<div class="col-sm-3 col-sm-offset-1" style="margin-left:10%">
+         <section class="main clearfix">
+               <div class="fleft">
+               <select name="dept_no" id="cd-dropdown" class="cd-select">
+                <option value="-1" selected="">부서명을 선택하세요</option>
+            	            
+                   <option style="text-align:center" value="10">개발부</option>
+                            
+                   <option style="text-align:center" value="20">영업부</option>
+                            
+                   <option style="text-align:center" value="30">품질관리부</option>
+                            
+                   <option style="text-align:center" value="40">디자인부</option>
+                 
+               </select>
+            </div>
+         </section>
+</div>
+
+<div class="col-sm-3">
+         <section class="main clearfix">
+               <div class="fleft">
+               <select name="team_no" id="cd-dropdown2" class="cd-select">
+                  <option value="-1" selected="">팀을 선택하세요</option>
+            
+                     <option style="text-align:center" value="101">개발1팀</option>
+                  
+                     <option style="text-align:center" value="102">개발2팀</option>
+                  
+                     <option style="text-align:center" value="103">개발3팀</option>
+                  
+                     <option style="text-align:center" value="201">영업1팀</option>
+                  
+                     <option style="text-align:center" value="202">영업2팀</option>
+                  
+                     <option style="text-align:center" value="203">영업3팀</option>
+                  
+                     <option style="text-align:center" value="301">품질관리1팀</option>
+                  
+                     <option style="text-align:center" value="302">품질관리2팀</option>
+                  
+                     <option style="text-align:center" value="303">품질관리3팀</option>
+                  
+                     <option style="text-align:center" value="401">디자인1팀</option>
+                  
+                     <option style="text-align:center" value="402">디자인2팀</option>
+                  
+                     <option style="text-align:center" value="403">디자인3팀</option>
+                  
+                     <option style="text-align:center" value="404">디자인4팀</option>
+                  
+         
+               </select>
+            </div>
+         </section>
+</div>
+
+<div class="col-sm-3">
+         <section class="main clearfix">
+               <div class="fleft">
+               <select name="position_no" id="cd-dropdown3" class="cd-select">
+                  <option value="-1" selected="">직급을 선택하세요</option>
+               
+                     <option style="text-align:center" value="1">사원</option>
+                  
+                     <option style="text-align:center" value="2">대리</option>
+                  
+                     <option style="text-align:center" value="3">과장</option>
+                  
+                     <option style="text-align:center" value="4">차장</option>
+                  
+                     <option style="text-align:center" value="5">부장</option>
+                     
+         
+               </select>
+            </div>
+         </section>
+</div>
+
+
+
+
+
+>>>>>>> 8a890e0a451070f892be9470ec0cf8c43e86e333
 </div>
 
 <!-- Button -->
 <div class="form-group">
   <label class="control-label"></label>  
-    <button type="submit" name="joinbtn" id="joinbtn" onclick='birth();' class="btn hvr-forward" style="margin-top:200px" >join</button>
+    <button type="submit" name="joinbtn" id="joinbtn" onclick="birth();" class="btn hvr-forward" style="margin-top: 50px;">join</button>
 </div>
 
 </fieldset>
@@ -278,353 +506,25 @@
                        
                  </div>
 
-<!-- What we do -->
-   <div class="what-we-do-container section-container">
-      <div class="container">
-         <div class="row">
-            <div
-               class="col-sm-12 what-we-do section-description wow fadeIn animated"
-               style="visibility: visible; animation-name: fadeIn;">
-               <h2>What we do</h2>
-               <div class="divider-1 wow fadeInUp animated"
-                  style="visibility: visible; animation-name: fadeInUp;">
-                  <span></span>
-               </div>
-               <p>이예지 바보</p>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-sm-4 what-we-do-box wow fadeInUp animated"
-               style="visibility: visible; animation-name: fadeInUp;">
-               <div class="what-we-do-box-icon">
-                  <i class="fa fa-pencil"></i>
-               </div>
-               <h3>Web design</h3>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore.</p>
-            </div>
-            <div class="col-sm-4 what-we-do-box wow fadeInDown animated"
-               style="visibility: visible; animation-name: fadeInDown;">
-               <div class="what-we-do-box-icon">
-                  <i class="fa fa-gears"></i>
-               </div>
-               <h3>Development</h3>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore.</p>
-            </div>
-            <div class="col-sm-4 what-we-do-box wow fadeInUp animated"
-               style="visibility: visible; animation-name: fadeInUp;">
-               <div class="what-we-do-box-icon">
-                  <i class="fa fa-twitter"></i>
-               </div>
-               <h3>Social media</h3>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore.</p>
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- Our process -->
-
-
-   <!-- Portfolio -->
-   <div class="portfolio-container section-container">
-      <div class="container">
-         <div class="row">
-            <div
-               class="col-sm-12 portfolio section-description wow fadeIn animated"
-               style="visibility: visible; animation-name: fadeIn;">
-               <h2>Portfolio</h2>
-               <div class="divider-1 wow fadeInUp animated"
-                  style="visibility: visible; animation-name: fadeInUp;">
-                  <span></span>
-               </div>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation.</p>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-sm-12 portfolio-filters wow fadeInUp animated"
-               style="visibility: visible; animation-name: fadeInUp;">
-               <a href="#" class="filter-all active">All</a> / <a href="#"
-                  class="filter-design">Design</a> / <a href="#"
-                  class="filter-development">Development</a> / <a href="#"
-                  class="filter-branding">Branding</a>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-sm-12 portfolio-masonry"
-               style="position: relative; height: 700px;">
-               <div class="portfolio-box design"
-                  style="position: absolute; left: 15px; top: 0px;">
-                  <img src="assets/img/portfolio/1.jpg" alt=""
-                     data-at2x="assets/img/portfolio/1.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Lorem website</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box development"
-                  style="position: absolute; left: 255px; top: 0px;">
-                  <img src="assets/img/portfolio/2.jpg" alt=""
-                     data-at2x="assets/img/portfolio/2.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Sit amet logo</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box branding"
-                  style="position: absolute; left: 495px; top: 0px;">
-                  <img src="assets/img/portfolio/3.jpg" alt=""
-                     data-at2x="assets/img/portfolio/3.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Ipsum social</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box development"
-                  style="position: absolute; left: 15px; top: 175px;">
-                  <img src="assets/img/portfolio/4.jpg" alt=""
-                     data-at2x="assets/img/portfolio/4.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Etiam processus dynamicus</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box design"
-                  style="position: absolute; left: 255px; top: 175px;">
-                  <img src="assets/img/portfolio/5.jpg" alt=""
-                     data-at2x="assets/img/portfolio/5.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Processus dynamicus logo</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box development"
-                  style="position: absolute; left: 495px; top: 175px;">
-                  <img src="assets/img/portfolio/6.jpg" alt=""
-                     data-at2x="assets/img/portfolio/6.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Mirum est notare</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box design"
-                  style="position: absolute; left: 15px; top: 350px;">
-                  <img src="assets/img/portfolio/7.jpg" alt=""
-                     data-at2x="assets/img/portfolio/7.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">March notare site</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box development"
-                  style="position: absolute; left: 255px; top: 350px;">
-                  <img src="assets/img/portfolio/8.jpg" alt=""
-                     data-at2x="assets/img/portfolio/8.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Sit amet logo</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box branding"
-                  style="position: absolute; left: 495px; top: 350px;">
-                  <img src="assets/img/portfolio/9.jpg" alt=""
-                     data-at2x="assets/img/portfolio/9.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Lorem website</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box design"
-                  style="position: absolute; left: 15px; top: 525px;">
-                  <img src="assets/img/portfolio/10.jpg" alt=""
-                     data-at2x="assets/img/portfolio/10.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Mirum est notare</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box development"
-                  style="position: absolute; left: 255px; top: 525px;">
-                  <img src="assets/img/portfolio/11.jpg" alt=""
-                     data-at2x="assets/img/portfolio/11.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Etiam processus social</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio-box branding"
-                  style="position: absolute; left: 495px; top: 525px;">
-                  <img src="assets/img/portfolio/12.jpg" alt=""
-                     data-at2x="assets/img/portfolio/12.jpg">
-                  <div class="portfolio-box-text-container">
-                     <div class="portfolio-box-text">
-                        <p>
-                           <a href="#">Sit website logo</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
-
-
-   <!-- The team -->
-   <div class="team-container section-container">
-      <div class="container">
-         <div class="row">
-            <div class="col-sm-12 team section-description wow fadeIn animated"
-               style="visibility: visible; animation-name: fadeIn;">
-               <h2>The team</h2>
-               <div class="divider-1 wow fadeInUp animated"
-                  style="visibility: visible; animation-name: fadeInUp;">
-                  <span></span>
-               </div>
-               <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                  ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                  consequat. Ut wisi enim ad minim veniam, quis nostrud.</p>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-sm-4 team-box wow fadeInUp animated"
-               style="visibility: visible; animation-name: fadeInUp;">
-               <div class="team-photo">
-                  <img src="assets/img/about/1.jpg" alt=""
-                     data-at2x="assets/img/about/1.jpg">
-               </div>
-               <h3>John Doe</h3>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod.</p>
-               <div class="team-social">
-                  <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                     class="fa fa-dribbble"></i></a> <a href="#"><i
-                     class="fa fa-twitter"></i></a>
-               </div>
-            </div>
-            <div class="col-sm-4 team-box wow fadeInDown animated"
-               style="visibility: visible; animation-name: fadeInDown;">
-               <div class="team-photo">
-                  <img src="assets/img/about/2.jpg" alt=""
-                     data-at2x="assets/img/about/2.jpg">
-               </div>
-               <h3>Tim Brown</h3>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod.</p>
-               <div class="team-social">
-                  <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                     class="fa fa-dribbble"></i></a> <a href="#"><i
-                     class="fa fa-twitter"></i></a>
-               </div>
-            </div>
-            <div class="col-sm-4 team-box wow fadeInUp animated"
-               style="visibility: visible; animation-name: fadeInUp;">
-               <div class="team-photo">
-                  <img src="assets/img/about/3.jpg" alt=""
-                     data-at2x="assets/img/about/3.jpg">
-               </div>
-               <h3>Sarah Red</h3>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod.</p>
-               <div class="team-social">
-                  <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                     class="fa fa-dribbble"></i></a> <a href="#"><i
-                     class="fa fa-twitter"></i></a>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- Contact us -->
-
-
-   <!-- Scroll to top -->
-   <div class="section-container section-container-gray">
-      <div class="container">
-         <div class="row">
-            <div class="col-sm-12">
-               <div class="scroll-to-top">
-                  <a class="scroll-link" href="#top-content2"><i
-                     class="fa fa-chevron-up"></i></a>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
    <!-- Footer -->
-   <footer>
-      <div class="container">
-         <div class="row">
-            <div class="col-sm-7 footer-copyright">
-               Â© Riona Bootstrap Template by <a href="http://azmind.com">Azmind</a>.
-            </div>
-            <div class="col-sm-5 footer-social">
-               <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                  class="fa fa-dribbble"></i></a> <a href="#"><i
-                  class="fa fa-twitter"></i></a> <a href="#"><i
-                  class="fa fa-google-plus"></i></a> <a href="#"><i
-                  class="fa fa-pinterest"></i></a>
-            </div>
-         </div>
-      </div>
-   </footer>
+   
 
 
    <!-- Javascript -->
-   <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
    <script src="assets/js/jquery.backstretch.min.js"></script>
    <script src="assets/js/wow.min.js"></script>
-   <script src="assets/js/retina-1.1.0.min.js"></script>
+  <!--  <script src="assets/js/retina-1.1.0.min.js"></script> -->
    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-   <script src="assets/js/masonry.pkgd.min.js"></script>
-   <script src="assets/js/scripts.js"></script>
-   <script src="assets/js/modernizr.custom.63321.js"></script>
-   <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script> 
-   <script src="ios-7-date-picker.js"></script>
-   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-   <script type="text/javascript" src="assets/js/jquery.dropdown.js"></script>
-   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+ <!--   <script src="assets/js/masonry.pkgd.min.js"></script> -->
+<!--    <script src="assets/js/scripts.js"></script> -->
+<!--    <script src="assets/js/modernizr.custom.63321.js"></script> -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  
+   <!-- <script src="ios-7-date-picker.js"></script>
+    --><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+   <!-- <script type="text/javascript" src="assets/js/jquery.dropdown.js"></script>
+    --><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
    
    <script type="text/javascript">
          
@@ -632,7 +532,7 @@
     	
     	 $('#idchk').hide();
          
-         $( '#cd-dropdown' ).dropdown( {
+      /*    $( '#cd-dropdown' ).dropdown( {
             gutter : 5,
             stack : false,
             delay : 100,
@@ -650,7 +550,7 @@
             stack : false,
             delay : 100,
             slidingIn : 100
-         } );
+         } ); */
       });
       
       //년,월,일 합치기
@@ -751,6 +651,7 @@
     
 
       </script>
+
 
 
 </body>
