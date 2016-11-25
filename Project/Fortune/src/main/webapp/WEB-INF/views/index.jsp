@@ -33,10 +33,9 @@
 	href="assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
-<link rel="stylesheet"
-	href="path/to/font-awesome/css/font-awesome.min.css">
+
 	
-<script src="dist/js/websoket.js"></script>
+
 
 
 
@@ -460,7 +459,7 @@
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
 	<script src="assets/js/wow.min.js"></script>
-	<script src="assets/js/retina-1.1.0.min.js"></script>
+
 	<script src="assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="assets/js/masonry.pkgd.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
