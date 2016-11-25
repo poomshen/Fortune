@@ -11,7 +11,7 @@
 	
 	<!-- 전체 게시물  -->
 	<select id="listNotice" parameterType="integer" resultType="com.fortune.Table_DTO.Notice_DTO">
-		select * from (select rownum num, n.* from (select * from notice  order by notice_no desc) n)
+		select * from (select rownum num, n.* from (select * from notice order by notice_no desc) n)
 		 where num between 1 + (#{page} - 1) * 10 and 10 + (#{page} - 1) * 10
 	</select>
 	
@@ -45,8 +45,9 @@
 	</select>
 	
 	<!-- 검색 -->
-	<select id="searchTitleListNotices" parameterType="String" resultType="com.fortune.Table_DTO.Notice_DTO">
-		select * from notice where notice_title like '%'||#{searchvalue}||'%'
+	<select id="searchTitleListNotices" resultType="com.fortune.Table_DTO.Notice_DTO">
+		select * from (select rownum num, n.* from (select * from notice where notice_title like '%'||#{param1}||'%' order by notice_no desc) n)
+		 where num between 1 + (#{param2} - 1) * 10 and 10 + (#{param2} - 1) * 10
 	</select>
 	
 	<select id="searchTextListNotices" parameterType="String" resultType="com.fortune.Table_DTO.Notice_DTO">

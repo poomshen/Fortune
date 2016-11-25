@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -71,6 +72,12 @@ public class NoticeList_Controller {
 		
 		return mv;
 
+	}
+	
+	@ExceptionHandler(ArithmeticException.class)
+	public String handleException(){
+		return "error/exception";
+		
 	}
 
 }

@@ -23,7 +23,7 @@
 		</div>
 		<p>
 			<input type="submit" value="저장" /> 
-			<a href="notice/noticeList.htm">공지사항 목록보기</a>
+			<a href="notice.noticeList.htm">공지사항 목록보기</a>
 		</p>
 	</form>
 </div>

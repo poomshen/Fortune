@@ -114,6 +114,9 @@
 							</div>
 						</div>
 						<!-- /.panel-body -->
+						<p>
+			<a href="noticeInsert.htm">공지사항 작성하기</a>
+		</p>
 					</div>
 					<!-- /.panel -->
 				</div>

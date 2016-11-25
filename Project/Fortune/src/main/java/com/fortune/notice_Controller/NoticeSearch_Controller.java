@@ -42,10 +42,12 @@ public class NoticeSearch_Controller {
 			noticelist = noticeSearchDao.searchTextListNotices(searchvalue);
 		}
 		
-		System.out.println(noticelist.size());
-		//View 화면에 뿌려주기 위한 list
 		int page = 1;
 		int row_size = 10;
+		
+		System.out.println(noticelist.size());
+		//View 화면에 뿌려주기 위한 list
+		
 
 		int total_count = noticelist.size();	//file 개수
 		System.out.println("totalcount : " + total_count);
