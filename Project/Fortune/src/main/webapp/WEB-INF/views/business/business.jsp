@@ -13,7 +13,7 @@
 <!-- <input type="button" onclick="deptshow()" value="같은 부서원 정보 뿌리기"> -->
 <h2>deptno 확인 : ${sessionScope.info.dept_no}</h2>
 <c:forEach var="i" items="${deptlist}">
-	<c:out value="${i}"></c:out><br>
+	<c:out value="${i.user_id}"></c:out><br>
 </c:forEach>
 
 <!-- 
