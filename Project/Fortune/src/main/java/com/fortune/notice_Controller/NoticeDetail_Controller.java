@@ -26,7 +26,7 @@ public class NoticeDetail_Controller {
 
 	// 공지사항글 상세보기
 	@RequestMapping("noticeDetail.htm")
-	public String noticeDetail(String notice_no, Model model) throws ClassNotFoundException, SQLException {
+	public String noticeDetail(int notice_no, Model model) throws ClassNotFoundException, SQLException {
 
 		System.out.println("NoticeController의 noticeDetail을 탑니다~");
 

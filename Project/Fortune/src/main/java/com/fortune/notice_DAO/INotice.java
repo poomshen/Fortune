@@ -15,27 +15,31 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
+import com.fortune.Table_DTO.FileRoom_DTO;
 import com.fortune.Table_DTO.Notice_DTO;
 
 public interface INotice {
 
-	//공지글 개수
-	public int CountNotice() throws ClassNotFoundException, SQLException;
+	//공지사항 전체 개수
+	public int countNotice();
 	//전체 게시물
 	public List<Notice_DTO> listNotice(int page) throws ClassNotFoundException, SQLException;
-	//게시물 삭제
-	public int deleteNotice(String notice_no) throws ClassNotFoundException, SQLException;
-	//게시물 수정
-	public int updateNotice(Notice_DTO ndto) throws ClassNotFoundException, SQLException;
 	//게시물 상세
-	public Notice_DTO detailNotice(String notice_no) throws ClassNotFoundException, SQLException;
+	public Notice_DTO detailNotice(int notice_no) throws ClassNotFoundException, SQLException;
 	//게시물 입력
 	public int insertNotice(Notice_DTO ndto) throws ClassNotFoundException, SQLException;
+	//게시물 수정
+	public int updateNotice(Notice_DTO ndto) throws ClassNotFoundException, SQLException;
+	//게시물 삭제
+	public int deleteNotice(int notice_no) throws ClassNotFoundException, SQLException;
 	//공지사항 파일다운로드
-	public Notice_DTO fileDownloadNotice(String notice_no) throws ClassNotFoundException, SQLException;
-	/*	
+	public Notice_DTO fileDownloadNotice(int notice_no) throws ClassNotFoundException, SQLException;
+	//공지사항 제목검색
+	public List<Notice_DTO> searchTitleListNotices(String searchvalue);
+	//공지사항 내용검색
+	public List<Notice_DTO> searchTextListNotices(String searchvalue);
 	//조회수
-	public void upHit(String notice_no) throws ClassNotFoundException, SQLException;*/
+	//public void updateReadCount(int notice_no) throws ClassNotFoundException, SQLException;
 	
 	
 

@@ -5,24 +5,14 @@
 <mapper namespace="com.fortune.notice_DAO.INotice">
 	
 	<!-- 게시물 개수  -->
-	<select id="CountNotice" resultType="Integer">	
+	<select id="countNotice" resultType="Integer">	
 		SELECT COUNT(*) FROM NOTICE
 	</select>
 	
 	<!-- 전체 게시물  -->
-<!-- 	<select id="listNotice" resultType="com.fortune.Table_DTO.Notice_DTO">
-		SELECT * FROM
-			 		(SELECT ROWNUM NUM, N.* 
-			  			FROM 
-			     			 ( SELECT * 
-			       				 FROM NOTICE 
-			       					 WHERE ${param2} LIKE '%${param3}%' ORDER BY NOTICE_DATE DESC
-		          				 ) N
-     						) WHERE NUM BETWEEN 1 + (${param1} - 1) * 5 AND 5 + (${param1} - 1) * 5
-	</select> -->
 	<select id="listNotice" parameterType="integer" resultType="com.fortune.Table_DTO.Notice_DTO">
-		select * from (select rownum num, n.* from (select * from notice order by notice_no desc) n)
-		 where num between 1 + (#{page} - 1) * 9 and 9 + (#{page} - 1) * 9
+		select * from (select rownum num, n.* from (select * from notice  order by notice_no desc) n)
+		 where num between 1 + (#{page} - 1) * 10 and 10 + (#{page} - 1) * 10
 	</select>
 	
 	<!-- 게시물 삭제 -->
@@ -44,17 +34,7 @@
 	</select>
 
 	<!-- 게시물 입력 -->
-	<insert id="insertNotice">
-	<!--  
-		public int insert(Notice n)
-		Notice n Parameter  타입 생략
-		INSERT INTO NOTICES(SEQ, TITLE, CONTENT, WRITER, REGDATE, HIT, FILESRC ,FILESRC2 )
-	    VALUES( (SELECT MAX(TO_NUMBER(SEQ))+1 FROM NOTICES), ?, ?, 'kosta', SYSDATE, 0, ?, ?)
-	-->
-	
-		<!-- <selectKey order="BEFORE" keyProperty="notice_no" resultType="String">
-			SELECT MAX(TO_NUMBER(notice_seq))+1 FROM NOTICE
-		</selectKey> -->
+	<insert id="insertNotice">	
 		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_DATE, NOTICE_FILENAME_ORG, NOTICE_FILENAME_RE, NOTICE_FILEEXT)
 	    VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE, #{notice_filename_org}, #{notice_filename_re}, #{notice_fileext})
 	</insert>
@@ -62,6 +42,15 @@
 	<!-- 파일다운로드 -->
 	<select id="fileDownloadNotice" resultType="com.fortune.Table_DTO.Notice_DTO">
      	SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_no}
+	</select>
+	
+	<!-- 검색 -->
+	<select id="searchTitleListNotices" parameterType="String" resultType="com.fortune.Table_DTO.Notice_DTO">
+		select * from notice where notice_title like '%'||#{searchvalue}||'%'
+	</select>
+	
+	<select id="searchTextListNotices" parameterType="String" resultType="com.fortune.Table_DTO.Notice_DTO">
+		select * from notice where notice_text like '%'||#{searchvalue}||'%'
 	</select>
 	
 
