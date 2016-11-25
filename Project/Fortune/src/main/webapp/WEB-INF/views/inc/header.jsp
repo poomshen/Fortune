@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
   <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; border-color:#f8f8f8; background-color:rgba(248,248,248,0); box-shadow: 2px 2px 5px hsla(0,0%,0%,0.58);">
             <div class="navbar-header">
@@ -147,62 +148,65 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
+                                 
                     <a class="dropdown-toggle" style="color:#417ca5;;" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
+                       <i class="fa fa-bell fa-fw hvr-pop"><span id="blink"  <c:if test="${sessionScope.alarm.size()>0}"> class="blink_me notification_count" </c:if> > <c:if test="${sessionScope.totalCount>0}"> ${sessionScope.totalCount}</c:if></span></i>  <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
+                
+                  <c:if test="${sessionScope.alarm.size()>0}">
+                  
+               
+              
+                   <ul id="alarmList" class="dropdown-menu dropdown-alerts">
+                   	   <c:forEach var="alarm" items="${sessionScope.alarm}"> 
+                  		
+                        <li id="${alarm.work_type}">
+                       
                             <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                <div> 
+                                
+                   <c:choose>
+                   <c:when test="${alarm.work_type==1}">
+                    	<i class="fa fa-file-o fa-fw"></i>	새 프로젝트 요청 
+                   </c:when>                 
+                   <c:when test="${alarm.work_type==2}">
+                  	     <i class="fa fa-file-text-o fa-fw"></i>  기존 프로젝트 요청
+                   </c:when>               
+                   <c:when test="${alarm.work_type==3}">
+                      <i class="fa fa-file-word-o fa-fw"></i>	새로운 업무 요청
+                   </c:when>                 
+                   <c:when test="${alarm.work_type==4}">
+                   		 <i class="fa fa-comment-o fa-fw"></i>	새로운 댓글 
+                   </c:when>                
+                      </c:choose>
+                                    <span class="pull-right text-muted small" 
+                                    style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
+ 										${alarm.count}</span>
                                 </div>
+                         
+                         
                             </a>
+                      
                         </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
+                        
+                            <li class="divider"></li>
+                            
+             			</c:forEach>	
+             			
+
                         <li>
                             <a class="text-center" href="#">
                                 <strong>See All Alerts</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
+                    
+               
                     </ul>
+                    
+                  
+                    </c:if>
+           
                     <!-- /.dropdown-alerts -->
                 </li>
                 <!-- /.dropdown -->

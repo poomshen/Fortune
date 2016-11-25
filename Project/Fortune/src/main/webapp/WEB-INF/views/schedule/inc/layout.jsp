@@ -54,7 +54,12 @@ function onOpen(evt) {
 }
 function onMessage(evt) {
 
-	alert("메세지 : "+evt.data);
+	
+	$('#blink').addClass("blink_me notification_count");
+	$('#blink').html("5");
+	
+	
+	//alert("메세지 : "+evt.data);
 }
 function onClose(evt) {
 	appendMessage("연결을 끊었습니다.");

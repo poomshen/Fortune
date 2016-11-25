@@ -6,6 +6,11 @@
 
 package com.fortune.join_Controller;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,10 +20,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.alarm_DAO.IAlarm;
+import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.member_DAO.IJoin;
 import com.fortune.password_Service.PassWord_Service;
 
@@ -34,20 +42,21 @@ public class MemberController {
 		PassWord_Service passWord_Service = new PassWord_Service();
 		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
 		IJoin dao = sqlsession.getMapper(IJoin.class);
+	
 		dao.insertMember(dto);
 		
 		System.out.println("id : " + dto.getUser_id());
 		System.out.println("pwd : " + dto.getUser_password());
 		
 		return "redirect:index.htm";
+		
 	}
-	
-	
+
 	
 
-
+	/*수정 : 이예지 2016-11-24 로그인했을시 알림 db 체크 */
 	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.GET)
-	public String loginSubmit(HttpSession session ,Authentication authentication ){
+	public String loginSubmit(HttpSession session ,Authentication authentication,Model model){
 
 		System.out.println("로그인 버튼 눌렀고요");
 		UserDetails details = (UserDetails)authentication.getPrincipal();
@@ -57,11 +66,31 @@ public class MemberController {
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		result = dao.searchMember(user_id);
 		System.out.println("login dao 동작 완료");
-				
+		
+		
+		
 			
 		session.setAttribute("info", result);
+		
+		//추가사항  
+		//로그인했을때 알림 체크한뒤 해당 알림 리스트를 session에 저장
+		
+		IAlarm adao = sqlsession.getMapper(IAlarm.class);
+		
+		List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+		
+		alist = adao.checkAlarmAll(user_id);
+		
+		int tatalCount = adao.totalCount(user_id);
+		
+		System.out.println("size:"+alist.size());
+		
+		session.setAttribute("alarm", alist);
+		
+	
+		session.setAttribute("totalCount", tatalCount);
 			
-			return "home.main";
+		return "home.main";
 		
 			
 	
@@ -93,12 +122,12 @@ public class MemberController {
 	@RequestMapping("/updateMember.htm")
 	public String updateMemberView(HttpSession session){
 		
-		System.out.println("id값 받아서 edit view단 보여줄거임");
+	/*	System.out.println("id값 받아서 edit view단 보여줄거임");
 		Join_DTO dto = (Join_DTO) session.getAttribute("info");
 		
 		System.out.println("dto값이 뭔데 그러냐 " + dto);
 	
-		System.out.println("id : " + dto.getUser_id());
+		System.out.println("id : " + dto.getUser_id());*/
 		
 		return "home.edit";
 		

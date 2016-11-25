@@ -19,6 +19,6 @@
  부서번호 : ${sessionScope.info.dept_no}
  직함번호 : ${sessionScope.info.position_no}
  팀번호    : ${sessionScope.info.team_no}
- 
+알림  ${sessionScope.alarm.size()}
 </body>
 </html>
