@@ -7,6 +7,7 @@
 */
 package com.fortune.alarm_Controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Join_DTO;
@@ -70,6 +72,35 @@ public class Alarm_Controller {
 		
 		return "home.main";
 	
+	}
+	
+	@RequestMapping(value="newAlarm.htm", method = RequestMethod.POST)
+    public String newAlarm(@RequestParam(value="newAlarm") String newAlarm,HttpSession session)
+            throws ClassNotFoundException, SQLException{
+	
+		
+	      System.out.println("newAlarm.ajax");
+	      System.out.println("newAlarm : "+newAlarm);
+	      
+	        
+			IAlarm adao = sqlsession.getMapper(IAlarm.class);
+			
+			List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+			
+			Join_DTO dto = (Join_DTO)session.getAttribute("info");
+			
+			
+			alist = adao.checkAlarmAll(dto.getUser_id());
+			
+			int tatalCount = adao.totalCount(dto.getUser_id());
+			
+			System.out.println("size:"+alist.size());
+			
+			session.setAttribute("alarm", alist);
+			session.setAttribute("totalCount", tatalCount);
+	      
+	      return "newAlarm";
+	      
 	}
 	
 	

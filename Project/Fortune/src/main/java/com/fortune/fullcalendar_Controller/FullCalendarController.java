@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Alarm_DTO;
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Schedule_DTO;
+import com.fortune.Table_DTO.Work_Users_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.fullcalendar_DAO.IFullCalendar;
 import com.fortune.function_DTO.Schedule_Work_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
+
+
 
 @Controller
 public class FullCalendarController {
@@ -30,15 +36,15 @@ public class FullCalendarController {
     
 	private View jsonview;
 	
-    /* 작업자 : 이명철  // 최초 작업일 : 11.16 // 최종 작업일 : 11.18
+    /* 작업자 : 이명철  // 최초 작업일 : 11.16 // 최종 작업일 : 11.23
      * 작업 내용 : fullcalendar에서 select 호출 : 일반일정 추가
-     * 추가 내용 : DB와 데이터 연동 ( schedule, work 테이블) /alarmDAO 접근하여 count갯수 가져오기 // ********* work_users 테이블은 아직 미구현상태 **********
+     * 추가 내용 : DB와 데이터 연동 ( schedule, work 테이블) /alarmDAO 접근하여 count갯수 가져오기(이예지) / work_users Insert 작업
      * version : v1.1
     */
 	@RequestMapping(value="select.ajax", method = RequestMethod.POST)
     public @ResponseBody Map<String,Object> ajax(@RequestParam(value="scheduleusers") String users,
             @RequestParam(value="title") String title, @RequestParam(value="start") String start,
-            @RequestParam(value="end") String end, @RequestParam(value="text") String text)
+            @RequestParam(value="end") String end, @RequestParam(value="text") String text,HttpSession session)
             throws ClassNotFoundException, SQLException{
     	
 		//Schedule_Work_DTO
@@ -54,6 +60,8 @@ public class FullCalendarController {
 		List<Select_Alarm_DTO> sadto = new ArrayList<Select_Alarm_DTO>();
 		IAlarm alarmDAO =  sqlSession.getMapper(IAlarm.class);
 		
+		Work_Users_DTO wudto = new Work_Users_DTO();
+		
 		swdto.setSchedule_no(sdto.getSchedule_no());
         swdto.setSchedule_start(start);
         swdto.setSchedule_end(end);
@@ -62,29 +70,37 @@ public class FullCalendarController {
         
         Map<String,Object> map = new HashMap();
         
-        
         int f = fullcalendarDAO.insertSchedule(swdto);
         f += fullcalendarDAO.insertWork(swdto);
         map.put("schedule", swdto);
        
-        //users 정보값만 넘어오고 DB작업은 안함
-        //System.out.println(users.get(0) + "/" + users.get(1));
         
-       String[] selectId=users.split("/");
+        
+        String[] selectId=users.split("/");
     
        
         for(int i=0;i<selectId.length;i++){
         	adto.setUser_id(selectId[i]);
-        	adto.setWork_type("1");
+        	adto.setWork_type("2");
         	alarmDAO.insertAlarm(adto);
-        	//select한 아이디값에 따라 count가 다르므로 해당 count값을 저장해주어야함
-        
-           System.out.println("count :"+ alarmDAO.checkAlarm(adto).getCount());
+
            sadto.add(alarmDAO.checkAlarm(adto));
+
            
+           wudto.setUser_id(selectId[i]);
+           wudto.setSchedule_no(sdto.getSchedule_no());
+           
+           fullcalendarDAO.insertWork_Users(wudto);
         }
         
         map.put("alarm", sadto);
+        
+		
+        
+        
+
+        
+        
         
     
         return map;
@@ -93,22 +109,40 @@ public class FullCalendarController {
 	
 	
 	
-    /* 작업자 : 이명철  // 최초 작업일 : 11.18 // 최종 작업일 : 11.19
+    /* 작업자 : 이명철  // 최초 작업일 : 11.18 // 최종 작업일 : 11.23
      * 작업 내용 : 최초 fullcalendar 로드될 때 => DB저장된 일정 불러오기
-     * 추가 내용 : 
+     * 추가 내용 : 최초내용 + 참가자 id도 가져옴
      * version : v1.0
     */
 	@RequestMapping(value="calendarload.ajax", method = RequestMethod.POST)
-	public @ResponseBody List<Schedule_Work_DTO> schedule() throws ClassNotFoundException, SQLException {
+	public @ResponseBody Map<String,Object> schedule() throws ClassNotFoundException, SQLException {
 		System.out.println("위치 : FullCalendarController // 내용 : DB에서 일정 가져옴 // 작업자: 이명철");
         
 	    IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
-		
-        Schedule_Work_DTO swdto = new Schedule_Work_DTO();
-        
+
         List<Schedule_Work_DTO> schedulelist = fullcalendarDAO.selectSWList();
-		
-		return schedulelist;
+
+        List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList();
+        
+        for(Schedule_Work_DTO sw : schedulelist){
+    	String userid = "";
+        	
+        	for(Work_Users_DTO wu : wulist){
+
+        		if(wu.getSchedule_no() == sw.getSchedule_no()){
+        			userid += wu.getUser_id();
+        			userid += "/";
+        			sw.setUsers(userid);
+        		};
+        		
+        	};
+        	
+        };
+        
+        Map<String,Object> map = new HashMap();
+        map.put("schedulelist", schedulelist);
+        
+		return map;
 	}
 	
 	
