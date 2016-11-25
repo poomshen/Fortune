@@ -1,16 +1,17 @@
 package Work_Users_DTO;
 
 public class Work_Users_DTO {
-	private int shcedule_no;
+	private int schedule_no;
 	private String user_id;
 	
 	
 
-	public int getShcedule_no() {
-		return shcedule_no;
+
+	public int getSchedule_no() {
+		return schedule_no;
 	}
-	public void setShcedule_no(int shcedule_no) {
-		this.shcedule_no = shcedule_no;
+	public void setSchedule_no(int schedule_no) {
+		this.schedule_no = schedule_no;
 	}
 	public String getUser_id() {
 		return user_id;

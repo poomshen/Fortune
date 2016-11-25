@@ -3,6 +3,7 @@ var content = "<table class='table table-striped'><tr><th>구분</th><th>제목<
 var array = [];
 
 
+
 function fcontent() {
 	var content2 = "";
 	content2 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
@@ -12,18 +13,15 @@ function fcontent() {
 		type : 'post',
 		success : function(data) {
 			console.log(data)
-			$.each(data, function(index, obj) {
+			$.each(data.schedulelist, function(index, obj) {
 				var userid ="";
-				if(obj.schedulelist.schedule_no == obj.wulist.schedule_no){
-					userid += 
-				}
 				
-		        content2 += '<tr id=tr' +obj.schedulelist.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.schedulelist.work_title;
+		        content2 += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
 		        content2 += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"';
-		        content2 += ' onclick="test(' + obj.schedulelist.schedule_no;
-		        content2 += ",'" + obj.schedulelist.work_title + "','" + obj.schedulelist.work_text;
-		        content2 += "','" + obj.schedulelist.schedule_start +"','" + obj.schedulelist.schedule_end;
-		        content2 += "','"+??????????????????????+"'";
+		        content2 += ' onclick="test(' + obj.schedule_no;
+		        content2 += ",'" + obj.work_title + "','" + obj.work_text;
+		        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
+		        content2 += "','" + obj.users + "'" ;
 		        content2 += ')" >상세보기</a></td></tr>';
 			});
 	        $('#content').html(content2)
@@ -254,7 +252,7 @@ function loadCalendar() {
 					var scheduleusers="";
 					var count=",";
 					var work_type="";
-					$("input[name='uesrchk']:checked").each(function(i){
+					$("input[name='userchk']:checked").each(function(i){
 
 						scheduleusers += $(this).val()+"/";
 					

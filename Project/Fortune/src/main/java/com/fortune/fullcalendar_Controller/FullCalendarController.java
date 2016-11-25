@@ -17,12 +17,13 @@ import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Schedule_DTO;
+import com.fortune.Table_DTO.Work_Users_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.fullcalendar_DAO.IFullCalendar;
 import com.fortune.function_DTO.Schedule_Work_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 
-import Work_Users_DTO.Work_Users_DTO;
+
 
 @Controller
 public class FullCalendarController {
@@ -84,7 +85,7 @@ public class FullCalendarController {
 
            
            wudto.setUser_id(selectId[i]);
-           wudto.setShcedule_no(sdto.getSchedule_no());
+           wudto.setSchedule_no(sdto.getSchedule_no());
            
            fullcalendarDAO.insertWork_Users(wudto);
         }
@@ -100,7 +101,7 @@ public class FullCalendarController {
 	
     /* 작업자 : 이명철  // 최초 작업일 : 11.18 // 최종 작업일 : 11.23
      * 작업 내용 : 최초 fullcalendar 로드될 때 => DB저장된 일정 불러오기
-     * 추가 내용 : 최초내용 + 참가자 id도 가져옴 시발
+     * 추가 내용 : 최초내용 + 참가자 id도 가져옴
      * version : v1.0
     */
 	@RequestMapping(value="calendarload.ajax", method = RequestMethod.POST)
@@ -108,27 +109,28 @@ public class FullCalendarController {
 		System.out.println("위치 : FullCalendarController // 내용 : DB에서 일정 가져옴 // 작업자: 이명철");
         
 	    IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
-		
-        Schedule_Work_DTO swdto = new Schedule_Work_DTO();
+
         List<Schedule_Work_DTO> schedulelist = fullcalendarDAO.selectSWList();
-        
-        Work_Users_DTO wudto = new Work_Users_DTO();
+
         List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList();
         
-        for(Work_Users_DTO wu: wulist){
-        	for(Schedule_Work_DTO sw: schedulelist){
+        for(Schedule_Work_DTO sw : schedulelist){
+    	String userid = "";
+        	
+        	for(Work_Users_DTO wu : wulist){
+
+        		if(wu.getSchedule_no() == sw.getSchedule_no()){
+        			userid += wu.getUser_id();
+        			userid += "/";
+        			sw.setUsers(userid);
+        		};
         		
-        		if(wu.getShcedule_no() == sw.getSchedule_no()){
-        			
-        		}
-        	}
+        	};
+        	
         };
-        
         
         Map<String,Object> map = new HashMap();
         map.put("schedulelist", schedulelist);
-        
-        map.put("wulist",wulist);
         
 		return map;
 	}
