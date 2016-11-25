@@ -33,7 +33,7 @@ public class NoticeFileDownload_Controller {
 	
 	//공지사항게시판 파일다운로드처리
 	@RequestMapping(value="noticeFileDownload.htm")
-	public void fileDownloadNotice(String notice_no, Model model, HttpServletResponse response) throws Exception {
+	public void fileDownloadNotice(int notice_no, Model model, HttpServletResponse response) throws Exception {
 	    
 		System.out.println("NoticeController의 fileDownloadNotice를 탑니다~");
 		

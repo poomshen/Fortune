@@ -147,7 +147,7 @@
                     <!-- /.dropdown-tasks -->
                 </li>
                 <!-- /.dropdown -->
-                <li class="dropdown">
+                <li id="alarm" class="dropdown">
                                  
                     <a class="dropdown-toggle" style="color:#417ca5;;" data-toggle="dropdown" href="#">
                        <i class="fa fa-bell fa-fw hvr-pop"><span id="blink"  <c:if test="${sessionScope.alarm.size()>0}"> class="blink_me notification_count" </c:if> > <c:if test="${sessionScope.totalCount>0}"> ${sessionScope.totalCount}</c:if></span></i>  <i class="fa fa-caret-down"></i>

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Alarm_DTO;
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Schedule_DTO;
 import com.fortune.Table_DTO.Work_Comment_DTO;
 import com.fortune.Table_DTO.Work_Users_DTO;
@@ -43,7 +46,7 @@ public class FullCalendarController {
     public @ResponseBody Map<String,Object> ajax(@RequestParam(value="scheduleusers") String users,
             @RequestParam(value="title") String title, @RequestParam(value="start") String start,
             @RequestParam(value="end") String end, @RequestParam(value="text") String text,
-            @RequestParam(value="collabo_no") String collabo_no)
+            @RequestParam(value="collabo_no") String collabo_no,HttpSession session)
             throws ClassNotFoundException, SQLException{
     	
 		//Schedule_Work_DTO
@@ -82,6 +85,8 @@ public class FullCalendarController {
         for(int i=0;i<selectId.length;i++){
         	adto.setUser_id(selectId[i]);
         	adto.setWork_type("3");
+        	//에러, 중복코드 (주석처리함)
+        	//adto.setWork_type("2");
         	alarmDAO.insertAlarm(adto);
 
            sadto.add(alarmDAO.checkAlarm(adto));
@@ -94,6 +99,13 @@ public class FullCalendarController {
         }
         
         map.put("alarm", sadto);
+        
+		
+        
+        
+
+        
+        
         
     
         return map;

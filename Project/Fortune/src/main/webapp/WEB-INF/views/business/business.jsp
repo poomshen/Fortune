@@ -1,20 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%
+   request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
 </head>
 <body>
 
-<h3>같은 부서인 사람들 아이디 뽑기</h3>
+<h3>같은 부서인 사람들 정보 뽑기</h3>
 <!-- <input type="button" onclick="deptshow()" value="같은 부서원 정보 뿌리기"> -->
 <h2>deptno 확인 : ${sessionScope.info.dept_no}</h2>
-<c:forEach var="i" items="${deptlist}">
-	<c:out value="${i}"></c:out><br>
-</c:forEach>
+
+<select>
+<option value="-1" selected>부서명을 선택하세요</option>
+	<c:forEach var="i" items="${dept}">
+		<option value="${i.dept_no}">${i.dept_name}</option>
+	</c:forEach>
+</select>
+
+<table>
+	<tr>
+		<th>아이디</th>
+		<th>이름</th>
+		<th>전화번호</th>
+		<th>입사일</th>
+		<th>부서명</th>
+		<th>팀명</th>
+		<th>직급명</th>
+	</tr>
+		<c:forEach var="i" items="${deptlist}">
+			<c:if test="${not (i.user_id eq 'admin@fortune.com' or i.user_id eq sessionScope.info.user_id)}">
+			<tr>
+				<td><c:out value="${i.user_id}"></c:out></td>
+				<td><c:out value="${i.user_name}"></c:out></td>
+				<td><c:out value="${i.user_phone}"></c:out></td>
+				<td><c:out value="${fn:substring(i.user_join,0,10)}"></c:out></td>
+				<td><c:out value="${i.dept_no}"></c:out></td>
+				<td><c:out value="${i.team_no}"></c:out></td>
+				<td><c:out value="${i.position_no}"></c:out></td>
+			</tr>
+			</c:if>
+		</c:forEach><br>
+
+</table>
 
 <!-- 
 <script type="text/javascript">

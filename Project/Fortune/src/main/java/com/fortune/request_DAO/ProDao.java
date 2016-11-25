@@ -43,7 +43,8 @@ public interface ProDao {
 		public List<Join_DTO> listManager() throws ClassNotFoundException, SQLException;
 		//게시물 대기 , 수락 , 거절 리스트 
 		public Request_DTO kindState(String collabo_req_state) throws ClassNotFoundException, SQLException;
-				
+		//수락 하기
+		public int manager(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		
 		
 }

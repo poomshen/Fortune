@@ -7,6 +7,7 @@
 package com.fortune.join_Controller;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.alarm_DAO.IAlarm;
@@ -93,6 +95,9 @@ public class MemberController {
 			
 	
 	}
+	
+	
+	
 	
 	@RequestMapping("/logOut.htm")
 	public String logOut(HttpSession session){
