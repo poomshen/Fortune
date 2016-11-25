@@ -244,9 +244,13 @@ function loadCalendar() {
 	    	insertEvent: {
 	    		click: $('#modal_ok').click(function(){
 	    			var eventData;
-					var scheduleusers = [];
+					var scheduleusers="";
+					var count=",";
+					var work_type="";
 					$("input[name='uesrchk']:checked").each(function(i){
-						scheduleusers.push($(this).val());
+
+						scheduleusers += $(this).val()+"/";
+					
 					});
 
 					var newschedule = {
@@ -262,16 +266,36 @@ function loadCalendar() {
 						url: 'select.ajax',
 						data: newschedule,
 						success : function(data) {
+							console.log(data);
 							eventData = {
-									id: data.schedule_no,
-									title: data.work_title,
-									start: data.schedule_start,
-									end: data.schedule_end
+									id: data.schedule.schedule_no,
+									title: data.schedule.work_title,
+									start: data.schedule.schedule_start,
+									end: data.schedule.schedule_end
 							}
 
+							
+							
 							calendar.fullCalendar('renderEvent', eventData , true);
 							console.log('insert 성공')
 							fcontent();
+							
+							
+						      $.each(data.alarm, function (i, item) {
+	                                console.log(item.count);
+	                                count+=item.count+"/";
+	                                work_type=item.work_type;
+						      
+						      });
+							
+							console.log(data.alarm);
+							//var count =","+data.count.join(' / ');
+							
+							console.log(count);
+							
+							send(scheduleusers+count+","+work_type);
+							
+							
 						}
 					});
 				})

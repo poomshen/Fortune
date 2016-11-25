@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fortune.organization_DAO.IOrganization">
+
+<select id="showdept" parameterType="integer" resultType="com.fortune.Table_DTO.Join_DTO">  
+select USER_ID, USER_NAME, USER_PHONE, DEPT_NO, TEAM_NO, POSITION_NO from users
+where DEPT_NO=#{dept_no}
+</select>
+
+</mapper>

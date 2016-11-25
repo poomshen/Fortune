@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fortune.alarm_DAO.IAlarm">
+ 
+<!-- 알람 체크 -->
+ <select id="checkAlarm" parameterType="com.fortune.Table_DTO.Alarm_DTO" resultType="com.fortune.function_DTO.Select_Alarm_DTO">
+ 	select work_type,count(work_type) as count from alarm where USER_ID=#{user_id} and WORK_TYPE=#{work_type} group by work_type
+ </select>
+ 
+<!-- 알림  추가 -->
+ <insert id="insertAlarm" parameterType="com.fortune.Table_DTO.Alarm_DTO">
+  	 insert into alarm(work_type,user_id) values(#{work_type},#{user_id})    
+  </insert>
+
+ <!-- 알림 삭제 -->
+ <delete id="deleteAlarm" parameterType="com.fortune.Table_DTO.Alarm_DTO">
+ 	delete from alarm where USER_ID=#{user_id} and WORK_TYPE=#{work_type}
+ </delete>
+ 
+ <!-- 전체 알림 리스트 뽑기 -->
+  <select id="checkAlarmAll" resultType="com.fortune.function_DTO.Select_Alarm_DTO">
+ 	select work_type,count(work_type) as count from alarm where USER_ID=#{user_id} group by work_type
+ </select>
+ 
+ <!-- 알림 total count 가져오기 -->
+ <select id="totalCount" resultType="Integer">
+ 	select count(*) from alarm where USER_ID=#{user_id} 
+ </select>
+ 
+</mapper>

@@ -33,7 +33,56 @@
 <script src='fullcalendar/js/fullcalendar.min.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 <script src="fullcalendar/js/customcalendar.js" ></script>
+<script>
+var wsocket;
+var msg 
+function connect() {
+	/* alert("소켓연결!"); */
+	
+	wsocket = new WebSocket("ws://192.168.0.3:8090/fortune/chat-ws.htm");
+	wsocket.onopen = onOpen;
+	wsocket.onmessage = onMessage;
+	wsocket.onclose = onClose;
 
+}
+function disconnect() {
+	wsocket.close();
+}
+function onOpen(evt) {
+	
+	appendMessage("연결되었습니다.");
+}
+function onMessage(evt) {
+
+	
+	$('#blink').addClass("blink_me notification_count");
+	$('#blink').html("5");
+	
+	
+	//alert("메세지 : "+evt.data);
+}
+function onClose(evt) {
+	appendMessage("연결을 끊었습니다.");
+}
+
+function send(alarm) {
+/* 	var selectId="sungjun@gmail.com/mclee@gmail.com"; */
+
+	wsocket.send(alarm);
+	
+}
+
+function appendMessage(msg) {
+	console.log(msg);
+
+}
+
+
+	
+$(document).ready(function() {
+		connect();
+});
+</script>
 
 </head>
 <body>
