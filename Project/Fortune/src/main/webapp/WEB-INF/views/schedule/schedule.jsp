@@ -5,8 +5,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script>
 
+<script>
+$(".dropdown dt a").on('click', function() {
+	  $(".dropdown dd ul").slideToggle('fast');
+	});
+
+	$(".dropdown dd ul li a").on('click', function() {
+	  $(".dropdown dd ul").hide();
+	});
+
+	function getSelectedValue(id) {
+	  return $("#" + id).find("dt a span.value").html();
+	}
+
+	$(document).bind('click', function(e) {
+	  var $clicked = $(e.target);
+	  if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+	});
+
+	$('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+	  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+	    title = $(this).val() + ",";
+
+	  if ($(this).is(':checked')) {
+	    var html = '<span title="' + title + '">' + title + '</span>';
+	    $('.multiSel').append(html);
+	    $(".hida").hide();
+	  } else {
+	    $('span[title="' + title + '"]').remove();
+	    var ret = $(".hida");
+	    $('.dropdown dt a').append(ret);
+
+	  }
+	});
 
 
 
@@ -85,6 +118,90 @@ div{
 	padding-right: 5px;
 }
 
+
+
+
+.dropdown {
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+}
+
+a {
+  color: #fff;
+}
+
+.dropdown dd,
+.dropdown dt {
+  margin: 0px;
+  padding: 0px;
+}
+
+.dropdown ul {
+  margin: -1px 0 0 0;
+}
+
+.dropdown dd {
+  position: relative;
+}
+
+.dropdown a,
+.dropdown a:visited {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+  font-size: 12px;
+}
+
+.dropdown dt a {
+  background-color: #4F6877;
+  display: block;
+  padding: 8px 20px 5px 10px;
+  min-height: 25px;
+  line-height: 24px;
+  overflow: hidden;
+  border: 0;
+  width: 272px;
+}
+
+.dropdown dt a span,
+.multiSel span {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 3px 2px 0;
+}
+
+.dropdown dd ul {
+  background-color: #4F6877;
+  border: 0;
+  color: #fff;
+  display: none;
+  left: 0px;
+  padding: 2px 15px 2px 5px;
+  position: absolute;
+  top: 2px;
+  width: 280px;
+  list-style: none;
+  height: 100px;
+  overflow: auto;
+}
+
+.dropdown span.value {
+  display: none;
+}
+
+.dropdown dd ul li a {
+  padding: 5px;
+  display: block;
+}
+
+.dropdown dd ul li a:hover {
+  background-color: #fff;
+}
+
+
+
+
 </style>
 </head>
 <body>
@@ -106,9 +223,13 @@ div{
 			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog">
 
+
+
+
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
+						
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">일 정 내 용</h4>
 						</div>

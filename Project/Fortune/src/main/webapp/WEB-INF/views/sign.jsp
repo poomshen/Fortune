@@ -389,14 +389,7 @@
                <select name="team_no" id="cd-dropdown2" class="cd-select">
                   <option value="-1" selected="">팀을 선택하세요</option>
             
-                     <option style="text-align:center" value="101">개발1팀</option>
-                  
-                     <option style="text-align:center" value="102">개발2팀</option>
-                  
-                     <option style="text-align:center" value="103">개발3팀</option>
-                  
-                     <option style="text-align:center" value="201">영업1팀</option>
-                  
+
                      <option style="text-align:center" value="202">영업2팀</option>
                   
                      <option style="text-align:center" value="203">영업3팀</option>

@@ -81,7 +81,7 @@ public class FullCalendarController {
        
         for(int i=0;i<selectId.length;i++){
         	adto.setUser_id(selectId[i]);
-        	adto.setWork_type("2");
+        	adto.setWork_type("3");
         	alarmDAO.insertAlarm(adto);
 
            sadto.add(alarmDAO.checkAlarm(adto));
