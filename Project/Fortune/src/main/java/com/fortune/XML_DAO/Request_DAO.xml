@@ -190,6 +190,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	
 	
+	<select id="selectCollaboList" parameterType="String" resultType="com.fortune.function_DTO.Select_Collabo_DTO">
+		select Col.Collabo_Req_Title,collabo_no from Collabo_Req col join (Select * From
+		(Select collabo_no,team_no,collabo_req_index From Users U Join (Select * From Collabo) C On U.User_Id = C.User_Id) J
+		Join
+		(Select Team_No,Dept_No From Users Where User_Id = #{user_id}) Ids On J.Team_No = Ids.Team_No ) Lst 
+		on col.collabo_req_index = lst.collabo_req_index
+	</select>
 
 
 
