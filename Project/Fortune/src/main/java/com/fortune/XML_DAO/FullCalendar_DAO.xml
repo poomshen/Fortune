@@ -8,13 +8,13 @@
 
 <!-- 일정(일반업무)등록 -1 -->
 <insert id="insertSchedule">
-<!-- schedule 테이블 insert // COLLABO_NO는 임의로 1로 넣음 -->
+<!-- schedule 테이블 insert -->
 INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
-    VALUES((select nvl(max(schedule_no)+1,1) from schedule), 1, #{schedule_start}, #{schedule_end})
+    VALUES((select nvl(max(schedule_no)+1,1) from schedule), #{collabo_no}, #{schedule_start}, #{schedule_end})
 </insert>
 <!-- 일정(일반업무)등록 -2 -->
 <insert id="insertWork">
-<!-- work 테이블 insert // WORK_NO는 임의로 1로 넣음 -->
+<!-- work 테이블 insert -->
 INSERT INTO work(SCHEDULE_NO, WORK_TITLE, WORK_TEXT)
     VALUES((select max(schedule_no) from schedule), #{work_title}, #{work_text})
 </insert>
@@ -35,7 +35,7 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 	SELECT S.SCHEDULE_NO, SCHEDULE_START, SCHEDULE_END, WORK_TITLE, WORK_TEXT FROM 
 	SCHEDULE S JOIN WORK W 
 	ON S.SCHEDULE_NO = W.SCHEDULE_NO 
-	WHERE S.COLLABO_NO = 1
+	WHERE S.COLLABO_NO = #{collabo_no}
 	ORDER BY SCHEDULE_START
 </select>
 
@@ -46,7 +46,7 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 	on wu.SCHEDULE_NO = w.SCHEDULE_NO
 	join schedule s
 	on w.schedule_no = s.schedule_no
-	where s.collabo_no = 1
+	where s.collabo_no = #{collabo_no}
 </select>
 
 
@@ -70,6 +70,10 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 <delete id="deleteSchedule">
 	delete from schedule where schedule_no = #{id}
 </delete>
+<!-- 일정 delete 작업 -3 -->
+<delete id="deleteWork_Users">
+	delete from work_users where schedule_no =#{id}
+</delete>
 
 
 
@@ -88,6 +92,14 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 	UPDATE schedule SET schedule_start = #{schedule_start}, schedule_end = #{schedule_end}
 	WHERE SCHEDULE_NO = #{schedule_no}
 </update>
+
+
+
+
+<!-- 일정 상세보기의 comment 불러오기 -->
+<select id="selectComment" resultType="com.fortune.Table_DTO.Work_Comment_DTO">
+	select * from work_comment where schedule_no = #{id}
+</select>
 
 
 

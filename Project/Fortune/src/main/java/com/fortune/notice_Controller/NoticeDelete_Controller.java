@@ -24,7 +24,7 @@ public class NoticeDelete_Controller {
 
 	// 공지사항글 삭제하기
 	@RequestMapping("noticeDelete.htm")
-	public String noticeDelete(String notice_no) throws ClassNotFoundException, SQLException {
+	public String noticeDelete(int notice_no) throws ClassNotFoundException, SQLException {
 		System.out.println("notice_no : " + notice_no);
 
 		INotice noticeDao = sqlSession.getMapper(INotice.class);

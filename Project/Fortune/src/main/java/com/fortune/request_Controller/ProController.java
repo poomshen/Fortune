@@ -262,9 +262,9 @@ public class ProController {
 			
 			//담당자 선택역할을 한다.
 			@RequestMapping( value="insertmanager.htm", method = RequestMethod.POST)
-			 public String InsertManager(With_DTO m) throws ClassNotFoundException,
+			 public String InsertManager(With_DTO m, String collabo_req_index) throws ClassNotFoundException,
 			   SQLException {
-				
+				 proservice.ProManager(collabo_req_index);
 				 proservice.InsertManager(m);
 				/* System.out.println(m.toString()+"흠냐");*/
 				 
