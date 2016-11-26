@@ -1,6 +1,7 @@
 package com.fortune.Ajax_Controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,6 +17,7 @@ import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.function_DTO.Schedule_Work_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.member_DAO.IJoin;
+import com.fortune.organization_DAO.IOrganization;
 
 @Controller
 public class JoinAjax_Controller {
@@ -42,7 +44,6 @@ public class JoinAjax_Controller {
 		}
 	}
 	
-	
 	@RequestMapping("/pwdchk.ajax")
 	public @ResponseBody String pwdchk(@RequestParam(value="user_password") String user_password, @RequestParam(value="user_password_chk") String user_password_chk){
 		System.out.println("pwd 중복 체크");
@@ -54,6 +55,17 @@ public class JoinAjax_Controller {
 		}else{
 			return "fail";
 		}
+	}
+	
+	@RequestMapping("/deptsearch.ajax")
+	public ArrayList<Join_DTO> deptsearch(int dept_no){
+		System.out.println("같은 부서 리스트 쫙 뽑을거");
+		
+		ArrayList<Join_DTO> dto = new ArrayList<Join_DTO>();
+		IOrganization dao = sqlsession.getMapper(IOrganization.class);
+		dto = dao.showdept(dept_no);
+		
+		return dto;
 	}
 
 }
