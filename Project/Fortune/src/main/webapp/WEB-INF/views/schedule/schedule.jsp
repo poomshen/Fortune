@@ -5,10 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <script>
-
-
-
 
 
 $(document).ready(function() {
@@ -17,6 +15,7 @@ $(document).ready(function() {
  	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
+		data : 'collabo_no=${collabo_no}',
 		success : function(data) {
 			console.log(data)
 			$.each(data.schedulelist, function(index, obj) {
@@ -29,8 +28,8 @@ $(document).ready(function() {
 				array.push(item);
 				
 		        content += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
-		        content += '</td><td><a'; //href="#" data-toggle="modal" data-target="#myModal2"
-		        content += ' onclick="test(' + obj.schedule_no;
+		        content += '</td><td><a';
+		        content += ' onclick="detail(' + obj.schedule_no;
 		        content += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
 		        content += "','" + obj.users + "'";
 		        content += ')" >상세보기</a></td></tr>';
@@ -43,7 +42,8 @@ $(document).ready(function() {
 	});
 });
 
-function test(id, title, text, start, end, userids){
+function detail(id, title, text, start, end, userids){
+	//온클릭 함수에 가져올 데이터들
 	$('#content').empty();
 	$('#content_detail').css("display", "block");
  	$('#detail_id').val(id);
@@ -52,6 +52,7 @@ function test(id, title, text, start, end, userids){
 	$('#detail_start').val(start);
 	$('#detail_end').val(end);
 	
+	//상세보기 내용에 참가자 인원 뿌려주는 코드
 	var userid = userids.split("/");
 	var contentck = "";
 	
@@ -60,6 +61,61 @@ function test(id, title, text, start, end, userids){
 	}
 	
  	$('#cbdiv').append(contentck)
+ 	
+ 	
+ 	//상세보기 내용에 comment 뿌려주는 내용
+ 	var comment_text = "";
+ 	comment_text += "<table class='table table-striped'><tr><th>번호</th><th>작성자</th><th>작성시간</th></tr>"
+ 	$.ajax({
+		url : 'select_comment.ajax',
+		type : 'post',
+		data : 'schedule_no='+ id,
+		success : function(data) {
+			console.log(data)
+ 			$.each(data, function(index, obj) {
+ 				comment_text += "<tr><td>"+obj.work_comment_no+"</td><td>"+obj.user_id+"</td><td>"+obj.work_comment_date+"</td></tr>"
+				comment_text += "<tr><td>내용 : </td><td colspan='2'>"+obj.work_comment_text+"</td></tr>"
+				
+			});
+	        $('#comment_text').html(comment_text);
+		}
+	});
+ 	
+ 	
+}
+
+//수정하기 버튼 클릭시 readonly속성 없애줌
+function work_update(){
+	$('#update_btn').attr('type','hidden');
+	$('#updateok_btn').attr('type','button');
+	document.getElementById("detail_title").readOnly = false;
+	document.getElementById("detail_text").readOnly = false;
+}
+
+//저장하기 버튼 클릭시 DB에 update작업
+function work_updateok(){
+	$('#update_btn').attr('type','button');
+	$('#updateok_btn').attr('type','hidden');
+	document.getElementById("detail_title").readOnly = true;
+	document.getElementById("detail_text").readOnly = true;
+	
+}
+
+function insert_comment(){
+ 	$.ajax({
+		url : 'insert_comment.ajax',
+		type : 'post',
+		data : 'schedule_no='+ id,
+		success : function(data) {
+			console.log(data)
+ 			$.each(data, function(index, obj) {
+ 				comment_text += "<tr><td>"+obj.work_comment_no+"</td><td>"+obj.user_id+"</td><td>"+obj.work_comment_date+"</td></tr>"
+				comment_text += "<tr><td>내용 : </td><td colspan='2'>"+obj.work_comment_text+"</td></tr>"
+				
+			});
+	        $('#comment_text').html(comment_text);
+		}
+	});
 }
 
 
@@ -85,9 +141,19 @@ div{
 	padding-right: 5px;
 }
 
+
+input:read-only {
+    background-color: rgb(234,234,234);
+}
+textarea:read-only{
+	background-color: rgb(234,234,234);
+}
+
 </style>
 </head>
 <body>
+<input type="hidden" id="collabo_no" value="${collabo_no}">
+
 	<br>
 	<br>
 	<div class="container-fluid">
@@ -106,9 +172,13 @@ div{
 			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog">
 
+
+
+
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
+						
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">일 정 내 용</h4>
 						</div>
@@ -117,6 +187,7 @@ div{
 							<label>일정 제목 : </label> <input type="text" id="modal_title"><br>
 							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="modal_text"></textarea><br>
 							<label>참가 인원 : </label>
+					
 							<input type="checkbox" value="개발1팀장" name='userchk'>개발1팀장 &nbsp;
 							<input type="checkbox" value="yeji" name='userchk'>yeji &nbsp;
 							<input type="checkbox" value="yeji314" name='userchk'>yeji314 &nbsp;
@@ -174,15 +245,26 @@ div{
 					<div id="content" style="padding-right:0px;">
 					</div>
 					<div id="content_detail" style="display: none; padding-right:0px;">
-						<input type="button" value="수정" id="update_btn"><input type="button" value="삭제" id="delete_btn"><br>
-						<label>제목 : </label> <input type="text" id="detail_title"><br>
-						<label>내용 : </label> <textarea rows="5" cols="30" id="detail_text"></textarea><br>
-						<div id="cbdiv">담당자 : </div> <br>
-							
+						<input type="button" value="일정 수정하기" id="update_btn" onclick="work_update()">
+						<input type="hidden" value="일정 저장하기" id="updateok_btn" class="btn-success" onclick="work_updateok()">
+						<input type="button" value="일정 삭제하기" id="delete_btn"><br>
+						<label>제목 : </label> <input type="text" id="detail_title" readonly="readonly"><br>
+						<label>내용 : </label> <textarea rows="5" cols="50" id="detail_text" readonly="readonly"></textarea><br>
+						<div id="cbdiv" style="padding-right:0px;">담당자 : </div>
+							<hr>
 							<input type="hidden" id="detail_id">
 							<input type="hidden" id="detail_start">
 							<input type="hidden" id="detail_end">
-						<div>comment영역 ( 아직 미구현 )</div>
+						<div id = "comment" style="padding-right:0px;">
+						
+							<div id= "comment_text" style="padding-right:0px;"></div>
+							
+							<textarea rows="3" cols="60" style="overflow: scroll; overflow-x: hidden;"></textarea><br>
+							<input type="button" value="댓글 등록" id="insert_comment" onclick="insert_comment()">
+							<input type="button" value="댓글 수정" id="update_comment">
+							<input type="button" value="댓글 삭제" id="delete_comment">
+							
+						</div>
 					</div>
 
 				</div>

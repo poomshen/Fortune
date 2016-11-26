@@ -28,7 +28,7 @@
 <link href='fullcalendar/css/fullcalendar.css' rel='stylesheet' />
 <link href='fullcalendar/css/fullcalendar.print.css' rel='stylesheet' media='print' />
 <link href='fullcalendar/css/jquery-ui.min.css' rel='stylesheet' />
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
 <script src='fullcalendar/js/lib/moment.min.js'></script>
 <script src='fullcalendar/js/fullcalendar.min.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
@@ -106,12 +106,19 @@ function appendMessage(msg) {
 
 	
 $(document).ready(function() {
-		connect();
+	connect();
+	$("#alarmList li").click(function() {
+	    alert(this.id); 
+	    
+	    window.location.href = "alarmCheck.htm?work_type="+this.id;
+	});
+
 });
 </script>
 
 </head>
 <body>
+
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="aside" />
 	<!-- Page Content -->
@@ -136,7 +143,6 @@ $(document).ready(function() {
 
 	<!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
-	
 	
 </body>
 </html>
