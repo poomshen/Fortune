@@ -106,12 +106,19 @@ function appendMessage(msg) {
 
 	
 $(document).ready(function() {
-		connect();
+	connect();
+	$("#alarmList li").click(function() {
+	    alert(this.id); 
+	    
+	    window.location.href = "alarmCheck.htm?work_type="+this.id;
+	});
+
 });
 </script>
 
 </head>
 <body>
+
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="aside" />
 	<!-- Page Content -->
@@ -136,7 +143,6 @@ $(document).ready(function() {
 
 	<!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
-	
 	
 </body>
 </html>

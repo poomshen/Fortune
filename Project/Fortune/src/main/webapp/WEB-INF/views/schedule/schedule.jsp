@@ -117,6 +117,7 @@ div{
 							<label>일정 제목 : </label> <input type="text" id="modal_title"><br>
 							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="modal_text"></textarea><br>
 							<label>참가 인원 : </label>
+					
 							<input type="checkbox" value="개발1팀장" name='userchk'>개발1팀장 &nbsp;
 							<input type="checkbox" value="yeji" name='userchk'>yeji &nbsp;
 							<input type="checkbox" value="yeji314" name='userchk'>yeji314 &nbsp;
