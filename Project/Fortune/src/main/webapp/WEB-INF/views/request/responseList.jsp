@@ -88,17 +88,10 @@
 					<td class="collabo_end">${n.collabo_end}</td>
 					<td class="collabo_req_state">${n.collabo_state}</td>
 					<td class="collabo_req_id">${n.collabo_req_ID}</td>
-<<<<<<< HEAD
 					<td class="collabo_cal"><a href="schedule.htm?collabo_no=${n.collabo_no}"><button>Click</button></a></td>
 					
 					
 				</tr>	
-=======
-					<td class="collabo_cal"><a href="schedule.htm" class="btn btn-default btn-md">Click</a></td>
-
-
-				</tr>
->>>>>>> bf50580846aa09059737cbbc0df4756c5b5dfe08
 			</c:forEach>
 
 
