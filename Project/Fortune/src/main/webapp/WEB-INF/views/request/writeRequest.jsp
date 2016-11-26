@@ -16,11 +16,6 @@
 			$('#collabo_req_title').focus();
 			return false;
 
-		} else if ($('#collabo_req_ID').val() == "") {
-			alert("수신자 입력바랍니다. ");
-			$('#collabo_req_ID').focus();
-			return false;
-
 		} else {
 			alert("완료");
 			 promodifyform.submit(); 
@@ -38,7 +33,7 @@
 </head>
 <body>
 	<div class="container">
-	<form action="" method="post" name="promodifyform">
+	<form action="" method="post" name="promodifyform" enctype="multipart/form-data">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
 			
@@ -51,6 +46,12 @@
 					 <input type="text"
 						name="collabo_req_title" id="collabo_req_title"
 						class="form-control" placeholder="제목을 입력하세요" >
+				</div>
+			</div>
+			<div class="form-group has-success">
+				<div>
+					<label>첨부파일 :</label>
+					 <input type="file" name="files[0]" id="collabo_req_filesrc" class="form-control">
 				</div>
 			</div>
 
@@ -101,5 +102,7 @@
 	</form>
 </div>
 
+			
+					
 </body>
 </html>
