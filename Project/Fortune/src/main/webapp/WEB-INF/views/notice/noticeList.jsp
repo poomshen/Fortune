@@ -50,6 +50,17 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">안녕하세요, 관리자의 공지사항공간이랍니다~</div>
+						<!-- 검색폼 추가 -->
+						<div>
+							<form name="searchform" id="searchform" action="noticeSearch.htm" method="get">
+								<select name="selectvalue" id="selectvalue" class="cd-select">
+									<option style="text-align:center" value="notice_title">제목</option>
+									<option style="text-align:center" value="notice_text">내용</option>
+								</select>
+								<input type="text" name="searchvalue">
+								<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
+							</form>
+						</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="dataTable_wrapper">
@@ -103,6 +114,9 @@
 							</div>
 						</div>
 						<!-- /.panel-body -->
+						<p>
+			<a href="noticeInsert.htm">공지사항 작성하기</a>
+		</p>
 					</div>
 					<!-- /.panel -->
 				</div>

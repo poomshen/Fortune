@@ -271,7 +271,9 @@ public class ProService {
 
 	//////////////////////////////////////////////////////////////
 
-	// 전체 협업 리스트
+	// 전체 협업 리스트 입니다. 
+	// 즉 협업요청이 아닌 협업이 완료된 상태를 의미합니다.
+	
 	public List<With_DTO> listResponse(String pg, String f, String q, HttpSession session)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("집에 갑시다.");
@@ -317,6 +319,7 @@ public class ProService {
 	// 담당자를 선택하는 역할을 한다.
 	public With_DTO InsertManager(With_DTO m) throws ClassNotFoundException, SQLException {
 		System.out.println("tostring : " + m.toString());
+		
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
 		 proDao.updatemanager(m);
 		return m;
@@ -339,13 +342,22 @@ public class ProService {
 			throws ClassNotFoundException, SQLException{
 			
 			ProDao checking_DAO = sqlsession.getMapper(ProDao.class);
+			
 			List<Join_DTO> list = checking_DAO.listManager();
 			System.out.println("私たちは今も悪い道を行っているのか..?");
 			//System.out.println(list);
 			
 			return list;
 		}
-	
+		// 대기에서 진행중으로 변환 시키는 클래스입니다.
+		// 날짜 일자 :2016-11-25
+		public int ProManager(String collabo_req_index) throws ClassNotFoundException, SQLException {
+			System.out.println("collabo_req_index : " + collabo_req_index);
+			ProDao proDao = sqlsession.getMapper(ProDao.class);
+			 // 진행중으로 변환시키는 데이터 
+			int re= proDao.manager(collabo_req_index); 
+			return re;
+		}
 	
 
 }

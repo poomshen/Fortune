@@ -7,8 +7,17 @@ public class Schedule_Work_DTO {
 	private String work_title;
 	private String work_text;
 	private String users;
+	private String collabo_no;
 	
 	
+	
+	
+	public String getCollabo_no() {
+		return collabo_no;
+	}
+	public void setCollabo_no(String collabo_no) {
+		this.collabo_no = collabo_no;
+	}
 	public String getUsers() {
 		return users;
 	}

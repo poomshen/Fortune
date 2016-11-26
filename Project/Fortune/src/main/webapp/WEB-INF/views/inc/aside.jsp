@@ -33,7 +33,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="schedule.htm"><i class="fa fa-table fa-fw"></i>일정</a>
+                            <a href="schedule.htm?collabo_no=1"><i class="fa fa-table fa-fw"></i>일정</a>
                         </li>
                         <li>
                             <a href="noticeList.htm"><i class="fa fa-edit fa-fw"></i>공지 사항</a>
@@ -60,7 +60,7 @@
                                 <li>
                                     <a href="dept.htm">부서</a>
                                 </li>
-                                <li>
+                             <!--    <li>
                                     <a href="#">팀 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
@@ -76,8 +76,8 @@
                                             <a href="#">Third Level Item</a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
+                                    /.nav-third-level
+                                </li> -->
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

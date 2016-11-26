@@ -44,10 +44,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="searchNameListFiles" parameterType="String" resultType="com.fortune.Table_DTO.FileRoom_DTO">
+		<!-- select * from (select rownum num, n.* from (select * from file_room where file_room_name like '%'||#{searchvalue}||'%' order by file_room_no desc) n)
+		 where num between 1 + (#{page} - 1) * 9 and 9 + (#{page} - 1) * 9 -->
+		
 		select * from file_room where file_room_name like '%'||#{searchvalue}||'%'
 	</select>
 	
 	<select id="searchDateListFiles" parameterType="String" resultType="com.fortune.Table_DTO.FileRoom_DTO">
+		<!-- select * from (select rownum num, n.* from (select * from file_room where to_char(file_room_date)= to_date(#{searchvalue},'YY/MM/DD') order by file_room_no desc) n)
+		 where num between 1 + (#{page} - 1) * 9 and 9 + (#{page} - 1) * 9 -->
+		
 		select * from file_room where to_char(file_room_date)= to_date(#{searchvalue},'YY/MM/DD')
 	</select>
 </mapper>
