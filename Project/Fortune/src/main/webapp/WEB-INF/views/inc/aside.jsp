@@ -60,7 +60,7 @@
                                 <li>
                                     <a href="dept.htm">부서</a>
                                 </li>
-                                <li>
+                             <!--    <li>
                                     <a href="#">팀 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
@@ -76,8 +76,8 @@
                                             <a href="#">Third Level Item</a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
+                                    /.nav-third-level
+                                </li> -->
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

@@ -22,14 +22,38 @@ table, th, td {
 <!-- <input type="button" onclick="deptshow()" value="같은 부서원 정보 뿌리기"> -->
 <h2>deptno 확인 : ${sessionScope.info.dept_no}</h2>
 
-<select>
-<option value="-1" selected>부서명을 선택하세요</option>
-	<c:forEach var="i" items="${dept}">
-		<option value="${i.dept_no}">${i.dept_name}</option>
-	</c:forEach>
-</select>
+<form action="deptsearch.ajax">
+	<select>
+		<c:forEach var="i" items="${dept}">
+			<c:choose>
+				<c:when test="${i.dept_no == sessionScope.info.dept_no}">
+					<option value="${i.dept_no}" selected>${i.dept_name}</option>
+				</c:when>
+				<c:otherwise>
+					<option value="${i.dept_no}">${i.dept_name}</option>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</select>
+	
+	<%-- <select>
+		<c:forEach var="i" items="${team}">
+			<c:choose>
+				<c:when test="${i.team_no == sessionScope.info.team_no}">
+					<option value="${i.team_no}" selected>${i.team_name}</option>
+				</c:when>			
+				<c:otherwise>
+					<option value="${i.team_no}">${i.team_name}</option>	
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</select> --%>
 
-<table>
+	<input type="submit" class="btn btn-primary" value="검색">
+</form>
+
+
+	<table>
 	<tr>
 		<th>아이디</th>
 		<th>이름</th>
