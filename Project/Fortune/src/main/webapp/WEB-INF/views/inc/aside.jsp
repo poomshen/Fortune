@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="navbar-default sidebar" style="border-color:#444; background-color:#417ca5; width:170px; height:644px;" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -29,6 +30,11 @@
                                 <li>
                                     <a href="historyList.htm">히스토리 리스트</a>
                                 </li>
+                                <c:forEach var="n" items="${sessionScope.collabo}">
+                                <li>
+                                 <a href="schedule.htm?collabo_no=${n.collabo_no}"> ${n.collabo_req_title}</a>
+                                </li>
+                                </c:forEach>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

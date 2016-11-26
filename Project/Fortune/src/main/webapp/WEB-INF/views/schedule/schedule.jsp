@@ -5,10 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <script>
-
-
-
 
 
 $(document).ready(function() {
@@ -143,6 +141,7 @@ div{
 	padding-right: 5px;
 }
 
+
 input:read-only {
     background-color: rgb(234,234,234);
 }
@@ -173,9 +172,13 @@ textarea:read-only{
 			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog">
 
+
+
+
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
+						
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">일 정 내 용</h4>
 						</div>
@@ -184,6 +187,7 @@ textarea:read-only{
 							<label>일정 제목 : </label> <input type="text" id="modal_title"><br>
 							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="modal_text"></textarea><br>
 							<label>참가 인원 : </label>
+					
 							<input type="checkbox" value="개발1팀장" name='userchk'>개발1팀장 &nbsp;
 							<input type="checkbox" value="yeji" name='userchk'>yeji &nbsp;
 							<input type="checkbox" value="yeji314" name='userchk'>yeji314 &nbsp;

@@ -39,24 +39,33 @@
 		<dt>프로젝트 진행상태</dt>
 		<dd>${list.collabo_req_state}</dd>
 	</dl>
+	<dl>
+		<dt>프로젝트 첨부파일</dt>
+		<dd>
+			<a href="download.htm?p=upload&f=${list.collabo_req_filesrc}">${list.collabo_req_filesrc}</a>
+		</dd>
+	</dl>
 </div>
 	<p><a href="requestList.htm">목록</a></p>
+	
+	
 				<c:choose>
-					<c:when test="${list.collabo_req_state == '수락'}">
-						<p>수락완료</p>
-						
-					</c:when>
+					<c:when test="${list.collabo_req_state == '수락'}"><p>수락완료</p></c:when>
+					
 					<c:when test="${list.collabo_req_state == '거절'}"></c:when>
+					
 					<c:otherwise>
+					<c:if test="${sessionScope.info.user_id == list.collabo_req_ID}">
 					<p><a href="accept.htm?collabo_req_index=${list.collabo_req_index}" name="collabo_req_state">수락</a></p> 
 					<p><a  href="refuse.htm?collabo_req_index=${list.collabo_req_index}" name="collabo_req_state">거절</a></p>
+					</c:if>
 					</c:otherwise>
 					
 				</c:choose>
 				
 	
 	
-	<p><a href="proEdit.htm?collabo_req_index=${list.collabo_req_index}">수정</a></p>
+	<%-- <p><a href="proEdit.htm?collabo_req_index=${list.collabo_req_index}">수정</a></p> --%>
 
 
 </body>
