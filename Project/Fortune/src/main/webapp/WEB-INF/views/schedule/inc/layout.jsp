@@ -28,7 +28,7 @@
 <link href='fullcalendar/css/fullcalendar.css' rel='stylesheet' />
 <link href='fullcalendar/css/fullcalendar.print.css' rel='stylesheet' media='print' />
 <link href='fullcalendar/css/jquery-ui.min.css' rel='stylesheet' />
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
 <script src='fullcalendar/js/lib/moment.min.js'></script>
 <script src='fullcalendar/js/fullcalendar.min.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
