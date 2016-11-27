@@ -39,7 +39,7 @@ var msg
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://192.168.0.3:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://sasystem.iptime.org:8081/Fortune/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
