@@ -57,11 +57,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="searchDateListFiles" resultType="com.fortune.Table_DTO.FileRoom_DTO">
-		select * from (select rownum num, n.* from (select * from file_room where to_char(file_room_date)= to_date(#{param1},'YY/MM/DD') order by file_room_no desc) n)
+		select * from (select rownum num, n.* from (select * from file_room where to_char(file_room_date) like to_date(nvl(#{param1}, sysdate),'YY/MM/DD') order by file_room_no desc) n)
 		 where num between 1 + (#{param2} - 1) * 12 and 12 + (#{param2} - 1) * 12
 	</select>
 	
 	<select id="countSearchDateFile" parameterType="String" resultType="integer">
-		select count(*) from file_room where to_char(file_room_date)= to_date(#{searchvalue},'YY/MM/DD')
+		select count(*) from file_room where to_char(file_room_date) like to_date(nvl(#{searchvalue}, sysdate),'YY/MM/DD')
 	</select>
 </mapper>
