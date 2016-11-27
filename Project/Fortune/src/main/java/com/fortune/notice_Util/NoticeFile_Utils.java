@@ -9,4 +9,30 @@ public class NoticeFile_Utils {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 
+		/*
+		 * 한글 및 영문 글자 길이를 잘라서 리턴 
+		 * @param String 원본문자열
+		 * @param int  리턴할 문자열갯수
+		 * @return String
+		 */
+	public static String getFixString(String message, int len) {
+		int sublen = 0;
+		StringBuffer sbuf = new StringBuffer();
+		if (message == null)
+			return "";
+
+		for (int j = 0; (j < message.length() && sublen < len); j++) {
+			if (Character.getType(message.charAt(j)) == 5)
+				sublen = sublen + 2;// 한글
+			else
+				sublen++; // 기타 영문,특수문자,공백
+
+			sbuf.append(message.charAt(j));
+		}
+		if (message.length() > len)
+			sbuf.append("..");
+
+		return sbuf.toString();
+	}
+
 }

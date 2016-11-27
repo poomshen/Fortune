@@ -67,7 +67,7 @@ public class Delete_Controller {
 		for(int i = 0; i < arrayParams.size(); i++){
 			String file_name = arrayParams.get(i);
 			System.out.println("file_name : " + file_name);
-			fileroom_DTO.setFile_room_name(file_name);
+			fileroom_DTO.setFile_room_rename(file_name);
 			fileromm_DAO.deleteFile(fileroom_DTO);
 			
 			String path = request.getServletContext().getRealPath("upload");
@@ -79,7 +79,7 @@ public class Delete_Controller {
 		
 		//View 화면에 뿌려주기 위한 list
 		int page = 1;
-		int row_size = 9;
+		int row_size = 12;
 
 		int total_count = fileromm_DAO.countFile(); // file 개수
 		System.out.println("total_count : " + total_count);
@@ -112,16 +112,16 @@ public class Delete_Controller {
 	
 	@RequestMapping(value = "/deletefiles.ajax", produces = "application/json")
 	@ResponseBody
-	public HashMap<String, Object> deleteFiles(@RequestParam(value="deletefilename") String arrayParams, HttpServletRequest request){
+	public HashMap<String, Object> deleteFiles(@RequestParam(value="deletefilename") String deletefilename, HttpServletRequest request){
 		System.out.println("deleteFile 컨트롤러");
-		System.out.println("arrayParams : " + arrayParams);
+		System.out.println("deletefilename : " + deletefilename);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		FileRoom_DTO fileroom_DTO = new FileRoom_DTO();
 		
-		String file_name = arrayParams;
+		String file_name = deletefilename;
 		System.out.println("file_name : " + file_name);
-		fileroom_DTO.setFile_room_name(file_name);
+		fileroom_DTO.setFile_room_rename(file_name);
 		fileromm_DAO.deleteFile(fileroom_DTO);
 			
 		String path = request.getServletContext().getRealPath("upload");
@@ -132,7 +132,7 @@ public class Delete_Controller {
 		
 		//View 화면에 뿌려주기 위한 list
 		int page = 1;
-		int row_size = 9;
+		int row_size = 12;
 
 		int total_count = fileromm_DAO.countFile(); // file 개수
 		System.out.println("total_count : " + total_count);

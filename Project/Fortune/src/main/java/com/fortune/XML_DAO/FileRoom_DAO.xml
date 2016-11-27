@@ -23,37 +23,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.fortune.fileroom_DAO.IFileRoom">
 	<insert id="insertFile" parameterType="com.fortune.Table_DTO.FileRoom_DTO">
-		insert into file_room values(1, 1, 'sung@gmail.com',sysdate, #{file_room_name}, (SELECT MAX(TO_NUMBER(file_room_no))+1 FROM file_room), #{file_room_ext})
+		insert into file_room values(1, 1, #{user_id}, sysdate, #{file_room_name}, (SELECT MAX(TO_NUMBER(file_room_no))+1 FROM file_room), #{file_room_ext}, #{file_room_rename})
 	</insert>
+	
+	<select id="selectOverlapNameFile" parameterType="String" resultType="integer">
+		select count(*) from file_room where file_room_name = #{file_room_name}
+	</select>
 
-	<!-- <select id="listFiles" parameterType="integer" resultType="com.fortune.Table_DTO.FileRoom_DTO">
-		select * from file_room order by file_room_no desc 
-	</select> -->
+	<select id="selectNameFile" parameterType="com.fortune.Table_DTO.FileRoom_DTO" resultType="String">
+		select file_room_name from file_room where file_room_rename = #{file_room_rename}
+	</select>
 	
 	<select id="listFiles" parameterType="integer" resultType="com.fortune.Table_DTO.FileRoom_DTO">
 		select * from (select rownum num, n.* from (select * from file_room order by file_room_no desc) n)
-		 where num between 1 + (#{page} - 1) * 9 and 9 + (#{page} - 1) * 9
+		 where num between 1 + (#{page} - 1) * 12 and 12 + (#{page} - 1) * 12
 	</select>
 	
 	<delete id="deleteFile" parameterType="com.fortune.Table_DTO.FileRoom_DTO">
-		delete file_room where file_room_name = #{file_room_name}
+		delete file_room where file_room_rename = #{file_room_rename}
 	</delete>
 	
 	<select id="countFile" resultType="integer">
 		select count(*) from file_room
 	</select>
 	
-	<select id="searchNameListFiles" parameterType="String" resultType="com.fortune.Table_DTO.FileRoom_DTO">
-		<!-- select * from (select rownum num, n.* from (select * from file_room where file_room_name like '%'||#{searchvalue}||'%' order by file_room_no desc) n)
-		 where num between 1 + (#{page} - 1) * 9 and 9 + (#{page} - 1) * 9 -->
-		
-		select * from file_room where file_room_name like '%'||#{searchvalue}||'%'
+	<select id="searchNameListFiles" resultType="com.fortune.Table_DTO.FileRoom_DTO">
+		select * from (select rownum num, n.* from (select * from file_room where file_room_name like '%'||#{param1}||'%' order by file_room_no desc) n)
+		 where num between 1 + (#{param2} - 1) * 12 and 12 + (#{param2} - 1) * 12
 	</select>
 	
-	<select id="searchDateListFiles" parameterType="String" resultType="com.fortune.Table_DTO.FileRoom_DTO">
-		<!-- select * from (select rownum num, n.* from (select * from file_room where to_char(file_room_date)= to_date(#{searchvalue},'YY/MM/DD') order by file_room_no desc) n)
-		 where num between 1 + (#{page} - 1) * 9 and 9 + (#{page} - 1) * 9 -->
-		
-		select * from file_room where to_char(file_room_date)= to_date(#{searchvalue},'YY/MM/DD')
+	<select id="countSearchNameFile" parameterType="String" resultType="integer">
+		select count(*) from file_room where file_room_name like '%'||#{searchvalue}||'%' 
+	</select>
+	
+	<select id="searchDateListFiles" resultType="com.fortune.Table_DTO.FileRoom_DTO">
+		select * from (select rownum num, n.* from (select * from file_room where to_char(file_room_date)= to_date(#{param1},'YY/MM/DD') order by file_room_no desc) n)
+		 where num between 1 + (#{param2} - 1) * 12 and 12 + (#{param2} - 1) * 12
+	</select>
+	
+	<select id="countSearchDateFile" parameterType="String" resultType="integer">
+		select count(*) from file_room where to_char(file_room_date)= to_date(#{searchvalue},'YY/MM/DD')
 	</select>
 </mapper>
