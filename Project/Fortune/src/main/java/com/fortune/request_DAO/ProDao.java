@@ -6,6 +6,7 @@ import java.util.List;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.function_DTO.Select_Collabo_DTO;
 
 
 
@@ -46,5 +47,9 @@ public interface ProDao {
 		//수락 하기
 		public int manager(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		
+		//작성자 이성준
+		//2016-11-26
+		//사이드바에 자신의 협업들 보여 주기
+		public List<Select_Collabo_DTO> selectCollaboList(String user_id);
 		
 }

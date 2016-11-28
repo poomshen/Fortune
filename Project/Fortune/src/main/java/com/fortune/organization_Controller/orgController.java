@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fortune.Table_DTO.Dept_DTO;
+import com.fortune.Table_DTO.Jobtitle_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Team_DTO;
 import com.fortune.member_DAO.IJoin;
@@ -52,6 +53,12 @@ public class orgController {
 		tdto = tdao.searchTeam();
 		model.addAttribute("team", tdto);
 		
+		//직함 리스트 보여주는 부분
+		ArrayList<Jobtitle_DTO> jdto = new ArrayList<Jobtitle_DTO>();
+		IJoin jdao = sqlSession.getMapper(IJoin.class);
+		jdto = jdao.searchTitle();
+		model.addAttribute("position", jdto);
+
 		return "business.business";
 	}
 

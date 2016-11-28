@@ -27,7 +27,7 @@ public class FileRoom_Controller {
 		if (str_pg != null) {
 			page = Integer.parseInt(str_pg);
 		}
-		int row_size = 9;
+		int row_size = 12;
 
 		int total_count = fileromm_DAO.countFile();
 		System.out.println("totalcount : " + total_count);
@@ -52,7 +52,7 @@ public class FileRoom_Controller {
 		mv.addObject("block", block);
 		mv.addObject("from_page", from_page);
 		mv.addObject("to_page", to_page);
-		mv.setViewName("fileView.file");
+		mv.setViewName("fileView.file3");
 		
 		return mv;
 	}
