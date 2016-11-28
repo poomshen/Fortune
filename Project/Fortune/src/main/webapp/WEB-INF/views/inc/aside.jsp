@@ -3,7 +3,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <style>
-a {
+ul a {
      color: white;
     text-decoration: none;
 }
