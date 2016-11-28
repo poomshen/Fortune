@@ -153,10 +153,10 @@ public class FullCalendarController {
         
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
         
+        fullcalendarDAO.deleteWork_Comment(id);
         fullcalendarDAO.deleteWork_Users(id);
         fullcalendarDAO.deleteWork(id);
         fullcalendarDAO.deleteSchedule(id);
-        fullcalendarDAO.deleteWork_Comment(id);
         System.out.println("삭제성공");
 		return 1;
 	}

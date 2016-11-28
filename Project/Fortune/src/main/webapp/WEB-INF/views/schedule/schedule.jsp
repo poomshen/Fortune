@@ -323,7 +323,6 @@ function delete_comment(commend_id){
 						<input type="button" value="일정 삭제하기" id="delete_btn"><br>
 						<label>제목 : </label> <input type="text" id="detail_title" readonly="readonly"><br>
 						<label>내용 : </label> <textarea rows="5" cols="50" id="detail_text" readonly="readonly"></textarea><br>
-						<div id="cbdiv" style="padding-right:0px;">담당자 : </div>
 							<hr>
 							<input type="hidden" id="detail_id">
 							<input type="hidden" id="detail_start">

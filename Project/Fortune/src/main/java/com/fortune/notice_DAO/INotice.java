@@ -7,15 +7,8 @@
 
 package com.fortune.notice_DAO;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.ui.Model;
-
-import com.fortune.Table_DTO.FileRoom_DTO;
 import com.fortune.Table_DTO.Notice_DTO;
 
 public interface INotice {
@@ -23,17 +16,17 @@ public interface INotice {
 	//공지사항 전체 개수
 	public int countNotice();
 	//전체 게시물
-	public List<Notice_DTO> listNotice(int page) throws ClassNotFoundException, SQLException;
+	public List<Notice_DTO> listNotice(int page);
 	//게시물 상세
-	public Notice_DTO detailNotice(int notice_no) throws ClassNotFoundException, SQLException;
+	public Notice_DTO detailNotice(int notice_no);
 	//게시물 입력
-	public int insertNotice(Notice_DTO ndto) throws ClassNotFoundException, SQLException;
+	public int insertNotice(Notice_DTO ndto);
 	//게시물 수정
-	public int updateNotice(Notice_DTO ndto) throws ClassNotFoundException, SQLException;
+	public int updateNotice(Notice_DTO ndto);
 	//게시물 삭제
-	public int deleteNotice(int notice_no) throws ClassNotFoundException, SQLException;
+	public int deleteNotice(int notice_no);
 	//공지사항 파일다운로드
-	public Notice_DTO fileDownloadNotice(int notice_no) throws ClassNotFoundException, SQLException;
+	public Notice_DTO fileDownloadNotice(int notice_no);
 	//공지사항 제목검색
 	public List<Notice_DTO> searchTitleListNotices(String searchvalue);
 	//공지사항 내용검색
