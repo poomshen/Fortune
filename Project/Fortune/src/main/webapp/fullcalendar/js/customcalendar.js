@@ -5,6 +5,7 @@ var array = [];
 
 
 function fcontent() {
+	
 	var content2 = "";
 	content2 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
 	$('#content').empty();
@@ -25,9 +26,9 @@ function fcontent() {
 		        content2 += "','" + obj.users + "'" ;
 		        content2 += ')" >상세보기</a></td></tr>';
 			});
-			$('#content_detail').empty();
+			$('#content_detail').css("display", "none");
 	        $('#content').html(content2)
-		}
+		} 
 	});
 }
 
@@ -292,7 +293,7 @@ function loadCalendar() {
 						      
 						      });
 							
-							console.log(data.alarm);
+							console.log(data.alarm); 
 							//var count =","+data.count.join(' / ');
 							
 							console.log(count);
@@ -314,5 +315,39 @@ function loadCalendar() {
 	 // 캘린더 초기 호출시 뷰단에 뿌려줄 일정데이터
 		events: array
 	});
+	
+	$(".dropdown_s dt a").on('click', function() {
+		  $(".dropdown_s dd ul").slideToggle('fast');
+		});
+
+		$(".dropdown_s dd ul li a").on('click', function() {
+		  $(".dropdown_s dd ul").hide();
+		});
+
+		function getSelectedValue(id) {
+		  return $("#" + id).find("dt a span.value").html();
+		}
+
+		$(document).bind('click', function(e) {
+		  var $clicked = $(e.target);
+		  if (!$clicked.parents().hasClass("dropdown_s")) $(".dropdown_s dd ul").hide();
+		});
+
+		$('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+		  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+		    title = $(this).val() + ",";
+
+		  if ($(this).is(':checked')) {
+		    var html = '<span title="' + title + '">' + title + '</span>';
+		    $('.multiSel').append(html);
+		    $(".hida").hide();
+		  } else {
+		    $('span[title="' + title + '"]').remove();
+		    var ret = $(".hida");
+		    $('.dropdown_s dt a').append(ret);
+
+		  }
+		});
 
 }

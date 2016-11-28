@@ -6,6 +6,8 @@ public class Work_Comment_DTO {
 	private String user_id;
 	private String work_comment_text;
 	private String work_comment_date;
+	
+	
 	public int getWork_comment_no() {
 		return work_comment_no;
 	}

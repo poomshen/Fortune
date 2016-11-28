@@ -34,10 +34,6 @@ public class WebSocketHandshakeInterceptor extends HttpSessionHandshakeIntercept
         //로그인한 사람 아이디 뽑기
 		Join_DTO dto = (Join_DTO) req.getSession().getAttribute("info");
 		
-	
-       
-  
-        
         attributes.put("userId", dto.getUser_id());
   
       

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,12 +62,11 @@ function detail(id, title, text, start, end, userids){
 		contentck += "<input type='checkbox' name='userchk' value='" +userid[i]+ "'>" + userid[i] + " &nbsp;&nbsp;";
 	}
 	
- 	$('#cbdiv').append(contentck)
+ 	$('#cbdiv').html(contentck)
  	
  	
  	//상세보기 내용에 comment 뿌려주는 내용
- 	var comment_text = "";
- 	comment_text += "<table class='table table-striped'><tr><th>번호</th><th>작성자</th><th>작성시간</th></tr>"
+	var comment_text = "";
  	$.ajax({
 		url : 'select_comment.ajax',
 		type : 'post',
@@ -73,11 +74,23 @@ function detail(id, title, text, start, end, userids){
 		success : function(data) {
 			console.log(data)
  			$.each(data, function(index, obj) {
- 				comment_text += "<tr><td>"+obj.work_comment_no+"</td><td>"+obj.user_id+"</td><td>"+obj.work_comment_date+"</td></tr>"
-				comment_text += "<tr><td>내용 : </td><td colspan='2'>"+obj.work_comment_text+"</td></tr>"
-				
+ 				if(index%2==0){
+ 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
+ 					comment_text += '<input type="button" value="수정"><br><button type="button" value="'+obj.work_comment_no;
+ 					comment_text += '">삭제</span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
+ 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>';
+ 				}else{
+ 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
+ 					comment_text += '<input type="button" value="수정"><br><button type="button" value="'+obj.work_comment_no;
+ 					comment_text += '">삭제</span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+ 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>'
+ 				}
+ 				$('#comment_text').html(comment_text);
 			});
-	        $('#comment_text').html(comment_text);
 		}
 	});
  	
@@ -101,19 +114,16 @@ function work_updateok(){
 	
 }
 
+//댓글 등록 버튼 클릭시 insert 작업
 function insert_comment(){
  	$.ajax({
 		url : 'insert_comment.ajax',
 		type : 'post',
-		data : 'schedule_no='+ id,
+		data : {"schedule_no" : $('#detail_id').val(),
+				"work_comment_text" : $('#comment_textarea').val()
+				},
 		success : function(data) {
-			console.log(data)
- 			$.each(data, function(index, obj) {
- 				comment_text += "<tr><td>"+obj.work_comment_no+"</td><td>"+obj.user_id+"</td><td>"+obj.work_comment_date+"</td></tr>"
-				comment_text += "<tr><td>내용 : </td><td colspan='2'>"+obj.work_comment_text+"</td></tr>"
-				
-			});
-	        $('#comment_text').html(comment_text);
+			console.log('comment 등록 성공')
 		}
 	});
 }
@@ -123,13 +133,13 @@ function insert_comment(){
 
 
 <style>
-body {
+ body {
 	margin: 0px 0px;
 	padding: 0;
 	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
 	font-size: 14px;
 }
-
+ 
 #calendar {
 	width: 100%;
 	height: 100%;
@@ -141,13 +151,115 @@ div{
 	padding-right: 5px;
 }
 
-
 input:read-only {
     background-color: rgb(234,234,234);
 }
 textarea:read-only{
 	background-color: rgb(234,234,234);
 }
+
+.nav-tabs {
+    margin-bottom: 15px;
+}
+.sign-with {
+    margin-top: 25px;
+    padding: 20px;
+}
+div#OR {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    font-weight: bold;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    float: right;
+    position: absolute;
+    right: -16px;
+    top: 40%;
+    z-index: 1;
+    background: #DFDFDF;
+}
+
+.dropdown_s {
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+}
+
+a {
+  color: #ddd;
+}
+
+.dropdown_s dd,
+.dropdown_s dt {
+  margin: 0px;
+  padding: 0px;
+}
+
+.dropdown_s ul {
+  margin: -1px 0 0 0;
+}
+
+.dropdown_s dd {
+  position: relative;
+}
+
+.dropdown_s a,
+.dropdown_s a:visited {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+  font-size: 12px;
+}
+
+.dropdown_s dt a {
+  background-color: #ddd;
+  display: block;
+  padding: 8px 20px 5px 10px;
+  min-height: 25px;
+  line-height: 24px;
+  overflow: hidden;
+  border: 0;
+  width: 272px;
+}
+
+.dropdown_s dt a span,
+.multiSel span {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 3px 2px 0;
+}
+
+.dropdown_s dd ul {
+  background-color: #ddd;
+  border: 0;
+  color: #fff;
+  display: none;
+  left: 0px;
+  padding: 2px 15px 2px 5px;
+  position: absolute;
+  top: 2px;
+  width: 280px;
+  list-style: none;
+  height: 100px;
+  overflow: auto;
+}
+
+.dropdown_s span.value {
+  display: none;
+}
+
+.dropdown_s dd ul li a {
+  padding: 5px;
+  display: block;
+}
+
+.dropdown_s dd ul li a:hover {
+  background-color: #fff;
+}
+
+
 
 </style>
 </head>
@@ -165,75 +277,115 @@ textarea:read-only{
 			</div>
 
 
-			<!-- 일정등록 버튼 -->
-			<input type="hidden" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modal_btn" >
 
-			<!-- 일정등록 내용 Modal -->
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog">
+<input type="hidden" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modal_btn" >
 
+<input type="hidden" class="btn btn-primary" id="modal_btn" data-toggle="modal" data-target="#myModal">
+    Login modal</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="height:500px">
+        <div class="modal-content"style="height:500px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;</button>
+                <h4 class="modal-title" id="myModalLabel">
+                    일반/회의 업무 등록</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#Login" data-toggle="tab">일반 업무</a></li>
+                            <li><a href="#Registration" data-toggle="tab">회의 업무</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Login">
+                                <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">일정제목</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="modal_title" placeholder="제목.." />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="content" class="col-sm-2 control-label">내용</label>
+                                    <div class="col-sm-10">
+                                    <textarea rows="5" cols="30" class="form-control" id="modal_text" placeholder="내용.." ></textarea><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-10" style="margin-top:50px">
+                                        <button type="submit" class="btn hvr-forward"">
+                                            업무등록</button>
+                                        
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="Registration">
+                             <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">일정제목</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="modal_title" placeholder="제목.." />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="content" class="col-sm-2 control-label">내용</label>
+                                    <div class="col-sm-10">
+                                    <textarea rows="5" cols="30" class="form-control" id="modal_text" placeholder="내용.." ></textarea><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-10" style="margin-top:50px">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            업무등록</button>
+                                        
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="OR" class="hidden-xs" style="color:#fff">
+                              >></div>
+                    </div>
+                    <div class="col-md-4">
+           						
+							<dl class="dropdown_s" style="margin-top: 50px;margin-left: 5px;"> 
+  
+    <dt>
+    <a href="#"style="height: 43px;padding-right: 0px;">
+      <span class="hida" style="width: 253px;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
+      <p class="multiSel"></p>  
+    </a>
+    </dt>
+  
+    <dd>
+        <div class="mutliSelect">
+            <ul style="display: block;padding-right: 0px;height: 204px;width: 272px;">
+        		<c:forEach items="${team_id}" var="obj" varStatus="status">
+					<li><input type="checkbox" value="${obj}" name='userchk'>${obj}</li>
+				</c:forEach>
+            </ul>
+        </div>
+    </dd>
 
-
-
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
+</dl>
 						
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">일 정 내 용</h4>
-						</div>
-						<div class="modal-body">
-							<input type="radio" name="worktype"> 업무 일정 <input type="radio" name="worktype"> 회의 일정 <br>
-							<label>일정 제목 : </label> <input type="text" id="modal_title"><br>
-							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="modal_text"></textarea><br>
-							<label>참가 인원 : </label>
-					
-							<input type="checkbox" value="개발1팀장" name='userchk'>개발1팀장 &nbsp;
-							<input type="checkbox" value="yeji" name='userchk'>yeji &nbsp;
-							<input type="checkbox" value="yeji314" name='userchk'>yeji314 &nbsp;
-							<br>
-							<button type="button" class="btn btn-default" id="modal_ok"
-								data-dismiss="modal">등록</button>
-							<input type="hidden" id="modal_start">
-							<input type="hidden" id="modal_end">
-						</div>
-					</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-				</div>
-			</div>
-			
-			
-			
-			<!-- 상세보기 내용 Modal -->
-<!--
- 			<div class="modal fade" id="myModal2" role="dialog">
-				<div class="modal-dialog">
-
-					Modal content
-					<div class="modal-content" style="width: 150%;">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">일 정 상 세</h4>
-						</div>
-						<div class="modal-body">
-							<label>일정 제목 : </label> <input type="text" id="detail_modal_title"><br>
-							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="detail_modal_text"></textarea><br>
-							<label>참가 인원 : </label> <div id="cbdiv"></div> <br>
-							<input type="hidden" id="detail_modal_id">
-							<input type="hidden" id="detail_modal_start">
-							<input type="hidden" id="detail_modal_end"><br>
-							
-							<button type="button" class="" id="detail_modal_update"
-								data-dismiss="modal">수정</button>
-							<button type="button" class="" id="detail_modal_delete"
-								data-dismiss="modal">삭제</button>
-						</div>
-					</div>
-
-				</div>
-			</div>			
-
- -->
 
 			<!-- 업우상세 보여주는 div 영역 -->
 			<div class="col-sm-5" style="padding-right: 0px;">
@@ -255,18 +407,30 @@ textarea:read-only{
 							<input type="hidden" id="detail_id">
 							<input type="hidden" id="detail_start">
 							<input type="hidden" id="detail_end">
-						<div id = "comment" style="padding-right:0px;">
-						
-							<div id= "comment_text" style="padding-right:0px;"></div>
-							
-							<textarea rows="3" cols="60" style="overflow: scroll; overflow-x: hidden;"></textarea><br>
-							<input type="button" value="댓글 등록" id="insert_comment" onclick="insert_comment()">
-							<input type="button" value="댓글 수정" id="update_comment">
-							<input type="button" value="댓글 삭제" id="delete_comment">
-							
-						</div>
+			
+			<!-- comment 보여주는 div영역 -->
+			<!-- panel-heading -->	
+			<div class="chat-panel panel panel-default">
+				<div class="panel-heading">
+					<i class="fa fa-comments fa-fw"></i> Comment
+				</div>
+				<!-- panel-body -->
+				<div class="panel-body">
+					<!-- comment_text 내용추가 하는 영역 -->
+					<ul class="chat" id="comment_text">
+					</ul>
+				</div>
+				<!-- panel-footer -->
+				<div class="panel-footer">
+					<div class="input-group row">
+						<input type="text" placeholder="Type your message here..." id="comment_textarea">
+						<input type="button" value="등록" onclick="insert_comment()">
 					</div>
-
+				</div>
+			</div>
+						
+						
+					</div>
 				</div>
 			</div>
 		</div>

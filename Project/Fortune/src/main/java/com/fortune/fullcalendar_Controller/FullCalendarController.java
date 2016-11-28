@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Alarm_DTO;
-import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Schedule_DTO;
-import com.fortune.Table_DTO.Work_Comment_DTO;
 import com.fortune.Table_DTO.Work_Users_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.fullcalendar_DAO.IFullCalendar;
@@ -168,6 +166,7 @@ public class FullCalendarController {
         fullcalendarDAO.deleteWork_Users(id);
         fullcalendarDAO.deleteWork(id);
         fullcalendarDAO.deleteSchedule(id);
+        fullcalendarDAO.deleteWork_Comment(id);
         System.out.println("삭제성공");
 		return 1;
 	}
@@ -247,27 +246,6 @@ public class FullCalendarController {
 	}
 	
 	
-	
-	
-	/* 작업자 : 이명철  // 최초 작업일 : 11.25 // 최종 작업일 : 11.25
-     * 작업 내용 : 일정상세 화면의 select_comment 호출
-     * version : v1.0
-    */
-	@RequestMapping(value="select_comment.ajax", method = RequestMethod.POST)
-    public @ResponseBody List<Work_Comment_DTO> select_Comment(@RequestParam(value="schedule_no") String schedule_no) throws ClassNotFoundException, SQLException{
-        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 일정상세 화면의 select_comment 호출");        
-        
-        IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
-        
-        List<Work_Comment_DTO> wcdtolist = new ArrayList<Work_Comment_DTO>();
-        wcdtolist = fullcalendarDAO.selectComment(schedule_no);
-        
-        return wcdtolist;
-	}
-    
-    
-    
-    
 	
 	
 	
