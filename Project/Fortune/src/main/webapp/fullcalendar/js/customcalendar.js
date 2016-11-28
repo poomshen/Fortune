@@ -5,6 +5,7 @@ var array = [];
 
 
 function fcontent() {
+	
 	var content2 = "";
 	content2 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
 	$('#content').empty();
@@ -25,9 +26,9 @@ function fcontent() {
 		        content2 += "','" + obj.users + "'" ;
 		        content2 += ')" >상세보기</a></td></tr>';
 			});
-			$('#content_detail').empty();
+			$('#content_detail').css("display", "none");
 	        $('#content').html(content2)
-		}
+		} 
 	});
 }
 

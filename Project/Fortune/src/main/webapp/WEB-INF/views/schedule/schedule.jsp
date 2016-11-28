@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,12 +62,11 @@ function detail(id, title, text, start, end, userids){
 		contentck += "<input type='checkbox' name='userchk' value='" +userid[i]+ "'>" + userid[i] + " &nbsp;&nbsp;";
 	}
 	
- 	$('#cbdiv').append(contentck)
+ 	$('#cbdiv').html(contentck)
  	
  	
  	//상세보기 내용에 comment 뿌려주는 내용
- 	var comment_text = "";
- 	comment_text += "<table class='table table-striped'><tr><th>번호</th><th>작성자</th><th>작성시간</th></tr>"
+	var comment_text = "";
  	$.ajax({
 		url : 'select_comment.ajax',
 		type : 'post',
@@ -73,11 +74,23 @@ function detail(id, title, text, start, end, userids){
 		success : function(data) {
 			console.log(data)
  			$.each(data, function(index, obj) {
- 				comment_text += "<tr><td>"+obj.work_comment_no+"</td><td>"+obj.user_id+"</td><td>"+obj.work_comment_date+"</td></tr>"
-				comment_text += "<tr><td>내용 : </td><td colspan='2'>"+obj.work_comment_text+"</td></tr>"
-				
+ 				if(index%2==0){
+ 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
+ 					comment_text += '<input type="button" value="수정"><br><input type="button" value="삭제">';
+ 					comment_text += '</span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
+ 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>';
+ 				}else{
+ 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
+ 					comment_text += '<input type="button" value="수정"><br><input type="button" value="삭제">';
+ 					comment_text += '</span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+ 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>'
+ 				}
+ 				$('#comment_text').html(comment_text);
 			});
-	        $('#comment_text').html(comment_text);
 		}
 	});
  	
@@ -101,19 +114,16 @@ function work_updateok(){
 	
 }
 
+//댓글 등록 버튼 클릭시 insert 작업
 function insert_comment(){
  	$.ajax({
 		url : 'insert_comment.ajax',
 		type : 'post',
-		data : 'schedule_no='+ id,
+		data : {"schedule_no" : $('#detail_id').val(),
+				"work_comment_text" : $('#comment_textarea').val()
+				},
 		success : function(data) {
-			console.log(data)
- 			$.each(data, function(index, obj) {
- 				comment_text += "<tr><td>"+obj.work_comment_no+"</td><td>"+obj.user_id+"</td><td>"+obj.work_comment_date+"</td></tr>"
-				comment_text += "<tr><td>내용 : </td><td colspan='2'>"+obj.work_comment_text+"</td></tr>"
-				
-			});
-	        $('#comment_text').html(comment_text);
+			console.log('comment 등록 성공')
 		}
 	});
 }
@@ -186,11 +196,21 @@ textarea:read-only{
 							<input type="radio" name="worktype"> 업무 일정 <input type="radio" name="worktype"> 회의 일정 <br>
 							<label>일정 제목 : </label> <input type="text" id="modal_title"><br>
 							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="modal_text"></textarea><br>
-							<label>참가 인원 : </label>
-					
-							<input type="checkbox" value="개발1팀장" name='userchk'>개발1팀장 &nbsp;
-							<input type="checkbox" value="yeji" name='userchk'>yeji &nbsp;
-							<input type="checkbox" value="yeji314" name='userchk'>yeji314 &nbsp;
+							<label>참가 인원 : </label><br>
+								<table>
+								<c:forEach items="${team_id}" var="obj" varStatus="status">
+
+									<c:if test="${(status.index) %2 == 0}">
+										<tr>
+											<td><input type="checkbox" value="${obj}" name='userchk'>${obj}</td>
+									</c:if>
+								
+									<c:if test="${(status.index + 1) %2 == 0}">
+											<td><input type="checkbox" value="${obj}" name='userchk'>${obj}</td>
+									</c:if>
+									
+								</c:forEach>
+								</table>
 							<br>
 							<button type="button" class="btn btn-default" id="modal_ok"
 								data-dismiss="modal">등록</button>
@@ -202,38 +222,6 @@ textarea:read-only{
 				</div>
 			</div>
 			
-			
-			
-			<!-- 상세보기 내용 Modal -->
-<!--
- 			<div class="modal fade" id="myModal2" role="dialog">
-				<div class="modal-dialog">
-
-					Modal content
-					<div class="modal-content" style="width: 150%;">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">일 정 상 세</h4>
-						</div>
-						<div class="modal-body">
-							<label>일정 제목 : </label> <input type="text" id="detail_modal_title"><br>
-							<label>일정 내용 : </label> <textarea rows="5" cols="30" id="detail_modal_text"></textarea><br>
-							<label>참가 인원 : </label> <div id="cbdiv"></div> <br>
-							<input type="hidden" id="detail_modal_id">
-							<input type="hidden" id="detail_modal_start">
-							<input type="hidden" id="detail_modal_end"><br>
-							
-							<button type="button" class="" id="detail_modal_update"
-								data-dismiss="modal">수정</button>
-							<button type="button" class="" id="detail_modal_delete"
-								data-dismiss="modal">삭제</button>
-						</div>
-					</div>
-
-				</div>
-			</div>			
-
- -->
 
 			<!-- 업우상세 보여주는 div 영역 -->
 			<div class="col-sm-5" style="padding-right: 0px;">
@@ -255,18 +243,30 @@ textarea:read-only{
 							<input type="hidden" id="detail_id">
 							<input type="hidden" id="detail_start">
 							<input type="hidden" id="detail_end">
-						<div id = "comment" style="padding-right:0px;">
-						
-							<div id= "comment_text" style="padding-right:0px;"></div>
-							
-							<textarea rows="3" cols="60" style="overflow: scroll; overflow-x: hidden;"></textarea><br>
-							<input type="button" value="댓글 등록" id="insert_comment" onclick="insert_comment()">
-							<input type="button" value="댓글 수정" id="update_comment">
-							<input type="button" value="댓글 삭제" id="delete_comment">
-							
-						</div>
+			
+			<!-- comment 보여주는 div영역 -->
+			<!-- panel-heading -->	
+			<div class="chat-panel panel panel-default">
+				<div class="panel-heading">
+					<i class="fa fa-comments fa-fw"></i> Comment
+				</div>
+				<!-- panel-body -->
+				<div class="panel-body">
+					<!-- comment_text 내용추가 하는 영역 -->
+					<ul class="chat" id="comment_text">
+					</ul>
+				</div>
+				<!-- panel-footer -->
+				<div class="panel-footer">
+					<div class="input-group row">
+						<input type="text" placeholder="Type your message here..." id="comment_textarea">
+						<input type="button" value="등록" onclick="insert_comment()">
 					</div>
-
+				</div>
+			</div>
+						
+						
+					</div>
 				</div>
 			</div>
 		</div>

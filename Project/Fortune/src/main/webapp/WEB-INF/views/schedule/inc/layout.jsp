@@ -35,7 +35,7 @@
 <script src="fullcalendar/js/customcalendar.js" ></script>
 <script>
 var wsocket;
-var msg 
+var msg;
 function connect() {
 	/* alert("소켓연결!"); */
 	
