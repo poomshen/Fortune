@@ -10,13 +10,13 @@
                             <ul class="nav nav-second-level">
                             	<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
                                 <li>
-                                    <a href="writerequest.htm">프로젝트 생성</a>
+                                    <a href="writerequest.htm">협업 요청하기</a>
                                 </li>
                             	</security:authorize>
                             	<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
                                
                                 <li>
-                               <a href="#">협업요청 리스트<span class="fa arrow"></span></a>
+                               <a href="#"><i class="fa fa-bank"></i></i>협업요청 목록<span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level">
                                    <li> <a href="listReplyRequest.htm">작성자요청 리스트</a></li>
                                    <li> <a href="requestList.htm">답장자요청 리스트</a></li>

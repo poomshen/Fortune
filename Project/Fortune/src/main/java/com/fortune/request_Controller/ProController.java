@@ -19,6 +19,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Join_DTO;
@@ -66,7 +67,8 @@ public class ProController {
 
 	}
 
-	// 요청한 프로젝트들을 리스트로 담아서 뿌려주는 역할을 해준다.
+	// 만든 목적: 발신자가 보낸 것을 리스트로 보여주는 클래스입니다,
+	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
 	public String requestList(String pg, String f, String q, String st,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
@@ -79,7 +81,7 @@ public class ProController {
 		return "request.requestList";
 
 	}
-	//답장자
+	
 	 @Transactional
 	@RequestMapping("listReplyRequest.htm") // /customer/notice.htm
 	public String listReplyRequest( String pg, String f, String q,String st, HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
@@ -157,11 +159,11 @@ public class ProController {
 		
 	//거절 하기
 		 @RequestMapping("refuse.htm")
-		 public String Refuse(String collabo_req_index) throws ClassNotFoundException,
+		 public String Refuse(String collabo_req_text,String collabo_req_index ) throws ClassNotFoundException,
 		   SQLException {
 			 System.out.println("거절했다.");
-		 proservice.Refuse(collabo_req_index);
-		 
+		 proservice.Refuse(collabo_req_text,collabo_req_index);
+		
 		  return "redirect:requestList.htm"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	
 		 
@@ -284,5 +286,25 @@ public class ProController {
 				 proservice.download(p, f, request, response);
 				 
 			 }
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 /*@RequestMapping(value="/noticeList.htm")
+				
+			 //만든 목적: 페이징 처리할때 사용하는데 협업 요청 하는데 많은 리스트를 뽑는다 그것을 페이징 처리하기 위해서 위한 클래스입니다.
+			 //날짜 일자 :2016-11-26
+			 public ModelAndView noticeList(String pg) throws ClassNotFoundException, SQLException {
+				
+				 
+				 
+				 return null;
 	
+				 
+			 }*/
 }
