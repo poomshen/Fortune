@@ -79,7 +79,7 @@ public class ProController {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "redirect:requestList.htm";
+		return "redirect:listReplyRequest.htm";
 
 	}
 
@@ -87,25 +87,34 @@ public class ProController {
 	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
-	public String requestList(String pg, String f, String q, String st,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+	public String requestList(String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 
 		
 		List<Request_DTO> list = proservice.getRequest(pg, f, q, st, session);
 		System.out.println("아아ㄷ아"+st);
+		System.out.println("미"+collabo_req_index);
 		model.addAttribute("list", list); // 자동 forward
+		
+		
+		
 		
 		return "request.requestList";
 
 	}
-	
+	// 만든 목적: 발신자가 보낸 것 수신자가 보는 리스트로 보여주는 클래스입니다,
+	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("listReplyRequest.htm") // /customer/notice.htm
-	public String listReplyRequest( String pg, String f, String q,String st, HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+	public String listReplyRequest( String pg, String f, String q,String st, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
 			
 		List<Request_DTO> list = proservice.listReplyRequest(pg, f, q,st, session);
 		System.out.println("아아ㅇ아"+st);
 		model.addAttribute("list", list); // 자동 forward
+		System.out.println("미"+collabo_req_index);
+		System.out.println(collabo_req_index);
+		
+		
 		
 		return "request.requestList";
 
@@ -113,12 +122,15 @@ public class ProController {
 	//전체
 	 @Transactional
 	@RequestMapping("listallRequest.htm") // /customer/notice.htm
-	public String listallRequest( String pg, String f, String q, String st,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+	public String listallRequest( String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
 		System.out.println("아아ㄴ아"+st);
 		List<Request_DTO> list = proservice.listallRequest(pg, f, q, st, session);
 		System.out.println("커피를 타보자");
+		System.out.println("미"+collabo_req_index);
 		model.addAttribute("list", list); // 자동 forward
+		
+		
 		return "request.requestList";
 
 	}
@@ -170,7 +182,7 @@ public class ProController {
 		 System.out.println("여기는 !!");
 		 System.out.println(proDto.toString());
 		 
-		  return "request.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
+		  return "cen.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	
 		
 	//거절 하기

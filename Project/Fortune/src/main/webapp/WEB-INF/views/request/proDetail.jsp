@@ -97,6 +97,7 @@ function refuse() {
 								
 							</div>
 							</div>
+							</form>
 							
 						</div>
 							
@@ -106,7 +107,7 @@ function refuse() {
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<input type="button"  class="btn btn-default" value="거절 완료" onclick="refuse()">
 					</div>
-					</form>
+					
 				</div>
 
 			</div>

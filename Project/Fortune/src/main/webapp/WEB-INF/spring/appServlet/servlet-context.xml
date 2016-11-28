@@ -100,5 +100,11 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
     </beans:bean>
     <tx:annotation-driven transaction-manager="transactionManager" />
     <!-- transaction end -->
+    
+    
+    
+    <!-- @ControllerAdvice 사용하기위해 추가 (지율) -->
+	<beans:bean class="com.fortune.exception.CommonExceptionHandler" />
+	
 
 </beans:beans>
