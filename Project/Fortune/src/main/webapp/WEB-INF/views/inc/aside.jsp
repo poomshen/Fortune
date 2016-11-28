@@ -29,11 +29,7 @@ a {
                             	<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
                                
                                 <li>
-<<<<<<< HEAD
                                <a href="#"><i class="fa fa-bank"></i></i>협업요청 목록<span class="fa arrow"></span></a>
-=======
-                               <a href="#">요청 리스트<span class="fa arrow"></span></a>
->>>>>>> de07f3b763c22d435349a8fee9f4633c111284b9
                                <ul class="nav nav-second-level">
                                    <li> <a href="listReplyRequest.htm">보낸요청 리스트</a></li>
                                    <li> <a href="requestList.htm">받은요청 리스트</a></li>
