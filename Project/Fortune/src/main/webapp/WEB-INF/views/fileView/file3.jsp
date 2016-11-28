@@ -51,7 +51,7 @@
 				<div class="col-lg-2" style="float: left">
 					<div class="thumbnail bootsnipp-thumb">
 						<input type="checkbox" name="filename" id="filename" value="${flist.file_room_rename}">
-						<a href="downloadfile.htm?filename=${flist.file_room_rename}">${flist.file_room_name}</a>
+						<a href="downloadfile.htm?filename=${flist.file_room_rename}">${flist.file_room_cutname}</a>
 						<div class="drag" style="position: relative;">
 							<c:choose>
 								<c:when test="${flist.file_room_ext == '.docx'}">
@@ -104,13 +104,13 @@
 						</c:if>
 					</ul>
 				</c:forEach>
-				<c:if test="${to_page < all_page}">
+				<c:if test="${pg < to_page || pg != all_page}">
 					<ul class="pagination">
 						<li><a href="mainfile.htm?pg=${pg + 1}">▶</a></li>
 						<li><a href="mainfile.htm?pg=${all_page}">▶▶</a></li>
 					</ul>
 				</c:if>
-				<c:if test="${to_page >= all_page && pg != all_page}">
+				<c:if test="${to_page > all_page && pg != all_page}">
 					<ul class="pagination">
 						<li><a href="mainfile.htm?pg=${to_page + 1}">▶</a></li>
 						<li><a href="mainfile.htm?pg=${all_page}">▶▶</a></li>
@@ -139,7 +139,6 @@
 	[].slice.call( document.querySelectorAll( '#drop-area .drop-area__item' )).forEach( function( el ) {
 		droppableArr.push( new Droppable( el, {
 			onDrop : function( instance, draggable ) {
-				//console.log(instance.el.id);
 				if(instance.el.id == 'trash'){
 					var deletefilename = $('#deletename').val();
 					
@@ -159,7 +158,7 @@
 							console.log(e);
 						}
 					});
-				}
+				} 
 
 				// show checkmark inside the droppabe element
 				classie.add( instance.el, 'drop-feedback' );
@@ -257,25 +256,26 @@
 			$('#divrow1').append("<input type=hidden id=deletename>");
 			$.each(data.file, function(index, item) {
 				if(item.file_room_ext == ".docx"){
-					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/docx.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px>" + "</div></div></div>";
+					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/docx.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 				}else if(item.file_room_ext == ".hwp"){
-					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/hwp.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px>" + "</div></div></div>";
+					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/hwp.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 				}else if(item.file_room_ext == ".xlsx"){
-					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/xlsx.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px>" + "</div></div></div>";
+					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/xlsx.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 				}else if(item.file_room_ext == ".pptx"){
-					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/pptx.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px>" + "</div></div></div>";
+					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/pptx.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 				}else if(item.file_room_ext == ".zip"){
-					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/zip.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px>" + "</div></div></div>";
+					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/zip.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 				}else if(item.file_room_ext == ".jpg" || item.file_room_ext == ".png" || item.file_room_ext == ".bmp" || item.file_room_ext == ".gif"){
-					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=upload/"+ item.file_room_rename +" onmousedown=indexselect("+index+") style=width:100px;height:50px>" + "</div></div></div>";
+					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=upload/"+ item.file_room_rename +" onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 				}else{
-					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/file.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px>" + "</div></div></div>";
+					var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/file.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 				}
+			
 				$("#divrow1").append("<div class=col-lg-2 style=float:left>"+
 						"<div class='thumbnail bootsnipp-thumb'>"+
 						"<input type=checkbox name=filename id=filename value=" + item.file_room_rename + ">" +
-						"<a href=downloadfile.htm?filename=" + item.file_room_rename + ">"+ item.file_room_name + "</a>" +
-						"<div class=drag style='position: relative'>"+result);
+						"<a href=downloadfile.htm?filename=" + item.file_room_rename + ">" + item.file_room_cutname + 
+						"</a><div class=drag style='position: relative'>" + result);
 			});
 		}
 
@@ -299,11 +299,11 @@
 			}
 		}
 		
-		if(data.to_page < data.all_page){
+		if(data.pg < data.to_page || data.pg != data.all_page){
 			result2 += "<ul class=pagination>" + 
 			"<li><a href=mainfile.htm?pg="+(data.pg+1)+">▶</a></li>" +
 			"<li><a href=mainfile.htm?pg="+data.all_page+">▶▶</a></li></ul>";
-		}else if(data.to_page >= data.all_page && data.pg != data.all_page){
+		}else if(data.to_page > data.all_page && data.pg != data.all_page){
 			result2 += "<ul class=pagination>" + 
 			"<li><a href=mainfile.htm?pg="+(data.to_page+1)+">▶</a></li>" + 
 			"<li><a href=mainfile.htm?pg="+data.all_page+">▶▶</a></li></ul>";

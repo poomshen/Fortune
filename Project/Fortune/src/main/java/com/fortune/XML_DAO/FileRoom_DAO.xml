@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.fortune.fileroom_DAO.IFileRoom">
 	<insert id="insertFile" parameterType="com.fortune.Table_DTO.FileRoom_DTO">
-		insert into file_room values(1, 1, #{user_id}, sysdate, #{file_room_name}, (SELECT MAX(TO_NUMBER(file_room_no))+1 FROM file_room), #{file_room_ext}, #{file_room_rename})
+		insert into file_room values(1, 1, #{user_id}, sysdate, #{file_room_name}, (SELECT MAX(TO_NUMBER(file_room_no))+1 FROM file_room), #{file_room_ext}, #{file_room_rename}, #{file_room_cutname})
 	</insert>
 	
 	<select id="selectOverlapNameFile" parameterType="String" resultType="integer">

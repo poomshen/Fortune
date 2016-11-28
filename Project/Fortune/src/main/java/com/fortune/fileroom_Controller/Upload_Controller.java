@@ -1,8 +1,6 @@
 package com.fortune.fileroom_Controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -69,6 +67,9 @@ public class Upload_Controller {
 		////////////////////////////////////////////////////////////////////
 		System.out.println("file_new_name : " + file_new_name);
 		
+		String filenamecut = NoticeFile_Utils.getFixString(file_new_name, 12);
+		System.out.println("filenamecut : " + filenamecut);
+		
 		String upload_path = request.getSession().getServletContext().getRealPath("upload");
 		File file = new File(upload_path + "/" + storedFileName);		
 		
@@ -84,6 +85,7 @@ public class Upload_Controller {
 		fileroom_DTO.setFile_room_name(file_new_name);
 		fileroom_DTO.setFile_room_ext(originalFileExtension);
 		fileroom_DTO.setFile_room_rename(storedFileName);
+		fileroom_DTO.setFile_room_cutname(filenamecut);
 		fileromm_DAO.insertFile(fileroom_DTO);
 		
 		//View 화면에 뿌려주기 위한 list
