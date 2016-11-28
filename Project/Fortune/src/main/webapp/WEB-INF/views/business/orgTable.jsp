@@ -5,7 +5,8 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-<table>
+
+<table class="table table-striped table-bordered table-hover">
 	<tr>
 		<th>아이디</th>
 		<th>이름</th>
