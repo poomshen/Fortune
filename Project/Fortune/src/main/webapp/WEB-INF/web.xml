@@ -73,4 +73,10 @@
      <filter-name>springSecurityFilterChain</filter-name>
      <url-pattern>/*</url-pattern>
    </filter-mapping>
+   
+   <!-- 에러리다이렉션 추가(지율) -->
+   <error-page>
+   	<error-code>404</error-code>
+   	<location>/404.htm</location>
+   </error-page>
 </web-app>

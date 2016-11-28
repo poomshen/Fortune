@@ -7,6 +7,6 @@
 <title>에러발생</title>
 </head>
 <body>
-작업처리 도중 문제가 발생했습니다.
+IO익셉션 문제가 발생했습니다.
 </body>
 </html>

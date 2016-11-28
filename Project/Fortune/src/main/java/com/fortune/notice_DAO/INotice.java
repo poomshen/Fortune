@@ -23,11 +23,11 @@ public interface INotice {
 	//공지사항 전체 개수
 	public int countNotice();
 	//전체 게시물
-	public List<Notice_DTO> listNotice(int page) throws ClassNotFoundException, SQLException;
+	public List<Notice_DTO> listNotice(int page);
 	//게시물 상세
 	public Notice_DTO detailNotice(int notice_no) throws ClassNotFoundException, SQLException;
 	//게시물 입력
-	public int insertNotice(Notice_DTO ndto) throws ClassNotFoundException, SQLException;
+	public int insertNotice(Notice_DTO ndto);
 	//게시물 수정
 	public int updateNotice(Notice_DTO ndto) throws ClassNotFoundException, SQLException;
 	//게시물 삭제

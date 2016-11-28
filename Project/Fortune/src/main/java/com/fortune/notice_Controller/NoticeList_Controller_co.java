@@ -3,7 +3,7 @@
 * @Date : 2016.11.21
 * @Author : 김지율
 * @Desc : 공지사항게시판 List Controller
-*/
+
 
 package com.fortune.notice_Controller;
 
@@ -23,12 +23,10 @@ import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.notice_DAO.INotice;
 
 @Controller
-public class NoticeList_Controller {
+public class NoticeList_Controller_co {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-/*	String exceptionOccured = "ARITHMETIC_EXCEPTION";*/
 
 	// 공지사항 글목록보기
 
@@ -36,16 +34,7 @@ public class NoticeList_Controller {
 	public ModelAndView noticeList(String pg) throws Exception  {
 
 		System.out.println("NoticeController의 noticeList를 탑니다~");
-		
-/*		if (exceptionOccured.equalsIgnoreCase("NULL_POINTER")) {
-			throw new NullPointerException("Null Pointer Exception");
-		} else if (exceptionOccured.equalsIgnoreCase("IO_EXCEPTION")) {
-			throw new IOException("IO Exception");
-		} else if (exceptionOccured.equalsIgnoreCase("ARITHMETIC_EXCEPTION")) {
-			throw new ArithmeticException("Arithmetic Exception");
-		}
-		*/
-		
+	
 		ModelAndView mv = new ModelAndView();
 		
 		
@@ -86,19 +75,6 @@ public class NoticeList_Controller {
 		return mv;
 	}
 
-/*	@ExceptionHandler(NullPointerException.class)
-	public String handleNullPointerException(Exception e) {
-		return "error.NullPointerException";
-	}
-
-	@ExceptionHandler(IOException.class)
-	public String handleIOException(Exception e) {
-		return "error.IOException";
-	}
-
-	@ExceptionHandler(Exception.class)
-	public String handleException(Exception e) {
-		return "error.Exception";
-	}*/
 
 }
+*/
