@@ -29,8 +29,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.function_DTO.Select_Alarm_DTO;
+import com.fortune.function_DTO.Select_Collabo_DTO;
 import com.fortune.member_DAO.IJoin;
 import com.fortune.password_Service.PassWord_Service;
+import com.fortune.request_DAO.ProDao;
 
 @Controller
 public class MemberController {
@@ -55,8 +57,9 @@ public class MemberController {
 	}
 
 	
-
+	
 	/*수정 : 이예지 2016-11-24 로그인했을시 알림 db 체크 */
+	//수정추가 : 이성준 2016-11-26 로그인 했을시 자신 참조 프로젝트
 	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session ,Authentication authentication,Model model){
 
@@ -71,6 +74,11 @@ public class MemberController {
 		
 		
 		session.setAttribute("info", result);
+		
+		//추가 사항
+		ProDao proDao = sqlsession.getMapper(ProDao.class);
+		List<Select_Collabo_DTO> collabo = proDao.selectCollaboList(result.getUser_id());
+		session.setAttribute("collabo", collabo);
 		
 		//추가사항  
 		//로그인했을때 알림 체크한뒤 해당 알림 리스트를 session에 저장

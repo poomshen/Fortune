@@ -15,6 +15,7 @@ table, th, td {
     border: 1px solid black;
 }
 </style>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
 
@@ -23,7 +24,7 @@ table, th, td {
 <h2>deptno 확인 : ${sessionScope.info.dept_no}</h2>
 
 <form action="deptsearch.ajax">
-	<select>
+	<select id="deptSelect" onchange="myFunction()">
 		<c:forEach var="i" items="${dept}">
 			<c:choose>
 				<c:when test="${i.dept_no == sessionScope.info.dept_no}">
@@ -36,7 +37,8 @@ table, th, td {
 		</c:forEach>
 	</select>
 	
-	<%-- <select>
+	<%-- 
+	<select id="teamSelect">
 		<c:forEach var="i" items="${team}">
 			<c:choose>
 				<c:when test="${i.team_no == sessionScope.info.team_no}">
@@ -48,7 +50,24 @@ table, th, td {
 			</c:choose>
 		</c:forEach>
 	</select> --%>
-
+ 	
+	<select>
+		<c:forEach var="j" items="${team}">				
+			<c:if test="${sessionScope.info.dept_no == j.dept_no}">
+				<c:choose>
+					<c:when test="${sessionScope.info.team_no == j.team_no}">
+						<option value="${j.team_no}" selected>${j.team_name}</option>
+					</c:when>
+					<c:otherwise>
+						<option value="${j.team_no}">${j.team_name}</option>
+					</c:otherwise>
+				</c:choose>
+				
+			</c:if>	
+		</c:forEach>		
+	</select>
+	
+	
 	<input type="submit" class="btn btn-primary" value="검색">
 </form>
 
@@ -70,15 +89,48 @@ table, th, td {
 				<td><c:out value="${i.user_name}"></c:out></td>
 				<td><c:out value="${i.user_phone}"></c:out></td>
 				<td><c:out value="${fn:substring(i.user_join,0,10)}"></c:out></td>
-				<td><c:out value="${i.dept_no}"></c:out></td>
-				<td><c:out value="${i.team_no}"></c:out></td>
-				<td><c:out value="${i.position_no}"></c:out></td>
+				
+				<c:forEach var="j" items="${dept}">
+					<c:if test="${i.dept_no == j.dept_no}">
+					<td><c:out value="${j.dept_name}"></c:out></td>
+					</c:if>
+				</c:forEach>		
+						
+				<c:forEach var="j" items="${team}">
+					<c:if test="${i.team_no == j.team_no}">
+						<td><c:out value="${j.team_name}"></c:out></td>
+					</c:if>					
+				</c:forEach>	
+										
+				<c:forEach var="j" items="${position}">
+					<c:if test="${i.position_no ==  j.position_no}">
+						<td><c:out value="${j.position_name}"></c:out></td>
+					</c:if>			
+				</c:forEach>				
 			</tr>
 			</c:if>
 		</c:forEach><br>
 
 </table>
+<!-- <script type="text/javascript">
+function myFunction(){
+	
+	var x = document.getElementById("deptSelect").value;
+	var y = document.getElementById("teamSelect").value;
+	
+	if(x == ""){
+		alert('바꼈음');
+		y=101;
 
+	}	
+}
+</script> -->
+<script type="text/javascript">
+	$("#deptSelect").change(function(){
+		alert('바꼈음');
+		$("#teamSelect").val() = 101;
+	});
+</script>
 <!-- 
 <script type="text/javascript">
 function deptshow(){

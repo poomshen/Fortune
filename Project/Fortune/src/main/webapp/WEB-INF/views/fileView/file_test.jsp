@@ -63,9 +63,6 @@
       <script src="dist/js/draggabilly.pkgd.min.js"></script>
       <script src="dist/js/dragdrop.js"></script>
       <script>
-      function al(){
-    	  alert("타라");
-      }
          (function() {
             var body = document.body,
                dropArea = document.getElementById( 'drop-area' ),
@@ -99,7 +96,6 @@
                      classie.add( dropArea, 'show' );
                   },
                   onEnd : function( wasDropped ) {
-                	 alert('끝');
                      var afterDropFn = function() {
                         // hide dropArea
                         classie.remove( dropArea, 'show' );

@@ -1,5 +1,6 @@
 package com.fortune.fileroom_Controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,27 +26,34 @@ public class Search_Controller {
 		
 		String selectvalue = request.getParameter("selectvalue");
 		String searchvalue = request.getParameter("searchvalue");
+		String pg = request.getParameter("pg");
 		System.out.println("selectvalue : "+ selectvalue);
 		System.out.println("searchvalue : "+ searchvalue);
+		System.out.println("pg : "+ pg);
 		
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		List<FileRoom_DTO> list = null;
+		int page = 1;
+		String str_pg = pg;
+		if (str_pg != null) {
+			page = Integer.parseInt(str_pg);
+		}
+		int row_size = 12;
+		int total_count = 0;
 		
 		if(selectvalue.equals("file_room_name")){
 			System.out.println("file_room_name 문");
-			list = fileromm_DAO.searchNameListFiles(searchvalue);
+			list = fileromm_DAO.searchNameListFiles(searchvalue, page);
+			total_count = fileromm_DAO.countSearchNameFile(searchvalue);
 		}
 		if(selectvalue.equals("file_room_date")){
 			System.out.println("file_room_date 문");
-			list = fileromm_DAO.searchDateListFiles(searchvalue);
+			list = fileromm_DAO.searchDateListFiles(searchvalue, page);
+			total_count = fileromm_DAO.countSearchDateFile(searchvalue);
 		}
 		
-		System.out.println(list.size());
 		//View 화면에 뿌려주기 위한 list
-		int page = 1;
-		int row_size = 9;
-
-		int total_count = list.size();	//file 개수
+		
 		System.out.println("totalcount : " + total_count);
 
 		// ... 목록
@@ -66,13 +74,15 @@ public class Search_Controller {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);
+		mv.addObject("selectvalue", selectvalue);
+		mv.addObject("searchvalue", searchvalue);
 		mv.addObject("total_count", total_count);
 		mv.addObject("pg", page);
 		mv.addObject("all_page", all_page);
 		mv.addObject("block", block);
 		mv.addObject("from_page", from_page);
 		mv.addObject("to_page", to_page);
-		mv.setViewName("fileView.file");
+		mv.setViewName("fileView.file2");
 		
 		return mv;
 	}

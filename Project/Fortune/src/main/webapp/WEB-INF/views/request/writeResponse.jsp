@@ -25,8 +25,7 @@ function proAdd(){
 		alert(" 날짜 입력해주세요");
 		$('#endDate').focus();
 		return false;
-	}
-	else{
+	}else if{
 		alert("완료");
 		proaddform.submit();
 		return true;

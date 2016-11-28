@@ -1,5 +1,6 @@
 package com.fortune.request_Service;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -7,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -183,7 +185,35 @@ public class ProService {
 		System.out.println("n : " + n.getCollabo_req_index());
 		System.out.println("n : " + n.getCollabo_req_no());
 		System.out.println("n : " + n.getCollabo_req_state());
-
+		System.out.println("file :"+n.getCollabo_req_filesrc());
+		
+		List<CommonsMultipartFile> files = n.getFiles();
+		  List<String> filenames = new ArrayList<String>(); //파일명만 추출
+		  
+		  if(files != null && files.size() > 0 ){ //업로드한 파일이 하나라도 있다면
+			  
+			  for(CommonsMultipartFile multipartfile : files ){
+				                              
+				  String fname = multipartfile.getOriginalFilename(); //파일명 얻기
+				  String path  = request.getServletContext().getRealPath("/customer/upload");
+				  String fullpath = path + "\\" + fname;
+				  
+				  System.out.println(fname + " / " + path + " / " + fullpath);
+				  
+				  if(!fname.equals("")){
+					 //서버에 파일 쓰기 작업 
+					  FileOutputStream fs = new FileOutputStream(fullpath);
+					  fs.write(multipartfile.getBytes());
+					  fs.close();
+				  }
+				  filenames.add(fname); //실 DB Insert 작업시 .. 파일명 
+			  }
+			  
+		  }
+		  
+		 
+		  n.setCollabo_req_filesrc(filenames.get(0));  // 파일명으로 데이터에 넣을 것들입니다.
+		  
 		// 실DB저장
 
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
@@ -203,10 +233,10 @@ public class ProService {
 	}
 
 	// 글 수락
-	public Request_DTO Accept(String collabo_req_index) throws ClassNotFoundException, SQLException {
+	public Request_DTO DetailResponse(String collabo_req_index) throws ClassNotFoundException, SQLException {
 		System.out.println("seq : " + collabo_req_index);
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
-		proDao.accept(collabo_req_index);
+		
 		Request_DTO proDto = proDao.detailResponse(collabo_req_index); 
 		
 		System.out.println("index : " + proDto.getCollabo_req_index());
@@ -214,6 +244,15 @@ public class ProService {
 
 		return proDto;
 	}
+	
+	// 사용 목적: 협업 요청에 수락을 하게 되면 대기 에서 수락으로 변경 시키는 클래스입니다.
+	// 시간 날짜: 2011-11-26
+		public int Accept(String collabo_req_index) throws ClassNotFoundException, SQLException {
+			System.out.println("seq : " + collabo_req_index);
+			ProDao proDao = sqlsession.getMapper(ProDao.class);
+			int re= proDao.accept(collabo_req_index); // 여기에서 delete 사용하여 삭제 함
+			return re;
+		}
 
 	// 글 거절
 	public int Refuse(String collabo_req_index) throws ClassNotFoundException, SQLException {
@@ -358,6 +397,40 @@ public class ProService {
 			int re= proDao.manager(collabo_req_index); 
 			return re;
 		}
+		
+		
+		 //사용 목적: 다운로드 를 하였을 때 사용되는 클래스이다.
+		 //날짜 일자: 2016-11-26
+		 public void download(String p, String f, HttpServletRequest request,
+				   HttpServletResponse response) throws IOException {
+			 
+			 String fname = new String(f.getBytes("euc-kr"), "8859_1");
+			  System.out.println(fname);
+			  // 다운로드 기본 설정 (브라우져가 read 하지 않고 ... 다운 )
+			  // 요청 - 응답 간에 헤더정보에 설정을 강제 다운로드
+			  // response.setHeader("Content-Disposition", "attachment;filename=" +
+			  // new String(fname.getBytes(),"ISO8859_1"));
+			  response.setHeader("Content-Disposition", "attachment;filename="
+			    + fname + ";");
+			  // 파일명 전송
+			  // 파일 내용전송
+			  String fullpath = request.getServletContext().getRealPath(
+			    "/customer/" + p + "/" + f);
+			  System.out.println(fullpath);
+			  FileInputStream fin = new FileInputStream(fullpath);
+			  // 출력 도구 얻기 :response.getOutputStream()
+			  ServletOutputStream sout = response.getOutputStream();
+			  byte[] buf = new byte[1024]; // 전체를 다읽지 않고 1204byte씩 읽어서
+			  int size = 0;
+			  while ((size = fin.read(buf, 0, buf.length)) != -1) // buffer 에 1024byte
+			               // 담고
+			  { // 마지막 남아있는 byte 담고 그다음 없으면 탈출
+			   sout.write(buf, 0, size); // 1kbyte씩 출력
+			  }
+			  fin.close();
+			  sout.close();
+			 
+		 }
 	
 
 }

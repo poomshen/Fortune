@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
@@ -47,7 +48,7 @@ public class ProController {
 	@RequestMapping("/writerequest.htm")
 	public String writeForm(Model model) throws ClassNotFoundException, SQLException {
 			System.out.println("여기에 들어갈까나 ?");
-			List<Join_DTO> list = proservice.listEffect(model);
+			List<Join_DTO> list = proservice.listEffect(model); //수신자를 부르기 위해서 사용하였다. 
 			model.addAttribute("list", list);
 		return "request.writeRequest";
 
@@ -162,7 +163,7 @@ public class ProController {
 		 public String Accept(String collabo_req_index, Model model) throws ClassNotFoundException,
 		   SQLException {
 			 System.out.println("수락했다.");
-		 Request_DTO proDto = proservice.Accept(collabo_req_index);
+		 Request_DTO proDto = proservice.DetailResponse(collabo_req_index);
 		 model.addAttribute("list", proDto);
 		 System.out.println("여기는 !!");
 		 System.out.println(proDto.toString());
@@ -213,6 +214,7 @@ public class ProController {
 			@RequestMapping("/writeresponse.htm")
 			public String writeResponse() {
 				System.out.println("이쪽으로 왔다 해도 POST는 무슨뜻인지 몰라서 그냥 가는걸지도 몰라요");
+				
 				return "request.writeResponse";
 
 			}
@@ -227,7 +229,7 @@ public class ProController {
 					System.out.println("dlv:"+ collabo_req_index);
 					/*System.out.println(n.toString());*/
 					 proservice.regResponse(n, collabo_req_index);
-					
+					 proservice.Accept(collabo_req_index);
 					// 실DB저장
 				
 				
@@ -289,6 +291,14 @@ public class ProController {
 			 }
 			
 			
-			
+			//사용 목적: 다운로드 하는 부분인데 요청 상태에서 제안서나 그런것을 받을 때 사용 되는 클래스이다.	
+			// 날짜 일자 :2016-11-25
+			 @RequestMapping("download.htm")
+			 public void download(String p, String f, HttpServletRequest request,
+			   HttpServletResponse response) throws IOException {
+				 	
+				 proservice.download(p, f, request, response);
+				 
+			 }
 	
 }
