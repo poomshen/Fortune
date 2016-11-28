@@ -42,11 +42,13 @@ $(document).ready(function() {
 			loadCalendar();
 		}
 	});
+	
 });
 
 function detail(id, title, text, start, end, userids){
 	//온클릭 함수에 가져올 데이터들
 	$('#content').empty();
+	$('#comment_text').empty();
 	$('#content_detail').css("display", "block");
  	$('#detail_id').val(id);
 	$('#detail_title').val(title);
@@ -66,31 +68,30 @@ function detail(id, title, text, start, end, userids){
  	
  	
  	//상세보기 내용에 comment 뿌려주는 내용
-	var comment_text = "";
  	$.ajax({
 		url : 'select_comment.ajax',
 		type : 'post',
 		data : 'schedule_no='+ id,
 		success : function(data) {
-			console.log(data)
+			var comment_text = "";
  			$.each(data, function(index, obj) {
  				if(index%2==0){
  					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
- 					comment_text += '<input type="button" value="수정"><br><button type="button" value="'+obj.work_comment_no;
- 					comment_text += '">삭제</span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
  					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
  					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
  					comment_text += obj.work_comment_text+'</p></div></li>';
  				}else{
  					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
- 					comment_text += '<input type="button" value="수정"><br><button type="button" value="'+obj.work_comment_no;
- 					comment_text += '">삭제</span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
  					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
  					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
  					comment_text += obj.work_comment_text+'</p></div></li>'
  				}
- 				$('#comment_text').html(comment_text);
 			});
+ 			$('#comment_text').html(comment_text);
 		}
 	});
  	
@@ -114,7 +115,7 @@ function work_updateok(){
 	
 }
 
-//댓글 등록 버튼 클릭시 insert 작업
+//comment 등록 버튼 클릭시 insert 작업
 function insert_comment(){
  	$.ajax({
 		url : 'insert_comment.ajax',
@@ -123,11 +124,62 @@ function insert_comment(){
 				"work_comment_text" : $('#comment_textarea').val()
 				},
 		success : function(data) {
+			var comment_text = "";
 			console.log('comment 등록 성공')
+ 			$.each(data, function(index, obj) {
+ 				if(index%2==0){
+ 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
+ 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>';
+ 				}else{
+ 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+ 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>'
+ 				}
+			});
+			$('#comment_text').html(comment_text);
+			$('#comment_textarea').val("");
 		}
 	});
 }
 
+//comment 삭제버튼 클릭시 delete 작업
+function delete_comment(commend_id){
+ 	$.ajax({
+		url : 'delete_comment.ajax',
+		type : 'post',
+		data : {"schedule_no" : $('#detail_id').val(),
+				"work_comment_no" : commend_id},
+		success : function(data) {
+			var comment_text = "";
+			console.log(' cocmment 삭제 성공')
+ 			$.each(data, function(index, obj) {
+ 				if(index%2==0){
+ 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
+ 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>';
+ 				}else{
+ 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+ 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>'
+ 				}
+			});
+			$('#comment_text').html(comment_text);
+		}
+	});
+}
 
 </script>
 
@@ -265,6 +317,8 @@ a {
 </head>
 <body>
 <input type="hidden" id="collabo_no" value="${collabo_no}">
+<input type="hidden" id="modal_start">
+<input type="hidden" id="modal_end">
 
 	<br>
 	<br>
@@ -320,7 +374,7 @@ a {
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="submit" class="btn hvr-forward"">
+                                        <button type="button" class="btn hvr-forward" id="modal_ok">
                                             업무등록</button>
                                         
                                     </div>
@@ -332,20 +386,20 @@ a {
                                 <div class="form-group">
                                     <label for="title" class="col-sm-2 control-label">일정제목</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="modal_title" placeholder="제목.." />
+                                        <input type="text" class="form-control" id="modal_title2" placeholder="제목.." />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="content" class="col-sm-2 control-label">내용</label>
                                     <div class="col-sm-10">
-                                    <textarea rows="5" cols="30" class="form-control" id="modal_text" placeholder="내용.." ></textarea><br>
+                                    <textarea rows="5" cols="30" class="form-control" id="modal_text2" placeholder="내용.." ></textarea><br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="submit" class="btn btn-primary btn-sm">
+                                        <button type="submit" class="btn btn-primary btn-sm" id="modal_ok2">
                                             업무등록</button>
                                         
                                     </div>
@@ -417,7 +471,8 @@ a {
 				<!-- panel-body -->
 				<div class="panel-body">
 					<!-- comment_text 내용추가 하는 영역 -->
-					<ul class="chat" id="comment_text">
+					<ul class="chat">
+					<div id="comment_text"></div>
 					</ul>
 				</div>
 				<!-- panel-footer -->

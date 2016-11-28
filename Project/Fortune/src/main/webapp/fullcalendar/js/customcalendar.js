@@ -59,8 +59,8 @@ function loadCalendar() {
 	    	select: function(start, end) {
 			//모달 띄우는 함수
 			var test = $('#modal_btn').click();
-			$('#modal_title').val("");
-			$('#modal_text').val("");
+			$('#modal_title').val(""); $('#modal_title2').val("");
+			$('#modal_text').val(""); $('#modal_text2').val("");
 			$('#modal_start').val(start.format("YYYY-MM-DD"));
 			$('#modal_end').val(end.format("YYYY-MM-DD"))
 			
@@ -233,7 +233,6 @@ function loadCalendar() {
 						data: updateschedule,
 						success : function(data) {
 							console.log('업데이트 성공');
-							//fcontent();
 						}
 					});
             		
@@ -278,12 +277,10 @@ function loadCalendar() {
 									start: data.schedule.schedule_start,
 									end: data.schedule.schedule_end
 							}
-
-							
 							
 							calendar.fullCalendar('renderEvent', eventData , true);
-							console.log('insert 성공')
 							fcontent();
+							console.log('insert 성공')
 							
 							
 						      $.each(data.alarm, function (i, item) {
