@@ -40,7 +40,7 @@ public class FCMainController {
 		String[] user_id = fullcalendarDAO.selectTeam_id(dto.getUser_id());
 
 			
-			//model.addAttribute("team_id", user_id);
+		model.addAttribute("team_id", user_id);
 
 		return "schedule.schedule";
 	}
