@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fortune.Table_DTO.Dept_DTO;
+import com.fortune.Table_DTO.Jobtitle_DTO;
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Team_DTO;
 import com.fortune.member_DAO.IJoin;
 import com.fortune.organization_DAO.IOrganization;
 
@@ -32,29 +35,32 @@ public class orgController {
 		
 		IOrganization dao = sqlSession.getMapper(IOrganization.class);
 		ArrayList<Join_DTO> deptmember = dao.showdept(dept_no);
-/*
-		for(int i=0; i<deptmember.size(); i++){
-			System.out.println("해당 아이디값 : "+ deptmember.get(i));
-		}*/
 		model.addAttribute("deptlist", deptmember);
 		
+/*		for(int i=0; i<deptmember.size(); i++){
+			System.out.println("해당 아이디값 : "+ deptmember.get(i));
+		}*/
+
+		//부서 리스트 보여주는 부분
 		ArrayList<Dept_DTO> dto2 = new ArrayList<Dept_DTO>();
 		IJoin dao2 = sqlSession.getMapper(IJoin.class);
 		dto2 = dao2.searchDept();
 		model.addAttribute("dept", dto2);
 		
+		//팀 리스트 보여주는 부분
+		ArrayList<Team_DTO> tdto = new ArrayList<Team_DTO>();
+		IJoin tdao = sqlSession.getMapper(IJoin.class);
+		tdto = tdao.searchTeam();
+		model.addAttribute("team", tdto);
 		
+		//직함 리스트 보여주는 부분
+		ArrayList<Jobtitle_DTO> jdto = new ArrayList<Jobtitle_DTO>();
+		IJoin jdao = sqlSession.getMapper(IJoin.class);
+		jdto = jdao.searchTitle();
+		model.addAttribute("position", jdto);
+
 		return "business.business";
 	}
-	/*
-	@RequestMapping("/deptinfo.ajax")
-	public @ResponseBody ArrayList<Join_DTO> deptinfo(int dept_no){
-		System.out.println(dept_no);
-		System.out.println("같은 부서 리스트 쫙 뽑을거");
-		IOrganization dao = sqlSession.getMapper(IOrganization.class);
-		ArrayList<Join_DTO> deptmember = dao.showdept(dept_no);
-		
-		return deptmember;
-	}
-	*/
+
+	
 }

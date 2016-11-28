@@ -5,27 +5,30 @@ var array = [];
 
 
 function fcontent() {
+	
 	var content2 = "";
 	content2 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
 	$('#content').empty();
 	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
+		data : 'collabo_no='+$('#collabo_no').val(),
 		success : function(data) {
 			console.log(data)
 			$.each(data.schedulelist, function(index, obj) {
 				var userid ="";
 				
 		        content2 += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
-		        content2 += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"';
-		        content2 += ' onclick="test(' + obj.schedule_no;
+		        content2 += '</td><td><a';
+		        content2 += ' onclick="detail(' + obj.schedule_no;
 		        content2 += ",'" + obj.work_title + "','" + obj.work_text;
 		        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
 		        content2 += "','" + obj.users + "'" ;
 		        content2 += ')" >상세보기</a></td></tr>';
 			});
+			$('#content_detail').css("display", "none");
 	        $('#content').html(content2)
-		}
+		} 
 	});
 }
 
@@ -56,8 +59,8 @@ function loadCalendar() {
 	    	select: function(start, end) {
 			//모달 띄우는 함수
 			var test = $('#modal_btn').click();
-			$('#modal_title').val("");
-			$('#modal_text').val("");
+			$('#modal_title').val(""); $('#modal_title2').val("");
+			$('#modal_text').val(""); $('#modal_text2').val("");
 			$('#modal_start').val(start.format("YYYY-MM-DD"));
 			$('#modal_end').val(end.format("YYYY-MM-DD"))
 			
@@ -89,7 +92,6 @@ function loadCalendar() {
 			
 			var content3 = "";
 			content3 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
-			$('#content').empty();
 			$.ajax({
 				url : 'eventclick.ajax',
 				type : 'post',
@@ -99,11 +101,12 @@ function loadCalendar() {
 				success : function(obj) {
 					console.log(obj)
 					content3 += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
-					content3 += '</td><td><a href="#" data-toggle="modal" data-target="#myModal2"';
-					content3 += ' onclick="test(' + obj.schedule_no;
-					content3 += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end +"'";
+					content3 += '</td><td><a';
+					content3 += ' onclick="detail(' + obj.schedule_no;
+					content3 += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
+					content3 += "','" + obj.users + "'";
 					content3 += ')" >상세보기</a></td></tr>';
-					
+					$('#content_detail').css("display", "none");
 			        $('#content').html(content3)
 				}
 			});
@@ -175,25 +178,23 @@ function loadCalendar() {
 	    	//일정 삭제 함수
 	    	//********************DB연동 작업 전******************
 	    	deleteEvent: {
-	            click: $('#detail_modal_delete').click(function(){
+	            click: $('#delete_btn').click(function(){
 	            	
 	            	var check = confirm('일정을 삭제 하시겠습니까?');
 	            	if(check){
 
-	            		var id = $('#detail_modal_id').val();
+	            		var id = $('#detail_id').val();
 	            		calendar.fullCalendar('removeEvents', id);
-	            		
-	            		$('#tr'+id).remove();
 	            		
 	            		$.ajax({
 							type: 'post',
-							url: 'delete.ajax',
-							data: "id="+id,
+							url: 'deleteSchedule.ajax',
+							data: {"id" : id},
 							success : function(data) {
-								console.log('삭제성공');
-								fcontent();
+								console.log("삭제성공");
 							}
 						});
+	            		fcontent();
 	            		
 	            	}
 
@@ -203,38 +204,35 @@ function loadCalendar() {
 	        // 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
 	        //업데이트 함수
 	        updateEvent: {
-	            click: $('#detail_modal_update').click(function(){
+	            click: $('#updateok_btn').click(function(){
 	            	
 	            	var check = confirm('일정을 수정 하시겠습니까?');
 	            	if(check){
-	            		var id = $('#detail_modal_id').val();
+	            		var id = $('#detail_id').val();
 	            		var calEvent;
 	            		for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
 	            			if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
 	            				calEvent = calendar.fullCalendar( 'getEventSources' )[0].events[i];
-	            				calendar.fullCalendar( 'getEventSources' )[0].events[i].title =$('#detail_modal_title').val();
+	            				calendar.fullCalendar( 'getEventSources' )[0].events[i].title =$('#detail_title').val();
 	            				calendar.fullCalendar('updateEvent', calEvent);
 	            				var j = i;
 	            			}
-	            		}
+	            	}
 	            		
-            		console.log(calendar.fullCalendar( 'getEventSources' )[0].events[j].title)
-            		
 					var updateschedule = {
-						"title": $('#detail_modal_title').val(),
-						"text": $('#detail_modal_text').val(),
-						"schedule_no": $('#detail_modal_id').val(),
-		                "schedule_start" : $('#detail_modal_start').val(),
-		                "schedule_end" : $('#detail_modal_end').val()
+						"title": $('#detail_title').val(),
+						"text": $('#detail_text').val(),
+						"schedule_no": $('#detail_id').val(),
+		                "schedule_start" : $('#detail_start').val(),
+		                "schedule_end" : $('#detail_end').val()
 					}
             		
             		$.ajax({
 						type: 'post',
-						url: 'update.ajax',
+						url: 'work_update.ajax',
 						data: updateschedule,
 						success : function(data) {
 							console.log('업데이트 성공');
-							fcontent();
 						}
 					});
             		
@@ -263,6 +261,7 @@ function loadCalendar() {
 							"text": $('#modal_text').val(),
 							"start": $('#modal_start').val(),
 							"end": $('#modal_end').val(),
+							"collabo_no" : $('#collabo_no').val(),
 							"scheduleusers": scheduleusers
 					}
 					
@@ -278,12 +277,10 @@ function loadCalendar() {
 									start: data.schedule.schedule_start,
 									end: data.schedule.schedule_end
 							}
-
-							
 							
 							calendar.fullCalendar('renderEvent', eventData , true);
-							console.log('insert 성공')
 							fcontent();
+							console.log('insert 성공')
 							
 							
 						      $.each(data.alarm, function (i, item) {
@@ -293,7 +290,7 @@ function loadCalendar() {
 						      
 						      });
 							
-							console.log(data.alarm);
+							console.log(data.alarm); 
 							//var count =","+data.count.join(' / ');
 							
 							console.log(count);
@@ -315,5 +312,39 @@ function loadCalendar() {
 	 // 캘린더 초기 호출시 뷰단에 뿌려줄 일정데이터
 		events: array
 	});
+	
+	$(".dropdown_s dt a").on('click', function() {
+		  $(".dropdown_s dd ul").slideToggle('fast');
+		});
+
+		$(".dropdown_s dd ul li a").on('click', function() {
+		  $(".dropdown_s dd ul").hide();
+		});
+
+		function getSelectedValue(id) {
+		  return $("#" + id).find("dt a span.value").html();
+		}
+
+		$(document).bind('click', function(e) {
+		  var $clicked = $(e.target);
+		  if (!$clicked.parents().hasClass("dropdown_s")) $(".dropdown_s dd ul").hide();
+		});
+
+		$('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+		  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+		    title = $(this).val() + ",";
+
+		  if ($(this).is(':checked')) {
+		    var html = '<span title="' + title + '">' + title + '</span>';
+		    $('.multiSel').append(html);
+		    $(".hida").hide();
+		  } else {
+		    $('span[title="' + title + '"]').remove();
+		    var ret = $(".hida");
+		    $('.dropdown_s dt a').append(ret);
+
+		  }
+		});
 
 }

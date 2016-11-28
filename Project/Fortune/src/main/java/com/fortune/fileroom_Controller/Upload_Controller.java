@@ -1,9 +1,10 @@
 package com.fortune.fileroom_Controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fortune.Table_DTO.FileRoom_DTO;
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.fileroom_DAO.IFileRoom;
+import com.fortune.notice_Util.NoticeFile_Utils;
 
 @Controller
 public class Upload_Controller {
@@ -25,7 +28,7 @@ public class Upload_Controller {
 	
 	@RequestMapping(value="/uploadfile.ajax", method=RequestMethod.POST ,produces="application/json")
 	@ResponseBody
-	public HashMap<String, Object> uploadFile(MultipartHttpServletRequest request) throws Exception {
+	public HashMap<String, Object> uploadFile(HttpSession session, MultipartHttpServletRequest request) throws Exception {
 		System.out.println("uploadFile 컨트롤러");
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		MultipartFile mf = request.getFile("file");
@@ -33,48 +36,66 @@ public class Upload_Controller {
 		String file_name = mf.getOriginalFilename();
 		System.out.println("file_name : " + file_name);
 		
-		//확장자 구하는 부분
-		int lastindexof = mf.getOriginalFilename().lastIndexOf(".");
-		int length = mf.getOriginalFilename().length();
-		String substr = mf.getOriginalFilename().substring(lastindexof, length);
+		String originalFileExtension = file_name.substring(file_name.lastIndexOf("."));
+		String storedFileName = NoticeFile_Utils.getRandomString() + originalFileExtension;
+		
+
+		/////////////////////////////////////////////////////
+		String body = null;
+		String ext = null;
+		
+		int dot = file_name.lastIndexOf(".");
+		if (dot != -1) { // 확장자가 없을때
+			body = file_name.substring(0, dot);
+			ext = file_name.substring(dot);
+		} else { // 확장자가 있을때
+			body = file_name;
+			ext = "";
+		}
+
+		int count = 0;
+		String file_new_name = file_name;
+		// 중복된 파일이 있을때
+		// 파일이름뒤에 a숫자.확장자 이렇게 들어가게 되는데 숫자는 9999까지 된다.
+		
+		
+		while (!overlapName(fileromm_DAO, file_new_name) && count < 9999) {
+			System.out.println("몇번 타냐 : " + count);
+			count++;
+			file_new_name = body + "("+count+")" + ext;
+		}
+		////////////////////////////////////////////////////////////////////
+		System.out.println("file_new_name : " + file_new_name);
+		
+		String filenamecut = NoticeFile_Utils.getFixString(file_new_name, 12);
+		System.out.println("filenamecut : " + filenamecut);
 		
 		String upload_path = request.getSession().getServletContext().getRealPath("upload");
-		File file = new File(upload_path + "/" + file_name);
-		file = renameFile(file);
+		File file = new File(upload_path + "/" + storedFileName);		
 		
-		//이름 변경 해주는 부분
-		//for(int i = 0; i < list.size(); i++){
-		//	if(list.get(i).getFilesrc().equals(fileName)){
-				
-				
-				/*index++;
-				int lastindexof = mf.getOriginalFilename().lastIndexOf(".");
-				int length = mf.getOriginalFilename().length();
-				//String[] str = mf.getOriginalFilename().split(".");
-				String substr = mf.getOriginalFilename().substring(lastindexof, length);
-				
-				System.out.println("lastindexof : " + lastindexof);
-				System.out.println("substr : " + substr);
-				System.out.println("변경 (O) fileName : " + fileName);
-				System.out.println("index : " + index);*/
-		//	}
-		//}
-		/*	
-		String uploadPath = request.getSession().getServletContext().getRealPath("upload");
-		*/
 		if (mf.getSize() != 0) {
 			mf.transferTo(file);
 		}
 		
 		//DB insert 하는 부분
+		Join_DTO join_DTO = (Join_DTO) session.getAttribute("info");
+		System.out.println("세션 user_id : " + join_DTO.getUser_id());
 		FileRoom_DTO fileroom_DTO = new FileRoom_DTO();
-		fileroom_DTO.setFile_room_name(file.getName());
-		fileroom_DTO.setFile_room_ext(substr);
+		fileroom_DTO.setUser_id(join_DTO.getUser_id());
+		fileroom_DTO.setFile_room_name(file_new_name);
+		fileroom_DTO.setFile_room_ext(originalFileExtension);
+		fileroom_DTO.setFile_room_rename(storedFileName);
+		fileroom_DTO.setFile_room_cutname(filenamecut);
 		fileromm_DAO.insertFile(fileroom_DTO);
 		
 		//View 화면에 뿌려주기 위한 list
+		String pg = request.getParameter("pg");
 		int page = 1;
-		int row_size =9;
+		String str_pg = pg;
+		if (str_pg != null) {
+			page = Integer.parseInt(str_pg);
+		}
+		int row_size = 12;
 
 		int total_count = fileromm_DAO.countFile();	//file 개수
 		System.out.println("totalcount : " + total_count);
@@ -93,6 +114,10 @@ public class Upload_Controller {
 			to_page = all_page;
 		}
 		
+		System.out.println("to_page : " + to_page);
+		System.out.println("from_page : " + from_page);
+		System.out.println("page : " + page);
+		
 		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page);
 		result.put("file", list);
 		result.put("total_count", total_count);
@@ -105,14 +130,22 @@ public class Upload_Controller {
 		return result;
 	}
 	
-	public File renameFile(File f) { // File f는 원본 파일
+	public boolean overlapName(IFileRoom fileromm_DAO, String file_new_name){
+		int overlapname = fileromm_DAO.selectOverlapNameFile(file_new_name);
+		if(overlapname == 1){
+			return false;
+		}
+		return true;
+	}
+	
+	/*public File renameFile(File f) { // File f는 원본 파일
 		if (createNewFile(f))
 			return f; // 생성된 f가 중복되지 않으면 리턴
 
 		String name = f.getName();
 		String body = null;
 		String ext = null;
-
+		
 		int dot = name.lastIndexOf(".");
 		if (dot != -1) { // 확장자가 없을때
 			body = name.substring(0, dot);
@@ -139,5 +172,5 @@ public class Upload_Controller {
 		} catch (IOException ignored) {
 			return false;
 		}
-	}
+	}*/
 }

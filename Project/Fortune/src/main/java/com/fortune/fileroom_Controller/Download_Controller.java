@@ -7,12 +7,20 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fortune.Table_DTO.FileRoom_DTO;
+import com.fortune.fileroom_DAO.IFileRoom;
+
 @Controller
 public class Download_Controller {
-
+	
+	@Autowired
+	private SqlSession sqlsession;
+	
 	@RequestMapping(value="/downloadfile.htm")
 	public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("downloadFile 컨트롤러");
@@ -24,12 +32,18 @@ public class Download_Controller {
 
 		String fullPath = path + "/" + filename;
 		System.out.println("fullPath : " + fullPath);
+		
 		File downloadFile = new File(fullPath);
 		System.out.println("downloadFile : " + downloadFile);
+		
+		FileRoom_DTO fileroom_DTO = new FileRoom_DTO();
+		fileroom_DTO.setFile_room_rename(filename);
+		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
+		String orginfilename = fileromm_DAO.selectNameFile(fileroom_DTO);
+		
 		response.setContentLength((int) downloadFile.length());
-
 		response.setContentType("application/octet-stream; charset=utf-8");
-		response.setHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(), "ISO8859_1"));
+		response.setHeader("Content-Disposition", "attachment;filename=" + new String(orginfilename.getBytes(), "ISO8859_1"));
 
 		response.setHeader("Content-Transfer-Encoding", "binary");
 

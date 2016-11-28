@@ -25,8 +25,8 @@ function proAdd(){
 		alert(" 날짜 입력해주세요");
 		$('#endDate').focus();
 		return false;
-	}
-	else{
+	}else if{
+		alert("완료");
 		proaddform.submit();
 		return true;
 	}
@@ -130,19 +130,58 @@ function proAdd(){
 </head>
 <body>
 
+<div class="container">
+	<form action="writeresponse.htm" method="post" name="proaddform">
+	
+	<input type="hidden" name="collabo_req_index" value="${list.collabo_req_index}">
+	<input type="hidden" name="collabo_req_no" value="${list.collabo_req_no}">
+	
+		<div class="col-sm-1"></div>
+		<div class="col-sm-9">
+			
+			<br>
+			<br>
+			<div class="form-group has-success">
 
-<form action="writeresponse.htm" method="post" name="proaddform">
-<input type="hidden" name="collabo_req_index" value="${list.collabo_req_index}">
-<input type="hidden" name="collabo_req_no" value="${list.collabo_req_no}">
+				<div>
+					<label>수락자 :</label>
+					 <input type="text" name="collabo_req_ID" id="collabo_req_ID"
+					class="form-control" value="${list.collabo_req_ID}" readonly="readonly">
+				</div>
+			</div>
 
-수락자 : <input type="text" name="collabo_req_ID" value="${list.collabo_req_ID}" readonly="readonly"><br>
-끝  날짜 : <input type="text" name="collabo_start" id="startDate">
-- <input type="text" name="collabo_end" id="endDate"><br>  
-진행 상태 :<input type="text" value="진행중" name="collabo_state" readonly="readonly"><br>
+			<br>
+			<div class="form-group has-success">
+				<label>시작 날짜 :</label>
+				 <input type="text" name="collabo_start" class="form-control" id="startDate">
+			</div>
+			<div class="form-group has-success">
+				<label>끝 날짜 :</label>
+				 <input type="text" name="collabo_end" 
+					class="form-control" id="endDate">
+			</div>
+			<br>
+			<div class="form-group has-success">
+				<label>진행 상태 :</label>
+				 <input type="text" name="collabo_state" 
+					class="form-control" value="대기" readonly="readonly">
+			</div>
+			<br>
+			
+			
+		</div>
 
-<input type="button" value="submit" onclick="proAdd()">
-<p><a href="requestList.htm">취소하기</a></p>
-</form>
+		<div class="col-sm-2"></div>
+		<div class="col-sm-6" style="text-align: right" >
+			<br> 
+			<input type="button" class="btn btn-default" value="완료"  onclick="proAdd()">
+			
+			<a href="requestList.htm" class="btn btn-default">취소하기</a>
+		</div>
+		<br>
+		<br>
+	</form>
+</div>
 
 
 </body>

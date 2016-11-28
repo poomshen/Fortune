@@ -6,6 +6,7 @@ import java.util.List;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.function_DTO.Select_Collabo_DTO;
 
 
 
@@ -26,7 +27,7 @@ public interface ProDao {
 		//수락 하기
 		public int accept(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//거절 하기
-		public int refuse(String collabo_req_index) throws ClassNotFoundException, SQLException;
+		public int refuse(String collabo_req_text ,String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//게시물 입력 요청
 		public int insertResponse(With_DTO n) throws ClassNotFoundException, SQLException;
 		//게시물 상세 요청
@@ -43,7 +44,12 @@ public interface ProDao {
 		public List<Join_DTO> listManager() throws ClassNotFoundException, SQLException;
 		//게시물 대기 , 수락 , 거절 리스트 
 		public Request_DTO kindState(String collabo_req_state) throws ClassNotFoundException, SQLException;
-				
+		//수락 하기
+		public int manager(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		
+		//작성자 이성준
+		//2016-11-26
+		//사이드바에 자신의 협업들 보여 주기
+		public List<Select_Collabo_DTO> selectCollaboList(String user_id);
 		
 }

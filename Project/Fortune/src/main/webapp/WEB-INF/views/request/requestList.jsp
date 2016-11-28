@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,54 +42,54 @@
 </head>
 <body>
 
-	
-		<table class="article-list margin-small">
-			<caption class="hidden">공지사항</caption>
-			<thead>
-				<tr>
-					<th class="collabo_req_index">번호</th>
 
-					<th class="title">제목</th>
+	<table class="article-list margin-small">
+		<caption class="hidden">공지사항</caption>
+		<thead>
+			<tr>
+				<th></th>
+				<th class="collabo_req_index">번호</th>
+
+				<th class="title">제목</th>
 
 
-<th class="user_ID">작성자</th>
-					<th class="collabo_req_date">작성일</th>
-					<th class="collabo_req_ID">답장자</th>
-					<th class="collabo_req_state">진행상태</th>
-					
-				
+				<th class="user_ID">작성자</th>
+				<th class="collabo_req_date">작성일</th>
+				<th class="collabo_req_ID">답장자</th>
+				<th class="collabo_req_state">진행상태</th>
+
+
+
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${list}" var="n">
+				<tr class="alert alert-warning" height="50">
+
+					<td class="btn btn-info" height="50" data-toggle="modal"
+						data-target="#myModal"
+						onclick="proAjaxCall(${n.collabo_req_index})"><span
+						class="glyphicon glyphicon-blackboard"></span></td>
+
+					<td class="collabo_req_index">${n.collabo_req_index}</td>
+					<td>${n.collabo_req_title}</td>
+					<td class="user_ID">${n.user_ID}</td>
+					<td class="collabo_req_date">${n.collabo_req_date}</td>
+					<td class="collabo_req_ID">${n.collabo_req_ID}</td>
+					<td class="collabo_req_state">${n.collabo_req_state}</td>
 
 				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="n">
-					<tr>
-						<td class="collabo_req_index">${n.collabo_req_index}</td>
 
-
-						<td><a data-toggle="modal" data-target="#myModal"
-							onclick="proAjaxCall(${n.collabo_req_index})">${n.collabo_req_title}</a></td>
-
-
-
-
-						<td class="user_ID">${n.user_ID}</td>
-						<td class="collabo_req_date">${n.collabo_req_date}</td>
-						<td class="collabo_req_ID">${n.collabo_req_ID}</td>
-						<td class="collabo_req_state">${n.collabo_req_state}</td>
-		
-
-					</tr>
-				</c:forEach>
+			</c:forEach>
 
 
 
 
 
-			</tbody>
-		</table>
-	
-	
+		</tbody>
+	</table>
+
+
 
 	<div class="container">
 		<!-- Modal -->
@@ -104,7 +105,9 @@
 					</div>
 					<div class="modal-body">
 
-						<p><div id="menuView">아아</div></p>
+						<p>
+						<div id="menuView">아아</div>
+						</p>
 
 
 
@@ -124,15 +127,15 @@
 
 	</div>
 
-<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
-	<a href="writerequest.htm" class="btn btn-success">요청</a>
-</security:authorize>
+	<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
+		<a href="writerequest.htm" class="btn btn-success">요청</a>
+	</security:authorize>
 
 	<a href="listReplyRequest.htm" class="btn btn-success">작성자 리스트</a>
 	<a href="requestList.htm" class="btn btn-success">답장자 리스트</a>
 	<a href="listallRequest.htm" class="btn btn-success">전체 리스트</a>
 
-<%-- <c:forEach items="${all}" var="c">
+	<%-- <c:forEach items="${all}" var="c">
 	<c:if test="${c.collabo_req_state=='대기'}">
 		<td class="collabo_req_state">${c.collabo_req_state = '대기'}</td>
 	</c:if>

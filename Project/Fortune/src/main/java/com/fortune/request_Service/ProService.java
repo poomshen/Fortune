@@ -1,5 +1,6 @@
 package com.fortune.request_Service;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -7,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,12 +22,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
-
+import com.fortune.notice_DAO.INotice;
 import com.fortune.request_DAO.ProDao;
 
 @Service
@@ -183,7 +187,35 @@ public class ProService {
 		System.out.println("n : " + n.getCollabo_req_index());
 		System.out.println("n : " + n.getCollabo_req_no());
 		System.out.println("n : " + n.getCollabo_req_state());
-
+		System.out.println("file :"+n.getCollabo_req_filesrc());
+		
+		List<CommonsMultipartFile> files = n.getFiles();
+		  List<String> filenames = new ArrayList<String>(); //파일명만 추출
+		  
+		  if(files != null && files.size() > 0 ){ //업로드한 파일이 하나라도 있다면
+			  
+			  for(CommonsMultipartFile multipartfile : files ){
+				                              
+				  String fname = multipartfile.getOriginalFilename(); //파일명 얻기
+				  String path  = request.getServletContext().getRealPath("/customer/upload");
+				  String fullpath = path + "\\" + fname;
+				  
+				  System.out.println(fname + " / " + path + " / " + fullpath);
+				  
+				  if(!fname.equals("")){
+					 //서버에 파일 쓰기 작업 
+					  FileOutputStream fs = new FileOutputStream(fullpath);
+					  fs.write(multipartfile.getBytes());
+					  fs.close();
+				  }
+				  filenames.add(fname); //실 DB Insert 작업시 .. 파일명 
+			  }
+			  
+		  }
+		  
+		 
+		  n.setCollabo_req_filesrc(filenames.get(0));  // 파일명으로 데이터에 넣을 것들입니다.
+		  
 		// 실DB저장
 
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
@@ -203,10 +235,10 @@ public class ProService {
 	}
 
 	// 글 수락
-	public Request_DTO Accept(String collabo_req_index) throws ClassNotFoundException, SQLException {
+	public Request_DTO DetailResponse(String collabo_req_index) throws ClassNotFoundException, SQLException {
 		System.out.println("seq : " + collabo_req_index);
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
-		proDao.accept(collabo_req_index);
+		
 		Request_DTO proDto = proDao.detailResponse(collabo_req_index); 
 		
 		System.out.println("index : " + proDto.getCollabo_req_index());
@@ -214,12 +246,21 @@ public class ProService {
 
 		return proDto;
 	}
+	
+	// 사용 목적: 협업 요청에 수락을 하게 되면 대기 에서 수락으로 변경 시키는 클래스입니다.
+	// 시간 날짜: 2011-11-26
+		public int Accept(String collabo_req_index) throws ClassNotFoundException, SQLException {
+			System.out.println("seq : " + collabo_req_index);
+			ProDao proDao = sqlsession.getMapper(ProDao.class);
+			int re= proDao.accept(collabo_req_index); // 여기에서 delete 사용하여 삭제 함
+			return re;
+		}
 
 	// 글 거절
-	public int Refuse(String collabo_req_index) throws ClassNotFoundException, SQLException {
+	public int Refuse(String collabo_req_text,String collabo_req_index) throws ClassNotFoundException, SQLException {
 		System.out.println("seq : " + collabo_req_index);
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
-		int re = proDao.refuse(collabo_req_index); // 여기에서 delete 사용하여 삭제 함
+		int re = proDao.refuse(collabo_req_text,collabo_req_index); // 여기에서 delete 사용하여 삭제 함
 		return re;
 	}
 
@@ -271,7 +312,9 @@ public class ProService {
 
 	//////////////////////////////////////////////////////////////
 
-	// 전체 협업 리스트
+	// 전체 협업 리스트 입니다. 
+	// 즉 협업요청이 아닌 협업이 완료된 상태를 의미합니다.
+	
 	public List<With_DTO> listResponse(String pg, String f, String q, HttpSession session)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("집에 갑시다.");
@@ -317,6 +360,7 @@ public class ProService {
 	// 담당자를 선택하는 역할을 한다.
 	public With_DTO InsertManager(With_DTO m) throws ClassNotFoundException, SQLException {
 		System.out.println("tostring : " + m.toString());
+		
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
 		 proDao.updatemanager(m);
 		return m;
@@ -339,13 +383,105 @@ public class ProService {
 			throws ClassNotFoundException, SQLException{
 			
 			ProDao checking_DAO = sqlsession.getMapper(ProDao.class);
+			
 			List<Join_DTO> list = checking_DAO.listManager();
 			System.out.println("私たちは今も悪い道を行っているのか..?");
 			//System.out.println(list);
 			
 			return list;
 		}
-	
+		// 대기에서 진행중으로 변환 시키는 클래스입니다.
+		// 날짜 일자 :2016-11-25
+		public int ProManager(String collabo_req_index) throws ClassNotFoundException, SQLException {
+			System.out.println("collabo_req_index : " + collabo_req_index);
+			ProDao proDao = sqlsession.getMapper(ProDao.class);
+			 // 진행중으로 변환시키는 데이터 
+			int re= proDao.manager(collabo_req_index); 
+			return re;
+		}
+		
+		
+		 //사용 목적: 다운로드 를 하였을 때 사용되는 클래스이다.
+		 //날짜 일자: 2016-11-26
+		 public void download(String p, String f, HttpServletRequest request,
+				   HttpServletResponse response) throws IOException {
+			 
+			 String fname = new String(f.getBytes("euc-kr"), "8859_1");
+			  System.out.println(fname);
+			  // 다운로드 기본 설정 (브라우져가 read 하지 않고 ... 다운 )
+			  // 요청 - 응답 간에 헤더정보에 설정을 강제 다운로드
+			  // response.setHeader("Content-Disposition", "attachment;filename=" +
+			  // new String(fname.getBytes(),"ISO8859_1"));
+			  response.setHeader("Content-Disposition", "attachment;filename="
+			    + fname + ";");
+			  // 파일명 전송
+			  // 파일 내용전송
+			  String fullpath = request.getServletContext().getRealPath(
+			    "/customer/" + p + "/" + f);
+			  System.out.println(fullpath);
+			  FileInputStream fin = new FileInputStream(fullpath);
+			  // 출력 도구 얻기 :response.getOutputStream()
+			  ServletOutputStream sout = response.getOutputStream();
+			  byte[] buf = new byte[1024]; // 전체를 다읽지 않고 1204byte씩 읽어서
+			  int size = 0;
+			  while ((size = fin.read(buf, 0, buf.length)) != -1) // buffer 에 1024byte
+			               // 담고
+			  { // 마지막 남아있는 byte 담고 그다음 없으면 탈출
+			   sout.write(buf, 0, size); // 1kbyte씩 출력
+			  }
+			  fin.close();
+			  sout.close();
+			 
+		 }
+		 
+		 
+		/*//만든 목적: 페이징 처리할때 사용하는데 협업 요청 하는데 많은 리스트를 뽑는다 그것을 페이징 처리하기 위한 클래스입니다.
+		//날짜 일자 :2016-11-26
+			public ModelAndView ListPaging(String pg) throws ClassNotFoundException, SQLException {
+			
+				System.out.println("NoticeController의 noticeList를 탑니다~");
+				
+				ProDao proDao = sqlsession.getMapper(ProDao.class);
+				
+				int page = 1;
+				String str_pg = pg;
+				if (str_pg != null) {
+					page = Integer.parseInt(str_pg);
+				}
+				int row_size = 9;
+				
+				int total_count = proDao.countNotice(); //공지사항 글 개수
+				System.out.println("total_count : " + total_count);
+				
+				//공지사항 글 목록
+				int all_page = (int)Math.ceil(total_count / (double)row_size); //페이지수
+				// int totalPage = total/rowSize + (total%rowSize==0?0:1);
+				System.out.println("페이지수 : " + all_page);
+
+				int block = 5; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
+				// [10] >>
+				int from_page = ((page - 1) / block * block) + 1; // 보여줄 페이지의 시작
+				// ((1-1)/10*10)
+				int to_page = ((page - 1) / block * block) + block; // 보여줄 페이지의 끝
+				if (to_page > all_page) { // 예) 20>17
+					to_page = all_page;
+				}
+
+				List<Notice_DTO> noticelist = noticeListDao.listNotice(page);	//공지사항 리스트
+				
+				ModelAndView mv = new ModelAndView();
+				mv.addObject("noticelist", noticelist);
+				mv.addObject("total_count", total_count);
+				mv.addObject("pg", page);
+				mv.addObject("all_page", all_page);
+				mv.addObject("block", block);
+				mv.addObject("from_page", from_page);
+				mv.addObject("to_page", to_page);
+				mv.setViewName("notice.noticeList");
+				
+				return mv;
+
+			}*/
 	
 
 }

@@ -16,6 +16,34 @@ public class Request_DTO {
 	private Date collabo_req_date; //요청 날짜 regdate
 	private String collabo_req_state; //진행 상태 ref
 	private String collabo_req_ID; //수신자 ..
+	private String collabo_req_filesrc;
+	private List<CommonsMultipartFile> files;
+	
+	
+	
+	
+	
+	
+
+		public String getCollabo_req_filesrc() {
+		return collabo_req_filesrc;
+	}
+	public void setCollabo_req_filesrc(String collabo_req_filesrc) {
+		this.collabo_req_filesrc = collabo_req_filesrc;
+	}
+
+
+	//멀티 파일 업로드///////////////////////////////
+		
+			
+		public List<CommonsMultipartFile> getFiles() {
+			return files;
+		}
+		public void setFiles(List<CommonsMultipartFile> files) {
+			this.files = files;
+		}
+	////////////////////////////////////////////////
+	
 	
 	public String getCollabo_req_index() {
 		return collabo_req_index;
@@ -65,15 +93,17 @@ public class Request_DTO {
 	public void setCollabo_req_ID(String collabo_req_ID) {
 		this.collabo_req_ID = collabo_req_ID;
 	}
-	
-	
 	@Override
 	public String toString() {
-		return "ProDto [collabo_req_index=" + collabo_req_index + ", collabo_req_no=" + collabo_req_no
+		return "Request_DTO [collabo_req_index=" + collabo_req_index + ", collabo_req_no=" + collabo_req_no
 				+ ", collabo_req_title=" + collabo_req_title + ", collabo_req_text=" + collabo_req_text + ", user_ID="
 				+ user_ID + ", collabo_req_date=" + collabo_req_date + ", collabo_req_state=" + collabo_req_state
-				+ ", collabo_req_ID=" + collabo_req_ID + "]";
+				+ ", collabo_req_ID=" + collabo_req_ID + ", collabo_req_filesrc=" + collabo_req_filesrc + ", files="
+				+ files + "]";
 	}
+	
+	
+	
 	
 	
 	

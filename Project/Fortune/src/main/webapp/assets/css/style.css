@@ -133,7 +133,7 @@ color:#c0c0c0
     padding-bottom: 60px;
 }
 
-.section-container-gray { background: #ff0080; }
+.section-container-gray {    background: rgba(221, 221, 221, 0.33); }
 
 .section-container-full-bg, 
 .section-container-full-bg h1, 

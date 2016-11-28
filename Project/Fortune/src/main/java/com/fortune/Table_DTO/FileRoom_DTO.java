@@ -11,7 +11,9 @@ public class FileRoom_DTO {
 	private String user_id;				//올린이
 	private Date file_room_date;		//올린 날짜
 	private String file_room_name;		//파일명
-	private String file_room_ext;		//확장자명
+	private String file_room_rename;	//새파일명
+	private String file_room_ext;		//확장자명 
+	private String file_room_cutname;	//파일명 자르기
 	
 	///////////////////////////////////////////////
 	private MultipartFile file;			//파일 업로드
@@ -23,7 +25,18 @@ public class FileRoom_DTO {
 		this.file = file;
 	}
 	///////////////////////////////////////////////
-	
+	public String getFile_room_cutname() {
+		return file_room_cutname;
+	}
+	public void setFile_room_cutname(String file_room_cutname) {
+		this.file_room_cutname = file_room_cutname;
+	}
+	public String getFile_room_rename() {
+		return file_room_rename;
+	}
+	public void setFile_room_rename(String file_room_rename) {
+		this.file_room_rename = file_room_rename;
+	}
 	public int getFile_room_no() {
 		return file_room_no;
 	}

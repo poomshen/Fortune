@@ -6,15 +6,25 @@
 
 
 
+<!-- 일정의 참가한 팀원 가져오기 위해 팀목록 불러오는 쿼리  -->
+<select id="selectTeam_id" resultType="String">
+	select u.user_id, u.team_no from users u join team t
+	on u.team_no = t.team_no
+	where u.team_no = (select team_no from users where user_id = #{user_id})
+</select>
+
+
+
+
 <!-- 일정(일반업무)등록 -1 -->
 <insert id="insertSchedule">
-<!-- schedule 테이블 insert // COLLABO_NO는 임의로 1로 넣음 -->
+<!-- schedule 테이블 insert -->
 INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
-    VALUES((select nvl(max(schedule_no)+1,1) from schedule), 1, #{schedule_start}, #{schedule_end})
+    VALUES((select nvl(max(schedule_no)+1,1) from schedule), #{collabo_no}, #{schedule_start}, #{schedule_end})
 </insert>
 <!-- 일정(일반업무)등록 -2 -->
 <insert id="insertWork">
-<!-- work 테이블 insert // WORK_NO는 임의로 1로 넣음 -->
+<!-- work 테이블 insert -->
 INSERT INTO work(SCHEDULE_NO, WORK_TITLE, WORK_TEXT)
     VALUES((select max(schedule_no) from schedule), #{work_title}, #{work_text})
 </insert>
@@ -35,10 +45,9 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 	SELECT S.SCHEDULE_NO, SCHEDULE_START, SCHEDULE_END, WORK_TITLE, WORK_TEXT FROM 
 	SCHEDULE S JOIN WORK W 
 	ON S.SCHEDULE_NO = W.SCHEDULE_NO 
-	WHERE S.COLLABO_NO = 1
+	WHERE S.COLLABO_NO = #{collabo_no}
 	ORDER BY SCHEDULE_START
 </select>
-
 <!-- 일정마다 참가자 select -2 -->
 <select id="selectWUList" resultType="com.fortune.Table_DTO.Work_Users_DTO">
 	select user_id, wu.schedule_no from
@@ -46,7 +55,7 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 	on wu.SCHEDULE_NO = w.SCHEDULE_NO
 	join schedule s
 	on w.schedule_no = s.schedule_no
-	where s.collabo_no = 1
+	where s.collabo_no = #{collabo_no}
 </select>
 
 
@@ -62,6 +71,7 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 
 
 
+
 <!-- 일정 delete 작업 -1 -->
 <delete id="deleteWork">
 	delete from work where schedule_no = #{id}
@@ -70,6 +80,15 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 <delete id="deleteSchedule">
 	delete from schedule where schedule_no = #{id}
 </delete>
+<!-- 일정 delete 작업 -3 -->
+<delete id="deleteWork_Users">
+	delete from work_users where schedule_no =#{id}
+</delete>
+<!-- 일정 delete 작업 -4 -->
+<delete id="deleteWork_Comment">
+	delete from work_comment where schedule_no =#{id}
+</delete>
+
 
 
 
@@ -88,6 +107,37 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 	UPDATE schedule SET schedule_start = #{schedule_start}, schedule_end = #{schedule_end}
 	WHERE SCHEDULE_NO = #{schedule_no}
 </update>
+
+
+
+
+<!-- 일정 상세보기의 comment select하기 -->
+<select id="selectComment" resultType="com.fortune.Table_DTO.Work_Comment_DTO">
+	select * from work_comment where schedule_no = #{id} order by work_comment_date desc
+</select>
+
+
+
+
+
+<!-- comment insert하기 -1 -->
+<insert id="insertComment">
+	insert into work_comment(work_comment_no , user_id , work_comment_text , work_comment_date , schedule_no)
+	values((select nvl(max(work_comment_no +1),1) from work_comment), #{user_id}, #{work_comment_text}, sysdate, #{schedule_no})
+</insert>
+<!-- comment insert하기 -2 (insert 후 1건 select) -->
+<select id="selectComment1" resultType="com.fortune.Table_DTO.Work_Comment_DTO">
+	select * from work_comment where work_comment_no = (select max(work_comment_no) from work_comment)
+</select>
+
+
+
+
+
+<delete id="deleteComment">
+	delete from work_comment where work_comment_no = #{work_comment_no}
+</delete>
+
 
 
 
