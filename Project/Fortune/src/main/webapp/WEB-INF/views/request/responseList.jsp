@@ -8,97 +8,134 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<!-- 성준 추가 UI  -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> de07f3b763c22d435349a8fee9f4633c111284b9
 <script type="text/javascript">
-     function proAjaxManager(a){
-    	 
-  	
-   	 $.ajax({
-   		 
- 			type: "get",
- 			url:  "insertmanager.htm",
- 			cache: false,				
- 			data:"collabo_req_index="+a,
- 		    success:function(data){ //callback  
- 		    	
- 		    	$('#menuView').empty();
- 		    
-				$("#menuView").append($('#menuView').html(data)); 
- 		      
- 		     },
- 			error: function(){						
- 				alert('Error while request..'	);
- 			}
- 		});
-		 
-	 }  
-</script>
+	function proAjaxManager(a) {
+		$.ajax({
+			type : "get",
+			url : "insertmanager.htm",
+			cache : false,
+			data : "collabo_req_index=" + a,
+			success : function(data) { //callback  
 
+				$('#menuView').empty();
+
+				$("#menuView").append($('#menuView').html(data));
+
+			},
+			error : function() {
+				alert('Error while request..');
+			}
+		});
+
+	}
+	
+	function detailReqCollabo(a){
+		
+		$("#menuView").empty();
+	  	
+	   	 $.ajax({
+	   		 
+	 			type: "get",
+	 			url:  "ProDetail.htm",
+	 			cache: false,				
+	 			data:"collabo_req_index="+a,
+	 		    success:function(data){ //callback  
+					$("#ReqCollabo").append($('#ReqCollabo').html(data)); 
+	 		      
+	 		     },
+	 			error: function(){						
+	 				alert('Error while request..'	);
+	 			}
+	 		});
+	}
+</script>
+<style type="text/css">
+#pageside {
+	width: 55%;
+	float: left;
+}
+#ajaxside{
+	width: 400px;
+	float: left;
+	margin-left: 1%;
+}
+</style>
 
 <title>Insert title here</title>
 </head>
 <body>
-	<table class="article-list margin-small">
-		<caption class="hidden">공지사항</caption>
-		<thead>
-			<tr>
-				<th class="collabo_no">협업번호</th>
-				<th class="collabo_req_index">협업구분자</th>
-				<th class="collabo_req_no">요청번호</th>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">[협업 목록]</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<div id="pageside">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">협업 리스트</div>
+					<!-- 검색폼 추가 -->
+					<div>
+						<c:forEach items="${list}" var="n">
+							<div class="w3-card-2"
+								style="width: 98%; margin-top: 1%; margin-left: 1%; margin-bottom: 1%;">
+								<header class="w3-container "> 번호: ${n.collabo_no} 기간:
+								${n.collabo_start} ~ ${n.collabo_end}
+								<h1>프로젝트 제목</h1>
+								부장 ${n.collabo_req_ID} 팀장 : <security:authorize
+									access="hasAnyRole('ROLE_SUPERMGR')">
+									<c:choose>
+										<c:when test="${n.user_ID  == null}">
+											<a data-toggle="modal" data-target="#myModal"
+												class="btn btn-default btn-md"
+												onclick="proAjaxManager(${n.collabo_req_index})">담당</a>
+										</c:when>
+										<c:otherwise>
+											<a data-toggle="modal" data-target="#myModal"
+												class="btn btn-default btn-md"
+												onclick="proAjaxManager(${n.collabo_req_index})">담당</a>
+										</c:otherwise>
+									</c:choose>
+								</security:authorize> ${n.user_ID} </header>
+
+								<div class="w3-container">
+									<p> <input type="button" onclick="detailReqCollabo(${n.collabo_req_index})" value="상세보기"> </p>
+								</div>
+
+								<footer class="w3-container "> <a
+									href="schedule.htm?collabo_no=${n.collabo_no}"><button>일정</button></a>
+								<h5>${n.collabo_state}</h5>
+								</footer>
+							</div>
+							<!-- 여기에서 CSS 제공 -->
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div  id="ajaxside">
+		<div class="panel panel-default">
+			<div class="panel-heading">협업 리스트</div>
+			<!-- 검색폼 추가 -->
+			<div id="ReqCollabo"></div>
+		</div>
+	</div>
 
 
-				<th class="user_ID">협업담당자</th>
 
-				<th class="collabo_start">시작일</th>
-				<th class="collabo_end">마지막일</th>
-				<th class="collabo_state">진행 상태</th>
-				<th class="collabo_req_id">협업수락자</th>
-				<th class="collabo_cal">일정</th>
-
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${list}" var="n">
-				<!-- 여기에서 CSS 제공 -->
-				<tr class="alert alert-warning" height="70" >
-
-
-					<td class="collabo_no">${n.collabo_no}</td>
-					<td class="collabo_req_index">${n.collabo_req_index}</td>
-					<td class="collabo_req_no">${n.collabo_req_no}</td>
-					<td class="user_ID"><security:authorize
-							access="hasAnyRole('ROLE_SUPERMGR')">
-							<c:choose>
-								<c:when test="${n.user_ID  == null}">
-									<a data-toggle="modal" data-target="#myModal" class="btn btn-default btn-md" 
-										onclick="proAjaxManager(${n.collabo_req_index})">담당</a>
-								</c:when>
-								<c:otherwise>
-									<a data-toggle="modal" data-target="#myModal" class="btn btn-default btn-md"
-										onclick="proAjaxManager(${n.collabo_req_index})">담당</a>
-								</c:otherwise>
-							</c:choose>
-						</security:authorize> ${n.user_ID}</td>
-
-					<td class="collabo_start">${n.collabo_start}</td>
-					<td class="collabo_end">${n.collabo_end}</td>
-					<td class="collabo_req_state">${n.collabo_state}</td>
-					<td class="collabo_req_id">${n.collabo_req_ID}</td>
-					<td class="collabo_cal"><a href="schedule.htm?collabo_no=${n.collabo_no}"><button>Click</button></a></td>
-					
-					
-				</tr>	
-			</c:forEach>
-
-
-
-
-
-		</tbody>
-	</table>
 	<div class="container">
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog">
@@ -126,6 +163,5 @@
 
 
 	<a href="responseList.htm">리스트</a>
-
 </body>
 </html>

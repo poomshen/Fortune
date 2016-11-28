@@ -24,60 +24,6 @@
 <link rel="stylesheet" href="assets/css/hover.css">
 </head>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-<script>
-var wsocket;
-var msg 
-function connect() {
-	/* alert("소켓연결!"); */
-	
-	wsocket = new WebSocket("ws://sasystem.iptime.org:8081/Fortune/chat-ws.htm");
-	wsocket.onopen = onOpen;
-	wsocket.onmessage = onMessage;
-	wsocket.onclose = onClose;
-
-}
-function disconnect() {
-	wsocket.close();
-}
-function onOpen(evt) {
-	
-	appendMessage("연결되었습니다.");
-}
-function onMessage(evt) {
-
-	alert("메세지"+evt.data);
-}
-function onClose(evt) {
-	appendMessage("연결을 끊었습니다.");
-}
-
-function send(selectId) {
-/* 	var selectId="sungjun@gmail.com/mclee@gmail.com"; */
-	console.log(msg);
-	wsocket.send(selectId);
-	
-}
-
-function appendMessage(msg) {
-	console.log(msg);
-
-}
-
-
-	
-$(document).ready(function() {
-		connect();
-		$("#alarmList li").click(function() {
-		    alert(this.id); 
-		    
-		    window.location.href = "alarmCheck.htm?work_type="+this.id;
-		});
-
-});
-
-
-
-</script>
 
 <body>
 

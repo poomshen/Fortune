@@ -1,6 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+   request.setCharacterEncoding("UTF-8");
+%>
+
+<script>
+var wsocket;
+var msg 
+function connect() {
+	/* alert("소켓연결!"); */
+	
+	wsocket = new WebSocket("ws://192.168.0.3:8090/fortune/chat-ws.htm");
+	wsocket.onopen = onOpen;
+	wsocket.onmessage = onMessage;
+	wsocket.onclose = onClose;
+
+}
+function disconnect() {
+	wsocket.close();
+}
+function onOpen(evt) {
+	
+	appendMessage("연결되었습니다.");
+}
+function onMessage(evt) {
+
+	console.log("evt.data"+evt.data);
+	  $.ajax({
+		  
+		  type:"post",
+		  dataType: "html",
+		  url:"newAlarm.htm",
+		  data:{"newAlarm": evt.data},
+		  success:function(data){
+		  
+			  
+			  console.log("성공");
+			  
+			  $('#alarm').empty();
+			  
+			  $('#alarm').html(data);
+			 
+			  
+			 
+		
+		  }
+	  });	
+	
+
+}
+function onClose(evt) {
+	appendMessage("연결을 끊었습니다.");
+}
+
+function send(selectId) {
+/* 	var selectId="sungjun@gmail.com/mclee@gmail.com"; */
+	console.log("보낼 메세지:"+selectId);
+	wsocket.send(selectId);
+	
+}
+
+function appendMessage(msg) {
+	console.log(msg);
+
+}
+
+
+	
+$(document).ready(function() {
+		connect();
+		
+		$("#alarmList li").click(function() {
+		    alert(this.id); 
+		    
+		    window.location.href = "alarmCheck.htm?work_type="+this.id;
+		});
+
+});
+
+
+
+</script>
+
+
+  
   <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; border-color:#f8f8f8; background-color:rgba(248,248,248,0); box-shadow: 2px 2px 5px hsla(0,0%,0%,0.58);">
             <div class="navbar-header">

@@ -27,6 +27,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	      log("접속 성공" + session.getId() + "웹소켓 세션 아이디");
 	      String userid = (String) session.getAttributes().get("userId");
 
+	      System.out.println("userID"+userid);
+	      
 	      users.put(userid, session);
 	      ids.put(session.getId(), userid);
 		
@@ -47,33 +49,62 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(
 			WebSocketSession session, TextMessage message) throws Exception {
 	     
-		
-		
-	      
+		System.out.println("---------------------------------");
+	
+		 String[] selectedId ={};
+		 String[] selectedCount={};
+		  System.out.println("받은 메세지 : "+message.getPayload());
 		  
-		  String[] id_count_type = message.getPayload().split(",");
-	      String[] selectedId=id_count_type[0].split("/");
-	      String[] selectedCount=id_count_type[1].split("/");
+		  String msg = message.getPayload();
+		  
+		  if(msg.contains(",")){
+			  
+			  
+			  String[] id_count_type = msg.split(",");
+			  
+			  selectedId=id_count_type[0].split("/");
+			  selectedCount=id_count_type[1].split("/");
+			  
+			   
+		        for (WebSocketSession s : users.values()) {          
+		           for(int i =0; i < selectedId.length; i++){
+		        	   System.out.println("--------선택받은사람-----------");
+		        	   System.out.println("아이디>"+selectedId[i]+"<");
+		        	   
+		        	   System.out.println("---------------------");
+		              if( ids.get(s.getId()).equals(selectedId[i]) ){
+		                 System.out.println(selectedId[i]);
+		                 s.sendMessage(new TextMessage("알림 발생") );
+		              }
+		           }
+		           
+		       
+		        }
+			  
+		  }else{
+		        
+		        for (WebSocketSession s : users.values()) {          
+			       
+			        	   System.out.println("--------선택받은사람-----------");
+			        	   System.out.println("아이디>"+msg+"<");
+			        	   
+			        	   System.out.println("---------------------");
+			              if( ids.get(s.getId()).equals(msg) ){
+			                 System.out.println(msg);
+			                 s.sendMessage(new TextMessage("알림 발생") );
+			              
+			           }
+			           
+			       
+			        }
+			
+	
 	     
-	      
+		  }
 
 	       
-	       
-	        for (WebSocketSession s : users.values()) {          
-	           for(int i =0; i < selectedId.length; i++){
-	        	   System.out.println("--------선택받은사람-----------");
-	        	   System.out.println("아이디>"+selectedId[i]+"<");
-	        	   System.out.println("메세지 건수>"+selectedCount[i]+"<");
-	        	   System.out.println("---------------------");
-	              if( ids.get(s.getId()).equals(selectedId[i]) ){
-	                 System.out.println(selectedId[i]);
-	                 s.sendMessage(new TextMessage(id_count_type[2]+"/"+selectedCount[i]+"건 알림 발생") );
-	              }
-	           }
-	           
-	       
-	        }
-		
+	    
+	
 		
 		
 	}
