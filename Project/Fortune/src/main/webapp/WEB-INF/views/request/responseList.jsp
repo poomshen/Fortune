@@ -14,6 +14,10 @@
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> de07f3b763c22d435349a8fee9f4633c111284b9
 <script type="text/javascript">
 	function proAjaxManager(a) {
 		$.ajax({

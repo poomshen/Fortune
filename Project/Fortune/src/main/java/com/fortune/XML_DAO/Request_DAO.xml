@@ -64,13 +64,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE collabo_req_index=#{collabo_req_index}
 	</update>
 
-	<update id="refuse">
+	<update id="refuse" parameterType="com.fortune.Table_DTO.Request_DTO">
 		UPDATE collabo_req SET
-		collabo_req_state='거절'
-		WHERE collabo_req_index=#{collabo_req_index}
+		collabo_req_state='거절',
+		collabo_req_text=${param1}
+		WHERE collabo_req_index=${param2}
 
 	</update>
 
+	
 
 	<update id="update" parameterType="com.fortune.Table_DTO.Request_DTO">
 
