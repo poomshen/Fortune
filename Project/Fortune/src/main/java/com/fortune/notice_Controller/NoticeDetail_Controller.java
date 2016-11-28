@@ -24,14 +24,20 @@ public class NoticeDetail_Controller {
 
 	// 공지사항글 상세보기
 	@RequestMapping("noticeDetail.htm")
-	public String noticeDetail(int notice_no, Model model){
+	public String noticeDetail(int notice_no){
 
 		System.out.println("NoticeController의 noticeDetail을 탑니다~");
-
-		INotice noticeDao = sqlSession.getMapper(INotice.class);
-		Notice_DTO noticeDetail = noticeDao.detailNotice(notice_no);
+		
+		/*INotice noticeDetailDao = sqlSession.getMapper(INotice.class);
+		Notice_DTO noticeDetail = noticeDetailDao.detailNotice(notice_no);
+		noticeDetailDao.updateHits(notice_no);
 		model.addAttribute("noticeDetail", noticeDetail);
-
+*/
+		
+		INotice noticeDetailDao = sqlSession.getMapper(INotice.class);
+		Notice_DTO noticeDetail = noticeDetailDao.detailNotice(notice_no);
+		//Notice_DTO noticeDetail2 = noticeDetailDao.updateHits(notice_no);
+		
 		return "notice.noticeDetail";
 	}
 

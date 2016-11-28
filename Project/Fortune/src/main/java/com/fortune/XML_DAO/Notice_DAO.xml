@@ -3,57 +3,73 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mappier.dtd">
 <mapper namespace="com.fortune.notice_DAO.INotice">
-	
-	<!-- 게시물 개수  -->
-	<select id="countNotice" resultType="Integer">	
+
+	<!-- 게시물 개수 -->
+	<select id="countNotice" resultType="Integer">
 		SELECT COUNT(*) FROM NOTICE
 	</select>
-	
-	<!-- 전체 게시물  -->
-	<select id="listNotice" parameterType="integer" resultType="com.fortune.Table_DTO.Notice_DTO">
-		select * from (select rownum num, n.* from (select * from notice order by notice_no desc) n)
-		 where num between 1 + (#{page} - 1) * 10 and 10 + (#{page} - 1) * 10
+
+	<!-- 전체 게시물 -->
+	<select id="listNotice" parameterType="integer"
+		resultType="com.fortune.Table_DTO.Notice_DTO">
+		select * from (select rownum num, n.* from (select * from
+		notice order by notice_no desc) n)
+		where num between 1 + (#{page} - 1) * 10 and 10 + (#{page} - 1) * 10
 	</select>
-	
+
 	<!-- 게시물 삭제 -->
-	<delete id="deleteNotice">	
-	 	DELETE NOTICE WHERE NOTICE_NO=#{notice_no}
+	<delete id="deleteNotice">
+		DELETE NOTICE WHERE NOTICE_NO=#{notice_no}
 	</delete>
-	
+
 	<!-- 게시물 수정 -->
-	<update id="updateNotice" >
-	UPDATE NOTICE 
-	SET NOTICE_TITLE=#{notice_title}, 
-	    NOTICE_TEXT=#{notice_text} 
-	WHERE NOTICE_NO=#{notice_no}
+	<update id="updateNotice">
+		UPDATE NOTICE
+		SET NOTICE_TITLE=#{notice_title},
+		NOTICE_TEXT=#{notice_text}
+		WHERE NOTICE_NO=#{notice_no}
 	</update>
-	
+
 	<!-- 게시물 상세 -->
 	<select id="detailNotice" resultType="com.fortune.Table_DTO.Notice_DTO">
-     	SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_no}
+		SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_no}
 	</select>
 
 	<!-- 게시물 입력 -->
-	<insert id="insertNotice">	
-		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT, NOTICE_HITS, NOTICE_DATE, NOTICE_FILENAME_ORG, NOTICE_FILENAME_RE, NOTICE_FILEEXT)
-	    VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE, #{notice_filename_org}, #{notice_filename_re}, #{notice_fileext})
+	<insert id="insertNotice">
+		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT,
+		NOTICE_HITS, NOTICE_DATE, NOTICE_FILENAME_ORG, NOTICE_FILENAME_RE,
+		NOTICE_FILEEXT)
+		VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE,
+		#{notice_filename_org}, #{notice_filename_re}, #{notice_fileext})
 	</insert>
-	
+
 	<!-- 파일다운로드 -->
 	<select id="fileDownloadNotice" resultType="com.fortune.Table_DTO.Notice_DTO">
-     	SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_no}
+		SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_no}
 	</select>
-	
+
 	<!-- 검색 -->
 	<select id="searchTitleListNotices" resultType="com.fortune.Table_DTO.Notice_DTO">
-		select * from (select rownum num, n.* from (select * from notice where notice_title like '%'||#{param1}||'%' order by notice_no desc) n)
-		 where num between 1 + (#{param2} - 1) * 10 and 10 + (#{param2} - 1) * 10
+		select * from
+		(select rownum num, n.* from (select * from notice where notice_title
+		like '%'||#{param1}||'%' order by notice_no desc) n)
+		where num between 1 + (#{param2} - 1) * 10 and 10 + (#{param2} - 1) * 10
 	</select>
-	
-	<select id="searchTextListNotices" parameterType="String" resultType="com.fortune.Table_DTO.Notice_DTO">
-		select * from notice where notice_text like '%'||#{searchvalue}||'%'
-	</select>
-	
 
-	
+	<select id="searchTextListNotices" parameterType="String"
+		resultType="com.fortune.Table_DTO.Notice_DTO">
+		select * from notice where notice_text like
+		'%'||#{searchvalue}||'%'
+	</select>
+
+	<!-- 조회수 -->
+	<update id="updateHits" parameterType="integer"
+		resultType="com.fortune.Table_DTO.Notice_DTO">	
+		UPDATE NOTICE
+         SET
+            NOTICE_HITS = NVL(NOTICE_HITS, 0) + 1
+         WHERE
+            NOTICE_NO = #{NOTICE_NO}
+	</update>
 </mapper>

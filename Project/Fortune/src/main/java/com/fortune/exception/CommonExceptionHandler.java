@@ -1,12 +1,5 @@
 package com.fortune.exception;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
-import javax.servlet.ServletException;
-
-import org.apache.tiles.impl.CannotRenderException;
-import org.apache.tiles.util.TilesIOException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -19,7 +12,7 @@ public class CommonExceptionHandler {
 		return "error.CommonException";
 	}
 	
-	@ExceptionHandler(IOException.class)
+	/*@ExceptionHandler(IOException.class)
 	public String handleIOException() {
 		System.out.println("IOException발생!!!!!!!!!!");
 		return "error.IOException";
@@ -54,5 +47,11 @@ public class CommonExceptionHandler {
 		System.out.println("SQLException발생!!!!!!!!!!");
 		return "error.SQLException";
 	}
+	
+	@ExceptionHandler(NestedIOException.class)
+	public String handleNestedIOException() {
+		System.out.println("NestedIOException발생!!!!!!!!!!");
+		return "error.NestedIOException";
+	}*/
 	
 }
