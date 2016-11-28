@@ -42,11 +42,13 @@ $(document).ready(function() {
 			loadCalendar();
 		}
 	});
+	
 });
 
 function detail(id, title, text, start, end, userids){
 	//온클릭 함수에 가져올 데이터들
 	$('#content').empty();
+	$('#comment_text').empty();
 	$('#content_detail').css("display", "block");
  	$('#detail_id').val(id);
 	$('#detail_title').val(title);
@@ -66,31 +68,30 @@ function detail(id, title, text, start, end, userids){
  	
  	
  	//상세보기 내용에 comment 뿌려주는 내용
-	var comment_text = "";
  	$.ajax({
 		url : 'select_comment.ajax',
 		type : 'post',
 		data : 'schedule_no='+ id,
 		success : function(data) {
-			console.log(data)
+			var comment_text = "";
  			$.each(data, function(index, obj) {
  				if(index%2==0){
  					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
- 					comment_text += '<input type="button" value="수정"><br><button type="button" value="'+obj.work_comment_no;
- 					comment_text += '">삭제</span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
  					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
  					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
  					comment_text += obj.work_comment_text+'</p></div></li>';
  				}else{
  					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
- 					comment_text += '<input type="button" value="수정"><br><button type="button" value="'+obj.work_comment_no;
- 					comment_text += '">삭제</span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
  					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
  					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
  					comment_text += obj.work_comment_text+'</p></div></li>'
  				}
- 				$('#comment_text').html(comment_text);
 			});
+ 			$('#comment_text').html(comment_text);
 		}
 	});
  	
@@ -114,7 +115,7 @@ function work_updateok(){
 	
 }
 
-//댓글 등록 버튼 클릭시 insert 작업
+//comment 등록 버튼 클릭시 insert 작업
 function insert_comment(){
  	$.ajax({
 		url : 'insert_comment.ajax',
@@ -123,180 +124,71 @@ function insert_comment(){
 				"work_comment_text" : $('#comment_textarea').val()
 				},
 		success : function(data) {
+			var comment_text = "";
 			console.log('comment 등록 성공')
+ 			$.each(data, function(index, obj) {
+ 				if(index%2==0){
+ 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
+ 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>';
+ 				}else{
+ 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+ 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>'
+ 				}
+			});
+			$('#comment_text').html(comment_text);
+			$('#comment_textarea').val("");
 		}
 	});
 }
 
+//comment 삭제버튼 클릭시 delete 작업
+function delete_comment(commend_id){
+ 	$.ajax({
+		url : 'delete_comment.ajax',
+		type : 'post',
+		data : {"schedule_no" : $('#detail_id').val(),
+				"work_comment_no" : commend_id},
+		success : function(data) {
+			var comment_text = "";
+			console.log(' cocmment 삭제 성공')
+ 			$.each(data, function(index, obj) {
+ 				if(index%2==0){
+ 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
+ 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>';
+ 				}else{
+ 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
+ 					comment_text += '<button type="button" ';
+ 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+ 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
+ 					comment_text += obj.work_comment_text+'</p></div></li>'
+ 				}
+			});
+			$('#comment_text').html(comment_text);
+		}
+	});
+}
 
 </script>
 
 
-<style>
- body {
-	margin: 0px 0px;
-	padding: 0;
-	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
-	font-size: 14px;
-}
- 
-#calendar {
-	width: 100%;
-	height: 100%;
-	margin: 0 auto;
-}
-
-div{
-	padding-left: 0px;
-	padding-right: 5px;
-}
-
-input:read-only {
-    background-color: rgb(234,234,234);
-}
-textarea:read-only{
-	background-color: rgb(234,234,234);
-}
-
-.nav-tabs {
-    margin-bottom: 15px;
-}
-.sign-with {
-    margin-top: 25px;
-    padding: 20px;
-}
-div#OR {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    font-weight: bold;
-    line-height: 28px;
-    text-align: center;
-    font-size: 12px;
-    float: right;
-    position: absolute;
-    right: -16px;
-    top: 40%;
-    z-index: 1;
-    background: #DFDFDF;
-}
-
-.dropdown_s {
-  position: absolute;
-  top:50%;
-  transform: translateY(-50%);
-}
-
-a {
-  color: #ddd;
-}
-
-.dropdown_s dd,
-.dropdown_s dt {
-  margin: 0px;
-  padding: 0px;
-}
-
-.dropdown_s ul {
-  margin: -1px 0 0 0;
-}
-
-.dropdown_s dd {
-  position: relative;
-}
-
-.dropdown_s a,
-.dropdown_s a:visited {
-  color: #fff;
-  text-decoration: none;
-  outline: none;
-  font-size: 12px;
-}
-
-.dropdown_s dt a {
-  background-color: #ddd;
-  display: block;
-  padding: 8px 20px 5px 10px;
-  min-height: 25px;
-  line-height: 24px;
-  overflow: hidden;
-  border: 0;
-  width: 272px;
-}
-
-.dropdown_s dt a span,
-.multiSel span {
-  cursor: pointer;
-  display: inline-block;
-  padding: 0 3px 2px 0;
-}
-
-.dropdown_s dd ul {
-  background-color: #ddd;
-  border: 0;
-  color: #fff;
-  display: none;
-  left: 0px;
-  padding: 2px 15px 2px 5px;
-  position: absolute;
-  top: 2px;
-  width: 280px;
-  list-style: none;
-  height: 100px;
-  overflow: auto;
-}
-
-.dropdown_s span.value {
-  display: none;
-}
-
-.dropdown_s dd ul li a {
-  padding: 5px;
-  display: block;
-}
-
-.dropdown_s dd ul li a:hover {
-  background-color: #fff;
-}
-
-
-.box {
-
-	text-align:center;
-	position:relative;
-	top:50%;
-}
-
-.effect2
-{
-  position: relative;
-}
-.effect2:before, .effect2:after
-{
-  z-index: -1;
-  position: absolute;
-  content: "";
-  bottom: 15px;
-  left: 10px;
-  width: 50%;
-  top: 80%;
-  max-width:300px;
-  background: #777;
-  box-shadow: 0 15px 10px #777;
-  transform: rotate(-3deg);
-}
-.effect2:after
-{
-  transform: rotate(3deg);
-  right: 10px;
-  left: auto;
-}
-
-
-</style>
 </head>
 <body>
 <input type="hidden" id="collabo_no" value="${collabo_no}">
+<input type="hidden" id="modal_start">
+<input type="hidden" id="modal_end">
 
 	<br>
 	<br>
@@ -310,10 +202,8 @@ a {
 
 
 
-<input type="hidden" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modal_btn" >
-
 <input type="hidden" class="btn btn-primary" id="modal_btn" data-toggle="modal" data-target="#myModal">
-    Login modal</button>
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" style="height:500px">
@@ -352,7 +242,7 @@ a {
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="submit" class="btn hvr-forward"">
+                                        <button type="button" class="btn hvr-forward" id="modal_ok">
                                             업무등록</button>
                                         
                                     </div>
@@ -364,20 +254,20 @@ a {
                                 <div class="form-group">
                                     <label for="title" class="col-sm-2 control-label">일정제목</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="modal_title" placeholder="제목.." />
+                                        <input type="text" class="form-control" id="modal_title2" placeholder="제목.." />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="content" class="col-sm-2 control-label">내용</label>
                                     <div class="col-sm-10">
-                                    <textarea rows="5" cols="30" class="form-control" id="modal_text" placeholder="내용.." ></textarea><br>
+                                    <textarea rows="5" cols="30" class="form-control" id="modal_text2" placeholder="내용.." ></textarea><br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="submit" class="btn btn-primary btn-sm">
+                                        <button type="submit" class="btn btn-primary btn-sm" id="modal_ok2">
                                             업무등록</button>
                                         
                                     </div>
@@ -388,7 +278,7 @@ a {
                         <div id="OR" class="hidden-xs" style="color:#fff">
                               >></div>
                     </div>
-                    <div class="col-md-4" style="margin-top:50px">
+                    <div class="col-md-4" style="margin-top:57px">
  
 							<dl class="dropdown_s effect2" style="margin-top: 50px;margin-left: 5px;"> 
   
@@ -449,7 +339,8 @@ a {
 				<!-- panel-body -->
 				<div class="panel-body">
 					<!-- comment_text 내용추가 하는 영역 -->
-					<ul class="chat" id="comment_text">
+					<ul class="chat">
+					<div id="comment_text"></div>
 					</ul>
 				</div>
 				<!-- panel-footer -->

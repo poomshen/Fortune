@@ -30,6 +30,7 @@ ul a {
                                
                                 <li>
                                <a href="#"><i class="fa fa-bank"></i></i>협업요청 목록<span class="fa arrow"></span></a>
+
                                <ul class="nav nav-second-level">
                                    <li> <a href="listReplyRequest.htm">보낸요청 리스트</a></li>
                                    <li> <a href="requestList.htm">받은요청 리스트</a></li>

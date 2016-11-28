@@ -36,7 +36,7 @@ public interface IFullCalendar {
 	public Schedule_Work_DTO selectClick(String id) throws ClassNotFoundException, SQLException;
 	
 	//일정 상세보기의 comment내용 호출
-	public List<Work_Comment_DTO> selectComment(String id) throws ClassNotFoundException, SQLException;
+	public List<Work_Comment_DTO> selectComment(int id) throws ClassNotFoundException, SQLException;
 	
 	//일정상세의 comment 등록
 	public int insertComment(Work_Comment_DTO dto) throws ClassNotFoundException, SQLException;
@@ -44,6 +44,8 @@ public interface IFullCalendar {
 	//일정상세의 comment 등록 후 등록한것 select
 	public Work_Comment_DTO selectComment1() throws ClassNotFoundException, SQLException;
 	
+	//일정상세의 comment 삭제
+	public int deleteComment(int work_comment_no) throws ClassNotFoundException, SQLException;
 	
 	//일정에 참가한 팀원 id목록을 가져오는 함수
 	public String[] selectTeam_id(String user_id) throws ClassNotFoundException, SQLException;
