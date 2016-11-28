@@ -205,7 +205,7 @@ function loadCalendar() {
 	        //업데이트 함수
 	        updateEvent: {
 	            click: $('#updateok_btn').click(function(){
-	            	
+	            
 	            	var check = confirm('일정을 수정 하시겠습니까?');
 	            	if(check){
 	            		var id = $('#detail_id').val();
@@ -246,6 +246,8 @@ function loadCalendar() {
 	        //일정등록 함수
 	    	insertEvent: {
 	    		click: $('#modal_ok').click(function(){
+	    		
+	    			
 	    			var eventData;
 					var scheduleusers="";
 					var count=",";
@@ -298,6 +300,9 @@ function loadCalendar() {
 							send(scheduleusers+count+","+work_type);
 							
 							
+							$(".hida").show();
+			    			$('input[type="checkbox"]').prop("checked",false);
+			    			$('.multiSel').text("");
 						}
 					});
 				})
@@ -313,19 +318,31 @@ function loadCalendar() {
 		events: array
 	});
 	
+
+	
+	
+	//작업자 : 이예지 
+	//최종 수정일 : 2016/11/28
+	//select 되어지는 사람의 이름을 즉시 보여주는 함수
+	
 	$(".dropdown_s dt a").on('click', function() {
+	
 		  $(".dropdown_s dd ul").slideToggle('fast');
+		
 		});
 
 		$(".dropdown_s dd ul li a").on('click', function() {
+	
 		  $(".dropdown_s dd ul").hide();
 		});
 
 		function getSelectedValue(id) {
+	
 		  return $("#" + id).find("dt a span.value").html();
 		}
 
 		$(document).bind('click', function(e) {
+		
 		  var $clicked = $(e.target);
 		  if (!$clicked.parents().hasClass("dropdown_s")) $(".dropdown_s dd ul").hide();
 		});
@@ -336,10 +353,13 @@ function loadCalendar() {
 		    title = $(this).val() + ",";
 
 		  if ($(this).is(':checked')) {
+			 
 		    var html = '<span title="' + title + '">' + title + '</span>';
+		    
 		    $('.multiSel').append(html);
 		    $(".hida").hide();
 		  } else {
+		
 		    $('span[title="' + title + '"]').remove();
 		    var ret = $(".hida");
 		    $('.dropdown_s dt a').append(ret);

@@ -204,8 +204,7 @@ function delete_comment(commend_id){
 
 <input type="hidden" class="btn btn-primary" id="modal_btn" data-toggle="modal" data-target="#myModal">
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="height:500px">
         <div class="modal-content"style="height:500px">
             <div class="modal-header">
@@ -242,7 +241,7 @@ function delete_comment(commend_id){
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="button" class="btn hvr-forward" id="modal_ok">
+                                        <button type="button" data-dismiss="modal" class="btn hvr-forward" id="modal_ok">
                                             업무등록</button>
                                         
                                     </div>
@@ -267,7 +266,7 @@ function delete_comment(commend_id){
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="submit" class="btn btn-primary btn-sm" id="modal_ok2">
+                                        <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" id="modal_ok2">
                                             업무등록</button>
                                         
                                     </div>
@@ -278,14 +277,14 @@ function delete_comment(commend_id){
                         <div id="OR" class="hidden-xs" style="color:#fff">
                               >></div>
                     </div>
-                    <div class="col-md-4" style="margin-top:57px">
- 
+                     <div class="col-md-4" style="margin-top:57px">
+
 							<dl class="dropdown_s effect2" style="margin-top: 50px;margin-left: 5px;"> 
   
     <dt>
     <a href="#"style="margin-top:5px; height: 133px;padding-right: 0px;">
       <span class="hida box" style="width: 253px;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
-      <p class="multiSel"></p>  
+      <p class="multiSel"></p>
     </a>
     </dt>
   

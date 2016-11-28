@@ -1395,6 +1395,12 @@ be a descendant of the grid when it is being dragged.
 .fc-unthemed .fc-list-empty { /* theme will provide own background */
 	background-color: #eee;
 }
+
+/* 
+	작성자 : 이예지 
+	최종 수정일 : 2016/11/28
+	작업 내용 : 캘린더의 select box css와 효과 삽입
+ */
 body {
 	margin: 0px 0px;
 	padding: 0;
