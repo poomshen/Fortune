@@ -14,6 +14,7 @@
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+
 <script type="text/javascript">
 	function proAjaxManager(a) {
 		$.ajax({
@@ -112,6 +113,7 @@
 
 								<footer class="w3-container "> <a
 									href="schedule.htm?collabo_no=${n.collabo_no}"><button>일정</button></a>
+									<a href="mainfile.htm?collabo_no=${n.collabo_no}"><button>자료실</button></a>
 								<h5>${n.collabo_state}</h5>
 								</footer>
 							</div>

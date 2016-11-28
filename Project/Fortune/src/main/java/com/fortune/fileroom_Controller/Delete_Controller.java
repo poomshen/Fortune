@@ -64,10 +64,14 @@ public class Delete_Controller {
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		FileRoom_DTO fileroom_DTO = new FileRoom_DTO();
 		
+		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));
+		System.out.println("collabo_no : " + collabo_no);
+		
 		for(int i = 0; i < arrayParams.size(); i++){
 			String file_name = arrayParams.get(i);
 			System.out.println("file_name : " + file_name);
 			fileroom_DTO.setFile_room_rename(file_name);
+			fileroom_DTO.setCollabo_no(collabo_no);
 			fileromm_DAO.deleteFile(fileroom_DTO);
 			
 			String path = request.getServletContext().getRealPath("upload");
@@ -81,7 +85,7 @@ public class Delete_Controller {
 		int page = 1;
 		int row_size = 12;
 
-		int total_count = fileromm_DAO.countFile(); // file 개수
+		int total_count = fileromm_DAO.countFile(collabo_no); // file 개수
 		System.out.println("total_count : " + total_count);
 
 		// ... 목록
@@ -98,7 +102,7 @@ public class Delete_Controller {
 			to_page = all_page;
 		}
 		
-		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page);
+		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page, collabo_no);
 		result.put("file", list);
 		result.put("total_count", total_count);
 		result.put("pg", page);
@@ -106,7 +110,8 @@ public class Delete_Controller {
 		result.put("block", block);
 		result.put("from_page", from_page);
 		result.put("to_page", to_page);
-
+		result.put("collabo_no", collabo_no);
+		
 		return result;
 	}
 	
@@ -119,9 +124,13 @@ public class Delete_Controller {
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		FileRoom_DTO fileroom_DTO = new FileRoom_DTO();
 		
+		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));
+		System.out.println("collabo_no : " + collabo_no);
+		
 		String file_name = deletefilename;
 		System.out.println("file_name : " + file_name);
 		fileroom_DTO.setFile_room_rename(file_name);
+		fileroom_DTO.setCollabo_no(collabo_no);
 		fileromm_DAO.deleteFile(fileroom_DTO);
 			
 		String path = request.getServletContext().getRealPath("upload");
@@ -134,7 +143,7 @@ public class Delete_Controller {
 		int page = 1;
 		int row_size = 12;
 
-		int total_count = fileromm_DAO.countFile(); // file 개수
+		int total_count = fileromm_DAO.countFile(collabo_no); // file 개수
 		System.out.println("total_count : " + total_count);
 
 		// ... 목록
@@ -151,7 +160,7 @@ public class Delete_Controller {
 			to_page = all_page;
 		}
 		
-		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page);
+		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page, collabo_no);
 		result.put("file", list);
 		result.put("total_count", total_count);
 		result.put("pg", page);
@@ -159,7 +168,8 @@ public class Delete_Controller {
 		result.put("block", block);
 		result.put("from_page", from_page);
 		result.put("to_page", to_page);
-
+		result.put("collabo_no", collabo_no);
+		
 		return result;
 	}
 }
