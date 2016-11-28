@@ -6,13 +6,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileRoom_DTO {
 	private int file_room_no;			//자료실 번호
-	private int collabo_req_index;		//협업 구분자
-	private int collabo_req_no;			//요청 번호
+	private int collabo_no;				//협업 번호
 	private String user_id;				//올린이
 	private Date file_room_date;		//올린 날짜
 	private String file_room_name;		//파일명
 	private String file_room_rename;	//새파일명
 	private String file_room_ext;		//확장자명 
+	private String file_room_cutname;	//파일명 (...)표기
 	
 	///////////////////////////////////////////////
 	private MultipartFile file;			//파일 업로드
@@ -24,6 +24,18 @@ public class FileRoom_DTO {
 		this.file = file;
 	}
 	///////////////////////////////////////////////
+	public int getCollabo_no() {
+		return collabo_no;
+	}
+	public void setCollabo_no(int collabo_no) {
+		this.collabo_no = collabo_no;
+	}
+	public String getFile_room_cutname() {
+		return file_room_cutname;
+	}
+	public void setFile_room_cutname(String file_room_cutname) {
+		this.file_room_cutname = file_room_cutname;
+	}
 	public String getFile_room_rename() {
 		return file_room_rename;
 	}
@@ -36,18 +48,7 @@ public class FileRoom_DTO {
 	public void setFile_room_no(int file_room_no) {
 		this.file_room_no = file_room_no;
 	}
-	public int getCollabo_req_index() {
-		return collabo_req_index;
-	}
-	public void setCollabo_req_index(int collabo_req_index) {
-		this.collabo_req_index = collabo_req_index;
-	}
-	public int getCollabo_req_no() {
-		return collabo_req_no;
-	}
-	public void setCollabo_req_no(int collabo_req_no) {
-		this.collabo_req_no = collabo_req_no;
-	}
+	
 	public String getUser_id() {
 		return user_id;
 	}
@@ -74,8 +75,9 @@ public class FileRoom_DTO {
 	}
 	@Override
 	public String toString() {
-		return "FileRoom_DTO [file_room_no=" + file_room_no + ", collabo_req_index=" + collabo_req_index
-				+ ", collabo_req_no=" + collabo_req_no + ", user_id=" + user_id + ", file_room_date=" + file_room_date
-				+ ", file_room_name=" + file_room_name + ", file_room_ext=" + file_room_ext + "]";
+		return "FileRoom_DTO [file_room_no=" + file_room_no + ", collabo_no=" + collabo_no + ", user_id=" + user_id
+				+ ", file_room_date=" + file_room_date + ", file_room_name=" + file_room_name + ", file_room_rename="
+				+ file_room_rename + ", file_room_ext=" + file_room_ext + ", file_room_cutname=" + file_room_cutname
+				+ ", file=" + file + "]";
 	}
 }

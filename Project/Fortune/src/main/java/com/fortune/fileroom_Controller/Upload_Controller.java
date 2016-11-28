@@ -1,8 +1,6 @@
 package com.fortune.fileroom_Controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -34,6 +33,8 @@ public class Upload_Controller {
 		System.out.println("uploadFile 컨트롤러");
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		MultipartFile mf = request.getFile("file");
+		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));
+		System.out.println("collabo_no : " + collabo_no);
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		String file_name = mf.getOriginalFilename();
 		System.out.println("file_name : " + file_name);
@@ -61,7 +62,7 @@ public class Upload_Controller {
 		// 파일이름뒤에 a숫자.확장자 이렇게 들어가게 되는데 숫자는 9999까지 된다.
 		
 		
-		while (!overlapName(fileromm_DAO, file_new_name) && count < 9999) {
+		while (!overlapName(fileromm_DAO, file_new_name, collabo_no) && count < 9999) {
 			System.out.println("몇번 타냐 : " + count);
 			count++;
 			file_new_name = body + "("+count+")" + ext;
@@ -69,8 +70,11 @@ public class Upload_Controller {
 		////////////////////////////////////////////////////////////////////
 		System.out.println("file_new_name : " + file_new_name);
 		
+		String filenamecut = NoticeFile_Utils.getFixString(file_new_name, 12);
+		System.out.println("filenamecut : " + filenamecut);
+		
 		String upload_path = request.getSession().getServletContext().getRealPath("upload");
-		File file = new File(upload_path + "/" + storedFileName);		
+		File file = new File(upload_path + "/" + storedFileName);
 		
 		if (mf.getSize() != 0) {
 			mf.transferTo(file);
@@ -84,6 +88,8 @@ public class Upload_Controller {
 		fileroom_DTO.setFile_room_name(file_new_name);
 		fileroom_DTO.setFile_room_ext(originalFileExtension);
 		fileroom_DTO.setFile_room_rename(storedFileName);
+		fileroom_DTO.setFile_room_cutname(filenamecut);
+		fileroom_DTO.setCollabo_no(collabo_no);
 		fileromm_DAO.insertFile(fileroom_DTO);
 		
 		//View 화면에 뿌려주기 위한 list
@@ -95,7 +101,7 @@ public class Upload_Controller {
 		}
 		int row_size = 12;
 
-		int total_count = fileromm_DAO.countFile();	//file 개수
+		int total_count = fileromm_DAO.countFile(collabo_no);	//file 개수
 		System.out.println("totalcount : " + total_count);
 
 		// ... 목록
@@ -116,7 +122,7 @@ public class Upload_Controller {
 		System.out.println("from_page : " + from_page);
 		System.out.println("page : " + page);
 		
-		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page);
+		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page, collabo_no);
 		result.put("file", list);
 		result.put("total_count", total_count);
 		result.put("pg", page);
@@ -124,12 +130,13 @@ public class Upload_Controller {
 		result.put("block", block);
 		result.put("from_page", from_page);
 		result.put("to_page", to_page);
+		result.put("collabo_no", collabo_no);
 		
 		return result;
 	}
 	
-	public boolean overlapName(IFileRoom fileromm_DAO, String file_new_name){
-		int overlapname = fileromm_DAO.selectOverlapNameFile(file_new_name);
+	public boolean overlapName(IFileRoom fileromm_DAO, String file_new_name, int collabo_no){
+		int overlapname = fileromm_DAO.selectOverlapNameFile(file_new_name, collabo_no);
 		if(overlapname == 1){
 			return false;
 		}

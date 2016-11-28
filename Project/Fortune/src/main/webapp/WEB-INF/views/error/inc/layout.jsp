@@ -19,26 +19,8 @@
 <!-- Custom Fonts -->
 <link href="bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
-	 
-	
-	
-<link rel="stylesheet" href="assets/css/hover.css">
-
-<script src='fullcalendar/js/lib/jquery.min.js'></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-<link href='fullcalendar/css/fullcalendar.css' rel='stylesheet' />
-<link href='fullcalendar/css/fullcalendar.print.css' rel='stylesheet' media='print' />
-<link href='fullcalendar/css/jquery-ui.min.css' rel='stylesheet' />
-<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
-<script src='fullcalendar/js/lib/moment.min.js'></script>
-<script src='fullcalendar/js/fullcalendar.min.js'></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-<script src="fullcalendar/js/customcalendar.js" ></script>
-
-
 </head>
 <body>
-
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="aside" />
 	<!-- Page Content -->
@@ -56,13 +38,16 @@
 	</div>
 	<!-- /#page-wrapper -->
 
+	<!-- jQuery -->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
 	<!-- Bootstrap Core JavaScript -->
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
 	<!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
-	
 </body>
 </html>

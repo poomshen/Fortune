@@ -35,9 +35,9 @@ public class CommentController {
      * version : v1.0
     */
 	@RequestMapping(value="select_comment.ajax", method = RequestMethod.POST)
-    public @ResponseBody List<Work_Comment_DTO> select_Comment(@RequestParam(value="schedule_no") String schedule_no) 
+    public @ResponseBody List<Work_Comment_DTO> select_Comment(@RequestParam(value="schedule_no") int schedule_no) 
     		throws ClassNotFoundException, SQLException{
-        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 일정상세 화면의 select_comment 호출");        
+        System.out.println("위치 : CommentController // 작업자: 이명철 // 내용 : comment목록 select");        
         
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
         
@@ -59,10 +59,10 @@ public class CommentController {
      * version : v1.0
     */
 	@RequestMapping(value="insert_comment.ajax", method = RequestMethod.POST)
-	public @ResponseBody Work_Comment_DTO schedule(@RequestParam(value="schedule_no") int schedule_no, 
+	public @ResponseBody List<Work_Comment_DTO> insert_comment(@RequestParam(value="schedule_no") int schedule_no, 
 		   @RequestParam(value="work_comment_text") String work_comment_text, HttpSession session) 
 		   throws ClassNotFoundException, SQLException {
-		System.out.println("위치 : FullCalendarController // 내용 : DB에서 일정 가져옴 // 작업자: 이명철");
+		System.out.println("위치 : CommentController // 작업자: 이명철 // 내용 : comment목록 insert");
         
 		Join_DTO jdto = (Join_DTO) session.getAttribute("info");
 		
@@ -74,10 +74,37 @@ public class CommentController {
 	    IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
 	    
 	    fullcalendarDAO.insertComment(wcdto);
-	    wcdto = fullcalendarDAO.selectComment1();
+	    
+	    List<Work_Comment_DTO> wcdtolist = new ArrayList<Work_Comment_DTO>();
+	    wcdtolist = fullcalendarDAO.selectComment(schedule_no);
 
-		return wcdto;
+		return wcdtolist;
 	}
+	
+	
+	
+	
+	/* 작업자 : 이명철  // 최초 작업일 : 11.28 // 최종 작업일 : 11.28
+     * 작업 내용 : 일정상세 화면의 delete_comment 호출
+     * version : v1.0
+    */
+	@RequestMapping(value="delete_comment.ajax", method = RequestMethod.POST)
+    public @ResponseBody List<Work_Comment_DTO> delete_Comment(@RequestParam(value="work_comment_no") int work_comment_no,
+    		@RequestParam(value="schedule_no") int schedule_no) 
+    		throws ClassNotFoundException, SQLException{
+        System.out.println("위치 : CommentController // 작업자: 이명철 // 내용 : comment목록 delete");        
+        
+        IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+        
+        fullcalendarDAO.deleteComment(work_comment_no);
+        
+        List<Work_Comment_DTO> wcdtolist = new ArrayList<Work_Comment_DTO>();
+        wcdtolist = fullcalendarDAO.selectComment(schedule_no);
+        
+        return wcdtolist;
+	}
+	
+
 	
     
     

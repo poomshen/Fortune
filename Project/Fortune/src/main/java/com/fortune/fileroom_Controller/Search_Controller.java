@@ -27,9 +27,12 @@ public class Search_Controller {
 		String selectvalue = request.getParameter("selectvalue");
 		String searchvalue = request.getParameter("searchvalue");
 		String pg = request.getParameter("pg");
+		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));
+		
 		System.out.println("selectvalue : "+ selectvalue);
 		System.out.println("searchvalue : "+ searchvalue);
 		System.out.println("pg : "+ pg);
+		System.out.println("collabo_no : " + collabo_no);
 		
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		List<FileRoom_DTO> list = null;
@@ -43,13 +46,13 @@ public class Search_Controller {
 		
 		if(selectvalue.equals("file_room_name")){
 			System.out.println("file_room_name 문");
-			list = fileromm_DAO.searchNameListFiles(searchvalue, page);
-			total_count = fileromm_DAO.countSearchNameFile(searchvalue);
+			list = fileromm_DAO.searchNameListFiles(searchvalue, page, collabo_no);
+			total_count = fileromm_DAO.countSearchNameFile(searchvalue, collabo_no);
 		}
 		if(selectvalue.equals("file_room_date")){
 			System.out.println("file_room_date 문");
-			list = fileromm_DAO.searchDateListFiles(searchvalue, page);
-			total_count = fileromm_DAO.countSearchDateFile(searchvalue);
+			list = fileromm_DAO.searchDateListFiles(searchvalue, page, collabo_no);
+			total_count = fileromm_DAO.countSearchDateFile(searchvalue, collabo_no);
 		}
 		
 		//View 화면에 뿌려주기 위한 list
@@ -70,8 +73,6 @@ public class Search_Controller {
 			to_page = all_page;
 		}
 
-		//List<FileRoom_DTO> list = fileromm_DAO.listFiles(page);	//file 리스트
-		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);
 		mv.addObject("selectvalue", selectvalue);
@@ -82,6 +83,7 @@ public class Search_Controller {
 		mv.addObject("block", block);
 		mv.addObject("from_page", from_page);
 		mv.addObject("to_page", to_page);
+		mv.addObject("collabo_no", collabo_no);
 		mv.setViewName("fileView.file2");
 		
 		return mv;

@@ -58,9 +58,10 @@ function loadCalendar() {
 	    // 처리결과: start, end 값만 html에 기재하고, customBotton속성 함수에서 일정등록 코드 진행 + 재호출시 기존에 입력된 값 초기화 작업.
 	    	select: function(start, end) {
 			//모달 띄우는 함수
-			var test = $('#modal_btn').click();
-			$('#modal_title').val("");
-			$('#modal_text').val("");
+	    	
+	    	var test = $('#modal_btn').click();
+			$('#modal_title').val(""); $('#modal_title2').val("");
+			$('#modal_text').val(""); $('#modal_text2').val("");
 			$('#modal_start').val(start.format("YYYY-MM-DD"));
 			$('#modal_end').val(end.format("YYYY-MM-DD"))
 			
@@ -192,9 +193,9 @@ function loadCalendar() {
 							data: {"id" : id},
 							success : function(data) {
 								console.log("삭제성공");
+								fcontent();
 							}
 						});
-	            		fcontent();
 	            		
 	            	}
 
@@ -233,7 +234,6 @@ function loadCalendar() {
 						data: updateschedule,
 						success : function(data) {
 							console.log('업데이트 성공');
-							//fcontent();
 						}
 					});
             		
@@ -278,12 +278,10 @@ function loadCalendar() {
 									start: data.schedule.schedule_start,
 									end: data.schedule.schedule_end
 							}
-
-							
 							
 							calendar.fullCalendar('renderEvent', eventData , true);
-							console.log('insert 성공')
 							fcontent();
+							console.log('insert 성공')
 							
 							
 						      $.each(data.alarm, function (i, item) {

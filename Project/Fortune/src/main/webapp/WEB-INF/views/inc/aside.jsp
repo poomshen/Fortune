@@ -29,6 +29,7 @@ a {
                             	<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
                                
                                 <li>
+
                                <a href="#"><i class="fa fa-bank"></i></i>협업요청 목록<span class="fa arrow"></span></a>
 
                                <ul class="nav nav-second-level">

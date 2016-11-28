@@ -28,7 +28,7 @@ public class NoticeUpdate_Controller {
 
 	// 글 수정하기
 	@RequestMapping(value="noticeUpdate.htm", method=RequestMethod.GET)
-	public String noticeUpdate(int notice_no, Model model) throws ClassNotFoundException, SQLException {
+	public String noticeUpdate(int notice_no, Model model) {
 
 		System.out.println("NoticeController의 noticeUpdate를  GET방식으로 탑니다~");
 
@@ -42,7 +42,7 @@ public class NoticeUpdate_Controller {
 
 	// 게시판 실제 수정처리
 	@RequestMapping(value="noticeUpdate.htm", method=RequestMethod.POST)
-	public String noticeUpdate(Notice_DTO ndto) throws ClassNotFoundException, SQLException, IOException {
+	public String noticeUpdate(Notice_DTO ndto) {
 
 		System.out.println("NoticeController의 noticeUpdate를  POST방식으로 타서 실제수정 할꺼지롱~");
 		
