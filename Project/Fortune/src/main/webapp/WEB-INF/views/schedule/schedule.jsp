@@ -260,6 +260,38 @@ a {
 }
 
 
+.box {
+
+	text-align:center;
+	position:relative;
+	top:50%;
+}
+
+.effect2
+{
+  position: relative;
+}
+.effect2:before, .effect2:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  box-shadow: 0 15px 10px #777;
+  transform: rotate(-3deg);
+}
+.effect2:after
+{
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+
 
 </style>
 </head>
@@ -356,20 +388,20 @@ a {
                         <div id="OR" class="hidden-xs" style="color:#fff">
                               >></div>
                     </div>
-                    <div class="col-md-4">
-           						
-							<dl class="dropdown_s" style="margin-top: 50px;margin-left: 5px;"> 
+                    <div class="col-md-4" style="margin-top:50px">
+ 
+							<dl class="dropdown_s effect2" style="margin-top: 50px;margin-left: 5px;"> 
   
     <dt>
-    <a href="#"style="height: 43px;padding-right: 0px;">
-      <span class="hida" style="width: 253px;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
+    <a href="#"style="margin-top:5px; height: 133px;padding-right: 0px;">
+      <span class="hida box" style="width: 253px;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
       <p class="multiSel"></p>  
     </a>
     </dt>
   
     <dd>
-        <div class="mutliSelect">
-            <ul style="display: block;padding-right: 0px;height: 204px;width: 272px;">
+        <div class="mutliSelect effect2" >
+            <ul class="effect2" style="display: block;padding-right: 0px;height: 204px;width: 272px;">
         		<c:forEach items="${team_id}" var="obj" varStatus="status">
 					<li><input type="checkbox" value="${obj}" name='userchk'>${obj}</li>
 				</c:forEach>
