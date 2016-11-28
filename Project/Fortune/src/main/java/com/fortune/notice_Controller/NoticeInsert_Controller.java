@@ -3,7 +3,8 @@
 * @Date : 2016.11.21
 * @Author : 김지율
 * @Desc : 공지사항게시판 Insert Controller
-*/
+* */
+
 
 package com.fortune.notice_Controller;
 
@@ -34,20 +35,12 @@ public class NoticeInsert_Controller {
 	
 	//파일저장될위치 임시지정
 	private static final String filePath = "C:\\fortune\\noticefile\\";
-/*	String exceptionOccured = "ARITHMETIC_EXCEPTION";*/
+
 
 	// 공지사항등록 화면처리
 	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.GET)
 	public String noticeInsert() throws Exception {
 		System.out.println("NoticeController의 noticeInsert를 탑니다~");
-		
-/*		if (exceptionOccured.equalsIgnoreCase("NULL_POINTER")) {
-			throw new NullPointerException("Null Pointer Exception");
-		} else if (exceptionOccured.equalsIgnoreCase("IO_EXCEPTION")) {
-			throw new IOException("IO Exception");
-		} else if (exceptionOccured.equalsIgnoreCase("ARITHMETIC_EXCEPTION")) {
-			throw new ArithmeticException("Arithmetic Exception");
-		}*/
 		
 		return "notice.noticeInsert";		
 		
@@ -60,14 +53,7 @@ public class NoticeInsert_Controller {
 
 		System.out.println("NoticeController의 noticeInsert를 타서, 실제로 글작성을 할꺼지롱!");		
 
-/*		if (exceptionOccured.equalsIgnoreCase("NULL_POINTER")) {
-			throw new NullPointerException("Null Pointer Exception");
-		} else if (exceptionOccured.equalsIgnoreCase("IO_EXCEPTION")) {
-			throw new IOException("IO Exception");
-		} else if (exceptionOccured.equalsIgnoreCase("ARITHMETIC_EXCEPTION")) {
-			throw new ArithmeticException("Arithmetic Exception");
-		}*/
-		
+	
 		MultipartFile multipartFile = ndto.getFile();
         String originalFileName = null;
         String originalFileExtension = null;
@@ -114,20 +100,6 @@ public class NoticeInsert_Controller {
 
 	}
 	
-/*	@ExceptionHandler(NullPointerException.class)
-	public String handleNullPointerException(Exception e) {
-		return "error.NullPointerException";
-	}
-
-	@ExceptionHandler(IOException.class)
-	public String handleIOException(Exception e) {
-		return "error.NullPointerException";
-	}
-
-	@ExceptionHandler(Exception.class)
-	public String handleException(Exception e) {
-		return "error.Exception";
-	}*/
 
 }      
             

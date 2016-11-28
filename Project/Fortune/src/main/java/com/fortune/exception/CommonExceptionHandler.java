@@ -1,6 +1,7 @@
 package com.fortune.exception;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 
@@ -46,6 +47,12 @@ public class CommonExceptionHandler {
 	public String handleServletException() {
 		System.out.println("ServletException발생!!!!!!!!!!");
 		return "error.ServletException";
+	}
+	
+	@ExceptionHandler(SQLException.class)
+	public String handleSQLException() {
+		System.out.println("SQLException발생!!!!!!!!!!");
+		return "error.SQLException";
 	}
 	
 }

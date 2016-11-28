@@ -7,14 +7,11 @@
 
 package com.fortune.notice_Controller;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,25 +24,14 @@ public class NoticeList_Controller {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-/*	String exceptionOccured = "ARITHMETIC_EXCEPTION";*/
 
 	// 공지사항 글목록보기
 
 	@RequestMapping(value = "/noticeList.htm", method = RequestMethod.GET)
-	public ModelAndView noticeList(String pg) throws Exception  {
+	public ModelAndView noticeList(String pg) {
 
 		System.out.println("NoticeController의 noticeList를 탑니다~");
-		
-/*		if (exceptionOccured.equalsIgnoreCase("NULL_POINTER")) {
-			throw new NullPointerException("Null Pointer Exception");
-		} else if (exceptionOccured.equalsIgnoreCase("IO_EXCEPTION")) {
-			throw new IOException("IO Exception");
-		} else if (exceptionOccured.equalsIgnoreCase("ARITHMETIC_EXCEPTION")) {
-			throw new ArithmeticException("Arithmetic Exception");
-		}
-		*/
-		
+	
 		ModelAndView mv = new ModelAndView();
 		
 		
@@ -86,19 +72,5 @@ public class NoticeList_Controller {
 		return mv;
 	}
 
-/*	@ExceptionHandler(NullPointerException.class)
-	public String handleNullPointerException(Exception e) {
-		return "error.NullPointerException";
-	}
-
-	@ExceptionHandler(IOException.class)
-	public String handleIOException(Exception e) {
-		return "error.IOException";
-	}
-
-	@ExceptionHandler(Exception.class)
-	public String handleException(Exception e) {
-		return "error.Exception";
-	}*/
 
 }

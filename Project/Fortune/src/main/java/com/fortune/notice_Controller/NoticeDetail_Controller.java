@@ -7,8 +7,6 @@
 
 package com.fortune.notice_Controller;
 
-import java.sql.SQLException;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +24,7 @@ public class NoticeDetail_Controller {
 
 	// 공지사항글 상세보기
 	@RequestMapping("noticeDetail.htm")
-	public String noticeDetail(int notice_no, Model model) throws ClassNotFoundException, SQLException {
+	public String noticeDetail(int notice_no, Model model){
 
 		System.out.println("NoticeController의 noticeDetail을 탑니다~");
 
