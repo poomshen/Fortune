@@ -26,6 +26,8 @@ public class Download_Controller {
 		System.out.println("downloadFile 컨트롤러");
 		String filename = request.getParameter("filename");
 		System.out.println("filename : " + filename);
+		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));
+		System.out.println("collabo_no : " + collabo_no);
 		//filename = new String(filename.getBytes("ISO8859_1"), "UTF-8");
 		//System.out.println("filename 인코딩 후 : " + filename);
 		String path = request.getServletContext().getRealPath("upload");
@@ -38,6 +40,7 @@ public class Download_Controller {
 		
 		FileRoom_DTO fileroom_DTO = new FileRoom_DTO();
 		fileroom_DTO.setFile_room_rename(filename);
+		fileroom_DTO.setCollabo_no(collabo_no);
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		String orginfilename = fileromm_DAO.selectNameFile(fileroom_DTO);
 		

@@ -7,8 +7,6 @@
 
 package com.fortune.notice_Controller;
 
-import java.sql.SQLException;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +22,7 @@ public class NoticeDelete_Controller {
 
 	// 공지사항글 삭제하기
 	@RequestMapping("noticeDelete.htm")
-	public String noticeDelete(int notice_no) throws ClassNotFoundException, SQLException {
+	public String noticeDelete(int notice_no){
 		System.out.println("notice_no : " + notice_no);
 
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
