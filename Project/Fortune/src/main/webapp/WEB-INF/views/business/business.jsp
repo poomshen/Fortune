@@ -19,12 +19,10 @@ table, th, td {
 </head>
 <body>
 
-<h3>같은 부서인 사람들 정보 뽑기</h3>
-<!-- <input type="button" onclick="deptshow()" value="같은 부서원 정보 뿌리기"> -->
-<h2>deptno 확인 : ${sessionScope.info.dept_no}</h2>
+<h3>주소록</h3>
 
-<form action="deptsearch.ajax">
-	<select id="deptSelect" onchange="myFunction()">
+<form action="" >
+	<select id="deptSelect" name="deptSelect" onchange="deptchange()">
 		<c:forEach var="i" items="${dept}">
 			<c:choose>
 				<c:when test="${i.dept_no == sessionScope.info.dept_no}">
@@ -37,21 +35,7 @@ table, th, td {
 		</c:forEach>
 	</select>
 	
-	<%-- 
-	<select id="teamSelect">
-		<c:forEach var="i" items="${team}">
-			<c:choose>
-				<c:when test="${i.team_no == sessionScope.info.team_no}">
-					<option value="${i.team_no}" selected>${i.team_name}</option>
-				</c:when>			
-				<c:otherwise>
-					<option value="${i.team_no}">${i.team_name}</option>	
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-	</select> --%>
- 	
-	<select>
+	<select id="teamSelect" name="teamSelect">
 		<c:forEach var="j" items="${team}">				
 			<c:if test="${sessionScope.info.dept_no == j.dept_no}">
 				<c:choose>
@@ -61,104 +45,91 @@ table, th, td {
 					<c:otherwise>
 						<option value="${j.team_no}">${j.team_name}</option>
 					</c:otherwise>
-				</c:choose>
-				
+				</c:choose>				
 			</c:if>	
 		</c:forEach>		
 	</select>
 	
-	
-	<input type="submit" class="btn btn-primary" value="검색">
+	<input type="button" class="btn btn-primary" onclick="deptshow()" value="검색">
 </form>
 
+<!-- 표 부분 -->
+<div id="deptshowDiv">
+</div>
 
-	<table>
-	<tr>
-		<th>아이디</th>
-		<th>이름</th>
-		<th>전화번호</th>
-		<th>입사일</th>
-		<th>부서명</th>
-		<th>팀명</th>
-		<th>직급명</th>
-	</tr>
-		<c:forEach var="i" items="${deptlist}">
-			<c:if test="${not (i.user_id eq 'admin@fortune.com' or i.user_id eq sessionScope.info.user_id)}">
-			<tr>
-				<td><c:out value="${i.user_id}"></c:out></td>
-				<td><c:out value="${i.user_name}"></c:out></td>
-				<td><c:out value="${i.user_phone}"></c:out></td>
-				<td><c:out value="${fn:substring(i.user_join,0,10)}"></c:out></td>
-				
-				<c:forEach var="j" items="${dept}">
-					<c:if test="${i.dept_no == j.dept_no}">
-					<td><c:out value="${j.dept_name}"></c:out></td>
-					</c:if>
-				</c:forEach>		
-						
-				<c:forEach var="j" items="${team}">
-					<c:if test="${i.team_no == j.team_no}">
-						<td><c:out value="${j.team_name}"></c:out></td>
-					</c:if>					
-				</c:forEach>	
-										
-				<c:forEach var="j" items="${position}">
-					<c:if test="${i.position_no ==  j.position_no}">
-						<td><c:out value="${j.position_name}"></c:out></td>
-					</c:if>			
-				</c:forEach>				
-			</tr>
-			</c:if>
-		</c:forEach><br>
-
-</table>
-<!-- <script type="text/javascript">
-function myFunction(){
-	
-	var x = document.getElementById("deptSelect").value;
-	var y = document.getElementById("teamSelect").value;
-	
-	if(x == ""){
-		alert('바꼈음');
-		y=101;
-
-	}	
-}
-</script> -->
 <script type="text/javascript">
-	$("#deptSelect").change(function(){
-		alert('바꼈음');
-		$("#teamSelect").val() = 101;
-	});
-</script>
-<!-- 
-<script type="text/javascript">
-function deptshow(){
-	
-	var deptno = ${sessionScope.info.dept_no};
+(function() {
+	alert('잠시만 기다려주세요...');
 
 	$.ajax({
 		type:"get",
-		url:"deptinfo.ajax",
-		data:{"dept_no": deptno },
+		url:"deptsearch2.ajax",
+		data:{"dept_no": ${sessionScope.info.dept_no}, 
+			  "team_no": ${sessionScope.info.team_no} },
 		success:function(data){
+			//console.log(data);
+			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 		
+		},
+		error:function(){
+			alert('처음 띄우는데에서 에러남!');
+		}
+	});	
+})();
+
+function deptshow(){
+	alert('잠시만 기다려주세요...');
+
+	$.ajax({
+		type:"get",
+		url:"deptsearch.ajax",
+		data:{"dept_no": $('#deptSelect').val(), 
+			  "team_no": $('#teamSelect').val()},
+		success:function(data){
+			//console.log(data);
+			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 
 			if(data != null){
-				
-				console.log(data.length);
-				 for(var i=0; i<data.length; i++){
-					console.log(data[i].user_id);
-				} 
-			}
-			else{
-				alert('실패함');
+				alert('검색 완료');
+			
+			}else{
+				alert('회원 목록을 가져오는데 실패했습니다');
 			}
 		},
 		error:function(){
-			alert('이건 에러');
+			alert('검색 에러! 관리자에게 문의하세요');
+		}
+		
+	}); 
+}
+function deptchange() {
+	
+	var deptval = $('#deptSelect').val();
+		
+	$.ajax({
+		type:"get",
+		url:"getteam.ajax",
+		data:{"dept_no":$('#deptSelect').val()},
+		success:function(data){
+			//console.log(data[0].team_name);
+			alert('팀목록 바뀜요');
+			$("#teamSelect").html("");
+			for(var i=0; i<data.length; i++){
+				if(i==0){
+					$('#teamSelect').append("<option value='"+data[i].team_no+"' selected>"+data[i].team_name+"</option>");
+				}else{
+					$('#teamSelect').append("<option value='"+data[i].team_no+"'>"+data[i].team_name+"</option>");
+				}
+				
+			}
+			
+		},
+		error:function(){
+			alert('팀목록 가져오는데서 에러남!');
 		}
 	});
-}
 	
-</script> -->
+	
+}
+
+</script>
 </body>
 </html>
