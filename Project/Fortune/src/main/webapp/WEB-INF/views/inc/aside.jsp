@@ -5,6 +5,9 @@
 <div class="navbar-default sidebar" style="border-color:#444; background-color:#417ca5; width:170px; height:644px;" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
+                    <li>
+                            <a href="noticeList.htm"><i class="fa fa-edit fa-fw"></i>공지 사항</a>
+                        </li>
                         <li>
                             <a href="#" ><i class="fa fa-bar-chart-o fa-fw hvr-pop"></i>프로젝트<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -16,34 +19,38 @@
                             	<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
                                
                                 <li>
-                               <a href="#">협업요청 리스트<span class="fa arrow"></span></a>
+                               <a href="#">요청 리스트<span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level">
-                                   <li> <a href="listReplyRequest.htm">작성자요청 리스트</a></li>
-                                   <li> <a href="requestList.htm">답장자요청 리스트</a></li>
+                                   <li> <a href="listReplyRequest.htm">보낸요청 리스트</a></li>
+                                   <li> <a href="requestList.htm">받은요청 리스트</a></li>
+                                   <security:authorize access="hasAnyRole('ROLE_ADMIN')">
                                    <li> <a href="listallRequest.htm">전체 리스트</a></li>
+                                   </security:authorize>
                                 </ul>
                                 </li>
                                 </security:authorize>
                                 <li>
                                     <a href="responseList.htm">협업 리스트</a>
                                 </li>
+                                <security:authorize access="hasAnyRole('ROLE_ADMIN')">
                                 <li>
-                                    <a href="historyList.htm">히스토리 리스트</a>
+                                    <a href="historyList.htm">모든 히스토리</a>
                                 </li>
+                                </security:authorize>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i>일정<span class="fa arrow"></a>
+                            <ul class="nav nav-second-level">
                                 <c:forEach var="n" items="${sessionScope.collabo}">
                                 <li>
                                  <a href="schedule.htm?collabo_no=${n.collabo_no}"> ${n.collabo_req_title}</a>
                                 </li>
                                 </c:forEach>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="schedule.htm?collabo_no=1"><i class="fa fa-table fa-fw"></i>일정</a>
-                        </li>
-                        <li>
-                            <a href="noticeList.htm"><i class="fa fa-edit fa-fw"></i>공지 사항</a>
-                        </li>
+                        
                         <security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>관리<span class="fa arrow"></span></a>
