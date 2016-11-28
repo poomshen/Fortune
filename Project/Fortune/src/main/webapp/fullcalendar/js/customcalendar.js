@@ -48,8 +48,7 @@ function loadCalendar() {
 		//캘린더 헤더 부분 css요소
 		header: {
 	        left: 'prev,next today',
-	        center: 'title',
-	        right: 'month,agendaWeek,agendaDay'
+	        right: 'title',
 	    },
 
 		
