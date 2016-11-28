@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 
+import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.alarm_DAO.IAlarm;
+import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.request_DAO.ProDao;
 import com.fortune.request_Service.ProService;
 
@@ -36,6 +40,8 @@ public class ProController {
 	@Autowired
 	private ProService proservice;
 
+	 @Autowired
+	 private SqlSession sqlSession;
 	
 	
 	@RequestMapping("/writerequest.htm")
@@ -52,11 +58,21 @@ public class ProController {
 	public String regRequest(Request_DTO n, HttpServletRequest request)
 			throws IOException, ClassNotFoundException, SQLException {
 			
-			System.out.println("집으로");
+		System.out.println("writeRequest.htm 컨트롤러 start");
 		try {
 			// 실DB저장
 			proservice.regRequest(n, request);
 			
+			Alarm_DTO adto = new Alarm_DTO();
+			
+			IAlarm alarmDAO =  sqlSession.getMapper(IAlarm.class);
+			System.out.println("수신자 아이디 :"+n.getCollabo_req_ID());
+			
+			adto.setUser_id(n.getCollabo_req_ID());
+        	adto.setWork_type("1");
+
+        	alarmDAO.insertAlarm(adto);
+
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

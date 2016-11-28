@@ -22,7 +22,9 @@
 			return false;
 
 		} else {
-			alert("완료");
+			alert("완료"+$('#collabo_req_ID').val());
+			
+			send($('#collabo_req_ID').val());
 			 promodifyform.submit(); 
 			return true;
 		}
@@ -92,7 +94,7 @@
 		<div class="col-sm-2"></div>
 		<div class="col-sm-7" style="text-align: right" >
 			<br> 
-			<input type="submit" id="submit" class="btn btn-default" value="저장" onclick="promodify()">
+			<input type="button" class="btn btn-default" value="저장" onclick="promodify()">
 			
 			<a href="requestList.htm" class="btn btn-default">취소하기</a>
 		</div>

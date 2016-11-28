@@ -27,6 +27,7 @@ function proAdd(){
 		return false;
 	}
 	else{
+		alert("완료");
 		proaddform.submit();
 		return true;
 	}
@@ -174,7 +175,7 @@ function proAdd(){
 		<div class="col-sm-2"></div>
 		<div class="col-sm-6" style="text-align: right" >
 			<br> 
-			<input type="button" id="submit" class="btn btn-default" value="완료"  onclick="proAdd()">
+			<input type="button" class="btn btn-default" value="완료"  onclick="proAdd()">
 			
 			<a href="requestList.htm" class="btn btn-default">취소하기</a>
 		</div>
