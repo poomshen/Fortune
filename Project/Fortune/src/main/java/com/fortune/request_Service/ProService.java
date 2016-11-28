@@ -142,9 +142,9 @@ public class ProService {
 
 					// Mybatis 적용
 					ProDao proDao = sqlsession.getMapper(ProDao.class);
-
+					
 					List<Request_DTO> list = proDao.getRequest(page, field, query,st_query);
-
+						
 					return list;
 				}
 	

@@ -9,15 +9,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <!-- 성준 추가 UI  -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 
+
+
+
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> de07f3b763c22d435349a8fee9f4633c111284b9
 <script type="text/javascript">
 	function proAjaxManager(a) {
 		$.ajax({
