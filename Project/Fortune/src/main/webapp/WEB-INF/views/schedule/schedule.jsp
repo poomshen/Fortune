@@ -76,15 +76,16 @@ function detail(id, title, text, start, end, userids){
  			$.each(data, function(index, obj) {
  				if(index%2==0){
  					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
- 					comment_text += '<input type="button" value="수정"><br><input type="button" value="삭제">';
- 					comment_text += '</span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<input type="button" value="수정"><br><button type="button" value="'+obj.work_comment_no;
+ 					comment_text += '">삭제</span><div class="chat-body clearfix"><div class="header">';
  					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
  					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
  					comment_text += obj.work_comment_text+'</p></div></li>';
+ 					comment_text += 
  				}else{
  					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
- 					comment_text += '<input type="button" value="수정"><br><input type="button" value="삭제">';
- 					comment_text += '</span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<input type="button" value="수정"><br><button type="button" value="'+obj.work_comment_no;
+ 					comment_text += '">삭제</span><div class="chat-body clearfix"><div class="header">';
  					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
  					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
  					comment_text += obj.work_comment_text+'</p></div></li>'
