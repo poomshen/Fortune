@@ -5,6 +5,7 @@ var array = [];
 
 
 function fcontent() {
+	
 	var content2 = "";
 	content2 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
 	$('#content').empty();
@@ -25,9 +26,9 @@ function fcontent() {
 		        content2 += "','" + obj.users + "'" ;
 		        content2 += ')" >상세보기</a></td></tr>';
 			});
-			$('#content_detail').empty();
+			$('#content_detail').css("display", "none");
 	        $('#content').html(content2)
-		}
+		} 
 	});
 }
 
@@ -57,9 +58,10 @@ function loadCalendar() {
 	    // 처리결과: start, end 값만 html에 기재하고, customBotton속성 함수에서 일정등록 코드 진행 + 재호출시 기존에 입력된 값 초기화 작업.
 	    	select: function(start, end) {
 			//모달 띄우는 함수
-			var test = $('#modal_btn').click();
-			$('#modal_title').val("");
-			$('#modal_text').val("");
+	    	
+	    	var test = $('#modal_btn').click();
+			$('#modal_title').val(""); $('#modal_title2').val("");
+			$('#modal_text').val(""); $('#modal_text2').val("");
 			$('#modal_start').val(start.format("YYYY-MM-DD"));
 			$('#modal_end').val(end.format("YYYY-MM-DD"))
 			
@@ -191,9 +193,9 @@ function loadCalendar() {
 							data: {"id" : id},
 							success : function(data) {
 								console.log("삭제성공");
+								fcontent();
 							}
 						});
-	            		fcontent();
 	            		
 	            	}
 
@@ -232,7 +234,6 @@ function loadCalendar() {
 						data: updateschedule,
 						success : function(data) {
 							console.log('업데이트 성공');
-							//fcontent();
 						}
 					});
             		
@@ -277,12 +278,10 @@ function loadCalendar() {
 									start: data.schedule.schedule_start,
 									end: data.schedule.schedule_end
 							}
-
-							
 							
 							calendar.fullCalendar('renderEvent', eventData , true);
-							console.log('insert 성공')
 							fcontent();
+							console.log('insert 성공')
 							
 							
 						      $.each(data.alarm, function (i, item) {
@@ -292,7 +291,7 @@ function loadCalendar() {
 						      
 						      });
 							
-							console.log(data.alarm);
+							console.log(data.alarm); 
 							//var count =","+data.count.join(' / ');
 							
 							console.log(count);
@@ -314,5 +313,39 @@ function loadCalendar() {
 	 // 캘린더 초기 호출시 뷰단에 뿌려줄 일정데이터
 		events: array
 	});
+	
+	$(".dropdown_s dt a").on('click', function() {
+		  $(".dropdown_s dd ul").slideToggle('fast');
+		});
+
+		$(".dropdown_s dd ul li a").on('click', function() {
+		  $(".dropdown_s dd ul").hide();
+		});
+
+		function getSelectedValue(id) {
+		  return $("#" + id).find("dt a span.value").html();
+		}
+
+		$(document).bind('click', function(e) {
+		  var $clicked = $(e.target);
+		  if (!$clicked.parents().hasClass("dropdown_s")) $(".dropdown_s dd ul").hide();
+		});
+
+		$('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+		  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+		    title = $(this).val() + ",";
+
+		  if ($(this).is(':checked')) {
+		    var html = '<span title="' + title + '">' + title + '</span>';
+		    $('.multiSel').append(html);
+		    $(".hida").hide();
+		  } else {
+		    $('span[title="' + title + '"]').remove();
+		    var ret = $(".hida");
+		    $('.dropdown_s dt a').append(ret);
+
+		  }
+		});
 
 }

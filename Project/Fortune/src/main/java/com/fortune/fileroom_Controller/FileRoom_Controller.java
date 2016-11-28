@@ -2,6 +2,8 @@ package com.fortune.fileroom_Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +20,12 @@ public class FileRoom_Controller {
 	private SqlSession sqlsession;
 	
 	@RequestMapping(value="/mainfile.htm")
-	public ModelAndView mainFile(String pg){
+	public ModelAndView mainFile(HttpServletRequest request){
 		System.out.println("mainFile 컨트롤러");
-		
+		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));
+		System.out.println("collabo_no : " + collabo_no);
+		String pg = request.getParameter("pg");
+		System.out.println("pg : " + pg);
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		int page = 1;
 		String str_pg = pg;
@@ -29,7 +34,7 @@ public class FileRoom_Controller {
 		}
 		int row_size = 12;
 
-		int total_count = fileromm_DAO.countFile();
+		int total_count = fileromm_DAO.countFile(collabo_no);
 		System.out.println("totalcount : " + total_count);
 
 		int all_page = (int) Math.ceil(total_count / (double) row_size);
@@ -42,7 +47,7 @@ public class FileRoom_Controller {
 			to_page = all_page;
 		}
 
-		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page);
+		List<FileRoom_DTO> list = fileromm_DAO.listFiles(page, collabo_no);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);
@@ -52,6 +57,7 @@ public class FileRoom_Controller {
 		mv.addObject("block", block);
 		mv.addObject("from_page", from_page);
 		mv.addObject("to_page", to_page);
+		mv.addObject("collabo_no", collabo_no);
 		mv.setViewName("fileView.file3");
 		
 		return mv;

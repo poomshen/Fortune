@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +20,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.alarm_DAO.IAlarm;
+import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.request_DAO.ProDao;
 import com.fortune.request_Service.ProService;
 
@@ -37,6 +42,8 @@ public class ProController {
 	@Autowired
 	private ProService proservice;
 
+	 @Autowired
+	 private SqlSession sqlSession;
 	
 	
 	@RequestMapping("/writerequest.htm")
@@ -53,41 +60,61 @@ public class ProController {
 	public String regRequest(Request_DTO n, HttpServletRequest request)
 			throws IOException, ClassNotFoundException, SQLException {
 			
-			System.out.println("집으로");
+		System.out.println("writeRequest.htm 컨트롤러 start");
 		try {
 			// 실DB저장
 			proservice.regRequest(n, request);
 			
+			Alarm_DTO adto = new Alarm_DTO();
+			
+			IAlarm alarmDAO =  sqlSession.getMapper(IAlarm.class);
+			System.out.println("수신자 아이디 :"+n.getCollabo_req_ID());
+			
+			adto.setUser_id(n.getCollabo_req_ID());
+        	adto.setWork_type("1");
+
+        	alarmDAO.insertAlarm(adto);
+
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "redirect:requestList.htm";
+		return "redirect:listReplyRequest.htm";
 
 	}
 
-	// 요청한 프로젝트들을 리스트로 담아서 뿌려주는 역할을 해준다.
+	// 만든 목적: 발신자가 보낸 것을 리스트로 보여주는 클래스입니다,
+	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
-	public String requestList(String pg, String f, String q, String st,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+	public String requestList(String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 
 		
 		List<Request_DTO> list = proservice.getRequest(pg, f, q, st, session);
 		System.out.println("아아ㄷ아"+st);
+		System.out.println("미"+collabo_req_index);
 		model.addAttribute("list", list); // 자동 forward
+		
+		
+		
 		
 		return "request.requestList";
 
 	}
-	//답장자
+	// 만든 목적: 발신자가 보낸 것 수신자가 보는 리스트로 보여주는 클래스입니다,
+	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("listReplyRequest.htm") // /customer/notice.htm
-	public String listReplyRequest( String pg, String f, String q,String st, HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+	public String listReplyRequest( String pg, String f, String q,String st, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
 			
 		List<Request_DTO> list = proservice.listReplyRequest(pg, f, q,st, session);
 		System.out.println("아아ㅇ아"+st);
 		model.addAttribute("list", list); // 자동 forward
+		System.out.println("미"+collabo_req_index);
+		System.out.println(collabo_req_index);
+		
+		
 		
 		return "request.requestList";
 
@@ -95,12 +122,15 @@ public class ProController {
 	//전체
 	 @Transactional
 	@RequestMapping("listallRequest.htm") // /customer/notice.htm
-	public String listallRequest( String pg, String f, String q, String st,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+	public String listallRequest( String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
 		System.out.println("아아ㄴ아"+st);
 		List<Request_DTO> list = proservice.listallRequest(pg, f, q, st, session);
 		System.out.println("커피를 타보자");
+		System.out.println("미"+collabo_req_index);
 		model.addAttribute("list", list); // 자동 forward
+		
+		
 		return "request.requestList";
 
 	}
@@ -152,16 +182,16 @@ public class ProController {
 		 System.out.println("여기는 !!");
 		 System.out.println(proDto.toString());
 		 
-		  return "request.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
+		  return "cen.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	
 		
 	//거절 하기
 		 @RequestMapping("refuse.htm")
-		 public String Refuse(String collabo_req_index) throws ClassNotFoundException,
+		 public String Refuse(String collabo_req_text,String collabo_req_index ) throws ClassNotFoundException,
 		   SQLException {
 			 System.out.println("거절했다.");
-		 proservice.Refuse(collabo_req_index);
-		 
+		 proservice.Refuse(collabo_req_text,collabo_req_index);
+		
 		  return "redirect:requestList.htm"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	
 		 
@@ -284,5 +314,25 @@ public class ProController {
 				 proservice.download(p, f, request, response);
 				 
 			 }
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 /*@RequestMapping(value="/noticeList.htm")
+				
+			 //만든 목적: 페이징 처리할때 사용하는데 협업 요청 하는데 많은 리스트를 뽑는다 그것을 페이징 처리하기 위해서 위한 클래스입니다.
+			 //날짜 일자 :2016-11-26
+			 public ModelAndView noticeList(String pg) throws ClassNotFoundException, SQLException {
+				
+				 
+				 
+				 return null;
 	
+				 
+			 }*/
 }

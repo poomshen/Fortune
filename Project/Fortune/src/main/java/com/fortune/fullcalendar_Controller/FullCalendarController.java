@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Alarm_DTO;
-import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Schedule_DTO;
-import com.fortune.Table_DTO.Work_Comment_DTO;
 import com.fortune.Table_DTO.Work_Users_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.fullcalendar_DAO.IFullCalendar;
@@ -46,13 +44,12 @@ public class FullCalendarController {
     public @ResponseBody Map<String,Object> ajax(@RequestParam(value="scheduleusers") String users,
             @RequestParam(value="title") String title, @RequestParam(value="start") String start,
             @RequestParam(value="end") String end, @RequestParam(value="text") String text,
-            @RequestParam(value="collabo_no") String collabo_no,HttpSession session)
+            @RequestParam(value="collabo_no") int collabo_no, HttpSession session)
             throws ClassNotFoundException, SQLException{
     	
 		//Schedule_Work_DTO
     	
         System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 캘린더 select함수 호출: 일정 insert작업");        
-        
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
         
 		Schedule_Work_DTO swdto = new Schedule_Work_DTO();
@@ -76,7 +73,6 @@ public class FullCalendarController {
         int f = fullcalendarDAO.insertSchedule(swdto);
         f += fullcalendarDAO.insertWork(swdto);
         map.put("schedule", swdto);
-       
         
         
         String[] selectId=users.split("/");
@@ -99,14 +95,6 @@ public class FullCalendarController {
         
         map.put("alarm", sadto);
         
-		
-        
-        
-
-        
-        
-        
-    
         return map;
 	}
 	
@@ -165,6 +153,7 @@ public class FullCalendarController {
         
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
         
+        fullcalendarDAO.deleteWork_Comment(id);
         fullcalendarDAO.deleteWork_Users(id);
         fullcalendarDAO.deleteWork(id);
         fullcalendarDAO.deleteSchedule(id);
@@ -247,27 +236,6 @@ public class FullCalendarController {
 	}
 	
 	
-	
-	
-	/* 작업자 : 이명철  // 최초 작업일 : 11.25 // 최종 작업일 : 11.25
-     * 작업 내용 : 일정상세 화면의 select_comment 호출
-     * version : v1.0
-    */
-	@RequestMapping(value="select_comment.ajax", method = RequestMethod.POST)
-    public @ResponseBody List<Work_Comment_DTO> select_Comment(@RequestParam(value="schedule_no") String schedule_no) throws ClassNotFoundException, SQLException{
-        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 일정상세 화면의 select_comment 호출");        
-        
-        IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
-        
-        List<Work_Comment_DTO> wcdtolist = new ArrayList<Work_Comment_DTO>();
-        wcdtolist = fullcalendarDAO.selectComment(schedule_no);
-        
-        return wcdtolist;
-	}
-    
-    
-    
-    
 	
 	
 	
