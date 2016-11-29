@@ -1,6 +1,8 @@
 //캘린더 호출시 필요한 초기 변수 선언
 var content = "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
 var array = [];
+var clickobject;
+var clickobjectcolor= "";
 
 
 
@@ -23,7 +25,7 @@ function fcontent() {
 		        content2 += ' onclick="detail(' + obj.schedule_no;
 		        content2 += ",'" + obj.work_title + "','" + obj.work_text;
 		        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
-		        content2 += "','" + obj.users + "'" ;
+		        content2 += "','" + obj.users + "','" + obj.work_progress + "'";
 		        content2 += ')" >상세보기</a></td></tr>';
 			});
 			$('#content_detail').css("display", "none");
@@ -48,8 +50,7 @@ function loadCalendar() {
 		//캘린더 헤더 부분 css요소
 		header: {
 	        left: 'prev,next today',
-	        center: 'title',
-	        right: 'month,agendaWeek,agendaDay'
+	        right: 'title',
 	    },
 
 		
@@ -82,13 +83,19 @@ function loadCalendar() {
 	        //alert('View: ' + view.name); //달력의 정보 표현 ex) view.name = november 2016, view.title = month
 			//$(this).css('background-color', 'rgb(58, 135, 173)'); //일정의 스타일을 바꿀 수 있음 ex) border-color, background-color ...
 			
+			//기존에 클릭했던 object의 주소가 있으면 그 객체의 색상을 기존 색상으로 바꿈
+			if(clickobject){
+				clickobject.css('background-color', clickobjectcolor);
+			}
 			
-			//모든 일정의 배경색을 reg(58, 135, 173)으로 설정
-			$('.fc-event-container').children().css('background-color', 'rgb(58, 135, 173)');
+			
+			//클릭된 일정의 객체주소를 변수에 담음
+			clickobject = $(this)
+			//클릭된 일정의 객체 배경색 값을 변수에 담음
+			clickobjectcolor = $(this).css('background-color');
 			
 			//클릭된 일정의 배경색을 red로 설정
 			$(this).css('background-color', 'red');
-			
 			
 			
 			var content3 = "";
@@ -100,12 +107,11 @@ function loadCalendar() {
 					"schedule_no": calEvent.id,
 	            },
 				success : function(obj) {
-					console.log(obj)
 					content3 += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
 					content3 += '</td><td><a';
 					content3 += ' onclick="detail(' + obj.schedule_no;
 					content3 += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-					content3 += "','" + obj.users + "'";
+					content3 += "','" + obj.users + "','" + obj.work_progress + "'";
 					content3 += ')" >상세보기</a></td></tr>';
 					$('#content_detail').css("display", "none");
 			        $('#content').html(content3)
@@ -206,7 +212,7 @@ function loadCalendar() {
 	        //업데이트 함수
 	        updateEvent: {
 	            click: $('#updateok_btn').click(function(){
-	            	
+	            
 	            	var check = confirm('일정을 수정 하시겠습니까?');
 	            	if(check){
 	            		var id = $('#detail_id').val();
@@ -247,6 +253,8 @@ function loadCalendar() {
 	        //일정등록 함수
 	    	insertEvent: {
 	    		click: $('#modal_ok').click(function(){
+	    		
+	    			
 	    			var eventData;
 					var scheduleusers="";
 					var count=",";
@@ -256,15 +264,16 @@ function loadCalendar() {
 						scheduleusers += $(this).val()+"/";
 					
 					});
-
 					var newschedule = {
 							"title": $('#modal_title').val(),
 							"text": $('#modal_text').val(),
 							"start": $('#modal_start').val(),
 							"end": $('#modal_end').val(),
 							"collabo_no" : $('#collabo_no').val(),
-							"scheduleusers": scheduleusers
+							"scheduleusers" : scheduleusers,
+							"meeting_place_no" : "0"
 					}
+
 					
 					$.ajax({
 						type: 'post',
@@ -299,34 +308,125 @@ function loadCalendar() {
 							send(scheduleusers+count+","+work_type);
 							
 							
+							$(".hida").show();
+			    			$('input[type="checkbox"]').prop("checked",false);
+			    			$('.multiSel').text("");
 						}
 					});
 				})
-	    	}
-	    },
+	    	},
 	 // 작업자: 이명철  // 최근 수정일: 16-11-21 --------------------- E N D ------------------------
 	 // ------------------------------------------------------------------------------------
 	 
 	    
 	    
 	    
+	    
+        // 작업자: 이명철  // 최근 수정일: 16-11-29 ---------------------S T A R T------------------------
+        // 회의업무 등록함수
+    	insertEvent2: {
+    		click: $('#modal_ok2').click(function(){
+    		
+    			
+    			var eventData;
+				var scheduleusers="";
+				var count=",";
+				var work_type="";
+				$("input[name='userchk']:checked").each(function(i){
+
+					scheduleusers += $(this).val()+"/";
+				
+				});
+				var newschedule = {
+						"title": $('#modal_title2').val(),
+						"text": $('#modal_text2').val(),
+						"start": $('#modal_start').val(),
+						"end": $('#modal_end').val(),
+						"collabo_no" : $('#collabo_no').val(),
+						"scheduleusers" : scheduleusers,
+						"meeting_place_no" : "1"
+				}
+
+				
+				$.ajax({
+					type: 'post',
+					url: 'select.ajax',
+					data: newschedule,
+					success : function(data) {
+						console.log(data);
+						eventData = {
+								id: data.schedule.schedule_no,
+								title: data.schedule.meeting_title,
+								start: data.schedule.schedule_start,
+								end: data.schedule.schedule_end
+						}
+						
+						calendar.fullCalendar('renderEvent', eventData , true);
+						fcontent();
+						console.log('회의업무 insert 성공')
+						
+						
+					      $.each(data.alarm, function (i, item) {
+                                console.log(item.count);
+                                count+=item.count+"/";
+                                work_type=item.work_type;
+					      
+					      });
+						
+						console.log(data.alarm); 
+						//var count =","+data.count.join(' / ');
+						
+						console.log(count);
+						
+						send(scheduleusers+count+","+work_type);
+						
+						
+						$(".hida").show();
+		    			$('input[type="checkbox"]').prop("checked",false);
+		    			$('.multiSel').text("");
+						}
+					});
+				})
+	    	}
+	    	// 작업자: 이명철  // 최근 수정일: 16-11-29 --------------------- E N D ------------------------
+	    	// ------------------------------------------------------------------------------------    
+	    	
+	    	
+	    }, //custombutton 끝
+	    
+	    
+	 
+	    
+	    
 	 // 캘린더 초기 호출시 뷰단에 뿌려줄 일정데이터
 		events: array
 	});
 	
+
+	
+	
+	//작업자 : 이예지 
+	//최종 수정일 : 2016/11/28
+	//select 되어지는 사람의 이름을 즉시 보여주는 함수
+	
 	$(".dropdown_s dt a").on('click', function() {
+	
 		  $(".dropdown_s dd ul").slideToggle('fast');
+		
 		});
 
 		$(".dropdown_s dd ul li a").on('click', function() {
+	
 		  $(".dropdown_s dd ul").hide();
 		});
 
 		function getSelectedValue(id) {
+	
 		  return $("#" + id).find("dt a span.value").html();
 		}
 
 		$(document).bind('click', function(e) {
+		
 		  var $clicked = $(e.target);
 		  if (!$clicked.parents().hasClass("dropdown_s")) $(".dropdown_s dd ul").hide();
 		});
@@ -337,10 +437,13 @@ function loadCalendar() {
 		    title = $(this).val() + ",";
 
 		  if ($(this).is(':checked')) {
+			 
 		    var html = '<span title="' + title + '">' + title + '</span>';
+		    
 		    $('.multiSel').append(html);
 		    $(".hida").hide();
 		  } else {
+		
 		    $('span[title="' + title + '"]').remove();
 		    var ret = $(".hida");
 		    $('.dropdown_s dt a').append(ret);
