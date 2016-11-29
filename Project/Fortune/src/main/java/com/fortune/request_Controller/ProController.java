@@ -166,9 +166,10 @@ public class ProController {
 	 @RequestMapping("proDel.htm")
 	 public String ProDel(String collabo_req_index) throws ClassNotFoundException,
 	   SQLException {
+		 System.out.println("삭제 인덱스"+collabo_req_index);
 	 proservice.ProDel(collabo_req_index);
 	 
-	  return "redirect:requestList.htm"; //리스트 화면 (controller 타서 데이터 출력)
+	  return "request.requestList"; //리스트 화면 (controller 타서 데이터 출력)
 	 }
 	 
 	//수락 하기
@@ -192,7 +193,7 @@ public class ProController {
 			 System.out.println("거절했다.");
 		 proservice.Refuse(collabo_req_text,collabo_req_index);
 		
-		  return "redirect:requestList.htm"; //리스트 화면 (controller 타서 데이터 출력)
+		  return "request.requestList"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	
 		 
 		
@@ -211,11 +212,11 @@ public class ProController {
 
 	//게시판 실제 수정처리
 		 @RequestMapping(value = "proEdit.htm", method = RequestMethod.POST)
-		 public String proEdit(Request_DTO n) throws ClassNotFoundException,
+		 public String proEdit(Request_DTO n,HttpServletRequest request) throws ClassNotFoundException,
 		   SQLException, IOException {
 			 System.out.println("일로 타는데?");
 			 System.out.println(n.toString() );
-			proservice.proEdit(n);
+			proservice.proEdit(n,request);
 		  return "redirect:requestList.htm";
 	    	 
 		 }

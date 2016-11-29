@@ -78,6 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		UPDATE COLLABO_REQ SET
 		collabo_req_title=#{collabo_req_title},
+		collabo_req_filesrc=#{collabo_req_filesrc},
 		collabo_req_text=#{collabo_req_text}
 		WHERE collabo_req_index=#{collabo_req_index}
 
