@@ -81,45 +81,17 @@ img {
  
      function refuseReqCollabo(a){
     	 $("#menuView2").empty();
-   		$("#refuseindex").empty();
-   	  	
-   	   	 $.ajax({
-   	   		 
-   	 			type: "get",
-   	 			url:  "refuse.htm",
-   	 			cache: false,
-   	 			data:"collabo_req_index="+a,
-   	 		    success:function(data){ //callback 
-   	 		    	//console.log(data);
-   					 $('#refuseindex').val(a); 
-   	 		      
-   	 		     },
-   	 			error: function(){						
-   	 				alert('Error while request..'	);
-   	 			}
-   	 		});
-   	}
+   		 $("#refuseindex").val(a); 
+   
+   	 		}
+   	
      
   
      
  
  	
 
-     function refuse() {
-    	 $("#menuView2").empty();
-    	 $('#menuView3').empty();
-    	 
- 		if($('#collabo_req_text').val() == "") {
- 			alert("거절 사유를 입력하세요. ");
- 			$('#collabo_req_text').focus();
- 			return false;
- 		}else{
- 				alert("완료");
- 				refuseform.submit(); 
- 				return true;
- 		}
- 		
-     }
+     
      
     
     
@@ -247,7 +219,7 @@ img {
 									<c:when test="${n.collabo_req_state == '거절'}"></c:when>
 
 									<c:otherwise>
-										<c:if test="${sessionScope.info.user_id == n.user_ID}">
+										<c:if test="${sessionScope.info.user_id == n.collabo_req_ID}">
 											<input type="button" class="btn btn-info" data-toggle="modal"
 												data-target="#myModal2"
 												onclick="memoReqCollabo(${n.collabo_req_index})" value="수락">
@@ -256,6 +228,8 @@ img {
 												data-target="#myModal3"
 												onclick="refuseReqCollabo(${n.collabo_req_index})"
 												class="btn btn-info" value="거절">
+										</c:if>
+										<c:if test="${sessionScope.info.user_id == n.user_ID}">
 											<security:authorize
 												access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
 												<a class="btn btn-info"
@@ -301,7 +275,24 @@ img {
 
 		</c:forEach>
 
+<script type="text/javascript">
+function refuse() {
+	 $("#menuView2").empty();
+	 $('#menuView3').empty();
+	 
+	if($('#collabo_req_text').val() == "") {
+		alert("거절 사유를 입력하세요. ");
+		$('#collabo_req_text').focus();
+		return false;
+	}else{
+			alert("완료");
+			$('#refuseform').submit(); 
+			return true;
+	}
+	
+}
 
+</script>
 
 		<!-- 거절을 하였을때 거절 사유를 쓸 때 사용됩니다. -->
 		<div class="container">
@@ -316,31 +307,34 @@ img {
 							<h4 class="modal-title">거절 사유</h4>
 
 						</div>
+						
 						<div class="modal-body">
+						
 							<div id="menuView3">
 								<!-- CSS 구성  -->
-
-								<form action="refuse.htm" method="get" name="refuseform">
+								<form action="refuse.htm" method="get" id="refuseform">
+								
 									<div class="col-sm-6"></div>
 									<br>
 									<div>
-
+									
 										<input type="hidden" name="collabo_req_index" id="refuseindex">
 
 										<dl>
 											<dt>거절 사유</dt>
 											<dd>
-												<textarea class="form-control" name="collabo_req_text"
+												<textarea class="form-control" name="collabo_req_text" 
 													id="collabo_req_text" rows="3" cols="20"></textarea>
 											</dd>
 										</dl>
 										<br />
-
+										
 										<div class="col-sm-2"></div>
 										<div class="col-sm-10"></div>
 									</div>
-								</form>
-
+								<input type="submit" class="btn btn-default" value="거절 완료"
+								onclick="refuse()">
+						</form>	
 							</div>
 
 							<br> <br>
@@ -348,8 +342,8 @@ img {
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<input type="button" class="btn btn-default" value="거절 완료"
-								onclick="refuse()">
+							
+							
 						</div>
 
 					</div>

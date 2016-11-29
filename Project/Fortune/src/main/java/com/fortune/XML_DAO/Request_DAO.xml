@@ -67,8 +67,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="refuse" parameterType="com.fortune.Table_DTO.Request_DTO">
 		UPDATE collabo_req SET
 		collabo_req_state='거절',
-		collabo_req_text=${param1}
-		WHERE collabo_req_index=${param2}
+		collabo_req_text=#{param2}
+		WHERE collabo_req_index=#{param1}
 
 	</update>
 
