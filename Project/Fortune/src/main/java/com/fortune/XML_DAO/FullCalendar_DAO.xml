@@ -16,15 +16,13 @@
 
 
 
-<!-- 일정(일반업무)등록 -1 -->
+<!-- 일정(일반업무)등록 -1 --><!-- schedule 테이블 insert -->
 <insert id="insertSchedule">
-<!-- schedule 테이블 insert -->
 INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
     VALUES((select nvl(max(schedule_no)+1,1) from schedule), #{collabo_no}, #{schedule_start}, #{schedule_end})
 </insert>
-<!-- 일정(일반업무)등록 -2 -->
+<!-- 일정(일반업무)등록 -2 --><!-- work 테이블 insert -->
 <insert id="insertWork">
-<!-- work 테이블 insert -->
 INSERT INTO work(SCHEDULE_NO, WORK_TITLE, WORK_TEXT)
     VALUES((select max(schedule_no) from schedule), #{work_title}, #{work_text})
 </insert>
@@ -32,10 +30,26 @@ INSERT INTO work(SCHEDULE_NO, WORK_TITLE, WORK_TEXT)
 <insert id="insertWork_Users">
 insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 </insert>
-<!-- 일정(일반업무)등록-4 // 등록 후 schedule_no select작업 -->
+<!-- 일정(일반업무)등록-4 // 등록 전 schedule_no select작업 -->
 <select id="selectScheduleno" resultType="com.fortune.Table_DTO.Schedule_DTO">
 	select nvl(max(schedule_no)+1,1) as"schedule_no" from schedule
 </select>
+
+
+<!-- 일정(회의 업무)등록 -1 --><!-- schedule 테이블 insert -->
+<insert id="insertSchedule2">
+INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
+    VALUES((select nvl(max(schedule_no)+1,1) from schedule), #{collabo_no}, #{schedule_start}, #{schedule_end})
+</insert>
+<!-- 일정(회의 업무)등록 -2 --><!-- meeting 테이블 insert -->
+<insert id="insertMeeting">
+	insert into meeting(SCHEDULE_NO, MEETING_TITLE, MEETING_TEXT, MEETING_PLACE_NO)
+	VALUES((select max(schedule_no) from schedule), #{meeting_title}, #{meeting_text}, 1)
+</insert>
+<!-- 일정(회의 업무)등록-4 // Meet_users insert작업 -->
+<insert id="insertMeet_users">
+	insert into meet_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
+</insert>
 
 
 

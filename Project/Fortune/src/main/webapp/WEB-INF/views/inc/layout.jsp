@@ -22,8 +22,10 @@
 	rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" href="assets/css/hover.css">
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>	
+
 </head>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+
 
 <body>
 
@@ -47,6 +49,7 @@
 	<!-- /#page-wrapper -->
 
 	<!-- jQuery -->
+
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
@@ -55,9 +58,10 @@
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
+
 	<!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
 
-	
+
 </body>
 </html>

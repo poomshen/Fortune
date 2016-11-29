@@ -190,7 +190,6 @@ function progress_0(){
 	$('#progress_value').text("0%");
 	$('#progress_value').css("width","0%");
 	$('#progress_value').attr("value","0");
-
 }
 
 function progress_20(){
@@ -247,6 +246,9 @@ function update_progress(){
 <input type="hidden" id="modal_start">
 <input type="hidden" id="modal_end">
 
+
+
+
 	<br>
 	<br>
 	<div class="container-fluid">
@@ -261,8 +263,7 @@ function update_progress(){
 
 <input type="hidden" class="btn btn-primary" id="modal_btn" data-toggle="modal" data-target="#myModal">
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="height:500px">
         <div class="modal-content"style="height:500px">
             <div class="modal-header">
@@ -282,15 +283,14 @@ function update_progress(){
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="Login">
-                                <form role="form" class="form-horizontal">
                                 <div class="form-group">
-                                    <label for="title" class="col-sm-2 control-label">일정제목</label>
+                                    <label for="title" class="col-sm-2 control-label">업무제목</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="modal_title" placeholder="제목.." />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="content" class="col-sm-2 control-label">내용</label>
+                                    <label for="content" class="col-sm-2 control-label">업무내용</label>
                                     <div class="col-sm-10">
                                     <textarea rows="5" cols="30" class="form-control" id="modal_text" placeholder="내용.." ></textarea><br>
                                     </div>
@@ -299,23 +299,21 @@ function update_progress(){
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="button" class="btn hvr-forward" id="modal_ok">
-                                            업무등록</button>
+                                        <button type="button" data-dismiss="modal" class="btn hvr-forward" id="modal_ok">
+                                            일반업무 등록</button>
                                         
                                     </div>
                                 </div>
-                                </form>
                             </div>
                             <div class="tab-pane" id="Registration">
-                             <form role="form" class="form-horizontal">
                                 <div class="form-group">
-                                    <label for="title" class="col-sm-2 control-label">일정제목</label>
+                                    <label for="title" class="col-sm-2 control-label">회의제목</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="modal_title2" placeholder="제목.." />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="content" class="col-sm-2 control-label">내용</label>
+                                    <label for="content" class="col-sm-2 control-label">회의내용</label>
                                     <div class="col-sm-10">
                                     <textarea rows="5" cols="30" class="form-control" id="modal_text2" placeholder="내용.." ></textarea><br>
                                     </div>
@@ -324,25 +322,24 @@ function update_progress(){
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="submit" class="btn btn-primary btn-sm" id="modal_ok2">
-                                            업무등록</button>
+                                        <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" id="modal_ok2">
+                                            회의업무 등록</button>
                                         
                                     </div>
                                 </div>
-                                </form>
                             </div>
                         </div>
                         <div id="OR" class="hidden-xs" style="color:#fff">
                               >></div>
                     </div>
-                    <div class="col-md-4" style="margin-top:57px">
- 
+                     <div class="col-md-4" style="margin-top:57px">
+
 							<dl class="dropdown_s effect2" style="margin-top: 50px;margin-left: 5px;"> 
   
     <dt>
     <a href="#"style="margin-top:5px; height: 133px;padding-right: 0px;">
       <span class="hida box" style="width: 253px;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
-      <p class="multiSel"></p>  
+      <p class="multiSel"></p>
     </a>
     </dt>
   
