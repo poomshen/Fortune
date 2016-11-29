@@ -8,11 +8,20 @@ public class Schedule_Work_DTO {
 	private String work_text;
 	private String users;
 	private int collabo_no;
+	private float work_progress;
+	
+	
 	
 	
 	
 	
 
+	public float getWork_progress() {
+		return work_progress;
+	}
+	public void setWork_progress(float work_progress) {
+		this.work_progress = work_progress;
+	}
 	public int getCollabo_no() {
 		return collabo_no;
 	}

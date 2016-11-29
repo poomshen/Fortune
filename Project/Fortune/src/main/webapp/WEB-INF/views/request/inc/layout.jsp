@@ -26,7 +26,7 @@
 	
 
 
-	
+<link rel="stylesheet" href="assets/css/hover.css">	
 </head>
 <body>
 	<tiles:insertAttribute name="header" />

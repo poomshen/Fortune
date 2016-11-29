@@ -260,7 +260,7 @@ NOTE: use percentage font sizes or else old IE chokes
 }
 
 /*
-every button that is not first in a button group should scootch over one pixel and cover the
+every button that is not first in a button group shoufc-button-groupld scootch over one pixel and cover the
 previous button's border...
 */
 
@@ -520,13 +520,13 @@ temporary rendered events).
 	font-size: .85em;
 	line-height: 1.3;
 	border-radius: 3px;
-	border: 1px solid #3a87ad; /* default BORDER color */
+	/* default BORDER color */
 	font-weight: normal; /* undo jqui's ui-widget-header bold */
 }
 
 .fc-event,
 .fc-event-dot {
-	background-color: #3a87ad; /* default BACKGROUND color */
+	background-color: #337ab7; /* default BACKGROUND color */
 }
 
 /* overpower some of bootstrap's and jqui's styles on <a> tags */
@@ -1395,6 +1395,12 @@ be a descendant of the grid when it is being dragged.
 .fc-unthemed .fc-list-empty { /* theme will provide own background */
 	background-color: #eee;
 }
+
+/* 
+	작성자 : 이예지 
+	최종 수정일 : 2016/11/28
+	작업 내용 : 캘린더의 select box css와 효과 삽입
+ */
 body {
 	margin: 0px 0px;
 	padding: 0;

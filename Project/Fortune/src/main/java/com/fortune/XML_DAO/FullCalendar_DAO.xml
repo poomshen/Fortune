@@ -16,15 +16,13 @@
 
 
 
-<!-- 일정(일반업무)등록 -1 -->
+<!-- 일정(일반업무)등록 -1 --><!-- schedule 테이블 insert -->
 <insert id="insertSchedule">
-<!-- schedule 테이블 insert -->
 INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
     VALUES((select nvl(max(schedule_no)+1,1) from schedule), #{collabo_no}, #{schedule_start}, #{schedule_end})
 </insert>
-<!-- 일정(일반업무)등록 -2 -->
+<!-- 일정(일반업무)등록 -2 --><!-- work 테이블 insert -->
 <insert id="insertWork">
-<!-- work 테이블 insert -->
 INSERT INTO work(SCHEDULE_NO, WORK_TITLE, WORK_TEXT)
     VALUES((select max(schedule_no) from schedule), #{work_title}, #{work_text})
 </insert>
@@ -32,17 +30,33 @@ INSERT INTO work(SCHEDULE_NO, WORK_TITLE, WORK_TEXT)
 <insert id="insertWork_Users">
 insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 </insert>
-<!-- 일정(일반업무)등록-4 // 등록 후 schedule_no select작업 -->
+<!-- 일정(일반업무)등록-4 // 등록 전 schedule_no select작업 -->
 <select id="selectScheduleno" resultType="com.fortune.Table_DTO.Schedule_DTO">
 	select nvl(max(schedule_no)+1,1) as"schedule_no" from schedule
 </select>
+
+
+<!-- 일정(회의 업무)등록 -1 --><!-- schedule 테이블 insert -->
+<insert id="insertSchedule2">
+INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
+    VALUES((select nvl(max(schedule_no)+1,1) from schedule), #{collabo_no}, #{schedule_start}, #{schedule_end})
+</insert>
+<!-- 일정(회의 업무)등록 -2 --><!-- meeting 테이블 insert -->
+<insert id="insertMeeting">
+	insert into meeting(SCHEDULE_NO, MEETING_TITLE, MEETING_TEXT, MEETING_PLACE_NO)
+	VALUES((select max(schedule_no) from schedule), #{meeting_title}, #{meeting_text}, 1)
+</insert>
+<!-- 일정(회의 업무)등록-4 // Meet_users insert작업 -->
+<insert id="insertMeet_users">
+	insert into meet_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
+</insert>
 
 
 
 
 <!-- 모든 일정(일반업무) select -1 -->
 <select id="selectSWList" resultType="com.fortune.function_DTO.Schedule_Work_DTO">
-	SELECT S.SCHEDULE_NO, SCHEDULE_START, SCHEDULE_END, WORK_TITLE, WORK_TEXT FROM 
+	SELECT S.SCHEDULE_NO, SCHEDULE_START, SCHEDULE_END, WORK_TITLE, WORK_TEXT, WORK_PROGRESS FROM 
 	SCHEDULE S JOIN WORK W 
 	ON S.SCHEDULE_NO = W.SCHEDULE_NO 
 	WHERE S.COLLABO_NO = #{collabo_no}
@@ -63,10 +77,15 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 
 <!-- 선택한 일정 select -->
 <select id="selectClick" resultType="com.fortune.function_DTO.Schedule_Work_DTO">
-	SELECT S.SCHEDULE_NO, SCHEDULE_START, SCHEDULE_END, WORK_TITLE, WORK_TEXT FROM 
+	SELECT S.SCHEDULE_NO, SCHEDULE_START, SCHEDULE_END, WORK_TITLE, WORK_TEXT, WORK_PROGRESS FROM 
 	SCHEDULE S JOIN WORK W 
 	ON S.SCHEDULE_NO = W.SCHEDULE_NO 
 	WHERE S.COLLABO_NO = 1 AND S.SCHEDULE_NO = #{id}
+</select>
+<!-- 선택한 일정 select -2 -->
+<select id="selectClick_users" resultType="String">
+	select user_id from work_users
+	where schedule_no = #{schedule_no}
 </select>
 
 
@@ -97,6 +116,11 @@ insert into work_users(user_id, schedule_no) values(#{user_id}, #{schedule_no})
 <update id="updateWork">
 	UPDATE WORK SET WORK_TITLE = #{work_title}, WORK_TEXT = #{work_text}
 	WHERE SCHEDULE_NO = #{schedule_no}
+</update>
+<!-- progress update -->
+<update id="updateProgress">
+	UPDATE WORK SET WORK_PROGRESS = #{param2}
+	WHERE SCHEDULE_NO = #{param1}
 </update>
 
 
