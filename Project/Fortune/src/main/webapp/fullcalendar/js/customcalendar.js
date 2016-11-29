@@ -1,6 +1,8 @@
 //캘린더 호출시 필요한 초기 변수 선언
 var content = "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
 var array = [];
+var clickobject;
+var clickobjectcolor= "";
 
 
 
@@ -81,13 +83,19 @@ function loadCalendar() {
 	        //alert('View: ' + view.name); //달력의 정보 표현 ex) view.name = november 2016, view.title = month
 			//$(this).css('background-color', 'rgb(58, 135, 173)'); //일정의 스타일을 바꿀 수 있음 ex) border-color, background-color ...
 			
+			//기존에 클릭했던 object의 주소가 있으면 그 객체의 색상을 기존 색상으로 바꿈
+			if(clickobject){
+				clickobject.css('background-color', clickobjectcolor);
+			}
 			
-			//모든 일정의 배경색을 reg(58, 135, 173)으로 설정
-			$('.fc-event-container').children().css('background-color', 'rgb(58, 135, 173)');
+			
+			//클릭된 일정의 객체주소를 변수에 담음
+			clickobject = $(this)
+			//클릭된 일정의 객체 배경색 값을 변수에 담음
+			clickobjectcolor = $(this).css('background-color');
 			
 			//클릭된 일정의 배경색을 red로 설정
 			$(this).css('background-color', 'red');
-			
 			
 			
 			var content3 = "";
@@ -99,7 +107,6 @@ function loadCalendar() {
 					"schedule_no": calEvent.id,
 	            },
 				success : function(obj) {
-					console.log(obj)
 					content3 += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
 					content3 += '</td><td><a';
 					content3 += ' onclick="detail(' + obj.schedule_no;
