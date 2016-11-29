@@ -62,6 +62,9 @@ public class ProController {
 			
 		System.out.println("writeRequest.htm 컨트롤러 start");
 		try {
+			//추가 사항 req_no 바꿔주기
+			
+			
 			// 실DB저장
 			proservice.regRequest(n, request);
 			
@@ -171,7 +174,7 @@ public class ProController {
 	  return "redirect:requestList.htm"; //리스트 화면 (controller 타서 데이터 출력)
 	 }
 	 
-	//수락 하기
+	//수락 하기 눌렀을 경우 화면 출력
 	 @Transactional
 	@RequestMapping("accept.htm")
 		 public String Accept(String collabo_req_index, Model model) throws ClassNotFoundException,
@@ -185,7 +188,7 @@ public class ProController {
 		  return "cen.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	
 		
-	//거절 하기
+	//거절 하기 했을 경우 화면 출력
 		 @RequestMapping("refuse.htm")
 		 public String Refuse(String collabo_req_text,String collabo_req_index ) throws ClassNotFoundException,
 		   SQLException {
