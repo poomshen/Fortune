@@ -299,7 +299,7 @@ public class ProController {
 			@RequestMapping( value="insertmanager.htm", method = RequestMethod.POST)
 			 public String InsertManager(With_DTO m, String collabo_req_index) throws ClassNotFoundException,
 			   SQLException {
-				 proservice.ProManager(collabo_req_index);
+				// proservice.ProManager(collabo_req_index);
 				 proservice.InsertManager(m);
 				/* System.out.println(m.toString()+"흠냐");*/
 				 

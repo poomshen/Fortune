@@ -153,7 +153,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	<update id="updatemanager">
 		UPDATE collabo SET
-		user_ID=#{user_ID}
+		user_ID=#{user_ID} ,collabo_state='진행중'
 		WHERE collabo_req_index=#{collabo_req_index}
 
 	</update>
@@ -180,11 +180,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 날짜 일자: 2016-11-25
 	 -->
 	 
-	<update id="manager">
+	<!-- <update id="manager">
 		UPDATE collabo SET
 		collabo_state='진행중'
 		WHERE collabo_req_index=#{collabo_req_index}
-	</update>
+	</update> -->
 
 	<!--만든 목적: 담당자가 정해지면 참가자를 지정할수 있어야 하기에 만들었습니다.
 		날짜 일자: 2016-11-25 
