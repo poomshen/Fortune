@@ -3,9 +3,11 @@ package com.fortune.fullcalendar_DAO;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.fortune.Table_DTO.Meet_Users_DTO;
 import com.fortune.Table_DTO.Schedule_DTO;
 import com.fortune.Table_DTO.Work_Comment_DTO;
 import com.fortune.Table_DTO.Work_Users_DTO;
+import com.fortune.function_DTO.Schedule_Meeting_DTO;
 import com.fortune.function_DTO.Schedule_Work_DTO;
 
 
@@ -15,6 +17,11 @@ public interface IFullCalendar {
 	public int insertWork(Schedule_Work_DTO swdto) throws ClassNotFoundException, SQLException;
 	public Schedule_DTO selectScheduleno() throws ClassNotFoundException, SQLException;
 	public int insertWork_Users(Work_Users_DTO wudto) throws ClassNotFoundException, SQLException;
+	
+	//회의일정 등록(schedule(insertSchedule와 동일) + meeting + meet_users) 등록
+	public int insertSchedule2(Schedule_Meeting_DTO smdto) throws ClassNotFoundException, SQLException;
+	public int insertMeeting(Schedule_Meeting_DTO smdto) throws ClassNotFoundException, SQLException;
+	public int insertMeet_users(Meet_Users_DTO mudto) throws ClassNotFoundException, SQLException;
 	
 	//모든 일정내용 호출
 	public List<Schedule_Work_DTO> selectSWList(String collabo_no) throws ClassNotFoundException, SQLException;
