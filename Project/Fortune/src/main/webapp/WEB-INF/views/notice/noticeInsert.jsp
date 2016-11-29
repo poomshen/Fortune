@@ -20,22 +20,22 @@
 						<form role="form" action="" method="post"
 							enctype="multipart/form-data">
 							<div class="form-group">
-								<label>제목</label> <input class="form-control"
+								<input class="form-control"
 									placeholder="제목을 작성해주세요." type="text" name="notice_title"
 									id="notice_title">
 							</div>
 							<div class="form-group">
-								<label>작성자</label>
 								<p class="form-control-static">admin@fortune.com</p>
 							</div>
 							<div class="form-group">
-								<label>첨부파일</label> <input type="file" name="file" id="File">
+							<input type="file" name="file" id="File">
 							</div>
 							<div class="form-group">
-								<label>작성내용</label>
 								<textarea name="notice_text" id="notice_text"></textarea>
 								<script>
-								CKEDITOR.replace('notice_text');
+								CKEDITOR.replace('notice_text',{
+									filebrowserImageUploadUrl: '${contextPath}/noticeImageUpload.htm'
+								});
 								</script>
 							</div>
 							<button type="submit" class="btn btn-default">저장</button>

@@ -9,6 +9,7 @@
 package com.fortune.notice_Controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,13 +35,15 @@ public class NoticeInsert_Controller {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//public Logger logger;	
+	
 	//파일저장될위치 임시지정
 	private static final String filePath = "C:\\fortune\\noticefile\\";
 
 
 	// 공지사항등록 화면처리
 	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.GET)
-	public String noticeInsert() throws Exception {
+	public String noticeInsert() {
 		System.out.println("NoticeController의 noticeInsert를 탑니다~");
 		
 		return "notice.noticeInsert";		
@@ -48,8 +52,7 @@ public class NoticeInsert_Controller {
 
 	// 공지사항등록 실제처리
 	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.POST)
-	public String noticeInsert(Notice_DTO ndto, HttpServletRequest request)
-			throws Exception {
+	public String noticeInsert(Notice_DTO ndto, HttpServletRequest request) throws Exception {
 
 		System.out.println("NoticeController의 noticeInsert를 타서, 실제로 글작성을 할꺼지롱!");		
 
