@@ -25,8 +25,8 @@ public class JoinAjax_Controller {
 	@Autowired
 	public SqlSession sqlsession;
 	
-	   @Autowired
-	   private View jsonview;
+	@Autowired
+	private View jsonview;
 	
 	@RequestMapping("/idchk.ajax")
 	public @ResponseBody String idchk(Join_DTO dto){
@@ -57,15 +57,5 @@ public class JoinAjax_Controller {
 		}
 	}
 	
-	@RequestMapping("/deptsearch.ajax")
-	public ArrayList<Join_DTO> deptsearch(int dept_no){
-		System.out.println("같은 부서 리스트 쫙 뽑을거");
-		
-		ArrayList<Join_DTO> dto = new ArrayList<Join_DTO>();
-		IOrganization dao = sqlsession.getMapper(IOrganization.class);
-		dto = dao.showdept(dept_no);
-		
-		return dto;
-	}
 
 }

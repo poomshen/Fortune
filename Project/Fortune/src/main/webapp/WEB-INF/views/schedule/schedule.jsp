@@ -25,7 +25,7 @@ $(document).ready(function() {
 						id : obj.schedule_no,
 						title : obj.work_title,
 						start : obj.schedule_start,
-						end: obj.schedule_end
+						end : obj.schedule_end
 				};
 				array.push(item);
 				
@@ -33,7 +33,7 @@ $(document).ready(function() {
 		        content += '</td><td><a';
 		        content += ' onclick="detail(' + obj.schedule_no;
 		        content += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-		        content += "','" + obj.users + "'";
+		        content += "','" + obj.users + "','" + obj.work_progress + "'";
 		        content += ')" >상세보기</a></td></tr>';
 		        
 			});
@@ -43,10 +43,13 @@ $(document).ready(function() {
 		}
 	});
 	
+	
 });
 
-function detail(id, title, text, start, end, userids){
+function detail(id, title, text, start, end, userids, progress){
 	//온클릭 함수에 가져올 데이터들
+	$('#progress_value').text(progress*100+"%");
+	$('#progress_value').css("width",progress*100+"%");
 	$('#content').empty();
 	$('#comment_text').empty();
 	$('#content_detail').css("display", "block");
@@ -61,10 +64,11 @@ function detail(id, title, text, start, end, userids){
 	var contentck = "";
 	
 	for(var i =0; i<userid.length-1; i++){
-		contentck += "<input type='checkbox' name='userchk' value='" +userid[i]+ "'>" + userid[i] + " &nbsp;&nbsp;";
+		//contentck += "<input type='checkbox' name='userchk' value='" +userid[i]+ "'>" + userid[i] + " &nbsp;&nbsp;";
+		contentck += userid[i] + "&nbsp;&nbsp;&nbsp;"
 	}
 	
- 	$('#cbdiv').html(contentck)
+ 	$('#usersdiv').html(contentck)
  	
  	
  	//상세보기 내용에 comment 뿌려주는 내용
@@ -179,6 +183,59 @@ function delete_comment(commend_id){
 			$('#comment_text').html(comment_text);
 		}
 	});
+ 	
+}
+
+function progress_0(){
+	$('#progress_value').text("0%");
+	$('#progress_value').css("width","0%");
+	$('#progress_value').attr("value","0");
+
+}
+
+function progress_20(){
+	$('#progress_value').text("20%");
+	$('#progress_value').css("width","20%");
+	$('#progress_value').attr("value","0.2");
+}
+function progress_40(){
+	$('#progress_value').text("40%");
+	$('#progress_value').css("width","40%");
+	$('#progress_value').attr("value","0.4");
+}
+
+function progress_60(){
+	$('#progress_value').text("60%");
+	$('#progress_value').css("width","60%");
+	$('#progress_value').attr("value","0.6");
+}
+
+function progress_80(){
+	$('#progress_value').text("80%");
+	$('#progress_value').css("width","80%");
+	$('#progress_value').attr("value","0.8");
+}
+
+function progress_100(){
+	$('#progress_value').text("100%");
+	$('#progress_value').css("width","100%");
+	$('#progress_value').attr("value","1");
+}
+
+function update_progress(){
+	
+	$.ajax({
+		url : 'update_progress.ajax',
+		type : 'post',
+		data : {"schedule_no": $('#detail_id').val(),
+				"work_progress" : $('#progress_value').attr("value")
+				},
+		success : function(data) {
+			alert('등록 성공')
+		}
+	});
+	
+	
 }
 
 </script>
@@ -324,6 +381,22 @@ function delete_comment(commend_id){
 						<input type="button" value="일정 삭제하기" id="delete_btn"><br>
 						<label>제목 : </label> <input type="text" id="detail_title" readonly="readonly"><br>
 						<label>내용 : </label> <textarea rows="5" cols="50" id="detail_text" readonly="readonly"></textarea><br>
+						<!-- progress bar -->
+						<div class="progress">
+						    <div class="progress-bar progress-bar-striped active" value="0" id="progress_value" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+							0%</div>
+					  	</div>
+					  	<button type="button" onclick="progress_0()"> 0% </button>
+					  	<button type="button" onclick="progress_20()"> 20% </button>
+					  	<button type="button" onclick="progress_40()"> 40% </button>
+					    <button type="button" onclick="progress_60()"> 60% </button>
+					    <button type="button" onclick="progress_80()"> 80% </button>
+					    <button type="button" onclick="progress_100()"> 100% </button>
+					    <button type="button" onclick="update_progress()"> 등록 </button><br>
+					    
+					    <label>일정 담당자</label><br>
+					    <div id="usersdiv"></div>
+					    
 							<hr>
 							<input type="hidden" id="detail_id">
 							<input type="hidden" id="detail_start">

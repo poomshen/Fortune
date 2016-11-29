@@ -231,13 +231,38 @@ public class FullCalendarController {
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
         
         Schedule_Work_DTO swdto = fullcalendarDAO.selectClick(schedule_no);
-	
+        
+        String[] user_id = fullcalendarDAO.selectClick_users(schedule_no);
+        
+        String users ="";
+        for(int i =0; i<user_id.length; i++){
+        	users += user_id[i] + "/";
+        }
+        
+        swdto.setUsers(users);
+        
         return swdto;
 	}
 	
 	
 	
-	
+	/* 작업자 : 이명철  // 최초 작업일 : 11.29 // 최종 작업일 : 11.29
+     * 작업 내용 : progress값 update
+     * version : v1.0
+    */
+	@RequestMapping(value="update_progress.ajax", method = RequestMethod.POST)
+    public @ResponseBody int update_progress(@RequestParam(value="schedule_no") String schedule_no,
+    		@RequestParam(value="work_progress") float work_progress) throws ClassNotFoundException, SQLException{
+        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : progress 수치 update ");        
+        System.out.println(schedule_no);
+        System.out.println(work_progress);
+        
+        IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+        
+        int i = fullcalendarDAO.updateProgress(schedule_no, work_progress);
+        		
+        return i;
+	}
 	
 
 }

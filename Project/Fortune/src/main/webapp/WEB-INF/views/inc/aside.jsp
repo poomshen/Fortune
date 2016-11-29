@@ -3,7 +3,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <style>
-a {
+ul a {
      color: white;
     text-decoration: none;
 }
@@ -29,7 +29,6 @@ a {
                             	<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
                                
                                 <li>
-
                                <a href="#"><i class="fa fa-bank"></i></i>협업요청 목록<span class="fa arrow"></span></a>
 
                                <ul class="nav nav-second-level">
@@ -80,11 +79,11 @@ a {
                         </li>
                         </security:authorize>
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i>조직도<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
+                            <a href="dept.htm"><i class="fa fa-wrench"></i>주소록<!-- <span class="fa arrow"></span> --></a>
+                            <!-- <ul class="nav nav-second-level"> -->
+                              <!--   <li>
                                     <a href="dept.htm">부서</a>
-                                </li>
+                                </li> -->
                              <!--    <li>
                                     <a href="#">팀 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -103,7 +102,7 @@ a {
                                     </ul>
                                     /.nav-third-level
                                 </li> -->
-                            </ul>
+                            <!-- </ul> -->
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
