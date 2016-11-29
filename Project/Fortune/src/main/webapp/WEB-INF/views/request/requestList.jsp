@@ -79,7 +79,7 @@ img {
   	 			cache: false,
   	 			data:"collabo_req_index="+a,
   	 		    success:function(data){ //callback  
-  					$("#menuView2").append($('#menuView2').html(data)); 
+  					$("#ReqCollabo").append($('#ReqCollabo').html(data)); 
   	 		      
   	 		     },
   	 			error: function(){						

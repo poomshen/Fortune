@@ -107,11 +107,12 @@ function refuse() {
 						<h4 class="modal-title">협업모음 프로젝트</h4>
 
 					</div>
+					<form action="refuse.htm" method="get" name="refuseform">
 					<div class="modal-body">
 						<div>
 							<!-- CSS 구성  -->
 						
-							<form action="refuse.htm" method="get" name="refuseform">
+							
 							<div class="col-sm-6"></div>
 							<br>
 							<div>
@@ -128,7 +129,7 @@ function refuse() {
 								
 							</div>
 							</div>
-							</form>
+							
 							
 						</div>
 							
@@ -138,7 +139,7 @@ function refuse() {
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<input type="button"  class="btn btn-default" value="거절 완료" onclick="refuse()">
 					</div>
-					
+					</form>
 				</div>
 
 			</div>
