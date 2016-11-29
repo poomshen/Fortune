@@ -79,11 +79,11 @@ ul a {
                         </li>
                         </security:authorize>
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i>조직도<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
+                            <a href="dept.htm"><i class="fa fa-wrench"></i>주소록<!-- <span class="fa arrow"></span> --></a>
+                            <!-- <ul class="nav nav-second-level"> -->
+                              <!--   <li>
                                     <a href="dept.htm">부서</a>
-                                </li>
+                                </li> -->
                              <!--    <li>
                                     <a href="#">팀 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -102,7 +102,7 @@ ul a {
                                     </ul>
                                     /.nav-third-level
                                 </li> -->
-                            </ul>
+                            <!-- </ul> -->
                             <!-- /.nav-second-level -->
                         </li>
                         <li>

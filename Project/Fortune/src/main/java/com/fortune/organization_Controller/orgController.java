@@ -32,33 +32,30 @@ public class orgController {
 		
 		Join_DTO dto = (Join_DTO) session.getAttribute("info");
 		int dept_no = dto.getDept_no();
+		int team_no = dto.getTeam_no();
 		
 		IOrganization dao = sqlSession.getMapper(IOrganization.class);
-		ArrayList<Join_DTO> deptmember = dao.showdept(dept_no);
+		ArrayList<Join_DTO> deptmember = dao.showdept(dept_no,team_no);
 		model.addAttribute("deptlist", deptmember);
 		
-/*		for(int i=0; i<deptmember.size(); i++){
-			System.out.println("해당 아이디값 : "+ deptmember.get(i));
-		}*/
-
 		//부서 리스트 보여주는 부분
 		ArrayList<Dept_DTO> dto2 = new ArrayList<Dept_DTO>();
 		IJoin dao2 = sqlSession.getMapper(IJoin.class);
 		dto2 = dao2.searchDept();
 		model.addAttribute("dept", dto2);
-		
+
 		//팀 리스트 보여주는 부분
 		ArrayList<Team_DTO> tdto = new ArrayList<Team_DTO>();
 		IJoin tdao = sqlSession.getMapper(IJoin.class);
 		tdto = tdao.searchTeam();
 		model.addAttribute("team", tdto);
-		
+
 		//직함 리스트 보여주는 부분
 		ArrayList<Jobtitle_DTO> jdto = new ArrayList<Jobtitle_DTO>();
 		IJoin jdao = sqlSession.getMapper(IJoin.class);
 		jdto = jdao.searchTitle();
 		model.addAttribute("position", jdto);
-
+		
 		return "business.business";
 	}
 
