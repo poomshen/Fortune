@@ -264,15 +264,16 @@ function loadCalendar() {
 						scheduleusers += $(this).val()+"/";
 					
 					});
-
 					var newschedule = {
 							"title": $('#modal_title').val(),
 							"text": $('#modal_text').val(),
 							"start": $('#modal_start').val(),
 							"end": $('#modal_end').val(),
 							"collabo_no" : $('#collabo_no').val(),
-							"scheduleusers": scheduleusers
+							"scheduleusers" : scheduleusers,
+							"work_type" : "0"
 					}
+
 					
 					$.ajax({
 						type: 'post',
@@ -313,12 +314,86 @@ function loadCalendar() {
 						}
 					});
 				})
-	    	}
-	    },
+	    	},
 	 // 작업자: 이명철  // 최근 수정일: 16-11-21 --------------------- E N D ------------------------
 	 // ------------------------------------------------------------------------------------
 	 
 	    
+	    
+	    
+	    
+        // 작업자: 이명철  // 최근 수정일: 16-11-29 ---------------------S T A R T------------------------
+        //일정등록 함수
+    	insertEvent2: {
+    		click: $('#modal_ok2').click(function(){
+    		
+    			
+    			var eventData;
+				var scheduleusers="";
+				var count=",";
+				var work_type="";
+				$("input[name='userchk']:checked").each(function(i){
+
+					scheduleusers += $(this).val()+"/";
+				
+				});
+				var newschedule = {
+						"title": $('#modal_title').val(),
+						"text": $('#modal_text').val(),
+						"start": $('#modal_start').val(),
+						"end": $('#modal_end').val(),
+						"collabo_no" : $('#collabo_no').val(),
+						"scheduleusers" : scheduleusers,
+						"work_type" : "0"
+				}
+
+				
+				$.ajax({
+					type: 'post',
+					url: 'select.ajax',
+					data: newschedule,
+					success : function(data) {
+						console.log(data);
+						eventData = {
+								id: data.schedule.schedule_no,
+								title: data.schedule.work_title,
+								start: data.schedule.schedule_start,
+								end: data.schedule.schedule_end
+						}
+						
+						calendar.fullCalendar('renderEvent', eventData , true);
+						fcontent();
+						console.log('insert 성공')
+						
+						
+					      $.each(data.alarm, function (i, item) {
+                                console.log(item.count);
+                                count+=item.count+"/";
+                                work_type=item.work_type;
+					      
+					      });
+						
+						console.log(data.alarm); 
+						//var count =","+data.count.join(' / ');
+						
+						console.log(count);
+						
+						send(scheduleusers+count+","+work_type);
+						
+						
+						$(".hida").show();
+		    			$('input[type="checkbox"]').prop("checked",false);
+		    			$('.multiSel').text("");
+						}
+					});
+				})
+	    	}
+	    },
+		 // 작업자: 이명철  // 최근 수정일: 16-11-29 --------------------- E N D ------------------------
+		 // ------------------------------------------------------------------------------------    
+	    
+	    
+	 
 	    
 	    
 	 // 캘린더 초기 호출시 뷰단에 뿌려줄 일정데이터

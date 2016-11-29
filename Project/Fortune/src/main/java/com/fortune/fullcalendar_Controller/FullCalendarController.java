@@ -44,11 +44,11 @@ public class FullCalendarController {
     public @ResponseBody Map<String,Object> ajax(@RequestParam(value="scheduleusers") String users,
             @RequestParam(value="title") String title, @RequestParam(value="start") String start,
             @RequestParam(value="end") String end, @RequestParam(value="text") String text,
-            @RequestParam(value="collabo_no") int collabo_no, HttpSession session)
+            @RequestParam(value="collabo_no") int collabo_no, @RequestParam(value="work_type") int work_type, HttpSession session)
             throws ClassNotFoundException, SQLException{
     	
-		//Schedule_Work_DTO
-    	
+		System.out.println(work_type);
+		
         System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 캘린더 select함수 호출: 일정 insert작업");        
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
         
