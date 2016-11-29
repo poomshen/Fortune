@@ -27,7 +27,8 @@ function onOpen(evt) {
 function onMessage(evt) {
 
 	console.log("evt.data"+evt.data);
-	  $.ajax({
+	
+	$.ajax({
 		  
 		  type:"post",
 		  dataType: "html",
@@ -37,7 +38,7 @@ function onMessage(evt) {
 		  
 			  
 			  console.log("성공");
-			  
+			  console.log(data);
 			  $('#alarm').empty();
 			  
 			  $('#alarm').html(data);
@@ -233,7 +234,7 @@ $(document).ready(function() {
                 <!-- /.dropdown -->
                 <li id="alarm" class="dropdown">
                                  
-                    <a class="dropdown-toggle" style="color:#194f89;;" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" style="color:#194f89;" data-toggle="dropdown" href="#">
                        <i class="fa fa-bell fa-fw hvr-pop"><span id="blink"  <c:if test="${sessionScope.alarm.size()>0}"> class="blink_me notification_count" </c:if> > <c:if test="${sessionScope.totalCount>0}"> ${sessionScope.totalCount}</c:if></span></i>  <i class="fa fa-caret-down"></i>
                     </a>
                 

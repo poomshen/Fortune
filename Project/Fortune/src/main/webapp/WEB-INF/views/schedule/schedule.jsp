@@ -336,7 +336,9 @@ function update_progress(){
                     </div>
                      <div class="col-md-4" style="margin-top:57px">
 
-							<dl class="dropdown_s effect2" style="margin-top: 50px;margin-left: 5px;"> 
+
+
+<dl class="dropdown_s effect2" style="margin-top: 50px;margin-left: 5px;"> 
   
     <dt>
     <a href="#"style="margin-top:5px; height: 133px;padding-right: 0px;">
