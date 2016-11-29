@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
 
 <!-- Bootstrap Core CSS -->
@@ -25,7 +26,10 @@
 
 <!-- Custom Fonts -->
 <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="assets/css/hover.css">
+
+<style type="text/css">
+a{color: gray !important;}
+</style>
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
@@ -61,5 +65,8 @@
 	
 	<!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
+	
+	<!-- ckeditor 쓰려고 추가 -->
+	<script src="ckeditor/ckeditor.js"></script>
 </body>
 </html>

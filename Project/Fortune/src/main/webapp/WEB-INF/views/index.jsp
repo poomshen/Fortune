@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="assets/css/hover.css">
 
 <!-- Favicon and touch icons -->
-<link rel="shortcut icon" href="assets/ico/favicon.png">
+<link rel="shortcut icon" href="assets/ico/four_leaf_clover2.png">
 <link rel="apple-touch-icon-precomposed" sizes="144x144"
 	href="assets/ico/apple-touch-icon-144-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="114x114"
