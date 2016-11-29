@@ -13,14 +13,18 @@
 <style>
 table, th, td {
     border: 1px solid black;
+    text-align: center;
 }
 </style>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
 
-<h3>주소록</h3>
+<div class="col-lg-12">
+	<h1 class="page-header">[주소록]</h1>
+</div>
 
+<div class="col-lg-12">
 <form action="" >
 	<select id="deptSelect" name="deptSelect" onchange="deptchange()">
 		<c:forEach var="i" items="${dept}">
@@ -52,6 +56,7 @@ table, th, td {
 	
 	<input type="button" class="btn btn-primary" onclick="deptshow()" value="검색">
 </form>
+</div>
 
 <!-- 표 부분 -->
 <div id="deptshowDiv">
