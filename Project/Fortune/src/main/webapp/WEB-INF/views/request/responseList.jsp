@@ -70,6 +70,12 @@
 	float: left;
 	margin-left: 1%;
 }
+#cardLeft{
+	float: left;
+}
+#footerCard{
+	float: left;
+}
 </style>
 
 <title>Insert title here</title>
@@ -88,14 +94,14 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">협업 리스트</div>
 					<!-- 검색폼 추가 -->
-					<div>
 						<c:forEach items="${list}" var="n">
 							<div class="w3-card-2"
 								style="width: 98%; margin-top: 1%; margin-left: 1%; margin-bottom: 1%;">
-								<header class="w3-container "> 번호: ${n.collabo_no} 기간:
-								${n.collabo_start} ~ ${n.collabo_end}
+						<div id="cardLeft" >
+								<header class="w3-container "> 
+								번호: ${n.collabo_no} 기간: ${n.collabo_start} ~ ${n.collabo_end}
 								<h1>프로젝트 제목</h1>
-								부장 ${n.collabo_req_ID} 팀장 : <security:authorize
+								팀장 : <security:authorize
 									access="hasAnyRole('ROLE_SUPERMGR')">
 									<c:choose>
 										<c:when test="${n.user_ID  == null}">
@@ -109,16 +115,27 @@
 												onclick="proAjaxManager(${n.collabo_req_index})">담당</a>
 										</c:otherwise>
 									</c:choose>
-								</security:authorize> ${n.user_ID} </header>
-
-								<div class="w3-container">
-									<p> <input type="button" onclick="detailReqCollabo(${n.collabo_req_index})" value="상세보기"> </p>
-								</div>
-
-								<footer class="w3-container "> <a
-									href="schedule.htm?collabo_no=${n.collabo_no}"><button>일정</button></a>
-									<a href="mainfile.htm?collabo_no=${n.collabo_no}"><button>자료실</button></a>
+								</security:authorize> ${n.user_ID}
+								<br>
+								부장 ${n.collabo_req_ID}
 								<h5>${n.collabo_state}</h5>
+								 </header>
+								</div>
+								<footer class="w3-container " >
+								<div style="float: right;">
+								<div>
+									<a href="schedule.htm?collabo_no=${n.collabo_no}" class="btn btn-primary">
+									<i class="glyphicon glyphicon-calendar"></i><br>일정</a>
+								</div>
+								<div>
+									<a href="mainfile.htm?collabo_no=${n.collabo_no}" class="btn btn-primary">
+									<i class="glyphicon  glyphicon-cloud"></i><br>자료실</a>
+								</div>
+								<div>
+									<a href="#" onclick="detailReqCollabo(${n.collabo_req_index})" class="btn btn-primary"> 
+									<i class="glyphicon  glyphicon-th-list"></i><br>상세 보기</a>
+								</div>
+								</div> 
 								</footer>
 							</div>
 							<!-- 여기에서 CSS 제공 -->
@@ -127,7 +144,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	<div  id="ajaxside">
 		<div class="panel panel-default">
 			<div class="panel-heading">협업 리스트</div>
