@@ -23,7 +23,7 @@
 	</delete>
 
 	<!-- 게시물 수정 -->
-	<update id="updateNotice">
+	<update id="updateNotice" >
 		UPDATE NOTICE
 		SET NOTICE_TITLE=#{notice_title},
 		NOTICE_TEXT=#{notice_text}
@@ -64,8 +64,7 @@
 	</select>
 
 	<!-- 조회수 -->
-	<update id="updateHits" parameterType="integer"
-		resultType="com.fortune.Table_DTO.Notice_DTO">	
+	<update id="updateHits" parameterType="integer">	
 		UPDATE NOTICE
          SET
             NOTICE_HITS = NVL(NOTICE_HITS, 0) + 1

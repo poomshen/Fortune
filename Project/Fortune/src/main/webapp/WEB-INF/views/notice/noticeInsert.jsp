@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 
 <div class="row">
 	<div class="col-lg-12">
@@ -32,8 +33,10 @@
 							</div>
 							<div class="form-group">
 								<label>작성내용</label>
-								<textarea class="form-control" rows="3" name="notice_text"
-									id="notice_text"></textarea>
+								<textarea name="notice_text" id="notice_text"></textarea>
+								<script>
+								CKEDITOR.replace('notice_text');
+								</script>
 							</div>
 							<button type="submit" class="btn btn-default">저장</button>
 							<a href="notice.noticeList.htm">공지사항 목록보기</a>

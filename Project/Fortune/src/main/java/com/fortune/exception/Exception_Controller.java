@@ -16,7 +16,7 @@ public class Exception_Controller {
 	@RequestMapping(value="/error404", method=RequestMethod.GET)
 	public String handle404(){
 		System.out.println("404에러를 만나서!! 컨트롤러를 타서!!");
-		return "error.404";
+		return "error.error404";
 	}
 	
 /*	@RequestMapping(value="/error500", method=RequestMethod.GET)
