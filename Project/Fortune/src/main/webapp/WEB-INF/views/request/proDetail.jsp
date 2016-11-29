@@ -24,53 +24,22 @@ function refuse() {
 <title>Insert title here</title>
 </head>
 <body>
-
-	<div>
-		<dl>
-			<dt>프로젝트 제목</dt>
-			<dd>${list.collabo_req_title}</dd>
-		</dl>
-		<c:choose>
+	<table border="1" width="100%">
+	<tr><td>상태:</td><td>${list.collabo_req_state}</td><td>작성일</td><td>${list.collabo_req_date}</td></tr>
+	<tr><td>제목:</td><td>${list.collabo_req_title}</td><td>작성자</td><td>${list.user_ID}</td></tr>
+	<tr><td >내용</td><td colspan="3"></td></tr>
+	<tr ><td colspan="4"><c:choose>
 		<c:when test="${list.collabo_req_state != '거절'}">
-		<dl>
-			<dt>프로젝트 내용</dt>
-			<dd>${list.collabo_req_text}</dd>
-		</dl>
+			${list.collabo_req_text}
 		</c:when>
 		<c:otherwise>
-		<dl>
-			<dt>거절사유 내용</dt>
-			<dd>${list.collabo_req_text}</dd>
-		</dl>
+			${list.collabo_req_text}
 		</c:otherwise>
-		</c:choose>
-		<dl>
-			<dt>프로젝트 작성자</dt>
-			<dd>${list.user_ID}</dd>
-		</dl>
-		<dl>
-			<dt>프로젝트 전송받을 사람</dt>
-			<dd>${list.collabo_req_ID}</dd>
-		</dl>
-		<dl>
-			<dt>프로젝트 작성일</dt>
-			<dd>${list.collabo_req_date}</dd>
-		</dl>
-		<dl>
-			<dt>프로젝트 진행상태</dt>
-			<dd>${list.collabo_req_state}</dd>
-		</dl>
-		<dl>
-			<dt>프로젝트 첨부파일</dt>
-			<dd>
-				<a href="download.htm?p=upload&f=${list.collabo_req_filesrc}">${list.collabo_req_filesrc}</a>
-			</dd>
-		</dl>
-	</div>
-	<p>
-		<a href="requestList.htm">목록</a>
-	</p>
-
+		</c:choose></td></tr>
+	<tr><td colspan="2">수신자:</td><td colspan="2">${list.collabo_req_ID}</td></tr>
+	<tr><td colspan="2">첨부파일:</td><td colspan="2"><a href="download.htm?p=upload&f=${list.collabo_req_filesrc}">${list.collabo_req_filesrc}</a></td></tr>
+	</table>
+	
 
 	<c:choose>
 		<c:when test="${list.collabo_req_state == '수락'}">
@@ -94,7 +63,7 @@ function refuse() {
 
 	</c:choose>
 
-
+	<!--  거절을 위한 modal 창 -->
 	<div class="container">
 		<!-- Modal -->
 		<div class="modal fade" id="myModal2" role="dialog">
@@ -103,7 +72,7 @@ function refuse() {
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<button type="button" class="close" ..="modal">&times;</button>
 						<h4 class="modal-title">협업모음 프로젝트</h4>
 
 					</div>
@@ -128,6 +97,7 @@ function refuse() {
 								
 							</div>
 							</div>
+							</form>
 							
 						</div>
 							
@@ -137,7 +107,7 @@ function refuse() {
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<input type="button"  class="btn btn-default" value="거절 완료" onclick="refuse()">
 					</div>
-					</form>
+					
 				</div>
 
 			</div>

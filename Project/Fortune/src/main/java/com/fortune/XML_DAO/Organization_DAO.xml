@@ -5,9 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.fortune.organization_DAO.IOrganization">
 
-<select id="showdept" parameterType="integer" resultType="com.fortune.Table_DTO.Join_DTO">  
+<select id="showdept" resultType="com.fortune.Table_DTO.Join_DTO">  
 select USER_ID, USER_NAME, USER_PHONE, USER_JOIN, DEPT_NO, TEAM_NO, POSITION_NO from users
-where DEPT_NO=#{dept_no}
+where DEPT_NO=#{param1} and TEAM_NO=#{param2}
+</select>
+
+<select id="showteam" resultType="com.fortune.Table_DTO.Team_DTO">
+select TEAM_NO, DEPT_NO,TEAM_NAME from team
+where DEPT_NO=#{param1}
 </select>
 
 </mapper>
