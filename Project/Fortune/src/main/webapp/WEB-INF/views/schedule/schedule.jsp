@@ -190,7 +190,6 @@ function progress_0(){
 	$('#progress_value').text("0%");
 	$('#progress_value').css("width","0%");
 	$('#progress_value').attr("value","0");
-
 }
 
 function progress_20(){
@@ -244,6 +243,9 @@ function update_progress(){
 </head>
 <body>
 <input type="hidden" id="collabo_no" value="${collabo_no}">
+<input type="hidden" id="modal_start">
+<input type="hidden" id="modal_end">
+
 
 
 
@@ -320,7 +322,7 @@ function update_progress(){
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" id="modal_ok">
+                                        <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" id="modal_ok2">
                                             회의업무 등록</button>
                                         
                                     </div>

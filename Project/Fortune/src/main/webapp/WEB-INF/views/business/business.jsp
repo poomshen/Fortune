@@ -63,7 +63,7 @@ table, th, td {
 </div>
 
 <script type="text/javascript">
-(function() {
+$(function() {
 	alert('잠시만 기다려주세요...');
 
 	$.ajax({

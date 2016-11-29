@@ -271,7 +271,7 @@ function loadCalendar() {
 							"end": $('#modal_end').val(),
 							"collabo_no" : $('#collabo_no').val(),
 							"scheduleusers" : scheduleusers,
-							"work_type" : "0"
+							"meeting_place_no" : "0"
 					}
 
 					
@@ -323,7 +323,7 @@ function loadCalendar() {
 	    
 	    
         // 작업자: 이명철  // 최근 수정일: 16-11-29 ---------------------S T A R T------------------------
-        //일정등록 함수
+        // 회의업무 등록함수
     	insertEvent2: {
     		click: $('#modal_ok2').click(function(){
     		
@@ -338,13 +338,13 @@ function loadCalendar() {
 				
 				});
 				var newschedule = {
-						"title": $('#modal_title').val(),
-						"text": $('#modal_text').val(),
+						"title": $('#modal_title2').val(),
+						"text": $('#modal_text2').val(),
 						"start": $('#modal_start').val(),
 						"end": $('#modal_end').val(),
 						"collabo_no" : $('#collabo_no').val(),
 						"scheduleusers" : scheduleusers,
-						"work_type" : "0"
+						"meeting_place_no" : "1"
 				}
 
 				
@@ -356,14 +356,14 @@ function loadCalendar() {
 						console.log(data);
 						eventData = {
 								id: data.schedule.schedule_no,
-								title: data.schedule.work_title,
+								title: data.schedule.meeting_title,
 								start: data.schedule.schedule_start,
 								end: data.schedule.schedule_end
 						}
 						
 						calendar.fullCalendar('renderEvent', eventData , true);
 						fcontent();
-						console.log('insert 성공')
+						console.log('회의업무 insert 성공')
 						
 						
 					      $.each(data.alarm, function (i, item) {
@@ -388,9 +388,11 @@ function loadCalendar() {
 					});
 				})
 	    	}
-	    },
-		 // 작업자: 이명철  // 최근 수정일: 16-11-29 --------------------- E N D ------------------------
-		 // ------------------------------------------------------------------------------------    
+	    	// 작업자: 이명철  // 최근 수정일: 16-11-29 --------------------- E N D ------------------------
+	    	// ------------------------------------------------------------------------------------    
+	    	
+	    	
+	    }, //custombutton 끝
 	    
 	    
 	 
