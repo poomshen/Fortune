@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fortune.Table_DTO.Notice_DTO;
@@ -19,7 +20,7 @@ public class NoticeSearch_Controller {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping(value="/noticeSearch.htm")
+	@RequestMapping(value="/noticeSearch.htm", method=RequestMethod.GET)
 	public ModelAndView searchFile(HttpServletRequest request){
 		
 		System.out.println("NoticeSearch_Controller를 탑니다~");

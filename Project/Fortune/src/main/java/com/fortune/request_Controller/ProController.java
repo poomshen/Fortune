@@ -10,26 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
 import com.fortune.alarm_DAO.IAlarm;
-import com.fortune.function_DTO.Select_Alarm_DTO;
-import com.fortune.request_DAO.ProDao;
+import com.fortune.function_DTO.ProgectName_DTO;
+import com.fortune.history_Service.HistoryService;
 import com.fortune.request_Service.ProService;
 
 
@@ -41,14 +36,23 @@ public class ProController {
 
 	@Autowired
 	private ProService proservice;
-
+	
+	@Autowired
+	private HistoryService historyService;
+	
 	 @Autowired
 	 private SqlSession sqlSession;
 	
-	
 	@RequestMapping("/writerequest.htm")
 	public String writeForm(Model model) throws ClassNotFoundException, SQLException {
-			System.out.println("여기에 들어갈까나 ?");
+			//성준 추가 16-11-30 초기 헙업 가져오기
+			System.out.println("타기전에 ?");
+			List<ProgectName_DTO> pList = historyService.progetctNameList();
+			model.addAttribute("pList", pList);
+			int collabo_req_no = historyService.maxReqNo();
+			model.addAttribute("collabo_req_no", collabo_req_no);
+			System.out.println("타고 나서");
+			
 			List<Join_DTO> list = proservice.listEffect(model); //수신자를 부르기 위해서 사용하였다. 
 			model.addAttribute("list", list);
 		return "request.writeRequest";
@@ -182,8 +186,8 @@ public class ProController {
 		   SQLException {
 			 System.out.println("수락했다.");
 		 Request_DTO proDto = proservice.DetailResponse(collabo_req_index);
-		 model.addAttribute("list", proDto);
-		 System.out.println("여기는 !!");
+		 model.addAttribute("acceptlist", proDto);
+		 System.out.println("수락 창");
 		 System.out.println(proDto.toString());
 		 
 		  return "cen.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
@@ -191,12 +195,14 @@ public class ProController {
 		
 	//거절 하기 했을 경우 화면 출력
 		 @RequestMapping("refuse.htm")
-		 public String Refuse(String collabo_req_text,String collabo_req_index ) throws ClassNotFoundException,
+		 public String Refuse(String collabo_req_index,String collabo_req_text) throws ClassNotFoundException,
 		   SQLException {
 			 System.out.println("거절했다.");
-		 proservice.Refuse(collabo_req_text,collabo_req_index);
+			 System.out.println("텍스트"+collabo_req_text);
+			 System.out.println("인덱스"+collabo_req_index);
+		 proservice.Refuse(collabo_req_index,collabo_req_text);
 		
-		  return "request.requestList"; //리스트 화면 (controller 타서 데이터 출력)
+		  return "redirect:listReplyRequest.htm"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	
 		 
 		
@@ -233,7 +239,7 @@ public class ProController {
 			public String writeResponse() {
 				System.out.println("이쪽으로 왔다 해도 POST는 무슨뜻인지 몰라서 그냥 가는걸지도 몰라요");
 				
-				return "request.writeResponse";
+				return "cen.writeResponse";
 
 			}
 		 

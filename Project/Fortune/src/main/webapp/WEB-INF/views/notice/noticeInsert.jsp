@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 
 <div class="row">
@@ -17,12 +18,13 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-12">
-						<form role="form" action="" method="post"
+						<form:form role="form" action="" method="post"
 							enctype="multipart/form-data">
 							<div class="form-group">
 								<input class="form-control"
 									placeholder="제목을 작성해주세요." type="text" name="notice_title"
 									id="notice_title">
+									<form:errors path="notice_title"/>
 							</div>
 							<div class="form-group">
 								<p class="form-control-static">admin@fortune.com</p>
@@ -32,15 +34,16 @@
 							</div>
 							<div class="form-group">
 								<textarea name="notice_text" id="notice_text"></textarea>
+								<form:errors path="notice_text"/>
 								<script>
 								CKEDITOR.replace('notice_text',{
 									filebrowserImageUploadUrl: '${contextPath}/noticeImageUpload.htm'
 								});
-								</script>
+								</script>								
 							</div>
 							<button type="submit" class="btn btn-default">저장</button>
 							<a href="notice.noticeList.htm">공지사항 목록보기</a>
-						</form>
+						</form:form>
 					</div>
 				</div>
 				<!-- /.row (nested) -->

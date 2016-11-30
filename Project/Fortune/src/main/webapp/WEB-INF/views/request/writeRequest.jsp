@@ -106,6 +106,13 @@
 <hr>
 	<div class="container">
 	<form action="" method="post" name="promodifyform" enctype="multipart/form-data">
+	
+	<select name="collabo_req_no" >
+	<option value="${collabo_req_no }">새로운 요청</option>
+	<c:forEach var="pname" items="${pList}">
+	<option value="${pname.collabo_req_no }">${pname.project_name}</option>
+	</c:forEach>
+	</select>
 		<div class="col-sm-1"></div>
 		<div class="col-sm-8">
 		
