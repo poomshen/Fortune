@@ -49,8 +49,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	where USER_ID=#{user_id}
  </select>
  
+ <!-- 사원 정보 가져오기 -->
  <select id="searchMember" parameterType="String" resultType="com.fortune.Table_DTO.Join_DTO">
- 	select USER_ID, USER_NAME, USER_GENDER, USER_DATE, USER_PHONE, USER_JOIN, DEPT_NO, TEAM_NO, POSITION_NO from USERS 
+ 	select * from USERS 
  	where USER_ID=#{user_id}
+ </select>
+ 
+ <!-- 관리자가 사원 정보 수정 -->
+ <update id="updateMemberAdmin" parameterType="com.fortune.Table_DTO.Join_DTO" >
+ 	update USERS set USER_PASSWORD=#{user_password}, user_name=#{user_name}, user_gender=#{user_gender}, user_date=#{user_date}, USER_PHONE=#{user_phone}, user_join=#{user_join}, position_no=#{position_no}, team_no=#{team_no}, dept_no=#{dept_no}, role_no=#{role_no}
+ 	where USER_ID=#{user_id}
+ </update>
+ 
+ <!-- Role 정보 가져오기 -->
+ <select id="searchRole" parameterType="com.fortune.Table_DTO.Role_DTO" resultType="com.fortune.Table_DTO.Role_DTO">
+ 	select * from role
  </select>
 </mapper>

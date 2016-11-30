@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.fortune.Table_DTO.Dept_DTO;
 import com.fortune.Table_DTO.Jobtitle_DTO;
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Role_DTO;
 import com.fortune.Table_DTO.Team_DTO;
 
 public interface IJoin {
@@ -14,7 +15,6 @@ public interface IJoin {
 	int deleteMember(String id);
 	int updateMember(Join_DTO joinDto);
 	Join_DTO searchMember(String user_id);
-	Join_DTO memberInfo(Join_DTO joinDto);
 	Join_DTO login(Join_DTO joinDto);
 	ArrayList<Dept_DTO> searchDept();
 	ArrayList<Team_DTO> searchTeam();
@@ -22,4 +22,9 @@ public interface IJoin {
 	
 	//회원가입 유효성검사
 	Join_DTO idchk(String user_id);
+	
+	
+	int updateMemberAdmin(Join_DTO joinDto);
+	Join_DTO memberInfo(Join_DTO joinDto);
+	ArrayList<Role_DTO> searchRole();
 }

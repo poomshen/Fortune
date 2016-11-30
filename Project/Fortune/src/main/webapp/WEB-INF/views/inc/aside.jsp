@@ -3,7 +3,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <style>
-a {
+ul a {
      color: white;
     text-decoration: none;
 }
@@ -68,13 +68,11 @@ a {
                         <li>
                             <a class="hvr-grow-shadow" href="#"><i class="fa fa-wrench fa-fw"></i>관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                            	
-                                <li>
-                                <security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
-                                    <a href="authority.htm">전체 권한 부여</a>
-                                     </security:authorize>
-                                </li>
-                               
+                            	<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
+                                	<li>
+                                		<a href="adminusers.htm">관리자 회원 수정</a>
+                                    </li>
+                                </security:authorize>
                                 <li>
                                     <a href="#">부서장 팀장 선출</a>
                                 </li>

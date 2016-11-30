@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.catalina.Session;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -228,7 +229,8 @@ public class ProService {
 
 	// 글 삭제
 	public String ProDel(String collabo_req_index) throws ClassNotFoundException, SQLException {
-		System.out.println("collabo_req_index : " + collabo_req_index);
+		
+		 System.out.println("삭제 인덱스"+collabo_req_index);
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
 		proDao.delete(collabo_req_index); // 여기에서 delete 사용하여 삭제 함
 		return collabo_req_index;
@@ -302,8 +304,39 @@ public class ProService {
 
 	// 실제 글수정
 	@RequestMapping(value = "noticeEdit.htm", method = RequestMethod.POST)
-	public Request_DTO proEdit(Request_DTO n) throws ClassNotFoundException, SQLException, IOException {
+	public Request_DTO proEdit(Request_DTO n, HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
 
+		
+		List<CommonsMultipartFile> files = n.getFiles();
+		  List<String> filenames = new ArrayList<String>(); //파일명만 추출
+		  
+		  if(files != null && files.size() > 0 ){ //업로드한 파일이 하나라도 있다면
+			  
+			  for(CommonsMultipartFile multipartfile : files ){
+				                              
+				  String fname = multipartfile.getOriginalFilename(); //파일명 얻기
+				  String path  = request.getServletContext().getRealPath("/customer/upload");
+				  String fullpath = path + "\\" + fname;
+				  
+				  System.out.println(fname + " / " + path + " / " + fullpath);
+				  
+				  if(!fname.equals("")){
+					 //서버에 파일 쓰기 작업 
+					  FileOutputStream fs = new FileOutputStream(fullpath);
+					  fs.write(multipartfile.getBytes());
+					  fs.close();
+				  }
+				  filenames.add(fname); //실 DB Insert 작업시 .. 파일명 
+			  }
+			  
+		  }
+		  
+		  // DB저장작업
+		  // DB 저장할 파일 명
+		  n.setCollabo_req_filesrc(filenames.get(0));  // 파일명 1 
+		  
+		  
+		  
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
 		proDao.update(n);
 		return n;
@@ -385,20 +418,19 @@ public class ProService {
 			ProDao checking_DAO = sqlsession.getMapper(ProDao.class);
 			
 			List<Join_DTO> list = checking_DAO.listManager();
-			System.out.println("私たちは今も悪い道を行っているのか..?");
 			//System.out.println(list);
 			
 			return list;
 		}
 		// 대기에서 진행중으로 변환 시키는 클래스입니다.
 		// 날짜 일자 :2016-11-25
-		public int ProManager(String collabo_req_index) throws ClassNotFoundException, SQLException {
-			System.out.println("collabo_req_index : " + collabo_req_index);
-			ProDao proDao = sqlsession.getMapper(ProDao.class);
-			 // 진행중으로 변환시키는 데이터 
-			int re= proDao.manager(collabo_req_index); 
-			return re;
-		}
+//		public int ProManager(String collabo_req_index) throws ClassNotFoundException, SQLException {
+//			System.out.println("collabo_req_index : " + collabo_req_index);
+//			ProDao proDao = sqlsession.getMapper(ProDao.class);
+//			 // 진행중으로 변환시키는 데이터 
+//			int re= proDao.manager(collabo_req_index); 
+//			return re;
+//		}
 		
 		
 		 //사용 목적: 다운로드 를 하였을 때 사용되는 클래스이다.

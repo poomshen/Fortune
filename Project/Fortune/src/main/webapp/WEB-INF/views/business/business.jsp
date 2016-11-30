@@ -79,7 +79,7 @@ $(function() {
 			alert('처음 띄우는데에서 에러남!');
 		}
 	});	
-})();
+});
 
 function deptshow(){
 	alert('잠시만 기다려주세요...');
