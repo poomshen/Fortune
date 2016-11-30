@@ -95,8 +95,8 @@ $(document).ready(function() {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="main.htm">SB Admin v2.0</a>
-                
+                <!-- 11.30 왼쪽최상단 기업명? 변경 (지율) -->
+                <a class="navbar-brand" href="main.htm"><i><img src="${pageContext.request.contextPath}/images/clover.png" alt="아이콘" style="img size: 18px;">&nbsp;Fortune</i></a>                
             </div>
             <!-- /.navbar-header -->
 
