@@ -106,5 +106,8 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
     <!-- @ControllerAdvice 사용하기위해 추가 (지율) -->
 	<beans:bean class="com.fortune.exception.CommonExceptionHandler" />
 	
+	<!-- Validator start -->
+	<beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+	<!-- Validator end -->
 
 </beans:beans>
