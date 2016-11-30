@@ -8,6 +8,8 @@
 
 <title>Insert title here</title>
 
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>	
 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -27,6 +29,7 @@
 
 
 <link rel="stylesheet" href="assets/css/hover.css">	
+
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
@@ -61,7 +64,7 @@
 <!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
 	
-	
+
 	
 </body>
 </html>

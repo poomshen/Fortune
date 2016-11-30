@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -34,7 +35,7 @@ img {
 
 
 <script type="text/javascript">
-     
+
      //상세 정보를 보여주는 ajax 입니다.
      function detailReqCollabo(a){
     	 $("#menuView2").empty();
@@ -57,6 +58,8 @@ img {
  	 		});
  	}
      
+     
+     //수락을 하였을 때 비동기 처리로 사용하였습니다.
      function memoReqCollabo(a){
   		
   		$("#menuView2").empty();
@@ -66,10 +69,11 @@ img {
   	 			type: "get",
   	 			url:  "accept.htm",
   	 			cache: false,
-  	 			data:"collabo_req_index="+a,
+  	 			data: "collabo_req_index="+a ,
   	 		    success:function(data){ //callback  
-  	 		    	
+  	 		  	 	  
   					$("#menuView2").append($('#menuView2').html(data)); 
+  					
   	 		      
   	 		     },
   	 			error: function(){						
@@ -78,12 +82,19 @@ img {
   	 		});
   	}
      
+     function CancelClose(){
+    		$("#menuView2").html(""); 
+    		/* location.href = "requestList.htm"; */
+    		
+    	}
+     
+    
+     
  
      function refuseReqCollabo(a){
     	 $("#menuView2").empty();
    		 $("#refuseindex").val(a); 
-   
-   	 		}
+}
    	
      
   
@@ -275,24 +286,6 @@ img {
 
 		</c:forEach>
 
-<script type="text/javascript">
-function refuse() {
-	 $("#menuView2").empty();
-	 $('#menuView3').empty();
-	 
-	if($('#collabo_req_text').val() == "") {
-		alert("거절 사유를 입력하세요. ");
-		$('#collabo_req_text').focus();
-		return false;
-	}else{
-			alert("완료");
-			$('#refuseform').submit(); 
-			return true;
-	}
-	
-}
-
-</script>
 
 		<!-- 거절을 하였을때 거절 사유를 쓸 때 사용됩니다. -->
 		<div class="container">
@@ -310,9 +303,29 @@ function refuse() {
 						
 						<div class="modal-body">
 						
+						
+<script type="text/javascript">
+
+function refuse() {
+	 $("#menuView2").empty();
+	
+	 
+	if($('#collabo_req_text').val() == "") {
+		alert("거절 사유를 입력하세요. ");
+		$('#collabo_req_text').focus();
+		return false;
+	}else{
+			alert("완료");
+			refusemenform.submit(); 
+			return true;
+	}
+	
+}
+
+</script>
 							<div id="menuView3">
 								<!-- CSS 구성  -->
-								<form action="refuse.htm" method="get" id="refuseform">
+								<form action="refuse.htm" method="get" name="refusemenform">
 								
 									<div class="col-sm-6"></div>
 									<br>
@@ -332,19 +345,21 @@ function refuse() {
 										<div class="col-sm-2"></div>
 										<div class="col-sm-10"></div>
 									</div>
-								<input type="submit" class="btn btn-default" value="거절 완료"
+									
+									<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+								<input type="button" class="btn btn-primary" value="거절 완료"
 								onclick="refuse()">
+							
+						</div>
+							
 						</form>	
 							</div>
 
-							<br> <br>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-							
 							
 						</div>
+						
 
 					</div>
 
@@ -363,20 +378,23 @@ function refuse() {
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button type="button" class="close" data-dismiss="modal" onclick="CancelClose()">&times;</button>
 							<h4 class="modal-title">협업모음 프로젝트</h4>
 
 						</div>
 						<div class="modal-body">
-
+					
+					
 							<div id="menuView2">아아</div>
-
+					
+					
+					
 							<p></p>
 
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
+								data-dismiss="modal" onclick="CancelClose()">Close</button>
 						</div>
 					</div>
 

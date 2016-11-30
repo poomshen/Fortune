@@ -183,7 +183,7 @@ public class ProController {
 			 System.out.println("수락했다.");
 		 Request_DTO proDto = proservice.DetailResponse(collabo_req_index);
 		 model.addAttribute("list", proDto);
-		 System.out.println("여기는 !!");
+		 System.out.println("수락 창");
 		 System.out.println(proDto.toString());
 		 
 		  return "cen.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
@@ -235,7 +235,7 @@ public class ProController {
 			public String writeResponse() {
 				System.out.println("이쪽으로 왔다 해도 POST는 무슨뜻인지 몰라서 그냥 가는걸지도 몰라요");
 				
-				return "request.writeResponse";
+				return "cen.writeResponse";
 
 			}
 		 
