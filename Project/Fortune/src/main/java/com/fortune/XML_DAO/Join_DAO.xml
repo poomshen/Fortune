@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.fortune.member_DAO.IJoin">
 <!-- 멤버 추가 -->
  <insert id="insertMember" parameterType="com.fortune.Table_DTO.Join_DTO">
- 	 insert into USERS(USER_ID, USER_PASSWORD, USER_NAME, USER_GENDER, USER_DATE, USER_PHONE, USER_JOIN, DEPT_NO, TEAM_NO, POSITION_NO, ROLE_NO)
- 		values(#{user_id},#{user_password},#{user_name},#{user_gender},#{user_date},#{user_phone},#{user_join},#{dept_no},#{team_no},#{position_no},5)    
+ 	 insert into USERS(USER_ID, USER_PASSWORD, USER_NAME, USER_GENDER, USER_DATE, USER_PHONE, USER_JOIN, ROLE_NO)
+ 		values(#{user_id},#{user_password},#{user_name},#{user_gender},#{user_date},#{user_phone},#{user_join},5)    
   </insert>
  
 <!-- 로그인 -->
