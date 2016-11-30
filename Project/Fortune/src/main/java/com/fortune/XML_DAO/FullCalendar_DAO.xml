@@ -86,6 +86,7 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 	on m.schedule_no = s.schedule_no join
 	collabo c on s.collabo_no = c.collabo_no
 	where s.collabo_no = #{collabo_no}
+	order by schedule_start
 </select>
 
 
@@ -134,30 +135,45 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 
 
 
-<!-- 일정 delete 작업 -1 -->
-<delete id="deleteWork">
-	delete from work where schedule_no = #{id}
-</delete>
-<!-- 일정 delete 작업 -2 -->
-<delete id="deleteSchedule">
-	delete from schedule where schedule_no = #{id}
-</delete>
-<!-- 일정 delete 작업 -3 -->
+<!-- 업무일정 delete 작업 -1 -->
 <delete id="deleteWork_Users">
 	delete from work_users where schedule_no =#{id}
 </delete>
-<!-- 일정 delete 작업 -4 -->
+<!-- 업무일정 delete 작업 -2 -->
 <delete id="deleteWork_Comment">
 	delete from work_comment where schedule_no =#{id}
 </delete>
+<!-- 업무일정 delete 작업 -3 -->
+<delete id="deleteWork">
+	delete from work where schedule_no = #{id}
+</delete>
+<!-- 업무일정 delete 작업 -4 -->
+<delete id="deleteSchedule">
+	delete from schedule where schedule_no = #{id}
+</delete>
+
+
+<!-- 회의일정 delete 작업 -1 -->
+<delete id="deleteMeet_Users">
+	delete from MEET_USERS where schedule_no = #{id}
+</delete>
+<!-- 회의일정 delete 작업-2 -->
+<delete id="deleteMeeting">
+	delete from MEETING where schedule_no = #{id}
+</delete>
+<!-- 회의일정 delete 작업-3-->
+<!-- 업무일정 삭제의 deleteSchedule 함수와 동일// 생략함 -->
 
 
 
-
-
-<!-- 일정 update -->
+<!-- 일반일정 update -->
 <update id="updateWork">
 	UPDATE WORK SET WORK_TITLE = #{work_title}, WORK_TEXT = #{work_text}
+	WHERE SCHEDULE_NO = #{schedule_no}
+</update>
+<!-- 회의일정 update -->
+<update id="updateMeeting">
+	UPDATE MEETING SET MEETING_TITLE = #{meeting_title}, MEETING_TEXT = #{meeting_text}, MEETING_PLACE_NO = #{meeting_place_no}
 	WHERE SCHEDULE_NO = #{schedule_no}
 </update>
 <!-- progress update -->

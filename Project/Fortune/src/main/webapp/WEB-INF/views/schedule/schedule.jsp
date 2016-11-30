@@ -30,7 +30,7 @@ $(document).ready(function() {
 							backgroundColor : 'green'
 					};
 					array.push(item);
-			        content += '<tr id=tr' +obj.schedule_no+ '><td>업무일정</td><td>' + obj.wm_title;
+			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:green">업무일정</td><td>' + obj.wm_title;
 			        content += '</td><td><a';
 			        content += ' onclick="detail(' + obj.schedule_no;
 			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
@@ -45,7 +45,7 @@ $(document).ready(function() {
 							backgroundColor : 'blue'
 					};
 					array.push(item);
-			        content += '<tr id=tr' +obj.schedule_no+ '><td>회의일정</td><td>' + obj.wm_title;
+			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:blue">회의일정</td><td>' + obj.wm_title;
 			        content += '</td><td><a';
 			        content += ' onclick="detail2(' + obj.schedule_no;
 			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
@@ -137,15 +137,27 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 	//$('#comment_text').empty(); //코멘트 UI 안의 글들
 	//$('#content_detail').css("display", "block"); //
 	$('#content_detail2').css("display", "block");
- 	$('#detail_id').val(id);
-	$('#detail_title').val(title);
-	$('#detail_text').val(text);
-	$('#detail_start').val(start);
-	$('#detail_end').val(end);
+ 	$('#meet_detail_id').val(id);
+	$('#meet_detail_title').val(title);
+	$('#meet_detail_text').val(text);
+	$('#meet_detail_start').val(start);
+	$('#meet_detail_end').val(end);
+	
+	//회의실 번호 뿌려주는 코드
+	$('#place_no').val(progress_or_place);
+	
+	//상세보기 내용에 참가자 인원 뿌려주는 코드
+	var userid = userids.split("/");
+	var contentck = "";
+	
+	for(var i =0; i<userid.length-1; i++){
+		//contentck += "<input type='checkbox' name='userchk' value='" +userid[i]+ "'>" + userid[i] + " &nbsp;&nbsp;";
+		contentck += userid[i] + "&nbsp;&nbsp;&nbsp;"
+	}
+	
+ 	$('#usersdiv2').html(contentck)
 	
 	
-	
-	$('#content_detail2').html('aaaa');
 }
 
 
@@ -165,7 +177,24 @@ function work_updateok(){
 	$('#updateok_btn').attr('type','hidden');
 	document.getElementById("detail_title").readOnly = true;
 	document.getElementById("detail_text").readOnly = true;
-	
+}
+
+//회의일정 수정 버튼 클릭시 readonly속성 없애줌
+function work_update2(){
+	$('#meet_update_btn').attr('type','hidden');
+	$('#meet_updateok_btn').attr('type','button');
+	document.getElementById("meet_detail_title").readOnly = false;
+	document.getElementById("meet_detail_text").readOnly = false;
+	document.getElementById("place_no").readOnly = false;
+}
+
+//회의일정 저장 버튼 클릭시 DB에 update작업
+function work_updateok2(){
+	$('#meet_update_btn').attr('type','button');
+	$('#meet_updateok_btn').attr('type','hidden');
+	document.getElementById("meet_detail_title").readOnly = true;
+	document.getElementById("meet_detail_text").readOnly = true;
+	document.getElementById("place_no").readOnly = true;
 }
 
 //comment 등록 버튼 클릭시 insert 작업
@@ -479,10 +508,17 @@ function update_progress(){
 					
 					
 					<div id="content_detail2" style="display: none; padding-right:0px;">
+						<input type="button" value="회의일정 수정" id="meet_update_btn" onclick="work_update2()">
+						<input type="hidden" value="회의일정 저장" id="meet_updateok_btn" class="btn-success" onclick="work_updateok2()">
+						<input type="button" value="회의일정 삭제" id="meet_delete_btn"><br>
+						<label>제목 : </label> <input type="text" id="meet_detail_title" readonly="readonly"><br>
+						<label>내용 : </label> <textarea rows="5" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
+						<label>회의실 번호 : </label> <input type="text" id="place_no" readonly="readonly" value="10" place_no="10만 입력해, DB에 10밖에 없어"><br>
 					
-					
-					
-					
+						<label>회의 참가자</label><br>
+					    <div id="usersdiv2"></div>
+						<hr>
+						<input type="hidden" id="meet_detail_id"><input type="hidden" id="meet_detail_start"><input type="hidden" id="meet_detail_end">
 					
 					
 					

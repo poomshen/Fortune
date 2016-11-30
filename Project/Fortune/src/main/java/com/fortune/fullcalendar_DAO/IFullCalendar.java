@@ -33,14 +33,22 @@ public interface IFullCalendar {
 	public List<Meet_Users_DTO> selectMUList(String collabo_no) throws ClassNotFoundException, SQLException;
 	
 	
-	//일정 삭제
+	//업무일정 삭제
 	public int deleteWork(String id) throws ClassNotFoundException, SQLException;
 	public int deleteSchedule(String id) throws ClassNotFoundException, SQLException;
 	public int deleteWork_Users(String id) throws ClassNotFoundException, SQLException;
 	public int deleteWork_Comment(String id) throws ClassNotFoundException, SQLException;
+	
+	//회의일정 삭제
+	public int deleteMeeting(String id) throws ClassNotFoundException, SQLException;
+	public int deleteMeet_Users(String id) throws ClassNotFoundException, SQLException;
     
-	//일정 업데이트
+	//업무일정 업데이트
 	public int updateWork(Schedule_Work_DTO swdto) throws ClassNotFoundException, SQLException;
+	
+	//회의일정 업데이트 
+	public int updateMeeting(Schedule_Meeting_DTO smdto) throws ClassNotFoundException, SQLException;
+	
 	//progress 업데이트
 	public int updateProgress(String schedule_no, float work_progress) throws ClassNotFoundException, SQLException;
 		
