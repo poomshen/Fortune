@@ -8,10 +8,8 @@
                        	<c:if test="${sessionScope.totalCount>0}"> ${sessionScope.totalCount}</c:if></span></i>  
                        	<i class="fa fa-caret-down"></i>
                     </a>
-                
+          
                   <c:if test="${sessionScope.alarm.size()>0}">
-                  
-               
               
                    <ul id="alarmList" class="dropdown-menu dropdown-alerts">
                    	   <c:forEach var="alarm" items="${sessionScope.alarm}"> 
