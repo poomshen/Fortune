@@ -6,7 +6,7 @@ chart 비동기!
 </body>
 <script>
 $(function () {
-    Highcharts.chart('kk', {
+    Highcharts.chart('gg', {
         title: {
             text: 'Monthly Average Temperature',
             x: -20 //center

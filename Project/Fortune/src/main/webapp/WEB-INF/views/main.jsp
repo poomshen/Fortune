@@ -44,7 +44,7 @@
 
 $(function () {
 	
-	$('#gg').highcharts({
+	 var chart = Highcharts.chart('gg',{
 	        chart: {
 	            type: 'column'
 	        },
@@ -87,8 +87,20 @@ $(function () {
 	            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
 	            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
 	        },
-
-	        
+	        exporting: {
+	            buttons: {
+	              custom: {
+	                     x: -20,
+	                    text:'전체보기',
+	                    symbolFill: '#B5C9DF',
+	                    hoverSymbolFill: '#779ABF',
+	                    _titleKey: 'printButtonTitle',
+	                    onclick: function () {
+	                    	 chart.redraw();
+	                    }
+	                }
+	            }
+	        },
 	            series: [{
 	                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 	            }]
@@ -112,8 +124,8 @@ $(function () {
 				  
 				  console.log("차트 종류 보내기");
 				  
-				  
-				  $('#kk').html(data);
+				  $('#gg').empty();
+				  $('#gg').html(data);
 				 
 			
 			  }

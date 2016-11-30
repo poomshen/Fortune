@@ -299,7 +299,7 @@ function update_progress(){
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="button" data-dismiss="modal" class="btn hvr-forward" id="modal_ok">
+                                        <button type="button" data-dismiss="modal" class="btn hvr-grow-shadow" id="modal_ok">
                                             일반업무 등록</button>
                                         
                                     </div>
