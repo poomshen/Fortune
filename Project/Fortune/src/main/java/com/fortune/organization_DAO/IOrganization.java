@@ -9,4 +9,7 @@ public interface IOrganization {
 
 	public ArrayList<Join_DTO> showdept(int dept_no, int team_no);
 	public ArrayList<Team_DTO> showteam(int dept_no);
+	
+	public ArrayList<Join_DTO> showdeptadmin(int dept_no);
+	ArrayList<Join_DTO> usersDeptNull();
 }

@@ -420,20 +420,19 @@ public class ProService {
 			ProDao checking_DAO = sqlsession.getMapper(ProDao.class);
 			
 			List<Join_DTO> list = checking_DAO.listManager();
-			System.out.println("私たちは今も悪い道を行っているのか..?");
 			//System.out.println(list);
 			
 			return list;
 		}
 		// 대기에서 진행중으로 변환 시키는 클래스입니다.
 		// 날짜 일자 :2016-11-25
-		public int ProManager(String collabo_req_index) throws ClassNotFoundException, SQLException {
-			System.out.println("collabo_req_index : " + collabo_req_index);
-			ProDao proDao = sqlsession.getMapper(ProDao.class);
-			 // 진행중으로 변환시키는 데이터 
-			int re= proDao.manager(collabo_req_index); 
-			return re;
-		}
+//		public int ProManager(String collabo_req_index) throws ClassNotFoundException, SQLException {
+//			System.out.println("collabo_req_index : " + collabo_req_index);
+//			ProDao proDao = sqlsession.getMapper(ProDao.class);
+//			 // 진행중으로 변환시키는 데이터 
+//			int re= proDao.manager(collabo_req_index); 
+//			return re;
+//		}
 		
 		
 		 //사용 목적: 다운로드 를 하였을 때 사용되는 클래스이다.
