@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Insert title here</title>
+
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>	
 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -22,6 +23,8 @@
 <!-- Custom Fonts -->
 <link href="bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
+	
+
 
 <link rel="stylesheet" href="assets/css/hover.css">	
 </head>
@@ -57,6 +60,8 @@
 
 <!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
+	
+	
 	
 </body>
 </html>

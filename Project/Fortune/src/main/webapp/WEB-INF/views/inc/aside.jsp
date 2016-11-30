@@ -3,7 +3,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <style>
-a {
+ul a {
      color: white;
     text-decoration: none;
 }
@@ -75,6 +75,9 @@ a {
                                      </security:authorize>
                                 </li>
                                
+                                <li>
+                                    <a href="adminusers.htm">관리자 회원 수정</a>
+                                </li>
                                 <li>
                                     <a href="#">부서장 팀장 선출</a>
                                 </li>

@@ -1,0 +1,150 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%
+   request.setCharacterEncoding("UTF-8");
+%>
+<div class="form-group">
+	<label for="firstname" class="col-md-4" style="margin-top: 5px;">
+		<span class="addon" style="padding-bottom: 0px;"><i
+			class="glyphicon glyphicon-user"></i></span>아이디
+	</label>
+	<div class="col-md-8" style="margin-bottom: 10px">
+		<input type="text" id="user_id" name="user_id" readonly="readonly"
+			value="${join_DTO.user_id}" class="form-control" id="firstname">
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="lastname" class="col-md-4" style="margin-top: 5px;">
+		<span class="addon" style="padding-bottom: 0px;"><i
+			class="glyphicon glyphicon-lock"></i></span>비밀번호
+	</label>
+	<div class="col-md-8" style="margin-bottom: 10px">
+		<input type="password" style="color: #777" class="form-control"
+			id="user_password" name="user_password">
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="emailaddress" class="col-md-4" style="margin-top: 5px;">
+		<span class="addon" style="padding-bottom: 0px;"><i
+			class="glyphicon glyphicon-font"></i></span> 이름
+	</label>
+	<div class="col-md-8" style="margin-bottom: 10px">
+		<input type="text" class="form-control" id="user_name"
+			name="user_name" readonly="readonly" value="${join_DTO.user_name}">
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="emailaddress" class="col-md-4" style="margin-top: 5px;">
+		<span class="addon" style="padding-bottom: 0px;"><i
+			class="glyphicon glyphicon-user"></i></span>성별
+	</label>
+	<div class="col-md-8" style="margin-bottom: 10px">
+		<input type="text" class="form-control" id="user_gender"
+			name="user_gender" readonly="readonly"
+			value="${join_DTO.user_gender}">
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="emailaddress" class="col-md-4" style="margin-top: 5px;">
+		<span class="addon" style="padding-bottom: 0px;"><i
+			class="glyphicon glyphicon-calendar"></i></span>생년월일
+	</label>
+	<div class="col-md-8" style="margin-bottom: 10px">
+
+		<input type="text" class="form-control" id="user_date"
+			name="user_date" readonly="readonly" value="${join_DTO.user_date}">
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="emailaddress" class="col-md-4" style="margin-top: 5px;">
+		<span class="addon" style="padding-bottom: 0px;"><i
+			class="glyphicon glyphicon-phone"></i></span>휴대폰 번호
+	</label>
+	<div class="col-md-8" style="margin-bottom: 10px">
+
+		<input type="text" style="color: #777;" class="form-control"
+			id="user_phone" name="user_phone" value="${join_DTO.user_phone}">
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="emailaddress" class="col-md-4" style="margin-top: 5px;">
+		<span class="addon" style="padding-bottom: 0px;"><i
+			class="glyphicon glyphicon-calendar"></i></span>입사일
+	</label>
+	<div class="col-md-8" style="margin-bottom: 10px">
+		<input type="text" class="form-control" id="user_join"
+			name="user_join" value="${fn:substring(join_DTO.user_join,0,10)}"
+			readonly="readonly">
+	</div>
+</div>
+
+<!--부서명 입력-->
+<!--select id 변경 : 변경불가 -->
+<div class="form-group">
+	<div class="col-sm-3 col-sm-offset-1" style="margin-left: 10%">
+		<div class="fleft">
+			<select id="deptSelect" name="dept_no" onchange="deptchange()">
+				<c:forEach var="i" items="${deptselect}">
+					<c:choose>
+						<c:when test="${i.dept_no == join_DTO.dept_no}">
+							<option value="${i.dept_no}" selected>${i.dept_name}</option>
+						</c:when>
+						<c:otherwise>
+							<option value="${i.dept_no}">${i.dept_name}</option>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</select>
+		</div>
+	</div>
+
+	<div class="col-sm-3">
+		<div class="fleft">
+			<select id="teamSelect" name="team_no">
+				<c:forEach var="j" items="${teamselect}">
+					<c:if test="${join_DTO.dept_no == j.dept_no}">
+						<c:choose>
+							<c:when test="${join_DTO.team_no == j.team_no}">
+								<option value="${j.team_no}" selected>${j.team_name}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${j.team_no}">${j.team_name}</option>
+							</c:otherwise>
+						</c:choose>
+					</c:if>
+				</c:forEach>
+			</select>
+		</div>
+	</div>
+
+	<div class="col-sm-3">
+		<div class="fleft">
+			<select name="position_no" id="cd-dropdown3" class="cd-select">
+				<c:forEach var="i" items="${positionselect}">
+					<c:choose>
+						<c:when test="${i.position_no == join_DTO.position_no}">
+							<option value="${i.position_no}" selected>${i.position_name}</option>
+						</c:when>
+						<c:otherwise>
+							<option value="${i.position_no}">${i.position_name}</option>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</select>
+		</div>
+	</div>
+</div>
+<div class="form-group">
+	<div class="content">
+		<input type="submit" class="btn btn-primary" value="수정"> 
+		<input type="button" class="btn btn-primary" onclick="CancelUpdate()" value="취소">
+	</div>
+</div>

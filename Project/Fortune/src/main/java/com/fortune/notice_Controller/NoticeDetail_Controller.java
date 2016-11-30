@@ -27,11 +27,13 @@ public class NoticeDetail_Controller {
 	public String noticeDetail(int notice_no, Model model){
 
 		System.out.println("NoticeController의 noticeDetail을 탑니다~");
-
-		INotice noticeDao = sqlSession.getMapper(INotice.class);
-		Notice_DTO noticeDetail = noticeDao.detailNotice(notice_no);
-		model.addAttribute("noticeDetail", noticeDetail);
-
+		
+		INotice noticeDetailDao = sqlSession.getMapper(INotice.class);
+		noticeDetailDao.updateHits(notice_no);
+		Notice_DTO noticeDetailDto = noticeDetailDao.detailNotice(notice_no);
+		model.addAttribute("noticeDetail", noticeDetailDto);
+		
+		
 		return "notice.noticeDetail";
 	}
 

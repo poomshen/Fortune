@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">[공지사항 목록]</h1>
@@ -49,31 +50,37 @@
 						</tbody>
 					</table>
 				</div>
-				<div>
-					<table>
-						<tr>
-							<td align="center"><c:if test="${pg>block}">
-						[<a href="noticeList.htm?pg=1">◀◀</a>]
-						[<a href="noticeList.htm?pg=${from_page-1}">◀</a>]		
-					</c:if> <c:if test="${pg<=block}">
-						[<span style="color: gray">◀◀</span>]	
-						[<span style="color: gray">◀</span>]
-					</c:if> <c:forEach begin="${from_page}" end="${to_page}" var="i">
-									<c:if test="${i==pg}">[${i}]</c:if>
-									<c:if test="${i!=pg}">
-							[<a href="noticeList.htm?pg=${i}">${i}</a>]
+				<!-- Pagination 추가 시작 -->
+				<div class="container" style="text-align: center; margin-left: -80px;">
+					<ul class="pagination">
+						<c:if test="${pg>block}">
+							<li><a href="noticeList.htm?pg=1">««</a></li>
+							<li><a href="noticeList.htm?pg=${from_page-1}">«</a></li>
 						</c:if>
-								</c:forEach> <c:if test="${to_page<all_page}">
-						[<a href="noticeList.htm?pg=${to_page+1}">▶</a>]
-						[<a href="noticeList.htm?pg=${all_page}">▶▶</a>]
-					</c:if> <c:if test="${to_page>=all_page}">
-						[<span style="color: gray">▶</span>]
-						[<span style="color: gray">▶▶</span>]
-					</c:if></td>
-						</tr>
-					</table>
-
+						<c:if test="${pg<=block}">
+							<li><a href="#">««</a></li>
+							<li><a href="#">«</a></li>
+						</c:if>
+						<c:forEach begin="${from_page}" end="${to_page}" var="i">
+							<c:if test="${i==pg}">
+								<li><a href="#">${i}</a></li>
+							</c:if>
+							<c:if test="${i!=pg}">
+								<li><a href="noticeList.htm?pg=${i}">${i}</a></li>
+							</c:if>
+						</c:forEach>
+						<c:if test="${to_page<all_page}">
+							<li><a href="noticeList.htm?pg=${to_page+1}">»</a></li>
+							<li><a href="noticeList.htm?pg=${all_page}">»»</a></li>
+						</c:if>
+						<c:if test="${to_page>=all_page}">
+							<li><a href="#">»</a></li>
+							<li><a href="#">»»</a></li>
+						</c:if>
+					</ul>
 				</div>
+				<!-- Pagination 추가 끝 -->
+
 			</div>
 			<!-- /.panel-body -->
 			<p>
