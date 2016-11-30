@@ -21,20 +21,38 @@ $(document).ready(function() {
 		success : function(data) {
 			console.log(data)
 			$.each(data.schedulelist, function(index, obj) {
-				var item = {
-						id : obj.schedule_no,
-						title : obj.work_title,
-						start : obj.schedule_start,
-						end : obj.schedule_end
-				};
-				array.push(item);
-				
-		        content += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
-		        content += '</td><td><a';
-		        content += ' onclick="detail(' + obj.schedule_no;
-		        content += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-		        content += "','" + obj.users + "','" + obj.work_progress + "'";
-		        content += ')" >상세보기</a></td></tr>';
+				if(obj.progress_or_place<10){
+					var item = {
+							id : obj.schedule_no,
+							title : obj.wm_title,
+							start : obj.schedule_start,
+							end : obj.schedule_end,
+							backgroundColor : 'green'
+					};
+					array.push(item);
+			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:green">업무일정</td><td>' + obj.wm_title;
+			        content += '</td><td><a';
+			        content += ' onclick="detail(' + obj.schedule_no;
+			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
+			        content += "','" + obj.users + "','" + obj.progress_or_place + "'";
+			        content += ')" >상세보기</a></td></tr>';
+				} else{
+					var item = {
+							id : obj.schedule_no,
+							title : obj.wm_title,
+							start : obj.schedule_start,
+							end : obj.schedule_end,
+							backgroundColor : 'blue'
+					};
+					array.push(item);
+			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:blue">회의일정</td><td>' + obj.wm_title;
+			        content += '</td><td><a';
+			        content += ' onclick="detail2(' + obj.schedule_no;
+			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
+			        content += "','" + obj.users + "','" + obj.progress_or_place + "'";
+			        content += ')" >상세보기</a></td></tr>';
+					
+				}
 		        
 			});
 	        $('#content').html(content)
@@ -46,18 +64,87 @@ $(document).ready(function() {
 	
 });
 
-function detail(id, title, text, start, end, userids, progress){
+function detail(id, title, text, start, end, userids, progress_or_place){
 	//온클릭 함수에 가져올 데이터들
-	$('#progress_value').text(progress*100+"%");
-	$('#progress_value').css("width",progress*100+"%");
-	$('#content').empty();
-	$('#comment_text').empty();
-	$('#content_detail').css("display", "block");
- 	$('#detail_id').val(id);
-	$('#detail_title').val(title);
-	$('#detail_text').val(text);
-	$('#detail_start').val(start);
-	$('#detail_end').val(end);
+	if(progress_or_place<10){
+	
+		$('#progress_value').text(progress_or_place*100+"%");
+		$('#progress_value').css("width",progress_or_place*100+"%");
+		$('#content').empty();
+		$('#comment_text').empty();
+		$('#content_detail').css("display", "block");
+	 	$('#detail_id').val(id);
+		$('#detail_title').val(title);
+		$('#detail_text').val(text);
+		$('#detail_start').val(start);
+		$('#detail_end').val(end);
+		
+		//상세보기 내용에 참가자 인원 뿌려주는 코드
+		var userid = userids.split("/");
+		var contentck = "";
+		
+		for(var i =0; i<userid.length-1; i++){
+			//contentck += "<input type='checkbox' name='userchk' value='" +userid[i]+ "'>" + userid[i] + " &nbsp;&nbsp;";
+			contentck += userid[i] + "&nbsp;&nbsp;&nbsp;"
+		}
+		
+	 	$('#usersdiv').html(contentck)
+	 	
+	 	
+	 	//상세보기 내용에 comment 뿌려주는 내용
+	 	$.ajax({
+			url : 'select_comment.ajax',
+			type : 'post',
+			data : 'schedule_no='+ id,
+			success : function(data) {
+				var comment_text = "";
+	 			$.each(data, function(index, obj) {
+	 				if(index%2==0){
+	 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
+	 					comment_text += '<button type="button" ';
+	 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
+	 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
+	 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
+	 					comment_text += obj.work_comment_text+'</p></div></li>';
+	 				}else{
+	 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
+	 					comment_text += '<button type="button" ';
+	 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
+	 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+	 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
+	 					comment_text += obj.work_comment_text+'</p></div></li>'
+	 				}
+				});
+	 			$('#comment_text').html(comment_text);
+			}
+		});
+	}
+}
+
+
+/* 
+작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 
+작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 
+작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 
+
+
+
+
+ */
+function detail2(id, title, text, start, end, userids, progress_or_place){
+	
+	$('#content').empty(); //테이블형태 UI 비우기
+	//$('#comment_text').empty(); //코멘트 UI 안의 글들
+	//$('#content_detail').css("display", "block"); //
+	$('#content_detail2').css("display", "block");
+ 	$('#meet_detail_id').val(id);
+	$('#meet_detail_title').val(title);
+	$('#meet_detail_text').val(text);
+	$('#meet_detail_start').val(start);
+	$('#meet_detail_end').val(end);
+	
+	//회의실 번호 뿌려주는 코드
+	$('#place_no').val(progress_or_place);
 	
 	//상세보기 내용에 참가자 인원 뿌려주는 코드
 	var userid = userids.split("/");
@@ -68,39 +155,13 @@ function detail(id, title, text, start, end, userids, progress){
 		contentck += userid[i] + "&nbsp;&nbsp;&nbsp;"
 	}
 	
- 	$('#usersdiv').html(contentck)
- 	
- 	
- 	//상세보기 내용에 comment 뿌려주는 내용
- 	$.ajax({
-		url : 'select_comment.ajax',
-		type : 'post',
-		data : 'schedule_no='+ id,
-		success : function(data) {
-			var comment_text = "";
- 			$.each(data, function(index, obj) {
- 				if(index%2==0){
- 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
- 					comment_text += '<button type="button" ';
- 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
- 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
- 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
- 					comment_text += obj.work_comment_text+'</p></div></li>';
- 				}else{
- 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
- 					comment_text += '<button type="button" ';
- 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
- 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
- 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
- 					comment_text += obj.work_comment_text+'</p></div></li>'
- 				}
-			});
- 			$('#comment_text').html(comment_text);
-		}
-	});
- 	
- 	
+ 	$('#usersdiv2').html(contentck)
+	
+	
 }
+
+
+
 
 //수정하기 버튼 클릭시 readonly속성 없애줌
 function work_update(){
@@ -116,7 +177,24 @@ function work_updateok(){
 	$('#updateok_btn').attr('type','hidden');
 	document.getElementById("detail_title").readOnly = true;
 	document.getElementById("detail_text").readOnly = true;
-	
+}
+
+//회의일정 수정 버튼 클릭시 readonly속성 없애줌
+function work_update2(){
+	$('#meet_update_btn').attr('type','hidden');
+	$('#meet_updateok_btn').attr('type','button');
+	document.getElementById("meet_detail_title").readOnly = false;
+	document.getElementById("meet_detail_text").readOnly = false;
+	document.getElementById("place_no").readOnly = false;
+}
+
+//회의일정 저장 버튼 클릭시 DB에 update작업
+function work_updateok2(){
+	$('#meet_update_btn').attr('type','button');
+	$('#meet_updateok_btn').attr('type','hidden');
+	document.getElementById("meet_detail_title").readOnly = true;
+	document.getElementById("meet_detail_text").readOnly = true;
+	document.getElementById("place_no").readOnly = true;
 }
 
 //comment 등록 버튼 클릭시 insert 작업
@@ -425,6 +503,48 @@ function update_progress(){
 						
 						
 					</div>
+					
+					
+					
+					
+					
+					
+					<div id="content_detail2" style="display: none; padding-right:0px;">
+						<input type="button" value="회의일정 수정" id="meet_update_btn" onclick="work_update2()">
+						<input type="hidden" value="회의일정 저장" id="meet_updateok_btn" class="btn-success" onclick="work_updateok2()">
+						<input type="button" value="회의일정 삭제" id="meet_delete_btn"><br>
+						<label>제목 : </label> <input type="text" id="meet_detail_title" readonly="readonly"><br>
+						<label>내용 : </label> <textarea rows="5" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
+						<label>회의실 번호 : </label> <input type="text" id="place_no" readonly="readonly" value="10" place_no="10만 입력해, DB에 10밖에 없어"><br>
+					
+						<label>회의 참가자</label><br>
+					    <div id="usersdiv2"></div>
+						<hr>
+						<input type="hidden" id="meet_detail_id"><input type="hidden" id="meet_detail_start"><input type="hidden" id="meet_detail_end">
+					
+					
+					
+					
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 				</div>
 			</div>
 		</div>

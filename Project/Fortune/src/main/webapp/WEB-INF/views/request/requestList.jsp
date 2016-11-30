@@ -230,7 +230,7 @@
 									<c:otherwise>
 										<c:if test="${sessionScope.info.user_id == n.collabo_req_ID}">
 											<input type="button" class="btn btn-info" data-toggle="modal"
-												data-target="#myModal2"
+												data-target="#myModal2" data-backdrop="static"
 												onclick="memoReqCollabo(${n.collabo_req_index})" value="수락">
 
 											<input type="button" data-toggle="modal"
@@ -376,7 +376,11 @@ function refuse() {
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
+<<<<<<< HEAD
 							<button type="button" class="close" data-dismiss="modal" onclick="CancelClose()">&times;</button>
+=======
+							<button type="button" class="close closemodal" data-dismiss="modal">&times;</button>
+>>>>>>> d2f9dc08928cf7ee5ee6661e700d69495c58c54b
 							<h4 class="modal-title">협업모음 프로젝트</h4>
 
 						</div>
@@ -391,8 +395,13 @@ function refuse() {
 
 						</div>
 						<div class="modal-footer">
+<<<<<<< HEAD
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal" onclick="CancelClose()">Close</button>
+=======
+							<button type="button" class="btn btn-default closemodal"
+								data-dismiss="modal">Close</button>
+>>>>>>> d2f9dc08928cf7ee5ee6661e700d69495c58c54b
 						</div>
 					</div>
 
@@ -402,6 +411,11 @@ function refuse() {
 		</div>
 	</div>
 
-
+<!--  11월-29일 추가 -->
+<script type="text/javascript">
+ $(".closemodal").click(function(){
+	 history.go(0);
+ })
+</script>
 </body>
 </html>

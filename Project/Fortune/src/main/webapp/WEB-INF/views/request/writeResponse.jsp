@@ -130,7 +130,7 @@ function proAdd(){
 </head>
 <body>
 
-<div class="container">
+
 	<form action="writeresponse.htm" method="post" name="proaddform">
 	
 	<input type="hidden" name="collabo_req_index" value="${list.collabo_req_index}">
@@ -181,7 +181,6 @@ function proAdd(){
 		<br>
 		<br>
 	</form>
-</div>
 
 
 </body>
