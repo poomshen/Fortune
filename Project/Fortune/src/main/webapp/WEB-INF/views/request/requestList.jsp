@@ -17,17 +17,15 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style type="text/css">
-img {
-	border-radius: 70%;
-}
+
 
 #pageside {
-	width: 64%;
+	width: 60%;
 	float: left;
 }
 
 #ajaxside {
-	width: 34%;
+	width: 38%;
 	float: right;
 	margin: 1%;
 }
@@ -71,9 +69,9 @@ img {
   	 			cache: false,
   	 			data: "collabo_req_index="+a ,
   	 		    success:function(data){ //callback  
-  	 		  	 	  
+  	 		  	 	  $("#menuView2").append("<div class='table-responsive'>");
   					$("#menuView2").append($('#menuView2').html(data)); 
-  					
+  					 $("#menuView2").append("</div>");
   	 		      
   	 		     },
   	 			error: function(){						
@@ -83,8 +81,8 @@ img {
   	}
      
      function CancelClose(){
-    		$("#menuView2").html(""); 
-    		/* location.href = "requestList.htm"; */
+    		
+    		history.go(0);
     		
     	}
      
@@ -159,7 +157,7 @@ img {
 			<div class="panel panel-default">
 				<div class="panel-heading">협업 리스트</div>
 				<!-- 검색폼 추가 -->
-				<div id="ReqCollabo">어떻게 먹을까</div>
+				<div class="panel-body" id="ReqCollabo"></div>
 			</div>
 		</div>
 
@@ -178,7 +176,7 @@ img {
 
 							<div class="w3-card-2" style="margin: 5px" align="center">
 								<br> <img src="images/man1.PNG" alt="Norway"
-									style="width: 100px; height: 100px">
+									style="width: 100px; height: 100px; border-radius: 70%;" >
 								<div class="w3-container w3-center">
 									<dl>
 										<dt>요청발신자 :</dt>
@@ -268,7 +266,7 @@ img {
 
 							<div class="w3-card-2" align="center" style="margin: 5px">
 								<br> <img src="images/man2.PNG" alt="Norway"
-									style="width: 100px; height: 100px">
+									style="width: 100px; height: 100px; border-radius: 70%; ">
 								<div class="w3-container w3-center">
 									<dl>
 										<dt>요청수신자 :</dt>
