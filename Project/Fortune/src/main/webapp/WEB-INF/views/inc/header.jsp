@@ -11,7 +11,7 @@ var msg
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://192.168.0.3:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://192.168.0.239:8090/fortune/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -94,7 +94,7 @@ $(document).ready(function() {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                <a class="navbar-brand" href="main.htm">SB Admin v2.0</a>
                 
             </div>
             <!-- /.navbar-header -->
@@ -102,7 +102,7 @@ $(document).ready(function() {
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                
-                    <a class="dropdown-toggle" style="color:#417ca5;" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" style="color:#194f89;" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
@@ -153,7 +153,7 @@ $(document).ready(function() {
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" style="color:#417ca5;" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" style="color:#194f89;" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
@@ -233,7 +233,7 @@ $(document).ready(function() {
                 <!-- /.dropdown -->
                 <li id="alarm" class="dropdown">
                                  
-                    <a class="dropdown-toggle" style="color:#417ca5;;" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" style="color:#194f89;;" data-toggle="dropdown" href="#">
                        <i class="fa fa-bell fa-fw hvr-pop"><span id="blink"  <c:if test="${sessionScope.alarm.size()>0}"> class="blink_me notification_count" </c:if> > <c:if test="${sessionScope.totalCount>0}"> ${sessionScope.totalCount}</c:if></span></i>  <i class="fa fa-caret-down"></i>
                     </a>
                 
@@ -295,7 +295,7 @@ $(document).ready(function() {
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" style="color:#417ca5;;" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" style="color:#194f89;;" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">

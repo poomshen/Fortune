@@ -4,6 +4,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
+
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -61,11 +62,7 @@
 
 </head>
 
-<body style="
-    height: 800px;
-">
-
-
+<body style="height: 800px;">
 
    <div class="backstretch" style="left: 0px;top: 0px;overflow: hidden;margin: 0px;padding: 0px;height: 1000px;width: 1600px;z-index: -999998;position: absolute;">
    <img src="assets/img/backgrounds/1.jpg" style="position: absolute;margin: 0px;padding: 0px;border: none;width: 1500px;height: 1200px;max-height: none;max-width: none;z-index: -999999;left: -51.6984px;top: 0px;"></div>
@@ -162,69 +159,9 @@
 		   	<!-- <input type="text" name="year" id="year" size="5" class="form-control hvr-glow" required="required">생년 -->	   	
 		   	<select style="width: 100px" name="year" id="year" required="required">
 			   	<option value="-1">생년 선택 </option>
-			   			   	
-			    	<option value="1970">1970</option>	
-			   			   	
-			    	<option value="1971">1971</option>	
-			   			   	
-			    	<option value="1972">1972</option>	
-			   			   	
-			    	<option value="1973">1973</option>	
-			   			   	
-			    	<option value="1974">1974</option>	
-			   			   	
-			    	<option value="1975">1975</option>	
-			   			   	
-			    	<option value="1976">1976</option>	
-			   			   	
-			    	<option value="1977">1977</option>	
-			   			   	
-			    	<option value="1978">1978</option>	
-			   			   	
-			    	<option value="1979">1979</option>	
-			   			   	
-			    	<option value="1980">1980</option>	
-			   			   	
-			    	<option value="1981">1981</option>	
-			   			   	
-			    	<option value="1982">1982</option>	
-			   			   	
-			    	<option value="1983">1983</option>	
-			   			   	
-			    	<option value="1984">1984</option>	
-			   			   	
-			    	<option value="1985">1985</option>	
-			   			   	
-			    	<option value="1986">1986</option>	
-			   			   	
-			    	<option value="1987">1987</option>	
-			   			   	
-			    	<option value="1988">1988</option>	
-			   			   	
-			    	<option value="1989">1989</option>	
-			   			   	
-			    	<option value="1990">1990</option>	
-			   			   	
-			    	<option value="1991">1991</option>	
-			   			   	
-			    	<option value="1992">1992</option>	
-			   			   	
-			    	<option value="1993">1993</option>	
-			   			   	
-			    	<option value="1994">1994</option>	
-			   			   	
-			    	<option value="1995">1995</option>	
-			   			   	
-			    	<option value="1996">1996</option>	
-			   			   	
-			    	<option value="1997">1997</option>	
-			   			   	
-			    	<option value="1998">1998</option>	
-			   			   	
-			    	<option value="1999">1999</option>	
-			   			   	
-			    	<option value="2000">2000</option>	
-			   	
+			   		<c:forEach var="i" begin="1970" end="2000">
+			   			<option value="${i}">${i}</option>
+			   		</c:forEach>
 		  	</select>년
 		  	</div>
 		  	
@@ -232,31 +169,9 @@
 		   	<!-- <input type="text" name="month" id="month" size="5" class="form-control hvr-glow" required="required">월 -->
 		   	<select style="width: 100px" name="month" id="month" required="required">
 			   	<option value="-1">월 선택</option>
-			   			   	
-			    	<option value="1">1</option>	
-			   			   	
-			    	<option value="2">2</option>	
-			   			   	
-			    	<option value="3">3</option>	
-			   			   	
-			    	<option value="4">4</option>	
-			   			   	
-			    	<option value="5">5</option>	
-			   			   	
-			    	<option value="6">6</option>	
-			   			   	
-			    	<option value="7">7</option>	
-			   			   	
-			    	<option value="8">8</option>	
-			   			   	
-			    	<option value="9">9</option>	
-			   			   	
-			    	<option value="10">10</option>	
-			   			   	
-			    	<option value="11">11</option>	
-			   			   	
-			    	<option value="12">12</option>	
-			   	
+			   		<c:forEach var="i" begin="1" end="12">
+			   			<option value="${i}">${i}</option>
+			   		</c:forEach>   	
 		  	</select>월
 		   </div>  
 		   
@@ -264,69 +179,9 @@
 		   	<!-- <input type="text" name="day" id="day" size="5" class="form-control hvr-glow" required="required">일 -->
 		   	<select style="width: 100px" name="day" id="day" required="required">
 			   	<option value="-1">일 선택</option>
-			   			   	
-			    	<option value="1">1</option>	
-			   			   	
-			    	<option value="2">2</option>	
-			   			   	
-			    	<option value="3">3</option>	
-			   			   	
-			    	<option value="4">4</option>	
-			   			   	
-			    	<option value="5">5</option>	
-			   			   	
-			    	<option value="6">6</option>	
-			   			   	
-			    	<option value="7">7</option>	
-			   			   	
-			    	<option value="8">8</option>	
-			   			   	
-			    	<option value="9">9</option>	
-			   			   	
-			    	<option value="10">10</option>	
-			   			   	
-			    	<option value="11">11</option>	
-			   			   	
-			    	<option value="12">12</option>	
-			   			   	
-			    	<option value="13">13</option>	
-			   			   	
-			    	<option value="14">14</option>	
-			   			   	
-			    	<option value="15">15</option>	
-			   			   	
-			    	<option value="16">16</option>	
-			   			   	
-			    	<option value="17">17</option>	
-			   			   	
-			    	<option value="18">18</option>	
-			   			   	
-			    	<option value="19">19</option>	
-			   			   	
-			    	<option value="20">20</option>	
-			   			   	
-			    	<option value="21">21</option>	
-			   			   	
-			    	<option value="22">22</option>	
-			   			   	
-			    	<option value="23">23</option>	
-			   			   	
-			    	<option value="24">24</option>	
-			   			   	
-			    	<option value="25">25</option>	
-			   			   	
-			    	<option value="26">26</option>	
-			   			   	
-			    	<option value="27">27</option>	
-			   			   	
-			    	<option value="28">28</option>	
-			   			   	
-			    	<option value="29">29</option>	
-			   			   	
-			    	<option value="30">30</option>	
-			   			   	
-			    	<option value="31">31</option>	
-			   	
+			   		<c:forEach var="i" begin="1" end="31">
+			   			<option value="${i}">${i}</option>
+			   		</c:forEach>	   	
 		  	</select>일
 		   </div>
 		   <input type="hidden" name="user_date" id="birthday">
@@ -446,7 +301,7 @@
       $( function() {
     	
     	 $('#idchk').hide();
-         
+    	 joinchk = false;
       /*    $( '#cd-dropdown' ).dropdown( {
             gutter : 5,
             stack : false,
@@ -467,7 +322,7 @@
             slidingIn : 100
          } ); */
       });
-      
+     
       //년,월,일 합치기
       function birth(){
          
@@ -492,12 +347,16 @@
     	    		  success:function(data){
     	    			  //console.log(data);
     	    			  if(data == "yes"){
-    	    			  	/* $("#idselect").html("중복되는 아이디입니다"); */
-    	    			  	alert('중복되는 아이디입니다');
+    	    			  	$("#idselect").html("중복되는 아이디입니다"); 
+    	    			    joinchk = false;
+    	    			  	alert(joinchk);
+    	    			
     	    			  }else{
-    	    				/* $("#idselect").html("사용가능한 아이디 입니다"); */
+    	    				 $("#idselect").html("사용가능한 아이디 입니다");
     	    				  /* $('#nextchk').val()= "okay"; */
-    	    				alert('사용가능한 아이디 입니다'); 
+    	    				 joinchk = true;
+    	    				
+    	    				 alert(joinchk);
     	    			  }
     	    		  },
     	    		  error:function(){
@@ -562,9 +421,17 @@
         	}
     		
     	});
-  
-    
-
+  	
+    //유효성검사 결과로 join 못하게 막기
+ 
+ 	 $('#id').blur(function(){
+ 		
+ 		//alert('벗어났을때 : '+joinchk);
+ 		if(joinchk == false){
+ 			
+ 			$('#id').focus();
+ 		}
+ 	}); 
       </script>
 
 
