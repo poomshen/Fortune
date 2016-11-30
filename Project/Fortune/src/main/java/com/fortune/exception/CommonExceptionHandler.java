@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 
 import org.apache.tiles.impl.CannotRenderException;
 import org.apache.tiles.util.TilesIOException;
+import org.springframework.core.NestedIOException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -15,8 +16,8 @@ public class CommonExceptionHandler {
 
 	@ExceptionHandler(RuntimeException.class)
 	public String handleCommonException() {
-		System.out.println("CommonException발생!!!!!!!!!!");
-		return "error.CommonException";
+		System.out.println("RuntimeException발생!!!!!!!!!!");
+		return "error.RuntimeException";
 	}
 	
 	@ExceptionHandler(IOException.class)
@@ -53,6 +54,12 @@ public class CommonExceptionHandler {
 	public String handleSQLException() {
 		System.out.println("SQLException발생!!!!!!!!!!");
 		return "error.SQLException";
+	}
+	
+	@ExceptionHandler(NestedIOException.class)
+	public String handleNestedIOException() {
+		System.out.println("NestedIOException발생!!!!!!!!!!");
+		return "error.NestedIOException";
 	}
 	
 }

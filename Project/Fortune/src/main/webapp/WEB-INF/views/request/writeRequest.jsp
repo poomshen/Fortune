@@ -80,6 +80,7 @@
 			alert("제목 입력바랍니다 ");
 			$('#collabo_req_title').focus();
 			return false;
+			
 
 		} else {
 			alert("완료"+$('#collabo_req_ID').val());

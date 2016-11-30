@@ -22,4 +22,5 @@ public interface IJoin {
 	
 	//회원가입 유효성검사
 	Join_DTO idchk(String user_id);
+	int updateMemberAdmin(Join_DTO joinDto);
 }
