@@ -90,7 +90,7 @@ input.buttonLink {
 	<div class="col-sm-5" style="padding-right: 0px;">
 		<div class="row" style="padding-right: 0px;">
 		<label style="height: 32px; margin-top: 10px;"> &nbsp;&nbsp;&nbsp; 사원 상세 정보</label>
-			<form action="userupdateadmin.htm" method="post">
+			<form action="">
 				<div id="usershowDiv"></div>
 			</form>
 		</div>
@@ -131,7 +131,6 @@ function deptshowadmin(){
 		error:function(){
 			alert('회원 목록을 가져오는데 실패했습니다');
 		}
-		
 	}); 
 }
 
@@ -151,6 +150,27 @@ function ShowUserInfo(userid){
 
 function CancelUpdate(){
 	$("#usershowDiv").append($('#usershowDiv').html("")); 
+}
+
+function UserUpdate(){
+	$.ajax({
+		type: "get",
+		url : "userupdateadmin.ajax",
+		data: {"user_id":$('#user_id').val(),"user_password":$('#user_password').val(),
+			"user_name":$('#user_name').val(),"user_gender":$('#user_gender').val(),
+			"user_date":$('#user_date').val(),"user_phone":$('#user_phone').val(),
+			"user_join":$('#user_join').val(),"dept_no":$('#deptSelect').val(),
+			"team_no":$('#teamSelect').val(),"position_no":$('#positionSelect').val(),
+			"role_no":$('#roleSelect').val()},
+		success:function(data){
+			alert('수정 성공');
+			deptshowadmin();
+			$("#usershowDiv").append($('#usershowDiv').html(data)); 
+		},
+		error:function(){
+			alert('수정 실패');
+		}
+	});
 }
 </script>
 </html>
