@@ -22,30 +22,47 @@ $(document).ready(function() {
 			console.log(data)
 			$.each(data.schedulelist, function(index, obj) {
 				if(obj.progress_or_place<10){
-					var item = {
+					if(obj.progress_or_place==1){
+						var item = {
 							id : obj.schedule_no,
 							title : obj.wm_title,
 							start : obj.schedule_start,
 							end : obj.schedule_end,
-							backgroundColor : 'green'
-					};
-					array.push(item);
-			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:green">업무일정</td><td>' + obj.wm_title;
+							backgroundColor : 'rgba(51, 122, 183, 0.22)'
+						};
+						array.push(item);
+				        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무일정</td><td>' + obj.wm_title;
+				        content += '</td><td><a';
+				        content += ' onclick="detail(' + obj.schedule_no;
+				        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
+				        content += "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content += ')" >상세보기</a></td></tr>';
+					}else{
+						var item = {
+							id : obj.schedule_no,
+							title : obj.wm_title,
+							start : obj.schedule_start,
+							end : obj.schedule_end,
+							backgroundColor : 'rgb(51, 122, 183)'
+						};
+						array.push(item);
+			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(51, 122, 183)">업무일정</td><td>' + obj.wm_title;
 			        content += '</td><td><a';
 			        content += ' onclick="detail(' + obj.schedule_no;
 			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
 			        content += "','" + obj.users + "','" + obj.progress_or_place + "'";
 			        content += ')" >상세보기</a></td></tr>';
+					}
 				} else{
 					var item = {
 							id : obj.schedule_no,
 							title : obj.wm_title,
 							start : obj.schedule_start,
 							end : obj.schedule_end,
-							backgroundColor : 'blue'
+							backgroundColor : 'rgba(255, 228, 0, 0.66)'
 					};
 					array.push(item);
-			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:blue">회의일정</td><td>' + obj.wm_title;
+			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(255, 228, 0)">회의일정</td><td>' + obj.wm_title;
 			        content += '</td><td><a';
 			        content += ' onclick="detail2(' + obj.schedule_no;
 			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
@@ -67,7 +84,7 @@ $(document).ready(function() {
 function detail(id, title, text, start, end, userids, progress_or_place){
 	//온클릭 함수에 가져올 데이터들
 	if(progress_or_place<10){
-	
+		
 		$('#progress_value').text(progress_or_place*100+"%");
 		$('#progress_value').css("width",progress_or_place*100+"%");
 		$('#content').empty();
@@ -78,6 +95,7 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 		$('#detail_text').val(text);
 		$('#detail_start').val(start);
 		$('#detail_end').val(end);
+		$('#detail_progress').val(progress_or_place);
 		
 		//상세보기 내용에 참가자 인원 뿌려주는 코드
 		var userid = userids.split("/");
@@ -165,10 +183,14 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 
 //수정하기 버튼 클릭시 readonly속성 없애줌
 function work_update(){
-	$('#update_btn').attr('type','hidden');
-	$('#updateok_btn').attr('type','button');
-	document.getElementById("detail_title").readOnly = false;
-	document.getElementById("detail_text").readOnly = false;
+	if($('#detail_progress').val()==1){
+		alert('완료된 일정입니다.')
+	}else{
+		$('#update_btn').attr('type','hidden');
+		$('#updateok_btn').attr('type','button');
+		document.getElementById("detail_title").readOnly = false;
+		document.getElementById("detail_text").readOnly = false;
+	}
 }
 
 //저장하기 버튼 클릭시 DB에 update작업
@@ -478,6 +500,7 @@ function update_progress(){
 							<input type="hidden" id="detail_id">
 							<input type="hidden" id="detail_start">
 							<input type="hidden" id="detail_end">
+							<input type="hidden" id="detail_progress">
 			
 			<!-- comment 보여주는 div영역 -->
 			<!-- panel-heading -->	

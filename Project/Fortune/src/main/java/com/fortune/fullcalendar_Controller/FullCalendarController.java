@@ -308,10 +308,10 @@ public class FullCalendarController {
 
         String[] user_id = null;
         
-        if(color_check.equals("rgb(0, 128, 0)")){
+        if(color_check.equals("rgb(51, 122, 183)")||color_check.equals("rgba(51, 122, 183, 0.219608)")){
         	//일반일정
         	user_id = fullcalendarDAO.selectClick_users(schedule_no);
-        }else if(color_check.equals("rgb(0, 0, 255)")){
+        }else if(color_check.equals("rgba(255, 228, 0, 0.658824)")){
         	user_id = fullcalendarDAO.selectClick_users2(schedule_no);
         }
         
