@@ -11,8 +11,7 @@
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>	
-<link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="bower_components/bootstrap/dist/css/bootstrap.min.css"rel="stylesheet">
  
 
 <!-- MetisMenu CSS -->
