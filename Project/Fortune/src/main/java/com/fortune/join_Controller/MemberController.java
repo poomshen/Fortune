@@ -26,7 +26,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fortune.Table_DTO.Dept_DTO;
+import com.fortune.Table_DTO.Jobtitle_DTO;
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Team_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.function_DTO.Select_Collabo_DTO;
@@ -132,15 +135,28 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/updateMember.htm")
-	public String updateMemberView(HttpSession session){
+	public String updateMemberView(HttpSession session, Model model){
 		
-	/*	System.out.println("id값 받아서 edit view단 보여줄거임");
+		System.out.println("id값 받아서 edit view단 보여줄거임");
 		Join_DTO dto = (Join_DTO) session.getAttribute("info");
 		
-		System.out.println("dto값이 뭔데 그러냐 " + dto);
-	
-		System.out.println("id : " + dto.getUser_id());*/
-		
+		// 부서 리스트 보여주는 부분
+		ArrayList<Dept_DTO> dto2 = new ArrayList<Dept_DTO>();
+		IJoin dao2 = sqlsession.getMapper(IJoin.class);
+		dto2 = dao2.searchDept();
+		model.addAttribute("dept", dto2);
+		// 팀 리스트 보여주는 부분
+		ArrayList<Team_DTO> tdto = new ArrayList<Team_DTO>();
+		IJoin tdao = sqlsession.getMapper(IJoin.class);
+		tdto = tdao.searchTeam();
+		model.addAttribute("team", tdto);
+
+		// 직함 리스트 보여주는 부분
+		ArrayList<Jobtitle_DTO> jdto = new ArrayList<Jobtitle_DTO>();
+		IJoin jdao = sqlsession.getMapper(IJoin.class);
+		jdto = jdao.searchTitle();
+		model.addAttribute("position", jdto);
+
 		return "home.edit";
 		
 	}
