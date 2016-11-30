@@ -10,9 +10,18 @@ select USER_ID, USER_NAME, USER_PHONE, USER_JOIN, DEPT_NO, TEAM_NO, POSITION_NO 
 where DEPT_NO=#{param1} and TEAM_NO=#{param2}
 </select>
 
+<select id="showdeptadmin" resultType="com.fortune.Table_DTO.Join_DTO">  
+select * from users
+where DEPT_NO=#{param1}
+</select>
+
 <select id="showteam" resultType="com.fortune.Table_DTO.Team_DTO">
 select TEAM_NO, DEPT_NO,TEAM_NAME from team
 where DEPT_NO=#{param1}
 </select>
 
+<select id="usersDeptNull" resultType="com.fortune.Table_DTO.Join_DTO">
+select * from users
+where DEPT_NO is null
+</select>
 </mapper>
