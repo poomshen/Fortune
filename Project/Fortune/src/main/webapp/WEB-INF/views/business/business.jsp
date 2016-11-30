@@ -63,7 +63,7 @@ table, th, td {
 </div>
 
 <script type="text/javascript">
-(function() {
+$(function() {
 	alert('잠시만 기다려주세요...');
 
 	$.ajax({
@@ -79,7 +79,7 @@ table, th, td {
 			alert('처음 띄우는데에서 에러남!');
 		}
 	});	
-})();
+});
 
 function deptshow(){
 	alert('잠시만 기다려주세요...');

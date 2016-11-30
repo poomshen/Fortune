@@ -72,7 +72,7 @@ ul a {
                                 </li>
                                 </security:authorize>
                                 <li>
-                                    <a href="userupdate.htm">관리자 회원 수정</a>
+                                    <a href="adminusers.htm">관리자 회원 수정</a>
                                 </li>
                                 <li>
                                     <a href="#">부서장 팀장 선출</a>
