@@ -30,7 +30,11 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
 	<context:component-scan base-package="com.fortune.authority_Controller" />
 	<context:component-scan base-package="com.fortune.alarm_Controller" />
 	<context:component-scan base-package="com.fortune.organization_Controller" />
+
+	<context:component-scan base-package="com.fortune.chart_Controller" />
+
 	<context:component-scan base-package="com.fortune.admin_Controller" />
+
 
 	
 	
@@ -51,6 +55,8 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
 		목적 : 히스토리 를 보게 한다.
 	 -->
 	<context:component-scan base-package="com.fortune.history_Controller"></context:component-scan>
+	<context:component-scan base-package="com.fortune.history_Service"></context:component-scan>
+	
 	
  	<websocket:handlers>
 		<websocket:mapping handler="chatHandler" path="/chat-ws.htm" />
@@ -107,5 +113,8 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
     <!-- @ControllerAdvice 사용하기위해 추가 (지율) -->
 	<beans:bean class="com.fortune.exception.CommonExceptionHandler" />
 	
+	<!-- Validator start -->
+	<beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+	<!-- Validator end -->
 
 </beans:beans>

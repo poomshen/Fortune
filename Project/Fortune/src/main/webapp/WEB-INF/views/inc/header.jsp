@@ -11,7 +11,7 @@ var msg
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://192.168.0.239:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://192.168.0.3:8090/fortune/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -27,7 +27,8 @@ function onOpen(evt) {
 function onMessage(evt) {
 
 	console.log("evt.data"+evt.data);
-	  $.ajax({
+	
+	$.ajax({
 		  
 		  type:"post",
 		  dataType: "html",
@@ -37,7 +38,7 @@ function onMessage(evt) {
 		  
 			  
 			  console.log("성공");
-			  
+			  console.log(data);
 			  $('#alarm').empty();
 			  
 			  $('#alarm').html(data);
@@ -94,8 +95,8 @@ $(document).ready(function() {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="main.htm">SB Admin v2.0</a>
-                
+                <!-- 11.30 왼쪽최상단 기업명? 변경 (지율) -->
+                <a class="navbar-brand" href="main.htm"><i><img src="${pageContext.request.contextPath}/images/clover.png" alt="아이콘" style="img size: 18px;">&nbsp;Fortune</i></a>                
             </div>
             <!-- /.navbar-header -->
 
@@ -233,7 +234,7 @@ $(document).ready(function() {
                 <!-- /.dropdown -->
                 <li id="alarm" class="dropdown">
                                  
-                    <a class="dropdown-toggle" style="color:#194f89;;" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" style="color:#194f89;" data-toggle="dropdown" href="#">
                        <i class="fa fa-bell fa-fw hvr-pop"><span id="blink"  <c:if test="${sessionScope.alarm.size()>0}"> class="blink_me notification_count" </c:if> > <c:if test="${sessionScope.totalCount>0}"> ${sessionScope.totalCount}</c:if></span></i>  <i class="fa fa-caret-down"></i>
                     </a>
                 

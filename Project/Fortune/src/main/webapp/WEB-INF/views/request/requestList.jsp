@@ -249,7 +249,7 @@ img {
 									<c:otherwise>
 										<c:if test="${sessionScope.info.user_id == n.user_ID}">
 											<input type="button" class="btn btn-info" data-toggle="modal"
-												data-target="#myModal2"
+												data-target="#myModal2" data-backdrop="static"
 												onclick="memoReqCollabo(${n.collabo_req_index})" value="수락">
 
 											<input type="button" data-toggle="modal"
@@ -369,7 +369,7 @@ img {
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button type="button" class="close closemodal" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">협업모음 프로젝트</h4>
 
 						</div>
@@ -381,7 +381,7 @@ img {
 
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
+							<button type="button" class="btn btn-default closemodal"
 								data-dismiss="modal">Close</button>
 						</div>
 					</div>
@@ -392,6 +392,11 @@ img {
 		</div>
 	</div>
 
-
+<!--  11월-29일 추가 -->
+<script type="text/javascript">
+ $(".closemodal").click(function(){
+	 history.go(0);
+ })
+</script>
 </body>
 </html>

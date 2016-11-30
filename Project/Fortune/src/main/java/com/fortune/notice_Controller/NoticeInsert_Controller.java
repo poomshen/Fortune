@@ -15,15 +15,18 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.notice_DAO.INotice;
@@ -52,10 +55,19 @@ public class NoticeInsert_Controller {
 
 	// 공지사항등록 실제처리
 	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.POST)
-	public String noticeInsert(Notice_DTO ndto, HttpServletRequest request) throws Exception {
+	public ModelAndView noticeInsert(@Valid Notice_DTO ndto, Errors errors, HttpServletRequest request) throws Exception {
 
 		System.out.println("NoticeController의 noticeInsert를 타서, 실제로 글작성을 할꺼지롱!");		
-
+		
+		ModelAndView view = new ModelAndView();
+		if(errors.hasErrors()){
+			System.out.println("에러타서 모델타고 인서트로 다시온거다");
+			view.addObject("ndto",ndto);
+			view.setViewName("notice.noticeInsert");
+			return view;
+		}
+		
+		view.setViewName("redirect:noticeList.htm");
 	
 		MultipartFile multipartFile = ndto.getFile();
         String originalFileName = null;
@@ -99,7 +111,8 @@ public class NoticeInsert_Controller {
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
 
 		noticeDao.insertNotice(ndto);
-		return "redirect:noticeList.htm";
+		
+		return view;
 
 	}
 	
