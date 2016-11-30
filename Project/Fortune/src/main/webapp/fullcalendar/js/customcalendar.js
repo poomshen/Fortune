@@ -18,17 +18,26 @@ function fcontent() {
 		success : function(data) {
 			console.log(data)
 			$.each(data.schedulelist, function(index, obj) {
-				var userid ="";
-				
-		        content2 += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
-		        content2 += '</td><td><a';
-		        content2 += ' onclick="detail(' + obj.schedule_no;
-		        content2 += ",'" + obj.work_title + "','" + obj.work_text;
-		        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
-		        content2 += "','" + obj.users + "','" + obj.work_progress + "'";
-		        content2 += ')" >상세보기</a></td></tr>';
+				if(obj.progress_or_place<10){
+			        content2 += '<tr id=tr' +obj.schedule_no+ '><td>업무일정</td><td>' + obj.wm_title;
+			        content2 += '</td><td><a';
+			        content2 += ' onclick="detail(' + obj.schedule_no;
+			        content2 += ",'" + obj.wm_title + "','" + obj.wm_text;
+			        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
+			        content2 += "','" + obj.users + "','" + obj.progress_or_place + "'";
+			        content2 += ')" >상세보기</a></td></tr>';
+				} else{
+			        content2 += '<tr id=tr' +obj.schedule_no+ '><td>업무일정</td><td>' + obj.wm_title;
+			        content2 += '</td><td><a';
+			        content2 += ' onclick="detail(' + obj.schedule_no;
+			        content2 += ",'" + obj.wm_title + "','" + obj.wm_text;
+			        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
+			        content2 += "','" + obj.users + "','" + obj.progress_or_place + "'";
+			        content2 += ')" >상세보기</a></td></tr>';
+				}
 			});
 			$('#content_detail').css("display", "none");
+			$('#content_detail2').css("display", "none");
 	        $('#content').html(content2)
 		} 
 	});
@@ -105,16 +114,28 @@ function loadCalendar() {
 				type : 'post',
 	            data : {
 					"schedule_no": calEvent.id,
+					"collabo_no" : $('#collabo_no').val(),
+					"color_check" : clickobjectcolor
 	            },
 				success : function(obj) {
-					content3 += '<tr id=tr' +obj.schedule_no+ '><td>**일정(미구현)</td><td>' + obj.work_title;
-					content3 += '</td><td><a';
-					content3 += ' onclick="detail(' + obj.schedule_no;
-					content3 += ",'" + obj.work_title + "','" + obj.work_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-					content3 += "','" + obj.users + "','" + obj.work_progress + "'";
-					content3 += ')" >상세보기</a></td></tr>';
+					if(obj.progress_or_place<10){
+						content3 += '<tr id=tr' +obj.schedule_no+ '><td>업무일정</td><td>' + obj.wm_title;
+						content3 += '</td><td><a';
+						content3 += ' onclick="detail(' + obj.schedule_no;
+						content3 += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
+						content3 += "','" + obj.users + "','" + obj.progress_or_place + "'";
+						content3 += ')" >상세보기</a></td></tr>';
+					} else{
+						content3 += '<tr id=tr' +obj.schedule_no+ '><td>회의일정</td><td>' + obj.wm_title;
+						content3 += '</td><td><a';
+						content3 += ' onclick="detail2(' + obj.schedule_no;
+						content3 += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
+						content3 += "','" + obj.users + "','" + obj.progress_or_place + "'";
+						content3 += ')" >상세보기</a></td></tr>';
+					}
 					$('#content_detail').css("display", "none");
-			        $('#content').html(content3)
+					$('#content_detail2').css("display", "none");
+					$('#content').html(content3)
 				}
 			});
 

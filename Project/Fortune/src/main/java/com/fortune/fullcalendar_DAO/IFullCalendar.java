@@ -9,6 +9,7 @@ import com.fortune.Table_DTO.Work_Comment_DTO;
 import com.fortune.Table_DTO.Work_Users_DTO;
 import com.fortune.function_DTO.Schedule_Meeting_DTO;
 import com.fortune.function_DTO.Schedule_Work_DTO;
+import com.fortune.function_DTO.Schedule_Work_Meeting_DTO;
 
 
 public interface IFullCalendar {
@@ -23,9 +24,14 @@ public interface IFullCalendar {
 	public int insertMeeting(Schedule_Meeting_DTO smdto) throws ClassNotFoundException, SQLException;
 	public int insertMeet_users(Meet_Users_DTO mudto) throws ClassNotFoundException, SQLException;
 	
-	//모든 일정내용 호출
+	//모든 일반업무 일정내용 호출
 	public List<Schedule_Work_DTO> selectSWList(String collabo_no) throws ClassNotFoundException, SQLException;
 	public List<Work_Users_DTO> selectWUList(String collabo_no) throws ClassNotFoundException, SQLException;
+	
+	//일반업무 + 회의업무 일정내용 호출
+	public List<Schedule_Work_Meeting_DTO> selectSWMList(String collabo_no) throws ClassNotFoundException, SQLException;
+	public List<Meet_Users_DTO> selectMUList(String collabo_no) throws ClassNotFoundException, SQLException;
+	
 	
 	//일정 삭제
 	public int deleteWork(String id) throws ClassNotFoundException, SQLException;
@@ -42,8 +48,10 @@ public interface IFullCalendar {
 	public int updateSchedule(Schedule_Work_DTO swdto) throws ClassNotFoundException, SQLException;
 	
 	//클릭한 일정내용 호출
-	public Schedule_Work_DTO selectClick(String id) throws ClassNotFoundException, SQLException;
+	//public Schedule_Work_DTO selectClick(String id) throws ClassNotFoundException, SQLException;
+	public Schedule_Work_Meeting_DTO selectClick(String collabo_no, String schedule_no) throws ClassNotFoundException, SQLException;
 	public String[] selectClick_users(String schedule_no) throws ClassNotFoundException, SQLException;
+	public String[] selectClick_users2(String schedule_no) throws ClassNotFoundException, SQLException;
 	
 	//일정 상세보기의 comment내용 호출
 	public List<Work_Comment_DTO> selectComment(int id) throws ClassNotFoundException, SQLException;

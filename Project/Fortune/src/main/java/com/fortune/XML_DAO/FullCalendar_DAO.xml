@@ -44,7 +44,7 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 <!-- 일정(회의 업무)등록 -2 --><!-- meeting 테이블 insert -->
 <insert id="insertMeeting">
 	insert into meeting(SCHEDULE_NO, MEETING_TITLE, MEETING_TEXT, MEETING_PLACE_NO)
-	VALUES((select max(schedule_no) from schedule), #{meeting_title}, #{meeting_text}, 1)
+	VALUES((select max(schedule_no) from schedule), #{meeting_title}, #{meeting_text}, 10)
 </insert>
 <!-- 일정(회의 업무)등록-4 // Meet_users insert작업 -->
 <insert id="insertMeet_users">
@@ -62,7 +62,7 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 	WHERE S.COLLABO_NO = #{collabo_no}
 	ORDER BY SCHEDULE_START
 </select>
-<!-- 일정마다 참가자 select -2 -->
+<!-- 일반 일정마다 참가자 select -2 -->
 <select id="selectWUList" resultType="com.fortune.Table_DTO.Work_Users_DTO">
 	select user_id, wu.schedule_no from
 	work_users wu join work w
@@ -75,16 +75,59 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 
 
 
+<!-- 모든 일정(일반업무  + 회의업무) select -1 -->
+<select id="selectSWMList" resultType="com.fortune.function_DTO.Schedule_Work_Meeting_DTO">
+	select s.schedule_no, s.schedule_start, s.schedule_end, w.work_title as "wm_title", w.work_text as "wm_text", w.work_progress as "progress_or_place" from work w join schedule s
+	on w.SCHEDULE_NO = s.schedule_no join
+	collabo c on s.collabo_no = c.collabo_no
+	where S.COLLABO_NO = #{collabo_no}
+	union
+	select s.schedule_no, s.schedule_start, s.schedule_end, m.meeting_title as "title", m.meeting_text, m.MEETING_PLACE_NO from meeting m join schedule s
+	on m.schedule_no = s.schedule_no join
+	collabo c on s.collabo_no = c.collabo_no
+	where s.collabo_no = #{collabo_no}
+</select>
+
+
+
+
+<!-- 회의업무 마다 참가자 select -1 -->
+<select id="selectMUList" resultType="com.fortune.Table_DTO.Meet_Users_DTO">
+	select user_id, wu.schedule_no from
+	work_users wu join work w
+	on wu.SCHEDULE_NO = w.SCHEDULE_NO
+	join schedule s
+	on w.schedule_no = s.schedule_no
+	where s.collabo_no = #{collabo_no}
+</select>
+
+
+
+
 <!-- 선택한 일정 select -->
-<select id="selectClick" resultType="com.fortune.function_DTO.Schedule_Work_DTO">
-	SELECT S.SCHEDULE_NO, SCHEDULE_START, SCHEDULE_END, WORK_TITLE, WORK_TEXT, WORK_PROGRESS FROM 
+<select id="selectClick" resultType="com.fortune.function_DTO.Schedule_Work_Meeting_DTO">
+<!-- 	SELECT S.SCHEDULE_NO, SCHEDULE_START, SCHEDULE_END, WORK_TITLE, WORK_TEXT, WORK_PROGRESS FROM 
 	SCHEDULE S JOIN WORK W 
 	ON S.SCHEDULE_NO = W.SCHEDULE_NO 
-	WHERE S.COLLABO_NO = 1 AND S.SCHEDULE_NO = #{id}
+	WHERE S.COLLABO_NO = 1 AND S.SCHEDULE_NO = #{id} -->
+	select s.schedule_no, s.schedule_start, s.schedule_end, w.work_title as "wm_title", w.work_text as "wm_text", w.work_progress as "progress_or_place" from work w join schedule s
+	on w.SCHEDULE_NO = s.schedule_no join
+	collabo c on s.collabo_no = c.collabo_no
+	where S.COLLABO_NO = #{param1} AND S.SCHEDULE_NO = #{param2}
+	union
+	select s.schedule_no, s.schedule_start, s.schedule_end, m.meeting_title as "title", m.meeting_text, m.MEETING_PLACE_NO from meeting m join schedule s
+	on m.schedule_no = s.schedule_no join
+	collabo c on s.collabo_no = c.collabo_no
+	where s.collabo_no = #{param1} AND S.SCHEDULE_NO = #{param2}
 </select>
 <!-- 선택한 일정 select -2 -->
 <select id="selectClick_users" resultType="String">
 	select user_id from work_users
+	where schedule_no = #{schedule_no}
+</select>
+<!-- 선택한 일정 select -3 -->
+<select id="selectClick_users2" resultType="String">
+	select user_id from meet_users
 	where schedule_no = #{schedule_no}
 </select>
 
