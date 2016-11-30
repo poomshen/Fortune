@@ -12,5 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  and H.Collabo_Req_Index = r.Collabo_Req_Index
 		 ORDER BY H.History_Date desc
 	</select>
-
+	
+	<select id="progectNamelist" resultType="com.fortune.function_DTO.ProgectName_DTO">
+		select PROJECT_NAME ,COLLABO_REQ_NO from PROJECTNAMEVIEW
+	</select>
+	
+	<select id="maxReqNo" resultType="Integer">
+		select MAX((collabo_req_no)+1) as collabo_req_no from COLLABO_REQ
+	</select>
 </mapper>
