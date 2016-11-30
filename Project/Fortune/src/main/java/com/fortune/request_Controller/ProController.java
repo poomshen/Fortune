@@ -186,7 +186,7 @@ public class ProController {
 		   SQLException {
 			 System.out.println("수락했다.");
 		 Request_DTO proDto = proservice.DetailResponse(collabo_req_index);
-		 model.addAttribute("list", proDto);
+		 model.addAttribute("acceptlist", proDto);
 		 System.out.println("수락 창");
 		 System.out.println(proDto.toString());
 		 

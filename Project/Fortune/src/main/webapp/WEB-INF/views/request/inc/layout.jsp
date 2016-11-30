@@ -8,11 +8,9 @@
 
 <title>Insert title here</title>
 
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>	
 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css"rel="stylesheet">
- 
+
 
 <!-- MetisMenu CSS -->
 <link href="bower_components/metisMenu/dist/metisMenu.min.css"

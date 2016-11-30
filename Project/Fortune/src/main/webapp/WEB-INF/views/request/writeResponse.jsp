@@ -10,9 +10,7 @@
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script>
 
 function proAdd(){
@@ -133,8 +131,8 @@ function proAdd(){
 
 	<form action="writeresponse.htm" method="post" name="proaddform">
 	
-	<input type="hidden" name="collabo_req_index" value="${list.collabo_req_index}">
-	<input type="hidden" name="collabo_req_no" value="${list.collabo_req_no}">
+	<input type="hidden" name="collabo_req_index" value="${acceptlist.collabo_req_index}">
+	<input type="hidden" name="collabo_req_no" value="${acceptlist.collabo_req_no}">
 	
 		<div class="col-sm-1"></div>
 		<div class="col-sm-9">
@@ -146,7 +144,7 @@ function proAdd(){
 				<div>
 					<label>수락자 :</label>
 					 <input type="text" name="collabo_req_ID" id="collabo_req_ID"
-					class="form-control" value="${list.collabo_req_ID}" readonly="readonly">
+					class="form-control" value="${acceptlist.collabo_req_ID}" readonly="readonly">
 				</div>
 			</div>
 
@@ -173,7 +171,7 @@ function proAdd(){
 
 		<div class="col-sm-2"></div>
 		<div class="col-sm-6" style="text-align: right" >
-			<br> 
+			<br>
 			<input type="button" class="btn btn-default" value="완료"  onclick="proAdd()">
 			
 			<a href="requestList.htm" class="btn btn-default">취소하기</a>
