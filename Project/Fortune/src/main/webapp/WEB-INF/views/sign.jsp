@@ -215,7 +215,7 @@
 </div>
 
 
-
+<%-- 
 <!--부서명 입력-->
 <!--select id 변경 : 변경불가 -->
 <div class="form-group">
@@ -261,11 +261,11 @@
 	         </section>
 	</div>
 </div>
-
+ --%>
 <!-- Button -->
 <div class="form-group">
   <label class="control-label"></label>  
-    <button type="submit" name="joinbtn" id="joinbtn" onclick="birth();" class="btn hvr-forward" style="margin-top: 50px;">join</button>
+    <input type="button" name="joinbtn" id="joinbtn" onclick="joinchk();" class="btn hvr-forward" style="margin-top: 50px;" value="join">
 </div>
 
 </fieldset>
@@ -301,7 +301,11 @@
       $( function() {
     	
     	 $('#idchk').hide();
-    	 joinchk = false;
+    	 joinchk1 = false;
+    	 joinchk2 = false;
+    	 joinchk3 = false;
+    	 
+    	 
       /*    $( '#cd-dropdown' ).dropdown( {
             gutter : 5,
             stack : false,
@@ -329,7 +333,25 @@
          var y = document.getElementById("year").value;
          var m = document.getElementById("month").value;
          var d = document.getElementById("day").value;
-         var b = y+'-'+m+'-'+d;
+        
+         if(m<10){
+        	
+        	 if(d<10){
+        		 var b = y+'-0'+m+'-0'+d;
+        	 }
+        	 else{
+        		 var b = y+'-0'+m+'-'+d;
+        	 }
+         }else{
+        	 if(d<10){
+        		 var b = y+'-'+m+'-0'+d;
+        	 }
+        	 else{
+        		 var b = y+'-'+m+'-'+d;
+        	 }
+         }
+        
+         
          
          document.getElementById("birthday").value = b;
          //alert(document.getElementById("birthday").value);
@@ -348,15 +370,14 @@
     	    			  //console.log(data);
     	    			  if(data == "yes"){
     	    			  	$("#idselect").html("중복되는 아이디입니다"); 
-    	    			    joinchk = false;
-    	    			  	alert(joinchk);
+    	    			    joinchk1 = false;
+    	    			 
     	    			
     	    			  }else{
     	    				 $("#idselect").html("사용가능한 아이디 입니다");
     	    				  /* $('#nextchk').val()= "okay"; */
-    	    				 joinchk = true;
+    	    				 joinchk1 = true;
     	    				
-    	    				 alert(joinchk);
     	    			  }
     	    		  },
     	    		  error:function(){
@@ -393,8 +414,10 @@
 				console.log(data);
 					if(data=="ok"){
 						$('#pwdchklb').html("비밀번호 통과");
+						joinchk2=true;
 					}else{
 						$('#pwdchklb').html("비밀번호가 일치하지 않습니다");
+						joinchk2=false;
 					}
 				},
 				error:function(){
@@ -415,23 +438,46 @@
     	 
     	 //console.log("phone value: " + $('#phone').val());
     		if(phoneRex.test($('#phone').val())){
-    			$('#phonelbl').html("전화번호가 유효합니다");	
+    			$('#phonelbl').html("전화번호가 유효합니다");
+    			joinchk3 = true;
         	}else{
-        		$('#phonelbl').html("ex)010-xxxx-xxxx 형식으로 작성해주세요");       	
+        		$('#phonelbl').html("ex)01x-xxxx-xxxx 형식으로 작성해주세요");     
+        		joinchk3 = false;
         	}
     		
     	});
-  	
-    //유효성검사 결과로 join 못하게 막기
- 
- 	 $('#id').blur(function(){
- 		
- 		//alert('벗어났을때 : '+joinchk);
- 		if(joinchk == false){
- 			
- 			$('#id').focus();
- 		}
- 	}); 
+  	//유효성 검사로 join 막기
+ 	function joinchk() {				
+		if(joinchk1 == false){
+			alert('아이디 유효성을 확인해주세요');
+			$('#id').focus();
+		}else if(joinchk2 == false){
+			alert('비밀번호 유효성을 확인해주세요');
+			$('#user_password').focus();
+		}else if($('#name').val() == null||$('#name').val() == "" ){		
+			alert('이름을 작성해주세요');
+			$('#name').focus();
+		}else if($('#year').val() == '-1'){
+			alert('년도를 선택해주세요');
+			$('#year').focus();
+		}else if($('#month').val() == '-1'){
+			alert('월을 선택해주세요');
+			$('#month').focus();
+		}else if($('#day').val() == '-1'){
+			alert('일을 선택해주세요');
+			$('#day').focus();
+		}else if(joinchk3 == false){
+			alert('핸드폰 번호 유효성을 확인해주세요');
+			$('#phone').focus();
+		}else if($('#enterdate').val() == null||$('#enterdate').val() == "" ){
+			alert('입사일을 입력해주세요');
+			$('#enterdate').focus();
+		}else{
+			alert('회원가입 완료!');
+			birth();
+			$('#contact_form').submit();	
+		}
+	}
       </script>
 
 

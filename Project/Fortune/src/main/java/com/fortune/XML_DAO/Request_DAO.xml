@@ -67,8 +67,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="refuse" parameterType="com.fortune.Table_DTO.Request_DTO">
 		UPDATE collabo_req SET
 		collabo_req_state='거절',
-		collabo_req_text=${param1}
-		WHERE collabo_req_index=${param2}
+		collabo_req_text=#{param2}
+		WHERE collabo_req_index=#{param1}
 
 	</update>
 
@@ -115,28 +115,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<choose>
 			<when test="collabo_no == null">
 				Insert into collabo(collabo_no,collabo_req_index,collabo_req_no,user_ID,
-				collabo_start, collabo_end, collabo_state, collabo_req_ID)
+				collabo_start, collabo_end, collabo_state, collabo_req_ID,collabo_sal)
 				VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no},
 				null, #{collabo_start}, #{collabo_end}, #{collabo_state},
-				#{collabo_req_ID})
+				#{collabo_req_ID},#{collabo_sal})
 			</when>
 
 			<otherwise>
 				Insert into collabo(collabo_no,collabo_req_index,collabo_req_no,user_ID,
-				collabo_start, collabo_end, collabo_state, collabo_req_ID)
+				collabo_start, collabo_end, collabo_state, collabo_req_ID,collabo_sal)
 				VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no},
 				null, #{collabo_start}, #{collabo_end}, #{collabo_state} ,
-				#{collabo_req_ID})
+				#{collabo_req_ID},#{collabo_sal})
 			</otherwise>
 		</choose>
 
 	</insert>
 
 	<select id="listResponse" resultType="com.fortune.Table_DTO.With_DTO">
-		SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
+		select COLLABO_REQ_TITLE, G.* from (SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo WHERE ${param2}
-		LIKE '%${param3}%' ORDER BY collabo_start DESC ) N )
-		WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50
+		LIKE '%${param3}%' ORDER BY collabo_no DESC ) N )
+		WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50) G join 
+		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX
+	</select>
+	
+	<!--  헙업 팀원들이 헙업 리스트 보기  -->
+	<select id="listResponse2" resultType="com.fortune.Table_DTO.With_DTO">
+		select COLLABO_REQ_TITLE, G.* from (SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
+		( SELECT * FROM collabo WHERE ${param2}
+		in 
+		<foreach  item="querys"  collection="param3" open="(" separator="," close=")">
+			#{querys}
+		</foreach>
+		 ORDER BY collabo_no DESC ) N )
+		WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50) G join 
+		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX
 	</select>
 
 
@@ -200,7 +214,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on col.collabo_req_index = lst.collabo_req_index
 	</select>
 
-
-
+	<!-- 작성자 : 이성준  날짜: 16-12-01 목적: 팀원들의 팀장 보기 -->
+	<select id="selectTeamMGR" parameterType="Integer"  resultType="String">
+		Select distinct c.user_Id From Users U Join (Select * From Collabo) C On U.User_Id = C.User_Id where team_no = #{param1}	
+	</select>
 
 </mapper>

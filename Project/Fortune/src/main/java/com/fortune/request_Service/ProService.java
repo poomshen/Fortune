@@ -116,7 +116,6 @@ public class ProService {
 		//협업 전체 리스트 입니다.
 				public List<Request_DTO> listallRequest(String pg, String f, String q,String st, HttpSession session)
 						throws ClassNotFoundException, SQLException {
-					System.out.println("집에 갑시다.");
 
 					// 게시판 기본 설정(기본값 처리)/////////////
 					int page = 1;
@@ -259,14 +258,16 @@ public class ProService {
 		}
 
 	// 글 거절
-	public int Refuse(String collabo_req_text,String collabo_req_index) throws ClassNotFoundException, SQLException {
-		System.out.println("seq : " + collabo_req_index);
+	public int Refuse(String collabo_req_index,String collabo_req_text) throws ClassNotFoundException, SQLException {
+		System.out.println("거절인덱스 : " + collabo_req_index);
+		System.out.println("거절텍스트 : "+collabo_req_text);
+		
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
-		int re = proDao.refuse(collabo_req_text,collabo_req_index); // 여기에서 delete 사용하여 삭제 함
+		int re = proDao.refuse(collabo_req_index,collabo_req_text); // 여기에서 delete 사용하여 삭제 함
 		return re;
 	}
 
-	// 글요청
+	// 글요청 처리
 	public Request_DTO regResponse(With_DTO n, String collabo_req_index)
 			throws IOException, ClassNotFoundException, SQLException {
 
@@ -354,11 +355,38 @@ public class ProService {
 
 		// 게시판 기본 설정(기본값 처리)/////////////
 		int page = 1;
-		String field = "collabo_req_ID";
-		Join_DTO ids = (Join_DTO) session.getAttribute("info");
+		String query="";
+		String field = "";
 		// 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
-		String query = "%" + ids.getUser_id() + "%";
+		Join_DTO ids = (Join_DTO) session.getAttribute("info");
+		ProDao proDao = sqlsession.getMapper(ProDao.class);
+		
+		System.out.println("실험");
+		System.out.println(ids.getRole_no());
+		System.out.println(ids.getRole_no()==4);
+		System.out.println(ids.getRole_no()==3);
+		System.out.println(ids.getRole_no()==2);
 		//////////////////////////////////////
+		//추가 2016-12-01 부장 ,팀장 ,사원 리스트 보여주기
+		if(ids.getRole_no() == 2){
+			 query = "%" + ids.getUser_id() + "%";
+			 field = "collabo_req_ID";
+		}else if(ids.getRole_no() == 3){
+			 field = "user_ID";
+			 query = "%" + ids.getUser_id() + "%";
+		}else if(ids.getRole_no() == 4){
+			field = "user_ID";
+			List<String> timeId = proDao.selectTeamMGR(ids.getTeam_no()) ;
+			List<With_DTO> list = proDao.listResponse2(page, field, timeId);
+			return list;
+		}else if(ids.getRole_no() == 1||ids.getRole_no() == 0){
+			 query = "%%";
+			 field = "collabo_req_ID";
+		}else {
+			query = "NO";
+			 field = "collabo_req_ID";
+		}
+		
 		if (pg != null && pg.equals("")) {
 			page = Integer.parseInt(pg);
 		}
@@ -369,10 +397,8 @@ public class ProService {
 			query = q;
 		}
 
-		System.out.println(page + " / " + field + " / " + query);
 
 		// Mybatis 적용
-		ProDao proDao = sqlsession.getMapper(ProDao.class);
 
 		List<With_DTO> list = proDao.listResponse(page, field, query);
 
@@ -406,7 +432,6 @@ public class ProService {
 		ProDao checking_DAO = sqlsession.getMapper(ProDao.class);
 		List<Join_DTO> list = checking_DAO.listEffect();
 		
-		System.out.println(list);
 		
 		return list;
 	}

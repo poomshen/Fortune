@@ -42,7 +42,7 @@ function onMessage(evt) {
 			  $('#alarm').empty();
 			  
 			  $('#alarm').html(data);
-			 
+			
 			  
 			 
 		
@@ -58,6 +58,19 @@ function onClose(evt) {
 function send(selectId) {
 /* 	var selectId="sungjun@gmail.com/mclee@gmail.com"; */
 	console.log("보낼 메세지:"+selectId);
+	$.ajax({
+		  
+		  type:"post",
+		  dataType: "html",
+		  url:"updateAlarm.htm",
+		  data:{"selectId": selectId},
+		  success:function(data){
+		  
+			  
+		 console.log("알림DB업데이트 성공");
+		 console.log(data);
+		  }
+	  });	
 	wsocket.send(selectId);
 	
 }

@@ -27,7 +27,7 @@ public interface ProDao {
 		//수락 하기
 		public int accept(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//거절 하기
-		public int refuse(String collabo_req_text ,String collabo_req_index) throws ClassNotFoundException, SQLException;
+		public int refuse(String collabo_req_index,String collabo_req_text) throws ClassNotFoundException, SQLException;
 		//게시물 입력 요청
 		public int insertResponse(With_DTO n) throws ClassNotFoundException, SQLException;
 		//게시물 상세 요청
@@ -52,4 +52,10 @@ public interface ProDao {
 		//사이드바에 자신의 협업들 보여 주기
 		public List<Select_Collabo_DTO> selectCollaboList(String user_id);
 		
+		//작성자 이성준
+		//2016-12-01
+		// 협업 리스트 보여주기 팀원 권한으로
+		public List<With_DTO> listResponse2(int page, String field, List<String>  query) throws ClassNotFoundException, SQLException;	
+		
+		public List<String> selectTeamMGR(int TeamMGR) throws ClassNotFoundException, SQLException;
 }

@@ -26,8 +26,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
+import com.fortune.Table_DTO.Chart_Data_DTO;
+
+import com.fortune.Table_DTO.Dept_DTO;
+import com.fortune.Table_DTO.Jobtitle_DTO;
+
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Team_DTO;
 import com.fortune.alarm_DAO.IAlarm;
+import com.fortune.chart_DAO.IChart;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.function_DTO.Select_Collabo_DTO;
 import com.fortune.member_DAO.IJoin;
@@ -63,6 +71,8 @@ public class MemberController {
 	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session ,Authentication authentication,Model model){
 
+	
+		
 		System.out.println("로그인 버튼 눌렀고요");
 		UserDetails details = (UserDetails)authentication.getPrincipal();
 		String user_id = details.getUsername();
@@ -74,11 +84,33 @@ public class MemberController {
 		
 		
 		session.setAttribute("info", result);
-		
+
 		//추가 사항
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
 		List<Select_Collabo_DTO> collabo = proDao.selectCollaboList(result.getUser_id());
 		session.setAttribute("collabo", collabo);
+		
+		
+		//메뉴에 차트 가져오기( 추가작업 : 이예지)
+		IChart cdao = sqlsession.getMapper(IChart.class);
+		List<Chart_Data_DTO> clist = new ArrayList<Chart_Data_DTO>();
+		
+		clist=cdao.selectChartAll();
+		System.out.println("clist"+clist.size());
+		ArrayList<Integer> chart_x =new ArrayList<Integer>();
+		ArrayList<Float> chart_y =new ArrayList<Float>();
+		for(int i=0;i<clist.size();i++){
+			
+	
+			chart_x.add(clist.get(i).getCollabo_no());
+			chart_y.add((float)(clist.get(i).getChart_progress()/(float)clist.get(i).getChart_total_date()));
+		
+		}
+		
+		model.addAttribute("chart_x",chart_x);
+		model.addAttribute("chart_y",chart_y);
+		System.out.println("메뉴 컨트롤러");
+		
 		
 		//추가사항  
 		//로그인했을때 알림 체크한뒤 해당 알림 리스트를 session에 저장
@@ -96,8 +128,7 @@ public class MemberController {
 		session.setAttribute("alarm", alist);
 		
 	
-		session.setAttribute("totalCount", tatalCount);
-			
+		session.setAttribute("totalCount", tatalCount);	
 		return "home.main";
 		
 			
@@ -132,15 +163,28 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/updateMember.htm")
-	public String updateMemberView(HttpSession session){
+	public String updateMemberView(HttpSession session, Model model){
 		
-	/*	System.out.println("id값 받아서 edit view단 보여줄거임");
+		System.out.println("id값 받아서 edit view단 보여줄거임");
 		Join_DTO dto = (Join_DTO) session.getAttribute("info");
 		
-		System.out.println("dto값이 뭔데 그러냐 " + dto);
-	
-		System.out.println("id : " + dto.getUser_id());*/
-		
+		// 부서 리스트 보여주는 부분
+		ArrayList<Dept_DTO> dto2 = new ArrayList<Dept_DTO>();
+		IJoin dao2 = sqlsession.getMapper(IJoin.class);
+		dto2 = dao2.searchDept();
+		model.addAttribute("dept", dto2);
+		// 팀 리스트 보여주는 부분
+		ArrayList<Team_DTO> tdto = new ArrayList<Team_DTO>();
+		IJoin tdao = sqlsession.getMapper(IJoin.class);
+		tdto = tdao.searchTeam();
+		model.addAttribute("team", tdto);
+
+		// 직함 리스트 보여주는 부분
+		ArrayList<Jobtitle_DTO> jdto = new ArrayList<Jobtitle_DTO>();
+		IJoin jdao = sqlsession.getMapper(IJoin.class);
+		jdto = jdao.searchTitle();
+		model.addAttribute("position", jdto);
+
 		return "home.edit";
 		
 	}
