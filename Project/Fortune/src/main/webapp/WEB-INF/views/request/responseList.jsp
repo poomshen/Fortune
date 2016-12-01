@@ -28,7 +28,7 @@
 			type : "get",
 			url : "insertmanager.htm",
 			cache : false,
-			data : "collabo_req_index=" + a,
+			data : {"collabo_req_index=" : a,"dept_no" : ${sessionScope.info.dept_no}},
 			success : function(data) { //callback  
 
 				$('#menuView').empty();
@@ -115,7 +115,7 @@
 									</c:choose>
 								
 								<h1>프로젝트 제목</h1>
-								팀장 : <security:authorize
+								팀장 :<%--  <security:authorize
 									access="hasAnyRole('ROLE_SUPERMGR')">
 									<c:choose>
 										<c:when test="${n.user_ID  == null}">
@@ -130,7 +130,7 @@
 										</c:otherwise>
 									</c:choose>
 								
-								</security:authorize> ${n.user_ID}
+								</security:authorize> --%> ${n.user_ID}
 								<br>
 								부장 ${n.collabo_req_ID}
 								<h5>${n.collabo_state}</h5>
@@ -162,10 +162,12 @@
 		</div>
 	<div  id="ajaxside">
 		<div class="panel panel-default">
+		
 			<div class="panel-heading">협업 리스트</div>
 			<!-- 검색폼 추가 -->
 			<div id="ReqCollabo"></div>
-		</div>
+			</div>
+		
 	</div>
 
 

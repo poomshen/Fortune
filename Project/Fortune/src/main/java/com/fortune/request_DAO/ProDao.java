@@ -41,7 +41,7 @@ public interface ProDao {
 		//수신자 부장 리스트 
 		public List<Join_DTO> listEffect() throws ClassNotFoundException, SQLException;
 		//담당자 팀장 리스트 
-		public List<Join_DTO> listManager() throws ClassNotFoundException, SQLException;
+		public List<Join_DTO> listManager(String dept_no) throws ClassNotFoundException, SQLException;
 		//게시물 대기 , 수락 , 거절 리스트 
 		public Request_DTO kindState(String collabo_req_state) throws ClassNotFoundException, SQLException;
 		//수락 하기
