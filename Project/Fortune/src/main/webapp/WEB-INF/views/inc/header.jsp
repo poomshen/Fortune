@@ -42,7 +42,7 @@ function onMessage(evt) {
 			  $('#alarm').empty();
 			  
 			  $('#alarm').html(data);
-			 
+			
 			  
 			 
 		
@@ -58,6 +58,19 @@ function onClose(evt) {
 function send(selectId) {
 /* 	var selectId="sungjun@gmail.com/mclee@gmail.com"; */
 	console.log("보낼 메세지:"+selectId);
+	$.ajax({
+		  
+		  type:"post",
+		  dataType: "html",
+		  url:"updateAlarm.htm",
+		  data:{"selectId": selectId},
+		  success:function(data){
+		  
+			  
+		 console.log("알림DB업데이트 성공");
+		 console.log(data);
+		  }
+	  });	
 	wsocket.send(selectId);
 	
 }
@@ -95,8 +108,8 @@ $(document).ready(function() {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="main.htm">SB Admin v2.0</a>
-                
+                <!-- 11.30 왼쪽최상단 기업명? 변경 (지율) -->
+                <a class="navbar-brand" href="main.htm"><i><img src="${pageContext.request.contextPath}/images/clover.png" alt="아이콘" style="img size: 18px;">&nbsp;Fortune</i></a>                
             </div>
             <!-- /.navbar-header -->
 

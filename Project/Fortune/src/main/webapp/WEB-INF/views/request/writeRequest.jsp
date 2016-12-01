@@ -86,7 +86,8 @@
 			alert("완료"+$('#collabo_req_ID').val());
 			
 			send($('#collabo_req_ID').val());
-			 promodifyform.submit(); 
+			promodifyform.submit(); 
+			
 			return true;
 		}
 	}

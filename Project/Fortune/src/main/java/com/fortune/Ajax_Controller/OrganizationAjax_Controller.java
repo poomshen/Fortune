@@ -3,7 +3,6 @@ package com.fortune.Ajax_Controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.Document;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

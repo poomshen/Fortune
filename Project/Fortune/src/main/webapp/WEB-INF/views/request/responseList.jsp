@@ -104,6 +104,16 @@
 								<header class="w3-container "> 
 								번호: ${n.collabo_no} 기간: ${n.collabo_start} ~ ${n.collabo_end}
 								<h1>${n.collabo_req_title}</h1>
+								<c:choose>
+										<c:when test="${n.collabo_sal  == null}">
+											
+										</c:when>
+										<c:otherwise>
+											예상 수익: ${n.collabo_sal}　만원
+										</c:otherwise>
+									</c:choose>
+								
+								<h1>프로젝트 제목</h1>
 								팀장 : <security:authorize
 									access="hasAnyRole('ROLE_SUPERMGR')">
 									<c:choose>
@@ -118,10 +128,12 @@
 												onclick="proAjaxManager(${n.collabo_req_index})">담당</a>
 										</c:otherwise>
 									</c:choose>
+								
 								</security:authorize> ${n.user_ID}
 								<br>
 								부장 ${n.collabo_req_ID}
 								<h5>${n.collabo_state}</h5>
+								
 								 </header>
 								</div>
 								<footer class="w3-container " >

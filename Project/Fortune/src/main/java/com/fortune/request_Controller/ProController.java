@@ -1,9 +1,7 @@
 package com.fortune.request_Controller;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
-import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.function_DTO.ProgectName_DTO;
 import com.fortune.history_Service.HistoryService;
 import com.fortune.request_Service.ProService;
@@ -71,15 +67,6 @@ public class ProController {
 			// 실DB저장
 			proservice.regRequest(n, request);
 			
-			Alarm_DTO adto = new Alarm_DTO();
-			
-			IAlarm alarmDAO =  sqlSession.getMapper(IAlarm.class);
-			System.out.println("수신자 아이디 :"+n.getCollabo_req_ID());
-			
-			adto.setUser_id(n.getCollabo_req_ID());
-        	adto.setWork_type("1");
-
-        	alarmDAO.insertAlarm(adto);
 
 			
 		} catch (Exception e) {
@@ -170,12 +157,14 @@ public class ProController {
 	 }
 	 
 	//수락 하기 눌렀을 경우 화면 출력
-	 @Transactional
+	
 	@RequestMapping("accept.htm")
 		 public String Accept(String collabo_req_index, Model model) throws ClassNotFoundException,
 		   SQLException {
 		 Request_DTO proDto = proservice.DetailResponse(collabo_req_index);
 		 model.addAttribute("list", proDto);
+		 model.addAttribute("acceptlist", proDto);
+		 System.out.println("수락 창");
 		 System.out.println(proDto.toString());
 		 
 		  return "cen.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
@@ -183,11 +172,11 @@ public class ProController {
 		
 	//거절 하기 했을 경우 화면 출력
 		 @RequestMapping("refuse.htm")
-		 public String Refuse(String collabo_req_text,String collabo_req_index ) throws ClassNotFoundException,
+		 public String Refuse(String collabo_req_index,String collabo_req_text) throws ClassNotFoundException,
 		   SQLException {
 		 proservice.Refuse(collabo_req_text,collabo_req_index);
 		
-		  return "request.requestList"; //리스트 화면 (controller 타서 데이터 출력)
+		  return "redirect:listReplyRequest.htm"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	
 		 
 		
@@ -218,10 +207,10 @@ public class ProController {
 	/////////////////////////////////////////////////////////////////////////
 		 
 		// 프로젝트를 요청해주는 클래스 이다.
-			@RequestMapping("/writeresponse.htm")
+			@RequestMapping("writeresponse.htm")
 			public String writeResponse() {
 				
-				return "request.writeResponse";
+				return "cen.writeResponse";
 
 			}
 		 

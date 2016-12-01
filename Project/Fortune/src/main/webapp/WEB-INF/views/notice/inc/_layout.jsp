@@ -5,25 +5,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>[효율적인업무 For春]</title>
+<title>Insert title here</title>
+
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-<link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+
+<!-- Bootstrap Core CSS -->
+<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- MetisMenu CSS -->
-<link href="bower_components/metisMenu/dist/metisMenu.min.css"
-	rel="stylesheet">
+<link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+<!-- Timeline CSS -->
+<link href="dist/css/timeline.css" rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="dist/css/sb-admin-2.css" rel="stylesheet">
-<!-- link rel="stylesheet" type="text/css" href="dist/css/sidebar.css">
 
-<link rel="stylesheet" type="text/css" href="dist/css/normalize.css">
+<!-- Morris Charts CSS -->
+<link href="bower_components/morrisjs/morris.css" rel="stylesheet">
 
-Custom Fonts-->
-<link href="bower_components/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css"> 
-<link rel="stylesheet" href="assets/css/hover.css">
+<!-- Custom Fonts -->
+<link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+a{color: gray !important;}
+</style>
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
@@ -44,18 +50,23 @@ Custom Fonts-->
 	<!-- /#page-wrapper -->
 
 	<!-- jQuery -->
-	<!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> 
- -->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	
 	<!-- Bootstrap Core JavaScript -->
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
+	
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
+	
+	<!-- Morris Charts JavaScript -->
+	<script src="bower_components/raphael/raphael-min.js"></script>
+	<script src="bower_components/morrisjs/morris.min.js"></script>
+	<script src="js/morris-data.js"></script>
+	
 	<!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
-	<script src="dist/js/modernizr.custom.js"></script>
-	<script src="dist/js/draggabilly.pkgd.min.js"></script>
-	<script src="dist/js/dragdrop.js"></script>
+	
+	<!-- ckeditor 쓰려고 추가 -->
+	<script src="ckeditor/ckeditor.js"></script>
 </body>
 </html>
