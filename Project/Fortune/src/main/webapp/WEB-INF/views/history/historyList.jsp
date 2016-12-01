@@ -34,6 +34,7 @@
                                         <div class="timeline-body">
                                             <h4 class="timeline-title">${historylist.collabo_req_title}</h4>
                                             <p>${historylist.collabo_req_text}</p>
+                                             <p>${historylist.history_text}</p>
                                         </div>
                                     </div>
                                 	</li>

@@ -213,6 +213,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(Select Team_No,Dept_No From Users Where User_Id = #{user_id}) Ids On J.Team_No = Ids.Team_No ) Lst 
 		on col.collabo_req_index = lst.collabo_req_index
 	</select>
+	
+	<select id="selectCollaboList2" parameterType="String" resultType="com.fortune.function_DTO.Select_Collabo_DTO">
+		select Col.Collabo_Req_Title,collabo_no from  Collabo_Req col join (Select collabo_no,team_no,collabo_req_index From 
+		(select * from Users where Users.DEPT_NO = #{param1} and Users.ROLE_NO = 2) U Join 
+		(Select * From Collabo) C On U.User_Id = C.collabo_req_id)  Lst  on col.collabo_req_index = lst.collabo_req_index
+	</select>
 
 	<!-- 작성자 : 이성준  날짜: 16-12-01 목적: 팀원들의 팀장 보기 -->
 	<select id="selectTeamMGR" parameterType="Integer"  resultType="String">

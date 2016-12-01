@@ -51,6 +51,7 @@ public interface ProDao {
 		//2016-11-26
 		//사이드바에 자신의 협업들 보여 주기
 		public List<Select_Collabo_DTO> selectCollaboList(String user_id);
+		public List<Select_Collabo_DTO> selectCollaboList2(int deptno);
 		
 		//작성자 이성준
 		//2016-12-01
