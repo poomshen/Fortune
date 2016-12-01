@@ -88,10 +88,25 @@ public class ProController {
 		
 		
 		
+		return "request.tikeRequestList";
 		
-		return "request.requestList";
 
 	}
+	 // ajax 태울 곳
+	 @Transactional
+	 @RequestMapping("requestList2.htm") // /customer/notice.htm
+	 public String requestList2(String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+		 
+		 
+		 List<Request_DTO> list = proservice.getRequest(pg, f, q, st, session);
+		 model.addAttribute("list", list); // 자동 forward
+		 
+		 
+		 
+		 return "cen.tikeRequestList";
+		 
+		 
+	 }
 	// 만든 목적: 발신자가 보낸 것 수신자가 보는 리스트로 보여주는 클래스입니다,
 	// 만든 날짜: 2016-11-28
 	 @Transactional
@@ -104,9 +119,23 @@ public class ProController {
 		
 		
 		
-		return "request.requestList";
+		return "request.postRequestList";
 
 	}
+	 // ajax 태울 곳
+	 @Transactional
+	 @RequestMapping("listReplyRequest2.htm") // /customer/notice.htm
+	 public String listReplyRequest2( String pg, String f, String q,String st, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+		 
+		 
+		 List<Request_DTO> list = proservice.listReplyRequest(pg, f, q,st, session);
+		 model.addAttribute("list", list); // 자동 forward
+		 
+		 
+		 
+		 return "cen.postRequestList";
+		 
+	 }
 	//전체
 	 @Transactional
 	@RequestMapping("listallRequest.htm") // /customer/notice.htm
