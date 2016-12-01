@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 						$(function(){
 							
@@ -79,6 +80,8 @@
 								  
 							});
 						
+						
+						
 						</script>
 <form action="writeresponse.htm" method="post" name="proaddform">
 	<input type="hidden" name="collabo_req_index"
@@ -97,6 +100,15 @@
 					value="${acceptlist.collabo_req_ID}" readonly="readonly">
 			</div>
 		</div>
+		<br>
+		<div class="form-group has-success">
+				<label>팀장 선택 :</label> 
+				 <select name="user_ID" class="form-control">
+				<c:forEach items="${listmanager}" var="list">
+					<option value="${list.user_id}">${list.user_id}</option>
+				</c:forEach>
+					</select>
+			</div>
 
 		<br>
 		<div class="form-group has-success">
@@ -118,6 +130,9 @@
 					id="collabo_sal" class="form-control" placeholder="만원단위 입력하세요">
 			</div>
 		<br>
+		
+		<br>
+		
 
 
 	</div>

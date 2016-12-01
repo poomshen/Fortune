@@ -117,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				Insert into collabo(collabo_no,collabo_req_index,collabo_req_no,user_ID,
 				collabo_start, collabo_end, collabo_state, collabo_req_ID,collabo_sal)
 				VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no},
-				null, #{collabo_start}, #{collabo_end}, #{collabo_state},
+				#{user_ID}, #{collabo_start}, #{collabo_end}, #{collabo_state},
 				#{collabo_req_ID},#{collabo_sal})
 			</when>
 
@@ -125,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				Insert into collabo(collabo_no,collabo_req_index,collabo_req_no,user_ID,
 				collabo_start, collabo_end, collabo_state, collabo_req_ID,collabo_sal)
 				VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no},
-				null, #{collabo_start}, #{collabo_end}, #{collabo_state} ,
+				#{user_ID}, #{collabo_start}, #{collabo_end}, #{collabo_state} ,
 				#{collabo_req_ID},#{collabo_sal})
 			</otherwise>
 		</choose>
@@ -187,7 +187,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listManager" resultType="com.fortune.Table_DTO.Join_DTO">
 
 		select user_ID , user_password,user_name,user_gender,user_date,user_phone,user_join,position_No,
-    team_No,dept_No,role_no from users where ROLE_NO = 3
+    team_No,dept_No,role_no from users where ROLE_NO = 3 and dept_no = #{dept_no}
 
 	</select>
 	
