@@ -45,7 +45,6 @@
 	
 	function detailReqCollabo(a){
 		
-		$("#menuView").empty();
 	  	
 	   	 $.ajax({
 	   		 
@@ -55,6 +54,7 @@
 	 			data:"collabo_req_index="+a,
 	 		    success:function(data){ //callback  
 					$("#ReqCollabo").append($('#ReqCollabo').html(data)); 
+	 		    
 	 		      
 	 		     },
 	 			error: function(){						
@@ -112,8 +112,6 @@
 											예상 수익: ${n.collabo_sal}　만원
 										</c:otherwise>
 									</c:choose>
-								
-								<h1>프로젝트 제목</h1>
 								팀장 : <security:authorize
 									access="hasAnyRole('ROLE_SUPERMGR')">
 									<c:choose>
@@ -164,7 +162,7 @@
 			</div>
 		</div>
 	<div  id="ajaxside">
-		<div class="panel panel-default">
+		<div class="panel panel-default"  style="position: fixed;">
 			<div class="panel-heading">협업 리스트</div>
 			<!-- 검색폼 추가 -->
 			<div id="ReqCollabo"></div>
