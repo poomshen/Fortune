@@ -268,7 +268,7 @@ public class ProService {
 		return re;
 	}
 
-	// 글요청
+	// 글요청 처리
 	public Request_DTO regResponse(With_DTO n, String collabo_req_index)
 			throws IOException, ClassNotFoundException, SQLException {
 

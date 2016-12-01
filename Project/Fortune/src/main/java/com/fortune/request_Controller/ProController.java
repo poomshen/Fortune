@@ -180,7 +180,7 @@ public class ProController {
 	 }
 	 
 	//수락 하기 눌렀을 경우 화면 출력
-	 @Transactional
+	
 	@RequestMapping("accept.htm")
 		 public String Accept(String collabo_req_index, Model model) throws ClassNotFoundException,
 		   SQLException {
@@ -235,7 +235,7 @@ public class ProController {
 	/////////////////////////////////////////////////////////////////////////
 		 
 		// 프로젝트를 요청해주는 클래스 이다.
-			@RequestMapping("/writeresponse.htm")
+			@RequestMapping("writeresponse.htm")
 			public String writeResponse() {
 				System.out.println("이쪽으로 왔다 해도 POST는 무슨뜻인지 몰라서 그냥 가는걸지도 몰라요");
 				

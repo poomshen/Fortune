@@ -13,12 +13,20 @@ public class With_DTO {
 	private Date collabo_end;
 	private String collabo_state;
 	private String collabo_req_ID;
+	private String collabo_sal;
 	
 	
 	
 	
 	
 	
+	
+	public String getCollabo_sal() {
+		return collabo_sal;
+	}
+	public void setCollabo_sal(String collabo_sal) {
+		this.collabo_sal = collabo_sal;
+	}
 	public String getCollabo_no() {
 		return collabo_no;
 	}
@@ -69,12 +77,16 @@ public class With_DTO {
 		this.collabo_req_ID = collabo_req_ID;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "With_DTO [collabo_no=" + collabo_no + ", collabo_req_index=" + collabo_req_index + ", collabo_req_no="
 				+ collabo_req_no + ", user_ID=" + user_ID + ", collabo_start=" + collabo_start + ", collabo_end="
-				+ collabo_end + ", collabo_state=" + collabo_state + ", collabo_req_ID=" + collabo_req_ID + "]";
+				+ collabo_end + ", collabo_state=" + collabo_state + ", collabo_req_ID=" + collabo_req_ID
+				+ ", collabo_sal=" + collabo_sal + "]";
 	}
+	
+	
 	
 	
 	
