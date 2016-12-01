@@ -462,8 +462,8 @@ function update_progress(){
   
     <dt>
     <a href="#"style="margin-top:5px; height: 133px;padding-right: 0px;">
-      <span class="hida box" style="width: 253px;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
-      <p class="multiSel"></p>
+      <span class="hida box" id="spantag" style="width: 253px; font-size:small;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
+      <p class="multiSel" id="ptag" style="font-size:medium;"></p>
     </a>
     </dt>
   
@@ -471,7 +471,7 @@ function update_progress(){
         <div class="mutliSelect effect2" >
             <ul class="effect2" style="display: block;padding-right: 0px;height: 204px;width: 272px;">
         		<c:forEach items="${team_id}" var="obj" varStatus="status">
-					<li><input type="checkbox" value="${obj}" name='userchk'>${obj}</li>
+					<li><input type="checkbox" value="${obj}" id="${obj}" name='userchk'><label for="${obj}" style="cursor: pointer ;">${obj}</label></li>
 				</c:forEach>
             </ul>
         </div>

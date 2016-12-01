@@ -82,10 +82,13 @@ function loadCalendar() {
 			//모달 띄우는 함수
 	    	
 	    	var test = $('#modal_btn').click();
-			$('#modal_title').val(""); $('#modal_title2').val("");
+	    	$('#ptag').empty();
+	    	$('#spantag').css("display","inline")
+	    	$('#modal_title').val(""); $('#modal_title2').val("");
 			$('#modal_text').val(""); $('#modal_text2').val("");
 			$('#modal_start').val(start.format("YYYY-MM-DD"));
 			$('#modal_end').val(end.format("YYYY-MM-DD"));
+			$("input[type='checkbox']").prop("checked", false);
 			$("input[type='radio']").prop("checked", false);
 			$("input[type='radio']").attr("onclick","return true");
 			$('.dplace').css("color","#858585)");
@@ -474,68 +477,73 @@ function loadCalendar() {
         // 회의업무 등록함수
     	insertEvent2: {
     		click: $('#modal_ok2').click(function(){
-    		
     			
-    			var eventData;
-				var scheduleusers="";
-				var count=",";
-				var work_type="";
-				$("input[name='userchk']:checked").each(function(i){
-
-					scheduleusers += $(this).val()+"/";
-				
-				});
-				var newschedule = {
-						"title": $('#modal_title2').val(),
-						"text": $('#modal_text2').val(),
-						"start": $('#modal_start').val(),
-						"end": $('#modal_end').val(),
-						"collabo_no" : $('#collabo_no').val(),
-						"scheduleusers" : scheduleusers,
-						"meeting_place_no" : $('input[type=radio]:checked').val(),
-				}
-
-				
-				$.ajax({
-					type: 'post',
-					url: 'select.ajax',
-					data: newschedule,
-					success : function(data) {
-						console.log(data);
-						eventData = {
-								id: data.schedule.schedule_no,
-								title: data.schedule.meeting_title,
-								start: data.schedule.schedule_start,
-								end: data.schedule.schedule_end,
-								backgroundColor: 'rgba(255, 228, 0, 0.66)'
-						}
-						
-						calendar.fullCalendar('renderEvent', eventData , true);
-						fcontent();
-						console.log('회의업무 insert 성공')
-						
-						
-					      $.each(data.alarm, function (i, item) {
-                                console.log(item.count);
-                                count+=item.count+"/";
-                                work_type=item.work_type;
-					      
-					      });
-						
-						console.log(data.alarm); 
-						//var count =","+data.count.join(' / ');
-						
-						console.log(count);
-						
-						send(scheduleusers+count+","+work_type);
-						
-						
-						$(".hida").show();
-		    			$('input[type="checkbox"]').prop("checked",false);
-		    			$('.multiSel').text("");
-						}
+    			if($('#modal_start').val() != $('#modal_end').val()){
+    				alert('회의일정은 하루씩만 가능합니다.')
+    			}else{
+    			
+	    			var eventData;
+					var scheduleusers="";
+					var count=",";
+					var work_type="";
+					$("input[name='userchk']:checked").each(function(i){
+	
+						scheduleusers += $(this).val()+"/";
+					
 					});
-				})
+					var newschedule = {
+							"title": $('#modal_title2').val(),
+							"text": $('#modal_text2').val(),
+							"start": $('#modal_start').val(),
+							"end": $('#modal_end').val(),
+							"collabo_no" : $('#collabo_no').val(),
+							"scheduleusers" : scheduleusers,
+							"meeting_place_no" : $('input[type=radio]:checked').val(),
+					}
+	
+					
+					$.ajax({
+						type: 'post',
+						url: 'select.ajax',
+						data: newschedule,
+						success : function(data) {
+							console.log(data);
+							eventData = {
+									id: data.schedule.schedule_no,
+									title: data.schedule.meeting_title,
+									start: data.schedule.schedule_start,
+									end: data.schedule.schedule_end,
+									backgroundColor: 'rgba(255, 228, 0, 0.66)'
+							}
+							
+							calendar.fullCalendar('renderEvent', eventData , true);
+							fcontent();
+							console.log('회의업무 insert 성공')
+							
+							
+						      $.each(data.alarm, function (i, item) {
+	                                console.log(item.count);
+	                                count+=item.count+"/";
+	                                work_type=item.work_type;
+						      
+						      });
+							
+							console.log(data.alarm); 
+							//var count =","+data.count.join(' / ');
+							
+							console.log(count);
+							
+							send(scheduleusers+count+","+work_type);
+							
+							
+							$(".hida").show();
+			    			$('input[type="checkbox"]').prop("checked",false);
+			    			$('.multiSel').text("");
+							}
+						});
+					
+	    			}
+    			})
 	    	}
 	    	// 작업자: 이명철  // 최근 수정일: 16-11-29 --------------------- E N D ------------------------
 	    	// ------------------------------------------------------------------------------------    
