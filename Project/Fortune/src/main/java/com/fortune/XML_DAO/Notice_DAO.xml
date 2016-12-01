@@ -71,4 +71,11 @@
          WHERE
             NOTICE_NO = #{NOTICE_NO}
 	</update>
+	
+	<!-- 메인 화면 최신글  -->
+	<select id="mainListNotice" resultType="com.fortune.Table_DTO.Notice_DTO">
+		select * from (select rownum num, n.* from (select * from
+		notice order by notice_no desc) n)
+		where num between 1 and 5
+	</select>
 </mapper>

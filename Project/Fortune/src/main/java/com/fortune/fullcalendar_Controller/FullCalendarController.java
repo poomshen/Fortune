@@ -53,7 +53,7 @@ public class FullCalendarController {
 		Map<String,Object> map = new HashMap();
 		IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
 		
-		
+		//업무 일정등록
 		if(meeting_place_no==0){
 			
         System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 캘린더 select함수 호출: 일반일정 insert작업");        
@@ -101,6 +101,8 @@ public class FullCalendarController {
 		
 		
 		}
+		
+		//회의일정 등록
 		else{
 			
 			
@@ -122,6 +124,7 @@ public class FullCalendarController {
 			smdto.setSchedule_end(end);
 			smdto.setMeeting_title(title);
 			smdto.setMeeting_text(text);
+			smdto.setMeeting_place_no(meeting_place_no);
 	        
 	        int f = fullcalendarDAO.insertSchedule2(smdto);
 	        f += fullcalendarDAO.insertMeeting(smdto);
@@ -241,7 +244,7 @@ public class FullCalendarController {
 	public @ResponseBody Schedule_Meeting_DTO meeting_update(@RequestParam(value="title") String title, 
 			@RequestParam(value="text") String text, @RequestParam(value="schedule_no") int schedule_no, 
 			@RequestParam(value="schedule_start") String schedule_start, @RequestParam(value="schedule_end") String schedule_end, 
-			@RequestParam(value="meeting_place_no") String meeting_place_no)  
+			@RequestParam(value="meeting_place_no") int meeting_place_no)  
 			throws ClassNotFoundException, SQLException {
 		System.out.println("위치 : FullCalendarController // 내용 : (회의 일정 제목, 내용, 참여자) update작업 // 작업자: 이명철"); 
         
@@ -308,10 +311,10 @@ public class FullCalendarController {
 
         String[] user_id = null;
         
-        if(color_check.equals("rgb(0, 128, 0)")){
+        if(color_check.equals("rgb(51, 122, 183)")||color_check.equals("rgba(51, 122, 183, 0.219608)")){
         	//일반일정
         	user_id = fullcalendarDAO.selectClick_users(schedule_no);
-        }else if(color_check.equals("rgb(0, 0, 255)")){
+        }else if(color_check.equals("rgba(255, 228, 0, 0.658824)")){
         	user_id = fullcalendarDAO.selectClick_users2(schedule_no);
         }
         
@@ -401,9 +404,26 @@ public class FullCalendarController {
 	
 	
 	
+
 	
 	
 	
+    /* 작업자 : 이명철  // 최초 작업일 : 12.01 // 최종 작업일 : 12.01
+     * 작업 내용 : 예약된 회의장소 정보 select
+     * 추가 내용 : 
+     * version : v1.0
+    */
+	@RequestMapping(value="select_place.ajax", method = RequestMethod.POST)
+	public @ResponseBody String[] select_place(@RequestParam(value="schedule_start") String schedule_start) throws ClassNotFoundException, SQLException {
+		System.out.println("위치 : FullCalendarController // 내용 : 예약된 회의장소 정보 select // 작업자: 이명철");
+
+		IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+	    
+		String[] select_place = fullcalendarDAO.select_place(schedule_start);
+	    
+	    
+		return select_place;
+	}
 	
 	
 	

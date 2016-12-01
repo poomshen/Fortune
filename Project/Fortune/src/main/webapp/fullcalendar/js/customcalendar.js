@@ -19,15 +19,25 @@ function fcontent() {
 			console.log(data)
 			$.each(data.schedulelist, function(index, obj) {
 				if(obj.progress_or_place<10){
-			        content2 += '<tr id=tr' +obj.schedule_no+ '><td style="color:green">업무일정</td><td>' + obj.wm_title;
-			        content2 += '</td><td><a';
-			        content2 += ' onclick="detail(' + obj.schedule_no;
-			        content2 += ",'" + obj.wm_title + "','" + obj.wm_text;
-			        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
-			        content2 += "','" + obj.users + "','" + obj.progress_or_place + "'";
-			        content2 += ')" >상세보기</a></td></tr>';
+					if(obj.progress_or_place==1){
+				        content2 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무일정</td><td>' + obj.wm_title;
+				        content2 += '</td><td><a';
+				        content2 += ' onclick="detail(' + obj.schedule_no;
+				        content2 += ",'" + obj.wm_title + "','" + obj.wm_text;
+				        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
+				        content2 += "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content2 += ')" >상세보기</a></td></tr>';
+					} else{
+				        content2 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(51, 122, 183)">업무일정</td><td>' + obj.wm_title;
+				        content2 += '</td><td><a';
+				        content2 += ' onclick="detail(' + obj.schedule_no;
+				        content2 += ",'" + obj.wm_title + "','" + obj.wm_text;
+				        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
+				        content2 += "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content2 += ')" >상세보기</a></td></tr>';
+					}
 				} else{
-			        content2 += '<tr id=tr' +obj.schedule_no+ '><td style="color:blue">회의일정</td><td>' + obj.wm_title;
+			        content2 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(255, 228, 0)">회의일정</td><td>' + obj.wm_title;
 			        content2 += '</td><td><a';
 			        content2 += ' onclick="detail(' + obj.schedule_no;
 			        content2 += ",'" + obj.wm_title + "','" + obj.wm_text;
@@ -50,30 +60,64 @@ function loadCalendar() {
 	//캘린더 호출
 	var calendar = $('#calendar').fullCalendar({
 		//캐린더의 기본 속성값 지정
-		theme: true,
-		editable: true,
+		theme: false,
+		editable: true, //스케줄 기간 늘이고, 위치 움직이는 함수
 		eventLimit: false, // allow "more" link when too many events
-		selectable: true,
-		selectHelper: true,
+		selectable: true, //insert할 select 이벤트
+		selectHelper: true, //???
 	    
+		
 		//캘린더 헤더 부분 css요소
 		header: {
 	        left: 'prev,next today',
-	        right: 'title',
+	        center: 'title',
+	        right: ''
 	    },
 
 		
 		// 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
 		// 작업내용: 드래그로 일정등록 하는 소스 , 사용한 함수 호출횟수 만큼 반복되어 실행되는 에러 발생
 	    // 처리결과: start, end 값만 html에 기재하고, customBotton속성 함수에서 일정등록 코드 진행 + 재호출시 기존에 입력된 값 초기화 작업.
-	    	select: function(start, end) {
+	    select: function(start, end) {
 			//모달 띄우는 함수
 	    	
 	    	var test = $('#modal_btn').click();
-			$('#modal_title').val(""); $('#modal_title2').val("");
+	    	$('#ptag').empty();
+	    	$('#spantag').css("display","inline")
+	    	$('#modal_title').val(""); $('#modal_title2').val("");
 			$('#modal_text').val(""); $('#modal_text2').val("");
 			$('#modal_start').val(start.format("YYYY-MM-DD"));
-			$('#modal_end').val(end.format("YYYY-MM-DD"))
+			$('#modal_end').val(end.format("YYYY-MM-DD"));
+			$("input[type='checkbox']").prop("checked", false);
+			$("input[type='radio']").prop("checked", false);
+			$("input[type='radio']").attr("onclick","return true");
+			$('.dplace').css("color","#858585)");
+			
+			$.ajax({
+				url : 'select_place.ajax',
+				type : 'post',
+				data :  'schedule_start='+start.format("YYYY-MM-DD") ,
+				success : function(data) {
+				      $.each(data, function (index, obj) {
+							if(obj=='10'){
+								$('#meeting_place_10').attr("onclick","return false");
+								$('#div_place_10').css("color","rgba(0,0,0,0.2)")
+							}else if(obj=='20'){
+								$('#meeting_place_20').attr("onclick","return false");
+								$('#div_place_20').css("color","rgba(0,0,0,0.2)")
+							}else if(obj=='30'){
+								$('#meeting_place_30').attr("onclick","return false");
+								$('#div_place_30').css("color","rgba(0,0,0,0.2)")
+							}else if(obj=='40'){
+								$('#meeting_place_40').attr("onclick","return false");
+								$('#div_place_40').css("color","rgba(0,0,0,0.2)")
+							}
+				      });
+				      
+				}
+			});
+			
+			
 			
 			calendar.fullCalendar('unselect');
 		},
@@ -103,8 +147,12 @@ function loadCalendar() {
 			//클릭된 일정의 객체 배경색 값을 변수에 담음
 			clickobjectcolor = $(this).css('background-color');
 			
+			if(clickobjectcolor=='rgba(51, 122, 183, 0.219608)'){
+				alert('완료된 일정입니다.')
+			}
+			
 			//클릭된 일정의 배경색을 red로 설정
-			$(this).css('background-color', 'red');
+			$(this).css('background-color', 'rgba(237,0,0,0.66');
 			
 			
 			var content3 = "";
@@ -119,14 +167,24 @@ function loadCalendar() {
 	            },
 				success : function(obj) {
 					if(obj.progress_or_place<10){
-						content3 += '<tr id=tr' +obj.schedule_no+ '><td style="color:green">업무일정</td><td>' + obj.wm_title;
-						content3 += '</td><td><a';
-						content3 += ' onclick="detail(' + obj.schedule_no;
-						content3 += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-						content3 += "','" + obj.users + "','" + obj.progress_or_place + "'";
-						content3 += ')" >상세보기</a></td></tr>';
+						if(obj.progress_or_place==1){
+							content3 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무일정</td><td>' + obj.wm_title;
+							content3 += '</td><td><a';
+							content3 += ' onclick="detail(' + obj.schedule_no;
+							content3 += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
+							content3 += "','" + obj.users + "','" + obj.progress_or_place + "'";
+							content3 += ')" >상세보기</a></td></tr>';
+
+						}else{
+							content3 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(51, 122, 183)">업무일정</td><td>' + obj.wm_title;
+							content3 += '</td><td><a';
+							content3 += ' onclick="detail(' + obj.schedule_no;
+							content3 += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
+							content3 += "','" + obj.users + "','" + obj.progress_or_place + "'";
+							content3 += ')" >상세보기</a></td></tr>';
+						}
 					} else{
-						content3 += '<tr id=tr' +obj.schedule_no+ '><td style="color:blue">회의일정</td><td>' + obj.wm_title;
+						content3 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(255, 228, 0)">회의일정</td><td>' + obj.wm_title;
 						content3 += '</td><td><a';
 						content3 += ' onclick="detail2(' + obj.schedule_no;
 						content3 += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
@@ -377,7 +435,8 @@ function loadCalendar() {
 									id: data.schedule.schedule_no,
 									title: data.schedule.work_title,
 									start: data.schedule.schedule_start,
-									end: data.schedule.schedule_end
+									end: data.schedule.schedule_end,
+									backgroundColor : 'rgb(51, 122, 183)'
 							}
 							
 							calendar.fullCalendar('renderEvent', eventData , true);
@@ -418,67 +477,73 @@ function loadCalendar() {
         // 회의업무 등록함수
     	insertEvent2: {
     		click: $('#modal_ok2').click(function(){
-    		
     			
-    			var eventData;
-				var scheduleusers="";
-				var count=",";
-				var work_type="";
-				$("input[name='userchk']:checked").each(function(i){
-
-					scheduleusers += $(this).val()+"/";
-				
-				});
-				var newschedule = {
-						"title": $('#modal_title2').val(),
-						"text": $('#modal_text2').val(),
-						"start": $('#modal_start').val(),
-						"end": $('#modal_end').val(),
-						"collabo_no" : $('#collabo_no').val(),
-						"scheduleusers" : scheduleusers,
-						"meeting_place_no" : "1"
-				}
-
-				
-				$.ajax({
-					type: 'post',
-					url: 'select.ajax',
-					data: newschedule,
-					success : function(data) {
-						console.log(data);
-						eventData = {
-								id: data.schedule.schedule_no,
-								title: data.schedule.meeting_title,
-								start: data.schedule.schedule_start,
-								end: data.schedule.schedule_end
-						}
-						
-						calendar.fullCalendar('renderEvent', eventData , true);
-						fcontent();
-						console.log('회의업무 insert 성공')
-						
-						
-					      $.each(data.alarm, function (i, item) {
-                                console.log(item.count);
-                                count+=item.count+"/";
-                                work_type=item.work_type;
-					      
-					      });
-						
-						console.log(data.alarm); 
-						//var count =","+data.count.join(' / ');
-						
-						console.log(count);
-						
-						send(scheduleusers+count+","+work_type);
-						
-						
-						$(".hida").show();
-		    			$('input[type="checkbox"]').prop("checked",false);
-		    			$('.multiSel').text("");
-						}
+    			if($('#modal_start').val() != $('#modal_end').val()){
+    				alert('회의일정은 하루씩만 가능합니다.')
+    			}else{
+    			
+	    			var eventData;
+					var scheduleusers="";
+					var count=",";
+					var work_type="";
+					$("input[name='userchk']:checked").each(function(i){
+	
+						scheduleusers += $(this).val()+"/";
+					
 					});
-				})
+					var newschedule = {
+							"title": $('#modal_title2').val(),
+							"text": $('#modal_text2').val(),
+							"start": $('#modal_start').val(),
+							"end": $('#modal_end').val(),
+							"collabo_no" : $('#collabo_no').val(),
+							"scheduleusers" : scheduleusers,
+							"meeting_place_no" : $('input[type=radio]:checked').val(),
+					}
+	
+					
+					$.ajax({
+						type: 'post',
+						url: 'select.ajax',
+						data: newschedule,
+						success : function(data) {
+							console.log(data);
+							eventData = {
+									id: data.schedule.schedule_no,
+									title: data.schedule.meeting_title,
+									start: data.schedule.schedule_start,
+									end: data.schedule.schedule_end,
+									backgroundColor: 'rgba(255, 228, 0, 0.66)'
+							}
+							
+							calendar.fullCalendar('renderEvent', eventData , true);
+							fcontent();
+							console.log('회의업무 insert 성공')
+							
+							
+						      $.each(data.alarm, function (i, item) {
+	                                console.log(item.count);
+	                                count+=item.count+"/";
+	                                work_type=item.work_type;
+						      
+						      });
+							
+							console.log(data.alarm); 
+							//var count =","+data.count.join(' / ');
+							
+							console.log(count);
+							
+							send(scheduleusers+count+","+work_type);
+							
+							
+							$(".hida").show();
+			    			$('input[type="checkbox"]').prop("checked",false);
+			    			$('.multiSel').text("");
+							}
+						});
+					
+	    			}
+    			})
 	    	}
 	    	// 작업자: 이명철  // 최근 수정일: 16-11-29 --------------------- E N D ------------------------
 	    	// ------------------------------------------------------------------------------------    

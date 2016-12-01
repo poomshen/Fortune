@@ -102,9 +102,8 @@
 								style="width: 98%; margin-top: 1%; margin-left: 1%; margin-bottom: 1%;">
 						<div id="cardLeft" >
 								<header class="w3-container "> 
-								번호: ${n.collabo_no} 기간: ${n.collabo_start} ~ ${n.collabo_end}<br>
-								
-								
+								번호: ${n.collabo_no} 기간: ${n.collabo_start} ~ ${n.collabo_end}
+								<h1>${n.collabo_req_title}</h1>
 								<c:choose>
 										<c:when test="${n.collabo_sal  == null}">
 											
@@ -150,6 +149,10 @@
 								<div>
 									<a href="#" onclick="detailReqCollabo(${n.collabo_req_index})" class="btn btn-primary"> 
 									<i class="glyphicon  glyphicon-th-list"></i><br>상세 보기</a>
+								</div>
+								<div>
+									<a href="historyList.htm?collabo_req_no=${n.collabo_req_no }" class="btn btn-primary"> 
+									<i class="glyphicon  glyphicon-th-list"></i><br>히스토리보기</a>
 								</div>
 								</div> 
 								</footer>

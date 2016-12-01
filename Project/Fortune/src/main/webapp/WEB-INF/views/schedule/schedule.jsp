@@ -13,7 +13,10 @@
 
 $(document).ready(function() {
 
-//화면 로드시 일정을 DB에서 불러오는 코드 
+    $('[data-toggle="tooltip"]').tooltip();
+	
+	
+//화면 로드시 일정을 DB에서 불러오는 코드  
  	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
@@ -22,30 +25,47 @@ $(document).ready(function() {
 			console.log(data)
 			$.each(data.schedulelist, function(index, obj) {
 				if(obj.progress_or_place<10){
-					var item = {
+					if(obj.progress_or_place==1){
+						var item = {
 							id : obj.schedule_no,
 							title : obj.wm_title,
 							start : obj.schedule_start,
 							end : obj.schedule_end,
-							backgroundColor : 'green'
-					};
-					array.push(item);
-			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:green">업무일정</td><td>' + obj.wm_title;
+							backgroundColor : 'rgba(51, 122, 183, 0.22)'
+						};
+						array.push(item);
+				        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무일정</td><td>' + obj.wm_title;
+				        content += '</td><td><a';
+				        content += ' onclick="detail(' + obj.schedule_no;
+				        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
+				        content += "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content += ')" >상세보기</a></td></tr>';
+					}else{
+						var item = {
+							id : obj.schedule_no,
+							title : obj.wm_title,
+							start : obj.schedule_start,
+							end : obj.schedule_end,
+							backgroundColor : 'rgb(51, 122, 183)'
+						};
+						array.push(item);
+			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(51, 122, 183)">업무일정</td><td>' + obj.wm_title;
 			        content += '</td><td><a';
 			        content += ' onclick="detail(' + obj.schedule_no;
 			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
 			        content += "','" + obj.users + "','" + obj.progress_or_place + "'";
 			        content += ')" >상세보기</a></td></tr>';
+					}
 				} else{
 					var item = {
 							id : obj.schedule_no,
 							title : obj.wm_title,
 							start : obj.schedule_start,
 							end : obj.schedule_end,
-							backgroundColor : 'blue'
+							backgroundColor : 'rgba(255, 228, 0, 0.66)'
 					};
 					array.push(item);
-			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:blue">회의일정</td><td>' + obj.wm_title;
+			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(255, 228, 0)">회의일정</td><td>' + obj.wm_title;
 			        content += '</td><td><a';
 			        content += ' onclick="detail2(' + obj.schedule_no;
 			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
@@ -67,7 +87,7 @@ $(document).ready(function() {
 function detail(id, title, text, start, end, userids, progress_or_place){
 	//온클릭 함수에 가져올 데이터들
 	if(progress_or_place<10){
-	
+		
 		$('#progress_value').text(progress_or_place*100+"%");
 		$('#progress_value').css("width",progress_or_place*100+"%");
 		$('#content').empty();
@@ -78,6 +98,7 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 		$('#detail_text').val(text);
 		$('#detail_start').val(start);
 		$('#detail_end').val(end);
+		$('#detail_progress').val(progress_or_place);
 		
 		//상세보기 내용에 참가자 인원 뿌려주는 코드
 		var userid = userids.split("/");
@@ -165,10 +186,14 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 
 //수정하기 버튼 클릭시 readonly속성 없애줌
 function work_update(){
-	$('#update_btn').attr('type','hidden');
-	$('#updateok_btn').attr('type','button');
-	document.getElementById("detail_title").readOnly = false;
-	document.getElementById("detail_text").readOnly = false;
+	if($('#detail_progress').val()==1){
+		alert('완료된 일정입니다.')
+	}else{
+		$('#update_btn').attr('type','hidden');
+		$('#updateok_btn').attr('type','button');
+		document.getElementById("detail_title").readOnly = false;
+		document.getElementById("detail_text").readOnly = false;
+	}
 }
 
 //저장하기 버튼 클릭시 DB에 update작업
@@ -311,12 +336,14 @@ function update_progress(){
 			alert('등록 성공')
 		}
 	});
-	
-	
 }
 
-</script>
 
+
+</script>
+<style>
+
+</style>
 
 </head>
 <body>
@@ -397,18 +424,35 @@ function update_progress(){
                                     </div>
                                 </div>
                                 <div class="row">
+                                	<div class="col-sm-3">
+                                		<input type="radio" id="meeting_place_10" name="place_radio" value="10">
+                                		<label for="meeting_place_10" style="cursor: pointer;"><div id="div_place_10" class="dplace" style="text-decoration:underline;">회의실1</div></label>
+                                	</div>
+                                	<div class="col-sm-3">
+                                		<input type="radio" id="meeting_place_20" name="place_radio" value="20">
+                                		<label for="meeting_place_20" style="cursor: pointer;"><div id="div_place_20" class="dplace" title="툴팁아 반영되라 좀 ㅡㅡ" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실2</div></label>
+                                	</div>
+                                	<div class="col-sm-3">
+                                		<input type="radio" id="meeting_place_30" name="place_radio" value="30">
+                                		<label for="meeting_place_30" style="cursor: pointer;"><div id="div_place_30" class="dplace" style="text-decoration:underline;">회의실3</div></label>
+                                	</div>
+                                	<div class="col-sm-3">
+                                		<input type="radio" id="meeting_place_40" name="place_radio" value="40">
+                                		<label for="meeting_place_40" style="cursor: pointer;"><div id="div_place_40" class="dplace" style="text-decoration:underline;">회의실4</div></label>
+                                	</div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
                                         <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" id="modal_ok2">
                                             회의업무 등록</button>
-                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="OR" class="hidden-xs" style="color:#fff">
-                              >></div>
+                              ></div>
                     </div>
                      <div class="col-md-4" style="margin-top:57px">
 
@@ -418,8 +462,8 @@ function update_progress(){
   
     <dt>
     <a href="#"style="margin-top:5px; height: 133px;padding-right: 0px;">
-      <span class="hida box" style="width: 253px;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
-      <p class="multiSel"></p>
+      <span class="hida box" id="spantag" style="width: 253px; font-size:small;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
+      <p class="multiSel" id="ptag" style="font-size:medium;"></p>
     </a>
     </dt>
   
@@ -427,7 +471,7 @@ function update_progress(){
         <div class="mutliSelect effect2" >
             <ul class="effect2" style="display: block;padding-right: 0px;height: 204px;width: 272px;">
         		<c:forEach items="${team_id}" var="obj" varStatus="status">
-					<li><input type="checkbox" value="${obj}" name='userchk'>${obj}</li>
+					<li><input type="checkbox" value="${obj}" id="${obj}" name='userchk'><label for="${obj}" style="cursor: pointer ;">${obj}</label></li>
 				</c:forEach>
             </ul>
         </div>
@@ -478,6 +522,7 @@ function update_progress(){
 							<input type="hidden" id="detail_id">
 							<input type="hidden" id="detail_start">
 							<input type="hidden" id="detail_end">
+							<input type="hidden" id="detail_progress">
 			
 			<!-- comment 보여주는 div영역 -->
 			<!-- panel-heading -->	
@@ -515,8 +560,8 @@ function update_progress(){
 						<input type="button" value="회의일정 삭제" id="meet_delete_btn"><br>
 						<label>제목 : </label> <input type="text" id="meet_detail_title" readonly="readonly"><br>
 						<label>내용 : </label> <textarea rows="5" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
-						<label>회의실 번호 : </label> <input type="text" id="place_no" readonly="readonly" value="10" place_no="10만 입력해, DB에 10밖에 없어"><br>
-					
+						<label>회의실 번호 : </label> <input type="hidden" id="place_no" readonly="readonly">
+						<br>
 						<label>회의 참가자</label><br>
 					    <div id="usersdiv2"></div>
 						<hr>
@@ -526,18 +571,6 @@ function update_progress(){
 					
 					
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 					
 					
 					

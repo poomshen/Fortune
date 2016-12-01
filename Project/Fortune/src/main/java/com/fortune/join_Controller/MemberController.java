@@ -33,12 +33,14 @@ import com.fortune.Table_DTO.Dept_DTO;
 import com.fortune.Table_DTO.Jobtitle_DTO;
 
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.Table_DTO.Team_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.chart_DAO.IChart;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.function_DTO.Select_Collabo_DTO;
 import com.fortune.member_DAO.IJoin;
+import com.fortune.notice_DAO.INotice;
 import com.fortune.password_Service.PassWord_Service;
 import com.fortune.request_DAO.ProDao;
 
@@ -129,6 +131,13 @@ public class MemberController {
 		
 	
 		session.setAttribute("totalCount", tatalCount);	
+		
+		//공지사항 최신글 뽑는 부분
+		INotice notice_dao = sqlsession.getMapper(INotice.class);
+		List<Notice_DTO> nlist = notice_dao.mainListNotice();
+		System.out.println(nlist);
+		model.addAttribute("nlist", nlist);
+
 		return "home.main";
 		
 			

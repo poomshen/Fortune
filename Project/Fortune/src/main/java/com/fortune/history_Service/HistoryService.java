@@ -25,12 +25,9 @@ public class HistoryService {
 	
 	//초기 헙업 요청된 요청 제목과 요청번호 가져오기
 	public ArrayList<ProgectName_DTO> progetctNameList(){
-		System.out.println("여기를 탄다 성준이 ~2");
 		
 		IHistory history = SqlSession.getMapper(IHistory.class);
-		System.out.println("여기 문제1");
 		ArrayList<ProgectName_DTO> namelist =   history.progectNamelist();
-		System.out.println("여기 문제2");
 		System.out.println(namelist.get(0).getProject_name());
 		System.out.println(namelist.get(1).getProject_name());
 		

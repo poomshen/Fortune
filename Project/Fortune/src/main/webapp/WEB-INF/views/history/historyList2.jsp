@@ -6,7 +6,6 @@
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <body>
-        <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">프로젝트 히스토리</h1>
@@ -65,8 +64,6 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-8 -->
 
 	
 

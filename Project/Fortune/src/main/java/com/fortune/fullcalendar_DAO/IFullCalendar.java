@@ -76,8 +76,8 @@ public interface IFullCalendar {
 	//프로젝트에 참가한 팀원 id목록을 가져오는 함수
 	public String[] selectTeam_id(String user_id) throws ClassNotFoundException, SQLException;
 	
-	
-	
+	//예약하려는 날짜의 예약된 회의실번호 체크해오기
+	public String[] select_place(String schedule_start) throws ClassNotFoundException, SQLException;
 	
 	
 	
