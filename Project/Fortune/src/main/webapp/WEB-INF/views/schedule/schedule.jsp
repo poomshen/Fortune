@@ -13,7 +13,10 @@
 
 $(document).ready(function() {
 
-//화면 로드시 일정을 DB에서 불러오는 코드 
+    $('[data-toggle="tooltip"]').tooltip();
+	
+	
+//화면 로드시 일정을 DB에서 불러오는 코드  
  	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
@@ -333,12 +336,14 @@ function update_progress(){
 			alert('등록 성공')
 		}
 	});
-	
-	
 }
 
-</script>
 
+
+</script>
+<style>
+
+</style>
 
 </head>
 <body>
@@ -419,18 +424,35 @@ function update_progress(){
                                     </div>
                                 </div>
                                 <div class="row">
+                                	<div class="col-sm-3">
+                                		<input type="radio" id="meeting_place_10" name="place_radio" value="10">
+                                		<label for="meeting_place_10" style="cursor: pointer;"><div id="div_place_10" class="dplace" style="text-decoration:underline;">회의실1</div></label>
+                                	</div>
+                                	<div class="col-sm-3">
+                                		<input type="radio" id="meeting_place_20" name="place_radio" value="20">
+                                		<label for="meeting_place_20" style="cursor: pointer;"><div id="div_place_20" class="dplace" title="툴팁아 반영되라 좀 ㅡㅡ" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실2</div></label>
+                                	</div>
+                                	<div class="col-sm-3">
+                                		<input type="radio" id="meeting_place_30" name="place_radio" value="30">
+                                		<label for="meeting_place_30" style="cursor: pointer;"><div id="div_place_30" class="dplace" style="text-decoration:underline;">회의실3</div></label>
+                                	</div>
+                                	<div class="col-sm-3">
+                                		<input type="radio" id="meeting_place_40" name="place_radio" value="40">
+                                		<label for="meeting_place_40" style="cursor: pointer;"><div id="div_place_40" class="dplace" style="text-decoration:underline;">회의실4</div></label>
+                                	</div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
                                         <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" id="modal_ok2">
                                             회의업무 등록</button>
-                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="OR" class="hidden-xs" style="color:#fff">
-                              >></div>
+                              ></div>
                     </div>
                      <div class="col-md-4" style="margin-top:57px">
 
@@ -538,8 +560,8 @@ function update_progress(){
 						<input type="button" value="회의일정 삭제" id="meet_delete_btn"><br>
 						<label>제목 : </label> <input type="text" id="meet_detail_title" readonly="readonly"><br>
 						<label>내용 : </label> <textarea rows="5" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
-						<label>회의실 번호 : </label> <input type="text" id="place_no" readonly="readonly" value="10" place_no="10만 입력해, DB에 10밖에 없어"><br>
-					
+						<label>회의실 번호 : </label> <input type="hidden" id="place_no" readonly="readonly">
+						<br>
 						<label>회의 참가자</label><br>
 					    <div id="usersdiv2"></div>
 						<hr>
@@ -549,18 +571,6 @@ function update_progress(){
 					
 					
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 					
 					
 					

@@ -1,5 +1,6 @@
 package com.fortune.Ajax_Controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fortune.Table_DTO.Dept_DTO;
@@ -18,6 +20,7 @@ import com.fortune.Table_DTO.Jobtitle_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Role_DTO;
 import com.fortune.Table_DTO.Team_DTO;
+import com.fortune.fullcalendar_DAO.IFullCalendar;
 import com.fortune.member_DAO.IJoin;
 import com.fortune.organization_DAO.IOrganization;
 import com.fortune.password_Service.PassWord_Service;
@@ -185,4 +188,13 @@ public class OrganizationAjax_Controller {
 		
 		return "/WEB-INF/views/admin/editDiv.jsp";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -66,6 +66,7 @@ function loadCalendar() {
 		selectable: true, //insert할 select 이벤트
 		selectHelper: true, //???
 	    
+		
 		//캘린더 헤더 부분 css요소
 		header: {
 	        left: 'prev,next today',
@@ -77,14 +78,43 @@ function loadCalendar() {
 		// 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
 		// 작업내용: 드래그로 일정등록 하는 소스 , 사용한 함수 호출횟수 만큼 반복되어 실행되는 에러 발생
 	    // 처리결과: start, end 값만 html에 기재하고, customBotton속성 함수에서 일정등록 코드 진행 + 재호출시 기존에 입력된 값 초기화 작업.
-	    	select: function(start, end) {
+	    select: function(start, end) {
 			//모달 띄우는 함수
 	    	
 	    	var test = $('#modal_btn').click();
 			$('#modal_title').val(""); $('#modal_title2').val("");
 			$('#modal_text').val(""); $('#modal_text2').val("");
 			$('#modal_start').val(start.format("YYYY-MM-DD"));
-			$('#modal_end').val(end.format("YYYY-MM-DD"))
+			$('#modal_end').val(end.format("YYYY-MM-DD"));
+			$("input[type='radio']").prop("checked", false);
+			$("input[type='radio']").attr("onclick","return true");
+			$('.dplace').css("color","#858585)");
+			
+			$.ajax({
+				url : 'select_place.ajax',
+				type : 'post',
+				data :  'schedule_start='+start.format("YYYY-MM-DD") ,
+				success : function(data) {
+				      $.each(data, function (index, obj) {
+							if(obj=='10'){
+								$('#meeting_place_10').attr("onclick","return false");
+								$('#div_place_10').css("color","rgba(0,0,0,0.2)")
+							}else if(obj=='20'){
+								$('#meeting_place_20').attr("onclick","return false");
+								$('#div_place_20').css("color","rgba(0,0,0,0.2)")
+							}else if(obj=='30'){
+								$('#meeting_place_30').attr("onclick","return false");
+								$('#div_place_30').css("color","rgba(0,0,0,0.2)")
+							}else if(obj=='40'){
+								$('#meeting_place_40').attr("onclick","return false");
+								$('#div_place_40').css("color","rgba(0,0,0,0.2)")
+							}
+				      });
+				      
+				}
+			});
+			
+			
 			
 			calendar.fullCalendar('unselect');
 		},
@@ -462,7 +492,7 @@ function loadCalendar() {
 						"end": $('#modal_end').val(),
 						"collabo_no" : $('#collabo_no').val(),
 						"scheduleusers" : scheduleusers,
-						"meeting_place_no" : "1"
+						"meeting_place_no" : $('input[type=radio]:checked').val(),
 				}
 
 				
