@@ -12,9 +12,6 @@ public class Schedule_Work_DTO {
 	
 	
 	
-	
-	
-	
 
 	public float getWork_progress() {
 		return work_progress;

@@ -3,7 +3,6 @@ package com.fortune.Ajax_Controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.Document;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fortune.Table_DTO.Dept_DTO;
 import com.fortune.Table_DTO.Jobtitle_DTO;
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Role_DTO;
 import com.fortune.Table_DTO.Team_DTO;
 import com.fortune.member_DAO.IJoin;
 import com.fortune.organization_DAO.IOrganization;
+import com.fortune.password_Service.PassWord_Service;
 
 @Controller
 public class OrganizationAjax_Controller {
@@ -117,8 +118,8 @@ public class OrganizationAjax_Controller {
 	}
 	
 	@RequestMapping(value="/userinfoadmin.ajax", method=RequestMethod.GET)
-	public String updateuseradmin(HttpServletRequest request, Model model){
-		System.out.println("updateuseradmin 컨트롤러");
+	public String userInfoAdmin(HttpServletRequest request, Model model){
+		System.out.println("userinfoadmin 컨트롤러");
 		String user_id = request.getParameter("user_id");
 		System.out.println("user_id : " + user_id);
 
@@ -140,6 +141,46 @@ public class OrganizationAjax_Controller {
 		ArrayList<Jobtitle_DTO> jdto = new ArrayList<Jobtitle_DTO>();
 		jdto = dao.searchTitle();
 		model.addAttribute("positionselect", jdto);
+		
+		//권한 리스트 보여주는 부분
+		ArrayList<Role_DTO> rdto = new ArrayList<Role_DTO>();
+		rdto = dao.searchRole();
+		model.addAttribute("roleselect", rdto);
+		
+		return "/WEB-INF/views/admin/editDiv.jsp";
+	}
+	
+	@RequestMapping(value="/userupdateadmin.ajax")
+	public String userUpdateAdmin(Join_DTO dto, Model model){
+		System.out.println("userUpdateAdmin 컨트롤러");
+		System.out.println(dto);
+		
+		PassWord_Service passWord_Service = new PassWord_Service();
+		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
+		IJoin dao = sqlsession.getMapper(IJoin.class);
+		dao.updateMemberAdmin(dto);
+
+		Join_DTO join_DTO = dao.searchMember(dto.getUser_id());
+		model.addAttribute("join_DTO", join_DTO);
+		
+		ArrayList<Dept_DTO> ddto = new ArrayList<Dept_DTO>();
+		ddto = dao.searchDept();
+		model.addAttribute("deptselect", ddto);
+
+		//팀 리스트 보여주는 부분
+		ArrayList<Team_DTO> tdto = new ArrayList<Team_DTO>();
+		tdto = dao.searchTeam();
+		model.addAttribute("teamselect", tdto);
+		
+		//직함 리스트 보여주는 부분
+		ArrayList<Jobtitle_DTO> jdto = new ArrayList<Jobtitle_DTO>();
+		jdto = dao.searchTitle();
+		model.addAttribute("positionselect", jdto);
+		
+		//권한 리스트 보여주는 부분
+		ArrayList<Role_DTO> rdto = new ArrayList<Role_DTO>();
+		rdto = dao.searchRole();
+		model.addAttribute("roleselect", rdto);
 		
 		return "/WEB-INF/views/admin/editDiv.jsp";
 	}

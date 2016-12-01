@@ -19,13 +19,15 @@
 				<td><input type="button" value="${i.user_id}" class="buttonLink" onclick="ShowUserInfo('${i.user_id}')" ></td>
 				<td><c:out value="${i.user_name}"></c:out></td>
 				<td><c:out value="${i.user_phone}"></c:out></td>
+				<c:if test="${i.dept_no == 0}">
+					<td><c:out value="없음"></c:out></td>
+				</c:if>
 				<c:forEach var="j" items="${dept}">
-					<c:if test="${i.dept_no == j.dept_no}">
-						<td><c:out value="${j.dept_name}"></c:out></td>
-					</c:if>
-					<c:if test="${i.dept_no == 0}">
-						<td><c:out value="없음"></c:out></td>
-					</c:if>
+					<c:choose>
+						<c:when test="${i.dept_no == j.dept_no}">
+							<td><c:out value="${j.dept_name}"></c:out></td>
+						</c:when>
+					</c:choose>
 				</c:forEach>
 			</tr>
 		</c:if>
