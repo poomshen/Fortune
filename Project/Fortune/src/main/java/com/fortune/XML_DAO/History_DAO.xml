@@ -20,4 +20,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="maxReqNo" resultType="Integer">
 		select MAX((collabo_req_no)+1) as collabo_req_no from COLLABO_REQ
 	</select>
+	
+	<select id="historyList" parameterType="String" resultType="com.fortune.function_DTO.HistoryFunction_DTO">
+		Select h.Collaboration_No , h.Collabo_Req_Index, h.Collabo_Req_No, h.History_Date, History_Title, History_Text
+		,h.User_Id,r.Collabo_Req_Id,r.Collabo_Req_Title,r.Collabo_Req_Text
+		 From History H Join Collabo_Req r on H.Collabo_Req_No= r.Collabo_Req_No
+		  and H.Collabo_Req_Index = r.Collabo_Req_Index where  H.Collabo_Req_No = #{param1}
+		 ORDER BY H.History_Date desc
+	</select>
 </mapper>

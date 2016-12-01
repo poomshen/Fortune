@@ -9,7 +9,7 @@ public class Schedule_Meeting_DTO {
 	private String meeting_text;
 	private String users;
 	private int collabo_no;
-	private String meeting_place_no;
+	private int meeting_place_no;
 	
 	
 	
@@ -56,12 +56,13 @@ public class Schedule_Meeting_DTO {
 	public void setCollabo_no(int collabo_no) {
 		this.collabo_no = collabo_no;
 	}
-	public String getMeeting_place_no() {
+	public int getMeeting_place_no() {
 		return meeting_place_no;
 	}
-	public void setMeeting_place_no(String meeting_place_no) {
+	public void setMeeting_place_no(int meeting_place_no) {
 		this.meeting_place_no = meeting_place_no;
 	}
+
 	
 	
 	

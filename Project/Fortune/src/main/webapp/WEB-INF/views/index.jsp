@@ -34,10 +34,6 @@
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
 
-	
-
-
-
 
 </head>
 

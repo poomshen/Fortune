@@ -132,14 +132,12 @@ public class MemberController {
 	
 		session.setAttribute("totalCount", tatalCount);	
 		
-		
-		
 		//공지사항 최신글 뽑는 부분
 		INotice notice_dao = sqlsession.getMapper(INotice.class);
 		List<Notice_DTO> nlist = notice_dao.mainListNotice();
 		System.out.println(nlist);
 		model.addAttribute("nlist", nlist);
-		
+
 		return "home.main";
 		
 			
