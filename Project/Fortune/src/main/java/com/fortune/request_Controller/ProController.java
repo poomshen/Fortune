@@ -1,9 +1,7 @@
 package com.fortune.request_Controller;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
-import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.function_DTO.ProgectName_DTO;
 import com.fortune.history_Service.HistoryService;
 import com.fortune.request_Service.ProService;
@@ -46,15 +42,14 @@ public class ProController {
 	@RequestMapping("/writerequest.htm")
 	public String writeForm(Model model) throws ClassNotFoundException, SQLException {
 			//성준 추가 16-11-30 초기 헙업 가져오기
-		
 			List<ProgectName_DTO> pList = historyService.progetctNameList();
 			model.addAttribute("pList", pList);
 			int collabo_req_no = historyService.maxReqNo();
 			model.addAttribute("collabo_req_no", collabo_req_no);
 			
-			
 			List<Join_DTO> list = proservice.listEffect(model); //수신자를 부르기 위해서 사용하였다. 
 			model.addAttribute("list", list);
+			
 		return "request.writeRequest";
 
 	}
@@ -89,8 +84,6 @@ public class ProController {
 
 		
 		List<Request_DTO> list = proservice.getRequest(pg, f, q, st, session);
-		System.out.println("아아ㄷ아"+st);
-		System.out.println("미"+collabo_req_index);
 		model.addAttribute("list", list); // 자동 forward
 		
 		
@@ -107,10 +100,7 @@ public class ProController {
 		
 			
 		List<Request_DTO> list = proservice.listReplyRequest(pg, f, q,st, session);
-		System.out.println("아아ㅇ아"+st);
 		model.addAttribute("list", list); // 자동 forward
-		System.out.println("미"+collabo_req_index);
-		System.out.println(collabo_req_index);
 		
 		
 		
@@ -122,10 +112,7 @@ public class ProController {
 	@RequestMapping("listallRequest.htm") // /customer/notice.htm
 	public String listallRequest( String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
-		System.out.println("아아ㄴ아"+st);
 		List<Request_DTO> list = proservice.listallRequest(pg, f, q, st, session);
-		System.out.println("커피를 타보자");
-		System.out.println("미"+collabo_req_index);
 		model.addAttribute("list", list); // 자동 forward
 		
 		
@@ -164,19 +151,18 @@ public class ProController {
 	 @RequestMapping("proDel.htm")
 	 public String ProDel(String collabo_req_index) throws ClassNotFoundException,
 	   SQLException {
-		 System.out.println("삭제 인덱스"+collabo_req_index);
 	 proservice.ProDel(collabo_req_index);
 	 
 	  return "request.requestList"; //리스트 화면 (controller 타서 데이터 출력)
 	 }
 	 
 	//수락 하기 눌렀을 경우 화면 출력
-	 @Transactional
+	
 	@RequestMapping("accept.htm")
 		 public String Accept(String collabo_req_index, Model model) throws ClassNotFoundException,
 		   SQLException {
-			 System.out.println("수락했다.");
 		 Request_DTO proDto = proservice.DetailResponse(collabo_req_index);
+		 model.addAttribute("list", proDto);
 		 model.addAttribute("acceptlist", proDto);
 		 System.out.println("수락 창");
 		 System.out.println(proDto.toString());
@@ -188,10 +174,7 @@ public class ProController {
 		 @RequestMapping("refuse.htm")
 		 public String Refuse(String collabo_req_index,String collabo_req_text) throws ClassNotFoundException,
 		   SQLException {
-			 System.out.println("거절했다.");
-			 System.out.println("텍스트"+collabo_req_text);
-			 System.out.println("인덱스"+collabo_req_index);
-		 proservice.Refuse(collabo_req_index,collabo_req_text);
+		 proservice.Refuse(collabo_req_text,collabo_req_index);
 		
 		  return "redirect:listReplyRequest.htm"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	
@@ -214,8 +197,6 @@ public class ProController {
 		 @RequestMapping(value = "proEdit.htm", method = RequestMethod.POST)
 		 public String proEdit(Request_DTO n,HttpServletRequest request) throws ClassNotFoundException,
 		   SQLException, IOException {
-			 System.out.println("일로 타는데?");
-			 System.out.println(n.toString() );
 			proservice.proEdit(n,request);
 		  return "redirect:requestList.htm";
 	    	 
@@ -226,9 +207,8 @@ public class ProController {
 	/////////////////////////////////////////////////////////////////////////
 		 
 		// 프로젝트를 요청해주는 클래스 이다.
-			@RequestMapping("/writeresponse.htm")
+			@RequestMapping("writeresponse.htm")
 			public String writeResponse() {
-				System.out.println("이쪽으로 왔다 해도 POST는 무슨뜻인지 몰라서 그냥 가는걸지도 몰라요");
 				
 				return "cen.writeResponse";
 
@@ -239,9 +219,7 @@ public class ProController {
 			@RequestMapping(value = "writeresponse.htm", method = RequestMethod.POST)
 			public String regResponse(With_DTO n, String collabo_req_index)
 					throws IOException, ClassNotFoundException, SQLException {
-					System.out.println("과연 이곳으로 오는가?");
 				
-					System.out.println("dlv:"+ collabo_req_index);
 					/*System.out.println(n.toString());*/
 					 proservice.regResponse(n, collabo_req_index);
 					 proservice.Accept(collabo_req_index);
