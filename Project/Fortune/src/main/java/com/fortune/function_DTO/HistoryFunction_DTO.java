@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 * @description : 히스토리를 남기기 위해 만든 DTO 
 */
 public class HistoryFunction_DTO {
+	private int num;
 	private int collaboration_NO;
 	private int collabo_req_index;
 	private int collabo_req_no;
@@ -26,12 +27,15 @@ public class HistoryFunction_DTO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
 
-	public HistoryFunction_DTO(int collaboration_NO, int collabo_req_index, int collabo_req_no, Timestamp history_date,
-			String history_title, String history_text, String user_ID, String collabo_req_ID, String collabo_req_title,
+
+	public HistoryFunction_DTO(int num, int collaboration_NO,
+			int collabo_req_index, int collabo_req_no, Timestamp history_date,
+			String history_title, String history_text, String user_ID,
+			String collabo_req_ID, String collabo_req_title,
 			String collabo_req_text) {
 		super();
+		this.num = num;
 		this.collaboration_NO = collaboration_NO;
 		this.collabo_req_index = collabo_req_index;
 		this.collabo_req_no = collabo_req_no;
@@ -42,6 +46,19 @@ public class HistoryFunction_DTO {
 		this.collabo_req_ID = collabo_req_ID;
 		this.collabo_req_title = collabo_req_title;
 		this.collabo_req_text = collabo_req_text;
+	}
+
+
+
+	
+
+	public int getNum() {
+		return num;
+	}
+
+
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 
@@ -149,14 +166,16 @@ public class HistoryFunction_DTO {
 
 	@Override
 	public String toString() {
-		return "HistoryFunction_DTO [collaboration_NO=" + collaboration_NO + ", collabo_req_index=" + collabo_req_index
-				+ ", collabo_req_no=" + collabo_req_no + ", history_date=" + history_date + ", history_title="
-				+ history_title + ", history_text=" + history_text + ", user_ID=" + user_ID + ", collabo_req_ID="
-				+ collabo_req_ID + ", collabo_req_title=" + collabo_req_title + ", collabo_req_text=" + collabo_req_text
+		return "HistoryFunction_DTO [num=" + num + ", collaboration_NO="
+				+ collaboration_NO + ", collabo_req_index=" + collabo_req_index
+				+ ", collabo_req_no=" + collabo_req_no + ", history_date="
+				+ history_date + ", history_title=" + history_title
+				+ ", history_text=" + history_text + ", user_ID=" + user_ID
+				+ ", collabo_req_ID=" + collabo_req_ID + ", collabo_req_title="
+				+ collabo_req_title + ", collabo_req_text=" + collabo_req_text
 				+ "]";
 	}
-	
-	
-	
+
+
 
 }
