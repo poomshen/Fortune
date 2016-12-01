@@ -46,12 +46,12 @@ public class ProController {
 	@RequestMapping("/writerequest.htm")
 	public String writeForm(Model model) throws ClassNotFoundException, SQLException {
 			//성준 추가 16-11-30 초기 헙업 가져오기
-			System.out.println("타기전에 ?");
+		
 			List<ProgectName_DTO> pList = historyService.progetctNameList();
 			model.addAttribute("pList", pList);
 			int collabo_req_no = historyService.maxReqNo();
 			model.addAttribute("collabo_req_no", collabo_req_no);
-			System.out.println("타고 나서");
+			
 			
 			List<Join_DTO> list = proservice.listEffect(model); //수신자를 부르기 위해서 사용하였다. 
 			model.addAttribute("list", list);
@@ -72,15 +72,6 @@ public class ProController {
 			// 실DB저장
 			proservice.regRequest(n, request);
 			
-			Alarm_DTO adto = new Alarm_DTO();
-			
-			IAlarm alarmDAO =  sqlSession.getMapper(IAlarm.class);
-			System.out.println("수신자 아이디 :"+n.getCollabo_req_ID());
-			
-			adto.setUser_id(n.getCollabo_req_ID());
-        	adto.setWork_type("1");
-
-        	alarmDAO.insertAlarm(adto);
 
 			
 		} catch (Exception e) {
