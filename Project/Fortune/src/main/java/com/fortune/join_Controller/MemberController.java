@@ -129,6 +129,8 @@ public class MemberController {
 		
 	
 		session.setAttribute("totalCount", tatalCount);	
+		
+		
 		return "home.main";
 		
 			

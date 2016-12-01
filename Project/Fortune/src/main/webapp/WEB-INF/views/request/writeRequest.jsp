@@ -85,7 +85,22 @@
 		} else {
 			alert("완료"+$('#collabo_req_ID').val());
 			
-			send($('#collabo_req_ID').val());
+			$.ajax({
+				  
+				  type:"post",
+				  dataType: "html",
+				  url:"updateAlarm.htm",
+				  data:{"selectId": $('#collabo_req_ID').val()},
+				  success:function(data){
+				  
+					  
+				 console.log("알림DB업데이트 성공");
+				 console.log(data);
+				 send($('#collabo_req_ID').val());
+			
+				  }
+			  });	
+			
 			promodifyform.submit(); 
 			
 			return true;
