@@ -11,7 +11,7 @@ public interface IHistory {
 	public ArrayList<HistoryFunction_DTO> historyAllList();
 	
 	//프로젝트의 히스토리 뽑기
-	public ArrayList<HistoryFunction_DTO> historyList(String req_no);
+	public ArrayList<HistoryFunction_DTO> historyList(String collabo_req_no);
 	
 	//히스토리 추가 하기
 	public void historyinsert(History_DTO history_DTO);

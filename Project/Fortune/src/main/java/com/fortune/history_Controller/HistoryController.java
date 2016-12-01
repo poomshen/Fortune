@@ -24,7 +24,7 @@ public class HistoryController {
 	@Autowired
 	private SqlSession SqlSession;
  	
-	@RequestMapping("historyList.htm")
+	@RequestMapping("historyAllList.htm")
 	public String historyList(Model model){
 		
 		
@@ -34,4 +34,14 @@ public class HistoryController {
 		model.addAttribute("list", list );
 		return "history.historyList2";
 	}
+	
+	@RequestMapping("historyList.htm")
+	public String historyList(Model model , String collabo_req_no){
+		IHistory  history = SqlSession.getMapper(IHistory.class);
+		ArrayList<HistoryFunction_DTO> list =  history.historyList(collabo_req_no);
+		 
+		 model.addAttribute("list", list );
+		return "history.historyList2";
+	}
+	
 }

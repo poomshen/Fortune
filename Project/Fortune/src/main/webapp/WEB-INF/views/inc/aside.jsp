@@ -47,7 +47,7 @@ ul a {
                                 </li>
                                 <security:authorize access="hasAnyRole('ROLE_ADMIN')">
                                 <li>
-                                    <a href="historyList.htm">모든 히스토리</a>
+                                    <a href="historyAllList.htm">모든 히스토리</a>
                                 </li>
                                 </security:authorize>
                             

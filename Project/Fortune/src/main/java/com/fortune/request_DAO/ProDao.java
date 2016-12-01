@@ -52,4 +52,10 @@ public interface ProDao {
 		//사이드바에 자신의 협업들 보여 주기
 		public List<Select_Collabo_DTO> selectCollaboList(String user_id);
 		
+		//작성자 이성준
+		//2016-12-01
+		// 협업 리스트 보여주기 팀원 권한으로
+		public List<With_DTO> listResponse2(int page, String field, List<String>  query) throws ClassNotFoundException, SQLException;	
+		
+		public List<String> selectTeamMGR(int TeamMGR) throws ClassNotFoundException, SQLException;
 }
