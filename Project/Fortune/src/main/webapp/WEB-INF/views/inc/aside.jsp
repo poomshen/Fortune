@@ -47,7 +47,7 @@ ul a {
                                 </li>
                                 <security:authorize access="hasAnyRole('ROLE_ADMIN')">
                                 <li>
-                                    <a href="historyList.htm">모든 히스토리</a>
+                                    <a href="historyAllList.htm">모든 히스토리</a>
                                 </li>
                                 </security:authorize>
                             
@@ -73,26 +73,12 @@ ul a {
                                 		<a href="adminusers.htm">관리자 회원 수정</a>
                                     </li>
                                 </security:authorize>
-                                <li>
-                                    <a href="#">부서장 팀장 선출</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         </security:authorize>
-                        <li>
-
-                            <a class="hvr-grow-shadow" href="#"><i class="fa fa-sitemap fa-fw"></i>조직도<span class="fa arrow"></span></a>
-                          </li>
-                                <li>
-
+						<li>
                             <a class="hvr-grow-shadow" href="dept.htm"><i class="fa fa-wrench fa-fw"></i>주소록<span class="fa arrow"></span></a>
-                         
- 
-                        </li>
-                        <li>
-                            <a class="hvr-grow-shadow" href="mainfile.htm"><i class="fa fa-files-o fa-fw"></i>자료실</a>
-                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                 </div>
