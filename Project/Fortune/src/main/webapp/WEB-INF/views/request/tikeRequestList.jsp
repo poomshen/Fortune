@@ -99,20 +99,21 @@
    		});
    	}
      //검색 기능 비동기 처리로 하였습니다.
-   	function searchBtn(search){
-   		console.log(search)
+   	function searchBtn(){
+   		console.log()
    		$.ajax({
  	   		 
 	 			type: "get",
-	 			url:  "accept.htm",
+	 			url:  "requestList2.htm",
 	 			cache: false,				
-	 			data:{"collabo_req_index" : a,
-	 				  "dept_no":${sessionScope.info.dept_no}},
+	 			data:{me : $('#memoselect').val(),
+	 				  se:$('#search').val()},
 	 		    success:function(data){ //callback  
-	 		    	//alert(a);
-	 		    	//console.log(data);
+	 		    	console.log($('#search').val());
+	 		    	console.log($('#memoselect').val());
+	 		    
 	 		    	
-	 		    	$("#meneview").append($('#meneview').html(data)); 
+	 		    	$("#requestlist").html(data); 
 	 		    
 	 		    },
 	 			error: function(){						
@@ -120,9 +121,7 @@
 	 			}
 	 		});
    		
-   		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
-   			$('#requestlist').html(data);
-   		});
+   		
    	}
  
 	
@@ -145,9 +144,21 @@
 			<a onclick="selectState('수락')" class="btn btn-primary">수락</a> 
 			<a onclick="selectState('거절')" class="btn btn-primary">거절</a>
 		</div>
+		
+		
+		<!-- 검색 기능 쪽입니다. -->
 		<div class="w3-dropdown-hover w3-right">
-		<select><option>그래요</option></select><input type="text" ><button>검색</button>
+		
+		<select id="memoselect">
+		<option value="collabo_req_title">제목</option>
+		<option value="collabo_req_text">내용</option>
+		
+		</select>
+		<input type="text" id="search" placeholder="Search" >
+		<button onclick="searchBtn()">검색</button>
 		</div>
+		
+		
 	</div>
 
 	<!-- 이곳은  w3-card-4 전체에 잡고 있습니다. CSS  -->
@@ -409,6 +420,9 @@ function refuse() {
 						     		return false;
 						     	}else {
 						     		alert("완료");
+						     		
+						     		
+						     		
 						     		proaddform.submit();
 						     		return true;
 						     	}
@@ -439,8 +453,8 @@ function refuse() {
 				<div class="container" style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
 						<c:if test="${pg>block}">
-							<li><a href="requestList.htm?pg=1&st=${st_query}">««</a></li>
-							<li><a href="requestList.htm?pg=${from_page-1}&st=${st_query}">«</a></li>
+							<li><a href="requestList.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li>
+							<li><a href="requestList.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li>
 						</c:if>
 						<c:if test="${pg<=block}">
 							<li><a href="#">««</a></li>
@@ -451,12 +465,12 @@ function refuse() {
 								<li><a href="#">${i}</a></li>
 							</c:if>
 							<c:if test="${i!=pg}">
-								<li><a href="requestList.htm?pg=${i}&st=${st_query}">${i}</a></li>
+								<li><a href="requestList.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li>
 							</c:if>
 						</c:forEach>
 						<c:if test="${to_page<all_page}">
-							<li><a href="requestList.htm?pg=${to_page+1}&st=${st_query}">»</a></li>
-							<li><a href="requestList.htm?pg=${all_page}&st=${st_query}">»»</a></li>
+							<li><a href="requestList.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li>
+							<li><a href="requestList.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li>
 						</c:if>
 						<c:if test="${to_page>=all_page}">
 							<li><a href="#">»</a></li>
