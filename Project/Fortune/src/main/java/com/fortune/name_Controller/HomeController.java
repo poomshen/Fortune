@@ -106,6 +106,13 @@ public class HomeController {
 		System.out.println("selector 컨트롤러 끝");
 		return "home.alarm";
 	}
-
+	
+	//아이디 패스워드 찾기 화면이동
+	@RequestMapping("/SearchIdPage.htm")
+	public String getIdpage(){		
+		System.out.println("아이디/패스워드 찾기 view 보냄");
+		
+		return "searchpage";
+	}
 
 }

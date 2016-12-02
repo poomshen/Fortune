@@ -104,8 +104,10 @@
 			</div>
  -->
 		</div>
-</div>
+		<span><a href="SearchIdPage.htm">아이디/패스워드를 잊어버리셨나요?</a></span>
 	</div>
+	
+</div>
 	
 	<div class="backstretch"
 		style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 609px; width: 972px; z-index: -999998; position: absolute;">
