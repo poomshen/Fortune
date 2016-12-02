@@ -1,5 +1,5 @@
 //캘린더 호출시 필요한 초기 변수 선언
-var content = "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
+var content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목/진척률</th><th style='width:50px;'>상세</th></tr>";
 var array = [];
 var clickobject;
 var clickobjectcolor= "";
@@ -71,7 +71,7 @@ function loadCalendar() {
 		header: {
 	        left: 'prev,next today',
 	        center: 'title',
-	        right: ''
+	        right: '여긴 뭐가 들어옴?'
 	    },
 
 		
@@ -91,7 +91,7 @@ function loadCalendar() {
 			$("input[type='checkbox']").prop("checked", false);
 			$("input[type='radio']").prop("checked", false);
 			$("input[type='radio']").attr("onclick","return true");
-			$('.dplace').css("color","#858585)");
+			$('.dplace').css("color","#858585");
 			
 			$.ajax({
 				url : 'select_place.ajax',
