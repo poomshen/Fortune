@@ -95,13 +95,13 @@
 				  
 					  
 				 console.log("알림DB업데이트 성공");
-				 console.log(data);
+				 console.log("성공?"+data);
 				 send($('#collabo_req_ID').val());
-			
+				 promodifyform.submit(); 
 				  }
 			  });	
 			
-			promodifyform.submit(); 
+		
 			
 			return true;
 		}
@@ -159,24 +159,24 @@
             </script>
 			</div>
 			<br>
-			<div class="form-group">
-				<label>작성자 </label>
-				 <input type="text" name="user_ID"
+			
+				<!-- 작성자 -->
+				 <input type="hidden" name="user_ID"
 					class="form-control" value="${sessionScope.info.user_id}" readonly="readonly" >
-			</div>
-			<br>
-			<div class="form-group">
-				<label>진행 상태 </label>
-				 <input type="text" name="collabo_req_state" value="대기"
+			
+			
+			
+				<!-- 진행상태 -->
+				 <input type="hidden" name="collabo_req_state" value="대기"
 					class="form-control" readonly>
-			</div>
-			<br>
+			
+			
 			<div class="form-group">
-				<label>수신자 </label>
+				<label>수신자 :</label>
 				 <select id="collabo_req_ID" name="collabo_req_ID" 
 									class="form-control">
 				<c:forEach items="${list}" var="list">
-					<option value="${list.user_id}">${list.user_id}</option>
+					<option value="${list.user_id}">부장 :${list.user_id} 이름:${list.user_name} </option>
 				</c:forEach>
 					</select>
 			</div>

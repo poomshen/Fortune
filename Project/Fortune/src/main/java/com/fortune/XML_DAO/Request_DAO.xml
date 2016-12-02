@@ -9,14 +9,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="requestCount" resultType="Integer">
 		SELECT COUNT(*) CNT
 		FROM collabo_req
-		WHERE ${param1} like '%${param2}%'
+		WHERE (${param1} like '%${param2}%'AND collabo_req_state LIKE '%${param3}%' AND ${param4} LIKE '%${param5}%')
 	</select>
 
 	<select id="getRequest" resultType="com.fortune.Table_DTO.Request_DTO">
 		SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo_req WHERE (${param2}
-		LIKE '%${param3}%' AND collabo_req_state LIKE '%${param4}%') ORDER BY collabo_req_date DESC ) N )
-		WHERE NUM BETWEEN 1 + (${param1} - 1) * 500 AND 500 + (${param1} - 1) * 500
+		LIKE '%${param3}%' AND ${param5} LIKE '%${param6}%' AND collabo_req_state LIKE '%${param4}%') ORDER BY collabo_req_date DESC ) N )
+		WHERE NUM BETWEEN 1 + (${param1} - 1) * 5 AND 5 + (${param1} - 1) * 5
 	</select>
 <!-- SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo_req WHERE( user_ID
