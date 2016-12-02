@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-   request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
+	int message = (Integer)request.getAttribute("msg");
+	
 %>
 <head>
 <meta charset="utf-8">
@@ -465,6 +467,12 @@
 	function joins() {
 		location.href="sign.htm";
 	}
+	$(function() {
+		var message1 = <%=message%>;
+		if(message1 == 1){
+			alert('권한이 없습니다.');
+		}
+	});
 	</script>
 
 </body>

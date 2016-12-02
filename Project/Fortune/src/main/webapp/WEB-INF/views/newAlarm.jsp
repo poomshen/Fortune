@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-     <a class="dropdown-toggle" style="color:#417ca5" data-toggle="dropdown" href="#">
+     <a class="dropdown-toggle" style="color:#194f89" data-toggle="dropdown" href="#">
                        <i class="fa fa-bell fa-fw hvr-pop">
                        <span id="blink"  
                        	<c:if test="${sessionScope.alarm.size()>0}">class="blink_me notification_count"</c:if> > 
