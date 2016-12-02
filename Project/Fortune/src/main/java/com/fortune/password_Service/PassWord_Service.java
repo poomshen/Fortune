@@ -39,5 +39,10 @@ public class PassWord_Service implements PasswordEncoder {
 	public boolean matches(CharSequence rawPassword, String encodedPassword) {
 		return shaPasswordEncoder.isPasswordValid(encodedPassword, rawPassword.toString(), salt);
 	}
+	
+	public String encode(String rawPassword) {
+		return shaPasswordEncoder.encodePassword(rawPassword.toString(), salt);
+		
+	}
 
 }

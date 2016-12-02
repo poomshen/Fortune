@@ -73,7 +73,9 @@ public class MemberController {
 	@RequestMapping(value="/FortuneMain.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session ,Authentication authentication,Model model){
 
-	
+		Join_DTO dto = new Join_DTO();
+		System.out.println("id"+ dto.getUser_id());
+		System.out.println("pwd"+ dto.getUser_password());
 		
 		System.out.println("로그인 버튼 눌렀고요");
 		UserDetails details = (UserDetails)authentication.getPrincipal();
