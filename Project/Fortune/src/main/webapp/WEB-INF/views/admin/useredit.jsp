@@ -94,10 +94,10 @@ input.buttonLink {
 	</div>
 	
 	<div class="col-sm-5" style="padding-right: 0px;">
-		<div class="row" style="padding-right: 0px;">
+		<div class="row" style="padding-right: 0px; position: fixed;">
 		<label style="height: 32px; margin-top: 10px;"> &nbsp;&nbsp;&nbsp; 사원 상세 정보</label>
 			<form action="">
-				<div id="usershowDiv"></div>
+				<div id="usershowDiv" ></div>
 			</form>
 		</div>
 	</div>

@@ -8,10 +8,13 @@ import com.fortune.function_DTO.ProgectName_DTO;
 
 public interface IHistory {
 	//모든 히스토리 뽑기
-	public ArrayList<HistoryFunction_DTO> historyAllList();
+	//public ArrayList<HistoryFunction_DTO> historyAllList();
+	
+	//모든 히스토리 뽑기 -16-12-02 페이지 처리
+	public ArrayList<HistoryFunction_DTO> historyAllList(int page);
 	
 	//프로젝트의 히스토리 뽑기
-	public ArrayList<HistoryFunction_DTO> historyList(String collabo_req_no);
+	public ArrayList<HistoryFunction_DTO> historyList(String collabo_req_no, int page);
 	
 	//히스토리 추가 하기
 	public void historyinsert(History_DTO history_DTO);

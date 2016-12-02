@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+										<!-- 공사중 -->
 <div>
 	<form action="insertmanager.htm" method="post">
 		<input type="hidden" name="collabo_req_index" value="${list.collabo_req_index}">
@@ -29,11 +31,13 @@
 				</select>
 		
 		<input type="submit" value="submit">
-		
+										
 		
 	
 	
 	</form>
 	</div>
+	
+									<!-- 공사중 -->
 </body>
 </html>
