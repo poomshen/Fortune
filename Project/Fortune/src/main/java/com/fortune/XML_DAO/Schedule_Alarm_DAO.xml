@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fortune.schedule_alarm_DAO.IScheduleAlarm">
+ 
+<!-- 알림  추가 -->
+ <insert id="insertScheduleAlarm" parameterType="com.fortune.function_DTO.All_Alarm_DTO">
+  	 insert into schedule_alarm(alarm_index,schedule_no) values((select max(alarm_index) as alarm_index from alarm where user_id=#{user_id}),#{schedule_no})    
+  </insert>
+
+<select id="selectScheduleAlarm">
+
+select sa.schedule_no from alarm a join schedule_alarm sa on sa.ALARM_INDEX = a.ALARM_INDEX where user_id=#{user_id}
+
+</select>
+</mapper>
