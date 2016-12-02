@@ -19,14 +19,17 @@ import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Meet_Users_DTO;
+import com.fortune.Table_DTO.Schedule_Alarm_DTO;
 import com.fortune.Table_DTO.Schedule_DTO;
 import com.fortune.Table_DTO.Work_Users_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.fullcalendar_DAO.IFullCalendar;
+import com.fortune.function_DTO.All_Alarm_DTO;
 import com.fortune.function_DTO.Schedule_Meeting_DTO;
 import com.fortune.function_DTO.Schedule_Work_DTO;
 import com.fortune.function_DTO.Schedule_Work_Meeting_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
+import com.fortune.schedule_alarm_DAO.IScheduleAlarm;
 
 
 
@@ -41,6 +44,7 @@ public class FullCalendarController {
     /* 작업자 : 이명철  // 최초 작업일 : 11.16 // 최종 작업일 : 11.23
      * 작업 내용 : fullcalendar에서 select 호출 : 일반일정 추가
      * 추가 내용 : DB와 데이터 연동 ( schedule, work 테이블) /alarmDAO 접근하여 count갯수 가져오기(이예지) / work_users Insert 작업
+     * 			스케줄알림 DB에 새로운 업무 알림 insert
      * version : v1.1
     */
 	@RequestMapping(value="select.ajax", method = RequestMethod.POST)
@@ -63,8 +67,12 @@ public class FullCalendarController {
 		Schedule_DTO sdto = fullcalendarDAO.selectScheduleno();
 		
 		Alarm_DTO adto = new Alarm_DTO();
+		Schedule_Alarm_DTO sch_alarm_dto= new Schedule_Alarm_DTO();
+		All_Alarm_DTO all_alarm_dto = new All_Alarm_DTO();
 		List<Select_Alarm_DTO> sadto = new ArrayList<Select_Alarm_DTO>();
 		IAlarm alarmDAO =  sqlSession.getMapper(IAlarm.class);
+		IScheduleAlarm sch_alarmDAO = sqlSession.getMapper(IScheduleAlarm.class);
+		
 		
 		Work_Users_DTO wudto = new Work_Users_DTO();
 		
@@ -85,10 +93,13 @@ public class FullCalendarController {
         for(int i=0;i<selectId.length;i++){
         	adto.setUser_id(selectId[i]);
         	adto.setWork_type("3");
-
+        	all_alarm_dto.setUser_id(selectId[i]);
+        	all_alarm_dto.setSchedule_no(sdto.getSchedule_no());
+        	
         	alarmDAO.insertAlarm(adto);
-
-           sadto.add(alarmDAO.checkAlarm(adto));
+        	sch_alarmDAO.insertScheduleAlarm(all_alarm_dto);
+        	
+        	sadto.add(alarmDAO.checkAlarm(adto));
 
            
            wudto.setUser_id(selectId[i]);
@@ -135,9 +146,10 @@ public class FullCalendarController {
 	    
 	       
 	        for(int i=0;i<selectId.length;i++){
+	        	
 	        	adto.setUser_id(selectId[i]);
 	        	adto.setWork_type("3");
-
+	        	//adto.setAlarm_index(sdto.getSchedule_no());
 	        	alarmDAO.insertAlarm(adto);
 
 	           sadto.add(alarmDAO.checkAlarm(adto));

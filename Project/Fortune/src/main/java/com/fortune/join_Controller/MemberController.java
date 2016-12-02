@@ -85,12 +85,16 @@ public class MemberController {
 		System.out.println("login dao 동작 완료");
 		
 		
-		session.setAttribute("info", result);
-
-		//추가 사항
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
-		List<Select_Collabo_DTO> collabo = proDao.selectCollaboList(result.getUser_id());
-		session.setAttribute("collabo", collabo);
+		session.setAttribute("info", result);
+		if( result.getRole_no() == 2 ){
+			List<Select_Collabo_DTO> collabo = proDao.selectCollaboList2(result.getDept_no());
+			session.setAttribute("collabo", collabo);
+		}else{
+			//추가 사항
+			List<Select_Collabo_DTO> collabo = proDao.selectCollaboList(result.getUser_id());
+			session.setAttribute("collabo", collabo);
+		}
 		
 		
 		//메뉴에 차트 가져오기( 추가작업 : 이예지)

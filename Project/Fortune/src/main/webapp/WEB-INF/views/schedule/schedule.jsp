@@ -152,6 +152,7 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 
 
  */
+//회의일정의 상세보기 페이지
 function detail2(id, title, text, start, end, userids, progress_or_place){
 	
 	$('#content').empty(); //테이블형태 UI 비우기
@@ -360,7 +361,7 @@ function update_progress(){
 		<div class="row" style="padding-right: 0px;">
 
 			<!-- calendar 보여 주는 div 영역 -->
-			<div class="col-sm-7" style="padding-left: 0px;">
+			<div class="col-sm-7" style="padding-left: 0px; padding-right: 0px;">
 					<div id='calendar'></div>
 			</div>
 
@@ -426,7 +427,7 @@ function update_progress(){
                                 <div class="row">
                                 	<div class="col-sm-3">
                                 		<input type="radio" id="meeting_place_10" name="place_radio" value="10">
-                                		<label for="meeting_place_10" style="cursor: pointer;"><div id="div_place_10" class="dplace" style="text-decoration:underline;">회의실1</div></label>
+                                		<label for="meeting_place_10" style="cursor: pointer;"><div id="div_place_10" class="dplace" title="툴팁아 반영되라 좀 ㅡㅡ" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실1</div></label>
                                 	</div>
                                 	<div class="col-sm-3">
                                 		<input type="radio" id="meeting_place_20" name="place_radio" value="20">
@@ -434,11 +435,11 @@ function update_progress(){
                                 	</div>
                                 	<div class="col-sm-3">
                                 		<input type="radio" id="meeting_place_30" name="place_radio" value="30">
-                                		<label for="meeting_place_30" style="cursor: pointer;"><div id="div_place_30" class="dplace" style="text-decoration:underline;">회의실3</div></label>
+                                		<label for="meeting_place_30" style="cursor: pointer;"><div id="div_place_30" class="dplace" title="툴팁아 반영되라 좀 ㅡㅡ" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실3</div></label>
                                 	</div>
                                 	<div class="col-sm-3">
                                 		<input type="radio" id="meeting_place_40" name="place_radio" value="40">
-                                		<label for="meeting_place_40" style="cursor: pointer;"><div id="div_place_40" class="dplace" style="text-decoration:underline;">회의실4</div></label>
+                                		<label for="meeting_place_40" style="cursor: pointer;"><div id="div_place_40" class="dplace" title="툴팁아 반영되라 좀 ㅡㅡ" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실4</div></label>
                                 	</div>
                                 </div>
                                 <div class="row">
@@ -462,8 +463,8 @@ function update_progress(){
   
     <dt>
     <a href="#"style="margin-top:5px; height: 133px;padding-right: 0px;">
-      <span class="hida box" style="width: 253px;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
-      <p class="multiSel"></p>
+      <span class="hida box" id="spantag" style="width: 253px; font-size:small;">참가자 선택<span style="margin-left:170px"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></span>    
+      <p class="multiSel" id="ptag" style="font-size:medium;"></p>
     </a>
     </dt>
   
@@ -471,7 +472,7 @@ function update_progress(){
         <div class="mutliSelect effect2" >
             <ul class="effect2" style="display: block;padding-right: 0px;height: 204px;width: 272px;">
         		<c:forEach items="${team_id}" var="obj" varStatus="status">
-					<li><input type="checkbox" value="${obj}" name='userchk'>${obj}</li>
+					<li><input type="checkbox" value="${obj}" id="${obj}" name='userchk'><label for="${obj}" style="cursor: pointer ;">${obj}</label></li>
 				</c:forEach>
             </ul>
         </div>
@@ -487,7 +488,7 @@ function update_progress(){
 </div>
 
 
-			<!-- 업우상세 보여주는 div 영역 -->
+			<!-- 업무상세 보여주는 div 영역 -->
 			<div class="col-sm-5" style="padding-right: 0px;">
 				<div class="row" style="padding-right: 0px;">
 					<label style="height: 32px; margin-top: 10px;"> &nbsp;&nbsp;&nbsp; 일반 / 회의 (선택 미구현)</label>
