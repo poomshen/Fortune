@@ -33,5 +33,6 @@ public interface INotice {
 	public List<Notice_DTO> searchTextListNotices(String searchvalue);
 	//조회수
 	public void updateHits(int notice_no);	
-
+	//메인 화면 최신글
+	public List<Notice_DTO> mainListNotice();
 }

@@ -416,14 +416,14 @@ public class ProService {
 		return req_Dto;
 	}
 
-	// 담당자를 선택하는 역할을 한다.
+	/*// 담당자를 선택하는 역할을 한다.
 	public With_DTO InsertManager(With_DTO m) throws ClassNotFoundException, SQLException {
 		System.out.println("tostring : " + m.toString());
 		
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
 		 proDao.updatemanager(m);
 		return m;
-	}
+	}*/
 	
 	//수신자 리스트  클래스입니다.
 	public List<Join_DTO> listEffect(Model model) 
@@ -437,12 +437,12 @@ public class ProService {
 	}
 	
 	//담당자 리스트  클래스입니다.
-	public List<Join_DTO> listManager(Model model) 
+	public List<Join_DTO> listManager(String dept_no) 
 			throws ClassNotFoundException, SQLException{
 			
 			ProDao checking_DAO = sqlsession.getMapper(ProDao.class);
 			
-			List<Join_DTO> list = checking_DAO.listManager();
+			List<Join_DTO> list = checking_DAO.listManager(dept_no);
 			//System.out.println(list);
 			
 			return list;
