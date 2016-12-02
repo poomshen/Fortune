@@ -26,8 +26,8 @@ function onOpen(evt) {
 }
 function onMessage(evt) {
 
-	console.log("evt.data"+evt.data);
-	alert("알림!!!!");
+	console.log("받은 메세지 내용은??"+evt.data);
+
 	$.ajax({
 		  
 		  type:"post",
@@ -37,7 +37,7 @@ function onMessage(evt) {
 		  success:function(data){
 		  
 			  
-			  console.log("성공");
+			  console.log("헤더 업데이트 성공");
 			  console.log(data);
 			  $('#alarm').empty();
 			  
@@ -54,7 +54,7 @@ function onClose(evt) {
 
 function send(selectId) {
 /* 	var selectId="sungjun@gmail.com/mclee@gmail.com"; */
-	console.log("보낼 메세지:"+selectId);
+	console.log("메세지 받을 사람~?"+selectId);
 	
 
 	 wsocket.send(selectId);
@@ -101,146 +101,17 @@ $(document).ready(function() {
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-               
-                    <a class="dropdown-toggle" style="color:#194f89;" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="alarm.htm">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-messages -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" style="color:#194f89;" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 4</strong>
-                                        <span class="pull-right text-muted">80% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Complete (danger)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Tasks</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-tasks -->
-                </li>
-                <!-- /.dropdown -->
+                 <!-- /.dropdown -->
                 <li id="alarm" class="dropdown">
-                                 
-                    <a class="dropdown-toggle" style="color:#194f89;" data-toggle="dropdown" href="#">
-                       <i class="fa fa-bell fa-fw hvr-pop"><span id="blink"  <c:if test="${sessionScope.alarm.size()>0}"> class="blink_me notification_count" </c:if> > <c:if test="${sessionScope.totalCount>0}"> ${sessionScope.totalCount}</c:if></span></i>  <i class="fa fa-caret-down"></i>
+   <a class="dropdown-toggle" style="color:#194f89" data-toggle="dropdown" href="#">
+                       <i class="fa fa-bell fa-fw hvr-pop">
+                       <span id="blink"  
+                       	<c:if test="${sessionScope.alarm.size()>0}">class="blink_me notification_count"</c:if> > 
+                       	<c:if test="${sessionScope.totalCount>0}">${sessionScope.totalCount}</c:if></span></i>  
+                       	<i class="fa fa-caret-down"></i>
                     </a>
-                
+          
                   <c:if test="${sessionScope.alarm.size()>0}">
-                  
-               
               
                    <ul id="alarmList" class="dropdown-menu dropdown-alerts">
                    	   <c:forEach var="alarm" items="${sessionScope.alarm}"> 
@@ -252,27 +123,49 @@ $(document).ready(function() {
                                 
                    <c:choose>
                    <c:when test="${alarm.work_type==1}">
-                    	<i class="fa fa-file-o fa-fw"></i>	새 프로젝트 요청 
+                    	<i class="fa fa-file-o fa-fw"></i>	새 프로젝트 요청               
+                    	<span class="pull-right text-muted small" 
+                    		  style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
+ 										${alarm.count}</span>
                    </c:when>                 
                    <c:when test="${alarm.work_type==2}">
-                  	     <i class="fa fa-file-text-o fa-fw"></i>  기존 프로젝트 요청
+                  	     <i class="fa fa-file-text-o fa-fw"></i>  기존 프로젝트 요청             
+                  	     <span class="pull-right text-muted small" 
+                  	     		style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
+ 										${alarm.count}</span>
+                  	     
                    </c:when>               
                    <c:when test="${alarm.work_type==3}">
-                      <i class="fa fa-file-word-o fa-fw"></i>	새로운 업무 요청
-                   </c:when>                 
-                   <c:when test="${alarm.work_type==4}">
-                   		 <i class="fa fa-comment-o fa-fw"></i>	새로운 댓글 
-                   </c:when>                
-                      </c:choose>
-                                    <span class="pull-right text-muted small" 
-                                    style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
+                   
+                      <i class="fa fa-file-word-o fa-fw"></i>	새로운 업무 요청              
+                      <span class="pull-right text-muted small" 
+                      		style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
  										${alarm.count}</span>
+ 										
+ 										
+            
+                        <c:forEach var="scheduleAlarmList" items="${sessionScope.sch_alist}"> 
+                   		
+                   		 <li id="${scheduleAlarmList.collabo_no}">  
+                   			 <a href="#">프로젝트${scheduleAlarmList.collabo_no}
+                   		 
+                   		      	<span class="pull-right text-muted small" 
+                                    style="padding: 3px 7px 3px 7px;background:#ffff;color: #cc0000;font-weight: bold;border-radius: 9px;">
+ 										${scheduleAlarmList.total_collabo}건</span>
+                   			 </a>
+                   		 </li>
+                    		
+                   	 	</c:forEach>
+         
+                   </c:when>                 
+                        
+                      </c:choose>
+                      
                                 </div>
-                         
-                         
-                            </a>
+                             </a>
                       
                         </li>
+                        
                         
                             <li class="divider"></li>
                             
@@ -288,9 +181,8 @@ $(document).ready(function() {
                     
                
                     </ul>
-                    
-                  
                     </c:if>
+    
            
                     <!-- /.dropdown-alerts -->
                 </li>
