@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Alarm_DTO;
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Meet_Users_DTO;
 import com.fortune.Table_DTO.Schedule_Alarm_DTO;
 import com.fortune.Table_DTO.Schedule_DTO;
@@ -67,13 +68,14 @@ public class FullCalendarController {
 		Schedule_DTO sdto = fullcalendarDAO.selectScheduleno();
 		
 		Alarm_DTO adto = new Alarm_DTO();
-		Schedule_Alarm_DTO sch_alarm_dto= new Schedule_Alarm_DTO();
+		//추가사항 : 일반업무에 알림 DB 넣어놓기		
+		//Schedule_Alarm_DTO sch_alarm_dto= new Schedule_Alarm_DTO();
 		All_Alarm_DTO all_alarm_dto = new All_Alarm_DTO();
 		List<Select_Alarm_DTO> sadto = new ArrayList<Select_Alarm_DTO>();
 		IAlarm alarmDAO =  sqlSession.getMapper(IAlarm.class);
 		IScheduleAlarm sch_alarmDAO = sqlSession.getMapper(IScheduleAlarm.class);
-		
-		
+		////
+			
 		Work_Users_DTO wudto = new Work_Users_DTO();
 		
 		swdto.setSchedule_no(sdto.getSchedule_no());
@@ -93,9 +95,11 @@ public class FullCalendarController {
         for(int i=0;i<selectId.length;i++){
         	adto.setUser_id(selectId[i]);
         	adto.setWork_type("3");
+        	//추가사항 스케쥴 알림에 넣기
         	all_alarm_dto.setUser_id(selectId[i]);
         	all_alarm_dto.setSchedule_no(sdto.getSchedule_no());
-        	
+        	all_alarm_dto.setCollabo_no(collabo_no);
+        	////
         	alarmDAO.insertAlarm(adto);
         	sch_alarmDAO.insertScheduleAlarm(all_alarm_dto);
         	
@@ -121,6 +125,11 @@ public class FullCalendarController {
 	        
 			Schedule_Meeting_DTO smdto = new Schedule_Meeting_DTO();
 			Schedule_DTO sdto = fullcalendarDAO.selectScheduleno();
+			
+			//추가)스케줄 회의 알림 DB에 넣기
+			All_Alarm_DTO all_alarm_dto = new All_Alarm_DTO();
+			IScheduleAlarm sch_alarmDAO = sqlSession.getMapper(IScheduleAlarm.class);
+			
 			
 			Alarm_DTO adto = new Alarm_DTO();
 			List<Select_Alarm_DTO> sadto = new ArrayList<Select_Alarm_DTO>();
@@ -149,9 +158,13 @@ public class FullCalendarController {
 	        	
 	        	adto.setUser_id(selectId[i]);
 	        	adto.setWork_type("3");
-	        	//adto.setAlarm_index(sdto.getSchedule_no());
+	        	//추가)스케쥴 회의알림 넣기
+	        	all_alarm_dto.setUser_id(selectId[i]);
+	        	all_alarm_dto.setSchedule_no(sdto.getSchedule_no());
+	        	all_alarm_dto.setCollabo_no(collabo_no);
+	        	////
 	        	alarmDAO.insertAlarm(adto);
-
+	        	sch_alarmDAO.insertScheduleAlarm(all_alarm_dto);
 	           sadto.add(alarmDAO.checkAlarm(adto));
 
 	           
@@ -367,20 +380,25 @@ public class FullCalendarController {
 	
     /* 작업자 : 이명철  // 최초 작업일 : 11.29 // 최종 작업일 : 11.29
      * 작업 내용 : 최초 fullcalendar 로드될 때, 참가자 id도 가져옴 => DB저장된 일정 불러오기
-     * 추가 내용 : 
-     * version : v1.0
+     * 추가 내용 : 알림 new 띄우기(이예지)
+     * version : v2.0
     */
 	@RequestMapping(value="calendarload.ajax", method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> schedule_work_meeting(@RequestParam(value="collabo_no") String collabo_no) throws ClassNotFoundException, SQLException {
+	public @ResponseBody Map<String,Object> schedule_work_meeting(@RequestParam(value="collabo_no") String collabo_no,HttpSession session) throws ClassNotFoundException, SQLException {
 		System.out.println("위치 : FullCalendarController // 내용 : DB에서 (일반+회의)일정 가져옴 // 작업자: 이명철");
         
 	    IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
-	    
+	   
 	    System.out.println("협업 번호"+collabo_no);
         List<Schedule_Work_Meeting_DTO> schedulelist = fullcalendarDAO.selectSWMList(collabo_no);
 
         List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no);
         List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no);
+        
+        //추가사항 : 스케줄 알림 db에서 불러오기
+        IScheduleAlarm sche_alarmDAO= sqlSession.getMapper(IScheduleAlarm.class);
+	    Join_DTO dto = (Join_DTO)session.getAttribute("info");
+	    List<Schedule_Alarm_DTO> new_alarm = sche_alarmDAO.selectScheduleAlarm(dto.getUser_id());
         
         for(Schedule_Work_Meeting_DTO swm : schedulelist){
     	String userid = "";
@@ -407,9 +425,12 @@ public class FullCalendarController {
         	
         };
         
+        
+        
         Map<String,Object> map = new HashMap();
         map.put("schedulelist", schedulelist);
-        
+        //추가사항:map에 새로운알림 데이터 넣기
+        map.put("new_alarm",new_alarm);        
 		return map;
 	}
 	

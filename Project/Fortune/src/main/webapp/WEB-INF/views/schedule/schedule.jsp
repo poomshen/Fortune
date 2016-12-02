@@ -13,7 +13,7 @@
 $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip();
-	
+
 	
 	//화면 로드시 일정을 DB에서 불러오는 코드  
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
@@ -32,7 +32,9 @@ $(document).ready(function() {
 							start : obj.schedule_start,
 							end : obj.schedule_end,
 							backgroundColor : 'rgba(51, 122, 183, 0.22)'
+							
 						};
+						
 						array.push(item);
 				        content += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
 				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
@@ -49,12 +51,14 @@ $(document).ready(function() {
 							backgroundColor : 'rgb(51, 122, 183)'
 						};
 						array.push(item);
+
 				        content += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
 				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 				        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
 				        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
 				        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
+
 					}
 				} else{
 					var item = {
@@ -72,9 +76,18 @@ $(document).ready(function() {
 				}
 		        
 			});
+			
+		
 	        $('#content').html(content)
 	        //fullcalendar 불러오는 함수
 			loadCalendar();
+			$.each(data.new_alarm, function(index, obj) {
+				
+				alert(obj.schedule_no);
+				
+				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
+				
+			});
 		}
 	});
 	
@@ -82,12 +95,6 @@ $(document).ready(function() {
 });
 
 
-
-/* 
-작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중
-작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중
-작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중작업중
- */
 
 function schedule_type(){
 	alert($('#schedule_type').val());

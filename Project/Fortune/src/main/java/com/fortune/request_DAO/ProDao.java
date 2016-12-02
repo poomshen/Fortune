@@ -13,7 +13,7 @@ import com.fortune.function_DTO.Select_Collabo_DTO;
 public interface ProDao {
 
 		//게시물 개수
-		public int requestCount(String field, String query) throws ClassNotFoundException, SQLException;
+		public int requestCount(String field, String query,String st_query) throws ClassNotFoundException, SQLException;
 		//전체 게시물
 		public List<Request_DTO> getRequest(int page, String field, String query, String st_query) throws ClassNotFoundException, SQLException;
 		//게시물 삭제
