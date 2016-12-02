@@ -14,7 +14,7 @@
 $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip();
-	
+
 	
 //화면 로드시 일정을 DB에서 불러오는 코드  
  	$.ajax({
@@ -32,7 +32,9 @@ $(document).ready(function() {
 							start : obj.schedule_start,
 							end : obj.schedule_end,
 							backgroundColor : 'rgba(51, 122, 183, 0.22)'
+							
 						};
+						
 						array.push(item);
 				        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무일정</td><td>' + obj.wm_title;
 				        content += '</td><td><a';
@@ -49,7 +51,7 @@ $(document).ready(function() {
 							backgroundColor : 'rgb(51, 122, 183)'
 						};
 						array.push(item);
-			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(51, 122, 183)">업무일정</td><td>' + obj.wm_title;
+			        content += '<tr><td style="color:rgb(51, 122, 183)">업무일정</td><td id=td'+obj.schedule_no+'>' + obj.wm_title;
 			        content += '</td><td><a';
 			        content += ' onclick="detail(' + obj.schedule_no;
 			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
@@ -65,7 +67,7 @@ $(document).ready(function() {
 							backgroundColor : 'rgba(255, 228, 0, 0.66)'
 					};
 					array.push(item);
-			        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(255, 228, 0)">회의일정</td><td>' + obj.wm_title;
+			        content += '<tr><td style="color:rgb(255, 228, 0)">회의일정</td><td id=td'+obj.schedule_no+'>' + obj.wm_title;
 			        content += '</td><td><a';
 			        content += ' onclick="detail2(' + obj.schedule_no;
 			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
@@ -75,9 +77,18 @@ $(document).ready(function() {
 				}
 		        
 			});
+			
+		
 	        $('#content').html(content)
 	        //fullcalendar 불러오는 함수
 			loadCalendar();
+			$.each(data.new_alarm, function(index, obj) {
+				
+				alert(obj.schedule_no);
+				
+				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
+				/* '<img src="assets/img/alarm/new1.png"/>' */
+			});
 		}
 	});
 	
@@ -147,10 +158,6 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 
 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 
 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 작업중 
-
-
-
-
  */
 //회의일정의 상세보기 페이지
 function detail2(id, title, text, start, end, userids, progress_or_place){
