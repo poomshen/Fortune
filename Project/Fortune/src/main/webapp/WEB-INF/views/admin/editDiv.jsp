@@ -24,7 +24,7 @@
 	</label>
 	<div class="col-md-8" style="margin-bottom: 10px">
 		<input type="password" style="color: #777" class="form-control"
-			id="user_password" name="user_password">
+			value="${join_DTO.user_password}" id="user_password" name="user_password">
 	</div>
 </div>
 

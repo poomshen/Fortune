@@ -89,14 +89,14 @@
 			<div class="text-center">
 				<c:if test="${pg > block}">
 					<ul class="pagination">
-						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">◀◀</a></li>
-						<li><a href="mainfile.htm?pg=${from_page - 1}&collabo_no=${collabo_no}">◀</a></li>
+						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">««</a></li>
+						<li><a href="mainfile.htm?pg=${from_page - 1}&collabo_no=${collabo_no}">«</a></li>
 					</ul>
 				</c:if>
 				<c:if test="${pg <= block && pg != 1}">
 					<ul class="pagination">
-						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">◀◀</a></li>
-						<li><a href="mainfile.htm?pg=${pg - 1}&collabo_no=${collabo_no}">◀</a></li>
+						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">««</a></li>
+						<li><a href="mainfile.htm?pg=${pg - 1}&collabo_no=${collabo_no}">«</a></li>
 					</ul>
 				</c:if>
 				<c:forEach begin="${from_page}" end="${to_page}" var="i">
@@ -110,14 +110,14 @@
 				<c:if test="${list.size() != 0}">
 					<c:if test="${pg < to_page || pg != all_page}">
 						<ul class="pagination">
-							<li><a href="mainfile.htm?pg=${pg + 1}&collabo_no=${collabo_no}">▶</a></li>
-							<li><a href="mainfile.htm?pg=${all_page}&collabo_no=${collabo_no}">▶▶</a></li>
+							<li><a href="mainfile.htm?pg=${pg + 1}&collabo_no=${collabo_no}">»</a></li>
+							<li><a href="mainfile.htm?pg=${all_page}&collabo_no=${collabo_no}">»»</a></li>
 						</ul>
 					</c:if>
 					<c:if test="${to_page > all_page && pg != all_page}">
 						<ul class="pagination">
-							<li><a href="mainfile.htm?pg=${to_page + 1}&collabo_no=${collabo_no}">▶</a></li>
-							<li><a href="mainfile.htm?pg=${all_page}&collabo_no=${collabo_no}">▶▶</a></li>
+							<li><a href="mainfile.htm?pg=${to_page + 1}&collabo_no=${collabo_no}">»</a></li>
+							<li><a href="mainfile.htm?pg=${all_page}&collabo_no=${collabo_no}">»»</a></li>
 						</ul>
 					</c:if>
 				</c:if>
