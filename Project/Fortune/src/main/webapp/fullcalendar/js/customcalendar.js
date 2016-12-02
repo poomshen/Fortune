@@ -1,5 +1,5 @@
 //캘린더 호출시 필요한 초기 변수 선언
-var content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목/진척률</th><th style='width:50px;'>상세</th></tr>";
+var content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 var array = [];
 var clickobject;
 var clickobjectcolor= "";
@@ -151,7 +151,7 @@ function loadCalendar() {
 			
 			
 			var content3 = "";
-			content3 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
+			content3 += "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 			$.ajax({
 				url : 'eventclick.ajax',
 				type : 'post',
@@ -171,13 +171,15 @@ function loadCalendar() {
 					        content3 += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
 					        content3 += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 					        content3 += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
-					        content3 += ')">'+ obj.wm_title + '</a></td><td>진척률</td></tr>';
+					        content3 += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
+					        content3 += '<div class="progress-bar progress-bar-striped active" role="progressbar" style="width:'+obj.progress_or_place*100;
+					        content3 += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 						}
 					} else{
 						content3 += '<tr><td style="color:rgb(255, 228, 0);">회의</td>';
 				        content3 += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 				        content3 += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
-				        content3 += ')">'+ obj.wm_title + '</a></td><td>진척률</td></tr>';
+				        content3 += ')">'+ obj.wm_title + '</a></td><td></td></tr>';
 					}
 					$('#content_detail').css("display", "none");
 					$('#content_detail2').css("display", "none");
