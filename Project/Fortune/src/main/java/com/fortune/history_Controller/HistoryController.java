@@ -24,14 +24,47 @@ public class HistoryController {
 	@Autowired
 	private SqlSession SqlSession;
  	
-	@RequestMapping("historyList.htm")
+	@RequestMapping("historyAllList.htm")
 	public String historyList(Model model){
 		
 		
 		IHistory  history = SqlSession.getMapper(IHistory.class);
-		ArrayList<HistoryFunction_DTO> list =  history.historyAllList();
+		//첫 페이지는 1
+		ArrayList<HistoryFunction_DTO> list =  history.historyAllList(0);
 		
 		model.addAttribute("list", list );
 		return "history.historyList2";
+	}
+	
+	@RequestMapping("historyList.htm")
+	public String historyList(Model model , String collabo_req_no){
+		IHistory  history = SqlSession.getMapper(IHistory.class);
+		ArrayList<HistoryFunction_DTO> list =  history.historyList(collabo_req_no,0);
+		System.out.println(collabo_req_no);
+		 model.addAttribute("req_no", collabo_req_no);
+		 model.addAttribute("list", list );
+		return "history.historyList3";
+	}
+	
+	
+	@RequestMapping("historyAllList.ajax")
+	public String historyAllpage(Model model,String page){
+		IHistory  history = SqlSession.getMapper(IHistory.class);
+		ArrayList<HistoryFunction_DTO> list =  history.historyAllList(Integer.parseInt(page));
+		
+		model.addAttribute("list", list );
+		
+		return "/WEB-INF/views/history/historyList.jsp";
+	}
+	
+	
+	@RequestMapping("historyAllList2.ajax")
+	public String historyAllpage2(Model model, String collabo_req_no,String page){
+		IHistory  history = SqlSession.getMapper(IHistory.class);
+		ArrayList<HistoryFunction_DTO> list =  history.historyList(collabo_req_no,Integer.parseInt(page));
+		
+		model.addAttribute("list", list );
+		
+		return "/WEB-INF/views/history/historyList.jsp";
 	}
 }

@@ -5,13 +5,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.fortune.history_DAO.IHistory">
 
-	<select id="historyAllList" resultType="com.fortune.function_DTO.HistoryFunction_DTO">
-		Select h.Collaboration_No , h.Collabo_Req_Index, h.Collabo_Req_No, h.History_Date, History_Title, History_Text
+	 <select id="historyAllList" parameterType="Integer"  resultType="com.fortune.function_DTO.HistoryFunction_DTO">
+		select * from (select  rownum  num ,n.* from (Select h.Collaboration_No , h.Collabo_Req_Index, h.Collabo_Req_No, h.History_Date, History_Title, History_Text
 		,h.User_Id,r.Collabo_Req_Id,r.Collabo_Req_Title,r.Collabo_Req_Text
 		 From History H Join Collabo_Req r on H.Collabo_Req_No= r.Collabo_Req_No
 		  and H.Collabo_Req_Index = r.Collabo_Req_Index
-		 ORDER BY H.History_Date desc
-	</select>
+		 ORDER BY H.History_Date desc) n) where  num  BETWEEN  (1+#{page}) and (4+#{page}) 
+	</select> 
 	
 	<select id="progectNamelist" resultType="com.fortune.function_DTO.ProgectName_DTO">
 		select PROJECT_NAME ,COLLABO_REQ_NO from PROJECTNAMEVIEW
@@ -19,5 +19,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="maxReqNo" resultType="Integer">
 		select MAX((collabo_req_no)+1) as collabo_req_no from COLLABO_REQ
+	</select>
+	
+	<select id="historyList"  resultType="com.fortune.function_DTO.HistoryFunction_DTO">
+		select * from( select rownum  num , n.* from(Select h.Collaboration_No , h.Collabo_Req_Index, h.Collabo_Req_No, h.History_Date, History_Title, History_Text
+		,h.User_Id,r.Collabo_Req_Id,r.Collabo_Req_Title,r.Collabo_Req_Text
+		 From History H Join Collabo_Req r on H.Collabo_Req_No= r.Collabo_Req_No
+		  and H.Collabo_Req_Index = r.Collabo_Req_Index where  H.Collabo_Req_No = #{param1}
+		 ORDER BY H.History_Date desc )n) where num BETWEEN  (1+#{param2}) and (5+ #{param2})
 	</select>
 </mapper>

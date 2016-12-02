@@ -3,6 +3,7 @@ package com.fortune.name_Controller;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,10 +18,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fortune.Table_DTO.Chart_Data_DTO;
 import com.fortune.Table_DTO.Dept_DTO;
 import com.fortune.Table_DTO.Jobtitle_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Team_DTO;
+import com.fortune.chart_DAO.IChart;
 import com.fortune.member_DAO.IJoin;
 
 
@@ -68,11 +71,20 @@ public class HomeController {
 		return "sign";
 	}
 	
+	
+	
+	/*
+	 작성자 : 이예지
+	 최초작업일 : 2016/11/28
+	 최종수정일 : 2016/11/30
+	 작업내용 : 메인화면에서 chart 나타내기
+	 =메인화면에 차트 추가
+	 */
 	@RequestMapping(value = "/main.htm", method = RequestMethod.GET)
-	public String main() {
+	public String main(Model model) {
 
+	
 		
-		System.out.println("메뉴 컨트롤러");
 		return "home.main";
 	}
 

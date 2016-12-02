@@ -24,7 +24,7 @@
 	</label>
 	<div class="col-md-8" style="margin-bottom: 10px">
 		<input type="password" style="color: #777" class="form-control"
-			id="user_password" name="user_password">
+			value="${join_DTO.user_password}" id="user_password" name="user_password">
 	</div>
 </div>
 
@@ -45,8 +45,16 @@
 			class="glyphicon glyphicon-user"></i></span>성별
 	</label>
 	<div class="col-md-8" style="margin-bottom: 10px">
-		<input type="text" style="color: #777" class="form-control" id="user_gender"
-			name="user_gender" value="${join_DTO.user_gender}">
+		<span class="field">
+			<c:if test="${join_DTO.user_gender == 'male'}">
+				<input type="radio" name="user_gender" id="user_gender" value="male" checked="checked">남자
+				<input type="radio" name="user_gender" id="user_gender" value="female">여자<br>
+			</c:if>
+			<c:if test="${join_DTO.user_gender == 'female'}">
+				<input type="radio" name="user_gender" id="user_gender" value="male">남자
+				<input type="radio" name="user_gender" id="user_gender" value="female" checked="checked">여자<br>
+			</c:if>
+		</span>
 	</div>
 </div>
 
@@ -68,7 +76,6 @@
 			class="glyphicon glyphicon-phone"></i></span>휴대폰 번호
 	</label>
 	<div class="col-md-8" style="margin-bottom: 10px">
-
 		<input type="text" style="color: #777;" class="form-control"
 			id="user_phone" name="user_phone" value="${join_DTO.user_phone}">
 	</div>
@@ -93,7 +100,7 @@
 			class="glyphicon glyphicon-calendar"></i></span>부서명
 	</label>
 	<div class="col-md-8" style="margin-bottom: 10px">
-		<select id="deptSelect" name="dept_no" onchange="deptchange()">
+		<select class="selectpicker" id="deptSelect" name="dept_no" onchange="deptchange()">
 			<c:forEach var="i" items="${deptselect}">
 				<c:choose>
 					<c:when test="${i.dept_no == join_DTO.dept_no}">
@@ -114,18 +121,16 @@
 			class="glyphicon glyphicon-calendar"></i></span>팀명
 	</label>
 	<div class="col-md-8" style="margin-bottom: 10px">
-		<select id="teamSelect" name="team_no">
+		<select class="selectpicker" id="teamSelect" name="team_no">
 			<c:forEach var="j" items="${teamselect}">
-				<c:if test="${join_DTO.dept_no == j.dept_no}">
-					<c:choose>
-						<c:when test="${join_DTO.team_no == j.team_no}">
-							<option value="${j.team_no}" selected>${j.team_name}</option>
-						</c:when>
-						<c:otherwise>
-							<option value="${j.team_no}">${j.team_name}</option>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
+				<c:choose>
+					<c:when test="${join_DTO.team_no == j.team_no}">
+						<option value="${j.team_no}" selected>${j.team_name}</option>
+					</c:when>
+					<c:otherwise>
+						<option value="${j.team_no}">${j.team_name}</option>
+					</c:otherwise>
+				</c:choose>
 			</c:forEach>
 		</select>
 	</div>
@@ -137,7 +142,7 @@
 			class="glyphicon glyphicon-calendar"></i></span>직급명
 	</label>
 	<div class="col-md-8" style="margin-bottom: 10px">
-		<select name="position_no" id="positionSelect" class="cd-select">
+		<select class="selectpicker" name="position_no" id="positionSelect">
 			<c:forEach var="i" items="${positionselect}">
 				<c:choose>
 					<c:when test="${i.position_no == join_DTO.position_no}">
@@ -176,6 +181,5 @@
 	<div class="content col-md-12" align="center">
 			<input type="button" class="btn btn-primary " onclick="UserUpdate()" value="수정"> 
 			<input type="button" class="btn btn-primary" onclick="CancelUpdate()" value="취소">
-	
 	</div>
 </div>

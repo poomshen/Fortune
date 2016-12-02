@@ -8,7 +8,7 @@
 		function lastPostFunc(){
 			console.log("스크롤 끝");
 			 $("div#pageListLoader").html("<div  class='btn btn-primary btn-lg btn-block'><h1style='color: white;'>로딩중..</h1></div>");  
-			 $.get("historyAllList.ajax?page="+ $(".wrdLatest:last").attr("id"), function(data, textStatus, req) {
+			 $.get("historyAllList2.ajax",{collabo_req_no:${req_no} ,page :$(".wrdLatest:last").attr("id")}, function(data, textStatus, req) {
 				  if (data != "") {  
 				        $(".wrdLatest:last").after(data);             
 				        }  
@@ -75,7 +75,7 @@
                                         <div class="timeline-body">
                                             <h4 class="timeline-title">${historylist.collabo_req_title}</h4>
                                             <p>${historylist.collabo_req_text}</p>
-                                            <p>${historylist.history_text}</p>
+                                             <p>${historylist.history_text}</p>
                                         </div>
                                     </div>
                                 	</li>

@@ -28,7 +28,7 @@
 			type : "get",
 			url : "insertmanager.htm",
 			cache : false,
-			data : "collabo_req_index=" + a,
+			data : {"collabo_req_index=" : a,"dept_no" : ${sessionScope.info.dept_no}},
 			success : function(data) { //callback  
 
 				$('#menuView').empty();
@@ -45,7 +45,6 @@
 	
 	function detailReqCollabo(a){
 		
-		$("#menuView").empty();
 	  	
 	   	 $.ajax({
 	   		 
@@ -55,6 +54,7 @@
 	 			data:"collabo_req_index="+a,
 	 		    success:function(data){ //callback  
 					$("#ReqCollabo").append($('#ReqCollabo').html(data)); 
+	 		    
 	 		      
 	 		     },
 	 			error: function(){						
@@ -103,25 +103,20 @@
 						<div id="cardLeft" >
 								<header class="w3-container "> 
 								번호: ${n.collabo_no} 기간: ${n.collabo_start} ~ ${n.collabo_end}
-								<h1>프로젝트 제목</h1>
-								팀장 : <security:authorize
-									access="hasAnyRole('ROLE_SUPERMGR')">
-									<c:choose>
-										<c:when test="${n.user_ID  == null}">
-											<a data-toggle="modal" data-target="#myModal"
-												class="btn btn-default btn-md"
-												onclick="proAjaxManager(${n.collabo_req_index})">담당</a>
+								<h1>${n.collabo_req_title}</h1>
+								<c:choose>
+										<c:when test="${n.collabo_sal  == null}">
+											
 										</c:when>
 										<c:otherwise>
-											<a data-toggle="modal" data-target="#myModal"
-												class="btn btn-default btn-md"
-												onclick="proAjaxManager(${n.collabo_req_index})">담당</a>
+											예상 수익: ${n.collabo_sal}　만원
 										</c:otherwise>
 									</c:choose>
-								</security:authorize> ${n.user_ID}
+								팀장 : ${n.user_ID}
 								<br>
 								부장 ${n.collabo_req_ID}
 								<h5>${n.collabo_state}</h5>
+								
 								 </header>
 								</div>
 								<footer class="w3-container " >
@@ -138,6 +133,10 @@
 									<a href="#" onclick="detailReqCollabo(${n.collabo_req_index})" class="btn btn-primary"> 
 									<i class="glyphicon  glyphicon-th-list"></i><br>상세 보기</a>
 								</div>
+								<div>
+									<a href="historyList.htm?collabo_req_no=${n.collabo_req_no }" class="btn btn-primary"> 
+									<i class="glyphicon  glyphicon-th-list"></i><br>히스토리보기</a>
+								</div>
 								</div> 
 								</footer>
 							</div>
@@ -148,11 +147,12 @@
 			</div>
 		</div>
 	<div  id="ajaxside">
-		<div class="panel panel-default">
+		<div class="panel panel-default"  style="position: fixed;">
 			<div class="panel-heading">협업 리스트</div>
 			<!-- 검색폼 추가 -->
 			<div id="ReqCollabo"></div>
-		</div>
+			</div>
+		
 	</div>
 
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fortune.chart_DAO.IChart">
+<!-- 알람 체크 -->
+ <select id="selectChartAll" resultType="com.fortune.Table_DTO.Chart_Data_DTO">
+select m.chart_date,c.collabo_no,c.chart_progress,c.chart_total_date,c.chart_seq from CHART_DATA c
+join (select max(chart_date)as chart_date,collabo_no from chart_data group by collabo_no)m 
+on c.chart_date=m.chart_date where c.collabo_no=m.collabo_no
+ </select>
+ 
+<!-- 알림  추가 -->
+ <select id="selectChart" resultType="com.fortune.Table_DTO.Chart_Data_DTO">
+  select chart_date,collabo_no,chart_progress,chart_total_date,chart_seq from chart_data where collabo_no=#{collabo_no}  
+</select>
+
+
+ </mapper>
+ 
+ 
+ 

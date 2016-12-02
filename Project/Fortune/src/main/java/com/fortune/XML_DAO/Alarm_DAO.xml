@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <!-- 알림  추가 -->
  <insert id="insertAlarm" parameterType="com.fortune.Table_DTO.Alarm_DTO">
-  	 insert into alarm(work_type,user_id) values(#{work_type},#{user_id})    
+  	 insert into alarm(work_type,user_id,alarm_index) values(#{work_type},#{user_id},alarm_s.NEXTVAL)    
   </insert>
 
  <!-- 알림 삭제 -->

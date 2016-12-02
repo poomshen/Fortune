@@ -1,27 +1,40 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<body>
-chart 비동기!
-</body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%
+   request.setCharacterEncoding("UTF-8");
+   ArrayList each_chart_x =(ArrayList)request.getAttribute("eachChart_x");
+   ArrayList each_chart_y = (ArrayList)request.getAttribute("eachChart_y");
+   int project_num =(Integer)request.getAttribute("project_num");
+   System.out.println(each_chart_x.get(0));
+   
+%>
 <script>
 $(function () {
-    Highcharts.chart('gg', {
+	
+	console.log(<%=(String)each_chart_x.get(0)%>);
+
+    Highcharts.chart('kk', {
         title: {
-            text: 'Monthly Average Temperature',
+            text: '각 프로젝트 날짜별 진척률',
             x: -20 //center
         },
-        subtitle: {
-            text: 'Source: WorldClimate.com',
-            x: -20
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+     
+        xAxis: {       	
+         
+          categories:<%=each_chart_x%>,
+          labels: {
+          	  title:'날짜',
+              style: {
+                  color: 'blue'
+              }
+          }
+     
         },
         yAxis: {
             title: {
-                text: 'Temperature (°C)'
+                text: '진척률%'
             },
             plotLines: [{
                 value: 0,
@@ -29,8 +42,10 @@ $(function () {
                 color: '#808080'
             }]
         },
+        credits:{ enabled:false },
         tooltip: {
-            valueSuffix: '°C'
+        	
+            valueSuffix: '%'
         },
         legend: {
             layout: 'vertical',
@@ -39,17 +54,9 @@ $(function () {
             borderWidth: 0
         },
         series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'New York',
-            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-        }, {
-            name: 'Berlin',
-            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-        }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+            name:<%=project_num%>,
+            data:<%=each_chart_y%>
+          
         }]
     });
 });

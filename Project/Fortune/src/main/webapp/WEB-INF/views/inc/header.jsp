@@ -27,7 +27,7 @@ function onOpen(evt) {
 function onMessage(evt) {
 
 	console.log("evt.data"+evt.data);
-	
+	alert("알림!!!!");
 	$.ajax({
 		  
 		  type:"post",
@@ -42,9 +42,6 @@ function onMessage(evt) {
 			  $('#alarm').empty();
 			  
 			  $('#alarm').html(data);
-			 
-			  
-			 
 		
 		  }
 	  });	
@@ -58,7 +55,10 @@ function onClose(evt) {
 function send(selectId) {
 /* 	var selectId="sungjun@gmail.com/mclee@gmail.com"; */
 	console.log("보낼 메세지:"+selectId);
-	wsocket.send(selectId);
+	
+
+	 wsocket.send(selectId);
+	
 	
 }
 
