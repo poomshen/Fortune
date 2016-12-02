@@ -351,6 +351,8 @@ function update_progress(){
 <input type="hidden" id="collabo_no" value="${collabo_no}">
 <input type="hidden" id="modal_start">
 <input type="hidden" id="modal_end">
+<input type="hidden" id="modal_start_ms">
+<input type="hidden" id="modal_end_ms">
 
 
 
@@ -358,7 +360,7 @@ function update_progress(){
 	<br>
 	<br>
 	<div class="container-fluid">
-		<div class="row" style="padding-right: 0px;">
+		<div class="row" style="padding-right: 0px; ">
 
 			<!-- calendar 보여 주는 div 영역 -->
 			<div class="col-sm-7" style="padding-left: 0px; padding-right: 0px;">
