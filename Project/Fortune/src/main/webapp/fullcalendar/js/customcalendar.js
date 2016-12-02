@@ -1,5 +1,5 @@
 //캘린더 호출시 필요한 초기 변수 선언
-var content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목/진척률</th><th style='width:50px;'>상세</th></tr>";
+var content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 var array = [];
 var clickobject;
 var clickobjectcolor= "";
@@ -9,7 +9,7 @@ var clickobjectcolor= "";
 function fcontent() {
 	
 	var content2 = "";
-	content2 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
+	content2 += "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 	$('#content').empty();
 	$.ajax({
 		url : 'calendarload.ajax',
@@ -20,30 +20,23 @@ function fcontent() {
 			$.each(data.schedulelist, function(index, obj) {
 				if(obj.progress_or_place<10){
 					if(obj.progress_or_place==1){
-				        content2 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무일정</td><td>' + obj.wm_title;
-				        content2 += '</td><td><a';
-				        content2 += ' onclick="detail(' + obj.schedule_no;
-				        content2 += ",'" + obj.wm_title + "','" + obj.wm_text;
-				        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
-				        content2 += "','" + obj.users + "','" + obj.progress_or_place + "'";
-				        content2 += ')" >상세보기</a></td></tr>';
+				        content2 += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
+				        content2 += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+				        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content2 += ')">'+ obj.wm_title + '</a></td><td>진척률</td></tr>';
 					} else{
-				        content2 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(51, 122, 183)">업무일정</td><td>' + obj.wm_title;
-				        content2 += '</td><td><a';
-				        content2 += ' onclick="detail(' + obj.schedule_no;
-				        content2 += ",'" + obj.wm_title + "','" + obj.wm_text;
-				        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
-				        content2 += "','" + obj.users + "','" + obj.progress_or_place + "'";
-				        content2 += ')" >상세보기</a></td></tr>';
+				        content2 += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
+				        content2 += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+				        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content2 += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
+				        content2 += '<div class="progress-bar progress-bar-striped active" role="progressbar" style="width:'+obj.progress_or_place*100;
+				        content2 += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 					}
 				} else{
-			        content2 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(255, 228, 0)">회의일정</td><td>' + obj.wm_title;
-			        content2 += '</td><td><a';
-			        content2 += ' onclick="detail(' + obj.schedule_no;
-			        content2 += ",'" + obj.wm_title + "','" + obj.wm_text;
-			        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end;
-			        content2 += "','" + obj.users + "','" + obj.progress_or_place + "'";
-			        content2 += ')" >상세보기</a></td></tr>';
+					content2 += '<tr><td style="color:rgb(255, 228, 0);">회의</td>';
+			        content2 += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+			        content2 += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+			        content2 += ')">'+ obj.wm_title + '</a></td><td></td></tr>';
 				}
 			});
 			$('#content_detail').css("display", "none");
@@ -87,7 +80,9 @@ function loadCalendar() {
 	    	$('#modal_title').val(""); $('#modal_title2').val("");
 			$('#modal_text').val(""); $('#modal_text2').val("");
 			$('#modal_start').val(start.format("YYYY-MM-DD"));
+			$('#modal_start_ms').val(start._d-1);
 			$('#modal_end').val(end.format("YYYY-MM-DD"));
+			$('#modal_end_ms').val(end._d-86400001);
 			$("input[type='checkbox']").prop("checked", false);
 			$("input[type='radio']").prop("checked", false);
 			$("input[type='radio']").attr("onclick","return true");
@@ -156,7 +151,7 @@ function loadCalendar() {
 			
 			
 			var content3 = "";
-			content3 += "<table class='table table-striped'><tr><th>구분</th><th>제목</th><th>일정상세</th></tr>";
+			content3 += "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 			$.ajax({
 				url : 'eventclick.ajax',
 				type : 'post',
@@ -168,28 +163,23 @@ function loadCalendar() {
 				success : function(obj) {
 					if(obj.progress_or_place<10){
 						if(obj.progress_or_place==1){
-							content3 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무일정</td><td>' + obj.wm_title;
-							content3 += '</td><td><a';
-							content3 += ' onclick="detail(' + obj.schedule_no;
-							content3 += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-							content3 += "','" + obj.users + "','" + obj.progress_or_place + "'";
-							content3 += ')" >상세보기</a></td></tr>';
-
-						}else{
-							content3 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(51, 122, 183)">업무일정</td><td>' + obj.wm_title;
-							content3 += '</td><td><a';
-							content3 += ' onclick="detail(' + obj.schedule_no;
-							content3 += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-							content3 += "','" + obj.users + "','" + obj.progress_or_place + "'";
-							content3 += ')" >상세보기</a></td></tr>';
+					        content3 += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
+					        content3 += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+					        content3 += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+					        content3 += ')">'+ obj.wm_title + '</a></td><td>진척률</td></tr>';
+						} else{
+					        content3 += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
+					        content3 += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+					        content3 += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+					        content3 += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
+					        content3 += '<div class="progress-bar progress-bar-striped active" role="progressbar" style="width:'+obj.progress_or_place*100;
+					        content3 += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 						}
 					} else{
-						content3 += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgb(255, 228, 0)">회의일정</td><td>' + obj.wm_title;
-						content3 += '</td><td><a';
-						content3 += ' onclick="detail2(' + obj.schedule_no;
-						content3 += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-						content3 += "','" + obj.users + "','" + obj.progress_or_place + "'";
-						content3 += ')" >상세보기</a></td></tr>';
+						content3 += '<tr><td style="color:rgb(255, 228, 0);">회의</td>';
+				        content3 += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+				        content3 += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content3 += ')">'+ obj.wm_title + '</a></td><td></td></tr>';
 					}
 					$('#content_detail').css("display", "none");
 					$('#content_detail2').css("display", "none");
@@ -478,7 +468,10 @@ function loadCalendar() {
     	insertEvent2: {
     		click: $('#modal_ok2').click(function(){
     			
-    			if($('#modal_start').val() != $('#modal_end').val()){
+    			console.log( $('#modal_start_ms').val() )
+    			console.log( $('#modal_end_ms').val() )
+    			
+    			if( $('#modal_start_ms').val() != $('#modal_end_ms').val() ){
     				alert('회의일정은 하루씩만 가능합니다.')
     			}else{
     			

@@ -20,6 +20,6 @@ public interface IScheduleAlarm {
 	//알림 해줘야 할것을 넣어주기
 	public int insertScheduleAlarm(All_Alarm_DTO dto);
 	
-	public int selectScheduleAlarm(String user_id);
+	public List<Schedule_Alarm_DTO> selectScheduleAlarm(String user_id);
 	
 }

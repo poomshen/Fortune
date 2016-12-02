@@ -20,11 +20,11 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style type="text/css">
 #pageside {
-	width: 65%;
+	width: 100%;
 }
 
 #ajaxside {
-	width: 45%;
+	width: 50%;
 	float: right;
 	margin: 1%;
 }
@@ -91,13 +91,41 @@
     	 $("#menuView2").empty();
    		 $("#refuseindex").val(a); 
 }
+     //대기 수락 거절을 비동기 처리로 사용하였다.
    	function selectState(state){
    		console.log(state)
    		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
-   			$('#requestlist').html(data)
-   		})
+   			$('#requestlist').html(data);
+   		});
    	}
-
+     //검색 기능 비동기 처리로 하였습니다.
+   	function searchBtn(search){
+   		console.log(search)
+   		$.ajax({
+ 	   		 
+	 			type: "get",
+	 			url:  "accept.htm",
+	 			cache: false,				
+	 			data:{"collabo_req_index" : a,
+	 				  "dept_no":${sessionScope.info.dept_no}},
+	 		    success:function(data){ //callback  
+	 		    	//alert(a);
+	 		    	//console.log(data);
+	 		    	
+	 		    	$("#meneview").append($('#meneview').html(data)); 
+	 		    
+	 		    },
+	 			error: function(){						
+	 				alert('Error while request..'	);
+	 			}
+	 		});
+   		
+   		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
+   			$('#requestlist').html(data);
+   		});
+   	}
+ 
+	
 
 </script>
 
@@ -117,11 +145,14 @@
 			<a onclick="selectState('수락')" class="btn btn-primary">수락</a> 
 			<a onclick="selectState('거절')" class="btn btn-primary">거절</a>
 		</div>
-
+		<div class="w3-dropdown-hover w3-right">
+		<select><option>그래요</option></select><input type="text" ><button>검색</button>
+		</div>
 	</div>
 
 	<!-- 이곳은  w3-card-4 전체에 잡고 있습니다. CSS  -->
 	<div class="w3-panel w3-card-4">
+	
 		<div id="ajaxside">
 			<div class="panel panel-default" style="position: fixed;">
 				<div class="panel-heading">협업 리스트1</div>
@@ -130,7 +161,7 @@
 			</div>
 		</div>
 
-
+<div class="w3-panel w3-card-4" style="float: left;">
 		<c:forEach items="${list}" var="n">
 
 
@@ -246,8 +277,10 @@
 			</div>
 
 
-		</c:forEach>
 
+
+		</c:forEach>
+</div>
 
 		<!-- 거절을 하였을때 거절 사유를 쓸 때 사용됩니다.-모델 창입니다. -->
 
@@ -334,6 +367,9 @@ function refuse() {
 			</div>
 
 		</div>
+		
+		
+		
 
 
 		<!-- 수락  내용을 확인 할때 쓰입니다. -->
@@ -398,7 +434,39 @@ function refuse() {
 
 		</div>
 	</div>
+<div class="w3-panel w3-card-4">
+<!-- Pagination 추가 시작 -->
+				<div class="container" style="text-align: center; margin-left: -80px;">
+					<ul class="pagination">
+						<c:if test="${pg>block}">
+							<li><a href="requestList.htm?pg=1&st=${st_query}">««</a></li>
+							<li><a href="requestList.htm?pg=${from_page-1}&st=${st_query}">«</a></li>
+						</c:if>
+						<c:if test="${pg<=block}">
+							<li><a href="#">««</a></li>
+							<li><a href="#">«</a></li>
+						</c:if>
+						<c:forEach begin="${from_page}" end="${to_page}" var="i">
+							<c:if test="${i==pg}">
+								<li><a href="#">${i}</a></li>
+							</c:if>
+							<c:if test="${i!=pg}">
+								<li><a href="requestList.htm?pg=${i}&st=${st_query}">${i}</a></li>
+							</c:if>
+						</c:forEach>
+						<c:if test="${to_page<all_page}">
+							<li><a href="requestList.htm?pg=${to_page+1}&st=${st_query}">»</a></li>
+							<li><a href="requestList.htm?pg=${all_page}&st=${st_query}">»»</a></li>
+						</c:if>
+						<c:if test="${to_page>=all_page}">
+							<li><a href="#">»</a></li>
+							<li><a href="#">»»</a></li>
+						</c:if>
+					</ul>
+				</div>
+				<!-- Pagination 추가 끝 -->
 
+	</div>
 	</div>
 
 </body>

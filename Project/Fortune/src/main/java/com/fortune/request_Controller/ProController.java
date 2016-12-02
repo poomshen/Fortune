@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
@@ -80,30 +81,24 @@ public class ProController {
 	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
-	public String requestList(String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	public ModelAndView requestList(String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 
+		String rs = "request";
+		ModelAndView mv = proservice.getRequest(pg, f, q, st,rs, session);
 		
-		List<Request_DTO> list = proservice.getRequest(pg, f, q, st, session);
-		model.addAttribute("list", list); // 자동 forward
-		
-		
-		
-		return "request.tikeRequestList";
+		return mv;
 		
 
 	}
-	 // ajax 태울 곳
+	 // 만든 목적 : 대기 수락 거절 을 비동기 처리로 하려면 ajax 태울 곳이 필요하여 만들었습니다.
+	 // 만든 날짜 : 2016 -12-02
 	 @Transactional
 	 @RequestMapping("requestList2.htm") // /customer/notice.htm
-	 public String requestList2(String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	 public ModelAndView requestList2(String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		 
-		 
-		 List<Request_DTO> list = proservice.getRequest(pg, f, q, st, session);
-		 model.addAttribute("list", list); // 자동 forward
-		 
-		 
-		 
-		 return "cen.tikeRequestList";
+		 String rs = "cen";
+		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, session);
+		 return mv;
 		 
 		 
 	 }
@@ -111,29 +106,29 @@ public class ProController {
 	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("listReplyRequest.htm") // /customer/notice.htm
-	public String listReplyRequest( String pg, String f, String q,String st, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	public ModelAndView listReplyRequest( String pg, String f, String q,String st, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
-			
-		List<Request_DTO> list = proservice.listReplyRequest(pg, f, q,st, session);
-		model.addAttribute("list", list); // 자동 forward
+		String rs = "request";
+		ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs, session);
+		 // 자동 forward
 		
 		
 		
-		return "request.postRequestList";
+		return mv;
 
 	}
 	 // ajax 태울 곳
 	 @Transactional
 	 @RequestMapping("listReplyRequest2.htm") // /customer/notice.htm
-	 public String listReplyRequest2( String pg, String f, String q,String st, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	 public ModelAndView listReplyRequest2( String pg, String f, String q,String st, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+		 
+		 String rs = "cen";
+		 ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs, session);
+		  // 자동 forward
 		 
 		 
-		 List<Request_DTO> list = proservice.listReplyRequest(pg, f, q,st, session);
-		 model.addAttribute("list", list); // 자동 forward
 		 
-		 
-		 
-		 return "cen.postRequestList";
+		 return mv;
 		 
 	 }
 	//전체
