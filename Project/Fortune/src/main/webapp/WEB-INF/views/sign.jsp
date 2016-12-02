@@ -268,6 +268,7 @@
     <input type="button" name="joinbtn" id="joinbtn" onclick="joinchk();" class="btn hvr-forward" style="margin-top: 50px;" value="join">
 </div>
 
+
 </fieldset>
 </form>
 </div>

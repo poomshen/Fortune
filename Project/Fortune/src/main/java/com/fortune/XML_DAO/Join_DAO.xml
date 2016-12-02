@@ -65,4 +65,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <select id="searchRole" parameterType="com.fortune.Table_DTO.Role_DTO" resultType="com.fortune.Table_DTO.Role_DTO">
  	select * from role
  </select>
+ 
+ <!-- id 찾기 -->
+ <select id="searchId" resultType="String">
+	select USER_ID from USERS
+	where USER_NAME=#{param1} AND USER_PHONE=#{param2} AND USER_DATE=#{param3}
+ </select>
 </mapper>

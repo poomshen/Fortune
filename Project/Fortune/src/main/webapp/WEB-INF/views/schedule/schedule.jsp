@@ -36,12 +36,10 @@ $(document).ready(function() {
 						};
 						
 						array.push(item);
-				        content += '<tr id=tr' +obj.schedule_no+ '><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무일정</td><td>' + obj.wm_title;
-				        content += '</td><td><a';
-				        content += ' onclick="detail(' + obj.schedule_no;
-				        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-				        content += "','" + obj.users + "','" + obj.progress_or_place + "'";
-				        content += ')" >상세보기</a></td></tr>';
+				        content += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
+				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content += ')">'+ obj.wm_title + '</a></td><td>진척률</td></tr>';
 					}else{
 						var item = {
 							id : obj.schedule_no,
@@ -51,12 +49,14 @@ $(document).ready(function() {
 							backgroundColor : 'rgb(51, 122, 183)'
 						};
 						array.push(item);
-			        content += '<tr><td style="color:rgb(51, 122, 183)">업무일정</td><td id=td'+obj.schedule_no+'>' + obj.wm_title;
-			        content += '</td><td><a';
-			        content += ' onclick="detail(' + obj.schedule_no;
-			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-			        content += "','" + obj.users + "','" + obj.progress_or_place + "'";
-			        content += ')" >상세보기</a></td></tr>';
+
+				        content += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
+				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
+				        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" style="width:'+obj.progress_or_place*100;
+				        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
+
 					}
 				} else{
 					var item = {
@@ -67,12 +67,12 @@ $(document).ready(function() {
 							backgroundColor : 'rgba(255, 228, 0, 0.66)'
 					};
 					array.push(item);
-			        content += '<tr><td style="color:rgb(255, 228, 0)">회의일정</td><td id=td'+obj.schedule_no+'>' + obj.wm_title;
-			        content += '</td><td><a';
-			        content += ' onclick="detail2(' + obj.schedule_no;
-			        content += ",'" + obj.wm_title + "','" + obj.wm_text +"','" + obj.schedule_start +"','" + obj.schedule_end;
-			        content += "','" + obj.users + "','" + obj.progress_or_place + "'";
-			        content += ')" >상세보기</a></td></tr>';
+
+					content += '<tr><td style="color:rgb(255, 228, 0);">회의</td>';
+			        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+			        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+			        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>';
+
 					
 				}
 		        
@@ -87,7 +87,7 @@ $(document).ready(function() {
 				alert(obj.schedule_no);
 				
 				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
-				/* '<img src="assets/img/alarm/new1.png"/>' */
+				
 			});
 		}
 	});
@@ -358,6 +358,8 @@ function update_progress(){
 <input type="hidden" id="collabo_no" value="${collabo_no}">
 <input type="hidden" id="modal_start">
 <input type="hidden" id="modal_end">
+<input type="hidden" id="modal_start_ms">
+<input type="hidden" id="modal_end_ms">
 
 
 
@@ -365,7 +367,7 @@ function update_progress(){
 	<br>
 	<br>
 	<div class="container-fluid">
-		<div class="row" style="padding-right: 0px;">
+		<div class="row" style="padding-right: 0px; ">
 
 			<!-- calendar 보여 주는 div 영역 -->
 			<div class="col-sm-7" style="padding-left: 0px; padding-right: 0px;">

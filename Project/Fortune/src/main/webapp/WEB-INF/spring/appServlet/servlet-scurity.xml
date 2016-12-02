@@ -13,7 +13,7 @@
 	username-parameter="user_id"
 	password-parameter="user_password"
 	authentication-failure-url="/index.htm?error"
-	default-target-url="/loginSubmit.htm"
+	default-target-url="/FortuneMain.htm"
 	always-use-default-target="true"
 />
 <security:logout logout-success-url="/logOut.htm"/>

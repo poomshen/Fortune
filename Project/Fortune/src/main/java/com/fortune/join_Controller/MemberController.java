@@ -70,7 +70,7 @@ public class MemberController {
 	
 	/*수정 : 이예지 2016-11-24 로그인했을시 알림 db 체크 */
 	//수정추가 : 이성준 2016-11-26 로그인 했을시 자신 참조 프로젝트
-	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.GET)
+	@RequestMapping(value="/FortuneMain.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session ,Authentication authentication,Model model){
 
 	
@@ -155,7 +155,7 @@ public class MemberController {
 	public String logOut(HttpSession session){
 		
 		session.invalidate();
-		System.out.println("로그아웃 성공");
+		//System.out.println("로그아웃 성공");
 		
 		return "redirect:index.htm";
 	}
@@ -169,7 +169,7 @@ public class MemberController {
 		dao.deleteMember(dto.getUser_id());
 		
 		
-		System.out.println("삭제완료!!~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		//System.out.println("삭제완료!!~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 		return "redirect:index.htm";
 		
@@ -213,6 +213,5 @@ public class MemberController {
 		
 		return "home.main";
 	}
-	
 	
 }
