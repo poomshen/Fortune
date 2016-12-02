@@ -42,12 +42,14 @@ public class HomeController {
 	public String index(Model model) {
 	
 		System.out.println("index 컨트롤러");
-		/*if(homeindex == 0){
-			model.addAttribute("role_no", 0);
+		if(homeindex == 0){
+			System.out.println("통과");
+			model.addAttribute("msg", 0);
 		}else{
 			homeindex = 0;
-			model.addAttribute("role_no", 1);
-		}*/
+			System.out.println("거부");
+			model.addAttribute("msg", 1);
+		}
 		
 		return "index";
 	}

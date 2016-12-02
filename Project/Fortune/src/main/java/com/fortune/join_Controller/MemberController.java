@@ -88,6 +88,7 @@ public class MemberController {
 		//권한이 ROLE_NOUSER이면 로그인 막기(추가작업 : 김중완)
 		if(result.getRole_no() == 5){
 			HomeController.homeindex = 1;
+			model.addAttribute("msg", 1);
 			return "redirect:index.htm";
 		}
 		
