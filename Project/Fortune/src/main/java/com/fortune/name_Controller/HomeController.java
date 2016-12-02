@@ -34,15 +34,21 @@ import com.fortune.member_DAO.IJoin;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	public static int homeindex = 0;
 	@Autowired
 	public SqlSession sqlsession;
 
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
-	public String index() {
+	public String index(Model model) {
 	
 		System.out.println("index 컨트롤러");
-
+		/*if(homeindex == 0){
+			model.addAttribute("role_no", 0);
+		}else{
+			homeindex = 0;
+			model.addAttribute("role_no", 1);
+		}*/
+		
 		return "index";
 	}
 

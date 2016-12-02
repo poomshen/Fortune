@@ -40,6 +40,7 @@ import com.fortune.chart_DAO.IChart;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.function_DTO.Select_Collabo_DTO;
 import com.fortune.member_DAO.IJoin;
+import com.fortune.name_Controller.HomeController;
 import com.fortune.notice_DAO.INotice;
 import com.fortune.password_Service.PassWord_Service;
 import com.fortune.request_DAO.ProDao;
@@ -84,17 +85,18 @@ public class MemberController {
 		result = dao.searchMember(user_id);
 		System.out.println("login dao 동작 완료");
 		
-		
-		ProDao proDao = sqlsession.getMapper(ProDao.class);
-		session.setAttribute("info", result);
-		if( result.getRole_no() == 2 ){
-			List<Select_Collabo_DTO> collabo = proDao.selectCollaboList2(result.getDept_no());
-			session.setAttribute("collabo", collabo);
-		}else{
-			//추가 사항
-			List<Select_Collabo_DTO> collabo = proDao.selectCollaboList(result.getUser_id());
-			session.setAttribute("collabo", collabo);
+		//권한이 ROLE_NOUSER이면 로그인 막기(추가작업 : 김중완)
+		if(result.getRole_no() == 5){
+			HomeController.homeindex = 1;
+			return "redirect:index.htm";
 		}
+		
+		session.setAttribute("info", result);
+
+		//추가 사항
+		ProDao proDao = sqlsession.getMapper(ProDao.class);
+		List<Select_Collabo_DTO> collabo = proDao.selectCollaboList(result.getUser_id());
+		session.setAttribute("collabo", collabo);
 		
 		
 		//메뉴에 차트 가져오기( 추가작업 : 이예지)
@@ -136,7 +138,7 @@ public class MemberController {
 	
 		session.setAttribute("totalCount", tatalCount);	
 		
-		//공지사항 최신글 뽑는 부분
+		//공지사항 최신글 뽑는 부분 (추가 작업 : 김중완)
 		INotice notice_dao = sqlsession.getMapper(INotice.class);
 		List<Notice_DTO> nlist = notice_dao.mainListNotice();
 		System.out.println(nlist);
