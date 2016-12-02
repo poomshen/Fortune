@@ -223,7 +223,7 @@
 					<div>
 						<b>공지사항</b>
                       	 
-                      	 <a href="noticeList.htm"><table class="table table-striped table-bordered table-hover">
+                      	 <table class="table table-striped table-bordered table-hover">
 							<tr>
 								<th>글 번호</th>
 								<th>글 제목</th>
@@ -231,10 +231,10 @@
 							<c:forEach var="i" items="${nlist}">
 								<tr>
 									<td>${i.notice_no}</td>
-									<td>${i.notice_title}</td>
+									<td><a href="noticeDetail.htm?notice_no=${i.notice_no}">${i.notice_title}</a></td>
 								</tr>
 							</c:forEach>
-						</table></a>
+						</table>
 					</div>
 			 </div>
 

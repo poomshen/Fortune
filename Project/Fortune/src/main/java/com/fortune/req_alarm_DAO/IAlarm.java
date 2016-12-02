@@ -3,13 +3,12 @@
 최초 작업일 : 2016/11/23
 최종 수정일 : 2016/11/24
 */
-package com.fortune.alarm_DAO;
+package com.fortune.req_alarm_DAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fortune.Table_DTO.Alarm_DTO;
-import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 
 public interface IAlarm {
@@ -26,7 +25,5 @@ public interface IAlarm {
 	public List<Select_Alarm_DTO> checkAlarmAll(String user_id);
 	
 	public int totalCount(String user_id);
-	
-	public List<Schedule_AlarmList_DTO> checkScheduleAlarm(String user_id);
 	
 }
