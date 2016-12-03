@@ -81,8 +81,9 @@ public class Alarm_Controller {
             throws ClassNotFoundException, SQLException{
 	
 		
-			System.out.println("newAlarm.ajax");
+			System.out.println("newAlarm.htm");
 			System.out.println("newAlarm : "+newAlarm);
+			
 			List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
 			Join_DTO dto = (Join_DTO)session.getAttribute("info");
 			IAlarm alarm_DAO = sqlsession.getMapper(IAlarm.class);
@@ -91,12 +92,14 @@ public class Alarm_Controller {
 			
 			alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
 			
-			int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+			int totalCount = alarm_DAO.totalCount(dto.getUser_id());
+			
 			sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
 			System.out.println("size:"+alist.size());
+			System.out.println("newAlarm totalcount:"+totalCount);
 			
 			session.setAttribute("alarm", alist);
-			session.setAttribute("totalCount", tatalCount);
+			session.setAttribute("totalCount", totalCount);
 			session.setAttribute("sch_alist", sch_alist);
 			
 	      return "newAlarm";
@@ -119,9 +122,10 @@ public class Alarm_Controller {
 			
 			alarm_dto.setUser_id(selectId);
 			alarm_dto.setWork_type("1");
+			
 			alarmDAO.insertAlarm(alarm_dto);
-	      
-	      return "newAlarm";
+			
+			return "alarm_success";
 	      
 	}
 

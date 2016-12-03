@@ -282,7 +282,6 @@ function fcontent() {
 			});
 			$('#content_detail').css("display", "none");
 			$('#content_detail2').css("display", "none");
-	        $('#content').html(content)
 	        
 	        $('#content').html(content)
 	        //fullcalendar 불러오는 함수
@@ -295,6 +294,7 @@ function fcontent() {
 				
 			});
 		}
+
 	});
 }
 
@@ -323,6 +323,7 @@ function loadCalendar() {
 		// 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
 		// 작업내용: 드래그로 일정등록 하는 소스 , 사용한 함수 호출횟수 만큼 반복되어 실행되는 에러 발생
 	    // 처리결과: start, end 값만 html에 기재하고, customBotton속성 함수에서 일정등록 코드 진행 + 재호출시 기존에 입력된 값 초기화 작업.
+	    
 	    select: function(start, end) {
 			//모달 띄우는 함수
 	    	
@@ -644,6 +645,7 @@ function loadCalendar() {
 	        
 	        // 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
 	        //일정등록 함수
+	        //추가 작업 : new 알림 가져오기
 	    	insertEvent: {
 	    		click: $('#modal_ok').click(function(){
 	    		
@@ -718,6 +720,7 @@ function loadCalendar() {
 	    
         // 작업자: 이명철  // 최근 수정일: 16-11-29 ---------------------S T A R T------------------------
         // 회의업무 등록함수
+	    //추가 작업 : new 알림 가져오기
     	insertEvent2: {
     		click: $('#modal_ok2').click(function(){
     			

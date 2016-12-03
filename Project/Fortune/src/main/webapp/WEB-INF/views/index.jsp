@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("UTF-8");
-	/* int role = Integer.parseInt(request.getParameter("role_no")); */
+	int message = (Integer)request.getAttribute("msg");
 %>
 <head>
 <meta charset="utf-8">
@@ -466,12 +466,14 @@
 	function joins() {
 		location.href="sign.htm";
 	}
-	<%-- $(function() {
-		alert(<%=role%>);
-		if(<%=role%> == 1){
+	
+	$(function() {
+		var message1 = <%=message%>;
+		
+		if(message1 == 1){
 			alert('권한이 없습니다.');
 		}
-	}); --%>
+	});
 	</script>
 
 </body>

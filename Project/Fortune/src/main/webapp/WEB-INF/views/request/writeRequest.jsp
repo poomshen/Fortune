@@ -95,13 +95,13 @@
 				  
 					  
 				 console.log("알림DB업데이트 성공");
-				 console.log(data);
+				 console.log("성공?"+data);
 				 send($('#collabo_req_ID').val());
-			
+				 promodifyform.submit(); 
 				  }
 			  });	
 			
-			promodifyform.submit(); 
+		
 			
 			return true;
 		}
