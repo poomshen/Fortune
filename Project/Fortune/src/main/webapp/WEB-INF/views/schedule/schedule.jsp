@@ -83,8 +83,6 @@ $(document).ready(function() {
 			loadCalendar();
 			$.each(data.new_alarm, function(index, obj) {
 				
-				alert(obj.schedule_no);
-				
 				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
 				
 			});

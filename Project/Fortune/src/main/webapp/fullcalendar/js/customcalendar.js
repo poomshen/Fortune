@@ -28,7 +28,7 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 			contentck += userid[i] + "&nbsp;&nbsp;&nbsp;"
 		}
 		
-	 	$('#usersdiv').html(contentck)
+	 	$('#usersdiv').html(contentck);
 	 	
 	 	
 	 	//상세보기 내용에 comment 뿌려주는 내용
@@ -85,6 +85,21 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 	}
 	
  	$('#usersdiv2').html(contentck)
+ 	
+ 	//회의 상세보기 클릭시 알림 delete
+ 	$.ajax({
+		url : 'select_comment_alarm.ajax',
+		type : 'post',
+		data : 'schedule_no='+ id,
+		success : function(data) {
+			
+			console.log("회의 알림 삭제!");
+ 	
+		}
+	});
+ 	
+ 	
+ 	
 	
 	
 }
@@ -245,7 +260,7 @@ function update_progress(){
 		}
 	});
 }
-
+//추가작업 : 알림DB NEW 가져오기
 function fcontent() {
 	
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
@@ -285,6 +300,13 @@ function fcontent() {
 
 	        $('#content').html(content);
 
+	        $.each(data.new_alarm, function(index, obj) {
+				
+				
+				
+				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
+				
+			});
 		} 
 	});
 }
@@ -429,6 +451,13 @@ function loadCalendar() {
 					$('#content_detail').css("display", "none");
 					$('#content_detail2').css("display", "none");
 					$('#content').html(content)
+					
+					//새로왔다면 new이미지 붙이기
+					if(obj.isNew){
+						
+						$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
+						
+					}
 				}
 			});
 
