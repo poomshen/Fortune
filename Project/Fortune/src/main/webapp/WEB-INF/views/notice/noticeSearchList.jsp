@@ -67,7 +67,7 @@
 								<li><a href="noticeSearch.htm?pg=${i}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">${i}</a></li>
 							</c:if>
 						</c:forEach>
-						<c:if test="${list.size() != 0}">
+						<c:if test="${noticelist.size() != 0}">
 							<c:if test="${pg < to_page || pg != all_page}">
 								<li><a href="noticeSearch.htm?pg=${pg + 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">»</a></li>
 								<li><a href="noticeSearch.htm?pg=${all_page}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">»»</a></li>

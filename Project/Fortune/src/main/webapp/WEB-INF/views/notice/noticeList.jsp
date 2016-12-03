@@ -53,29 +53,29 @@
 				<!-- Pagination 추가 시작 -->
 				<div class="container" style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
-						<c:if test="${pg>block}">
+						<c:if test="${pg > block} ">
 							<li><a href="noticeList.htm?pg=1">««</a></li>
 							<li><a href="noticeList.htm?pg=${from_page-1}">«</a></li>
 						</c:if>
-						<c:if test="${pg<=block}">
-							<li><a href="#">««</a></li>
-							<li><a href="#">«</a></li>
+						<c:if test="${pg <= block && pg != 1}">
+							<li><a href="noticeList.htm?pg=1">««</a></li>
+							<li><a href="noticeList.htm?pg=${pg - 1}">«</a></li>
 						</c:if>
 						<c:forEach begin="${from_page}" end="${to_page}" var="i">
-							<c:if test="${i==pg}">
-								<li class="active"><a href="#">${i}</a></li>
-							</c:if>
-							<c:if test="${i!=pg}">
+							<c:if test="${i == pg}"><li class="active"><a href="#">${i}</a></li></c:if>
+							<c:if test="${i != pg}">
 								<li><a href="noticeList.htm?pg=${i}">${i}</a></li>
 							</c:if>
 						</c:forEach>
-						<c:if test="${to_page<all_page}">
-							<li><a href="noticeList.htm?pg=${to_page+1}">»</a></li>
-							<li><a href="noticeList.htm?pg=${all_page}">»»</a></li>
-						</c:if>
-						<c:if test="${to_page>=all_page}">
-							<li><a href="#">»</a></li>
-							<li><a href="#">»»</a></li>
+						<c:if test="${noticelist.size() != 0}">
+							<c:if test="${pg < to_page || pg != all_page}">
+								<li><a href="noticeList.htm?pg=${pg + 1}">»</a></li>
+								<li><a href="noticeList.htm?pg=${all_page}">»»</a></li>
+							</c:if>
+							<c:if test="${to_page > all_page && pg != all_page}">
+								<li><a href="noticeList.htm?pg=${to_page + 1}">»</a></li>
+								<li><a href="noticeList.htm?pg=${all_page}">»»</a></li>
+							</c:if>
 						</c:if>
 					</ul>
 				</div>
