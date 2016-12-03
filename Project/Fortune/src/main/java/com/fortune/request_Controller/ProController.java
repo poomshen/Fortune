@@ -201,7 +201,9 @@ public class ProController {
 		 @RequestMapping("refuse.htm")
 		 public String Refuse(String collabo_req_index,String collabo_req_text) throws ClassNotFoundException,
 		   SQLException {
-		 proservice.Refuse(collabo_req_text,collabo_req_index);
+			 System.out.println("인덱스:"+collabo_req_index);
+			 System.out.println("텍스트:"+collabo_req_text);
+		 proservice.Refuse(collabo_req_index,collabo_req_text);
 		
 		  return "redirect:listReplyRequest.htm"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	
@@ -225,7 +227,7 @@ public class ProController {
 		 public String proEdit(Request_DTO n,HttpServletRequest request) throws ClassNotFoundException,
 		   SQLException, IOException {
 			proservice.proEdit(n,request);
-		  return "redirect:requestList.htm";
+		  return "redirect:listReplyRequest.htm";
 	    	 
 		 }
 		 
