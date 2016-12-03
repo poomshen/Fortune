@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Error 500</title>
+<title>Error 404</title>
 <style type="text/css">
 #content {
 	margin-top: 50px;
@@ -20,7 +20,7 @@ h1 {
 <body>
 	<div id="content">
 		<img src="${pageContext.request.contextPath}/images/fix.jpg" alt="공사중"><br />
-		<h1>Error 500 : 찾으시는 페이지는 존재하지 않습니다.</h1>
+		<h1>Error 404 : 찾으시는 페이지는 존재하지 않습니다.</h1>
 	</div>
 </body>
 </html>

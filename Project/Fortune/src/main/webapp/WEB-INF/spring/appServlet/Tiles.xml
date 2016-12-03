@@ -4,6 +4,11 @@
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
 
+<!-- <definition name="notice.*" template="/WEB-INF/views/inc/layout2.jsp">
+    	<put-attribute name="nav"  value="/WEB-INF/views/inc/nav.jsp" />
+    	<put-attribute name="content" value="/WEB-INF/views/notice/{1}.jsp" />
+  </definition> -->
+
    <definition name="home.*" template="/WEB-INF/views/inc/layout.jsp">
 	   	<put-attribute name="header"  value="/WEB-INF/views/inc/header.jsp" />
     	<put-attribute name="aside"  value="/WEB-INF/views/inc/aside.jsp" />
@@ -18,6 +23,8 @@
     	<put-attribute name="aside"  value="/WEB-INF/views/inc/aside.jsp" />
     	<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
   </definition>
+  
+  
   
   
   
