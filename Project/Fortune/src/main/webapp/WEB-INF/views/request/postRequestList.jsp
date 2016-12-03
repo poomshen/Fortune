@@ -96,8 +96,156 @@
     		
     		
     	}
-
      
+//////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+    	//페이징 처리를 비동기 처리로 처리 하였습니다. << 버튼으로 처리하였습니다.
+    	function pazingBtn(){
+    		
+    		$.ajax({
+  	   		 
+ 	 			type: "get",
+ 	 			url:  "listReplyRequest2.htm",
+ 	 			cache: false,				
+ 	 			data:{pg:1,
+ 	 				  st: "${st_query}",
+ 	 				  me: "${memo}", 
+ 	 				  se: "${search}"},
+ 	 		    success:function(data){ //callback  
+ 	 		    	console.log('${st_query}');
+ 	 		    	console.log('${memo}');
+ 	 		    	console.log('${search}');
+ 	 		    	
+ 	 		    
+ 	 		    	
+ 	 		    	$("#requestlist").html(data); 
+ 	 		    
+ 	 		    },
+ 	 			error: function(){						
+ 	 				alert('Error while request..'	);
+ 	 			}
+ 	 		});
+    		
+    		
+    	}
+    	//페이징 처리를 비동기 처리로 처리 하였습니다. < 버튼으로 처리하였습니다.
+function pazingBtn2(){
+    		
+    		$.ajax({
+  	   		 
+ 	 			type: "get",
+ 	 			url:  "listReplyRequest2.htm",
+ 	 			cache: false,				
+ 	 			data:{pg: "${from_page-1}",
+ 	 				  st: "${st_query}",
+ 	 				  me: "${memo}", 
+ 	 				  se: "${search}"},
+ 	 		    success:function(data){ //callback  
+ 	 		    	console.log('${st_query}');
+ 	 		    	console.log('${memo}');
+ 	 		    	console.log('${search}');
+ 	 		    	
+ 	 		    
+ 	 		    	
+ 	 		    	$("#requestlist").html(data); 
+ 	 		    
+ 	 		    },
+ 	 			error: function(){						
+ 	 				alert('Error while request..'	);
+ 	 			}
+ 	 		});
+    		
+    		
+    	}
+//페이징 처리를 비동기 처리로 처리 하였습니다. 번호 버튼으로 처리하였습니다.
+function pazing3Btn(page){
+	
+	$.ajax({
+ 		 
+			type: "get",
+			url:  "listReplyRequest2.htm",
+			cache: false,				
+			data:{pg: page,
+				  st: "${st_query}",
+				  me: "${memo}", 
+				  se: "${search}"},
+		    success:function(data){ //callback  
+		    	console.log('${st_query}');
+		    	console.log('${memo}');
+		    	console.log('${search}');
+		    	
+		    
+		    	
+		    	$("#requestlist").html(data); 
+		    
+		    },
+			error: function(){						
+				alert('Error while request..'	);
+			}
+		});
+	
+	
+}
+//페이징 처리를 비동기 처리로 처리 하였습니다. > 버튼으로 처리하였습니다.
+function pazing4Btn(){
+	
+	$.ajax({
+ 		 
+			type: "get",
+			url:  "listReplyRequest2.htm",
+			cache: false,				
+			data:{pg: "${to_page+1}",
+				  st: "${st_query}",
+				  me: "${memo}", 
+				  se: "${search}"},
+		    success:function(data){ //callback  
+		    	console.log('${st_query}');
+		    	console.log('${memo}');
+		    	console.log('${search}');
+		    	
+		    
+		    	
+		    	$("#requestlist").html(data); 
+		    
+		    },
+			error: function(){						
+				alert('Error while request..'	);
+			}
+		});
+	
+	
+}
+//페이징 처리를 비동기 처리로 처리 하였습니다. >> 버튼으로 처리하였습니다.
+function pazing5Btn(){
+	
+	$.ajax({
+ 		 
+			type: "get",
+			url:  "listReplyRequest2.htm",
+			cache: false,				
+			data:{pg: "${all_page}",
+				  st: "${st_query}",
+				  me: "${memo}", 
+				  se: "${search}"},
+		    success:function(data){ //callback  
+		    	console.log('${st_query}');
+		    	console.log('${memo}');
+		    	console.log('${search}');
+		    	
+		    
+		    	
+		    	$("#requestlist").html(data); 
+		    
+		    },
+			error: function(){						
+				alert('Error while request..'	);
+			}
+		});
+	
+	
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    	
      
      
 </script>
@@ -261,8 +409,10 @@
 				<div class="container" style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
 						<c:if test="${pg>block}">
-							<li><a href="listReplyRequest.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li>
-							<li><a href="listReplyRequest.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li>
+							<li><a href="#" onclick="pazingBtn()">««</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li> --%>
+							<li><a href="#" onclick="pazingBtn2()">«</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li> --%>
 						</c:if>
 						<c:if test="${pg<=block}">
 							<li><a href="#">««</a></li>
@@ -270,15 +420,18 @@
 						</c:if>
 						<c:forEach begin="${from_page}" end="${to_page}" var="i">
 							<c:if test="${i==pg}">
-								<li><a href="#">${i}</a></li>
+								<li class="active"><a href="#">${i}</a></li>
 							</c:if>
 							<c:if test="${i!=pg}">
-								<li><a href="listReplyRequest.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li>
+								<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
+								<%-- <li><a href="listReplyRequest.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li> --%>
 							</c:if>
 						</c:forEach>
 						<c:if test="${to_page<all_page}">
-							<li><a href="listReplyRequest.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li>
-							<li><a href="listReplyRequest.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li>
+							<li><a href="#" onclick="pazing4Btn()">»</a></li>
+							<li><a href="#" onclick="pazing5Btn()">»»</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li>--%>							
+							<%-- <li><a href="listReplyRequest.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li> --%>
 						</c:if>
 						<c:if test="${to_page>=all_page}">
 							<li><a href="#">»</a></li>
