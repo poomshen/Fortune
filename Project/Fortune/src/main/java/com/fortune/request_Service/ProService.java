@@ -40,7 +40,7 @@ public class ProService {
 	private SqlSession sqlsession;
 
 	//협업 답장자 리스트 입니다.
-	public ModelAndView getRequest(String pg, String f, String q,String st,String rs, HttpSession session)
+	public ModelAndView getRequest(String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("집에 갑시다.");
 
@@ -54,6 +54,8 @@ public class ProService {
 		String query = "%" + ids.getUser_id() + "%";
 		String st_query ="%%";
 		
+		String memo = "collabo_req_title";
+		String search = "%%";
 		//////////////////////////////////////
 		if (pg != null) {
 			page = Integer.parseInt(pg);
@@ -67,13 +69,21 @@ public class ProService {
 		if (st != null) {
 			st_query = st;
 		}
+		if (se != null) {
+			search = se;
+		}
+		if (me != null) {
+			memo = me;
+		}
+		
+		
 		ModelAndView mv = new ModelAndView();
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
 
 		System.out.println(page + " / " + field + " / " + query + "/"+ st_query);
 
 		int row_size = 9;
-		int total_count = proDao.requestCount(field,query,st_query); // 공지사항 글 개수
+		int total_count = proDao.requestCount(field,query,st_query,memo,search); // 공지사항 글 개수
 		System.out.println("total_count : " + total_count);
 		// 공지사항 글 목록
 		int all_page = (int) Math.ceil(total_count / (double) row_size); // 페이지수
@@ -94,7 +104,7 @@ public class ProService {
 		// Mybatis 적용
 		
 
-		List<Request_DTO> list = proDao.getRequest(page, field, query,st_query);
+		List<Request_DTO> list = proDao.getRequest(page, field, query,st_query, memo, search);
 		
 		mv.addObject("list", list);
 		mv.addObject("total_count", total_count);
@@ -104,12 +114,14 @@ public class ProService {
 		mv.addObject("from_page", from_page);
 		mv.addObject("to_page", to_page);
 		mv.addObject("st_query", st_query);
+		mv.addObject("memo", memo);
+		mv.addObject("search", search);
 		mv.setViewName(rs+".tikeRequestList");
 		return mv;
 	}
 	
 	//협업 작성자 리스트 입니다.
-		public ModelAndView listReplyRequest(String pg, String f, String q,String st,String rs, HttpSession session)
+		public ModelAndView listReplyRequest(String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
 				throws ClassNotFoundException, SQLException {
 			System.out.println("집에 갑시다.");
 
@@ -120,8 +132,10 @@ public class ProService {
 			// 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
 			String query = "%" + ids.getUser_id() + "%";
 			String st_query = "%%"; //대기 , 수락 , 거절 결정
+			String memo = "collabo_req_title";
+			String search = "%%";
 			//////////////////////////////////////
-			if (pg != null && pg.equals("")) {
+			if (pg != null) {
 				page = Integer.parseInt(pg);
 			}
 			if (f != null && f.equals("")) {
@@ -133,6 +147,12 @@ public class ProService {
 			if (st != null) {
 				st_query = st;
 			}
+			if (se != null) {
+				search = se;
+			}
+			if (me != null) {
+				memo = me;
+			}
 			ModelAndView mv = new ModelAndView();
 			ProDao proDao = sqlsession.getMapper(ProDao.class);
 			
@@ -143,7 +163,7 @@ public class ProService {
 
 			
 			int row_size = 9;
-			int total_count = proDao.requestCount(field,query,st_query); // 공지사항 글 개수
+			int total_count = proDao.requestCount(field,query,st_query, memo,search); // 공지사항 글 개수
 			System.out.println("total_count : " + total_count);
 			// 공지사항 글 목록
 			int all_page = (int) Math.ceil(total_count / (double) row_size); // 페이지수
@@ -164,7 +184,7 @@ public class ProService {
 			// Mybatis 적용
 			
 
-			List<Request_DTO> list = proDao.getRequest(page, field, query, st_query);
+			List<Request_DTO> list = proDao.getRequest(page, field, query, st_query,memo, search);
 
 			
 			mv.addObject("list", list);
@@ -175,6 +195,8 @@ public class ProService {
 			mv.addObject("from_page", from_page);
 			mv.addObject("to_page", to_page);
 			mv.addObject("st_query", st_query);
+			mv.addObject("memo", memo);
+			mv.addObject("search", search);
 			mv.setViewName(rs+".postRequestList");
 			
 			
@@ -182,7 +204,7 @@ public class ProService {
 		}
 
 		//협업 전체 리스트 입니다.
-				public List<Request_DTO> listallRequest(String pg, String f, String q,String st, HttpSession session)
+				public List<Request_DTO> listallRequest(String pg, String f, String q,String st,String me,String se, HttpSession session)
 						throws ClassNotFoundException, SQLException {
 
 					// 게시판 기본 설정(기본값 처리)/////////////
@@ -192,6 +214,8 @@ public class ProService {
 					// 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
 					String query = "%" + "" + "%";
 					String st_query ="%%";
+					String memo = "collabo_req_title";
+					String search = "%%";
 					//////////////////////////////////////
 					if (pg != null && pg.equals("")) {
 						page = Integer.parseInt(pg);
@@ -205,13 +229,19 @@ public class ProService {
 					if (st != null) {
 						st_query = st;
 					}
+					if (se != null) {
+						search = se;
+					}
+					if (me != null) {
+						memo = me;
+					}
 					System.out.println("***"+st);
 					System.out.println(page + " / " + field + " / " + query+"/"+st_query);
 
 					// Mybatis 적용
 					ProDao proDao = sqlsession.getMapper(ProDao.class);
 					
-					List<Request_DTO> list = proDao.getRequest(page, field, query,st_query);
+					List<Request_DTO> list = proDao.getRequest(page, field, query,st_query,memo, search);
 						
 					return list;
 				}
@@ -344,6 +374,7 @@ public class ProService {
 		System.out.println("n : " + n.getCollabo_req_no());
 		System.out.println("n : " + n.getUser_ID());
 		System.out.println("n : " + n.getCollabo_req_index());
+		System.out.println();
 		System.out.println(n.toString());
 		/*
 		 * System.out.println(n.getCollabo_end2());

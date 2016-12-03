@@ -23,8 +23,9 @@ public interface IJoin {
 	//아이디 중복 검사
 	Join_DTO idchk(String user_id);
 		
-	//아이디 찾기
+	// 아이디/비밀번호 찾기
 	String searchId(String search_name, String search_phone, String search_birth);
+	int searchpwd(String ranNum2, String search_id, String search_name2,String search_phone2);
 	
 	int updateMemberAdmin(Join_DTO joinDto);
 	Join_DTO memberInfo(Join_DTO joinDto);

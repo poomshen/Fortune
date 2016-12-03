@@ -81,10 +81,10 @@ public class ProController {
 	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
-	public ModelAndView requestList(String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	public ModelAndView requestList(String pg, String f, String q, String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 
 		String rs = "request";
-		ModelAndView mv = proservice.getRequest(pg, f, q, st,rs, session);
+		ModelAndView mv = proservice.getRequest(pg, f, q, st,rs,me,se, session);
 		
 		return mv;
 		
@@ -94,10 +94,10 @@ public class ProController {
 	 // 만든 날짜 : 2016 -12-02
 	 @Transactional
 	 @RequestMapping("requestList2.htm") // /customer/notice.htm
-	 public ModelAndView requestList2(String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	 public ModelAndView requestList2(String pg, String f, String q, String st,String me,String se,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		 
 		 String rs = "cen";
-		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, session);
+		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, me, se, session);
 		 return mv;
 		 
 		 
@@ -106,10 +106,10 @@ public class ProController {
 	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("listReplyRequest.htm") // /customer/notice.htm
-	public ModelAndView listReplyRequest( String pg, String f, String q,String st, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	public ModelAndView listReplyRequest( String pg, String f, String q,String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
 		String rs = "request";
-		ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs, session);
+		ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs,me,se, session);
 		 // 자동 forward
 		
 		
@@ -120,10 +120,10 @@ public class ProController {
 	 // ajax 태울 곳
 	 @Transactional
 	 @RequestMapping("listReplyRequest2.htm") // /customer/notice.htm
-	 public ModelAndView listReplyRequest2( String pg, String f, String q,String st, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	 public ModelAndView listReplyRequest2( String pg, String f, String q,String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		 
 		 String rs = "cen";
-		 ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs, session);
+		 ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs,me,se, session);
 		  // 자동 forward
 		 
 		 
@@ -134,9 +134,9 @@ public class ProController {
 	//전체
 	 @Transactional
 	@RequestMapping("listallRequest.htm") // /customer/notice.htm
-	public String listallRequest( String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	public String listallRequest( String pg, String f, String q, String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
-		List<Request_DTO> list = proservice.listallRequest(pg, f, q, st, session);
+		List<Request_DTO> list = proservice.listallRequest(pg, f, q, st,me,se, session);
 		model.addAttribute("list", list); // 자동 forward
 		
 		
@@ -201,7 +201,9 @@ public class ProController {
 		 @RequestMapping("refuse.htm")
 		 public String Refuse(String collabo_req_index,String collabo_req_text) throws ClassNotFoundException,
 		   SQLException {
-		 proservice.Refuse(collabo_req_text,collabo_req_index);
+			 System.out.println("인덱스:"+collabo_req_index);
+			 System.out.println("텍스트:"+collabo_req_text);
+		 proservice.Refuse(collabo_req_index,collabo_req_text);
 		
 		  return "redirect:listReplyRequest.htm"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	
@@ -225,7 +227,7 @@ public class ProController {
 		 public String proEdit(Request_DTO n,HttpServletRequest request) throws ClassNotFoundException,
 		   SQLException, IOException {
 			proservice.proEdit(n,request);
-		  return "redirect:requestList.htm";
+		  return "redirect:listReplyRequest.htm";
 	    	 
 		 }
 		 
@@ -246,7 +248,14 @@ public class ProController {
 			@RequestMapping(value = "writeresponse.htm", method = RequestMethod.POST)
 			public String regResponse(With_DTO n, String collabo_req_index)
 					throws IOException, ClassNotFoundException, SQLException {
-				
+					
+				System.out.println("계산중 :"+ n.getCollabo_sal());
+				    
+				    //가지고 있는 콤마를 잘라서 집어넣었습니다 00,00 -> 0000
+				    
+				    System.out.println("계산오류잡는중..."+ n.getCollabo_sal().replaceAll(",", ""));
+				    n.setCollabo_sal(n.getCollabo_sal().replaceAll(",", ""));
+				    System.out.println("계산완료 :"+n.getCollabo_sal());
 					/*System.out.println(n.toString());*/
 					 proservice.regResponse(n, collabo_req_index);
 					 proservice.Accept(collabo_req_index);

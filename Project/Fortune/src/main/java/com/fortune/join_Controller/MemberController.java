@@ -88,6 +88,7 @@ public class MemberController {
 		//권한이 ROLE_NOUSER이면 로그인 막기(추가작업 : 김중완)
 		if(result.getRole_no() == 5){
 			HomeController.homeindex = 1;
+			model.addAttribute("msg", 1);
 			return "redirect:index.htm";
 		}
 		
@@ -205,7 +206,7 @@ public class MemberController {
 	}
 		
 	@RequestMapping(value="/updateConfirm.htm", method=RequestMethod.POST)
-	public String updateMemberSubmit(Join_DTO dto){
+	public String updateMemberSubmit(Join_DTO dto, Model model, HttpSession session){
 		
 		System.out.println("update Controller 왔음~!~!~!");
 		PassWord_Service passWord_Service = new PassWord_Service();
@@ -213,7 +214,29 @@ public class MemberController {
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		dao.updateMember(dto);
 		
-		return "home.main";
+		Join_DTO  result = new Join_DTO();
+		result = dao.searchMember(dto.getUser_id());
+		session.setAttribute("info", result);
+		
+		// 부서 리스트 보여주는 부분
+		ArrayList<Dept_DTO> dto2 = new ArrayList<Dept_DTO>();
+		IJoin dao2 = sqlsession.getMapper(IJoin.class);
+		dto2 = dao2.searchDept();
+		model.addAttribute("dept", dto2);
+		
+		// 팀 리스트 보여주는 부분
+		ArrayList<Team_DTO> tdto = new ArrayList<Team_DTO>();
+		IJoin tdao = sqlsession.getMapper(IJoin.class);
+		tdto = tdao.searchTeam();
+		model.addAttribute("team", tdto);
+
+		// 직함 리스트 보여주는 부분
+		ArrayList<Jobtitle_DTO> jdto = new ArrayList<Jobtitle_DTO>();
+		IJoin jdao = sqlsession.getMapper(IJoin.class);
+		jdto = jdao.searchTitle();
+		model.addAttribute("position", jdto);
+		
+		return "home.edit";
 	}
 	
 }

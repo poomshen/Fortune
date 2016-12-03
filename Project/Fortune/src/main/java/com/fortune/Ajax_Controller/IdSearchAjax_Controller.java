@@ -1,17 +1,22 @@
 package com.fortune.Ajax_Controller;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.catalina.connector.Request;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.member_DAO.IJoin;
+import com.fortune.password_Service.PassWord_Service;
 
 @Controller
 public class IdSearchAjax_Controller {
@@ -32,5 +37,33 @@ public class IdSearchAjax_Controller {
 		model.addAttribute("resultId",resultId);
 		
 		return resultId;
+	}
+	@RequestMapping("/pwdsearch.ajax")
+	public @ResponseBody int getpwd(HttpServletRequest request){
+		//System.out.println("컨트롤러 오긴 오냐?ㅅㅂ");
+		IJoin dao = sqlsession.getMapper(IJoin.class);
+		PassWord_Service passWord_Service = new PassWord_Service();
+		Random random = new Random();
+		Join_DTO dto = new Join_DTO();
+		
+		int ranNum = random.nextInt(9000)+1000;
+		String ranNum2 = Integer.toString(ranNum);	
+		//System.out.println("랜덤 숫자 : " + ranNum);
+		
+		String search_id = request.getParameter("search_id");
+		String search_name2 = request.getParameter("search_name2");
+		String search_phone2 = request.getParameter("search_phone2");
+		String pwa = passWord_Service.encode(ranNum2);
+
+		dto.setUser_password(pwa);
+		int result = dao.searchpwd(pwa, search_id, search_name2, search_phone2);
+		
+		/*return ranNum;*/
+		if(result!=0){
+			//update 성공
+			result=ranNum;
+		}
+		
+		return result;
 	}
 }

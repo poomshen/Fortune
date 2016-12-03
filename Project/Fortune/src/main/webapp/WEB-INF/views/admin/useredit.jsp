@@ -27,7 +27,7 @@ input.buttonLink {
 <body style="color:#777">
 	<h3 style="margin-bottom: 40px; margin-top: 30px;">사원정보 수정</h3>
 	<hr>
-	<div class="col-sm-7" style="padding-left: 0px;">
+	<div class="col-sm-6" style="padding-left: 0px;">
 		<form action="">
 			<select id="deptSelect1" name="deptSelect1">
 				<option value="-1" selected>부서 선택</option>
@@ -93,7 +93,7 @@ input.buttonLink {
 		</form>
 	</div>
 	
-	<div class="col-sm-5" style="padding-right: 0px;">
+	<div class="col-sm-6" style="padding-right: 0px;">
 		<div class="row" style="padding-right: 0px; position: fixed;">
 		<label style="height: 32px; margin-top: 10px;"> &nbsp;&nbsp;&nbsp; 사원 상세 정보</label>
 			<form action="">
