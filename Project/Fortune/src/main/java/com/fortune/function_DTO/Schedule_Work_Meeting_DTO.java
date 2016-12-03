@@ -10,7 +10,8 @@ public class Schedule_Work_Meeting_DTO {
 	private String users;
 	private int collabo_no;
 	private String progress_or_place;
-	
+	//추가내용 : 알림이 있는지 체크
+	private int isNew;
 	
 	
 	
@@ -62,4 +63,11 @@ public class Schedule_Work_Meeting_DTO {
 	public void setProgress_or_place(String progress_or_place) {
 		this.progress_or_place = progress_or_place;
 	}
+	public int getIsNew() {
+		return isNew;
+	}
+	public void setIsNew(int isNew) {
+		this.isNew = isNew;
+	}
+
 }
