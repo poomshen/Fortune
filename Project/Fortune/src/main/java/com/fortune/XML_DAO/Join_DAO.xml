@@ -76,6 +76,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <update id="searchpwd">
 	update USERS
 	set USER_PASSWORD=#{param1}
-	where USER_ID=#{param2}
+	where USER_ID=#{param2} AND USER_NAME=#{param3} AND USER_PHONE=#{param4}
  </update>
 </mapper>
