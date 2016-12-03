@@ -53,7 +53,9 @@
   }
   .modal-body{
  	 color:#000000;
+ 
   }
+
 </style>
 </head>
 
