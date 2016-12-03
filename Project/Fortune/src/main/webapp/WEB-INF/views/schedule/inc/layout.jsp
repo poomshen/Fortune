@@ -44,8 +44,8 @@
 	<!-- Page Content -->
 	<div id="page-wrapper">
 		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-12">
+			<div class="row" style="padding-left: 15px; padding-right: 15px;">
+				<div class="col-lg-12" style="padding-right: 0px; padding-left: 0px;">
 					<tiles:insertAttribute name="content" />
 				</div>
 				<!-- /.col-lg-12 -->

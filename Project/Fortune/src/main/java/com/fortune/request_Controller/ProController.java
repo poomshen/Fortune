@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
@@ -80,39 +81,62 @@ public class ProController {
 	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
-	public String requestList(String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	public ModelAndView requestList(String pg, String f, String q, String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 
+		String rs = "request";
+		ModelAndView mv = proservice.getRequest(pg, f, q, st,rs,me,se, session);
 		
-		List<Request_DTO> list = proservice.getRequest(pg, f, q, st, session);
-		model.addAttribute("list", list); // 자동 forward
+		return mv;
 		
-		
-		
-		
-		return "request.requestList";
 
 	}
+	 // 만든 목적 : 대기 수락 거절 을 비동기 처리로 하려면 ajax 태울 곳이 필요하여 만들었습니다.
+	 // 만든 날짜 : 2016 -12-02
+	 @Transactional
+	 @RequestMapping("requestList2.htm") // /customer/notice.htm
+	 public ModelAndView requestList2(String pg, String f, String q, String st,String me,String se,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+		 
+		 String rs = "cen";
+		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, me, se, session);
+		 return mv;
+		 
+		 
+	 }
 	// 만든 목적: 발신자가 보낸 것 수신자가 보는 리스트로 보여주는 클래스입니다,
 	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("listReplyRequest.htm") // /customer/notice.htm
-	public String listReplyRequest( String pg, String f, String q,String st, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	public ModelAndView listReplyRequest( String pg, String f, String q,String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
-			
-		List<Request_DTO> list = proservice.listReplyRequest(pg, f, q,st, session);
-		model.addAttribute("list", list); // 자동 forward
+		String rs = "request";
+		ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs,me,se, session);
+		 // 자동 forward
 		
 		
 		
-		return "request.requestList";
+		return mv;
 
 	}
+	 // ajax 태울 곳
+	 @Transactional
+	 @RequestMapping("listReplyRequest2.htm") // /customer/notice.htm
+	 public ModelAndView listReplyRequest2( String pg, String f, String q,String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+		 
+		 String rs = "cen";
+		 ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs,me,se, session);
+		  // 자동 forward
+		 
+		 
+		 
+		 return mv;
+		 
+	 }
 	//전체
 	 @Transactional
 	@RequestMapping("listallRequest.htm") // /customer/notice.htm
-	public String listallRequest( String pg, String f, String q, String st,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	public String listallRequest( String pg, String f, String q, String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
-		List<Request_DTO> list = proservice.listallRequest(pg, f, q, st, session);
+		List<Request_DTO> list = proservice.listallRequest(pg, f, q, st,me,se, session);
 		model.addAttribute("list", list); // 자동 forward
 		
 		
@@ -159,13 +183,16 @@ public class ProController {
 	//수락 하기 눌렀을 경우 화면 출력
 	
 	@RequestMapping("accept.htm")
-		 public String Accept(String collabo_req_index, Model model) throws ClassNotFoundException,
+		 public String Accept(String collabo_req_index,String dept_no, Model model) throws ClassNotFoundException,
 		   SQLException {
 		 Request_DTO proDto = proservice.DetailResponse(collabo_req_index);
 		 model.addAttribute("list", proDto);
 		 model.addAttribute("acceptlist", proDto);
 		 System.out.println("수락 창");
 		 System.out.println(proDto.toString());
+		 
+		 List<Join_DTO> listmanager = proservice.listManager(dept_no); 
+		 model.addAttribute("listmanager", listmanager); // 담당자 리스트 
 		 
 		  return "cen.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	
@@ -219,7 +246,14 @@ public class ProController {
 			@RequestMapping(value = "writeresponse.htm", method = RequestMethod.POST)
 			public String regResponse(With_DTO n, String collabo_req_index)
 					throws IOException, ClassNotFoundException, SQLException {
-				
+					
+				System.out.println("계산중 :"+ n.getCollabo_sal());
+				    
+				    //가지고 있는 콤마를 잘라서 집어넣었습니다 00,00 -> 0000
+				    
+				    System.out.println("계산오류잡는중..."+ n.getCollabo_sal().replaceAll(",", ""));
+				    n.setCollabo_sal(n.getCollabo_sal().replaceAll(",", ""));
+				    System.out.println("계산완료 :"+n.getCollabo_sal());
 					/*System.out.println(n.toString());*/
 					 proservice.regResponse(n, collabo_req_index);
 					 proservice.Accept(collabo_req_index);
@@ -250,13 +284,13 @@ public class ProController {
 			
 			//담당자 선택역할을 하는 클래스입니다.
 			 @RequestMapping(value = "insertmanager.htm", method= RequestMethod.GET)
-			 public String InsertManager(String collabo_req_index, Model model)
+			 public String InsertManager(String collabo_req_index,String dept_no ,Model model)
 			   throws ClassNotFoundException, SQLException {
 			 
 				 //아 힘들다..
 				 
 				 With_DTO req_Dto =  proservice.managerDto(collabo_req_index);
-					List<Join_DTO> listmanager = proservice.listManager(model); 
+					List<Join_DTO> listmanager = proservice.listManager(dept_no); 
 				 
 					model.addAttribute("listmanager", listmanager); // 담당자 리스트 
 				  model.addAttribute("list", req_Dto);	//협업상태 보여준다.
@@ -271,17 +305,17 @@ public class ProController {
 			
 			
 			
-			//담당자 선택역할을 한다.
+			/*//담당자 선택역할을 한다.
 			@RequestMapping( value="insertmanager.htm", method = RequestMethod.POST)
 			 public String InsertManager(With_DTO m, String collabo_req_index) throws ClassNotFoundException,
 			   SQLException {
 				// proservice.ProManager(collabo_req_index);
 				 proservice.InsertManager(m);
-				/* System.out.println(m.toString()+"흠냐");*/
+				 System.out.println(m.toString()+"흠냐");
 				 
 				  return "redirect:responseList.htm"; //리스트 화면 (controller 타서 데이터 출력)
 				
-			 }
+			 }*/
 			
 			
 			//사용 목적: 다운로드 하는 부분인데 요청 상태에서 제안서나 그런것을 받을 때 사용 되는 클래스이다.	

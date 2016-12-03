@@ -10,12 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-
 </head>
 <body style="color:#777">
-
-
 <h3 style="
     margin-bottom: 40px;
     margin-top: 30px;
@@ -149,17 +145,10 @@
 				</c:forEach>			
 			</div>
 		</div>
-		
-
-		<button type="submit" class="btn hvr-glow" onclick="alert('수정 완료')" value="수정완료">수정완료</button>
+		<div class="form-group container" align="center">
+			<input type="submit" class="btn btn-primary" onclick="alert('수정 완료')" value="수정완료">
+			<input type="button" class="btn btn-primary" onclick="history.go(-1)" value="취소">
+		</div>
     </form>
-
-
-
-    <script src="js/jquery.js"></script>
- 
-
-  <script src="js/bootstrap.min.js"></script>
-   
 </body>
 </html>

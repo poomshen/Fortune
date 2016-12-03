@@ -13,9 +13,9 @@ import com.fortune.function_DTO.Select_Collabo_DTO;
 public interface ProDao {
 
 		//게시물 개수
-		public int requestCount(String field, String query) throws ClassNotFoundException, SQLException;
+		public int requestCount(String field, String query,String st_query,String memo,String search) throws ClassNotFoundException, SQLException;
 		//전체 게시물
-		public List<Request_DTO> getRequest(int page, String field, String query, String st_query) throws ClassNotFoundException, SQLException;
+		public List<Request_DTO> getRequest(int page, String field, String query, String st_query,String memo,String search) throws ClassNotFoundException, SQLException;
 		//게시물 삭제
 		public String delete(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//게시물 수정
@@ -41,7 +41,7 @@ public interface ProDao {
 		//수신자 부장 리스트 
 		public List<Join_DTO> listEffect() throws ClassNotFoundException, SQLException;
 		//담당자 팀장 리스트 
-		public List<Join_DTO> listManager() throws ClassNotFoundException, SQLException;
+		public List<Join_DTO> listManager(String dept_no) throws ClassNotFoundException, SQLException;
 		//게시물 대기 , 수락 , 거절 리스트 
 		public Request_DTO kindState(String collabo_req_state) throws ClassNotFoundException, SQLException;
 		//수락 하기
@@ -51,6 +51,7 @@ public interface ProDao {
 		//2016-11-26
 		//사이드바에 자신의 협업들 보여 주기
 		public List<Select_Collabo_DTO> selectCollaboList(String user_id);
+		public List<Select_Collabo_DTO> selectCollaboList2(int deptno);
 		
 		//작성자 이성준
 		//2016-12-01

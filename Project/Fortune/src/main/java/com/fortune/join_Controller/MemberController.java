@@ -33,12 +33,15 @@ import com.fortune.Table_DTO.Dept_DTO;
 import com.fortune.Table_DTO.Jobtitle_DTO;
 
 import com.fortune.Table_DTO.Join_DTO;
+import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.Table_DTO.Team_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.chart_DAO.IChart;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.function_DTO.Select_Collabo_DTO;
 import com.fortune.member_DAO.IJoin;
+import com.fortune.name_Controller.HomeController;
+import com.fortune.notice_DAO.INotice;
 import com.fortune.password_Service.PassWord_Service;
 import com.fortune.request_DAO.ProDao;
 
@@ -68,7 +71,7 @@ public class MemberController {
 	
 	/*수정 : 이예지 2016-11-24 로그인했을시 알림 db 체크 */
 	//수정추가 : 이성준 2016-11-26 로그인 했을시 자신 참조 프로젝트
-	@RequestMapping(value="/loginSubmit.htm", method=RequestMethod.GET)
+	@RequestMapping(value="/FortuneMain.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session ,Authentication authentication,Model model){
 
 	
@@ -82,6 +85,12 @@ public class MemberController {
 		result = dao.searchMember(user_id);
 		System.out.println("login dao 동작 완료");
 		
+		//권한이 ROLE_NOUSER이면 로그인 막기(추가작업 : 김중완)
+		if(result.getRole_no() == 5){
+			HomeController.homeindex = 1;
+			model.addAttribute("msg", 1);
+			return "redirect:index.htm";
+		}
 		
 		session.setAttribute("info", result);
 
@@ -129,6 +138,13 @@ public class MemberController {
 		
 	
 		session.setAttribute("totalCount", tatalCount);	
+		
+		//공지사항 최신글 뽑는 부분 (추가 작업 : 김중완)
+		INotice notice_dao = sqlsession.getMapper(INotice.class);
+		List<Notice_DTO> nlist = notice_dao.mainListNotice();
+		System.out.println(nlist);
+		model.addAttribute("nlist", nlist);
+
 		return "home.main";
 		
 			
@@ -142,7 +158,7 @@ public class MemberController {
 	public String logOut(HttpSession session){
 		
 		session.invalidate();
-		System.out.println("로그아웃 성공");
+		//System.out.println("로그아웃 성공");
 		
 		return "redirect:index.htm";
 	}
@@ -156,7 +172,7 @@ public class MemberController {
 		dao.deleteMember(dto.getUser_id());
 		
 		
-		System.out.println("삭제완료!!~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		//System.out.println("삭제완료!!~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 		return "redirect:index.htm";
 		
@@ -190,7 +206,7 @@ public class MemberController {
 	}
 		
 	@RequestMapping(value="/updateConfirm.htm", method=RequestMethod.POST)
-	public String updateMemberSubmit(Join_DTO dto){
+	public String updateMemberSubmit(Join_DTO dto, Model model, HttpSession session){
 		
 		System.out.println("update Controller 왔음~!~!~!");
 		PassWord_Service passWord_Service = new PassWord_Service();
@@ -198,8 +214,29 @@ public class MemberController {
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		dao.updateMember(dto);
 		
-		return "home.main";
+		Join_DTO  result = new Join_DTO();
+		result = dao.searchMember(dto.getUser_id());
+		session.setAttribute("info", result);
+		
+		// 부서 리스트 보여주는 부분
+		ArrayList<Dept_DTO> dto2 = new ArrayList<Dept_DTO>();
+		IJoin dao2 = sqlsession.getMapper(IJoin.class);
+		dto2 = dao2.searchDept();
+		model.addAttribute("dept", dto2);
+		
+		// 팀 리스트 보여주는 부분
+		ArrayList<Team_DTO> tdto = new ArrayList<Team_DTO>();
+		IJoin tdao = sqlsession.getMapper(IJoin.class);
+		tdto = tdao.searchTeam();
+		model.addAttribute("team", tdto);
+
+		// 직함 리스트 보여주는 부분
+		ArrayList<Jobtitle_DTO> jdto = new ArrayList<Jobtitle_DTO>();
+		IJoin jdao = sqlsession.getMapper(IJoin.class);
+		jdto = jdao.searchTitle();
+		model.addAttribute("position", jdto);
+		
+		return "home.edit";
 	}
-	
 	
 }

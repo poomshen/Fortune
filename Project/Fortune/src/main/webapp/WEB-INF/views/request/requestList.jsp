@@ -21,14 +21,15 @@
 
 
 #pageside {
-	width: 60%;
-	float: left;
+	width: 65%;
+	
 }
 
 #ajaxside {
-	width: 38%;
+	width: 45%;
 	float: right;
 	margin: 1%;
+	
 }
 </style>
 
@@ -72,7 +73,8 @@
 	 			type: "get",
 	 			url:  "accept.htm",
 	 			cache: false,				
-	 			data:"collabo_req_index="+a,
+	 			data:{"collabo_req_index" : a,
+	 				  "dept_no":${sessionScope.info.dept_no}},
 	 		    success:function(data){ //callback  
 	 		    	//alert(a);
 	 		    	//console.log(data);
@@ -146,9 +148,9 @@
 
 
 <!-- 이곳은  w3-card-4 전체에 잡고 있습니다. CSS  -->
-	<div class="w3-panel w3-card-4" style="width: 100%">
+	<div class="w3-panel w3-card-4">
 		<div id="ajaxside">
-			<div class="panel panel-default">
+			<div class="panel panel-default"  style="position: fixed;">
 				<div class="panel-heading">협업 리스트</div>
 				<!-- 검색폼 추가 -->
 				<div class="panel-body" id="ReqCollabo"></div>
@@ -159,7 +161,7 @@
 		<c:forEach items="${list}" var="n">
 
 
-			<div id="pageside">
+			<div id="pageside" class="w3-small">
 				<div style="float: left;">
 
 
@@ -170,7 +172,7 @@
 						<!-- 요청담당자 쪽 그림 입니다. -->
 						<div style="float: left;">
 
-							<div class="w3-card-2" style="margin: 5px" align="center">
+							<div class="w3-card-2" style="margin: 3px" align="center">
 								<br> <img src="images/man1.PNG" alt="Norway"
 									style="width: 100px; height: 100px; border-radius: 70%;" >
 								<div class="w3-container w3-center">
@@ -222,7 +224,7 @@
 							
 								<c:choose>
 									<c:when test="${n.collabo_req_state == '수락'}">
-										<input class="btn btn-primary disabled" value="수락완료" readonly="readonly">
+										<input type="button" class="btn btn-primary disabled" value="수락완료" readonly="readonly">
 									</c:when>
 									<c:when test="${n.collabo_req_state == '거절'}"></c:when>
 
@@ -267,7 +269,7 @@
 						
 						<div style="float: right;">
 
-							<div class="w3-card-2" align="center" style="margin: 5px">
+							<div class="w3-card-2" align="center" style="margin: 3px">
 								<br> <img src="images/man2.PNG" alt="Norway"
 									style="width: 100px; height: 100px; border-radius: 70%; ">
 								<div class="w3-container w3-center">
@@ -288,7 +290,7 @@
 		</c:forEach>
 
 
-		<!-- 거절을 하였을때 거절 사유를 쓸 때 사용됩니다. -->
+		<!-- 거절을 하였을때 거절 사유를 쓸 때 사용됩니다.-모델 창입니다. -->
 		
 		
 		

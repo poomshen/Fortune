@@ -34,15 +34,21 @@ import com.fortune.member_DAO.IJoin;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	public static int homeindex = 0;
 	@Autowired
 	public SqlSession sqlsession;
 
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
-	public String index() {
+	public String index(Model model) {
 	
 		System.out.println("index 컨트롤러");
-
+		if(homeindex == 0){
+			model.addAttribute("msg", 0);
+		}else{
+			homeindex = 0;
+			model.addAttribute("msg", 1);
+		}
+		
 		return "index";
 	}
 
@@ -118,6 +124,13 @@ public class HomeController {
 		System.out.println("selector 컨트롤러 끝");
 		return "home.alarm";
 	}
-
+	
+	//아이디 패스워드 찾기 화면이동
+	@RequestMapping("/SearchIdPage.htm")
+	public String getIdpage(){		
+		System.out.println("아이디/패스워드 찾기 view 보냄");
+		
+		return "searchpage";
+	}
 
 }

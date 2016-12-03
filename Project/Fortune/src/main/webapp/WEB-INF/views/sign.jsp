@@ -105,8 +105,8 @@
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
 		 <span class="addon" style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
-		    <input type="text" name="user_password" id="user_password" class="form-control" style="
-		    width: 340px;margin-left:20px;" required="required">
+		    <input type="password" style="background-color:transparent; color:#fff; border: none; border-bottom: 1.5px solid rgba(255, 255, 255, 0.56); width: 340px; margin-left:20px;" class="form-control"
+				 name="user_password" id="user_password" required="required">
 		    <label class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 입력</label>
 		</span>
 	</div>
@@ -117,8 +117,8 @@
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
 		 <span class="addon" style=" padding-bottom: 0px;"><i class="glyphicon glyphicon-lock"></i></span> 
-		    <input type="text" name="user_password_chk" id="user_password_chk" class="form-control" style="
-		    width: 340px;margin-left:20px;" required="required">
+		    <input type="password" name="user_password_chk" id="user_password_chk" class="form-control" style="
+		    background-color:transparent; color:#fff; border: none; border-bottom: 1.5px solid rgba(255, 255, 255, 0.56); width: 340px;margin-left:20px;" required="required">
 		    <label id="pwdchklb" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="pwd">비밀번호 확인</label>
 		</span>
 	</div>
@@ -267,6 +267,7 @@
   <label class="control-label"></label>  
     <input type="button" name="joinbtn" id="joinbtn" onclick="joinchk();" class="btn hvr-forward" style="margin-top: 50px;" value="join">
 </div>
+
 
 </fieldset>
 </form>

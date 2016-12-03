@@ -4,6 +4,26 @@
     <!-- Timeline CSS -->
     <link href="dist/css/timeline.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript">
+		function lastPostFunc(){
+			console.log("스크롤 끝");
+			 $("div#pageListLoader").html("<div  class='btn btn-primary btn-lg btn-block'><h1style='color: white;'>로딩중..</h1></div>");  
+			 $.get("historyAllList.ajax?page="+ $(".wrdLatest:last").attr("id"), function(data, textStatus, req) {
+				  if (data != "") {  
+				        $(".wrdLatest:last").after(data);             
+				        }  
+				        $("div#lastPostsLoader").empty();  
+			 })
+		}
+		
+	
+	
+	$(window).scroll(function(){  
+        if  ($(window).scrollTop() == $(document).height() - $(window).height()){  
+           lastPostFunc();  
+        }  
+	});  
+	</script>
 
 <body>
             <div class="row">
@@ -26,10 +46,10 @@
                                 <c:forEach var="historylist" items="${list}">
                                 <c:choose >
                                 	<c:when test="${historylist.history_title=='요청'||historylist.history_title=='최초요청'||historylist.history_title=='거절'}">
-                                	 <li>
+                                	 <li  class="wrdLatest" id="${historylist.num }">
                                 	</c:when>
                                 	<c:otherwise>
-                                	 <li class="timeline-inverted">
+                                	 <li class="timeline-inverted wrdLatest" id="${historylist.num }">
                                 	</c:otherwise>
                                 </c:choose>
                                 <c:choose>
@@ -55,12 +75,14 @@
                                         <div class="timeline-body">
                                             <h4 class="timeline-title">${historylist.collabo_req_title}</h4>
                                             <p>${historylist.collabo_req_text}</p>
+                                            <p>${historylist.history_text}</p>
                                         </div>
                                     </div>
                                 	</li>
                                 </c:forEach>
                             </ul>
                         </div>
+                        <div id ="pageListLoader"></div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->

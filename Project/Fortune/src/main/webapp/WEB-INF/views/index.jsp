@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-   request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
+	int message = (Integer)request.getAttribute("msg");
 %>
 <head>
 <meta charset="utf-8">
@@ -33,10 +34,6 @@
 	href="assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
-
-	
-
-
 
 
 </head>
@@ -104,8 +101,10 @@
 			</div>
  -->
 		</div>
-</div>
+		<span><a href="SearchIdPage.htm">아이디/패스워드를 잊어버리셨나요?</a></span>
 	</div>
+	
+</div>
 	
 	<div class="backstretch"
 		style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 609px; width: 972px; z-index: -999998; position: absolute;">
@@ -467,6 +466,14 @@
 	function joins() {
 		location.href="sign.htm";
 	}
+	
+	$(function() {
+		var message1 = <%=message%>;
+		
+		if(message1 == 1){
+			alert('권한이 없습니다.');
+		}
+	});
 	</script>
 
 </body>

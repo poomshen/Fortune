@@ -20,7 +20,34 @@
 <script src="<%=request.getContextPath() %>/js/jQuery.MultiFile.min.js"></script>
 
 </head>
+
+<style type="text/css" >
+.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+	position: fixed;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	background: rgba(0,0,0,0.2); /*not in ie */
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+}
+.wrap-loading div{ /*로딩 이미지*/
+	position: fixed;
+	top:50%;
+	left:50%;
+	margin-left: -21px;
+	margin-top: -21px;
+}
+.display-none{ /*감추기*/
+	display:none;
+}  
+</style>
+
 <body class="skin-4">
+<div class="wrap-loading display-none">
+    <div><img src="./images/default.gif" style="width: 50; height: 50px;" /></div>
+</div>
+<div id="loading" class="loading"></div>
 	<input id="test" value="${collabo_no}">
 	<form name="multiform" id="multiform" action="uploadfile.ajax" method="POST" enctype="multipart/form-data">
 		<label class="btn btn-primary" for="my-file-selector">
@@ -89,14 +116,14 @@
 			<div class="text-center">
 				<c:if test="${pg > block}">
 					<ul class="pagination">
-						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">◀◀</a></li>
-						<li><a href="mainfile.htm?pg=${from_page - 1}&collabo_no=${collabo_no}">◀</a></li>
+						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">««</a></li>
+						<li><a href="mainfile.htm?pg=${from_page - 1}&collabo_no=${collabo_no}">«</a></li>
 					</ul>
 				</c:if>
 				<c:if test="${pg <= block && pg != 1}">
 					<ul class="pagination">
-						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">◀◀</a></li>
-						<li><a href="mainfile.htm?pg=${pg - 1}&collabo_no=${collabo_no}">◀</a></li>
+						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">««</a></li>
+						<li><a href="mainfile.htm?pg=${pg - 1}&collabo_no=${collabo_no}">«</a></li>
 					</ul>
 				</c:if>
 				<c:forEach begin="${from_page}" end="${to_page}" var="i">
@@ -110,14 +137,14 @@
 				<c:if test="${list.size() != 0}">
 					<c:if test="${pg < to_page || pg != all_page}">
 						<ul class="pagination">
-							<li><a href="mainfile.htm?pg=${pg + 1}&collabo_no=${collabo_no}">▶</a></li>
-							<li><a href="mainfile.htm?pg=${all_page}&collabo_no=${collabo_no}">▶▶</a></li>
+							<li><a href="mainfile.htm?pg=${pg + 1}&collabo_no=${collabo_no}">»</a></li>
+							<li><a href="mainfile.htm?pg=${all_page}&collabo_no=${collabo_no}">»»</a></li>
 						</ul>
 					</c:if>
 					<c:if test="${to_page > all_page && pg != all_page}">
 						<ul class="pagination">
-							<li><a href="mainfile.htm?pg=${to_page + 1}&collabo_no=${collabo_no}">▶</a></li>
-							<li><a href="mainfile.htm?pg=${all_page}&collabo_no=${collabo_no}">▶▶</a></li>
+							<li><a href="mainfile.htm?pg=${to_page + 1}&collabo_no=${collabo_no}">»</a></li>
+							<li><a href="mainfile.htm?pg=${all_page}&collabo_no=${collabo_no}">»»</a></li>
 						</ul>
 					</c:if>
 				</c:if>
@@ -213,7 +240,7 @@
 		} );
 	} );
 })();
-	
+
 	$(function() {
 		$('#upload_btn').click(function() {
 			$('#multiform').ajaxForm({
@@ -224,7 +251,12 @@
 					console.log("success");
 					console.log(data);
 					output(data);
-				},
+				},beforeSend:function(){
+			        $('.wrap-loading').removeClass('display-none');
+			    }
+			    ,complete:function(){
+			        $('.wrap-loading').addClass('display-none');
+			    },
 				error : function(e) {
 					console.log("error");
 					console.log(e);

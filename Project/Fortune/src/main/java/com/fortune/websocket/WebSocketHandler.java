@@ -74,6 +74,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		        	   System.out.println("---------------------");
 		              if( ids.get(s.getId()).equals(selectedId[i]) ){
 		                 System.out.println(selectedId[i]);
+		                 System.out.println(selectedId[i]+"에게 메세지 전송!");
 		                 s.sendMessage(new TextMessage("알림 발생") );
 		              }
 		           }
@@ -87,10 +88,9 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			       
 			        	   System.out.println("--------선택받은사람-----------");
 			        	   System.out.println("아이디>"+msg+"<");
-			        	   
 			        	   System.out.println("---------------------");
 			              if( ids.get(s.getId()).equals(msg) ){
-			                 System.out.println(msg);
+			                 System.out.println(msg+"에게 메세지 전송!");
 			                 s.sendMessage(new TextMessage("알림 발생") );
 			              
 			           }
