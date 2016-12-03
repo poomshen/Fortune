@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fortune.Table_DTO.FileRoom_DTO;
 import com.fortune.Table_DTO.Notice_DTO;
+import com.fortune.fileroom_DAO.IFileRoom;
 import com.fortune.notice_DAO.INotice;
 
 @Controller
@@ -24,33 +26,35 @@ public class NoticeSearch_Controller {
 	public ModelAndView searchFile(HttpServletRequest request){
 		
 		System.out.println("NoticeSearch_Controller를 탑니다~");
-
-		
 		String selectvalue = request.getParameter("selectvalue");
 		String searchvalue = request.getParameter("searchvalue");
+		String pg = request.getParameter("pg");
 		System.out.println("selectvalue : "+ selectvalue);
 		System.out.println("searchvalue : "+ searchvalue);
+		System.out.println("pg : "+ pg);
+		
+		int page = 1;
+		String str_pg = pg;
+		if (str_pg != null) {
+			page = Integer.parseInt(str_pg);
+		}
+		int row_size = 10;
+		int total_count = 0;
 		
 		INotice noticeSearchDao = sqlSession.getMapper(INotice.class);
 		List<Notice_DTO> noticelist = null;
 		
 		if(selectvalue.equals("notice_title")){
 			System.out.println("notice_title 문");
-			noticelist = noticeSearchDao.searchTitleListNotices(searchvalue);
+			noticelist = noticeSearchDao.searchTitleListNotices(searchvalue, page);
+			total_count = noticeSearchDao.countTitleListNotices(searchvalue);
 		}
 		if(selectvalue.equals("notice_text")){
 			System.out.println("notice_text 문");
-			noticelist = noticeSearchDao.searchTextListNotices(searchvalue);
+			noticelist = noticeSearchDao.searchTextListNotices(searchvalue, page);
+			total_count = noticeSearchDao.countTextListNotices(searchvalue);
 		}
 		
-		int page = 1;
-		int row_size = 10;
-		
-		System.out.println(noticelist.size());
-		//View 화면에 뿌려주기 위한 list
-		
-
-		int total_count = noticelist.size();	//file 개수
 		System.out.println("totalcount : " + total_count);
 
 		// ... 목록
@@ -69,16 +73,16 @@ public class NoticeSearch_Controller {
 
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("noticelist", noticelist);
+		mv.addObject("selectvalue", selectvalue);
+		mv.addObject("searchvalue", searchvalue);
 		mv.addObject("total_count", total_count);
 		mv.addObject("pg", page);
 		mv.addObject("all_page", all_page);
 		mv.addObject("block", block);
 		mv.addObject("from_page", from_page);
 		mv.addObject("to_page", to_page);
-		mv.setViewName("notice.noticeList");
+		mv.setViewName("notice.noticeSearchList");
 		
 		return mv;
 	}
-	
-
 }

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-404에러가떴다!!!!!!!
+
 </body>
 </html>
