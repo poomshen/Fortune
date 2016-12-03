@@ -94,8 +94,10 @@
      //대기 수락 거절을 비동기 처리로 사용하였다.
    	function selectState(state){
    		console.log(state)
+   		
    		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
    			$('#requestlist').html(data);
+   			//console.log(data);
    		});
    	}
      //검색 기능 비동기 처리로 하였습니다.
