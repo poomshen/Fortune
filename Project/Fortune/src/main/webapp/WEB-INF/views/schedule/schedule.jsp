@@ -13,7 +13,7 @@
 $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip();
-
+ 	
 	
 	//화면 로드시 일정을 DB에서 불러오는 코드  
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
@@ -81,6 +81,7 @@ $(document).ready(function() {
 	        $('#content').html(content)
 	        //fullcalendar 불러오는 함수
 			loadCalendar();
+	        
 			$.each(data.new_alarm, function(index, obj) {
 				
 				alert(obj.schedule_no);
@@ -88,9 +89,21 @@ $(document).ready(function() {
 				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
 				
 			});
+
+			
+			
+			$('.fc-prev-button').click(function() {
+				alert('응?')
+	        });
+	        
+	        $('.fc-next-button').click(function() {
+	        	alert('응!')
+	        });
+	        
+	        
 		}
 	});
-	
+ 	
 	
 });
 
@@ -98,8 +111,56 @@ $(document).ready(function() {
 
 function schedule_type(){
 	alert($('#schedule_type').val());
+	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 	
-	
+	$.ajax({
+		url : 'schedule_type.ajax',
+		type : 'post',
+        data : { "collabo_no" : $('#collabo_no').val(),
+				 "schedule_type" : $('#schedule_type').val()
+		        },
+				success : function(data) {
+					console.log(data)
+					$.each(data.schedulelist, function(index, obj) {
+						if(obj.progress_or_place<10){
+							if(obj.progress_or_place==1){
+						        content += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
+						        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+						        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+						        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
+						        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
+						        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
+							}else{
+						        content += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
+						        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+						        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+						        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
+						        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
+						        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
+
+							}
+						} else{
+							content += '<tr><td style="color:#23b100;">회의</td>';
+					        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+					        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+					        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>';
+						}
+				        
+					});
+					
+					$('#content_detail').css("display", "none");
+					$('#content_detail2').css("display", "none");
+					$('#content').html(content)
+			        
+					$.each(data.new_alarm, function(index, obj) {
+						
+						alert(obj.schedule_no);
+						
+						$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
+						
+					});
+				}
+	}); 
 	
 	
 	
@@ -267,6 +328,7 @@ function schedule_type(){
 			<div class="col-sm-5" style="padding-right: 0px;">
 				<div class="row" style="padding-right: 0px;">
 					<select id="schedule_type" onchange="schedule_type()">
+						<option> 선 택  </option>
 						<option value="0"> 전 체 보 기 </option>
 						<option value="1">업무일정 보기</option>
 						<option value="2">회의일정 보기</option>

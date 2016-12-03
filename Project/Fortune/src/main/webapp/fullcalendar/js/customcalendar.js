@@ -283,7 +283,18 @@ function fcontent() {
 			$('#content_detail').css("display", "none");
 			$('#content_detail2').css("display", "none");
 	        $('#content').html(content)
-		} 
+	        
+	        $('#content').html(content)
+	        //fullcalendar 불러오는 함수
+			loadCalendar();
+			$.each(data.new_alarm, function(index, obj) {
+				
+				alert(obj.schedule_no);
+				
+				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
+				
+			});
+		}
 	});
 }
 
@@ -748,7 +759,7 @@ function loadCalendar() {
 									title: data.schedule.meeting_title,
 									start: data.schedule.schedule_start,
 									end: data.schedule.schedule_end,
-									backgroundColor: 'rgba(255, 228, 0, 0.66)'
+									backgroundColor: '#23b100'
 							}
 							
 							calendar.fullCalendar('renderEvent', eventData , true);
