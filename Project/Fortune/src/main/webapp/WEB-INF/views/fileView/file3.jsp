@@ -114,40 +114,32 @@
 		</div>
 		<div id="divrow2" class="row">
 			<div class="text-center">
-				<c:if test="${pg > block}">
-					<ul class="pagination">
+				<ul class="pagination">
+					<c:if test="${pg > block}">
 						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">««</a></li>
 						<li><a href="mainfile.htm?pg=${from_page - 1}&collabo_no=${collabo_no}">«</a></li>
-					</ul>
-				</c:if>
-				<c:if test="${pg <= block && pg != 1}">
-					<ul class="pagination">
+					</c:if>
+					<c:if test="${pg <= block && pg != 1}">
 						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">««</a></li>
 						<li><a href="mainfile.htm?pg=${pg - 1}&collabo_no=${collabo_no}">«</a></li>
-					</ul>
-				</c:if>
-				<c:forEach begin="${from_page}" end="${to_page}" var="i">
-					<ul class="pagination">
+					</c:if>
+					<c:forEach begin="${from_page}" end="${to_page}" var="i">
 						<c:if test="${i == pg}"><li class="active"><a href="#">${i}</a></li></c:if>
 						<c:if test="${i != pg}">
 							<li><a href="mainfile.htm?pg=${i}&collabo_no=${collabo_no}">${i}</a></li>
 						</c:if>
-					</ul>
-				</c:forEach>
-				<c:if test="${list.size() != 0}">
-					<c:if test="${pg < to_page || pg != all_page}">
-						<ul class="pagination">
+					</c:forEach>
+					<c:if test="${list.size() != 0}">
+						<c:if test="${pg < to_page || pg != all_page}">
 							<li><a href="mainfile.htm?pg=${pg + 1}&collabo_no=${collabo_no}">»</a></li>
 							<li><a href="mainfile.htm?pg=${all_page}&collabo_no=${collabo_no}">»»</a></li>
-						</ul>
-					</c:if>
-					<c:if test="${to_page > all_page && pg != all_page}">
-						<ul class="pagination">
+						</c:if>
+						<c:if test="${to_page > all_page && pg != all_page}">
 							<li><a href="mainfile.htm?pg=${to_page + 1}&collabo_no=${collabo_no}">»</a></li>
 							<li><a href="mainfile.htm?pg=${all_page}&collabo_no=${collabo_no}">»»</a></li>
-						</ul>
+						</c:if>
 					</c:if>
-				</c:if>
+				</ul>
 			</div>
 		</div>
 		<div id="drop-area" class="drop-area">
@@ -319,39 +311,34 @@
 			});
 		}
 
-		
 		var result2 = "";
 		if(data.pg > data.block){
-			result2 += "<ul class=pagination>" + 
-			"<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">◀◀</a></li>" +
-			"<li><a href=mainfile.htm?pg="+data.from_page-1+"&collabo_no="+data.collabo_no+">◀</a></li></ul>";
+			result2 += "<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">««</a></li>" +
+			"<li><a href=mainfile.htm?pg="+data.from_page-1+"&collabo_no="+data.collabo_no+">«</a></li>";
 		}else if(data.pg <= data.block && data.pg != 1){
-			result2 += "<ul class=pagination>" + 
-			"<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">◀◀</a></li>" +
-			"<li><a href=mainfile.htm?pg="+data.pg-1+"&collabo_no="+data.collabo_no+">◀</a></li></ul>";
+			result2 += "<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">««</a></li>" +
+			"<li><a href=mainfile.htm?pg="+data.pg-1+"&collabo_no="+data.collabo_no+">«</a></li>";
 		}
 		
 		for(var i = data.from_page; i <= data.to_page; i++){
 			if(data.pg == i){
-				result2 += "<ul class=pagination><li class=active><a href=#>"+i+"</a></li></ul>";
+				result2 += "<li class=active><a href=#>"+i+"</a></li>";
 			}else{
-				result2 += "<ul class=pagination><li><a href=mainfile.htm?pg="+i+"&collabo_no="+data.collabo_no+">"+i+"</a></li></ul>";
+				result2 += "<li><a href=mainfile.htm?pg="+i+"&collabo_no="+data.collabo_no+">"+i+"</a></li>";
 			}
 		}
 		
 		if(data.file.length != 0){
 			if(data.pg < data.to_page || data.pg != data.all_page){
-				result2 += "<ul class=pagination>" + 
-				"<li><a href=mainfile.htm?pg="+(data.pg+1)+"&collabo_no="+data.collabo_no+">▶</a></li>" +
-				"<li><a href=mainfile.htm?pg="+data.all_page+"&collabo_no="+data.collabo_no+">▶▶</a></li></ul>";
+				result2 += "<li><a href=mainfile.htm?pg="+(data.pg+1)+"&collabo_no="+data.collabo_no+">»</a></li>" +
+				"<li><a href=mainfile.htm?pg="+data.all_page+"&collabo_no="+data.collabo_no+">»»</a></li>";
 			}else if(data.to_page > data.all_page && data.pg != data.all_page){
-				result2 += "<ul class=pagination>" + 
-				"<li><a href=mainfile.htm?pg="+(data.to_page+1)+"&collabo_no="+data.collabo_no+">▶</a></li>" + 
-				"<li><a href=mainfile.htm?pg="+data.all_page+"&collabo_no="+data.collabo_no+">▶▶</a></li></ul>";
+				result2 += "<li><a href=mainfile.htm?pg="+(data.to_page+1)+"&collabo_no="+data.collabo_no+">»</a></li>" + 
+				"<li><a href=mainfile.htm?pg="+data.all_page+"&collabo_no="+data.collabo_no+">»»</a></li>";
 			}
 		}
 		
-		$("#divrow2").append("<div class=text-center>" + result2 + "</div>");
+		$("#divrow2").append("<div class=text-center><ul class=pagination>" + result2 + "</ul></div>");
 	}
 	
 	function indexselect(index) {

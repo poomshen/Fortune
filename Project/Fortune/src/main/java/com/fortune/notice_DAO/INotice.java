@@ -28,11 +28,15 @@ public interface INotice {
 	//공지사항 파일다운로드
 	public Notice_DTO fileDownloadNotice(int notice_no);
 	//공지사항 제목검색
-	public List<Notice_DTO> searchTitleListNotices(String searchvalue);
+	public List<Notice_DTO> searchTitleListNotices(String searchvalue, int page);
+	//공지사항 제목검색 개수
+	public int countTitleListNotices(String searchvalue);
 	//공지사항 내용검색
-	public List<Notice_DTO> searchTextListNotices(String searchvalue);
+	public List<Notice_DTO> searchTextListNotices(String searchvalue, int page);
+	//공지사항 제목검색 개수
+	public int countTextListNotices(String searchvalue);
 	//조회수
-	public void updateHits(int notice_no);	
+	public void updateHits(int notice_no);
 	//메인 화면 최신글
 	public List<Notice_DTO> mainListNotice();
 }
