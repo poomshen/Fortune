@@ -60,7 +60,7 @@ input.buttonLink {
 			<input type="button" class="btn btn-primary" onclick="deptshowadmin()" value="검색">
 		</form>
 		<form action="">
-		<div id="deptshowDiv">
+		<div id="deptshowDiv" style="overflow: scroll; overflow-x:hidden; ">
 				<table class="table table-striped table-bordered table-hover">
 					<tr>
 						<th>아이디</th>
@@ -94,10 +94,10 @@ input.buttonLink {
 	</div>
 	
 	<div class="col-sm-6" style="padding-right: 0px;">
-		<div class="row" style="padding-right: 0px; position: fixed;">
+		<div class="row" style="padding-right: 0px;">
 		<label style="height: 32px; margin-top: 10px;"> &nbsp;&nbsp;&nbsp; 사원 상세 정보</label>
 			<form action="">
-				<div id="usershowDiv" ></div>
+				<div id="usershowDiv" style="overflow: scroll; overflow-x:hidden"></div>
 			</form>
 		</div>
 	</div>

@@ -52,15 +52,24 @@
 	<!-- 검색 -->
 	<select id="searchTitleListNotices" resultType="com.fortune.Table_DTO.Notice_DTO">
 		select * from
-		(select rownum num, n.* from (select * from notice where notice_title
+		(select rownum num, n.* from (select * from notice where notice_title 
 		like '%'||#{param1}||'%' order by notice_no desc) n)
 		where num between 1 + (#{param2} - 1) * 10 and 10 + (#{param2} - 1) * 10
 	</select>
+	
+	<select id="countTitleListNotices" resultType="integer">
+		select count(*) from notice where notice_title like '%'||#{param1}||'%' 
+	</select>
 
-	<select id="searchTextListNotices" parameterType="String"
-		resultType="com.fortune.Table_DTO.Notice_DTO">
-		select * from notice where notice_text like
-		'%'||#{searchvalue}||'%'
+	<select id="searchTextListNotices" resultType="com.fortune.Table_DTO.Notice_DTO">
+		select * from
+		(select rownum num, n.* from (select * from notice where notice_text 
+		like '%'||#{param1}||'%' order by notice_no desc) n)
+		where num between 1 + (#{param2} - 1) * 10 and 10 + (#{param2} - 1) * 10
+	</select>
+	
+	<select id="countTextListNotices" resultType="integer">
+		select count(*) from notice where notice_text like '%'||#{param1}||'%' 
 	</select>
 
 	<!-- 조회수 -->
