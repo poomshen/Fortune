@@ -17,17 +17,15 @@ hr.hor{height: 50px; width:0px; border-right:0px;}
 	<h3>아이디 찾기^▽^/</h3>
 	
 <form action="">
-		<!-- 이름 <input type="text" id="search_name" name="search_name"><br>
-		전화번호 <input type="text" id="search_phone" name="search_phone"><br>
-		생년월일 <input type="text" id="search_birth" name="search_birth"><br> -->
+
 <table>
   <tr style="vertical-align:top">
-    <td style="width:190px; border-right:1px solid gray; padding-left:20px; padding-right:12px; text-align:justify">
+    <td style="width:190px; border-right:1px solid gray; padding-right:12px; text-align:justify">
     	이름 <input type="text" id="search_name" name="search_name" placeholder="이름을 입력하세요"><br>
 		전화번호 <input type="text" id="search_phone" name="search_phone" placeholder="ex)01x-xxxx-xxxx"><br>
 		생년월일 <input type="text" id="search_birth" name="search_birth" placeholder="ex)2016-11-11"><br>
 	</td>
-    <td style="width:190px; padding-left:20px; text-align:justify">
+    <td style="width:190px; padding-left:12px; text-align:justify">
    		아이디 <input type="text" id="search_id" name="search_id" placeholder="아이디를 입력하세요"><br>
 		이름 <input type="text" id="search_name2" name="search_name2" placeholder="이름을 입력하세요"><br>
 		전화번호 <input type="text" id="search_phone2" name="search_phone2" placeholder="ex)01x-xxxx-xxxx"><br>
