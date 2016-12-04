@@ -455,18 +455,13 @@ public class ProService {
 		System.out.println("집에 갑시다.");
 
 		// 게시판 기본 설정(기본값 처리)/////////////
-		int page = 1;
+		int page = 0;
 		String query="";
 		String field = "";
 		// 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
 		Join_DTO ids = (Join_DTO) session.getAttribute("info");
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
-		
-		System.out.println("실험");
-		System.out.println(ids.getRole_no());
-		System.out.println(ids.getRole_no()==4);
-		System.out.println(ids.getRole_no()==3);
-		System.out.println(ids.getRole_no()==2);
+		System.out.println("pg  :" +pg);
 		//////////////////////////////////////
 		//추가 2016-12-01 부장 ,팀장 ,사원 리스트 보여주기
 		if(ids.getRole_no() == 2){
@@ -488,7 +483,8 @@ public class ProService {
 			 field = "collabo_req_ID";
 		}
 		
-		if (pg != null && pg.equals("")) {
+		if (pg != null ) {
+			System.out.println("proServie  파라미터 들어옴:");
 			page = Integer.parseInt(pg);
 		}
 		if (f != null && f.equals("")) {
@@ -497,7 +493,7 @@ public class ProService {
 		if (q != null && q.equals("")) {
 			query = q;
 		}
-
+		System.out.println("sdkf;hasdihoghaoishegoihowaehsoigfhoih:"+ page);
 
 		// Mybatis 적용
 
