@@ -11,7 +11,7 @@ var msg
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://192.168.0.3:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://172.30.1.34:8090/fortune/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -83,10 +83,7 @@ $(document).ready(function() {
 
 
 </script>
-
-
-  
-  <!-- Navigation -->
+ <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; border-color:#f8f8f8; background-color:rgba(248,248,248,0); box-shadow: 2px 2px 5px hsla(0,0%,0%,0.58);">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -96,7 +93,7 @@ $(document).ready(function() {
                     <span class="icon-bar"></span>
                 </button>
                 <!-- 11.30 왼쪽최상단 기업명? 변경 (지율) -->
-                <a class="navbar-brand" href="main.htm"><i><img src="${pageContext.request.contextPath}/images/clover.png" alt="아이콘" style="img size: 18px;">&nbsp;Fortune</i></a>                
+                <a class="navbar-brand" href="FortuneMain.htm"><i><img src="${pageContext.request.contextPath}/images/clover.png" alt="아이콘" style="img size: 18px;">&nbsp;Fortune</i></a>                
             </div>
             <!-- /.navbar-header -->
 
@@ -147,7 +144,7 @@ $(document).ready(function() {
                         <c:forEach var="scheduleAlarmList" items="${sessionScope.sch_alist}"> 
                    		
                    		 <li id="${scheduleAlarmList.collabo_no}">  
-                   			 <a href="#">프로젝트${scheduleAlarmList.collabo_no}
+                   			 <a href="schedule.htm?collabo_no=${scheduleAlarmList.collabo_no}">프로젝트${scheduleAlarmList.collabo_no}
                    		 
                    		      	<span class="pull-right text-muted small" 
                                     style="padding: 3px 7px 3px 7px;background:#ffff;color: #cc0000;font-weight: bold;border-radius: 9px;">
@@ -194,8 +191,8 @@ $(document).ready(function() {
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="updateMember.htm"><i class="fa fa-user fa-fw"></i> Edit Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
+                        <!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li> -->
                         <li class="divider"></li>
                         <li><a href="logOut.htm"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>

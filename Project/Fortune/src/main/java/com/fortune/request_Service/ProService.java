@@ -135,7 +135,7 @@ public class ProService {
 			String memo = "collabo_req_title";
 			String search = "%%";
 			//////////////////////////////////////
-			if (pg != null && pg.equals("")) {
+			if (pg != null) {
 				page = Integer.parseInt(pg);
 			}
 			if (f != null && f.equals("")) {
@@ -195,8 +195,6 @@ public class ProService {
 			mv.addObject("from_page", from_page);
 			mv.addObject("to_page", to_page);
 			mv.addObject("st_query", st_query);
-			mv.addObject("memo", memo);
-			mv.addObject("search", search);
 			mv.addObject("memo", memo);
 			mv.addObject("search", search);
 			mv.setViewName(rs+".postRequestList");

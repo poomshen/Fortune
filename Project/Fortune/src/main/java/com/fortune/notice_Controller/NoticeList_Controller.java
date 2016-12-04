@@ -41,7 +41,7 @@ public class NoticeList_Controller {
 		if (str_pg != null) {
 			page = Integer.parseInt(str_pg);
 		}
-		int row_size = 9;
+		int row_size = 10;
 		int total_count = noticeListDao.countNotice(); // 공지사항 글 개수
 		System.out.println("total_count : " + total_count);
 		// 공지사항 글 목록

@@ -325,31 +325,46 @@ public class FullCalendarController {
     */
 	@RequestMapping(value="eventclick.ajax", method = RequestMethod.POST)
     public @ResponseBody Schedule_Work_Meeting_DTO eventclick(@RequestParam(value="collabo_no") String collabo_no,
-    	   @RequestParam(value="schedule_no") String schedule_no, @RequestParam(value="color_check") String color_check)
+    	   @RequestParam(value="schedule_no") String schedule_no, @RequestParam(value="color_check") String color_check,HttpSession session)
             throws ClassNotFoundException, SQLException{
         System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 캘린더 fullcalendar함수 호출: 선택한 일정 호출");        
         System.out.println(color_check);
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
-        
-        //Schedule_Work_DTO swdto = fullcalendarDAO.selectClick(schedule_no);
-        Schedule_Work_Meeting_DTO swmdto = fullcalendarDAO.selectClick(collabo_no, schedule_no);
 
-        String[] user_id = null;
+        Schedule_Alarm_DTO  sche_alarmDTO =new Schedule_Alarm_DTO();
+        //Schedule_Work_DTO swdto = fullcalendarDAO.selectClick(schedule_no);
         
+       
+        
+        Schedule_Work_Meeting_DTO swmdto = fullcalendarDAO.selectClick(collabo_no,schedule_no);
+
+        String[] user_ids = null;
+
+        //추가사항 : 스케줄 알림 db에서 불러오기
+        IScheduleAlarm sche_alarmDAO= sqlSession.getMapper(IScheduleAlarm.class);
+	    Join_DTO dto = (Join_DTO)session.getAttribute("info");
+	    System.out.println("schedule_no"+schedule_no);
+	    Schedule_Work_Meeting_DTO swmdto2= sche_alarmDAO.selectScheduleAlarm_one(dto.getUser_id(),schedule_no);
+	
+	    
+	    
         if(color_check.equals("rgb(51, 122, 183)")||color_check.equals("rgba(51, 122, 183, 0.219608)")){
         	//일반일정
-        	user_id = fullcalendarDAO.selectClick_users(schedule_no);
+        	user_ids = fullcalendarDAO.selectClick_users(schedule_no);
         }else if(color_check.equals("rgba(255, 228, 0, 0.658824)")){
-        	user_id = fullcalendarDAO.selectClick_users2(schedule_no);
+        	user_ids = fullcalendarDAO.selectClick_users2(schedule_no);
+
         }
         
         
         String users ="";
-        for(int i =0; i<user_id.length; i++){
-        	users += user_id[i] + "/";
+        for(int i =0; i<user_ids.length; i++){
+        	users += user_ids[i] + "/";
         }
         
         swmdto.setUsers(users);
+        
+        swmdto.setIsNew(swmdto2.getIsNew());
         
         return swmdto;
 	}
@@ -401,7 +416,8 @@ public class FullCalendarController {
 	    List<Schedule_Alarm_DTO> new_alarm = sche_alarmDAO.selectScheduleAlarm(dto.getUser_id());
         
         for(Schedule_Work_Meeting_DTO swm : schedulelist){
-    	String userid = "";
+        	String userid = "";
+        	String userid2 = "";
         	
         	for(Work_Users_DTO wu : wulist){
 
@@ -416,9 +432,9 @@ public class FullCalendarController {
         	for(Meet_Users_DTO mu : mulist){
 
         		if(mu.getSchedule_no() == swm.getSchedule_no()){
-        			userid += mu.getUser_id();
-        			userid += "/";
-        			swm.setUsers(userid);
+        			userid2 += mu.getUser_id();
+        			userid2 += "/";
+        			swm.setUsers(userid2);
         		};
         		
         	};
@@ -430,7 +446,7 @@ public class FullCalendarController {
         Map<String,Object> map = new HashMap();
         map.put("schedulelist", schedulelist);
         //추가사항:map에 새로운알림 데이터 넣기
-        map.put("new_alarm",new_alarm);        
+        map.put("new_alarm",new_alarm);
 		return map;
 	}
 	
@@ -458,6 +474,144 @@ public class FullCalendarController {
 		return select_place;
 	}
 	
+	
+	
+	
+	/* 작업자 : 이명철  // 최초 작업일 : 12.02 // 최종 작업일 : 12.02
+     * 작업 내용 : selectbox change값에 따라 일정테이블 가져옴
+     * version : v1.0
+    */
+	@RequestMapping(value="schedule_type.ajax", method = RequestMethod.POST)
+    public @ResponseBody Map<String,Object> schedule_type(@RequestParam(value="collabo_no") String collabo_no, 
+    		@RequestParam(value="schedule_type") String schedule_type, HttpSession session) throws ClassNotFoundException, SQLException{
+        System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 일정 table의 selectbox onchang시 해당되는 값 select");
+        
+        IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+        List<Schedule_Work_Meeting_DTO> schedulelist = new ArrayList<Schedule_Work_Meeting_DTO>();
+        Map<String,Object> map = new HashMap();
+        
+        IScheduleAlarm sche_alarmDAO= sqlSession.getMapper(IScheduleAlarm.class);
+	    Join_DTO dto = (Join_DTO)session.getAttribute("info");
+	    List<Schedule_Alarm_DTO> new_alarm = sche_alarmDAO.selectScheduleAlarm(dto.getUser_id());
+        
+        //selectbox 전체보기 클릭시
+        if(schedule_type.equals("0")){
+        	System.out.println("스케줄 타입 : 0");
+        	schedulelist = fullcalendarDAO.selectSWMList(collabo_no);
+        	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no);
+        	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no);
+        	
+            for(Schedule_Work_Meeting_DTO swm : schedulelist){
+            	String userid = "";
+                String userid2 ="";
+            	
+                	for(Work_Users_DTO wu : wulist){
+
+                		if(wu.getSchedule_no() == swm.getSchedule_no()){
+                			userid += wu.getUser_id();
+                			userid += "/";
+                			swm.setUsers(userid);
+                		};
+                		
+                	};
+                	
+                	for(Meet_Users_DTO mu : mulist){
+
+                		if(mu.getSchedule_no() == swm.getSchedule_no()){
+                			userid2 += mu.getUser_id();
+                			userid2 += "/";
+                			swm.setUsers(userid2);
+                		};
+                		
+                	};
+                	
+                };
+        
+        //selectbox 일반일정보기 클릭시
+        }else if(schedule_type.equals("1")){
+        	System.out.println("스케줄 타입 : 1");
+        	schedulelist = fullcalendarDAO.selectSWList(collabo_no);
+        	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no);
+        	
+            for(Schedule_Work_Meeting_DTO swm : schedulelist){
+            	String userid = "";
+                	
+	            	for(Work_Users_DTO wu : wulist){
+	
+	            		if(wu.getSchedule_no() == swm.getSchedule_no()){
+	            			userid += wu.getUser_id();
+	            			userid += "/";
+	            			swm.setUsers(userid);
+	            		};
+	            		
+	            	};
+                	
+               };
+        	
+        	
+        //selectbox 회의일정보기 클릭시
+        }else if(schedule_type.equals("2")){
+        	System.out.println("스케줄 타입 : 2");
+        	
+        	schedulelist = fullcalendarDAO.selectSMList(collabo_no);
+        	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no);
+        	
+            for(Schedule_Work_Meeting_DTO swm : schedulelist){
+            	String userid = "";
+                	
+            	for(Meet_Users_DTO mu : mulist){
+
+            		if(mu.getSchedule_no() == swm.getSchedule_no()){
+            			userid += mu.getUser_id();
+            			userid += "/";
+            			swm.setUsers(userid);
+            		};
+            		
+            	};
+                	
+            };
+        	
+        	
+        //selectbox 내 일정보기 클릭시
+        }else if(schedule_type.equals("3")){
+        	System.out.println("스케줄 타입 : 3");
+        	Join_DTO jdto = (Join_DTO) session.getAttribute("info");
+        	schedulelist = fullcalendarDAO.selectMySWMList(collabo_no, jdto.getUser_id());
+        	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no);
+        	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no);
+        	
+            for(Schedule_Work_Meeting_DTO swm : schedulelist){
+            	String userid = "";
+                String userid2 ="";
+            	
+                	for(Work_Users_DTO wu : wulist){
+
+                		if(wu.getSchedule_no() == swm.getSchedule_no()){
+                			userid += wu.getUser_id();
+                			userid += "/";
+                			swm.setUsers(userid);
+                		};
+                		
+                	};
+                	
+                	for(Meet_Users_DTO mu : mulist){
+
+                		if(mu.getSchedule_no() == swm.getSchedule_no()){
+                			userid2 += mu.getUser_id();
+                			userid2 += "/";
+                			swm.setUsers(userid2);
+                		};
+                		
+                	};
+                	
+                };
+        }
+        
+        map.put("schedulelist", schedulelist);
+        map.put("new_alarm",new_alarm);
+        
+        return map;
+	}
 	
 	
 	
