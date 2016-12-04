@@ -110,7 +110,11 @@ public class NoticeInsert_Controller {
 
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
 
-		noticeDao.insertNotice(ndto);
+		if(multipartFile.getSize() == 0){
+			noticeDao.insertFileNullNotice(ndto);
+		}else{
+			noticeDao.insertNotice(ndto);
+		}
 		
 		return view;
 

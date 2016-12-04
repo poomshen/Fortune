@@ -49,12 +49,13 @@
 					</table>
 				</div>
 			</div>
+			
 			<!-- /.panel-body -->
-			<p>
-				<a href="noticeList.htm">목록으로 돌아가기</a> <a
-					href="noticeUpdate.htm?notice_no=${noticeDetail.notice_no}">수정하기</a>
-				<a href="noticeDelete.htm?notice_no=${noticeDetail.notice_no}">삭제하기</a>
-			</p>
+			<div class="form-group container" align="center">
+				<a href="noticeUpdate.htm?notice_no=${noticeDetail.notice_no}"><input type="button" class="btn btn-primary" value="수정"></a>
+				<a href="noticeDelete.htm?notice_no=${noticeDetail.notice_no}"><input type="button" class="btn btn-primary" value="삭제"></a>
+				<input type="button" class="btn btn-primary" onclick="history.go(-1)" value="취소">
+			</div>
 		</div>
 		<!-- /.panel -->
 	</div>

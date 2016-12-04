@@ -88,13 +88,15 @@
 		<div id="divrow2" class="row">
 			<div class="text-center">
 				<ul class="pagination">
-					<c:if test="${pg > block}">
-						<li><a href="searchfile.htm?pg=1&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">««</a></li>
-						<li><a href="searchfile.htm?pg=${from_page - 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">«</a></li>
-					</c:if>
-					<c:if test="${pg <= block && pg != 1}">
-						<li><a href="searchfile.htm?pg=1&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">««</a></li>
-						<li><a href="searchfile.htm?pg=${pg - 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">«</a></li>
+					<c:if test="${pg != 1}">
+						<c:if test="${pg == from_page}">
+							<li><a href="searchfile.htm?pg=1&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">««</a></li>
+							<li><a href="searchfile.htm?pg=${from_page - 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">«</a></li>
+						</c:if>
+						<c:if test="${pg > from_page}">
+							<li><a href="searchfile.htm?pg=1&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">««</a></li>
+							<li><a href="searchfile.htm?pg=${pg - 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">«</a></li>
+						</c:if>
 					</c:if>
 					<c:forEach begin="${from_page}" end="${to_page}" var="i">
 						<c:if test="${i == pg}"><li class="active"><a href="#">${i}</a></li></c:if>
@@ -280,12 +282,14 @@
 		}
 
 		var result2 = "";
-		if(data.pg > data.block){
-			result2 += "<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">««</a></li>" +
-			"<li><a href=mainfile.htm?pg="+data.from_page-1+"&collabo_no="+data.collabo_no+">«</a></li>";
-		}else if(data.pg <= data.block && data.pg != 1){
-			result2 += "<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">««</a></li>" +
-			"<li><a href=mainfile.htm?pg="+data.pg-1+"&collabo_no="+data.collabo_no+">«</a></li>";
+		if(data.pg != 1){
+			if(data.pg == data.from_page){
+				result2 += "<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">««</a></li>" +
+				"<li><a href=mainfile.htm?pg="+data.from_page-1+"&collabo_no="+data.collabo_no+">«</a></li>";
+			}else if(data.pg > data.from_page){
+				result2 += "<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">««</a></li>" +
+				"<li><a href=mainfile.htm?pg="+data.pg-1+"&collabo_no="+data.collabo_no+">«</a></li>";
+			}
 		}
 		
 		for(var i = data.from_page; i <= data.to_page; i++){

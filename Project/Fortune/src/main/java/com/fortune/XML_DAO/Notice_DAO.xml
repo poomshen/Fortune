@@ -35,13 +35,20 @@
 		SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_no}
 	</select>
 
-	<!-- 게시물 입력 -->
+	<!-- 게시물 입력 (파일 추가) -->
 	<insert id="insertNotice">
 		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT,
 		NOTICE_HITS, NOTICE_DATE, NOTICE_FILENAME_ORG, NOTICE_FILENAME_RE,
 		NOTICE_FILEEXT)
 		VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE,
 		#{notice_filename_org}, #{notice_filename_re}, #{notice_fileext})
+	</insert>
+	
+	<!-- 게시물 입력 (파일 없음) -->
+	<insert id="insertFileNullNotice">
+		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT,
+		NOTICE_HITS, NOTICE_DATE)
+		VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE)
 	</insert>
 
 	<!-- 파일다운로드 -->
