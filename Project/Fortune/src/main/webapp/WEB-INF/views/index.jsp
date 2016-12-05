@@ -106,59 +106,6 @@
 	
 </div>
 
-<!--ID/PWD 찾기 Modal -->
-<!-- 
-<div class="container">
-
-  Modal
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      Modal content
-      <div class="modal-content">
-        <div style="padding:35px 50px; background-color: #194f89; color:white !important; text-align: center; font-size: 30px;">
-        <button type="button" class="close" style="color: white;" data-dismiss="modal">&times;</button>
-          <h4 >ID/Password 찾기</h4>
-        </div>
-        
-        <div class="modal-body" style="padding:40px 50px;">
-        
-            <table>
-              <tr style="vertical-align:top">
-              
-                <td style="width:190px; border-right:1px solid gray; text-align:justify">
-                <h3 style="color: black">ID 찾기</h3><br>
-		         <label style="color: black">이름</label><input type="text" id="search_name" name="search_name" style="color: black;" placeholder="이름을 입력하세요"><br>
-		         <label style="color: black">전화번호</label><input type="text" id="search_phone" name="search_phone" style="color: black;" placeholder="ex)01x-xxxx-xxxx"><br>
-		         <label style="color: black">생년월일</label><input type="text" id="search_birth" name="search_birth" style="color: black;" placeholder="ex)2016-11-11"><br>
-                </td>
-                <td style="width:190px; padding-left:20px; text-align:justify">
-                <h3 style="color: black">PWD 찾기</h3><br>
-		         <label style="color: black">아이디</label><input type="text" id="search_id" name="search_id" style="color: black;" placeholder="아이디를 입력하세요"><br>
-		         <label style="color: black">이름</label><input type="text" id="search_name2" name="search_name2" style="color: black;" placeholder="이름을 입력하세요"><br>
-		         <label style="color: black">전화번호</label><input type="text" id="search_phone2" name="search_phone2" style="color: black;" placeholder="ex)01x-xxxx-xxxx"><br>
-                </td>
-              </tr>
-  			</table>
-		
-        <div>
-        <br>
-            <input type="button" id="sbtn" name="sbtn" class="btn btn-primary" style="background-color: #194f89" onclick="getid()" value="아이디 찾기">&nbsp;&nbsp;
-            <input type="button" id="sbtn2" name="sbtn2" class="btn btn-primary" style="background-color: #194f89" onclick="getpwd()" value="비밀번호 찾기">
-          
-        </div>
-        
-        </div>
-        
-    
-      </div>
-      
-    </div>
-  </div> 
-</div>
- -->
-
-	
 	<div class="backstretch"
 		style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 609px; width: 972px; z-index: -999998; position: absolute;">
 		<img src="assets/img/backgrounds/1.jpg"

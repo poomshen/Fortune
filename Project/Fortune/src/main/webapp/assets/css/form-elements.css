@@ -40,9 +40,9 @@ textarea:focus {
     
 }
 
-input[type="text"]:-moz-placeholder, textarea:-moz-placeholder { color: #00000; }
-input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder { color: #00000; }
-input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: #00000; }
+input[type="text"]:-moz-placeholder, textarea:-moz-placeholder { color: rgba(255, 255, 255, 0.5); }
+input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder { color: rgba(255, 255, 255, 0.5); }
+input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.5); }
 
 input.btn {
 	
