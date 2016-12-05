@@ -92,6 +92,21 @@
 #footerCard{
 	float: left;
 }
+.btnDivs a{
+	width: 100%;
+}
+.btnDivs{
+	float: left;
+	margin-left :2%;
+	width:48%;
+	margin-bottom: 1%;
+}
+#responsbody{
+	margin-left: 3%;
+}
+.responseFrom{
+	margin: 2% 0 2% 1% ;
+}
 </style>
 
 <title>Insert title here</title>
@@ -110,9 +125,9 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">협업 리스트</div>
 					<!-- 검색폼 추가 -->
-					<div class="w3-card-2"></div>
+					<div class="w3-card-4"></div>
 						<c:forEach items="${list}" var="n">
-							<div class="w3-card-2 responseFrom" id="${n.num}"
+							<div class="w3-card-4 responseFrom" id="${n.num}"
 								style="width: 98%; ">
 							<div id="cardLeft" >
 								<header class="w3-container "> 
@@ -120,39 +135,40 @@
 								<h1>${n.collabo_req_title}</h1>
 								<c:choose>
 										<c:when test="${n.collabo_sal  == null}">
-											
 										</c:when>
 										<c:otherwise>
-											예상 수익: ${n.collabo_sal}　만원
+											예상 수익: ${n.collabo_sal}￦
 										</c:otherwise>
 									</c:choose>
+								<br>
 								팀장 : ${n.user_ID}
 								<br>
-								부장 ${n.collabo_req_ID}
-								<h5>${n.collabo_state}</h5>
-								
+								부장 : ${n.collabo_req_ID}
+								<h5>${n.collabo_state}
+								<security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
+								<a data-toggle="modal" data-target="#myModal"  class="btn btn-primary" onclick="ctionQuestion(${n.collabo_no })" >완료</a>
+								</security:authorize>
+								</h5>
 								 </header>
 								</div>
 								<footer class="w3-container " >
-								<div style="float: right;">
-								<div>
+								<div >
+								<div class="btnDivs">
 									<a href="schedule.htm?collabo_no=${n.collabo_no}" class="btn btn-primary">
 									<i class="glyphicon glyphicon-calendar"></i><br>일정</a>
 								</div>
-								<div>
+								<div class="btnDivs">
 									<a href="mainfile.htm?collabo_no=${n.collabo_no}" class="btn btn-primary">
 									<i class="glyphicon  glyphicon-cloud"></i><br>자료실</a>
 								</div>
-								<div>
+								<br>
+								<div class="btnDivs">
 									<a  onclick="detailReqCollabo(${n.collabo_req_index})" class="btn btn-primary"> 
 									<i class="glyphicon  glyphicon-th-list"></i><br>상세 보기</a>
 								</div>
-								<div>
+								<div class="btnDivs">
 									<a href="historyList.htm?collabo_req_no=${n.collabo_req_no }" class="btn btn-primary"> 
 									<i class="glyphicon  glyphicon-th-list"></i><br>히스토리보기</a>
-								</div>
-								<div>
-									<a data-toggle="modal" data-target="#myModal" onclick="ctionQuestion(${n.collabo_no })" >완료</a>
 								</div>
 								</div> 
 								</footer>

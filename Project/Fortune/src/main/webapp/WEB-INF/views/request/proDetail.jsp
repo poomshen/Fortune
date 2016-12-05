@@ -6,7 +6,7 @@
 	<tr class="w3-hover-text-blue" style="height: 10px"><td>상태:</td><td>${list.collabo_req_state}</td><td>작성일</td><td>${list.collabo_req_date}</td></tr>
 	<tr class="w3-hover-text-blue" style="height: 10px"><td>제목:</td><td>${list.collabo_req_title}</td><td>작성자</td><td>${list.user_ID}</td></tr>
 	<tr class="w3-hover-text-blue" style="height: 10px"><td >내용</td><td colspan="3"></td></tr>
-	<tr class="w3-hover-text-blue" style="overflow: scroll;"><td colspan="4" width="100px" height="100%" style="overflow: scroll;"><c:choose>
+	<tr class="w3-hover-text-blue" style="overflow: scroll;"><td colspan="4" width="100px" height="100%" ><c:choose>
 		<c:when test="${list.collabo_req_state != '거절'}">
 			${list.collabo_req_text}
 		</c:when>
