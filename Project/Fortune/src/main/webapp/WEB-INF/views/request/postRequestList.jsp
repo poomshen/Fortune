@@ -378,7 +378,7 @@ function modifyReqCollabo(){
      			<div id="row1" style="height:200px" class="col-md-4 col">
 					<div class="accordion-wrap">
 	   					<div class="accordion">
-        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;${n.collabo_req_ID}</a>
+        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}{${n.collabo_req_ID}}</a>
         						<div class="sub-nav active">
             						<div class="html about-me" id="about-mesocial-link${n.collabo_req_index}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
@@ -436,7 +436,7 @@ function modifyReqCollabo(){
       	<div id="row2" style="height:200px" class="col-md-4 col">
 						<div class="accordion-wrap">
 	   					<div class="accordion">
-        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;${n.collabo_req_ID}</a>
+        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}{${n.collabo_req_ID}}</a>
         						<div class="sub-nav active">
             						<div class="html about-me" id="about-mesocial-link${n.collabo_req_index}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
