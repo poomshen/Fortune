@@ -325,31 +325,46 @@ public class FullCalendarController {
     */
 	@RequestMapping(value="eventclick.ajax", method = RequestMethod.POST)
     public @ResponseBody Schedule_Work_Meeting_DTO eventclick(@RequestParam(value="collabo_no") String collabo_no,
-    	   @RequestParam(value="schedule_no") String schedule_no, @RequestParam(value="color_check") String color_check)
+    	   @RequestParam(value="schedule_no") String schedule_no, @RequestParam(value="color_check") String color_check,HttpSession session)
             throws ClassNotFoundException, SQLException{
         System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 캘린더 fullcalendar함수 호출: 선택한 일정 호출");        
         System.out.println(color_check);
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
-        
-        Schedule_Work_Meeting_DTO swmdto = fullcalendarDAO.selectClick(collabo_no, schedule_no);
 
-        String[] user_id = null;
+        Schedule_Alarm_DTO  sche_alarmDTO =new Schedule_Alarm_DTO();
+        //Schedule_Work_DTO swdto = fullcalendarDAO.selectClick(schedule_no);
         
-        //일반일정
+       
+        
+        Schedule_Work_Meeting_DTO swmdto = fullcalendarDAO.selectClick(collabo_no,schedule_no);
+
+        String[] user_ids = null;
+
+        //추가사항 : 스케줄 알림 db에서 불러오기
+        IScheduleAlarm sche_alarmDAO= sqlSession.getMapper(IScheduleAlarm.class);
+	    Join_DTO dto = (Join_DTO)session.getAttribute("info");
+	    System.out.println("schedule_no"+schedule_no);
+	    Schedule_Work_Meeting_DTO swmdto2= sche_alarmDAO.selectScheduleAlarm_one(dto.getUser_id(),schedule_no);
+	
+	    
+	    
         if(color_check.equals("rgb(51, 122, 183)")||color_check.equals("rgba(51, 122, 183, 0.219608)")){
-        	user_id = fullcalendarDAO.selectClick_users(schedule_no);
-        //회의일정
-        }else if(color_check.equals("rgb(35, 177, 0)")){
-        	user_id = fullcalendarDAO.selectClick_users2(schedule_no);
+        	//일반일정
+        	user_ids = fullcalendarDAO.selectClick_users(schedule_no);
+        }else if(color_check.equals("rgba(255, 228, 0, 0.658824)")){
+        	user_ids = fullcalendarDAO.selectClick_users2(schedule_no);
+
         }
         
         
         String users ="";
-        for(int i =0; i<user_id.length; i++){
-        	users += user_id[i] + "/";
+        for(int i =0; i<user_ids.length; i++){
+        	users += user_ids[i] + "/";
         }
         
         swmdto.setUsers(users);
+        
+        swmdto.setIsNew(swmdto2.getIsNew());
         
         return swmdto;
 	}

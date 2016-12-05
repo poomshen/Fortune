@@ -27,4 +27,7 @@ public interface IHistory {
 	
 	//헙업 요청 최대 값 가져 오기
 	public int maxReqNo();
+	
+	//협업  테이블 수정 되는 값  16/12/02
+	public void collaboComplete(String  change , int  collabo_no);
 }

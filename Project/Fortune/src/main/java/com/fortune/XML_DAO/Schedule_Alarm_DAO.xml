@@ -13,4 +13,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="selectScheduleAlarm" resultType="com.fortune.Table_DTO.Schedule_DTO">
 select sa.schedule_no,sa.alarm_index from alarm a join schedule_alarm sa on sa.ALARM_INDEX = a.ALARM_INDEX where user_id=#{user_id}
 </select>
+
+<select id="selectScheduleAlarm_one" resultType="com.fortune.function_DTO.Schedule_Work_Meeting_DTO">
+select count(*) as isNew from alarm a join schedule_alarm sa on sa.ALARM_INDEX = a.ALARM_INDEX where user_id=#{param1} and schedule_no=#{param2}
+</select>
+
+<delete id="deleteScheAlarm">
+delete from schedule_alarm where alarm_index=(select a.alarm_index from alarm a join schedule_alarm sa on sa.ALARM_INDEX = a.ALARM_INDEX where schedule_no=#{param2} and user_id=#{param1})
+
+</delete>
 </mapper>
