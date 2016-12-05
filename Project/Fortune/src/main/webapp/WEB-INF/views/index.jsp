@@ -38,7 +38,7 @@
 <!-- Modal 때문에 css추가함
 	작성자 : 김지현
  -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <style>
@@ -51,8 +51,11 @@
   .modal-footer {
       background-color: #f9f9f9;
   }
-  .modal-body{
- 	 color:#000000;
+/*   .modal-body{
+ 	 background-color:#000000;
+  } */
+  .text-placeholder{
+  	color:black;
   }
 </style>
 </head>
@@ -140,7 +143,7 @@
           <h4>ID/Password 찾기</h4>
         </div>
         
-        <div class="modal-body" style="padding:40px 50px;color:#000000 ">
+        <div class="modal-body" style="padding:40px 50px; color: #000000">
         
             <table>
               <tr style="vertical-align:top">
