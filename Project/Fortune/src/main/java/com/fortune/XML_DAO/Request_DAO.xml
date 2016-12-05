@@ -139,7 +139,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      collabo_end,g.collabo_state collabo_state,
      g.collabo_req_id collabo_req_id ,g.collabo_sal collabo_sal from (SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo WHERE ${param2}
-		LIKE '%${param3}%' ORDER BY collabo_no DESC ) N )
+		LIKE '%${param3}%' and COLLABO_STATE != '완료' ORDER BY collabo_no DESC ) N )
 		WHERE NUM BETWEEN (${param1}+1)  AND (4+${param1}) )G join 
 		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX ORDER by NUM
 	</select>
@@ -156,6 +156,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<foreach  item="querys"  collection="param3" open="(" separator="," close=")">
 			#{querys}
 		</foreach>
+		and COLLABO_STATE != '완료'
 		 ORDER BY collabo_no DESC ) N )
 		WHERE NUM BETWEEN (${param1}+1)  AND (4+${param1}) )G join 
 		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX  ORDER by NUM
