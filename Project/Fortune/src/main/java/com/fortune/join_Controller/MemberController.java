@@ -37,6 +37,7 @@ import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.Table_DTO.Team_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.chart_DAO.IChart;
+import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.function_DTO.Select_Collabo_DTO;
 import com.fortune.member_DAO.IJoin;
@@ -135,9 +136,14 @@ public class MemberController {
 		System.out.println("size:"+alist.size());
 		
 		session.setAttribute("alarm", alist);
-		
-	
 		session.setAttribute("totalCount", tatalCount);	
+		
+		//일정 알림 (작성자 : 이예지)
+		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+		sch_alist  = adao.checkScheduleAlarm(user_id);
+		session.setAttribute("sch_alist", sch_alist);
+		
+		
 		
 		//공지사항 최신글 뽑는 부분 (추가 작업 : 김중완)
 		INotice notice_dao = sqlsession.getMapper(INotice.class);

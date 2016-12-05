@@ -25,8 +25,6 @@ import com.fortune.history_Service.HistoryService;
 import com.fortune.request_Service.ProService;
 
 
-
-
 @Controller
 
 public class ProController {
