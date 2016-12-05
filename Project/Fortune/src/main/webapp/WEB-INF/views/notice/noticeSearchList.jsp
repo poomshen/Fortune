@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">[공지사항 목록]</h1>
@@ -22,11 +22,9 @@
 					</select> 
 					<input type="text" name="searchvalue"> 
 					<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
-					<security:authorize access="hasAnyRole('ROLE_ADMIN')">
-                    	<div style="float: right; margin-right: 15px;">
-							<a href="noticeInsert.htm"><input type="button" class="btn btn-primary" value="글쓰기"></a>
-						</div>
-					</security:authorize>
+					<div style="float: right; margin-right: 15px;">
+						<a href="noticeInsert.htm"><input type="button" class="btn btn-primary" value="글쓰기"></a>
+					</div>
 				</form>
 			</div>
 			<!-- /.panel-heading -->
@@ -56,33 +54,32 @@
 					</table>
 				</div>
 				<!-- Pagination 추가 시작 -->
-				<!-- to_page 보여줄 페이지 끝, all_page 끝 페이지, from_page 보여줄 페이지의 시작, block 5 -->
 				<div class="container" style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
 						<c:if test="${pg != 1}">
 							<c:if test="${pg == from_page}">
-								<li><a href="noticeList.htm?pg=1">««</a></li>
-								<li><a href="noticeList.htm?pg=${from_page-1}">«</a></li>
+								<li><a href="noticeSearch.htm?pg=1&searchvalue=${searchvalue}&selectvalue=${selectvalue}">««</a></li>
+								<li><a href="noticeSearch.htm?pg=${from_page - 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">«</a></li>
 							</c:if>
 							<c:if test="${pg > from_page}">
-								<li><a href="noticeList.htm?pg=1">««</a></li>
-								<li><a href="noticeList.htm?pg=${pg - 1}">«</a></li>
+								<li><a href="noticeSearch.htm?pg=1&searchvalue=${searchvalue}&selectvalue=${selectvalue}">««</a></li>
+								<li><a href="noticeSearch.htm?pg=${pg - 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">«</a></li>
 							</c:if>
 						</c:if>
 						<c:forEach begin="${from_page}" end="${to_page}" var="i">
 							<c:if test="${i == pg}"><li class="active"><a href="#">${i}</a></li></c:if>
 							<c:if test="${i != pg}">
-								<li><a href="noticeList.htm?pg=${i}">${i}</a></li>
+								<li><a href="noticeSearch.htm?pg=${i}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">${i}</a></li>
 							</c:if>
 						</c:forEach>
 						<c:if test="${noticelist.size() != 0}">
 							<c:if test="${pg < to_page || pg != all_page}">
-								<li><a href="noticeList.htm?pg=${pg + 1}">»</a></li>
-								<li><a href="noticeList.htm?pg=${all_page}">»»</a></li>
+								<li><a href="noticeSearch.htm?pg=${pg + 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">»</a></li>
+								<li><a href="noticeSearch.htm?pg=${all_page}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">»»</a></li>
 							</c:if>
 							<c:if test="${to_page > all_page && pg != all_page}">
-								<li><a href="noticeList.htm?pg=${to_page + 1}">»</a></li>
-								<li><a href="noticeList.htm?pg=${all_page}">»»</a></li>
+								<li><a href="noticeSearch.htm?pg=${to_page + 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">»</a></li>
+								<li><a href="noticeSearch.htm?pg=${all_page}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">»»</a></li>
 							</c:if>
 						</c:if>
 					</ul>
@@ -91,7 +88,6 @@
 
 			</div>
 			<!-- /.panel-body -->
-
 		</div>
 		<!-- /.panel -->
 	</div>

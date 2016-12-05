@@ -19,8 +19,10 @@ public interface INotice {
 	public List<Notice_DTO> listNotice(int page);
 	//게시물 상세
 	public Notice_DTO detailNotice(int notice_no);
-	//게시물 입력
+	//게시물 입력 (파일 추가)
 	public int insertNotice(Notice_DTO ndto);
+	//게시물 입력 (파일 없음)
+	public int insertFileNullNotice(Notice_DTO ndto);
 	//게시물 수정
 	public int updateNotice(Notice_DTO ndto);
 	//게시물 삭제
@@ -28,11 +30,15 @@ public interface INotice {
 	//공지사항 파일다운로드
 	public Notice_DTO fileDownloadNotice(int notice_no);
 	//공지사항 제목검색
-	public List<Notice_DTO> searchTitleListNotices(String searchvalue);
+	public List<Notice_DTO> searchTitleListNotices(String searchvalue, int page);
+	//공지사항 제목검색 개수
+	public int countTitleListNotices(String searchvalue);
 	//공지사항 내용검색
-	public List<Notice_DTO> searchTextListNotices(String searchvalue);
+	public List<Notice_DTO> searchTextListNotices(String searchvalue, int page);
+	//공지사항 제목검색 개수
+	public int countTextListNotices(String searchvalue);
 	//조회수
-	public void updateHits(int notice_no);	
+	public void updateHits(int notice_no);
 	//메인 화면 최신글
 	public List<Notice_DTO> mainListNotice();
 }

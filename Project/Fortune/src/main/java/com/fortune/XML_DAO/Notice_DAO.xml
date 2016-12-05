@@ -35,13 +35,20 @@
 		SELECT * FROM NOTICE WHERE NOTICE_NO=#{notice_no}
 	</select>
 
-	<!-- 게시물 입력 -->
+	<!-- 게시물 입력 (파일 추가) -->
 	<insert id="insertNotice">
 		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT,
 		NOTICE_HITS, NOTICE_DATE, NOTICE_FILENAME_ORG, NOTICE_FILENAME_RE,
 		NOTICE_FILEEXT)
-		VALUES(NOTICE_SEQ.nextval, 'admin@fortune.com', #{notice_title}, #{notice_text}, 0, SYSDATE,
+		VALUES(NOTICE_SEQ.nextval, #{user_id}, #{notice_title}, #{notice_text}, 0, SYSDATE,
 		#{notice_filename_org}, #{notice_filename_re}, #{notice_fileext})
+	</insert>
+	
+	<!-- 게시물 입력 (파일 없음) -->
+	<insert id="insertFileNullNotice">
+		INSERT INTO NOTICE(NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_TEXT,
+		NOTICE_HITS, NOTICE_DATE)
+		VALUES(NOTICE_SEQ.nextval, #{user_id}, #{notice_title}, #{notice_text}, 0, SYSDATE)
 	</insert>
 
 	<!-- 파일다운로드 -->
@@ -52,15 +59,24 @@
 	<!-- 검색 -->
 	<select id="searchTitleListNotices" resultType="com.fortune.Table_DTO.Notice_DTO">
 		select * from
-		(select rownum num, n.* from (select * from notice where notice_title
+		(select rownum num, n.* from (select * from notice where notice_title 
 		like '%'||#{param1}||'%' order by notice_no desc) n)
 		where num between 1 + (#{param2} - 1) * 10 and 10 + (#{param2} - 1) * 10
 	</select>
+	
+	<select id="countTitleListNotices" resultType="integer">
+		select count(*) from notice where notice_title like '%'||#{param1}||'%' 
+	</select>
 
-	<select id="searchTextListNotices" parameterType="String"
-		resultType="com.fortune.Table_DTO.Notice_DTO">
-		select * from notice where notice_text like
-		'%'||#{searchvalue}||'%'
+	<select id="searchTextListNotices" resultType="com.fortune.Table_DTO.Notice_DTO">
+		select * from
+		(select rownum num, n.* from (select * from notice where notice_text 
+		like '%'||#{param1}||'%' order by notice_no desc) n)
+		where num between 1 + (#{param2} - 1) * 10 and 10 + (#{param2} - 1) * 10
+	</select>
+	
+	<select id="countTextListNotices" resultType="integer">
+		select count(*) from notice where notice_text like '%'||#{param1}||'%' 
 	</select>
 
 	<!-- 조회수 -->

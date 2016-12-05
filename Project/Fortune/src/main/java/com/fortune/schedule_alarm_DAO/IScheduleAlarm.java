@@ -11,6 +11,7 @@ import java.util.List;
 import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Schedule_Alarm_DTO;
 import com.fortune.function_DTO.All_Alarm_DTO;
+import com.fortune.function_DTO.Schedule_Work_Meeting_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 
 public interface IScheduleAlarm {
@@ -22,4 +23,7 @@ public interface IScheduleAlarm {
 	
 	public List<Schedule_Alarm_DTO> selectScheduleAlarm(String user_id);
 	
+	public Schedule_Work_Meeting_DTO selectScheduleAlarm_one(String user_id,String schedule_no);
+	
+	public int deleteScheAlarm(String user_id,int schedule_no);
 }
