@@ -54,7 +54,10 @@
 							</div>
 							<!-- 여기에서 CSS 제공 -->
 						</c:forEach>
-								<script type="text/javascript">
+							<script type="text/javascript">
+							$(function(){
+								console.log("dd");	
+							});
 							$("div#lastPostsLoader").html("<div  class='btn btn-primary btn-lg btn-block'><h1style='color: white;'>더 이상 존제하지 않습니다</h1></div>"); 
                                 				</script>
 							

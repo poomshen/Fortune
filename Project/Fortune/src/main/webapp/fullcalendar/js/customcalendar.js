@@ -5,19 +5,19 @@ var clickobject;
 var clickobjectcolor= "";
 var scheduleusers;
 
-var ttest = "0";
-
+var aa= new Date();
 
 
 function schedule_type(){
-	alert($('#schedule_type').val());
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 	
 	$.ajax({
 		url : 'schedule_type.ajax',
 		type : 'post',
         data : { "collabo_no" : $('#collabo_no').val(),
-				 "schedule_type" : $('#schedule_type').val()
+				 "schedule_type" : $('#schedule_type').val(),
+				 "year" : $('#year').val(),
+				 "month" : $('#month').val()
 		        },
 				success : function(data) {
 					console.log(data)
@@ -145,6 +145,18 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 	for(var i =0; i<userid.length-1; i++){
 		contentck += userid[i] + "&nbsp;&nbsp;&nbsp;"
 	}
+	
+	if(progress_or_place==10){
+		$('#place').html("회의실1")
+	}else if(progress_or_place==20){
+		$('#place').html("회의실2")
+	}else if(progress_or_place==30){
+		$('#place').html("회의실3")
+	}else if(progress_or_place==40){
+		$('#place').html("회의실4")
+	}
+	
+	
 	
  	$('#usersdiv2').html(contentck)
  	
@@ -324,13 +336,16 @@ function update_progress(){
 }
 //추가작업 : 알림DB NEW 가져오기
 function fcontent() {
-	
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 	$('#content').empty();
 	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
-		data : 'collabo_no='+$('#collabo_no').val(),
+        data : {
+			"collabo_no" : $('#collabo_no').val(),
+			"year" : $('#year').val(),
+			"month" : $('#month').val()
+        },
 		success : function(data) {
 			console.log(data)
 			$.each(data.schedulelist, function(index, obj) {
@@ -361,13 +376,8 @@ function fcontent() {
 			$('#content_detail2').css("display", "none");
 	        
 	        $('#content').html(content)
-	        //fullcalendar 불러오는 함수
-			loadCalendar();
-
 
 	        $.each(data.new_alarm, function(index, obj) {
-				
-				
 				
 				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
 				
@@ -375,6 +385,19 @@ function fcontent() {
 		} 
 
 	});
+}
+
+
+function scheduleuser(){
+	
+	scheduleusers="";
+	
+	$("input[name='userchk']:checked").each(function(i){
+
+		scheduleusers += $(this).val()+"/";
+	
+	});
+	
 }
 
 

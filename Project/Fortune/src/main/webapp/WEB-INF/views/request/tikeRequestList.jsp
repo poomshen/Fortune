@@ -306,7 +306,6 @@ alert('Error while request..'	);
 		<select id="memoselect">
 		<option value="collabo_req_title">제목</option>
 		<option value="collabo_req_text">내용</option>
-		
 		</select>
 		<input type="text" id="search" placeholder="Search" >
 		<button onclick="searchBtn()">검색</button>
@@ -398,7 +397,7 @@ alert('Error while request..'	);
 									<c:when test="${n.collabo_req_state == '거절'}"></c:when>
 
 									<c:otherwise>
-										<c:if test="${sessionScope.info.user_id == n.collabo_req_ID}">
+										<c:if test="${sessionScope.info.user_id == n.collabo_req_ID &&n.collabo_req_state != '완료' }">
 											<input type="button" class="btn btn-primary"
 												data-toggle="modal" data-target="#myModal2"
 												onclick="memoReqCollabo(${n.collabo_req_index})" value="수락">
@@ -559,6 +558,10 @@ function refuse() {
 							<!-- 날짜 유효성 검사를 한 곳입니다. -->
 							<script type="text/javascript">
 						 function proAdd(){
+							 
+							 var re = /^[0-9]+$/;
+							 
+							 
 						     	if($('#startDate').val() == ""){
 						     		alert(" 날짜 입력해주세요");
 						     		$('#startDate').focus();
@@ -572,10 +575,17 @@ function refuse() {
 						     		alert("예상수익 입력해주세요");
 						     		$('#collabo_sal').focus();
 						     		return false;
-						     	}else {
+						     	}else if(!re.test($("#collabo_sal").val())){
+						     		alert("숫자를 입력해주세요");
+						     		$('#collabo_sal').focus();
+						     		return false;
+						     	}
+						     	else {
 						     		alert("완료");
 						     		
-						     		
+						     			
+
+
 						     		
 						     		proaddform.submit();
 						     		return true;

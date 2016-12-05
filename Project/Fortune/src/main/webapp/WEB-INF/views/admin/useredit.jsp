@@ -60,7 +60,8 @@ input.buttonLink {
 			<input type="button" class="btn btn-primary" onclick="deptshowadmin()" value="검색">
 		</form>
 		<form action="">
-		<div id="deptshowDiv" style="overflow: scroll; height: 560px; overflow-x:hidden">
+		
+		<div id="deptshowDiv">
 				<table class="table table-striped table-bordered table-hover">
 					<tr>
 						<th>아이디</th>
@@ -71,8 +72,7 @@ input.buttonLink {
 					<c:forEach var="i" items="${deptlist}">
 						<c:if test="${not (i.user_id eq 'admin@fortune.com')}">
 							<tr>
-								<td><input type="button" value="${i.user_id}"
-									class="buttonLink" onclick="ShowUserInfo('${i.user_id}')"></td>
+								<td><input type="button" value="${i.user_id}" class="buttonLink" onclick="ShowUserInfo('${i.user_id}')"></td>
 								<td><c:out value="${i.user_name}"></c:out></td>
 								<td><c:out value="${i.user_phone}"></c:out></td>
 								<c:if test="${i.dept_no == 0}">
@@ -97,7 +97,7 @@ input.buttonLink {
 		<div class="row" style="padding-right: 0px;">
 		<label style="height: 32px; margin-top: 10px;"> &nbsp;&nbsp;&nbsp; 사원 상세 정보</label>
 			<form action="">
-				<div id="usershowDiv" style="overflow: scroll; height: 560px; overflow-x:hidden"></div>
+				<div id="usershowDiv"></div>
 			</form>
 		</div>
 	</div>
@@ -151,6 +151,8 @@ function deptshowadmin(){
 		url:"deptsearchadmin.ajax",
 		data:{"dept_no": $('#deptSelect1').val()},
 		success:function(data){
+			$("#deptshowDiv").css("overflow-y", "scroll");
+			$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data));
 		},
 		error:function(){

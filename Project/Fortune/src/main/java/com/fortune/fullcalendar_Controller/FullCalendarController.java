@@ -351,7 +351,7 @@ public class FullCalendarController {
         if(color_check.equals("rgb(51, 122, 183)")||color_check.equals("rgba(51, 122, 183, 0.219608)")){
         	//일반일정
         	user_ids = fullcalendarDAO.selectClick_users(schedule_no);
-        }else if(color_check.equals("rgba(255, 228, 0, 0.658824)")){
+        }else if(color_check.equals("rgb(35, 177, 0)")){
         	user_ids = fullcalendarDAO.selectClick_users2(schedule_no);
 
         }
@@ -399,16 +399,19 @@ public class FullCalendarController {
      * version : v2.0
     */
 	@RequestMapping(value="calendarload.ajax", method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> schedule_work_meeting(@RequestParam(value="collabo_no") String collabo_no,HttpSession session) throws ClassNotFoundException, SQLException {
+	public @ResponseBody Map<String,Object> schedule_work_meeting(@RequestParam(value="collabo_no") String collabo_no,
+			@RequestParam(value="year") String year, @RequestParam(value="month") String month,
+			HttpSession session) throws ClassNotFoundException, SQLException {
 		System.out.println("위치 : FullCalendarController // 내용 : DB에서 (일반+회의)일정 가져옴 // 작업자: 이명철");
+		String yearmonth = year + "-" + month;
+		System.out.println(yearmonth);
         
 	    IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
 	   
-	    System.out.println("협업 번호"+collabo_no);
-        List<Schedule_Work_Meeting_DTO> schedulelist = fullcalendarDAO.selectSWMList(collabo_no);
+        List<Schedule_Work_Meeting_DTO> schedulelist = fullcalendarDAO.selectSWMList(collabo_no, yearmonth);
 
-        List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no);
-        List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no);
+        List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no, yearmonth);
+        List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no, yearmonth);
         
         //추가사항 : 스케줄 알림 db에서 불러오기
         IScheduleAlarm sche_alarmDAO= sqlSession.getMapper(IScheduleAlarm.class);
@@ -451,6 +454,22 @@ public class FullCalendarController {
 	}
 	
 	
+	 /* 작업자 : 이명철  // 최초 작업일 : 12.05 // 최종 작업일 : 12.05
+     * 작업 내용 : 최초 fullcalendar 로드될 때, 이번달 외에도 모든 일정을 가져옴
+     * version : v1.0
+    */
+	@RequestMapping(value="calendarload2.ajax", method = RequestMethod.POST)
+	public @ResponseBody List<Schedule_Work_Meeting_DTO> schedule_work_meeting(@RequestParam(value="collabo_no") String collabo_no)
+			throws ClassNotFoundException, SQLException {
+		System.out.println("위치 : FullCalendarController // 내용 : DB에서 (일반+회의)일정 가져옴 -2// 작업자: 이명철");
+        
+	    IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+	    List<Schedule_Work_Meeting_DTO> swmdto = fullcalendarDAO.selectAllSWMList(collabo_no);
+	    
+		return swmdto;
+	}
+	
+	
 	
 	
 
@@ -483,8 +502,10 @@ public class FullCalendarController {
     */
 	@RequestMapping(value="schedule_type.ajax", method = RequestMethod.POST)
     public @ResponseBody Map<String,Object> schedule_type(@RequestParam(value="collabo_no") String collabo_no, 
-    		@RequestParam(value="schedule_type") String schedule_type, HttpSession session) throws ClassNotFoundException, SQLException{
+    		@RequestParam(value="schedule_type") String schedule_type, @RequestParam(value="year") String year, 
+    		@RequestParam(value="month") String month, HttpSession session) throws ClassNotFoundException, SQLException{
         System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 일정 table의 selectbox onchang시 해당되는 값 select");
+        String yearmonth = year + "-" + month;
         
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
         List<Schedule_Work_Meeting_DTO> schedulelist = new ArrayList<Schedule_Work_Meeting_DTO>();
@@ -497,9 +518,9 @@ public class FullCalendarController {
         //selectbox 전체보기 클릭시
         if(schedule_type.equals("0")){
         	System.out.println("스케줄 타입 : 0");
-        	schedulelist = fullcalendarDAO.selectSWMList(collabo_no);
-        	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no);
-        	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no);
+        	schedulelist = fullcalendarDAO.selectSWMList(collabo_no, yearmonth);
+        	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no, yearmonth);
+        	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no, yearmonth);
         	
             for(Schedule_Work_Meeting_DTO swm : schedulelist){
             	String userid = "";
@@ -531,7 +552,7 @@ public class FullCalendarController {
         }else if(schedule_type.equals("1")){
         	System.out.println("스케줄 타입 : 1");
         	schedulelist = fullcalendarDAO.selectSWList(collabo_no);
-        	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no);
+        	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no, yearmonth);
         	
             for(Schedule_Work_Meeting_DTO swm : schedulelist){
             	String userid = "";
@@ -554,7 +575,7 @@ public class FullCalendarController {
         	System.out.println("스케줄 타입 : 2");
         	
         	schedulelist = fullcalendarDAO.selectSMList(collabo_no);
-        	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no);
+        	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no, yearmonth);
         	
             for(Schedule_Work_Meeting_DTO swm : schedulelist){
             	String userid = "";
@@ -577,8 +598,8 @@ public class FullCalendarController {
         	System.out.println("스케줄 타입 : 3");
         	Join_DTO jdto = (Join_DTO) session.getAttribute("info");
         	schedulelist = fullcalendarDAO.selectMySWMList(collabo_no, jdto.getUser_id());
-        	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no);
-        	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no);
+        	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no, yearmonth);
+        	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no, yearmonth);
         	
             for(Schedule_Work_Meeting_DTO swm : schedulelist){
             	String userid = "";
