@@ -1,5 +1,6 @@
 package com.fortune.Table_DTO;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Request_DTO {
 	private String collabo_req_title; //요청 타이틀 title
 	private String collabo_req_text; //요청 글 content
 	private String user_ID; //요청자 writer
-	private Date collabo_req_date; //요청 날짜 regdate
+	private Timestamp collabo_req_date; //요청 날짜 regdate
 	private String collabo_req_state; //진행 상태 ref
 	private String collabo_req_ID; //수신자 ..
 	private String collabo_req_filesrc;
@@ -75,10 +76,10 @@ public class Request_DTO {
 	public void setUser_ID(String user_ID) {
 		this.user_ID = user_ID;
 	}
-	public Date getCollabo_req_date() {
+	public Timestamp getCollabo_req_date() {
 		return collabo_req_date;
 	}
-	public void setCollabo_req_date(Date collabo_req_date) {
+	public void setCollabo_req_date(Timestamp collabo_req_date) {
 		this.collabo_req_date = collabo_req_date;
 	}
 	public String getCollabo_req_state() {

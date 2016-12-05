@@ -758,9 +758,9 @@ function modifyReqCollabo(a){
 					<ul class="pagination">
 						<c:if test="${pg>block}">
 							<li><a href="#" onclick="pazingBtn()">««</a></li>
-							<li><a href="listReplyRequest.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li> --%>
 							<li><a href="#" onclick="pazingBtn2()">«</a></li>
-							<li><a href="listReplyRequest.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li> --%>
 						</c:if>
 						<c:if test="${pg<=block}">
 							<li><a href="#">««</a></li>
@@ -772,14 +772,14 @@ function modifyReqCollabo(a){
 							</c:if>
 							<c:if test="${i!=pg}">
 								<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
-								<li><a href="listReplyRequest.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li>
+								<%-- <li><a href="listReplyRequest.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li> --%>
 							</c:if>
 						</c:forEach>
 						<c:if test="${to_page<all_page}">
 							<li><a href="#" onclick="pazing4Btn()">»</a></li>
 							<li><a href="#" onclick="pazing5Btn()">»»</a></li>
-							<li><a href="listReplyRequest.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li>							
-							<li><a href="listReplyRequest.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li>							
+							<li><a href="listReplyRequest.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li> --%>
 						</c:if>
 						<c:if test="${to_page>=all_page}">
 							<li><a href="#">»</a></li>
@@ -907,8 +907,8 @@ function modifyReqCollabo(a){
 												data-toggle="modal" data-target="#myModal3"
 												onclick="modifyReqCollabo(${n.collabo_req_index})" value="수정">
 												
-												<%-- <a class="btn btn-primary"
-													href="proEdit.htm?collabo_req_index=${n.collabo_req_index}">수정</a> --%>
+												 <a class="btn btn-primary"
+													href="proEdit.htm?collabo_req_index=${n.collabo_req_index}">수정</a> 
 											</security:authorize>
 									</c:if>
 									</c:otherwise>

@@ -22,6 +22,7 @@ import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
 import com.fortune.function_DTO.ProgectName_DTO;
 import com.fortune.history_Service.HistoryService;
+import com.fortune.request_DTO.Passion_DTO;
 import com.fortune.request_Service.ProService;
 
 
@@ -46,7 +47,8 @@ public class ProController {
 			int collabo_req_no = historyService.maxReqNo();
 			model.addAttribute("collabo_req_no", collabo_req_no);
 			
-			List<Join_DTO> list = proservice.listEffect(model); //수신자를 부르기 위해서 사용하였다. 
+			List<Passion_DTO> list = proservice.listEffect(model); //수신자를 부르기 위해서 사용하였다. 
+			
 			model.addAttribute("list", list);
 			
 		return "request.writeRequest";
@@ -79,11 +81,12 @@ public class ProController {
 	// 만든 날짜: 2016-11-28
 	 @Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
-	public ModelAndView requestList(String pg, String f, String q, String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
-
+	public ModelAndView requestList(String pg, String f, String q, String st,String me,String se, HttpSession session ,String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
+		 
 		String rs = "request";
-		ModelAndView mv = proservice.getRequest(pg, f, q, st,rs,me,se, session);
+		ModelAndView mv = proservice.getRequest(pg, f, q, st,rs,me,se,collabo_req_date, session);
 		
+		System.out.println("데이터 변환중:"+ collabo_req_date);
 		return mv;
 		
 
@@ -92,10 +95,11 @@ public class ProController {
 	 // 만든 날짜 : 2016 -12-02
 	 @Transactional
 	 @RequestMapping("requestList2.htm") // /customer/notice.htm
-	 public ModelAndView requestList2(String pg, String f, String q, String st,String me,String se,HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+	 public ModelAndView requestList2(String pg, String f, String q, String st,String me,String se,HttpSession session, String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
 		 
 		 String rs = "cen";
-		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, me, se, session);
+		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, me, se,collabo_req_date, session);
+		 System.out.println("데이터 변환중:"+ collabo_req_date);
 		 return mv;
 		 
 		 
@@ -262,7 +266,7 @@ public class ProController {
 					// 실DB저장
 				
 				
-				return "redirect:requestList.htm";
+				return "redirect:responseList.htm";
 
 			}
 		 

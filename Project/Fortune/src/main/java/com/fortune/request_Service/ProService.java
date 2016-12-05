@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
 import com.fortune.notice_DAO.INotice;
 import com.fortune.request_DAO.ProDao;
+import com.fortune.request_DTO.Passion_DTO;
 
 @Service
 public class ProService {
@@ -39,8 +41,8 @@ public class ProService {
 	@Autowired
 	private SqlSession sqlsession;
 
-	//협업 답장자 리스트 입니다.
-	public ModelAndView getRequest(String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
+	//협업 답장자함 입니다.
+	public ModelAndView getRequest(String pg, String f, String q,String st,String rs,String me,String se,String collabo_req_date, HttpSession session)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("집에 갑시다.");
 
@@ -105,6 +107,12 @@ public class ProService {
 		
 
 		List<Request_DTO> list = proDao.getRequest(page, field, query,st_query, memo, search);
+		
+		SimpleDateFormat sdfCurrent = new SimpleDateFormat("yyyy-mm-dd hh시:mm분:ss초"); 
+		Timestamp currentTime = new Timestamp(Long.parseLong("1141952708997")); 
+		collabo_req_date = sdfCurrent.format(currentTime); 
+		System.out.println("collabo_req_date==="+collabo_req_date);
+		
 		
 		mv.addObject("list", list);
 		mv.addObject("total_count", total_count);
@@ -520,15 +528,16 @@ public class ProService {
 	}*/
 	
 	//수신자 리스트  클래스입니다.
-	public List<Join_DTO> listEffect(Model model) 
+	public List<Passion_DTO> listEffect(Model model) 
 			throws ClassNotFoundException, SQLException{
 		
 		ProDao checking_DAO = sqlsession.getMapper(ProDao.class);
-		List<Join_DTO> list = checking_DAO.listEffect();
+		List<Passion_DTO> list = checking_DAO.listEffect();
 		
 		
 		return list;
 	}
+	
 	
 	//담당자 리스트  클래스입니다.
 	public List<Join_DTO> listManager(String dept_no) 
