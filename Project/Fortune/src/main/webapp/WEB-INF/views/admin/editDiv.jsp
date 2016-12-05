@@ -99,8 +99,8 @@
 		<span class="addon" style="padding-bottom: 0px;"><i
 			class="glyphicon glyphicon-calendar"></i></span>부서명
 	</label>
-	<div class="col-md-7" style="margin-bottom: 10px">
-		<select class="selectpicker" id="deptSelect" name="dept_no" onchange="deptchange()">
+	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
+		<select class="selectpicker" id="deptSelect" name="dept_no" onchange="deptchange()" style="width: 150px;">
 			<c:forEach var="i" items="${deptselect}">
 				<c:choose>
 					<c:when test="${i.dept_no == join_DTO.dept_no}">
@@ -120,8 +120,8 @@
 		<span class="addon" style="padding-bottom: 0px;"><i
 			class="glyphicon glyphicon-calendar"></i></span>팀명
 	</label>
-	<div class="col-md-7" style="margin-bottom: 10px">
-		<select class="selectpicker" id="teamSelect" name="team_no">
+	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
+		<select class="selectpicker" id="teamSelect" name="team_no" style="width: 150px;">
 			<c:forEach var="j" items="${teamselect}">
 				<c:choose>
 					<c:when test="${join_DTO.team_no == j.team_no}">
@@ -141,8 +141,8 @@
 		<span class="addon" style="padding-bottom: 0px;"><i
 			class="glyphicon glyphicon-calendar"></i></span>직급명
 	</label>
-	<div class="col-md-7" style="margin-bottom: 10px">
-		<select class="selectpicker" name="position_no" id="positionSelect">
+	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
+		<select class="selectpicker" name="position_no" id="positionSelect" style="width: 150px;">
 			<c:forEach var="i" items="${positionselect}">
 				<c:choose>
 					<c:when test="${i.position_no == join_DTO.position_no}">
@@ -159,11 +159,11 @@
 
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-calendar"></i></span>권한
+		<span class="addon" style="padding-bottom: 0px;">
+		<i class="glyphicon glyphicon-calendar"></i></span>권한
 	</label>
-	<div class="col-md-7" style="margin-bottom: 10px">
-		<select id="roleSelect" name="role_no">
+	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
+		<select id="roleSelect" name="role_no" style="width: 150px;">
 			<c:forEach var="i" items="${roleselect}">
 				<c:choose>
 					<c:when test="${i.role_no == join_DTO.role_no}">
@@ -179,7 +179,7 @@
 </div>
 <div class="form-group">
 	<div class="content col-md-12" align="center">
-			<input type="button" class="btn btn-primary " onclick="UserUpdate()" value="수정"> 
-			<input type="button" class="btn btn-primary" onclick="CancelUpdate()" value="취소">
+		<input type="button" class="btn btn-primary " onclick="UserUpdate()" value="수정"> 
+		<input type="button" class="btn btn-primary" onclick="CancelUpdate()" value="취소">
 	</div>
 </div>

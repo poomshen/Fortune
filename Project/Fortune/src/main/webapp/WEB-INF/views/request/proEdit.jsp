@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
 function modify() {
-	 $('#menuView3').empty();
 	 
 	if($('#collabo_req_title').val() == "") {
 		alert("협업 제목을 입력하세요 ");
@@ -23,8 +21,6 @@ function modify() {
 }
 
 </script>
-<title>Insert title here</title>
-</head>
 <body>
 
 
@@ -96,4 +92,3 @@ function modify() {
 
 
 </body>
-</html>
