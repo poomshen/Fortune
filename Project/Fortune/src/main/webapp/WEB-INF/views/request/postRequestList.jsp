@@ -12,16 +12,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style>
+h6 {
+    color: #777;
+    font-weight: bolder;
+}
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>	
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</style>
 
 <script type="text/javascript">
 
@@ -50,6 +47,9 @@ Profile = {
         $('.plus').click(function(){
         	
         	alert( $(this).attr('id'));
+        	
+        	$('#hidden').val($(this).attr('id'));
+        	
         	detailReqCollabo($(this).attr('id'));
          	$('#social-link'+$(this).attr('id')).toggleClass('active');
             $('#about-mesocial-link'+$(this).attr('id')).toggleClass('blur');
@@ -87,8 +87,7 @@ Profile = {
      function detailReqCollabo(a){
 		
 		//modal body 부분 비워주기
-		
- 	  	
+	
     	 
  	   	 $.ajax({
  	   		 
@@ -117,7 +116,9 @@ Profile = {
     		console.log(state);
     		$.get("listReplyRequest2.htm", {st :state}, function(data, textStatus, req) {
     		
+    			$('#'+state).addClass('active');
     			$('#requestlist').html(data);
+    			
     		})
     	}
 
@@ -296,22 +297,20 @@ function pazing5Btn(){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-function modifyReqCollabo(a){
-	 $("#meneview").empty();
-	 $("#ReqCollabo").empty();
-  	
-	 
+function modifyReqCollabo(){
+	
+	var a=$('#hidden').val();
+
    	 $.ajax({
    		 
  			type: "get",
  			url:  "proEdit.htm",
  			cache: false,				
  			data:"collabo_req_index="+a,
- 		    success:function(data){ //callback  
- 		    	$("#meneview").append("<div>");
-				$("#meneview").append($('#meneview').html(data)); 
-				$("#meneview").append("</div>");
- 		      
+ 		    success:function(data){ //callback
+ 		    	$('#detail_footer').empty();
+ 		    	$("#detail").html(data);
+			  
  		     },
  			error: function(){						
  				alert('Error while request..'	);
@@ -340,14 +339,14 @@ function modifyReqCollabo(a){
 <!--대기/수락/거절 tab영역 -->
 <div class="tab-container">
   		<ul class="nav nav-tabs" style="width:950px">
-    		<li class="active"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
-    		<li><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
-    		<li><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
+    		<li id="대기" class="active"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
+    		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
+    		<li id="거절"><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
   		</ul>
 	<div class="tab-content">
-    	<div class="tab-pane active" id="home"></div>
-    	<div class="tab-pane" id="profile"></div>
-    	<div class="tab-pane" id="messages"></div>
+    	<div class="tab-pane" ></div>
+    	<div class="tab-pane" ></div>
+    	<div class="tab-pane" ></div>
 	</div>
 </div>
 
@@ -387,14 +386,14 @@ function modifyReqCollabo(a){
                 
                								 <c:choose>
 												<c:when test="${n.collabo_req_state == '수락'}">
-              										 "border:3px solid #1e851f"
+              										 "border:3px solid #1e851f; margin-right:0px"
                 								</c:when>
                 								
                 								<c:when test="${n.collabo_req_state == '거절'}">
 								 					"border:3px solid #dd2d16"
 												</c:when>
 												<c:otherwise>
-								 					"border:3px solid #ddd"
+								 					"border:3px solid #ddd; margin-right:0px"
 												</c:otherwise>
 
 											</c:choose>
@@ -404,11 +403,18 @@ function modifyReqCollabo(a){
                     							<div class="photo-overlay" >
                         							<span id="${n.collabo_req_index}" class="plus">+</span>
                     							</div>
-                  						</div>
-        
+           		         						
+	                    						</div>
+	                    						<h6>제목 : ${n.collabo_req_title}</h6>
+                							 	<h6 style="font-weight: inherit;">작성일:${n.collabo_req_date}</h6>
+                    						
+                    						
+                    								
+        	            						
+                    					
+                    						  
         <!-- card안에 간단한 상세 내역 -->
-                  									  제목 : ${n.collabo_req_title}
-                									작성일:${n.collabo_req_date}
+                  								
                 									
         
         
@@ -458,8 +464,9 @@ function modifyReqCollabo(a){
                   						</div>
         
         <!-- card안에 간단한 상세 내역 -->
-                  									  제목 : ${n.collabo_req_title}
-                									작성일:${n.collabo_req_date}
+                  								<h6>제목 : ${n.collabo_req_title}</h6>
+                							 	<h6 style="font-weight: inherit;">작성일:${n.collabo_req_date}</h6>
+                    						
                 									
         
         
@@ -523,177 +530,20 @@ function modifyReqCollabo(a){
 			
 					
 </div>
-				
-
-
-<%-- 
-
-	<div id="requestlist">
-	
-	<div class="w3-panel w3-card-4">
-
-		<div class="w3-dropdown-hover w3-left">
-				<a onclick="selectState('대기')" class="btn btn-primary">대기</a>
-				<a onclick="selectState('수락')" class="btn btn-primary">수락</a>
-				<a onclick="selectState('거절')" class="btn btn-primary">거절</a>
-		</div>
-		
-		<div class="w3-dropdown-hover w3-right">
-		
-		<select id="memoselect">
-		<option value="collabo_req_title">제목</option>
-		<option value="collabo_req_text">내용</option>
-		</select>
-		<input type="text" id="search" placeholder="Search" >
-		<button onclick="searchBtn()">검색</button>
-		</div>
-
-	</div>
-
-
-<!-- 이곳은  w3-card-4 전체에 잡고 있습니다. CSS  -->
-	<div class="w3-panel w3-card-4">
-		<div id="ajaxside">
-			<div class="panel panel-default"  style="position: fixed;">
-				<div class="panel-heading">협업 리스트</div>
-				<!-- 검색폼 추가 -->
-				<div class="panel-body" id="ReqCollabo"></div>
-			</div>
-		</div>
-
-<div class="w3-panel w3-card-4" style="float: left;">
-		<c:forEach items="${list}" var="n">
-
-
-			<div id="pageside" class="w3-small">
-				<div style="float: left;border: #e1e1e1;border-style: solid;">
-
-
-					<div class="w3-panel w3-card-4">
-
-
-
-						<!-- 요청담당자 쪽 그림 입니다. -->
-						<div style="float: left;">
-
-							<div class="w3-card-2" style="margin: 3px" align="center">
-								<br> <img style="width:30px"alt="이승훈 사진" src="http://www.y-bridge.co.kr/attach/files/20161031/thumbs/7cb2befbf0dc7adf828094523ebf4270_128_128.jpg" class="img-circle">
-								<div class="w3-container w3-center">
-									<dl>
-										<dt>수신자 </dt>
-										<dd>${n.collabo_req_ID}</dd>
-									</dl>
-								</div>
-							</div>
-
-						</div>
-						
-						
-						
-						<!-- 중앙 글 입니다. -->
-
-						<div style="float: left;" class="w3-panel w3-card-4">
-							<div class="row">
-
-
-								<dl class="col-sm-4">
-									<dd>번호</dd>
-									<dd class="collabo_req_index">${n.collabo_req_index}</dd>
-								</dl>
-
-								<dl class="col-sm-4">
-									<dd>진행상태</dd>
-									<dd>${n.collabo_req_state}</dd>
-								</dl>
-
-								<dl>
-
-									<dd class="col-sm-12">제목:${n.collabo_req_title}</dd>
-								</dl>
-
-
-								<dl>
-
-									<dd class="col-sm-12">작성일: ${n.collabo_req_date}</dd>
-								</dl>
-
-							</div>
-							<div class="w3-panel w3-card-2" align="center">
-							
-							<input type="button" class="btn btn-primary " 
-										onclick="detailReqCollabo(${n.collabo_req_index})"
-										value="상세보기"></input>
-							
-								<c:choose>
-									<c:when test="${n.collabo_req_state == '수락'}">
-										<input type="button" class="btn btn-primary disabled" value="수락완료" readonly="readonly">
-									</c:when>
-									<c:when test="${n.collabo_req_state == '거절'}"></c:when>
-									<c:otherwise>
-									<c:if test="${sessionScope.info.user_id == n.user_ID}">
-											<security:authorize
-												access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
-												
-												<input type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#myModal3"
-												onclick="modifyReqCollabo(${n.collabo_req_index})" value="수정">
-												
-												 <a class="btn btn-primary"
-													href="proEdit.htm?collabo_req_index=${n.collabo_req_index}">수정</a> 
-											</security:authorize>
-									</c:if>
-									</c:otherwise>
-
-								</c:choose>
-
-							</div>
-
-						</div>
-
-
-						<!-- 수신자 쪽 그림 입니다. -->
-						
-						
-						
-						<div style="float: right;">
-
-							<div class="w3-card-2" align="center" style="margin: 3px">
-								<br> <img src="images/man2.PNG" alt="Norway"
-									style="width: 100px; height: 100px; border-radius: 70%; ">
-								<div class="w3-container w3-center">
-									<dl>
-										<dt>요청수신자 :</dt>
-										<dd>${n.collabo_req_ID}</dd>
-									</dl>
-								</div>
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-			</div>
-
-
-		</c:forEach>
-</div>
-		
-		
-		
-		--%>
-		<div class="container">
-			<div class="modal fade" id="myModal3" role="dialog">
-				<div class="modal-dialog modal-lg">
+		<!-- 상세보기 modal 부분-->
+			<div class="container">
+				<div class="modal fade" id="myModal3" role="dialog">
+					<div class="modal-dialog modal-lg">
 
 					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
+						<div class="modal-content">
+							<div class="modal-header">
 
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
 
-							<h4 class="modal-title">수정 화면</h4>
+							<h4 class="modal-title">상세보기</h4>
 
-						</div>
+							</div>
 
 
 
@@ -701,16 +551,13 @@ function modifyReqCollabo(a){
 							
 							<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 							
-							
-							<!-- 비동기 처리로 불렀습니다 .. lord -->
-							<div id="meneview"></div>
-
-
-
+						
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
+						
+						<div class="modal-footer" id="detail_footer">
+							<input type="text" id="hidden">
+							<input type="button" class="btn btn-default" onclick="modifyReqCollabo()" value="수정">
+							<button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
 						</div>
 					</div>
 
