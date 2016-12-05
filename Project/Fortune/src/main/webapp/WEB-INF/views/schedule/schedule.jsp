@@ -13,7 +13,7 @@
 $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip();
- 	
+    
 	
 	//화면 로드시 일정을 DB에서 불러오는 코드  
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
@@ -104,73 +104,90 @@ $(document).ready(function() {
 		}
 	});
  	
+ 	
+ 	
+	//작업자 : 이예지 
+	//최종 수정일 : 2016/11/28
+	//select 되어지는 사람의 이름을 즉시 보여주는 함수
+	
+	$(".dropdown_s dt a").on('click', function() {
+	
+		  $(".dropdown_s dd ul").slideToggle('fast');
+		
+		});
+
+		$(".dropdown_s dd ul li a").on('click', function() {
+	
+		  $(".dropdown_s dd ul").hide();
+		});
+
+		function getSelectedValue(id) {
+	
+		  return $("#" + id).find("dt a span.value").html();
+		}
+
+		$(document).bind('click', function(e) {
+		
+		  var $clicked = $(e.target);
+		  if (!$clicked.parents().hasClass("dropdown_s")) $(".dropdown_s dd ul").hide();
+		});
+
+		$('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+		  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+		    title = $(this).val() + ",";
+
+		  if ($(this).is(':checked')) {
+			 
+		    var html = '<span title="' + title + '">' + title + '</span>';
+		    
+		    $('.multiSel').append(html);
+		    $(".hida").hide();
+		  } else {
+		
+		    $('span[title="' + title + '"]').remove();
+		    var ret = $(".hida");
+		    $('.dropdown_s dt a').append(ret);
+
+		  }
+		});
+ 	
 	
 });
 
 
 
-function schedule_type(){
-	alert($('#schedule_type').val());
-	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
-	
-	$.ajax({
-		url : 'schedule_type.ajax',
-		type : 'post',
-        data : { "collabo_no" : $('#collabo_no').val(),
-				 "schedule_type" : $('#schedule_type').val()
-		        },
-				success : function(data) {
-					console.log(data)
-					$.each(data.schedulelist, function(index, obj) {
-						if(obj.progress_or_place<10){
-							if(obj.progress_or_place==1){
-						        content += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
-						        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
-						        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
-						        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
-						        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
-						        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
-							}else{
-						        content += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
-						        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
-						        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
-						        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
-						        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
-						        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 
-							}
-						} else{
-							content += '<tr><td style="color:#23b100;">회의</td>';
-					        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
-					        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
-					        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>';
-						}
-				        
-					});
-					
-					$('#content_detail').css("display", "none");
-					$('#content_detail2').css("display", "none");
-					$('#content').html(content)
-			        
-					$.each(data.new_alarm, function(index, obj) {
-						
-						alert(obj.schedule_no);
-						
-						$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
-						
-					});
-				}
-	}); 
+
+function test(){
+	var test = "2016-11-03";
+	var arr1 = test.split('-');
+	var dat1 = new Date(arr1[0], arr1[1], arr1[2]);
+ 	console.log(dat1)
+ 	console.log(dat1.getMonth())
+ 	console.log(dat1.getFullYear())
+ 	console.log(dat1.getDate())
+	console.log(dat1.getMonth()+2)
+	console.log(dat1.getMonth()-1)
 	
-	
+	console.log(dat1.getFullYear()+ "-" + (dat1.getMonth()+3) + "-" + dat1.getDate())
 	
 }
 
 
 
 
+function scheduleuser(){
+	
+	scheduleusers="";
+	
+	$("input[name='userchk']:checked").each(function(i){
 
-
+		scheduleusers += $(this).val()+"/";
+	
+	});
+	
+}
 
 
 
@@ -183,10 +200,12 @@ function schedule_type(){
 </head>
 <body>
 <input type="hidden" id="collabo_no" value="${collabo_no}">
+<input type="hidden" id="today" value="2016-12-03">
 <input type="hidden" id="modal_start">
 <input type="hidden" id="modal_end">
 <input type="hidden" id="modal_start_ms">
 <input type="hidden" id="modal_end_ms">
+<input type="hidden" id="check">
 
 
 
@@ -306,9 +325,9 @@ function schedule_type(){
   
     <dd>
         <div class="mutliSelect effect2" >
-            <ul class="effect2" style="display: block;padding-right: 0px;height: 204px;width: 272px;">
+            <ul class="effect2" style="display: block; padding-right: 0px; height: 204px; width: 272px;">
         		<c:forEach items="${team_id}" var="obj" varStatus="status">
-					<li><input type="checkbox" value="${obj}" id="${obj}" name='userchk'><label for="${obj}" style="cursor: pointer ;">${obj}</label></li>
+					<li><input type="checkbox" value="${obj}" id="${obj}" name='userchk' onclick="scheduleuser()"><label for="${obj}" style="cursor: pointer ;">${obj}</label></li>
 				</c:forEach>
             </ul>
         </div>
@@ -327,8 +346,9 @@ function schedule_type(){
 			<!-- 업무상세 보여주는 div 영역 -->
 			<div class="col-sm-5" style="padding-right: 0px;">
 				<div class="row" style="padding-right: 0px;">
+				<button onclick="test()">test</button>
 					<select id="schedule_type" onchange="schedule_type()">
-						<option> 선 택  </option>
+						<option id="selectdefault"> 선 택  </option>
 						<option value="0"> 전 체 보 기 </option>
 						<option value="1">업무일정 보기</option>
 						<option value="2">회의일정 보기</option>
