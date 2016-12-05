@@ -51,9 +51,7 @@
   .modal-footer {
       background-color: #f9f9f9;
   }
-/*   .modal-body{
- 	 background-color:#000000;
-  } */
+
   .text-placeholder{
   	color:black;
   }
@@ -138,44 +136,44 @@
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="padding:35px 50px;">
-         <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        <div class="modal-header" style="padding:35px 50px; color: #194f89">
+        <button type="button" class="close" style="color: white;" data-dismiss="modal">&times;</button>
           <h4>ID/Password 찾기</h4>
         </div>
         
-        <div class="modal-body" style="padding:40px 50px; color: #000000">
+        <div class="modal-body" style="padding:40px 50px;">
         
             <table>
               <tr style="vertical-align:top">
               
-                <td style="width:190px; border-right:1px solid gray; padding-right:15px; text-align:justify">
-                <h3>ID 찾기</h3>
-		                    이름 <input type="text" id="search_name" name="search_name" placeholder="이름을 입력하세요"><br>
-		                    전화번호 <input type="text" id="search_phone" name="search_phone" placeholder="ex)01x-xxxx-xxxx"><br>
-		                    생년월일 <input type="text" id="search_birth" name="search_birth" placeholder="ex)2016-11-11"><br>
+                <td style="width:190px; border-right:1px solid gray; text-align:justify">
+                <h3 style="color: black">ID 찾기</h3>
+		         <label style="color: black">이름</label><input type="text" id="search_name" name="search_name" style="color: black;" placeholder="이름을 입력하세요"><br>
+		         <label style="color: black">전화번호</label><input type="text" id="search_phone" name="search_phone" placeholder="ex)01x-xxxx-xxxx"><br>
+		         <label style="color: black">생년월일</label><input type="text" id="search_birth" name="search_birth" placeholder="ex)2016-11-11"><br>
                 </td>
                 <td style="width:190px; padding-left:20px; text-align:justify">
-                <h3>PWD 찾기</h3>
-		                    아이디 <input type="text" id="search_id" name="search_id" placeholder="아이디를 입력하세요"><br>
-		                    이름 <input type="text" id="search_name2" name="search_name2" placeholder="이름을 입력하세요"><br>
-		                    전화번호 <input type="text" id="search_phone2" name="search_phone2" placeholder="ex)01x-xxxx-xxxx"><br>
+                <h3 style="color: black">PWD 찾기</h3>
+		         <label style="color: black">아이디</label><input type="text" id="search_id" name="search_id" placeholder="아이디를 입력하세요"><br>
+		         <label style="color: black">이름</label><input type="text" id="search_name2" name="search_name2" placeholder="이름을 입력하세요"><br>
+		         <label style="color: black">전화번호</label><input type="text" id="search_phone2" name="search_phone2" placeholder="ex)01x-xxxx-xxxx"><br>
                 </td>
               </tr>
   			</table>
 		
         <div>
         <br>
-            <input type="button" id="sbtn" name="sbtn" onclick="getid()" value="아이디 찾기">
-            <input type="button" id="sbtn2" name="sbtn2" onclick="getpwd()" value="비밀번호 찾기">
+            <input type="button" id="sbtn" name="sbtn" class="btn btn-primary " onclick="getid()" value="아이디 찾기">
+            <input type="button" id="sbtn2" name="sbtn2" class="btn btn-primary " onclick="getpwd()" value="비밀번호 찾기">
           
         </div>
         
         </div>
         
-        <div class="modal-footer">
+      <!--    <div class="modal-footer">
           <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
           <span></span>이전으로</button>
-        </div>
+        </div>  -->
       </div>
       
     </div>
