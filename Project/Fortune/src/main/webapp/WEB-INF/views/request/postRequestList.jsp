@@ -33,7 +33,7 @@
     padding:15px;
     position:relative;
     width: 280px;
-    height: 430px;
+    height: 200px;
     margin-top: 10px;
 
 }
@@ -41,9 +41,10 @@
     width:100%;
     margin:auto;
     max-width:280px;
+    height: 150px;
     overflow:hidden;
     border-radius:3px;
-    background:#ddd;
+    background:#f8f8f8;
     box-shadow:0 17px 50px 0 rgba(0,0,0,.19),0 12px 15px 0 rgba(0,0,0,.24);
 }
 .accordion>a{
@@ -52,18 +53,33 @@
     display:block;
     text-decoration:none;
     transition:all .3s ease-in-out 0s;
+    
+    padding-bottom: 1px;
+    padding-top: 1px;
+    
 }
 .accordion>a:not(:last-child){
     border-bottom:1px solid #fff;
+    
+    padding-bottom: 1px;
+    padding-top: 1px;
+    
 }
 .accordion>a:hover,
 .accordion>a.active{
+
+    padding-bottom: 1px;
+    padding-top: 1px;
 
 background:#194f89;
     color:#fff;
 }
 .accordion>a.active{
     color:#fff;
+    
+    padding-bottom: 1px;
+    padding-top: 1px;
+    
 }
 .accordion>a>.alert-numb,
 .accordion>.sub-nav>a>.alert-numb{
@@ -123,8 +139,8 @@ background:#194f89;
     margin-bottom:0;
 }
 .accordion .about-me .photo{
-    width:95px;
-    height:95px;
+    width:50px;
+    height:50px;
     margin:auto;
     overflow:hidden;
     border-radius:50%;
@@ -132,6 +148,8 @@ background:#194f89;
     border:4px solid #fff;
     box-shadow:0 6px 20px 0 rgba(0,0,0,.19),0 8px 17px 0 rgba(0,0,0,.2);
     background-color:#fff;
+    margin-left:0px;
+    
 }
 .accordion .about-me .photo .photo-overlay{
     top:0;
@@ -613,11 +631,21 @@ function pazing5Btn(){
 </head>
 <body>
 <div class="container" id="requestlist" style="margin-top:20px">
-<div class="row grid-columns" style="width:1000px; margin-top:2px">
-     <div id="gg" style="height:20px" class="col-md-6 col">
-				<a onclick="selectState('대기')" class="btn btn-primary">대기</a>
-				<a onclick="selectState('수락')" class="btn btn-primary">수락</a>
-				<a onclick="selectState('거절')" class="btn btn-primary">거절</a>
+<div class="tab-container">
+  <ul class="nav nav-tabs" style="width:950px">
+    <li class="active"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
+    <li><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
+    <li><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="home"></div>
+    <div class="tab-pane" id="profile"></div>
+    <div class="tab-pane" id="messages"></div>
+  </div>
+</div>
+<div class="row grid-columns" style="width:1000px; height:20px; margin-top:2px">
+     <div id="gg" style="height:20px;margin-left: 700px;" class="col-md-6 col">
+		
 				<select id="memoselect">
 				<option value="collabo_req_title">제목</option>
 				<option value="collabo_req_text">내용</option>
@@ -629,9 +657,9 @@ function pazing5Btn(){
 		</div>
 		<c:forEach items="${list}" var="n" varStatus="status">
 	<c:choose>
-     	<c:when test="${(status.index)%2 eq 0}">
+     	<c:when test="${(status.index)%3 eq 0}">
      	<div class="row grid-columns" style="width:1000px; margin-top:20px">
-     <div id="gg" style="height:280px" class="col-md-4 col">
+     <div id="gg" style="height:200px" class="col-md-4 col">
 				
 				<div class="accordion-wrap">
 	   <div class="accordion">
@@ -658,10 +686,14 @@ function pazing5Btn(){
                     <div class="photo-overlay" >
                         <span id="${n.collabo_req_index}" class="plus">+</span>
                     </div>
+                  
+                    
+                    
                 </div>
                
-                제목 : ${n.collabo_req_title}
+              
                 <br>
+                    제목 : ${n.collabo_req_title}
                 작성일:${n.collabo_req_date}
                 <div class="social-link" id="social-link${n.collabo_req_index}">
                     <a class="link link-twitter" href="http://twitter.com/khadkamhn/" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -676,8 +708,56 @@ function pazing5Btn(){
 </div>
 				</div>
 </c:when>
+<c:when test="${(status.index)%3 eq 1}">
+      	<div id="gg" style="height:200px" class="col-md-4 col">
+				
+				<div class="accordion-wrap">
+	   <div class="accordion">
+        <a href="#" class="active index"><i class="fa fa-user"></i>&nbsp;${n.collabo_req_ID}</a>
+        <div class="sub-nav active index">
+            <div class="html about-me index plus" id="about-mesocial-link${n.collabo_req_index}">
+                <div class="photo" style=
+                
+                <c:choose>
+					<c:when test="${n.collabo_req_state == '수락'}">
+               "border:3px solid #1e851f"
+                </c:when>
+                	<c:when test="${n.collabo_req_state == '거절'}">
+								 "border:3px solid #dd2d16"
+									</c:when>
+									<c:otherwise>
+								 "border:3px solid #ddd"
+									</c:otherwise>
+
+								</c:choose>
+								>
+                 <img src="images/언니회색.jpg" style="background:no-repeat center;width:100%; height: 100%">
+               
+                    <div class="photo-overlay" >
+                        <span id="${n.collabo_req_index}" class="plus">+</span>
+                    </div>
+                </div>
+               
+                      제목 : ${n.collabo_req_title}
+                <br>
+                작성일:${n.collabo_req_date}
+                <div class="social-link" id="social-link${n.collabo_req_index}">
+                    <a class="link link-twitter" href="http://twitter.com/khadkamhn/" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <a class="link link-codepen" href="http://codepen.io/khadkamhn/" target="_blank"><i class="fa fa-codepen"></i></a>
+                    <a class="link link-facebook" href="http://facebook.com/khadkamhn/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a class="link link-dribbble" href="http://dribbble.com/khadkamhn" target="_blank"><i class="fa fa-dribbble"></i></a>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</div>
+				</div>
+
+
+</c:when>
     	<c:otherwise>
-      	<div id="gg" style="height:280px" class="col-md-4 col">
+      	<div id="gg" style="height:200px" class="col-md-4 col">
 				
 				<div class="accordion-wrap">
 	   <div class="accordion">
@@ -722,8 +802,6 @@ function pazing5Btn(){
 </div>
 				</div>
 		
-		
-			<div id="yj" style="height:280px" class="col-md-4 col"></div>
 			</div>
 	
     	</c:otherwise>
@@ -731,7 +809,9 @@ function pazing5Btn(){
   		</c:forEach>
   		</div>
   	
-  		<div class="container" style="text-align: center; margin-left: -80px;">
+		
+
+		  		<div style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
 						<c:if test="${pg>block}">
 							<li><a href="#" onclick="pazingBtn()">««</a></li>
@@ -764,11 +844,11 @@ function pazing5Btn(){
 						</c:if>
 					</ul>
 				</div>
-
-		
 			</div>
 		
 			
+					
+
 				
 
 

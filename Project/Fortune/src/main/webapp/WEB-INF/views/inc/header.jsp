@@ -11,7 +11,7 @@ var msg
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://10.38.88.164:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://192.168.0.3:8090/fortune/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -35,12 +35,9 @@ function onMessage(evt) {
 		  url:"newAlarm.htm",
 		  data:{"newAlarm": evt.data},
 		  success:function(data){
-		  
-			  
 			  console.log("헤더 업데이트 성공");
 			  console.log(data);
-			  $('#alarm').empty();
-			  
+			  $('#alarm').empty();  
 			  $('#alarm').html(data);
 			  promodifyform.submit(); 
 		
