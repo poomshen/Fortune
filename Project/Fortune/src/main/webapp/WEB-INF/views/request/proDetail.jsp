@@ -35,9 +35,9 @@
   </tr>
   <tr>
     <td class="title">수신자</td>
-    <td class="tg-baqh"></td>
+    <td class="tg-baqh">${list.collabo_req_ID}</td>
     <td class="title">첨부파일</td>
-    <td class="tg-baqh"><a href="download.htm?p=upload&f=${list.collabo_req_filesrc}">${list.collabo_req_filesrc}</a></td>
+    <td class="tg-baqh"><a class="w3-small" href="download.htm?p=upload&f=${list.collabo_req_filesrc}">${list.collabo_req_filesrc}</a></td>
 
   </tr>
 </table>

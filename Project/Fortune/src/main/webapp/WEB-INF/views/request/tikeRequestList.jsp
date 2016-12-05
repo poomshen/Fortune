@@ -397,7 +397,7 @@ alert('Error while request..'	);
 									<c:when test="${n.collabo_req_state == '거절'}"></c:when>
 
 									<c:otherwise>
-										<c:if test="${sessionScope.info.user_id == n.collabo_req_ID}">
+										<c:if test="${sessionScope.info.user_id == n.collabo_req_ID &&n.collabo_req_state != '완료' }">
 											<input type="button" class="btn btn-primary"
 												data-toggle="modal" data-target="#myModal2"
 												onclick="memoReqCollabo(${n.collabo_req_index})" value="수락">
