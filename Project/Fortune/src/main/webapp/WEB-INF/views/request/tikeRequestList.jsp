@@ -559,7 +559,7 @@ function refuse() {
 							<script type="text/javascript">
 						 function proAdd(){
 							 
-							 var re = /^[0-9]+$/;
+							
 							 
 							 
 						     	if($('#startDate').val() == ""){
@@ -575,11 +575,7 @@ function refuse() {
 						     		alert("예상수익 입력해주세요");
 						     		$('#collabo_sal').focus();
 						     		return false;
-						     	}else if(!re.test($("#collabo_sal").val())){
-						     		alert("숫자를 입력해주세요");
-						     		$('#collabo_sal').focus();
-						     		return false;
-						     	}
+								}
 						     	else {
 						     		alert("완료");
 						     		
