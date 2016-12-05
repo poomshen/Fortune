@@ -219,13 +219,15 @@ public class ProController {
 			 Request_DTO req_Dto =  proservice.proEdit(collabo_req_index);
 			  model.addAttribute("list", req_Dto);	
 		 
-		  return "request.proEdit";
+		  return "cen.proEdit";
 		 }
 
 	//게시판 실제 수정처리
 		 @RequestMapping(value = "proEdit.htm", method = RequestMethod.POST)
 		 public String proEdit(Request_DTO n,HttpServletRequest request) throws ClassNotFoundException,
 		   SQLException, IOException {
+			 System.out.println("/////////////////////////////");
+			System.out.println(n.toString());
 			proservice.proEdit(n,request);
 		  return "redirect:listReplyRequest.htm";
 	    	 

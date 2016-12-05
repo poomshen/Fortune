@@ -403,8 +403,7 @@ public class ProService {
 	}
 
 	// 실제 글수정
-	@RequestMapping(value = "noticeEdit.htm", method = RequestMethod.POST)
-	public Request_DTO proEdit(Request_DTO n, HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
+	public Request_DTO proEdit( Request_DTO n, HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
 
 		
 		List<CommonsMultipartFile> files = n.getFiles();
