@@ -834,7 +834,7 @@ function modifyReqCollabo(a){
   	
 		
 
-		  		<div style="text-align: center; margin-left: -80px;">
+		  		<div class="container" style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
 						<c:if test="${pg>block}">
 							<li><a href="#" onclick="pazingBtn()">««</a></li>
