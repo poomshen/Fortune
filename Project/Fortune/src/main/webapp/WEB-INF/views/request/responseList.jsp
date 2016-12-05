@@ -98,7 +98,6 @@
 	float: left;
 	margin-left :2%;
 	width:48%;
-	margin-bottom: 1%;
 }
 #responsbody{
 	margin-left: 3%;
