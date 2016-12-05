@@ -11,19 +11,16 @@
 <script>
 
 $(document).ready(function() {
-
+	
+	
     $('[data-toggle="tooltip"]').tooltip();
     
-	
-	//화면 로드시 일정을 DB에서 불러오는 코드  
-	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
- 	$.ajax({
-		url : 'calendarload.ajax',
+    $.ajax({
+    	url : 'calendarload2.ajax',
 		type : 'post',
-		data : 'collabo_no=${collabo_no}',
-		success : function(data) {
-			console.log(data)
-			$.each(data.schedulelist, function(index, obj) {
+        data : { "collabo_no" : $('#collabo_no').val() },
+        success : function(data) {
+			$.each(data, function(index, obj) {
 				if(obj.progress_or_place<10){
 					if(obj.progress_or_place==1){
 						var item = {
@@ -32,16 +29,8 @@ $(document).ready(function() {
 							start : obj.schedule_start,
 							end : obj.schedule_end,
 							backgroundColor : 'rgba(51, 122, 183, 0.22)'
-							
 						};
-						
 						array.push(item);
-				        content += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
-				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
-				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
-				        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
-				        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
-				        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 					}else{
 						var item = {
 							id : obj.schedule_no,
@@ -51,14 +40,6 @@ $(document).ready(function() {
 							backgroundColor : 'rgb(51, 122, 183)'
 						};
 						array.push(item);
-
-				        content += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
-				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
-				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
-				        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
-				        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
-				        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
-
 					}
 				} else{
 					var item = {
@@ -69,6 +50,46 @@ $(document).ready(function() {
 							backgroundColor : '#23b100'
 					};
 					array.push(item);
+				}
+		        
+			});
+        }
+    
+    })
+    
+	
+	//화면 로드시 일정을 DB에서 불러오는 코드  
+	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
+ 	$.ajax({
+		url : 'calendarload.ajax',
+		type : 'post',
+        data : {
+			"collabo_no" : $('#collabo_no').val(),
+			"year" : $('#year').val(),
+			"month" : $('#month').val()
+        },
+		success : function(data) {
+			console.log(data)
+			$.each(data.schedulelist, function(index, obj) {
+				if(obj.progress_or_place<10){
+					if(obj.progress_or_place==1){
+				        content += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
+				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
+				        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
+				        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
+					}else{
+
+				        content += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
+				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
+				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
+				        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
+				        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
+				        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
+
+					}
+				} else{
 					content += '<tr><td style="color:#23b100;">회의</td>';
 			        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 			        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
@@ -91,11 +112,41 @@ $(document).ready(function() {
 			
 			
 			$('.fc-prev-button').click(function() {
-				alert('응?')
-	        });
+				
+				if($('#month').val()=="01"){
+					var year = Number($('#year').val())-1
+					$('#year').val(year)
+					$('#month').val('12')
+				}else{
+					var month = Number($('#month').val()) - 1
+					if( month< 10 ){
+					$('#month').val("0" + month)
+					}else{
+						$('#month').val(month)
+					}
+				}
+				
+				fcontent();
+
+	        });	
 	        
 	        $('.fc-next-button').click(function() {
-	        	alert('응!')
+
+				if($('#month').val()=="12"){
+					var year = Number($('#year').val())+1
+					$('#year').val(year)
+					$('#month').val('01')
+				}else{
+					var month = Number($('#month').val()) + 1
+					if(month<10){
+						$('#month').val("0" + month)
+					}else{
+						$('#month').val(month)
+					}
+				}
+				
+				fcontent();
+				
 	        });
 	        
 	        
@@ -157,38 +208,6 @@ $(document).ready(function() {
 
 
 
-function test(){
-	var test = "2016-11-03";
-	var arr1 = test.split('-');
-	var dat1 = new Date(arr1[0], arr1[1], arr1[2]);
- 	console.log(dat1)
- 	console.log(dat1.getMonth())
- 	console.log(dat1.getFullYear())
- 	console.log(dat1.getDate())
-	console.log(dat1.getMonth()+2)
-	console.log(dat1.getMonth()-1)
-	
-	console.log(dat1.getFullYear()+ "-" + (dat1.getMonth()+3) + "-" + dat1.getDate())
-	
-}
-
-
-
-
-function scheduleuser(){
-	
-	scheduleusers="";
-	
-	$("input[name='userchk']:checked").each(function(i){
-
-		scheduleusers += $(this).val()+"/";
-	
-	});
-	
-}
-
-
-
 
 </script>
 <style>
@@ -198,7 +217,7 @@ function scheduleuser(){
 </head>
 <body>
 <input type="hidden" id="collabo_no" value="${collabo_no}">
-<input type="hidden" id="today" value="2016-12-03">
+<input type="hidden" id="year" value="2016"><input type="hidden" id="month" value="12">
 <input type="hidden" id="modal_start">
 <input type="hidden" id="modal_end">
 <input type="hidden" id="modal_start_ms">
@@ -343,10 +362,9 @@ function scheduleuser(){
 
 			<!-- 업무상세 보여주는 div 영역 -->
 			<div class="col-sm-5" style="padding-right: 0px;">
-				<div class="row" style="padding-right: 0px;">
-				<button onclick="test()">test</button>
-					<select id="schedule_type" onchange="schedule_type()">
-						<option id="selectdefault"> 선 택  </option>
+				<div class="row" style="padding-right: 0px; margin-top: 10px; margin-bottom: 11px;">
+					<select id="schedule_type" onchange="schedule_type()" style="height: 20px;">
+						<option> 선 택  </option>
 						<option value="0"> 전 체 보 기 </option>
 						<option value="1">업무일정 보기</option>
 						<option value="2">회의일정 보기</option>
@@ -354,7 +372,7 @@ function scheduleuser(){
 					</select>
 				</div>
 
-				<div id="content_parent" style="overflow: scroll; width: 100%; height: 560px; overflow-x: hidden; padding-left: 0px; padding-right: 0px;">
+				<div id="content_parent" style="overflow: scroll; width: 100%; height: 435px; overflow-x: hidden; padding-left: 0px; padding-right: 0px;">
 					<div id="content" style="padding-right:0px;">
 					</div>
 					<div id="content_detail" style="display: none; padding-right:0px;">
@@ -421,7 +439,7 @@ function scheduleuser(){
 						<input type="button" value="회의일정 삭제" id="meet_delete_btn"><br>
 						<label>제목 : </label> <input type="text" id="meet_detail_title" readonly="readonly"><br>
 						<label>내용 : </label> <textarea rows="5" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
-						<label>회의실 번호 : </label> <input type="hidden" id="place_no" readonly="readonly">
+						<label>회의장소 : </label> <div id="place"></div> 
 						<br>
 						<label>회의 참가자</label><br>
 					    <div id="usersdiv2"></div>

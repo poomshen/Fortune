@@ -26,7 +26,7 @@ public interface IFullCalendar {
 	
 	//모든 일반업무 일정내용 호출
 	public List<Schedule_Work_Meeting_DTO> selectSWList(String collabo_no) throws ClassNotFoundException, SQLException;
-	public List<Work_Users_DTO> selectWUList(String collabo_no) throws ClassNotFoundException, SQLException;
+	public List<Work_Users_DTO> selectWUList(String collabo_no, String yearmonth) throws ClassNotFoundException, SQLException;
 	
 	//모든 회의업무 일정내용 호출
 	public List<Schedule_Work_Meeting_DTO> selectSMList(String collabo_no) throws ClassNotFoundException, SQLException;
@@ -36,8 +36,9 @@ public interface IFullCalendar {
 	
 	
 	//일반업무 + 회의업무 일정내용 호출
-	public List<Schedule_Work_Meeting_DTO> selectSWMList(String collabo_no) throws ClassNotFoundException, SQLException;
-	public List<Meet_Users_DTO> selectMUList(String collabo_no) throws ClassNotFoundException, SQLException;
+	public List<Schedule_Work_Meeting_DTO> selectSWMList(String collabo_no, String yearmonth) throws ClassNotFoundException, SQLException;
+	public List<Meet_Users_DTO> selectMUList(String collabo_no, String yearmonth) throws ClassNotFoundException, SQLException;
+	public List<Schedule_Work_Meeting_DTO> selectAllSWMList(String collabo_no) throws ClassNotFoundException, SQLException;
 	
 	
 	//업무일정 삭제
