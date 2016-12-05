@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">[공지사항 상세페이지]</h1>
@@ -52,9 +53,11 @@
 			
 			<!-- /.panel-body -->
 			<div class="form-group container" align="center">
-				<a href="noticeUpdate.htm?notice_no=${noticeDetail.notice_no}"><input type="button" class="btn btn-primary" value="수정"></a>
-				<a href="noticeDelete.htm?notice_no=${noticeDetail.notice_no}"><input type="button" class="btn btn-primary" value="삭제"></a>
-				<input type="button" class="btn btn-primary" onclick="history.go(-1)" value="취소">
+				<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+					<a href="noticeUpdate.htm?notice_no=${noticeDetail.notice_no}"><input type="button" class="btn btn-primary" value="수정"></a>
+					<a href="noticeDelete.htm?notice_no=${noticeDetail.notice_no}"><input type="button" class="btn btn-primary" value="삭제"></a>
+				</security:authorize>
+				<a href="noticeList.htm"><input type="button" class="btn btn-primary" value="취소"></a>
 			</div>
 		</div>
 		<!-- /.panel -->
