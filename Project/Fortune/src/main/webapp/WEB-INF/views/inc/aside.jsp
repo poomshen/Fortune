@@ -59,11 +59,11 @@ ul a {
                             </ul>
                         </li>
                         
-                        <security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
+                        <security:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <li>
                             <a class="hvr-grow-shadow" href="#"><i class="fa fa-wrench fa-fw"></i>관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                            	<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
+                            	<security:authorize access="hasAnyRole('ROLE_ADMIN')">
                                 	<li>
                                 		<a href="adminusers.htm">관리자 회원 수정</a>
                                     </li>
