@@ -656,7 +656,8 @@ function modifyReqCollabo(a){
 <div class="container" id="requestlist" style="margin-top:20px">
 <div class="tab-container">
   <ul class="nav nav-tabs" style="width:950px">
-    <li class="active"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
+    <li class="active"><a onclick="selectState('')" data-toggle="tab">전체</a></li>
+    <li><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
     <li><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
     <li><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
   </ul>
@@ -672,6 +673,7 @@ function modifyReqCollabo(a){
 				<select id="memoselect">
 				<option value="collabo_req_title">제목</option>
 				<option value="collabo_req_text">내용</option>
+				<option value="collabo_req_date">날짜</option>
 				</select>
 		<input type="text" id="search" placeholder="Search" >
 		<button onclick="searchBtn()">검색</button>
@@ -711,7 +713,7 @@ function modifyReqCollabo(a){
                     </div>
                   
                     
-                    
+                   
                 </div>
                
               
@@ -731,6 +733,7 @@ function modifyReqCollabo(a){
 </div>
 				</div>
 </c:when>
+
 <c:when test="${(status.index)%3 eq 1}">
       	<div id="gg" style="height:200px" class="col-md-4 col">
 				
@@ -776,6 +779,7 @@ function modifyReqCollabo(a){
     </div>
 </div>
 				</div>
+
 
 
 </c:when>
@@ -824,17 +828,15 @@ function modifyReqCollabo(a){
     </div>
 </div>
 				</div>
-		
-			</div>
-	
-    	</c:otherwise>
-  		</c:choose>
-  		</c:forEach>
-  		</div>
-  	
-		
+	</c:otherwise>
+  	</c:choose>
+	</c:forEach>
+		</div>
+  
+  		
 
-		  		<div class="container" style="text-align: center; margin-left: -80px;">
+	
+	<div class="container" style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
 						<c:if test="${pg>block}">
 							<li><a href="#" onclick="pazingBtn()">««</a></li>
@@ -867,7 +869,21 @@ function modifyReqCollabo(a){
 						</c:if>
 					</ul>
 				</div>
+	
 			</div>
+	
+			
+		
+			
+			
+	
+	
+  	    	
+  		</div>
+  	
+	
+		  		
+			
 		
 			
 					
