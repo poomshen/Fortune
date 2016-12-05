@@ -75,6 +75,12 @@
         	selectListForm();  
         }  
 });  
+ 	$(function(){
+ 		console.log($("#responsbody").height() );
+ 		console.log($(window).height() );
+ 		console.log($(window).scrollTop()  );
+ 		
+ 	})
 </script>
 <style type="text/css">
 #pageside {
@@ -152,6 +158,7 @@
 								 </header>
 								</div>
 								<footer class="w3-container " >
+								<br>
 								<div >
 								<div class="btnDivs">
 									<a href="schedule.htm?collabo_no=${n.collabo_no}" class="btn btn-primary">

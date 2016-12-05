@@ -7,6 +7,7 @@ import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
 import com.fortune.function_DTO.Select_Collabo_DTO;
+import com.fortune.request_DTO.Passion_DTO;
 
 
 
@@ -39,7 +40,9 @@ public interface ProDao {
 		//담당자 선택 
 		public int updatemanager(With_DTO m)throws ClassNotFoundException, SQLException;
 		//수신자 부장 리스트 
-		public List<Join_DTO> listEffect() throws ClassNotFoundException, SQLException;
+		public List<Passion_DTO> listEffect() throws ClassNotFoundException, SQLException;
+		
+		
 		//담당자 팀장 리스트 
 		public List<Join_DTO> listManager(String dept_no) throws ClassNotFoundException, SQLException;
 		//게시물 대기 , 수락 , 거절 리스트 

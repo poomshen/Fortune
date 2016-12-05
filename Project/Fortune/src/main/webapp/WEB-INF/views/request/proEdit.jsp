@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+
 <script type="text/javascript">
 function modify() {
 	 $('#menuView3').empty();
@@ -30,14 +30,17 @@ function modify() {
 
 
 <div class="container">
-	<form action="" method="post" name="modifyform" enctype="multipart/form-data">
-		<div class="col-sm-2"></div>
-		<div class="col-sm-8">
+	<form action="proEdit.htm" method="post" name="modifyform" enctype="multipart/form-data">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-7">
 			
 			<br>
 			<br>
 			<div class="form-group has-success">
-
+			<input type="hidden" name="collabo_req_index" value="${list.collabo_req_index}">
+			<input type="hidden" name="collabo_req_no" value="${list.collabo_req_no}">
+			
+			
 				<div>
 					<label>협업 제목 :</label>
 					 <input type="text"
@@ -77,8 +80,8 @@ function modify() {
 			
 					</div>
 
-		<div class="col-sm-2"></div>
-		<div class="col-sm-7" style="text-align: right" >
+		<div class="col-sm-1"></div>
+		<div class="col-sm-5" style="text-align: right" >
 			<br> 
 			<input type="button" class="btn btn-default" value="저장" onclick="modify()">
 			<a  class="btn btn-default" href="listReplyRequest.htm" >취소하기</a>

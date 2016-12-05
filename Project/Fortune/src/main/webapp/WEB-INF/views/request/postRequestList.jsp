@@ -11,7 +11,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>	
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet"
@@ -20,6 +19,334 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style type="text/css">
 
+*,:after,:before{box-sizing:border-box}
+.pull-left{float:left}
+.pull-right{float:right}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+
+.accordion-wrap{
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:15px;
+    position:relative;
+    width: 280px;
+    height: 200px;
+    margin-top: 10px;
+
+}
+.accordion{
+    width:100%;
+    margin:auto;
+    max-width:280px;
+    height: 150px;
+    overflow:hidden;
+    border-radius:3px;
+    background:#f8f8f8;
+    box-shadow:0 17px 50px 0 rgba(0,0,0,.19),0 12px 15px 0 rgba(0,0,0,.24);
+}
+.accordion>a{
+    color:#fff;
+    padding:15px;
+    display:block;
+    text-decoration:none;
+    transition:all .3s ease-in-out 0s;
+    
+    padding-bottom: 1px;
+    padding-top: 1px;
+    
+}
+.accordion>a:not(:last-child){
+    border-bottom:1px solid #fff;
+    
+    padding-bottom: 1px;
+    padding-top: 1px;
+    
+}
+.accordion>a:hover,
+.accordion>a.active{
+
+    padding-bottom: 1px;
+    padding-top: 1px;
+
+background:#194f89;
+    color:#fff;
+}
+.accordion>a.active{
+    color:#fff;
+    
+    padding-bottom: 1px;
+    padding-top: 1px;
+    
+}
+.accordion>a>.alert-numb,
+.accordion>.sub-nav>a>.alert-numb{
+    color:#eee;
+    right:10px;
+    height:22px;
+    min-width:40px;
+    font-size:12px;
+    font-weight:600;
+    line-height:22px;
+    border-radius:15px;
+    text-align:center;
+    background:#665e51;
+}
+.accordion>a.active>.alert-numb,
+.accordion>.sub-nav>a.active>.alert-numb{
+    background:#d0a051;
+}
+.accordion .sub-nav{
+    display:none;
+    color:#374046;
+    overflow:hidden;
+    background:#f8f8f8;
+}
+.accordion .sub-nav.open{
+    display:block;
+}
+.accordion .sub-nav a{
+    display:block;
+    color:inherit;
+    font-weight:300;
+    padding:10px 15px;
+    text-decoration:none;
+    transition:all .2s ease-in-out 0s;
+}
+.accordion .sub-nav a:not(:last-child){
+    border-bottom:1px solid rgba(0,0,0,.1);
+}
+.accordion .sub-nav a:hover{
+    background:#c2ced1;
+    box-shadow:5px 0 0 #8ca3a8 inset;
+}
+
+.accordion .html{
+    padding:15px;
+}
+.accordion .about-me{
+    text-align:center;
+    position:relative;
+}
+.accordion .about-me h4{
+    margin-bottom:0;
+}
+.accordion .about-me p{
+    font-size:14px;
+    font-weight:300;
+    margin-bottom:0;
+}
+.accordion .about-me .photo{
+    width:50px;
+    height:50px;
+    margin:auto;
+    overflow:hidden;
+    border-radius:50%;
+    position:relative;
+    border:4px solid #fff;
+    box-shadow:0 6px 20px 0 rgba(0,0,0,.19),0 8px 17px 0 rgba(0,0,0,.2);
+    background-color:#fff;
+    margin-left:0px;
+    
+}
+.accordion .about-me .photo .photo-overlay{
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    opacity:0;
+    visibility:hidden;
+    position:absolute;
+    background:rgba(0,0,0,.4);
+}
+.accordion .about-me .photo .photo-overlay .plus{
+    top:50%;
+    left:50%;
+    width:30px;
+    height:30px;
+    color:#1a1a1b;
+    cursor:pointer;
+    font-size:24px;
+    font-weight:100;
+    margin-top:-15px;
+    margin-left:-15px;
+    position:absolute;
+    line-height:30px;
+    border-radius:50%;
+    text-align:center;
+    background:#e8d0a9;
+    transform:scale(0) rotate(0);
+    transition:all .1s ease-in-out 0s;
+}
+.accordion .about-me .photo:hover .photo-overlay{
+    opacity:1;
+    visibility:visible;
+}
+.accordion .about-me .photo:hover .photo-overlay .plus{
+    transform:scale(1) rotate(90deg);
+}
+
+.accordion .about-me .social-link{
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    opacity:0;
+    padding-top:48px;
+    visibility:hidden;
+    position:absolute;
+    background:rgba(0,0,0,.3);
+    transition:opacity .5s ease-in-out 0s;
+}
+.accordion .about-me .social-link.active{
+    opacity:1;
+    visibility:visible;
+}
+.accordion .about-me .social-link .link{
+    width:30px;
+    padding:0;
+    color:#eee;
+    height:30px;
+    margin:0 4px;
+    line-height:28px;
+    border-radius:50%;
+    display:inline-block;
+    transform:translateY(-80px) scale(0);
+    border:1px solid rgba(0,0,0,.2);
+}
+.accordion .about-me .social-link .link-twitter{
+    background:#55acce;
+}
+.accordion .about-me .social-link .link-codepen{
+    background:#1a1a1b;
+}
+.accordion .about-me .social-link .link-facebook{
+    background:#3b5998;
+}
+.accordion .about-me .social-link .link-dribbble{
+    background:#ea4c89;
+}
+.accordion .about-me .social-link .link:hover{
+    box-shadow:none;
+}
+.accordion .about-me .social-link.active .link{
+    transform:translateY(0) scale(1);
+}
+.accordion .about-me .social-link.active .link:nth-child(1){
+    transition-duration:.1s;
+}
+.accordion .about-me .social-link.active .link:nth-child(2){
+    transition-duration:.2s;
+}
+.accordion .about-me .social-link.active .link:nth-child(3){
+    transition-duration:.3s;
+}
+.accordion .about-me .social-link.active .link:nth-child(4){
+    transition-duration:.4s;
+}
+.accordion .about-me .social-link.active .link:nth-child(5){
+    transition-duration:5s;
+}
+.accordion .about-me.blur p,
+.accordion .about-me.blur h4,
+.accordion .about-me.blur .photo{
+    -webkit-filter:blur(2px);
+    filter:blur(2px);
+}
+
+.accordion .chat .user:not(:last-child){
+    margin-bottom:10px;
+}
+.accordion .chat .user .photo{
+    width:40px;
+    height:40px;
+    font-size:24px;
+    line-height:36px;
+    text-align:center;
+    position:relative;
+    border-radius:3px;
+    display:inline-block;
+    border:1px solid rgba(0,0,0,.2);
+}
+.accordion .chat .user .photo:before,
+.accordion .chat .user .photo:after{
+    content:'';
+    opacity:0;
+    visibility:hidden;
+    position:absolute;
+    transition:opacity .4s ease-in-out 0s;
+}
+.accordion .chat .user .photo:before{
+    left:50%;
+    width:60px;
+    bottom:50px;
+    padding:4px;
+    font-size:12px;
+    line-height:14px;
+    margin-left:-30px;
+    text-align:center;
+    background:#333333;
+    border-radius:4px;
+    word-break:break-all;
+    content:attr(data-username);
+}
+.accordion .chat .user .photo:after{
+    left:50%;
+    bottom:35px;
+    margin-left:-8px;
+    border:8px solid transparent;
+    border-top:8px solid #333333;
+}
+.accordion .chat .user .photo:hover:before,
+.accordion .chat .user .photo:hover:after{
+    opacity:1;
+    visibility:visible;
+}
+
+.accordion .chat .user.user-dribble .photo{
+    color:#fff;
+    margin-right:5px;
+    background:#f15e95;
+}
+.accordion .chat .user .text-msg{
+    max-width:70%;
+    font-size:13px;
+    padding:4px 8px;
+    background:#fff;
+    border-radius:4px;
+    display:inline-block;
+    border:1px solid #cdd6d8;
+}
+.accordion .chat .user.user-khadkamhn .text-msg{
+    background:#dce2e4;
+}
+
+.accordion .invite{
+    text-align:center;
+}
+.accordion .invite .dribbble{
+    display:block;
+    color:#c33269;
+    margin:10px 0;
+    font-size:24px;
+    font-family:Pacifico;
+}
+.accordion .invite .btn{
+    color:#eee;
+    font-weight:500;
+    background:#ccc;
+    padding:10px 15px;
+    border-radius:2px;
+    background:#f15e95;
+    display:inline-block;
+    text-transform:uppercase;
+}
+.accordion .invite .btn:hover{
+    box-shadow:none;
+    background:#cb386f;
+}
 
 #pageside {
 	width: 100%;
@@ -36,13 +363,61 @@
 
 
 <script type="text/javascript">
+$(function(){
+    Profile.load();
+});
 
+Profile = {
+    load:function(){
+        this.links();
+        this.social();
+        this.accordion();
+    },
+    links:function(){
+        $('a[href="#"]').click(function(e){
+            e.preventDefault();
+        });
+    },
+    social:function(){
+        $('.plus').click(function(){
+        	
+        	alert( $(this).attr('id'));
+        	detailReqCollabo($(this).attr('id'));
+            $('#social-link'+$(this).attr('id')).toggleClass('active');
+            $('#about-mesocial-link'+$(this).attr('id')).toggleClass('blur');
+        });
+        $('.social-link').click(function(){
+           $(this).toggleClass('active');
+            $('#about-me'+$(this).attr('id')).toggleClass('blur');
+        });
+    },
+    accordion:function(){
+        var subMenus = $('.accordion .sub-nav').hide();
+        $('.accordion > a').each(function(){
+            if($(this).hasClass('active')){
+                $(this).next().slideDown(100);
+            }
+        });
+        $('.accordion > a').click(function(){
+            $this = $(this);
+            $target =  $this.next();
+            $this.siblings('a').removeAttr('class');
+            $this.addClass('active');
+            if(!$target.hasClass('active')){
+                subMenus.removeClass('active').slideUp(100);
+                $target.addClass('active').slideDown(100);
+            }
+            return false;
+        });
+    }
+}
 
 
      //상세 정보를 보여주는 ajax 입니다.
      function detailReqCollabo(a){
+		alert(a);
     	 $("#menuView2").empty();
-    	 $("#ReqCollabo").empty();
+    	 $("#yj").empty();
  	  	
     	 
  	   	 $.ajax({
@@ -52,9 +427,9 @@
  	 			cache: false,				
  	 			data:"collabo_req_index="+a,
  	 		    success:function(data){ //callback  
- 	 		    	$("#ReqCollabo").append("<div>");
- 					$("#ReqCollabo").append($('#ReqCollabo').html(data)); 
- 					$("#ReqCollabo").append("</div>");
+ 	 		    	$("#yj").append("<div>");
+ 					$("#yj").append($('#yj').html(data)); 
+ 					$("#yj").append("</div>");
  	 		      
  	 		     },
  	 			error: function(){						
@@ -64,9 +439,9 @@
  	}
      //대기 수락 거절을 비동기 처리로 사용하였다.
      function selectState(state){
-    		console.log(state)
+    		console.log(state);
     		$.get("listReplyRequest2.htm", {st :state}, function(data, textStatus, req) {
-    			$('#requestlist').html(data)
+    			$('#requestlist').html(data);
     		})
     	}
 
@@ -245,7 +620,30 @@ function pazing5Btn(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-    	
+
+function modifyReqCollabo(a){
+	 $("#meneview").empty();
+	 $("#ReqCollabo").empty();
+  	
+	 
+   	 $.ajax({
+   		 
+ 			type: "get",
+ 			url:  "proEdit.htm",
+ 			cache: false,				
+ 			data:"collabo_req_index="+a,
+ 		    success:function(data){ //callback  
+ 		    	$("#meneview").append("<div>");
+				$("#meneview").append($('#meneview').html(data)); 
+				$("#meneview").append("</div>");
+ 		      
+ 		     },
+ 			error: function(){						
+ 				alert('Error while request..'	);
+ 			}
+ 		});
+}
+
      
      
 </script>
@@ -255,6 +653,230 @@ function pazing5Btn(){
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container" id="requestlist" style="margin-top:20px">
+<div class="tab-container">
+  <ul class="nav nav-tabs" style="width:950px">
+    <li class="active"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
+    <li><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
+    <li><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="home"></div>
+    <div class="tab-pane" id="profile"></div>
+    <div class="tab-pane" id="messages"></div>
+  </div>
+</div>
+<div class="row grid-columns" style="width:1000px; height:20px; margin-top:2px">
+     <div id="gg" style="height:20px;margin-left: 700px;" class="col-md-6 col">
+		
+				<select id="memoselect">
+				<option value="collabo_req_title">제목</option>
+				<option value="collabo_req_text">내용</option>
+				</select>
+		<input type="text" id="search" placeholder="Search" >
+		<button onclick="searchBtn()">검색</button>
+		
+		</div>
+		</div>
+		<c:forEach items="${list}" var="n" varStatus="status">
+	<c:choose>
+     	<c:when test="${(status.index)%3 eq 0}">
+     	<div class="row grid-columns" style="width:1000px; margin-top:20px">
+     <div id="gg" style="height:200px" class="col-md-4 col">
+				
+				<div class="accordion-wrap">
+	   <div class="accordion">
+        <a href="#" class="active"><i class="fa fa-user"></i>&nbsp;${n.collabo_req_ID}</a>
+        <div class="sub-nav active">
+            <div class="html about-me" id="about-mesocial-link${n.collabo_req_index}">
+                                <div class="photo" style=
+                
+                <c:choose>
+					<c:when test="${n.collabo_req_state == '수락'}">
+               "border:3px solid #1e851f"
+                </c:when>
+                	<c:when test="${n.collabo_req_state == '거절'}">
+								 "border:3px solid #dd2d16"
+									</c:when>
+									<c:otherwise>
+								 "border:3px solid #ddd"
+									</c:otherwise>
+
+								</c:choose>
+								>
+                 <img src="images/언니회색.jpg" style="background:no-repeat center;width:100%; height: 100%">
+               
+                    <div class="photo-overlay" >
+                        <span id="${n.collabo_req_index}" class="plus">+</span>
+                    </div>
+                  
+                    
+                    
+                </div>
+               
+              
+                <br>
+                    제목 : ${n.collabo_req_title}
+                작성일:${n.collabo_req_date}
+                <div class="social-link" id="social-link${n.collabo_req_index}">
+                    <a class="link link-twitter" href="http://twitter.com/khadkamhn/" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <a class="link link-codepen" href="http://codepen.io/khadkamhn/" target="_blank"><i class="fa fa-codepen"></i></a>
+                    <a class="link link-facebook" href="http://facebook.com/khadkamhn/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a class="link link-dribbble" href="http://dribbble.com/khadkamhn" target="_blank"><i class="fa fa-dribbble"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+				</div>
+</c:when>
+<c:when test="${(status.index)%3 eq 1}">
+      	<div id="gg" style="height:200px" class="col-md-4 col">
+				
+				<div class="accordion-wrap">
+	   <div class="accordion">
+        <a href="#" class="active index"><i class="fa fa-user"></i>&nbsp;${n.collabo_req_ID}</a>
+        <div class="sub-nav active index">
+            <div class="html about-me index plus" id="about-mesocial-link${n.collabo_req_index}">
+                <div class="photo" style=
+                
+                <c:choose>
+					<c:when test="${n.collabo_req_state == '수락'}">
+               "border:3px solid #1e851f"
+                </c:when>
+                	<c:when test="${n.collabo_req_state == '거절'}">
+								 "border:3px solid #dd2d16"
+									</c:when>
+									<c:otherwise>
+								 "border:3px solid #ddd"
+									</c:otherwise>
+
+								</c:choose>
+								>
+                 <img src="images/언니회색.jpg" style="background:no-repeat center;width:100%; height: 100%">
+               
+                    <div class="photo-overlay" >
+                        <span id="${n.collabo_req_index}" class="plus">+</span>
+                    </div>
+                </div>
+               
+                      제목 : ${n.collabo_req_title}
+                <br>
+                작성일:${n.collabo_req_date}
+                <div class="social-link" id="social-link${n.collabo_req_index}">
+                    <a class="link link-twitter" href="http://twitter.com/khadkamhn/" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <a class="link link-codepen" href="http://codepen.io/khadkamhn/" target="_blank"><i class="fa fa-codepen"></i></a>
+                    <a class="link link-facebook" href="http://facebook.com/khadkamhn/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a class="link link-dribbble" href="http://dribbble.com/khadkamhn" target="_blank"><i class="fa fa-dribbble"></i></a>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</div>
+				</div>
+
+
+</c:when>
+    	<c:otherwise>
+      	<div id="gg" style="height:200px" class="col-md-4 col">
+				
+				<div class="accordion-wrap">
+	   <div class="accordion">
+        <a href="#" class="active index"><i class="fa fa-user"></i>&nbsp;${n.collabo_req_ID}</a>
+        <div class="sub-nav active index">
+            <div class="html about-me index plus" id="about-mesocial-link${n.collabo_req_index}">
+                <div class="photo" style=
+                
+                <c:choose>
+					<c:when test="${n.collabo_req_state == '수락'}">
+               "border:3px solid #1e851f"
+                </c:when>
+                	<c:when test="${n.collabo_req_state == '거절'}">
+								 "border:3px solid #dd2d16"
+									</c:when>
+									<c:otherwise>
+								 "border:3px solid #ddd"
+									</c:otherwise>
+
+								</c:choose>
+								>
+                 <img src="images/언니회색.jpg" style="background:no-repeat center;width:100%; height: 100%">
+               
+                    <div class="photo-overlay" >
+                        <span id="${n.collabo_req_index}" class="plus">+</span>
+                    </div>
+                </div>
+               
+                      제목 : ${n.collabo_req_title}
+                <br>
+                작성일:${n.collabo_req_date}
+                <div class="social-link" id="social-link${n.collabo_req_index}">
+                    <a class="link link-twitter" href="http://twitter.com/khadkamhn/" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <a class="link link-codepen" href="http://codepen.io/khadkamhn/" target="_blank"><i class="fa fa-codepen"></i></a>
+                    <a class="link link-facebook" href="http://facebook.com/khadkamhn/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a class="link link-dribbble" href="http://dribbble.com/khadkamhn" target="_blank"><i class="fa fa-dribbble"></i></a>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</div>
+				</div>
+		
+			</div>
+	
+    	</c:otherwise>
+  		</c:choose>
+  		</c:forEach>
+  		</div>
+  	
+		
+
+		  		<div style="text-align: center; margin-left: -80px;">
+					<ul class="pagination">
+						<c:if test="${pg>block}">
+							<li><a href="#" onclick="pazingBtn()">««</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li> --%>
+							<li><a href="#" onclick="pazingBtn2()">«</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li> --%>
+						</c:if>
+						<c:if test="${pg<=block}">
+							<li><a href="#">««</a></li>
+							<li><a href="#">«</a></li>
+						</c:if>
+						<c:forEach begin="${from_page}" end="${to_page}" var="i">
+							<c:if test="${i==pg}">
+								<li class="active"><a href="#">${i}</a></li>
+							</c:if>
+							<c:if test="${i!=pg}">
+								<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
+								<%-- <li><a href="listReplyRequest.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li> --%>
+							</c:if>
+						</c:forEach>
+						<c:if test="${to_page<all_page}">
+							<li><a href="#" onclick="pazing4Btn()">»</a></li>
+							<li><a href="#" onclick="pazing5Btn()">»»</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li>							
+							<li><a href="listReplyRequest.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li> --%>
+						</c:if>
+						<c:if test="${to_page>=all_page}">
+							<li><a href="#">»</a></li>
+							<li><a href="#">»»</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+		
+			
+					
+
+				
+
+
+<%-- 
+
 	<div id="requestlist">
 	
 	<div class="w3-panel w3-card-4">
@@ -293,7 +915,7 @@ function pazing5Btn(){
 
 
 			<div id="pageside" class="w3-small">
-				<div style="float: left;">
+				<div style="float: left;border: #e1e1e1;border-style: solid;">
 
 
 					<div class="w3-panel w3-card-4">
@@ -304,12 +926,11 @@ function pazing5Btn(){
 						<div style="float: left;">
 
 							<div class="w3-card-2" style="margin: 3px" align="center">
-								<br> <img src="images/man1.PNG" alt="Norway"
-									style="width: 100px; height: 100px; border-radius: 70%;" >
+								<br> <img style="width:30px"alt="이승훈 사진" src="http://www.y-bridge.co.kr/attach/files/20161031/thumbs/7cb2befbf0dc7adf828094523ebf4270_128_128.jpg" class="img-circle">
 								<div class="w3-container w3-center">
 									<dl>
-										<dt>요청발신자 :</dt>
-										<dd>${n.user_ID}</dd>
+										<dt>수신자 </dt>
+										<dd>${n.collabo_req_ID}</dd>
 									</dl>
 								</div>
 							</div>
@@ -361,8 +982,13 @@ function pazing5Btn(){
 									<c:if test="${sessionScope.info.user_id == n.user_ID}">
 											<security:authorize
 												access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
-												<a class="btn btn-primary"
-													href="proEdit.htm?collabo_req_index=${n.collabo_req_index}">수정</a>
+												
+												<input type="button" class="btn btn-primary"
+												data-toggle="modal" data-target="#myModal3"
+												onclick="modifyReqCollabo(${n.collabo_req_index})" value="수정">
+												
+												 <a class="btn btn-primary"
+													href="proEdit.htm?collabo_req_index=${n.collabo_req_index}">수정</a> 
 											</security:authorize>
 									</c:if>
 									</c:otherwise>
@@ -403,6 +1029,46 @@ function pazing5Btn(){
 		
 		
 		
+		
+		<div class="container">
+			<div class="modal fade" id="myModal3" role="dialog">
+				<div class="modal-dialog modal-lg">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+							<h4 class="modal-title">수정 화면</h4>
+
+						</div>
+
+
+
+						<div class="modal-body">
+							
+							<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+							
+							
+							<!-- 비동기 처리로 불렀습니다 .. lord -->
+							<div id="meneview"></div>
+
+
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+		
+		
 		</div>
 <div class="w3-panel w3-card-4">
 		<!-- Pagination 추가 시작 -->
@@ -410,9 +1076,9 @@ function pazing5Btn(){
 					<ul class="pagination">
 						<c:if test="${pg>block}">
 							<li><a href="#" onclick="pazingBtn()">««</a></li>
-							<%-- <li><a href="listReplyRequest.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li> --%>
+							<li><a href="listReplyRequest.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li>
 							<li><a href="#" onclick="pazingBtn2()">«</a></li>
-							<%-- <li><a href="listReplyRequest.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li> --%>
+							<li><a href="listReplyRequest.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li>
 						</c:if>
 						<c:if test="${pg<=block}">
 							<li><a href="#">««</a></li>
@@ -424,14 +1090,14 @@ function pazing5Btn(){
 							</c:if>
 							<c:if test="${i!=pg}">
 								<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
-								<%-- <li><a href="listReplyRequest.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li> --%>
+								<li><a href="listReplyRequest.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li>
 							</c:if>
 						</c:forEach>
 						<c:if test="${to_page<all_page}">
 							<li><a href="#" onclick="pazing4Btn()">»</a></li>
 							<li><a href="#" onclick="pazing5Btn()">»»</a></li>
-							<%-- <li><a href="listReplyRequest.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li>--%>							
-							<%-- <li><a href="listReplyRequest.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li> --%>
+							<li><a href="listReplyRequest.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li>							
+							<li><a href="listReplyRequest.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li>
 						</c:if>
 						<c:if test="${to_page>=all_page}">
 							<li><a href="#">»</a></li>
@@ -441,7 +1107,7 @@ function pazing5Btn(){
 				</div>
 				<!-- Pagination 추가 끝 -->
 </div>
-</div>
+</div> --%>
 
 </body>
 </html>

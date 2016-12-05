@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.notice_DAO.INotice;
 import com.fortune.notice_Util.NoticeFile_Utils;
@@ -55,7 +57,7 @@ public class NoticeInsert_Controller {
 
 	// 공지사항등록 실제처리
 	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.POST)
-	public ModelAndView noticeInsert(@Valid Notice_DTO ndto, Errors errors, HttpServletRequest request) throws Exception {
+	public ModelAndView noticeInsert(@Valid Notice_DTO ndto, Errors errors, HttpServletRequest request, HttpSession session) throws Exception {
 
 		System.out.println("NoticeController의 noticeInsert를 타서, 실제로 글작성을 할꺼지롱!");		
 		
@@ -109,7 +111,9 @@ public class NoticeInsert_Controller {
 		}
 
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
-
+		Join_DTO join_DTO = (Join_DTO) session.getAttribute("info");
+		ndto.setUser_id(join_DTO.getUser_id());
+		
 		if(multipartFile.getSize() == 0){
 			noticeDao.insertFileNullNotice(ndto);
 		}else{

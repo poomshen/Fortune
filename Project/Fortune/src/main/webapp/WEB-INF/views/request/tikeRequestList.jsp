@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet"
@@ -94,8 +94,10 @@
      //대기 수락 거절을 비동기 처리로 사용하였다.
    	function selectState(state){
    		console.log(state)
+   		
    		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
    			$('#requestlist').html(data);
+   			//console.log(data);
    		});
    	}
      //검색 기능 비동기 처리로 하였습니다.

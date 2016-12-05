@@ -69,7 +69,8 @@ public class Alarm_Controller {
 		session.setAttribute("alarm", alist);
 		
 		session.setAttribute("totalCount",tatalCount);
-	
+		
+
 		
 		return "home.main";
 	
