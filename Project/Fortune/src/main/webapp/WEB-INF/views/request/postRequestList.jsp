@@ -484,16 +484,15 @@ function modifyReqCollabo(){
 						</div>
 		<!-- 3으로 나눈 나머지가 2 일때 ■ ■ ■ 한줄 채워지면 div row 닫아주기 -->	
 			<c:if test="${(status.index)%3 eq 2}">
-			</div>
+			
 			</c:if>
     	</c:otherwise>
   		</c:choose>
   		</c:forEach>
   		<!-- container div영역 닫기 -->
-  		</div>
-  	
-		
-		<!-- 페이징 처리하기  -->
+  		
+			</div>
+  		<!-- 페이징 처리하기  -->
 		  		<div style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
 						<c:if test="${pg>block}">
@@ -525,11 +524,19 @@ function modifyReqCollabo(){
 						</c:if>
 					</ul>
 				</div>
-			</div>
+  		
+  		
+  		
+  		</div>
+  	
+		
+		
 		
 			
 					
 </div>
+
+
 		<!-- 상세보기 modal 부분-->
 			<div class="container">
 				<div class="modal fade" id="myModal3" role="dialog">
