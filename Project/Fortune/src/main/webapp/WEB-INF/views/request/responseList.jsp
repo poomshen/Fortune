@@ -11,7 +11,7 @@
 <!-- 성준 추가 UI  -->
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
@@ -75,6 +75,12 @@
         	selectListForm();  
         }  
 });  
+ 	$(function(){
+ 		console.log($("#responsbody").height() );
+ 		console.log($(window).height() );
+ 		console.log($(window).scrollTop()  );
+ 		
+ 	})
 </script>
 <style type="text/css">
 #pageside {
@@ -152,6 +158,7 @@
 								 </header>
 								</div>
 								<footer class="w3-container " >
+								<br>
 								<div >
 								<div class="btnDivs">
 									<a href="schedule.htm?collabo_no=${n.collabo_no}" class="btn btn-primary">
