@@ -75,7 +75,7 @@ ul a {
 			<li>
                             <a class="hvr-grow-shadow" href="dept.htm"><i class="fa fa-wrench fa-fw"></i>주소록</span></a>
                         </li>
-                        <li style="height: 3in;">
+                        <li style="">
                         </li>
                     </ul>
                 </div>

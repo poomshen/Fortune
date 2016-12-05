@@ -65,7 +65,6 @@
  		        if (data != "") {  
  		        $(".responseFrom:last").after(data);             
  		        }  
- 		        $("div#lastPostsLoader").empty();  
  		 
  		 })
  	}
@@ -75,12 +74,6 @@
         	selectListForm();  
         }  
 });  
- 	$(function(){
- 		console.log($("#responsbody").height() );
- 		console.log($(window).height() );
- 		console.log($(window).scrollTop()  );
- 		
- 	})
 </script>
 <style type="text/css">
 #pageside {
@@ -182,8 +175,8 @@
 							</div>
 							<!-- 여기에서 CSS 제공 -->
 						</c:forEach>
-					<div id="lastPostsLoader"></div>
 				<br>
+					<div id="lastPostsLoader"></div>
 				<br>
 					</div>
 				</div>
