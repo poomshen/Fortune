@@ -100,7 +100,7 @@
 			  });	
 			
 		
-			
+			promodifyform.submit();
 			return true;
 		}
 	}
@@ -174,7 +174,7 @@
 				 <select id="collabo_req_ID" name="collabo_req_ID" 
 									class="form-control">
 				<c:forEach items="${list}" var="list">
-					<option value="${list.user_id}">${list.dept_no}:부서 ${list.user_id}:부장 이름:${list.user_name} </option>
+					<option value="${list.user_id}">[${list.dept_name}] 부장:${list.user_name}</option>
 				</c:forEach>
 					</select>
 			</div>

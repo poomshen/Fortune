@@ -620,7 +620,30 @@ function pazing5Btn(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-    	
+
+function modifyReqCollabo(a){
+	 $("#meneview").empty();
+	 $("#ReqCollabo").empty();
+  	
+	 
+   	 $.ajax({
+   		 
+ 			type: "get",
+ 			url:  "proEdit.htm",
+ 			cache: false,				
+ 			data:"collabo_req_index="+a,
+ 		    success:function(data){ //callback  
+ 		    	$("#meneview").append("<div>");
+				$("#meneview").append($('#meneview').html(data)); 
+				$("#meneview").append("</div>");
+ 		      
+ 		     },
+ 			error: function(){						
+ 				alert('Error while request..'	);
+ 			}
+ 		});
+}
+
      
      
 </script>
@@ -815,9 +838,9 @@ function pazing5Btn(){
 					<ul class="pagination">
 						<c:if test="${pg>block}">
 							<li><a href="#" onclick="pazingBtn()">««</a></li>
-							<li><a href="listReplyRequest.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li> --%>
 							<li><a href="#" onclick="pazingBtn2()">«</a></li>
-							<li><a href="listReplyRequest.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li> --%>
 						</c:if>
 						<c:if test="${pg<=block}">
 							<li><a href="#">««</a></li>
@@ -829,14 +852,14 @@ function pazing5Btn(){
 							</c:if>
 							<c:if test="${i!=pg}">
 								<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
-								<li><a href="listReplyRequest.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li>
+								<%-- <li><a href="listReplyRequest.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li> --%>
 							</c:if>
 						</c:forEach>
 						<c:if test="${to_page<all_page}">
 							<li><a href="#" onclick="pazing4Btn()">»</a></li>
 							<li><a href="#" onclick="pazing5Btn()">»»</a></li>
-							<li><a href="listReplyRequest.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li>							
-							<li><a href="listReplyRequest.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li>
+							<%-- <li><a href="listReplyRequest.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li>							
+							<li><a href="listReplyRequest.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li> --%>
 						</c:if>
 						<c:if test="${to_page>=all_page}">
 							<li><a href="#">»</a></li>
@@ -959,8 +982,13 @@ function pazing5Btn(){
 									<c:if test="${sessionScope.info.user_id == n.user_ID}">
 											<security:authorize
 												access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
-												<a class="btn btn-primary"
-													href="proEdit.htm?collabo_req_index=${n.collabo_req_index}">수정</a>
+												
+												<input type="button" class="btn btn-primary"
+												data-toggle="modal" data-target="#myModal3"
+												onclick="modifyReqCollabo(${n.collabo_req_index})" value="수정">
+												
+												 <a class="btn btn-primary"
+													href="proEdit.htm?collabo_req_index=${n.collabo_req_index}">수정</a> 
 											</security:authorize>
 									</c:if>
 									</c:otherwise>
@@ -999,6 +1027,46 @@ function pazing5Btn(){
 		</c:forEach>
 </div>
 		
+		
+		
+		
+		<div class="container">
+			<div class="modal fade" id="myModal3" role="dialog">
+				<div class="modal-dialog modal-lg">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+							<h4 class="modal-title">수정 화면</h4>
+
+						</div>
+
+
+
+						<div class="modal-body">
+							
+							<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+							
+							
+							<!-- 비동기 처리로 불렀습니다 .. lord -->
+							<div id="meneview"></div>
+
+
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
 		
 		
 		</div>

@@ -20,7 +20,7 @@ ul a {
                             <a class="hvr-grow-shadow" href="noticeList.htm"><i class="fa fa-edit fa-fw"></i>공지 사항</a>
                         </li>
                         <li>
-                            <a class="hvr-grow-shadow" href="#" ><i class="fa fa-bar-chart-o fa-fw hvr-pop"></i>프로젝트<span class="fa arrow"></span></a>
+                            <a class="hvr-grow-shadow" href="#" ><i class="fa fa-bar-chart-o fa-fw hvr-pop"></i>협업<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                             	<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERMGR')">
                                 <li>
