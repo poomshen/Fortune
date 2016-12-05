@@ -18,6 +18,7 @@ public class Request_DTO {
 	private String collabo_req_state; //진행 상태 ref
 	private String collabo_req_ID; //수신자 ..
 	private String collabo_req_filesrc;
+	private String dept_name;
 	private List<CommonsMultipartFile> files;
 	
 	
@@ -26,6 +27,12 @@ public class Request_DTO {
 	
 	
 
+		public String getDept_name() {
+		return dept_name;
+	}
+	public void setDept_name(String dept_name) {
+		this.dept_name = dept_name;
+	}
 		public String getCollabo_req_filesrc() {
 		return collabo_req_filesrc;
 	}

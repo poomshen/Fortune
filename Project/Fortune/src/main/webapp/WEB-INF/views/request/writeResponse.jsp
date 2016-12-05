@@ -105,7 +105,7 @@
 				<label>팀장 선택 :</label> 
 				 <select name="user_ID" class="form-control">
 				<c:forEach items="${listmanager}" var="list">
-					<option value="${list.user_id}">${list.user_id}</option>
+					<option value="${list.user_id}">[${list.team_name}]팀장:${list.user_name}</option>
 				</c:forEach>
 					</select>
 			</div>
