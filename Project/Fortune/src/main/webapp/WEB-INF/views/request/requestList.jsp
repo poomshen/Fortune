@@ -95,13 +95,11 @@
    		 $("#refuseindex").val(a); 
 }
    	
-
-
 </script>
 
 
 
-<title>Insert title here</title>
+<title>협업 리스트</title>
 </head>
 <body>
 

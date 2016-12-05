@@ -28,4 +28,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  and H.Collabo_Req_Index = r.Collabo_Req_Index where  H.Collabo_Req_No = #{param1}
 		 ORDER BY H.History_Date desc )n) where num BETWEEN  (1+#{param2}) and (5+ #{param2})
 	</select>
+	
+	<update id="collaboComplete" >
+	 	update collabo set COLLABO_STATE = #{param1} where collabo_no = ${param2}
+	</update>
 </mapper>

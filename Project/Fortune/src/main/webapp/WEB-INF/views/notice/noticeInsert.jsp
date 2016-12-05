@@ -18,12 +18,9 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-12">
-						<form:form role="form" action="" method="post"
-							enctype="multipart/form-data">
+						<form:form role="form" action="" method="post" enctype="multipart/form-data">
 							<div class="form-group">
-								<input class="form-control"
-									placeholder="제목을 작성해주세요." type="text" name="notice_title"
-									id="notice_title">
+								<input class="form-control" placeholder="제목을 작성해주세요." type="text" name="notice_title" id="notice_title">
 									<form:errors path="notice_title"/>
 							</div>
 							<div class="form-group">
@@ -41,8 +38,10 @@
 								});
 								</script>								
 							</div>
-							<button type="submit" class="btn btn-default">저장</button>
-							<a href="notice.noticeList.htm">공지사항 목록보기</a>
+							<div class="form-group container" align="center">
+								<input type="submit" class="btn btn-primary" value="저장">
+								<input type="button" class="btn btn-primary" onclick="history.go(-1)" value="취소">
+							</div>
 						</form:form>
 					</div>
 				</div>

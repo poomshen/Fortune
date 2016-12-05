@@ -19,8 +19,10 @@ public interface INotice {
 	public List<Notice_DTO> listNotice(int page);
 	//게시물 상세
 	public Notice_DTO detailNotice(int notice_no);
-	//게시물 입력
+	//게시물 입력 (파일 추가)
 	public int insertNotice(Notice_DTO ndto);
+	//게시물 입력 (파일 없음)
+	public int insertFileNullNotice(Notice_DTO ndto);
 	//게시물 수정
 	public int updateNotice(Notice_DTO ndto);
 	//게시물 삭제

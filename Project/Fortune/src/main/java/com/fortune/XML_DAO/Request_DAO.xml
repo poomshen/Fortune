@@ -133,24 +133,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<select id="listResponse" resultType="com.fortune.Table_DTO.With_DTO">
-		select COLLABO_REQ_TITLE, G.* from (SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
+		select COLLABO_REQ_TITLE, NUM,g.collabo_no collabo_no ,g.collabo_req_index collabo_req_index,g.collabo_req_no collabo_req_no
+     ,g.user_id user_id,
+     g.collabo_start collabo_start,g.collabo_end 
+     collabo_end,g.collabo_state collabo_state,
+     g.collabo_req_id collabo_req_id ,g.collabo_sal collabo_sal from (SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo WHERE ${param2}
 		LIKE '%${param3}%' ORDER BY collabo_no DESC ) N )
-		WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50) G join 
-		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX
+		WHERE NUM BETWEEN (${param1}+1)  AND (4+${param1}) )G join 
+		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX ORDER by NUM
 	</select>
 	
 	<!--  헙업 팀원들이 헙업 리스트 보기  -->
 	<select id="listResponse2" resultType="com.fortune.Table_DTO.With_DTO">
-		select COLLABO_REQ_TITLE, G.* from (SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
+		select COLLABO_REQ_TITLE, NUM,g.collabo_no collabo_no ,g.collabo_req_index collabo_req_index,g.collabo_req_no collabo_req_no
+     ,g.user_id user_id,
+     g.collabo_start collabo_start,g.collabo_end 
+     collabo_end,g.collabo_state collabo_state,
+     g.collabo_req_id collabo_req_id ,g.collabo_sal collabo_sal from(SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo WHERE ${param2}
 		in 
 		<foreach  item="querys"  collection="param3" open="(" separator="," close=")">
 			#{querys}
 		</foreach>
 		 ORDER BY collabo_no DESC ) N )
-		WHERE NUM BETWEEN 1 + (${param1} - 1) * 50 AND 50 + (${param1} - 1) * 50) G join 
-		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX
+		WHERE NUM BETWEEN (${param1}+1)  AND (4+${param1}) )G join 
+		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX  ORDER by NUM
 	</select>
 
 
