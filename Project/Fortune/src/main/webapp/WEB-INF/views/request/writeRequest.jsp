@@ -143,9 +143,9 @@
 				<div class="form-group">
 				<label>새로운 요청 :</label> <select name="collabo_req_no" class="form-control">
 					<option value="${collabo_req_no }">새로운 요청</option>
-					<c:forEach var="pname" items="${pList}">
+				 	<c:forEach var="pname" items="${pList}">
 						<option value="${pname.collabo_req_no }">${pname.project_name}</option>
-					</c:forEach>
+					</c:forEach> 
 				</select>
 			</div>
 					
@@ -193,7 +193,7 @@
 						<c:forEach items="${list}" var="list">
 							<option value="${list.user_id}">[${list.dept_name}]
 								부장:${list.user_name}</option>
-						</c:forEach>
+						</c:forEach> 
 					</select>
 				</div>
 

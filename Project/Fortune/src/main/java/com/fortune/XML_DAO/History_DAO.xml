@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="maxReqNo" resultType="Integer">
-		select MAX((collabo_req_no)+1) as collabo_req_no from COLLABO_REQ
+		select NVL(MAX(collabo_req_no+1),1)as collabo_req_no from COLLABO_REQ
 	</select>
 	
 	<select id="historyList"  resultType="com.fortune.function_DTO.HistoryFunction_DTO">
