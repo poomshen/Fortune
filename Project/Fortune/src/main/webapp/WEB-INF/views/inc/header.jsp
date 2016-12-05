@@ -11,7 +11,7 @@ var msg
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://172.30.1.34:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://10.38.88.164:8090/fortune/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -42,6 +42,7 @@ function onMessage(evt) {
 			  $('#alarm').empty();
 			  
 			  $('#alarm').html(data);
+			  promodifyform.submit(); 
 		
 		  }
 	  });	
@@ -53,10 +54,8 @@ function onClose(evt) {
 }
 
 function send(selectId) {
-/* 	var selectId="sungjun@gmail.com/mclee@gmail.com"; */
-	console.log("메세지 받을 사람~?"+selectId);
-	
 
+	console.log("메세지 받을 사람~?"+selectId);
 	 wsocket.send(selectId);
 	
 	
@@ -84,7 +83,7 @@ $(document).ready(function() {
 
 </script>
  <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; border-color:#f8f8f8; background-color:rgba(248,248,248,0); box-shadow: 2px 2px 5px hsla(0,0%,0%,0.58);">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;border-color:#f8f8f8;background-color:rgba(248,248,248,0);box-shadow: 2px 2px 5px hsla(0,0%,0%,0.58);height: 41px;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -204,3 +203,4 @@ $(document).ready(function() {
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+            </nav>

@@ -21,6 +21,7 @@ import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Work_Comment_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.fullcalendar_DAO.IFullCalendar;
+import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.schedule_alarm_DAO.IScheduleAlarm;
 
@@ -74,6 +75,10 @@ public class CommentController {
 		
 		session.setAttribute("totalCount",tatalCount);
         
+		//추가 작업
+		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+		sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+		session.setAttribute("sch_alist", sch_alist);
         
         
         return wcdtolist;
@@ -116,6 +121,10 @@ public class CommentController {
 		session.setAttribute("alarm", alist);
 		
 		session.setAttribute("totalCount",tatalCount);
+		//추가작업 일정 알림 상세 리스트
+		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+		sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+		session.setAttribute("sch_alist", sch_alist);
         
 
 	}
