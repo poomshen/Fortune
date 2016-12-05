@@ -184,5 +184,7 @@ function cmaComma(obj) {
 		<br> <input type="button" class="btn btn-default" value="완료"
 			onclick="proAdd()">
 	</div>
+	
 	<br> <br>
+	
 </form>

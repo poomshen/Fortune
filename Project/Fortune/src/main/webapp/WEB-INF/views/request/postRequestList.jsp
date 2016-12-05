@@ -688,7 +688,7 @@ function modifyReqCollabo(a){
 				
 				<div class="accordion-wrap">
 	   <div class="accordion">
-        <a href="#" class="active"><i class="fa fa-user"></i>&nbsp;${n.collabo_req_ID}</a>
+        <a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}{${n.collabo_req_ID}}</a>
         <div class="sub-nav active">
             <div class="html about-me" id="about-mesocial-link${n.collabo_req_index}">
                                 <div class="photo" style=
@@ -739,7 +739,7 @@ function modifyReqCollabo(a){
 				
 				<div class="accordion-wrap">
 	   <div class="accordion">
-        <a href="#" class="active index"><i class="fa fa-user"></i>&nbsp;${n.collabo_req_ID}</a>
+        <a href="#" class="active index"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}{${n.collabo_req_ID}}</a>
         <div class="sub-nav active index">
             <div class="html about-me index plus" id="about-mesocial-link${n.collabo_req_index}">
                 <div class="photo" style=
@@ -788,7 +788,7 @@ function modifyReqCollabo(a){
 				
 				<div class="accordion-wrap">
 	   <div class="accordion">
-        <a href="#" class="active index"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]이름:${n.collabo_req_ID}</a>
+        <a href="#" class="active index"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}{${n.collabo_req_ID}}</a>
         <div class="sub-nav active index">
             <div class="html about-me index plus" id="about-mesocial-link${n.collabo_req_index}">
                 <div class="photo" style=

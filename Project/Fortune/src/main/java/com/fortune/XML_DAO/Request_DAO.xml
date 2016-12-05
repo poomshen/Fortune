@@ -15,8 +15,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getRequest" parameterType="String" resultType="com.fortune.Table_DTO.Request_DTO">
 		 SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT re.COLLABO_REQ_TEXT,re.COLLABO_REQ_TITLE,re.COLLABO_REQ_STATE,re.COLLABO_REQ_ID,re.COLLABO_REQ_DATE,
-    re.USER_ID,re.COLLABO_REQ_FILESRC,re.COLLABO_REQ_INDEX,re.COLLABO_REQ_NO,u.dept_no ,de.dept_name from collabo_req re
-    join users u on re.user_ID = u.user_ID join dept de on u.dept_no = de.dept_no WHERE (re.${param2}
+    re.USER_ID,re.COLLABO_REQ_FILESRC,re.COLLABO_REQ_INDEX,re.COLLABO_REQ_NO,u.dept_no ,de.dept_name, u.user_name from collabo_req re
+    join users u on re.collabo_req_ID = u.user_ID join dept de on u.dept_no = de.dept_no WHERE (re.${param2}
 		LIKE '%${param3}%' AND re.${param5} LIKE '%${param6}%' AND re.collabo_req_state LIKE '%${param4}%') ORDER BY re.collabo_req_date DESC ) N )
 		WHERE NUM BETWEEN 1 + (${param1} - 1) * 6 AND 6 + (${param1} - 1) * 6 
 		
