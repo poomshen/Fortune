@@ -44,37 +44,47 @@
 </style>
 
 <body class="skin-4">
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">[자료실]</h1>
+	</div>
+</div>
 <div class="wrap-loading display-none">
     <div><img src="./images/default.gif" style="width: 50; height: 50px;" /></div>
 </div>
-<div id="loading" class="loading"></div>
-	<input id="test" value="${collabo_no}">
-	<form name="multiform" id="multiform" action="uploadfile.ajax" method="POST" enctype="multipart/form-data">
-		<label class="btn btn-primary" for="my-file-selector">
-    		<input id="my-file-selector" type="file" name="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
-    		파일 선택
-    	</label>
-		<span class='label label-info' id="upload-file-info"></span>
-		<input type="hidden" id="collabo_no" name="collabo_no" value="${collabo_no}">
-		<input type="submit" class="btn btn-primary" id="upload_btn" value="업로드"/>
-	</form>
-
-	<form name="deleteform" id="deleteform" action="deletefile.ajax" method="POST">
-		<input type="submit" class="btn btn-primary" id="delete_btn" value="삭제"/><br>
-	</form>
-	
-	<form name="searchform" id="searchform" action="searchfile.htm" method="get">
-		<select name="selectvalue" id="selectvalue" class="cd-select">
-			<option style="text-align:center" value="file_room_name">파일이름</option>
-			<option style="text-align:center" value="file_room_date">등록날짜</option>
-		</select>
-		<input type="text" name="searchvalue">
-		<input type="hidden" id="collabo_no" name="collabo_no" value="${collabo_no}">
-		<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
-	</form>
-	<hr>
-	<div id="result">
-		<div class="container">
+	<div>
+		<div style="float: left;">
+			<form name="multiform" id="multiform" action="uploadfile.ajax" method="POST" enctype="multipart/form-data">
+				<label class="btn btn-primary" for="my-file-selector">
+    				<input id="my-file-selector" type="file" name="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
+    				파일 선택
+    			</label>
+				<span class='label label-info' id="upload-file-info"></span>
+				<input type="hidden" id="collabo_no" name="collabo_no" value="${collabo_no}">
+				<input type="submit" class="btn btn-primary" id="upload_btn" value="업로드"/>
+			</form>
+		</div>
+		<div style="float: left; margin-left: 10px;">
+			<form name="deleteform" id="deleteform" action="deletefile.ajax" method="POST">
+				<input type="submit" class="btn btn-primary" id="delete_btn" value="삭제"/><br>
+			</form>
+		</div>
+		
+		
+		<div style="float: right; margin-right: 15px;">
+			<form name="searchform" id="searchform" action="searchfile.htm" method="get">
+				<select name="selectvalue" id="selectvalue" class="cd-select">
+					<option style="text-align:center" value="file_room_name">파일이름</option>
+					<option style="text-align:center" value="file_room_date">등록날짜</option>
+				</select>
+				<input type="text" name="searchvalue">
+				<input type="hidden" id="collabo_no" name="collabo_no" value="${collabo_no}">
+				<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
+			</form>
+		</div>
+	</div>
+	<div id="result" class="col-lg-12">
+	<hr><div class="container">
 			<div id="divrow1" class="content">
 			<input type="hidden" id="deletename">
 				<c:forEach items="${list}" var="flist" varStatus="status">
@@ -115,13 +125,15 @@
 		<div id="divrow2" class="row">
 			<div class="text-center">
 				<ul class="pagination">
-					<c:if test="${pg > block}">
-						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">««</a></li>
-						<li><a href="mainfile.htm?pg=${from_page - 1}&collabo_no=${collabo_no}">«</a></li>
-					</c:if>
-					<c:if test="${pg <= block && pg != 1}">
-						<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">««</a></li>
-						<li><a href="mainfile.htm?pg=${pg - 1}&collabo_no=${collabo_no}">«</a></li>
+					<c:if test="${pg != 1}">
+						<c:if test="${pg == from_page}">
+							<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">««</a></li>
+							<li><a href="mainfile.htm?pg=${from_page - 1}&collabo_no=${collabo_no}">«</a></li>
+						</c:if>
+						<c:if test="${pg > from_page}">
+							<li><a href="mainfile.htm?pg=1&collabo_no=${collabo_no}">««</a></li>
+							<li><a href="mainfile.htm?pg=${pg - 1}&collabo_no=${collabo_no}">«</a></li>
+						</c:if>
 					</c:if>
 					<c:forEach begin="${from_page}" end="${to_page}" var="i">
 						<c:if test="${i == pg}"><li class="active"><a href="#">${i}</a></li></c:if>
@@ -312,14 +324,16 @@
 		}
 
 		var result2 = "";
-		if(data.pg > data.block){
-			result2 += "<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">««</a></li>" +
-			"<li><a href=mainfile.htm?pg="+data.from_page-1+"&collabo_no="+data.collabo_no+">«</a></li>";
-		}else if(data.pg <= data.block && data.pg != 1){
-			result2 += "<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">««</a></li>" +
-			"<li><a href=mainfile.htm?pg="+data.pg-1+"&collabo_no="+data.collabo_no+">«</a></li>";
+		if(data.pg != 1){
+			if(data.pg == data.from_page){
+				result2 += "<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">««</a></li>" +
+				"<li><a href=mainfile.htm?pg="+data.from_page-1+"&collabo_no="+data.collabo_no+">«</a></li>";
+			}else if(data.pg > data.from_page){
+				result2 += "<li><a href=mainfile.htm?pg=1&collabo_no="+data.collabo_no+">««</a></li>" +
+				"<li><a href=mainfile.htm?pg="+data.pg-1+"&collabo_no="+data.collabo_no+">«</a></li>";
+			}
 		}
-		
+				
 		for(var i = data.from_page; i <= data.to_page; i++){
 			if(data.pg == i){
 				result2 += "<li class=active><a href=#>"+i+"</a></li>";

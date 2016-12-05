@@ -14,14 +14,17 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">안녕하세요, 관리자의 공지사항공간이랍니다~</div>
 			<!-- 검색폼 추가 -->
-			<div>
-				<form name="searchform" id="searchform" action="noticeSearch.htm"
-					method="get">
+			<div style="margin-top: 10px; margin-left: 15px;">
+				<form name="searchform" id="searchform" action="noticeSearch.htm" method="get">
 					<select name="selectvalue" id="selectvalue" class="cd-select">
 						<option style="text-align: center" value="notice_title">제목</option>
 						<option style="text-align: center" value="notice_text">내용</option>
-					</select> <input type="text" name="searchvalue"> <input
-						type="submit" class="btn btn-primary" id="search_btn" value="검색">
+					</select> 
+					<input type="text" name="searchvalue"> 
+					<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
+					<div style="float: right; margin-right: 15px;">
+						<a href="noticeInsert.htm"><input type="button" class="btn btn-primary" value="글쓰기"></a>
+					</div>
 				</form>
 			</div>
 			<!-- /.panel-heading -->
@@ -53,28 +56,30 @@
 				<!-- Pagination 추가 시작 -->
 				<div class="container" style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
-						<c:if test="${pg > block} ">
-							<li><a href="noticeSearch.htm?pg=1&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">««</a></li>
-							<li><a href="noticeSearch.htm?pg=${from_page - 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">«</a></li>
-						</c:if>
-						<c:if test="${pg <= block && pg != 1}">
-							<li><a href="noticeSearch.htm?pg=1&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">««</a></li>
-							<li><a href="noticeSearch.htm?pg=${pg - 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">«</a></li>
+						<c:if test="${pg != 1}">
+							<c:if test="${pg == from_page}">
+								<li><a href="noticeSearch.htm?pg=1&searchvalue=${searchvalue}&selectvalue=${selectvalue}">««</a></li>
+								<li><a href="noticeSearch.htm?pg=${from_page - 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">«</a></li>
+							</c:if>
+							<c:if test="${pg > from_page}">
+								<li><a href="noticeSearch.htm?pg=1&searchvalue=${searchvalue}&selectvalue=${selectvalue}">««</a></li>
+								<li><a href="noticeSearch.htm?pg=${pg - 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">«</a></li>
+							</c:if>
 						</c:if>
 						<c:forEach begin="${from_page}" end="${to_page}" var="i">
 							<c:if test="${i == pg}"><li class="active"><a href="#">${i}</a></li></c:if>
 							<c:if test="${i != pg}">
-								<li><a href="noticeSearch.htm?pg=${i}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">${i}</a></li>
+								<li><a href="noticeSearch.htm?pg=${i}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">${i}</a></li>
 							</c:if>
 						</c:forEach>
-						<c:if test="${list.size() != 0}">
+						<c:if test="${noticelist.size() != 0}">
 							<c:if test="${pg < to_page || pg != all_page}">
-								<li><a href="noticeSearch.htm?pg=${pg + 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">»</a></li>
-								<li><a href="noticeSearch.htm?pg=${all_page}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">»»</a></li>
+								<li><a href="noticeSearch.htm?pg=${pg + 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">»</a></li>
+								<li><a href="noticeSearch.htm?pg=${all_page}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">»»</a></li>
 							</c:if>
 							<c:if test="${to_page > all_page && pg != all_page}">
-								<li><a href="noticeSearch.htm?pg=${to_page + 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">»</a></li>
-								<li><a href="noticeSearch.htm?pg=${all_page}&searchvalue=${searchvalue}&selectvalue=${selectvalue}&collabo_no=${collabo_no}">»»</a></li>
+								<li><a href="noticeSearch.htm?pg=${to_page + 1}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">»</a></li>
+								<li><a href="noticeSearch.htm?pg=${all_page}&searchvalue=${searchvalue}&selectvalue=${selectvalue}">»»</a></li>
 							</c:if>
 						</c:if>
 					</ul>
@@ -83,9 +88,6 @@
 
 			</div>
 			<!-- /.panel-body -->
-			<p>
-				<a href="noticeInsert.htm">공지사항 작성하기</a>
-			</p>
 		</div>
 		<!-- /.panel -->
 	</div>

@@ -92,12 +92,10 @@
 				  url:"updateAlarm.htm",
 				  data:{"selectId": $('#collabo_req_ID').val()},
 				  success:function(data){
-					  
-					  
 				 console.log("알림DB업데이트 성공");
 				 console.log("성공?"+data);
 				 send($('#collabo_req_ID').val());
-				 promodifyform.submit(); 
+				
 				  }
 			  });	
 			

@@ -36,7 +36,7 @@
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="aside" />
 	<!-- Page Content -->
-	<div id="page-wrapper">
+	<div id="page-wrapper" style="min-height: 644px;margin-left: 150px;">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-12">

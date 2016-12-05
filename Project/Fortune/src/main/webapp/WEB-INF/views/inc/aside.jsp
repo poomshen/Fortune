@@ -9,7 +9,8 @@ ul a {
 }
 
 </style>
-<div class="navbar-default sidebar" style="border-color:#444; background-color:#194f89;  height:100%;" role="navigation">
+<div class="navbar-default sidebar" style="border-color:#444;background-color:#194f89;height:100%;width: 150px;margin-top: 0px;" role="navigation">
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -79,6 +80,9 @@ ul a {
                         </security:authorize>
 						<li>
                             <a class="hvr-grow-shadow" href="dept.htm"><i class="fa fa-wrench fa-fw"></i>주소록<span class="fa arrow"></span></a>
+                        </li>
+                        <li style="height: 3in;">
+                        <a href="#">완료된 프로젝트</a>
                         </li>
                     </ul>
                 </div>
