@@ -33,9 +33,18 @@ h6 {
  추가작업 :카드형태의 dropdown 함수 
  작업일 : 2016/12/05
  */
+<%
+String selectId = (String)request.getSession().getAttribute("test1");
+%>
+
 
 $(function(){
     Profile.load();
+   
+    send('<%=selectId%>'); 
+    
+     
+    
 });
 
 Profile = {

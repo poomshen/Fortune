@@ -108,14 +108,13 @@ public class Alarm_Controller {
 	}
 	//알림 디비에 저장하고 session update해주기
 	@RequestMapping(value="updateAlarm.htm", method = RequestMethod.POST)
-    public String updateAlarm(@RequestParam(value="selectId") String selectId,HttpSession session)
-            throws ClassNotFoundException, SQLException{
-	
-		
-			
-	      System.out.println("-------updateAlarm.ajax-------");
+    public String updateAlarm(@RequestParam(value="selectId") String selectId,
+    						  @RequestParam(value="collabo_req_no") int collabo_req_no,
+    						  HttpSession session)throws ClassNotFoundException, SQLException{
+
+		  System.out.println("-------updateAlarm.ajax-------");
 	      System.out.println("updateAlarm할 아이디: "+selectId);
-	      
+	      System.out.println("");
 	     				
 			Alarm_DTO alarm_dto = new Alarm_DTO();
 		
@@ -123,6 +122,10 @@ public class Alarm_Controller {
 			
 			alarm_dto.setUser_id(selectId);
 			alarm_dto.setWork_type("1");
+			
+			
+			
+			
 			
 			alarmDAO.insertAlarm(alarm_dto);
 			

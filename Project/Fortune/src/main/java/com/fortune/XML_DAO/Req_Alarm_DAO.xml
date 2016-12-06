@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fortune.schedule_alarm_DAO.IReqAlarm">
+ 
+<!-- 알림  추가 -->
+ <insert id="insertReqAlarm" parameterType="com.fortune.function_DTO.All_Alarm_DTO">
+  	 insert into req_alarm(alarm_index,collabo_req,collabo_req_index) values((select max(alarm_index) as alarm_index from alarm where user_id=#{user_id}),#{collabo_req_no},#{collabo_req_index})    
+ </insert>
+ 
+ </mapper>
