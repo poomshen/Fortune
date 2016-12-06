@@ -84,7 +84,7 @@ public class Search_Controller {
 		mv.addObject("from_page", from_page);
 		mv.addObject("to_page", to_page);
 		mv.addObject("collabo_no", collabo_no);
-		mv.setViewName("fileView.file2");
+		mv.setViewName("fileView.fileroomSearch");
 		
 		return mv;
 	}

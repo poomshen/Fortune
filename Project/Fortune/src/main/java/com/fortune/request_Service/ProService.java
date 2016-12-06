@@ -483,8 +483,11 @@ public class ProService {
 		}else if(ids.getRole_no() == 4){
 			field = "user_ID";
 			List<String> timeId = proDao.selectTeamMGR(ids.getTeam_no()) ;
-			List<With_DTO> list = proDao.listResponse2(page, field, timeId);
-			return list;
+			if(timeId.size() != 0 ){
+				List<With_DTO> list = proDao.listResponse2(page, field, timeId);
+				return list;
+			}
+			return null;
 		}else if(ids.getRole_no() == 1||ids.getRole_no() == 0){
 			 query = "%%";
 			 field = "collabo_req_ID";
