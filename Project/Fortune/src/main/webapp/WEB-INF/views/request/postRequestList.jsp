@@ -52,8 +52,6 @@ Profile = {
     social:function(){
         $('.plus').click(function(){
         	
-        	alert( $(this).attr('id'));
-        	
         	$('#hidden').val($(this).attr('id'));
         	
         	detailReqCollabo($(this).attr('id'));

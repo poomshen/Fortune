@@ -3,42 +3,96 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
-
+<!-- 
+작성자 : 이예지
+최초작업일 : 2016/12/05
+최종수저일 : 2016/12/05
+추가작업 : css 변경 및 상세보기 -> modal로 변경
+ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<style type="text/css">
-#pageside {
-	width: 100%;
+<style>
+h6 {
+    color: #777;
+    font-weight: bolder;
 }
 
-#ajaxside {
-	width: 50%;
-	float: right;
-	margin: 1%;
-}
+.tg  {border-collapse:collapse;border-spacing:0;width:100%;height:350px}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-baqh{text-align:center;}
+.tg .title{text-align:center;font-weight:900;}
+
 </style>
-
 
 <script type="text/javascript">
 
+/* 
+ 작성자 : 이예지
+ 추가작업 :카드형태의 dropdown 함수 
+ 작업일 : 2016/12/05
+ */
 
+$(function(){
+    Profile.load();
+});
 
+Profile = {
+    load:function(){
+        this.links();
+        this.social();
+        this.accordion();
+    },
+    links:function(){
+        $('a[href="#"]').click(function(e){
+            e.preventDefault();
+        });
+    },
+    social:function(){
+        $('.plus').click(function(){
+        	
+        	
+        	
+        	$('#hidden').val($(this).attr('id'));
+        	
+        	detailReqCollabo($(this).attr('id'));
+        	
+        	
+         	$('#social-link'+$(this).attr('id')).toggleClass('active');
+            $('#about-mesocial-link'+$(this).attr('id')).toggleClass('blur');
+        });
+        $('.social-link').click(function(){
+        	
+        	alert("gg");
+          	$(this).toggleClass('active');
+            $('#about-me'+$(this).attr('id')).toggleClass('blur');
+        });
+    },
+    accordion:function(){
+        var subMenus = $('.accordion .sub-nav').hide();
+        $('.accordion > a').each(function(){
+            if($(this).hasClass('active')){
+                $(this).next().slideDown(100);
+            }
+        });
+        $('.accordion > a').click(function(){
+            $this = $(this);
+            $target =  $this.next();
+            $this.siblings('a').removeAttr('class');
+            $this.addClass('active');
+            if(!$target.hasClass('active')){
+                subMenus.removeClass('active').slideUp(100);
+                $target.addClass('active').slideDown(100);
+            }
+            return false;
+        });
+    }
+}
      //상세 정보를 보여주는 ajax 입니다.
      function detailReqCollabo(a){
-    	 $("#menuView2").empty();
-    	 $("#ReqCollabo").empty();
+    	 //$("#menuView2").empty();
+    	 //$("#ReqCollabo").empty();
  	  	
     	 
  	   	 $.ajax({
@@ -287,165 +341,140 @@ alert('Error while request..'	);
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="requestlist">
+<!--전체 div영역 -->
+<div class="container" id="requestlist" style="margin-top:20px">
 
-	
 
-	<div class="w3-panel w3-card-4">
-
-		<div class="w3-dropdown-hover w3-left">
-			<a onclick="selectState('대기')" class="btn btn-primary">대기</a> 
-			<a onclick="selectState('수락')" class="btn btn-primary">수락</a> 
-			<a onclick="selectState('거절')" class="btn btn-primary">거절</a>
-		</div>
-		
-		
-		<!-- 검색 기능 쪽입니다. -->
-		<div class="w3-dropdown-hover w3-right">
-		
-		<select id="memoselect">
-		<option value="collabo_req_title">제목</option>
-		<option value="collabo_req_text">내용</option>
-		</select>
-		<input type="text" id="search" placeholder="Search" >
-		<button onclick="searchBtn()">검색</button>
-		</div>
-		
-		
+<!--대기/수락/거절 tab영역 -->
+<div class="tab-container">
+  		<ul class="nav nav-tabs" style="width:950px">
+    		<li id="대기" class="active"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
+    		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
+    		<li id="거절"><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
+  		</ul>
+	<div class="tab-content">
+    	<div class="tab-pane" ></div>
+    	<div class="tab-pane" ></div>
+    	<div class="tab-pane" ></div>
 	</div>
-
-	<!-- 이곳은  w3-card-4 전체에 잡고 있습니다. CSS  -->
-	<div class="w3-panel w3-card-4">
-	
-		<div id="ajaxside">
-			<div class="panel panel-default" style="position: fixed;">
-				<div class="panel-heading">협업 리스트1</div>
-				<!-- 검색폼 추가 -->
-				<div class="panel-body" id="ReqCollabo"></div>
-			</div>
-		</div>
-
-<div class="w3-panel w3-card-4" style="float: left;">
-		<c:forEach items="${list}" var="n">
-
-
-			<div id="pageside" class="w3-small">
-				<div style="float: left;">
-
-
-					<div class="w3-panel w3-card-4">
-
-
-
-						<!-- 요청담당자 쪽 그림 입니다. -->
-						<div style="float: left;">
-
-							<div class="w3-card-2" style="margin: 3px" align="center">
-								<br> <img src="images/man1.PNG" alt="Norway"
-									style="width: 100px; height: 100px; border-radius: 70%;">
-								<div class="w3-container w3-center">
-									<dl>
-										<dt>요청발신자 :</dt>
-										<dd>${n.user_ID}</dd>
-									</dl>
-								</div>
-							</div>
-
-						</div>
-
-
-
-						<!-- 중앙 글 입니다. -->
-
-						<div style="float: left;" class="w3-panel w3-card-4">
-							<div class="row">
-
-
-
-								<dl class="col-sm-4">
-									<dd>번호</dd>
-									<dd class="collabo_req_index">${n.collabo_req_index}</dd>
-								</dl>
-
-								<dl class="col-sm-4">
-									<dd>진행상태</dd>
-									<dd>${n.collabo_req_state}</dd>
-								</dl>
-
-								<dl>
-
-									<dd class="col-sm-12">제목:${n.collabo_req_title}</dd>
-								</dl>
-
-
-								<dl>
-
-									<dd class="col-sm-12">작성일: ${n.collabo_req_date}</dd>
-								</dl>
-
-							</div>
-							<div class="w3-panel w3-card-2" align="center">
-
-								<input type="button" class="btn btn-primary "
-									onclick="detailReqCollabo(${n.collabo_req_index})" value="상세보기"></input>
-
-								<c:choose>
-									<c:when test="${n.collabo_req_state == '수락'}">
-										<input type="button" class="btn btn-primary disabled"
-											value="수락완료" readonly="readonly">
-									</c:when>
-									<c:when test="${n.collabo_req_state == '거절'}"></c:when>
-
-									<c:otherwise>
-										<c:if test="${sessionScope.info.user_id == n.collabo_req_ID &&n.collabo_req_state != '완료' }">
-											<input type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#myModal2"
-												onclick="memoReqCollabo(${n.collabo_req_index})" value="수락">
-
-											<input type="button" data-toggle="modal"
-												data-target="#myModal3"
-												onclick="refuseReqCollabo(${n.collabo_req_index})"
-												class="btn btn-primary" value="거절">
-										</c:if>
-									</c:otherwise>
-
-
-								</c:choose>
-
-							</div>
-
-						</div>
-
-
-						<!-- 수신자 쪽 그림 입니다. -->
-
-
-
-						<div style="float: right;">
-
-							<div class="w3-card-2" align="center" style="margin: 3px">
-								<br> <img src="images/man2.PNG" alt="Norway"
-									style="width: 100px; height: 100px; border-radius: 70%;">
-								<div class="w3-container w3-center">
-									<dl>
-										<dt>요청수신자 :</dt>
-										<dd>${n.collabo_req_ID}</dd>
-									</dl>
-								</div>
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-			</div>
-
-
-
-
-		</c:forEach>
 </div>
 
+
+<!-- 보낸 요청함 card 띄워주는 영역 -->
+<!-- 검색영역   -->
+<div class="row grid-columns"style="width:1000px; height:20px; margin-top:2px">
+     <div id="row" style="height:20px;margin-left: 700px;" class="col-md-6 col">
+		
+		<select id="memoselect">
+			<option value="collabo_req_title">제목</option>
+			<option value="collabo_req_text">내용</option>
+		</select>
+		
+		<input type="text" id="search" placeholder="Search" >
+		
+		<button onclick="searchBtn()">검색</button>
+		
+	</div>
+</div>
+
+
+<div class="col-lg-12" style="width:1000px; margin-top:20px">
+<!-- 가로로 한줄 ㅁㅁㅁ 씩 채우기-->
+<c:forEach items="${list}" var="n" varStatus="status">
+
+     	<!-- 가로로 한줄 ■ㅁㅁ (첫번째)-->
+    			<div id="row1" style="height:200px" class="col-md-4 col">
+					<div class="accordion-wrap">
+	   					<div class="accordion">
+        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}</a>
+        						<div class="sub-nav active">
+            						<div class="html about-me" id="about-mesocial-link${n.collabo_req_index}">
+         <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
+                       					<div class="photo" style=
+                
+               								 <c:choose>
+												<c:when test="${n.collabo_req_state == '수락'}">
+              										 "border:3px solid #1e851f; margin-right:0px"
+                								</c:when>
+                								
+                								<c:when test="${n.collabo_req_state == '거절'}">
+								 					"border:3px solid #dd2d16"
+												</c:when>
+												<c:otherwise>
+								 					"border:3px solid #ddd; margin-right:0px"
+												</c:otherwise>
+
+											</c:choose>
+										>
+                 							<img src="images/언니회색.jpg" style="background:no-repeat center;width:100%; height: 100%">
+         <!-- 사람 아이콘에 마우스 갖다댈시에 + 모양 띄우기-->
+                    							<div class="photo-overlay" >
+                        							<span id="${n.collabo_req_index}" class="plus">+</span>
+                    							</div>
+           		         						
+	                    						</div>
+	                    						<h6>제목 : ${n.collabo_req_title}</h6>
+                							 	<h6 style="font-weight: inherit;">작성일:${n.collabo_req_date}</h6>
+                    						
+                    						
+                    								
+        	            						
+                    					
+                    						  
+        <!-- card안에 간단한 상세 내역 -->
+                  								
+                									
+        
+        
+        <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
+                <div class="social-link" id="social-link${n.collabo_req_index}">
+                    <a class="link link-twitter" onclick="detailReqCollabo(${n.collabo_req_index});" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <a class="link link-codepen" href="http://codepen.io/khadkamhn/" target="_blank"><i class="fa fa-codepen"></i></a>
+                    <a class="link link-facebook" href="http://facebook.com/khadkamhn/" target="_blank"><i class="fa fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+				</div>
+
+  		</c:forEach>
+  		</div>
+  		<!-- container div영역 닫기 -->
+  			<div class="row grid-columns"style="width:1000px; height:100px; margin-top:2px">
+  		  		<!-- 페이징 처리하기  -->
+		  		<div style="text-align: center; margin-left: -80px;">
+					<ul class="pagination">
+							<c:if test="${pg>block}">
+								<li><a href="#" onclick="pazingBtn()">««</a></li>
+								<li><a href="#" onclick="pazingBtn2()">«</a></li>
+							</c:if>
+							<c:if test="${pg<=block}">
+								<li><a href="#">««</a></li>
+								<li><a href="#">«</a></li>
+							</c:if>
+							<c:forEach begin="${from_page}" end="${to_page}" var="i">
+								<c:if test="${i==pg}">
+									<li class="active"><a href="#">${i}</a></li>
+								</c:if>
+								<c:if test="${i!=pg}">
+									<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
+								</c:if>
+							</c:forEach>
+							<c:if test="${to_page<all_page}">
+								<li><a href="#" onclick="pazing4Btn()">»</a></li>
+								<li><a href="#" onclick="pazing5Btn()">»»</a></li>
+							</c:if>
+							<c:if test="${to_page>=all_page}">
+								<li><a href="#">»</a></li>
+								<li><a href="#">»»</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</div>
+			<!--container div닫아주기 -->	
+			</div>
 		<!-- 거절을 하였을때 거절 사유를 쓸 때 사용됩니다.-모델 창입니다. -->
 
 
@@ -607,47 +636,5 @@ function refuse() {
 			</div>
 
 		</div>
-	</div>
-<div class="w3-panel w3-card-4">
-<!-- Pagination 추가 시작 -->
-				<div class="container" style="text-align: center; margin-left: -80px;">
-					<ul class="pagination">
-						<c:if test="${pg>block}">
-							<li><a href="#" onclick="pazingBtn()">««</a></li>
-							<%-- <li><a href="requestList.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li> --%>
-							<li><a href="#" onclick="pazingBtn2()">«</a></li>
-							<%-- <li><a href="requestList.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li> --%>
-						</c:if>
-						<c:if test="${pg<=block}">
-							<li><a href="#">««</a></li>
-							<li><a href="#">«</a></li>
-						</c:if>
-						<c:forEach begin="${from_page}" end="${to_page}" var="i">
-							<c:if test="${i==pg}">
-								<li class="active"><a href="#">${i}</a></li>
-							</c:if>
-							<c:if test="${i!=pg}">
-								<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
-								<%-- <li><a href="requestList.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li> --%>
-							</c:if>
-						</c:forEach>
-						<c:if test="${to_page<all_page}">
-							<li><a href="#" onclick="pazing4Btn()">»</a></li>
-							<li><a href="#" onclick="pazing5Btn()">»»</a></li>
-							
-							<%-- <li><a href="requestList.htm?pg=${to_page+1}&st=${st_query}&me=${memo}&se=${search}">»</a></li> --%>
-							<%-- <li><a href="requestList.htm?pg=${all_page}&st=${st_query}&me=${memo}&se=${search}">»»</a></li> --%>
-						</c:if>
-						<c:if test="${to_page>=all_page}">
-							<li><a href="#">»</a></li>
-							<li><a href="#">»»</a></li>
-						</c:if>
-					</ul>
-				</div>
-				<!-- Pagination 추가 끝 -->
-
-	</div>
-	</div>
-
 </body>
 </html>
