@@ -9,8 +9,9 @@
 <title>Insert title here</title>
 
 <script>
+//캘린더 등록, 수정, 삭제권한 체를 위한 role변수 선언
 var role;
-if(${role_no}==3){ 
+if(${role_no}==3){
 	role= true;
 }else{
 	role=false;
@@ -190,9 +191,9 @@ $(document).ready(function() {
 		});
 
 		$('.mutliSelect input[type="checkbox"]').on('click', function() {
-
-		  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
-		    title = $(this).val() + ",";
+		//this.val() 이부분이 참가자목록에서 위쪽으로 id찍어주는 부분임
+		  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').attr("value2"),
+		    title = $(this).attr("value2") + ",";
 
 		  if ($(this).is(':checked')) {
 			 
@@ -352,7 +353,7 @@ $(document).ready(function() {
         <div class="mutliSelect effect2" >
             <ul class="effect2" style="display: block; padding-right: 0px; height: 204px; width: 272px;">
         		<c:forEach items="${team_id}" var="obj" varStatus="status">
-					<li><input type="checkbox" value="${obj.user_id}" id="${obj.user_id}" name='userchk' onclick="scheduleuser()"><label for="${obj.user_id}" style="cursor: pointer ;">${obj.user_name}</label></li>
+					<li><input type="checkbox" value="${obj.user_id}" value2="${obj.user_name}" id="${obj.user_id}" name='userchk' onclick="scheduleuser()"><label for="${obj.user_id}" style="cursor: pointer ;">${obj.user_name}</label></li>
 				</c:forEach>
             </ul>
         </div>
