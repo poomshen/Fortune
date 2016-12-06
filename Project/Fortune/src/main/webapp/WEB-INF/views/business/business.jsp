@@ -28,6 +28,8 @@ table, th, td {
 <form action="" >
 	<select id="deptSelect" name="deptSelect" onchange="deptchange()">
 		<c:forEach var="i" items="${dept}">
+		
+		
 			<c:choose>
 				<c:when test="${i.dept_no == sessionScope.info.dept_no}">
 					<option value="${i.dept_no}" selected>${i.dept_name}</option>
@@ -36,6 +38,8 @@ table, th, td {
 					<option value="${i.dept_no}">${i.dept_name}</option>
 				</c:otherwise>
 			</c:choose>
+			
+			
 		</c:forEach>
 	</select>
 	
