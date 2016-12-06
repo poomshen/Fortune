@@ -25,7 +25,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fortune.Table_DTO.Chart_Data_DTO;
 
@@ -93,12 +93,16 @@ public class MemberController {
 			return "redirect:index.htm";
 		}
 		
-		session.setAttribute("info", result);
-
-		//추가 사항
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
-		List<Select_Collabo_DTO> collabo = proDao.selectCollaboList(result.getUser_id());
-		session.setAttribute("collabo", collabo);
+		session.setAttribute("info", result);
+		if( result.getRole_no() == 2 ){
+			List<Select_Collabo_DTO> collabo = proDao.selectCollaboList2(result.getDept_no());
+			session.setAttribute("collabo", collabo);
+		}else{
+			//추가 사항
+			List<Select_Collabo_DTO> collabo = proDao.selectCollaboList(result.getUser_id());
+			session.setAttribute("collabo", collabo);
+		}
 		
 		
 		//메뉴에 차트 가져오기( 추가작업 : 이예지)
@@ -245,4 +249,11 @@ public class MemberController {
 		return "home.edit";
 	}
 	
+	//id search page이동 컨트롤러
+	@RequestMapping("/searchpage.htm")
+	public String idSearchpage(){
+		System.out.println("searchpage 이동!");
+		
+		return "searchpage";
+	}
 }

@@ -32,7 +32,7 @@ input.buttonLink {
 	<div class="col-sm-6" style="padding-left: 0px;">
 		<form action="">
 			<select id="deptSelect1" name="deptSelect1">
-				<option value="-1" selected>부서 선택</option>
+				<option value="-1" selected="selected">부서 선택</option>
 				<c:forEach var="i" items="${dept}">
 					<c:choose>
 						<c:when test="${i.dept_no == sessionScope.info.dept_no}">

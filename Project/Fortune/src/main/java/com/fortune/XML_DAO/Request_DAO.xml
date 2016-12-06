@@ -12,11 +12,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE (${param1} like '%${param2}%'AND collabo_req_state LIKE '%${param3}%' AND ${param4} LIKE '%${param5}%')
 	</select>
 
-	<select id="getRequest" resultType="com.fortune.Table_DTO.Request_DTO">
-		SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
-		( SELECT * FROM collabo_req WHERE (${param2}
-		LIKE '%${param3}%' AND ${param5} LIKE '%${param6}%' AND collabo_req_state LIKE '%${param4}%') ORDER BY collabo_req_date DESC ) N )
-		WHERE NUM BETWEEN 1 + (${param1} - 1) * 6 AND 6 + (${param1} - 1) * 6
+	<select id="getRequest" parameterType="String" resultType="com.fortune.Table_DTO.Request_DTO">
+		 SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
+		( SELECT re.COLLABO_REQ_TEXT,re.COLLABO_REQ_TITLE,re.COLLABO_REQ_STATE,re.COLLABO_REQ_ID,re.COLLABO_REQ_DATE,
+    re.USER_ID,re.COLLABO_REQ_FILESRC,re.COLLABO_REQ_INDEX,re.COLLABO_REQ_NO,u.dept_no ,de.dept_name, u.user_name from collabo_req re
+    join users u on re.collabo_req_ID = u.user_ID join dept de on u.dept_no = de.dept_no WHERE (re.${param2}
+		LIKE '%${param3}%' AND re.${param5} LIKE '%${param6}%' AND re.collabo_req_state LIKE '%${param4}%') ORDER BY re.collabo_req_date DESC ) N )
+		WHERE NUM BETWEEN 1 + (${param1} - 1) * 6 AND 6 + (${param1} - 1) * 6 
+		
+		
 	</select>
 <!-- SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo_req WHERE( user_ID
@@ -35,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				Insert into collabo_req(collabo_req_index,collabo_req_no,user_ID,
 				collabo_req_title,
 				collabo_req_text, collabo_req_date, collabo_req_ID, collabo_req_state , COLLABO_REQ_FILESRC)
-				VALUES(1,#{collabo_req_no}, #{user_ID}, #{collabo_req_title}, #{collabo_req_text}, TO_CHAR(SYSDATE, 'yyyy-mm-dd hh:mm:ss')
+				VALUES(1,#{collabo_req_no}, #{user_ID}, #{collabo_req_title}, #{collabo_req_text},SYSDATE
 				,#{collabo_req_ID}, #{collabo_req_state}, #{collabo_req_filesrc})
 			</when>
 
@@ -44,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				collabo_req_title,
 				collabo_req_text, collabo_req_date, collabo_req_ID, collabo_req_state , COLLABO_REQ_FILESRC)
 				VALUES(#{collabo_req_index},#{collabo_req_no}, #{user_ID}, #{collabo_req_title},
-				#{collabo_req_text}, TO_CHAR(SYSDATE, 'yyyy-mm-dd hh:mm:ss') ,#{collabo_req_ID},#{collabo_req_state},#{collabo_req_filesrc})
+				#{collabo_req_text}, sysdate ,#{collabo_req_ID},#{collabo_req_state},#{collabo_req_filesrc})
 			</otherwise>
 		</choose>
 	</insert>
@@ -139,7 +143,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      collabo_end,g.collabo_state collabo_state,
      g.collabo_req_id collabo_req_id ,g.collabo_sal collabo_sal from (SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo WHERE ${param2}
-		LIKE '%${param3}%' ORDER BY collabo_no DESC ) N )
+		LIKE '%${param3}%' and COLLABO_STATE != '완료' ORDER BY collabo_no DESC ) N )
 		WHERE NUM BETWEEN (${param1}+1)  AND (4+${param1}) )G join 
 		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX ORDER by NUM
 	</select>
@@ -156,6 +160,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<foreach  item="querys"  collection="param3" open="(" separator="," close=")">
 			#{querys}
 		</foreach>
+		and COLLABO_STATE != '완료'
 		 ORDER BY collabo_no DESC ) N )
 		WHERE NUM BETWEEN (${param1}+1)  AND (4+${param1}) )G join 
 		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX  ORDER by NUM
@@ -194,11 +199,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 만든 목적: 팀장 전용이라는 데이터를 뽑는데 사용되는 데이터 입니다..
 		 날짜 일자: 2016-11-23 
 	-->
-	<select id="listManager" resultType="com.fortune.Table_DTO.Join_DTO">
+	<select id="listManager" resultType="com.fortune.request_DTO.Passion_DTO">
 
-		select user_ID , user_password,user_name,user_gender,user_date,user_phone,user_join,position_No,
-    team_No,dept_No,role_no from users where ROLE_NO = 3 and dept_no = #{dept_no}
-
+	 select u.user_ID , u.user_password,u.user_name,u.user_gender,u.user_date,u.user_phone,u.user_join,u.position_No,
+    u.team_No,u.dept_No,u.role_no ,te.DEPT_NO,te.TEAM_NAME,te.TEAM_NO from users u join team te on u.team_NO = te.team_NO where u.ROLE_NO = 3 and u.dept_no = #{dept_no}
 	</select>
 	
 	<!-- 만든 목적: 대기에서 진행중으로 바꿔주는 데이터 입니다. 
@@ -233,6 +237,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 작성자 : 이성준  날짜: 16-12-01 목적: 팀원들의 팀장 보기 -->
 	<select id="selectTeamMGR" parameterType="Integer"  resultType="String">
 		Select distinct c.user_Id From Users U Join (Select * From Collabo) C On U.User_Id = C.User_Id where team_no = #{param1}	
+	</select>
+	
+	<!-- 작성자: 이성준 날짜: 16-12-06 목적: 요청 글 가지고 오기 -->
+	<select id="selectReqText" parameterType="Integer" resultType="String">
+		Select collabo_req_text from collabo_req where COLLABO_REQ_INDEX = #{param1}
 	</select>
 
 </mapper>

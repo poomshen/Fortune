@@ -367,9 +367,12 @@ public class ProService {
 	public int Refuse(String collabo_req_index,String collabo_req_text) throws ClassNotFoundException, SQLException {
 		System.out.println("거절인덱스 : " + collabo_req_index);
 		System.out.println("거절텍스트 : "+collabo_req_text);
+		String collabo_req_textAll;
 		
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
-		int re = proDao.refuse(collabo_req_index,collabo_req_text); // 여기에서 delete 사용하여 삭제 함
+		collabo_req_textAll = proDao.selectReqText(Integer.parseInt(collabo_req_index));
+		collabo_req_textAll += "<br>거절 사유 : <br>"+collabo_req_text;
+		int re = proDao.refuse(collabo_req_index,collabo_req_textAll); // 여기에서 Update 사용하여  바꿔줌
 		return re;
 	}
 
