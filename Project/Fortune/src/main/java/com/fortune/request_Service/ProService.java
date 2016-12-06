@@ -297,14 +297,14 @@ public class ProService {
 		System.out.println("n : " + n.getCollabo_req_state());
 		System.out.println("file :"+n.getCollabo_req_filesrc());
 		
-		List<CommonsMultipartFile> files = n.getFiles();
+		CommonsMultipartFile files = n.getFiles();
 		  List<String> filenames = new ArrayList<String>(); //파일명만 추출
 		  
-		  if(files != null && files.size() > 0 ){ //업로드한 파일이 하나라도 있다면
+		  if(files != null ){ //업로드한 파일이 하나라도 있다면
 			  
-			  for(CommonsMultipartFile multipartfile : files ){
+			  
 				                              
-				  String fname = multipartfile.getOriginalFilename(); //파일명 얻기
+				  String fname = files.getOriginalFilename(); //파일명 얻기
 				  String path  = request.getServletContext().getRealPath("/customer/upload");
 				  String fullpath = path + "\\" + fname;
 				  
@@ -313,23 +313,24 @@ public class ProService {
 				  if(!fname.equals("")){
 					 //서버에 파일 쓰기 작업 
 					  FileOutputStream fs = new FileOutputStream(fullpath);
-					  fs.write(multipartfile.getBytes());
+					  fs.write(files.getBytes());
 					  fs.close();
 				  }
 				  filenames.add(fname); //실 DB Insert 작업시 .. 파일명 
 			  }
 			  
-		  }
 		  
 		 
-		  n.setCollabo_req_filesrc(filenames.get(0));  // 파일명으로 데이터에 넣을 것들입니다.
+		n.setCollabo_req_filesrc(filenames.get(0));  // 파일명으로 데이터에 넣을 것들입니다.
 		  
 		// 실DB저장
 
 		ProDao proDao = sqlsession.getMapper(ProDao.class);
+		System.out.println("---------인서트 전------ ");
 		
-		proDao.insert(n);
-
+		int result=proDao.insert(n);
+		System.out.println("result:"+result);
+		
 		return n;
 
 	}
@@ -419,14 +420,14 @@ public class ProService {
 	public Request_DTO proEdit( Request_DTO n, HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
 
 		
-		List<CommonsMultipartFile> files = n.getFiles();
+		CommonsMultipartFile files = n.getFiles();
 		  List<String> filenames = new ArrayList<String>(); //파일명만 추출
 		  
-		  if(files != null && files.size() > 0 ){ //업로드한 파일이 하나라도 있다면
+		  if(files != null ){ //업로드한 파일이 하나라도 있다면
 			  
-			  for(CommonsMultipartFile multipartfile : files ){
+			  
 				                              
-				  String fname = multipartfile.getOriginalFilename(); //파일명 얻기
+				  String fname = files.getOriginalFilename(); //파일명 얻기
 				  String path  = request.getServletContext().getRealPath("/customer/upload");
 				  String fullpath = path + "\\" + fname;
 				  
@@ -435,13 +436,13 @@ public class ProService {
 				  if(!fname.equals("")){
 					 //서버에 파일 쓰기 작업 
 					  FileOutputStream fs = new FileOutputStream(fullpath);
-					  fs.write(multipartfile.getBytes());
+					  fs.write(files.getBytes());
 					  fs.close();
 				  }
 				  filenames.add(fname); //실 DB Insert 작업시 .. 파일명 
 			  }
 			  
-		  }
+		  
 		  
 		  // DB저장작업
 		  // DB 저장할 파일 명

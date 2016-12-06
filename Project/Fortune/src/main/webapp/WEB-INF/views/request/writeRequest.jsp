@@ -89,21 +89,56 @@
 			
 
 		} else {
-			alert("완료"+$('#collabo_req_ID').val());
+			
+			
+			
+		
+			alert("selectId "+$('#collabo_req_ID').val()+"/"+
+				  "collabo_req_no "+$('#collabo_req_no').val()+"/"+$('#collabo_req_filesrc').val()
+				);
+			
+			 /* var files[0]=$('#collabo_req_filesrc').val(); */ 
 			
 			$.ajax({
+				type:"post",
+				dataType:"html",
+				url:"writerequest.htm",
+				data:{
+					"collabo_req_no":$('#collabo_req_no').val(),
+					"collabo_req_title":$('#collabo_req_title').val(),
+					"collabo_req_filesrc":$('#collabo_req_filesrc').val(),
+					"user_ID":$('#user_ID').val(),
+					"collabo_req_state":$('#collabo_req_state').val(),
+					"collabo_req_ID":$('#collabo_req_ID').val()
+				},success:function(data){
+					
+					 
+						 console.log("알림DB업데이트 성공");
+						 console.log("성공?");
+						 send($('#collabo_req_ID').val());
+					
+					
+				}
+			})
+		/* 	$.ajax({
 				  
 				  type:"post",
 				  dataType: "html",
 				  url:"updateAlarm.htm",
-				  data:{"selectId": $('#collabo_req_ID').val()},
-				  success:function(data){
+				  data:{
+					  
+					  "selectId": $('#collabo_req_ID').val(),
+					  "collabo_req_no":$('#collabo_req_no').val()
+				  
+				  		},
+	
+				 success:function(data){
 				 console.log("알림DB업데이트 성공");
 				 console.log("성공?"+data);
 				 send($('#collabo_req_ID').val());
 				
 				  }
-			  });	
+			  });	 */
 		
 			return true;
 		}
@@ -125,22 +160,14 @@
 	<div class="container">
 		<form action="" method="post" name="promodifyform"
 			enctype="multipart/form-data">
-
-
-
-
-			
-
-
-
-
-			<div class="col-sm-1"></div>
+		<div class="col-sm-1"></div>
 			<div class="col-sm-8">
 
 
 				<div class="form-group">
-				<label>새로운 요청 :</label> <select name="collabo_req_no" class="form-control">
-					<option value="${collabo_req_no }">새로운 요청</option>
+				<label>새로운 요청 :</label> 
+				<select name="collabo_req_no" id="collabo_req_no" class="form-control">
+					<option value="${collabo_req_no}">새로운 요청</option>
 				 	<c:forEach var="pname" items="${pList}">
 						<option value="${pname.collabo_req_no }">${pname.project_name}</option>
 					</c:forEach> 
@@ -175,13 +202,13 @@
 				<br>
 
 				<!-- 작성자 -->
-				<input type="hidden" name="user_ID" class="form-control"
+				<input type="hidden" name="user_ID" id="user_ID" class="form-control"
 					value="${sessionScope.info.user_id}" readonly="readonly">
 
 
 
 				<!-- 진행상태 -->
-				<input type="hidden" name="collabo_req_state" value="대기"
+				<input type="hidden" name="collabo_req_state" id="collabo_req_state" value="대기"
 					class="form-control" readonly>
 
 

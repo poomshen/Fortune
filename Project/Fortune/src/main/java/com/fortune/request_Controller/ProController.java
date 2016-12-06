@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fortune.Table_DTO.Join_DTO;
@@ -57,7 +58,7 @@ public class ProController {
 
 	// 프로젝트를 요청해주는 클래스 이다.
 	@RequestMapping(value = "writerequest.htm", method = RequestMethod.POST)
-	public String regRequest(Request_DTO n, HttpServletRequest request)
+	public @ResponseBody String regRequest(Request_DTO n, HttpServletRequest request)
 			throws IOException, ClassNotFoundException, SQLException {
 			
 		System.out.println("writeRequest.htm 컨트롤러 start");
@@ -73,12 +74,13 @@ public class ProController {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "redirect:listReplyRequest.htm";
+		return null;
 
 	}
 
 	// 만든 목적: 발신자가 보낸 것을 리스트로 보여주는 클래스입니다,
 	// 만든 날짜: 2016-11-28
+	// 추가 작업: 이예지 알림 new list 불러오기
 	 @Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
 	public ModelAndView requestList(String pg, String f, String q, String st,String me,String se, HttpSession session ,String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {

@@ -68,7 +68,7 @@ function onMessage(evt) {
 			  $('#alarm').empty();  
 			  $('#alarm').html(data);
 			 
-			  promodifyform.submit(); 
+			  //promodifyform.submit(); 
 		
 		  }
 	  });	
