@@ -429,8 +429,8 @@ alert('Error while request..'	);
         <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
                 <div class="social-link" id="social-link${n.collabo_req_index}">
                     <!-- 상세보기 --><a class="link link-twitter" onclick="detailReqCollabo(${n.collabo_req_index})" target="_blank"><i class="fa fa-twitter"></i></a>
-                    <!-- 수락 --><a class="link link-codepen" onclick="detailReqCollabo(${n.collabo_req_index})" target="_blank"><i class="fa fa-codepen"></i></a>
-                    <!-- 거절 --><a class="link link-facebook" onclick="detailReqCollabo(${n.collabo_req_index})" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <!-- 수락 --><a  data-toggle="modal" data-target="#myModal2" class="link link-codepen" onclick="memoReqCollabo(${n.collabo_req_index})" target="_blank"><i class="fa fa-codepen"></i></a>
+                    <!-- 거절 --><a  data-toggle="modal" data-target="#myModal4" class="link link-facebook" onclick="refuseReqCollabo(${n.collabo_req_index})" target="_blank"><i class="fa fa-facebook"></i></a>
                 </div>
             </div>
         </div>
@@ -520,7 +520,7 @@ alert('Error while request..'	);
 
 		<div class="container">
 			<!-- Modal -->
-			<div class="modal fade" id="myModal3" role="dialog">
+			<div class="modal fade" id="myModal4" role="dialog">
 				<div class="modal-dialog">
 
 					<!-- Modal content-->
