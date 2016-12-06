@@ -27,9 +27,7 @@ table, th, td {
 <div class="col-lg-12">
 <form action="" >
 	<select id="deptSelect" name="deptSelect" onchange="deptchange()">
-		<c:forEach var="i" items="${dept}">
-		
-		
+		<c:forEach var="i" items="${dept}">			
 			<c:choose>
 				<c:when test="${i.dept_no == sessionScope.info.dept_no}">
 					<option value="${i.dept_no}" selected>${i.dept_name}</option>
@@ -37,13 +35,12 @@ table, th, td {
 				<c:otherwise>
 					<option value="${i.dept_no}">${i.dept_name}</option>
 				</c:otherwise>
-			</c:choose>
-			
-			
+			</c:choose>		
 		</c:forEach>
 	</select>
-	
-	<select id="teamSelect" name="teamSelect">
+
+	 <select id="teamSelect" name="teamSelect">
+	 <option value="999">전체</option>
 		<c:forEach var="j" items="${team}">				
 			<c:if test="${sessionScope.info.dept_no == j.dept_no}">
 				<c:choose>
@@ -54,9 +51,10 @@ table, th, td {
 						<option value="${j.team_no}">${j.team_name}</option>
 					</c:otherwise>
 				</c:choose>				
-			</c:if>	
+			</c:if>
+			
 		</c:forEach>		
-	</select>
+	</select> 
 	
 	<input type="button" class="btn btn-primary" onclick="deptshow()" value="검색">
 </form>
@@ -94,7 +92,7 @@ function deptshow(){
 		data:{"dept_no": $('#deptSelect').val(), 
 			  "team_no": $('#teamSelect').val()},
 		success:function(data){
-			//console.log(data);
+			//console.log("teamSelect value : "+team_no);
 			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 
 			if(data != null){
 				alert('검색 완료');
@@ -119,7 +117,7 @@ function deptchange() {
 		data:{"dept_no":$('#deptSelect').val()},
 		success:function(data){
 			//console.log(data[0].team_name);
-			alert('팀목록 바뀜요');
+			//alert('팀목록 바뀜요');
 			$("#teamSelect").html("");
 			for(var i=0; i<data.length; i++){
 				if(i==0){
@@ -134,9 +132,7 @@ function deptchange() {
 		error:function(){
 			alert('팀목록 가져오는데서 에러남!');
 		}
-	});
-	
-	
+	});	
 }
 
 </script>
