@@ -160,7 +160,7 @@
 		   	<select style="width: 100px;" name="year" id="year" required="required">
 			   	<option value="-1">생년 선택 </option>
 			   		<c:forEach var="i" begin="1970" end="2000">
-			   			<option style="background-color: transparent;" value="${i}">${i}</option>
+			   			<option style="background-color:transparent;" value="${i}">${i}</option>
 			   		</c:forEach>
 		  	</select>년
 		  	</div>
@@ -266,7 +266,7 @@
 <div class="form-group">
   <label class="control-label"></label>  
     <input type="button" name="joinbtn" id="joinbtn" onclick="joinchk();" class="btn hvr-forward" style="margin-top: 50px;" value="join">&nbsp; &nbsp; 
-    <input type="button" class="btn hvr-forward" value="back" style="margin-top: 50px;">
+    <input type="button" class="btn hvr-forward" style="margin-top: 50px;" value="back" onclick="history.go(-1)">
 </div>
 
 
