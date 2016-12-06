@@ -38,7 +38,7 @@ var msg
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://192.168.0.4:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://192.168.1.103:8090/fortune/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -54,7 +54,7 @@ function onOpen(evt) {
 function onMessage(evt) {
 
 	console.log("받은 메세지 내용은??"+evt.data);
-
+	 
 	$.ajax({
 		  
 		  type:"post",
@@ -62,13 +62,14 @@ function onMessage(evt) {
 		  url:"newAlarm.htm",
 		  data:{"newAlarm": evt.data},
 		  success:function(data){
-			  
+			 
+		
 			  console.log("헤더 업데이트 성공");
 			  console.log(data);
 			  $('#alarm').empty();  
 			  $('#alarm').html(data);
 			 
-			  //promodifyform.submit(); 
+			
 		
 		  }
 	  });	

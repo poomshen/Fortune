@@ -92,53 +92,10 @@
 			
 			
 			
-		
-			alert("selectId "+$('#collabo_req_ID').val()+"/"+
-				  "collabo_req_no "+$('#collabo_req_no').val()+"/"+$('#collabo_req_filesrc').val()
-				);
-			
-			 /* var files[0]=$('#collabo_req_filesrc').val(); */ 
-			
-			$.ajax({
-				type:"post",
-				dataType:"html",
-				url:"writerequest.htm",
-				data:{
-					"collabo_req_no":$('#collabo_req_no').val(),
-					"collabo_req_title":$('#collabo_req_title').val(),
-					"collabo_req_filesrc":$('#collabo_req_filesrc').val(),
-					"user_ID":$('#user_ID').val(),
-					"collabo_req_state":$('#collabo_req_state').val(),
-					"collabo_req_ID":$('#collabo_req_ID').val()
-				},success:function(data){
-					
-					 
-						 console.log("알림DB업데이트 성공");
-						 console.log("성공?");
-						 send($('#collabo_req_ID').val());
-					
-					
-				}
-			})
-		/* 	$.ajax({
-				  
-				  type:"post",
-				  dataType: "html",
-				  url:"updateAlarm.htm",
-				  data:{
-					  
-					  "selectId": $('#collabo_req_ID').val(),
-					  "collabo_req_no":$('#collabo_req_no').val()
-				  
-				  		},
+			 promodifyform.submit(); 
 	
-				 success:function(data){
-				 console.log("알림DB업데이트 성공");
-				 console.log("성공?"+data);
-				 send($('#collabo_req_ID').val());
-				
-				  }
-			  });	 */
+			 send($('#collabo_req_ID').val());
+
 		
 			return true;
 		}

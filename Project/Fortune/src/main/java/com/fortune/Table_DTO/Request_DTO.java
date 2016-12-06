@@ -31,7 +31,7 @@ public class Request_DTO {
 		this.user_name = user_name;
 	}
 	
-	private CommonsMultipartFile files;
+	private List<CommonsMultipartFile> files;
 		public String getDept_name() {
 		return dept_name;
 	}
@@ -49,10 +49,10 @@ public class Request_DTO {
 	//멀티 파일 업로드///////////////////////////////
 		
 			
-		public CommonsMultipartFile getFiles() {
+		public List<CommonsMultipartFile> getFiles() {
 			return files;
 		}
-		public void setFiles(CommonsMultipartFile files) {
+		public void setFiles(List<CommonsMultipartFile> files) {
 			this.files = files;
 		}
 	////////////////////////////////////////////////
