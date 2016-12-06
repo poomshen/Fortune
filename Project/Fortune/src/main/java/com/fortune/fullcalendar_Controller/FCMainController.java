@@ -1,6 +1,7 @@
 package com.fortune.fullcalendar_Controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.fullcalendar_DAO.IFullCalendar;
+import com.fortune.function_DTO.Team_Users_DTO;
 
 @Controller
 public class FCMainController {
@@ -37,9 +39,9 @@ public class FCMainController {
 		
 		Join_DTO dto = (Join_DTO) session.getAttribute("info");
 		
-		String[] user_id = fullcalendarDAO.selectTeam_id(dto.getUser_id());
+		List<Team_Users_DTO> user_id = fullcalendarDAO.selectTeam_id(dto.getUser_id());
 
-			
+		model.addAttribute("role_no", dto.getRole_no());
 		model.addAttribute("team_id", user_id);
 
 		return "schedule.schedule";

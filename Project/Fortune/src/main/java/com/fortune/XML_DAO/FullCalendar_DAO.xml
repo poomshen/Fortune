@@ -7,8 +7,8 @@
 
 
 <!-- 일정의 참가한 팀원 가져오기 위해 팀목록 불러오는 쿼리  -->
-<select id="selectTeam_id" resultType="String">
-	select u.user_id, u.team_no from users u join team t
+<select id="selectTeam_id" resultType="com.fortune.function_DTO.Team_Users_DTO">
+	select u.user_id, u.user_name from users u join team t
 	on u.team_no = t.team_no
 	where u.team_no = (select team_no from users where user_id = #{user_id})
 </select>
@@ -72,11 +72,13 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 </select>
 <!-- 일반 일정마다 참가자 select -2 -->
 <select id="selectWUList" resultType="com.fortune.Table_DTO.Work_Users_DTO">
-	select user_id, wu.schedule_no from
+	select u.user_name as "user_id", wu.schedule_no from
 	work_users wu join work w
 	on wu.SCHEDULE_NO = w.SCHEDULE_NO
 	join schedule s
 	on w.schedule_no = s.schedule_no
+	join users u
+  	on wu.user_id = u.user_id
 	where s.collabo_no = #{param1} and schedule_start like #{param2}||'%'
 </select>
 
@@ -131,11 +133,13 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 
 <!-- 회의업무 마다 참가자 select -1 -->
 <select id="selectMUList" resultType="com.fortune.Table_DTO.Meet_Users_DTO">
-	select user_id, mu.schedule_no from
+	select u.user_name as "user_id", mu.schedule_no from
 	meet_users mu join meeting m
 	on mu.SCHEDULE_NO = m.SCHEDULE_NO
 	join schedule s
 	on m.schedule_no = s.schedule_no
+	join users u
+  	on mu.user_id = u.user_id
 	where s.collabo_no = #{param1} and schedule_start like #{param2}||'%'
 </select>
 
@@ -156,12 +160,14 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 </select>
 <!-- 선택한 일정 select -2 -->
 <select id="selectClick_users" resultType="String">
-	select user_id from work_users
+	select u.user_name as "user_id" from work_users wu join
+	users u on wu.user_id = u.user_id
 	where schedule_no = #{schedule_no}
 </select>
 <!-- 선택한 일정 select -3 -->
 <select id="selectClick_users2" resultType="String">
-	select user_id from meet_users
+	select u.user_name as "user_id" from meet_users mu join
+	users u on mu.user_id = u.user_id
 	where schedule_no = #{schedule_no}
 </select>
 

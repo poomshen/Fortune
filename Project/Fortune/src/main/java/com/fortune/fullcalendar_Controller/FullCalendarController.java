@@ -328,13 +328,10 @@ public class FullCalendarController {
     	   @RequestParam(value="schedule_no") String schedule_no, @RequestParam(value="color_check") String color_check,HttpSession session)
             throws ClassNotFoundException, SQLException{
         System.out.println("위치 : FullCalendarController // 작업자: 이명철 // 내용 : 캘린더 fullcalendar함수 호출: 선택한 일정 호출");        
-        System.out.println(color_check);
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
 
         Schedule_Alarm_DTO  sche_alarmDTO =new Schedule_Alarm_DTO();
-        //Schedule_Work_DTO swdto = fullcalendarDAO.selectClick(schedule_no);
         
-       
         
         Schedule_Work_Meeting_DTO swmdto = fullcalendarDAO.selectClick(collabo_no,schedule_no);
 

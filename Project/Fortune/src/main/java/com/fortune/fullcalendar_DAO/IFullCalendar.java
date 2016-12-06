@@ -10,6 +10,7 @@ import com.fortune.Table_DTO.Work_Users_DTO;
 import com.fortune.function_DTO.Schedule_Meeting_DTO;
 import com.fortune.function_DTO.Schedule_Work_DTO;
 import com.fortune.function_DTO.Schedule_Work_Meeting_DTO;
+import com.fortune.function_DTO.Team_Users_DTO;
 
 
 public interface IFullCalendar {
@@ -82,7 +83,7 @@ public interface IFullCalendar {
 	public int deleteComment(int work_comment_no) throws ClassNotFoundException, SQLException;
 	
 	//프로젝트에 참가한 팀원 id목록을 가져오는 함수
-	public String[] selectTeam_id(String user_id) throws ClassNotFoundException, SQLException;
+	public List<Team_Users_DTO> selectTeam_id(String user_id) throws ClassNotFoundException, SQLException;
 	
 	//예약하려는 날짜의 예약된 회의실번호 체크해오기
 	public String[] select_place(String schedule_start) throws ClassNotFoundException, SQLException;
