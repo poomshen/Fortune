@@ -14,9 +14,19 @@ public class Passion_DTO {
 	private int role_no;
 	private String role;
 	private String dept_name;
+	private String team_name;
 	
 	
 	
+	
+	
+	
+	public String getTeam_name() {
+		return team_name;
+	}
+	public void setTeam_name(String team_name) {
+		this.team_name = team_name;
+	}
 	public String getDept_name() {
 		return dept_name;
 	}

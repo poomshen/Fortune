@@ -378,7 +378,7 @@ function modifyReqCollabo(){
      			<div id="row1" style="height:200px" class="col-md-4 col">
 					<div class="accordion-wrap">
 	   					<div class="accordion">
-        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;${n.collabo_req_ID}</a>
+        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}{${n.collabo_req_ID}}</a>
         						<div class="sub-nav active">
             						<div class="html about-me" id="about-mesocial-link${n.collabo_req_index}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
@@ -436,7 +436,7 @@ function modifyReqCollabo(){
       	<div id="row2" style="height:200px" class="col-md-4 col">
 						<div class="accordion-wrap">
 	   					<div class="accordion">
-        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;${n.collabo_req_ID}</a>
+        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}{${n.collabo_req_ID}}</a>
         						<div class="sub-nav active">
             						<div class="html about-me" id="about-mesocial-link${n.collabo_req_index}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
@@ -484,16 +484,15 @@ function modifyReqCollabo(){
 						</div>
 		<!-- 3으로 나눈 나머지가 2 일때 ■ ■ ■ 한줄 채워지면 div row 닫아주기 -->	
 			<c:if test="${(status.index)%3 eq 2}">
-			</div>
+			
 			</c:if>
     	</c:otherwise>
   		</c:choose>
   		</c:forEach>
   		<!-- container div영역 닫기 -->
-  		</div>
-  	
-		
-		<!-- 페이징 처리하기  -->
+  		
+			</div>
+  		<!-- 페이징 처리하기  -->
 		  		<div style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
 						<c:if test="${pg>block}">
@@ -525,11 +524,19 @@ function modifyReqCollabo(){
 						</c:if>
 					</ul>
 				</div>
-			</div>
+  		
+  		
+  		
+  		</div>
+  	
+		
+		
 		
 			
 					
 </div>
+
+
 		<!-- 상세보기 modal 부분-->
 			<div class="container">
 				<div class="modal fade" id="myModal3" role="dialog">

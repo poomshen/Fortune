@@ -306,7 +306,6 @@ alert('Error while request..'	);
 		<select id="memoselect">
 		<option value="collabo_req_title">제목</option>
 		<option value="collabo_req_text">내용</option>
-		
 		</select>
 		<input type="text" id="search" placeholder="Search" >
 		<button onclick="searchBtn()">검색</button>
@@ -559,6 +558,10 @@ function refuse() {
 							<!-- 날짜 유효성 검사를 한 곳입니다. -->
 							<script type="text/javascript">
 						 function proAdd(){
+							 
+							
+							 
+							 
 						     	if($('#startDate').val() == ""){
 						     		alert(" 날짜 입력해주세요");
 						     		$('#startDate').focus();
@@ -572,10 +575,13 @@ function refuse() {
 						     		alert("예상수익 입력해주세요");
 						     		$('#collabo_sal').focus();
 						     		return false;
-						     	}else {
+								}
+						     	else {
 						     		alert("완료");
 						     		
-						     		
+						     			
+
+
 						     		
 						     		proaddform.submit();
 						     		return true;

@@ -62,4 +62,6 @@ public interface ProDao {
 		public List<With_DTO> listResponse2(int page, String field, List<String>  query) throws ClassNotFoundException, SQLException;	
 		
 		public List<String> selectTeamMGR(int TeamMGR) throws ClassNotFoundException, SQLException;
+		
+		public String selectReqText(int collabo_req_index);
 }

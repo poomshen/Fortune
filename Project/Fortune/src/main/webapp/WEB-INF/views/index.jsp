@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>[효율적인업무 For春]</title>
+<title>Riona - One Page Bootstrap Business Template</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -35,28 +35,6 @@
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
 
-<!-- Modal 때문에 css추가함
-	작성자 : 김지현
- -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-<style>
-  .modal-header, h4 {
-      background-color: #5cb85c;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  }
-  .modal-footer {
-      background-color: #f9f9f9;
-  }
-  .modal-body{
- 	 color:#000000;
- 
-  }
-
-</style>
 </head>
 
 <body>
@@ -90,7 +68,7 @@
 							<span class="addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
 							<div class="form-group">
 								<label class="sr-only" for="r-form-1-email">id</label> 
-								<input type="text" name="user_id" style="background-color:transparent;" class="form-control hvr-glow" id="user_id" tabindex="1">
+								<input type="text" name="user_id" style="background-color:transparent; color:white;" class="form-control hvr-glow" id="user_id" tabindex="1">
 							</div>
 						</div>
 						<div class="input-group">
@@ -122,67 +100,12 @@
 			</div>
  -->
 		</div>
-		 <button type="button" class="btn hvr-forward" id="myBtn">ID/Password 찾기</button>
-		<!-- <span><a href="SearchIdPage.htm">아이디/패스워드를 잊어버리셨나요?</a></span> -->
+		 <button type="button" class="btn hvr-forward" id="idSearchBtn" onclick="moveSearchpage()">ID/Password 찾기</button>
+
 	</div>
 	
 </div>
 
-<!--ID/PWD 찾기 Modal -->
-<div class="container">
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="padding:35px 50px;">
-         <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-          <h4>ID/Password 찾기</h4>
-        </div>
-        
-        <div class="modal-body" style="padding:40px 50px;color:#000000 ">
-        
-            <table>
-              <tr style="vertical-align:top">
-              
-                <td style="width:190px; border-right:1px solid gray; padding-right:15px; text-align:justify">
-                <h3>ID 찾기</h3>
-		                    이름 <input type="text" id="search_name" name="search_name" placeholder="이름을 입력하세요"><br>
-		                    전화번호 <input type="text" id="search_phone" name="search_phone" placeholder="ex)01x-xxxx-xxxx"><br>
-		                    생년월일 <input type="text" id="search_birth" name="search_birth" placeholder="ex)2016-11-11"><br>
-                </td>
-                <td style="width:190px; padding-left:20px; text-align:justify">
-                <h3>PWD 찾기</h3>
-		                    아이디 <input type="text" id="search_id" name="search_id" placeholder="아이디를 입력하세요"><br>
-		                    이름 <input type="text" id="search_name2" name="search_name2" placeholder="이름을 입력하세요"><br>
-		                    전화번호 <input type="text" id="search_phone2" name="search_phone2" placeholder="ex)01x-xxxx-xxxx"><br>
-                </td>
-              </tr>
-  			</table>
-		
-        <div>
-        <br>
-            <input type="button" id="sbtn" name="sbtn" onclick="getid()" value="아이디 찾기">
-            <input type="button" id="sbtn2" name="sbtn2" onclick="getpwd()" value="비밀번호 찾기">
-          
-        </div>
-        
-        </div>
-        
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
-          <span></span>이전으로</button>
-        </div>
-      </div>
-      
-    </div>
-  </div> 
-</div>
-
-
-	
 	<div class="backstretch"
 		style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 609px; width: 972px; z-index: -999998; position: absolute;">
 		<img src="assets/img/backgrounds/1.jpg"
@@ -544,11 +467,12 @@
 		idsearch1 = false;
 		idsearch2 = false;
 		
-		$("#myBtn").click(function(){
-	        $("#myModal").modal();
-	    });
 	});
 
+	function moveSearchpage() {
+		location.href="searchpage.htm";
+	}
+	
 	function getid() {
 		//alert($('#searchname').val());
 		

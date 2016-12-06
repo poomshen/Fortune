@@ -28,8 +28,6 @@ public class HistoryService {
 		
 		IHistory history = SqlSession.getMapper(IHistory.class);
 		ArrayList<ProgectName_DTO> namelist =   history.progectNamelist();
-		System.out.println(namelist.get(0).getProject_name());
-		System.out.println(namelist.get(1).getProject_name());
 		
 		return namelist;
 	}
