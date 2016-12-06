@@ -238,5 +238,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectTeamMGR" parameterType="Integer"  resultType="String">
 		Select distinct c.user_Id From Users U Join (Select * From Collabo) C On U.User_Id = C.User_Id where team_no = #{param1}	
 	</select>
+	
+	<!-- 작성자: 이성준 날짜: 16-12-06 목적: 요청 글 가지고 오기 -->
+	<select id="selectReqText" parameterType="Integer" resultType="String">
+		Select collabo_req_text from collabo_req where COLLABO_REQ_INDEX = #{param1}
+	</select>
 
 </mapper>

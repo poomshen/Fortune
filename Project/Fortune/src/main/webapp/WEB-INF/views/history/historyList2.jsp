@@ -75,7 +75,11 @@
                                         <div class="timeline-body">
                                             <h4 class="timeline-title">${historylist.collabo_req_title}</h4>
                                             <p>${historylist.collabo_req_text}</p>
+                                            <c:choose>
+                                            <c:when test="${historylist.history_title!='거절'}">
                                             <p>${historylist.history_text}</p>
+                                            </c:when>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 	</li>
