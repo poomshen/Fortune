@@ -41,7 +41,7 @@ public class FCMainController {
 		
 		List<Team_Users_DTO> user_id = fullcalendarDAO.selectTeam_id(dto.getUser_id());
 
-			
+		model.addAttribute("role_no", dto.getRole_no());
 		model.addAttribute("team_id", user_id);
 
 		return "schedule.schedule";

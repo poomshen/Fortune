@@ -9,6 +9,14 @@
 <title>Insert title here</title>
 
 <script>
+//캘린더 등록, 수정, 삭제권한 체를 위한 role변수 선언
+var role;
+if(${role_no}==3){
+	role= true;
+}else{
+	role=false;
+}
+
 
 $(document).ready(function() {
 	
@@ -101,8 +109,9 @@ $(document).ready(function() {
 		
 	        $('#content').html(content)
 	        //fullcalendar 불러오는 함수
-			loadCalendar();
-	        
+	        //parameter로 false,false 를 주면 캘린더에 일정수정 및 일정등록 불가함
+	        //parameter로 true, true 를 주면 캘린더에 일정수정 및 일정등록 가능함
+			loadCalendar(role,role);
 			$.each(data.new_alarm, function(index, obj) {
 				
 				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
@@ -182,9 +191,9 @@ $(document).ready(function() {
 		});
 
 		$('.mutliSelect input[type="checkbox"]').on('click', function() {
-
-		  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
-		    title = $(this).val() + ",";
+		//this.val() 이부분이 참가자목록에서 위쪽으로 id찍어주는 부분임
+		  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').attr("value2"),
+		    title = $(this).attr("value2") + ",";
 
 		  if ($(this).is(':checked')) {
 			 
@@ -344,7 +353,7 @@ $(document).ready(function() {
         <div class="mutliSelect effect2" >
             <ul class="effect2" style="display: block; padding-right: 0px; height: 204px; width: 272px;">
         		<c:forEach items="${team_id}" var="obj" varStatus="status">
-					<li><input type="checkbox" value="${obj.user_id}" id="${obj.user_id}" name='userchk' onclick="scheduleuser()"><label for="${obj.user_id}" style="cursor: pointer ;">${obj.user_name}</label></li>
+					<li><input type="checkbox" value="${obj.user_id}" value2="${obj.user_name}" id="${obj.user_id}" name='userchk' onclick="scheduleuser()"><label for="${obj.user_id}" style="cursor: pointer ;">${obj.user_name}</label></li>
 				</c:forEach>
             </ul>
         </div>
@@ -376,9 +385,12 @@ $(document).ready(function() {
 					<div id="content" style="padding-right:0px;">
 					</div>
 					<div id="content_detail" style="display: none; padding-right:0px;">
+					<!-- 수정, 저장, 삭제 버튼 팀장만 보여주기 (권한처리) -->
+						<c:if test="${role_no==3}">
 						<input type="button" value="일정 수정하기" id="update_btn" onclick="work_update()">
 						<input type="hidden" value="일정 저장하기" id="updateok_btn" class="btn-success" onclick="work_updateok()">
 						<input type="button" value="일정 삭제하기" id="delete_btn"><br>
+						</c:if>
 						<label>제목 : </label> <input type="text" id="detail_title" readonly="readonly"><br>
 						<label>내용 : </label> <textarea rows="5" cols="50" id="detail_text" readonly="readonly"></textarea><br>
 						<!-- progress bar -->
@@ -386,6 +398,8 @@ $(document).ready(function() {
 						    <div class="progress-bar progress-bar-striped active" value="0" id="progress_value" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%">
 							0%</div>
 					  	</div>
+					  	<!-- 아래 6개 버튼 팀장만 보여주기 (권한처리) -->
+					  	<c:if test="${role_no==3}">
 					  	<button type="button" onclick="progress_0()"> 0% </button>
 					  	<button type="button" onclick="progress_20()"> 20% </button>
 					  	<button type="button" onclick="progress_40()"> 40% </button>
@@ -393,6 +407,7 @@ $(document).ready(function() {
 					    <button type="button" onclick="progress_80()"> 80% </button>
 					    <button type="button" onclick="progress_100()"> 100% </button>
 					    <button type="button" onclick="update_progress()"> 등록 </button><br>
+					    </c:if>
 					    
 					    <label>일정 담당자</label><br>
 					    <div id="usersdiv"></div>
@@ -434,9 +449,12 @@ $(document).ready(function() {
 					
 					
 					<div id="content_detail2" style="display: none; padding-right:0px;">
+						<!-- 회의일정 수정, 회의일정 삭제 버튼 팀장만 보여주기 (권한처리) -->
+						<c:if test="${role_no==3}">
 						<input type="button" value="회의일정 수정" id="meet_update_btn" onclick="work_update2()">
 						<input type="hidden" value="회의일정 저장" id="meet_updateok_btn" class="btn-success" onclick="work_updateok2()">
 						<input type="button" value="회의일정 삭제" id="meet_delete_btn"><br>
+						</c:if>
 						<label>제목 : </label> <input type="text" id="meet_detail_title" readonly="readonly"><br>
 						<label>내용 : </label> <textarea rows="5" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
 						<label>회의장소 : </label> <div id="place"></div> 
