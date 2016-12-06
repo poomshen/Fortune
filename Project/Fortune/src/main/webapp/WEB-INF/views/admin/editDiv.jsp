@@ -101,6 +101,7 @@
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
 		<select class="selectpicker" id="deptSelect" name="dept_no" onchange="deptchange()" style="width: 150px;">
+		<option value="-1" selected>선택</option>
 			<c:forEach var="i" items="${deptselect}">
 				<c:choose>
 					<c:when test="${i.dept_no == join_DTO.dept_no}">
@@ -122,6 +123,7 @@
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
 		<select class="selectpicker" id="teamSelect" name="team_no" style="width: 150px;">
+			<option value="-1" selected>선택</option>
 			<c:forEach var="j" items="${teamselect}">
 				<c:choose>
 					<c:when test="${join_DTO.team_no == j.team_no}">
@@ -143,6 +145,7 @@
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
 		<select class="selectpicker" name="position_no" id="positionSelect" style="width: 150px;">
+			<option value="-1" selected>선택</option>
 			<c:forEach var="i" items="${positionselect}">
 				<c:choose>
 					<c:when test="${i.position_no == join_DTO.position_no}">

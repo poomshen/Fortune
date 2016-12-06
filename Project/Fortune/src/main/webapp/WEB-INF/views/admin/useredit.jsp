@@ -11,7 +11,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>관리자 회원 수정</title>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<style>
+
+
+<style type="text/css">
 table, th, td {
     border: 1px solid black;
     text-align: center;
