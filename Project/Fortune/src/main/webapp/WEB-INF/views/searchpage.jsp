@@ -229,7 +229,7 @@
 		}else{
 			$.ajax({
 				type:"get",
-				url:"pwdsearch.ajax",
+				url:"pwdsearch.mail",
 				data:{"search_id":$('#search_id').val(),
 					  "search_name2":$('#search_name2').val(),
 					  "search_phone2":$('#search_phone2').val()},
@@ -238,8 +238,10 @@
 					console.log("result 뭐야!?!?!?!?!!??"+data);
 					if(data!=null && data!=""){
 						console.log(data);
-						alert('임시 비밀번호는 '+data+'입니다.');
+						if(data == "yes"){
+						alert('임시 비밀번호가 발송 되었습니다.');
 						location.href="index.htm";
+						}
 					}else if(data == 0){
 						alert('해당 정보에 맞는 아이디가 없습니다. 정보를 확인해주세요');
 					}else{
