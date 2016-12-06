@@ -64,7 +64,10 @@ function schedule_type(){
 
 function detail(id, title, text, start, end, userids, progress_or_place){
 	//온클릭 함수에 가져올 데이터들
-		
+		$('#update_btn').attr('type','button');
+		$('#updateok_btn').attr('type','hidden');
+		document.getElementById("detail_title").readOnly = true;
+		document.getElementById("detail_text").readOnly = true;
 		$('#progress_value').text(progress_or_place*100+"%");
 		$('#progress_value').css("width",progress_or_place*100+"%");
 		$('#content').empty();
@@ -122,6 +125,10 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 //회의일정의 상세보기 페이지
 function detail2(id, title, text, start, end, userids, progress_or_place){
 	
+	$('#meet_update_btn').attr('type','button');
+	$('#meet_updateok_btn').attr('type','hidden');
+	document.getElementById("meet_detail_title").readOnly = true;
+	document.getElementById("meet_detail_text").readOnly = true;
 	$('#content').empty(); //테이블형태 UI 비우기
 	$('#content_detail2').css("display", "block");
  	$('#meet_detail_id').val(id);
@@ -180,7 +187,7 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 //수정하기 버튼 클릭시 readonly속성 없애줌
 function work_update(){
 	if($('#detail_progress').val()==1){
-		alert('완료된 일정입니다.')
+		swal('완료된 일정입니다.')
 	}else{
 		$('#update_btn').attr('type','hidden');
 		$('#updateok_btn').attr('type','button');
@@ -212,7 +219,6 @@ function work_updateok2(){
 	$('#meet_updateok_btn').attr('type','hidden');
 	document.getElementById("meet_detail_title").readOnly = true;
 	document.getElementById("meet_detail_text").readOnly = true;
-	document.getElementById("place_no").readOnly = true;
 }
 
 //comment 등록 버튼 클릭시 insert 작업
@@ -399,14 +405,14 @@ function scheduleuser(){
 
 
 
-function loadCalendar() {
+function loadCalendar(role1,role2) {
 	//캘린더 호출
 	var calendar = $('#calendar').fullCalendar({
 		//캐린더의 기본 속성값 지정
 		theme: false,
-		editable: true, //스케줄 기간 늘이고, 위치 움직이는 함수
+		editable: role1, //스케줄 기간 늘이고, 위치 움직이는 함수
 		eventLimit: false, // allow "more" link when too many events
-		selectable: true, //insert할 select 이벤트
+		selectable: role2, //insert할 select 이벤트
 		selectHelper: true, //???
 	    
 		
@@ -497,7 +503,7 @@ function loadCalendar() {
 			clickobjectcolor = $(this).css('background-color');
 			
 			if(clickobjectcolor=='rgba(51, 122, 183, 0.219608)'){
-				alert('완료된 일정입니다.')
+				swal('완료된 일정입니다.')
 			}
 			
 			//클릭된 일정의 배경색을 red로 설정
@@ -836,7 +842,7 @@ function loadCalendar() {
 	    			console.log( $('#modal_end_ms').val() )
 	    			
 	    			if( $('#modal_start_ms').val() != $('#modal_end_ms').val() ){
-	    				alert('회의일정은 하루씩만 가능합니다.')
+	    				swal('회의 일정은 1일만 가능합니다.','기간을 1일로 설정해 주세요.')
 	    			}else{
 	    			
 		    			var eventData;

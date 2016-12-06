@@ -101,7 +101,9 @@ $(document).ready(function() {
 		
 	        $('#content').html(content)
 	        //fullcalendar 불러오는 함수
-			loadCalendar();
+	        //parameter로 false,false 를 주면 캘린더에 일정수정 및 일정등록 불가함
+	        //parameter로 true, true 를 주면 캘린더에 일정수정 및 일정등록 가능함
+			loadCalendar(true,true);
 	        
 			$.each(data.new_alarm, function(index, obj) {
 				
@@ -376,6 +378,7 @@ $(document).ready(function() {
 					<div id="content" style="padding-right:0px;">
 					</div>
 					<div id="content_detail" style="display: none; padding-right:0px;">
+					<!-- 일정 수정하기, 일정 삭제하기 버튼 권한처리 예정 -->
 						<input type="button" value="일정 수정하기" id="update_btn" onclick="work_update()">
 						<input type="hidden" value="일정 저장하기" id="updateok_btn" class="btn-success" onclick="work_updateok()">
 						<input type="button" value="일정 삭제하기" id="delete_btn"><br>
@@ -386,6 +389,7 @@ $(document).ready(function() {
 						    <div class="progress-bar progress-bar-striped active" value="0" id="progress_value" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%">
 							0%</div>
 					  	</div>
+					  	<!-- 아래 6개 버튼 권한처리 예정 -->
 					  	<button type="button" onclick="progress_0()"> 0% </button>
 					  	<button type="button" onclick="progress_20()"> 20% </button>
 					  	<button type="button" onclick="progress_40()"> 40% </button>
@@ -434,6 +438,7 @@ $(document).ready(function() {
 					
 					
 					<div id="content_detail2" style="display: none; padding-right:0px;">
+						<!-- 회의일정 수정, 회의일정 삭제 버튼 권한처리 예정 -->
 						<input type="button" value="회의일정 수정" id="meet_update_btn" onclick="work_update2()">
 						<input type="hidden" value="회의일정 저장" id="meet_updateok_btn" class="btn-success" onclick="work_updateok2()">
 						<input type="button" value="회의일정 삭제" id="meet_delete_btn"><br>
