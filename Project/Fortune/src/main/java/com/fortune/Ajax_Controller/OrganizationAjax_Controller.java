@@ -33,10 +33,17 @@ public class OrganizationAjax_Controller {
 	@RequestMapping(value="/deptsearch.ajax", method=RequestMethod.GET)
 	public String deptsearch(int dept_no, int team_no, Model model){
 		//System.out.println("같은 부서 리스트 쫙 뽑을거");
+		//System.out.println("teamSelect value : "+team_no);
 		
 		ArrayList<Join_DTO> dto = new ArrayList<Join_DTO>();
 		IOrganization dao = sqlsession.getMapper(IOrganization.class);
-		dto = dao.showdept(dept_no,team_no);
+		
+		if(team_no == 999){
+			dto = dao.showdeptadmin(dept_no);
+		}else{
+			dto = dao.showdept(dept_no,team_no);
+		}
+		
 		model.addAttribute("deptlist", dto);
 		
 		// 부서 리스트 보여주는 부분
@@ -62,9 +69,20 @@ public class OrganizationAjax_Controller {
 	
 	@RequestMapping(value="/deptsearch2.ajax")
 	public String deptsearch2(int dept_no, int team_no,Model model){
+		//System.out.println("우앙!!!!!!teamSelect value!!!!! : "+team_no);
+		
+		if(team_no == 0){
+			team_no = 999;
+		}
 		ArrayList<Join_DTO> dto = new ArrayList<Join_DTO>();
 		IOrganization dao = sqlsession.getMapper(IOrganization.class);
-		dto = dao.showdept(dept_no,team_no);
+		
+		if(team_no == 999){
+			dto = dao.showdeptadmin(dept_no);
+		}else{
+			dto = dao.showdept(dept_no,team_no);
+		}
+		
 		model.addAttribute("deptlist", dto);
 		//System.out.println("ajax 돌았음");
 
