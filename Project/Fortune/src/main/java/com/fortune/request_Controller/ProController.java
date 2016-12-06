@@ -96,7 +96,12 @@ public class ProController {
 	 @Transactional
 	 @RequestMapping("requestList2.htm") // /customer/notice.htm
 	 public ModelAndView requestList2(String pg, String f, String q, String st,String me,String se,HttpSession session, String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
+		 System.out.println("수락,거절등 :"+st);
 		 
+		 if(st.equals("전체")){
+				st = "%%";
+		}
+		 System.out.println("전체일경우 :"+st);
 		 String rs = "cen";
 		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, me, se,collabo_req_date, session);
 		 System.out.println("데이터 변환중:"+ collabo_req_date);
@@ -123,7 +128,12 @@ public class ProController {
 	 @Transactional
 	 @RequestMapping("listReplyRequest2.htm") // /customer/notice.htm
 	 public ModelAndView listReplyRequest2( String pg, String f, String q,String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
+		 System.out.println("수락,거절등 :"+st);
 		 
+		 if(st.equals("전체")){
+				st = "%%";
+		}
+		 System.out.println("전체일경우 :"+st);
 		 String rs = "cen";
 		 ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs,me,se, session);
 		  // 자동 forward

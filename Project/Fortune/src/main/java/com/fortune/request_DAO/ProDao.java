@@ -64,4 +64,13 @@ public interface ProDao {
 		public List<String> selectTeamMGR(int TeamMGR) throws ClassNotFoundException, SQLException;
 		
 		public String selectReqText(int collabo_req_index);
+		
+		/*
+		 	작성자 :이성준
+		 	2016-12-06
+		 	완료된 일정 보기
+	*/
+		public List<Select_Collabo_DTO> finishCollaboList(String user_id);
+		public List<Select_Collabo_DTO> finishCollaboList2(int deptno);
+		
 }

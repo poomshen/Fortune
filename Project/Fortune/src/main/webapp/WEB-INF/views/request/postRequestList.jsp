@@ -18,6 +18,12 @@ h6 {
     font-weight: bolder;
 }
 
+.tg  {border-collapse:collapse;border-spacing:0;width:100%;height:350px}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-baqh{text-align:center;}
+.tg .title{text-align:center;font-weight:900;}
+
 </style>
 
 <script type="text/javascript">
@@ -45,8 +51,6 @@ Profile = {
     },
     social:function(){
         $('.plus').click(function(){
-        	
-        	alert( $(this).attr('id'));
         	
         	$('#hidden').val($(this).attr('id'));
         	
@@ -82,6 +86,23 @@ Profile = {
     }
 }
 
+	//수정 ) modal 상세보기 수정시 사용되는 함수
+	function modify() {
+	 
+	if($('#collabo_req_title').val() == "") {
+		alert("협업 제목을 입력하세요 ");
+		$('#collabo_req_title').focus();
+		return false;
+	}else{
+			alert("완료");
+			modifyform.submit(); 
+			return true;
+		}
+	
+	}
+
+
+
 
      //상세 정보를 보여주는 ajax 입니다.
      function detailReqCollabo(a){
@@ -116,8 +137,10 @@ Profile = {
     		console.log(state);
     		$.get("listReplyRequest2.htm", {st :state}, function(data, textStatus, req) {
     		
-    			$('#'+state).addClass('active');
+    			
     			$('#requestlist').html(data);
+    			$('#'+state).addClass('active');
+    			
     			
     		})
     	}
@@ -295,8 +318,7 @@ function pazing5Btn(){
 	
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
+										///////
 function modifyReqCollabo(){
 	
 	var a=$('#hidden').val();
@@ -308,8 +330,8 @@ function modifyReqCollabo(){
  			cache: false,				
  			data:"collabo_req_index="+a,
  		    success:function(data){ //callback
- 		    	$('#detail_footer').empty();
- 		    	$("#detail").html(data);
+ 		    	//$('#detail_footer').empty();
+ 		    	$("#detail2").html(data);
 			  
  		     },
  			error: function(){						
@@ -339,9 +361,11 @@ function modifyReqCollabo(){
 <!--대기/수락/거절 tab영역 -->
 <div class="tab-container">
   		<ul class="nav nav-tabs" style="width:950px">
-    		<li id="대기" class="active"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
+  			<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
+    		<li id="대기"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
     		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
     		<li id="거절"><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
+    		<li id="완료"><a onclick="selectState('완료')" data-toggle="tab">완료</a></li>
   		</ul>
 	<div class="tab-content">
     	<div class="tab-pane" ></div>
@@ -369,16 +393,15 @@ function modifyReqCollabo(){
 </div>
 
 
+<div class="col-lg-12" style="width:1000px; margin-top:20px">
 <!-- 가로로 한줄 ㅁㅁㅁ 씩 채우기-->
 <c:forEach items="${list}" var="n" varStatus="status">
-	<c:choose>
-     	<c:when test="${(status.index)%3 eq 0}">
+
      	<!-- 가로로 한줄 ■ㅁㅁ (첫번째)-->
-     		<div class="row grid-columns" style="width:1000px; margin-top:20px">
-     			<div id="row1" style="height:200px" class="col-md-4 col">
+    			<div id="row1" style="height:200px" class="col-md-4 col">
 					<div class="accordion-wrap">
 	   					<div class="accordion">
-        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}{${n.collabo_req_ID}}</a>
+        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}</a>
         						<div class="sub-nav active">
             						<div class="html about-me" id="about-mesocial-link${n.collabo_req_index}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
@@ -431,111 +454,45 @@ function modifyReqCollabo(){
     </div>
 </div>
 				</div>
-</c:when>
-    <c:otherwise>
-      	<div id="row2" style="height:200px" class="col-md-4 col">
-						<div class="accordion-wrap">
-	   					<div class="accordion">
-        					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}{${n.collabo_req_ID}}</a>
-        						<div class="sub-nav active">
-            						<div class="html about-me" id="about-mesocial-link${n.collabo_req_index}">
-         <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
-                       					<div class="photo" style=
-                
-               								 <c:choose>
-												<c:when test="${n.collabo_req_state == '수락'}">
-              										 "border:3px solid #1e851f"
-                								</c:when>
-                								
-                								<c:when test="${n.collabo_req_state == '거절'}">
-								 					"border:3px solid #dd2d16"
-												</c:when>
-												<c:otherwise>
-								 					"border:3px solid #ddd"
-												</c:otherwise>
 
-											</c:choose>
-										>
-                 							<img src="images/언니회색.jpg" style="background:no-repeat center;width:100%; height: 100%">
-         <!-- 사람 아이콘에 마우스 갖다댈시에 + 모양 띄우기-->
-                    							<div class="photo-overlay" >
-                        							<span id="${n.collabo_req_index}" class="plus">+</span>
-                    							</div>
-                  						</div>
-        
-        <!-- card안에 간단한 상세 내역 -->
-                  								<h6>제목 : ${n.collabo_req_title}</h6>
-                							 	<h6 style="font-weight: inherit;">작성일:${n.collabo_req_date}</h6>
-                    						
-                									
-        
-        
-        <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
-                <div class="social-link" id="social-link${n.collabo_req_index}">
-                    <a class="link link-twitter" href="http://twitter.com/khadkamhn/" target="_blank"><i class="fa fa-twitter"></i></a>
-                    <a class="link link-codepen" href="http://codepen.io/khadkamhn/" target="_blank"><i class="fa fa-codepen"></i></a>
-                    <a class="link link-facebook" href="http://facebook.com/khadkamhn/" target="_blank"><i class="fa fa-facebook"></i></a>
-                    <a class="link link-dribbble" href="http://dribbble.com/khadkamhn" target="_blank"><i class="fa fa-dribbble"></i></a>
-                </div>
-            							</div>
-       								 </div>
-								</div>
-							</div>
-						</div>
-		<!-- 3으로 나눈 나머지가 2 일때 ■ ■ ■ 한줄 채워지면 div row 닫아주기 -->	
-			<c:if test="${(status.index)%3 eq 2}">
-			
-			</c:if>
-    	</c:otherwise>
-  		</c:choose>
   		</c:forEach>
+  		</div>
   		<!-- container div영역 닫기 -->
-  		
-			</div>
-  		<!-- 페이징 처리하기  -->
+  			<div class="row grid-columns"style="width:1000px; height:100px; margin-top:2px">
+  		  		<!-- 페이징 처리하기  -->
 		  		<div style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
-						<c:if test="${pg>block}">
-							<li><a href="#" onclick="pazingBtn()">««</a></li>
-							<%-- <li><a href="listReplyRequest.htm?pg=1&st=${st_query}&me=${memo}&se=${search}">««</a></li> --%>
-							<li><a href="#" onclick="pazingBtn2()">«</a></li>
-							<%-- <li><a href="listReplyRequest.htm?pg=${from_page-1}&st=${st_query}&me=${memo}&se=${search}">«</a></li> --%>
-						</c:if>
-						<c:if test="${pg<=block}">
-							<li><a href="#">««</a></li>
-							<li><a href="#">«</a></li>
-						</c:if>
-						<c:forEach begin="${from_page}" end="${to_page}" var="i">
-							<c:if test="${i==pg}">
-								<li class="active"><a href="#">${i}</a></li>
+							<c:if test="${pg>block}">
+								<li><a href="#" onclick="pazingBtn()">««</a></li>
+								<li><a href="#" onclick="pazingBtn2()">«</a></li>
 							</c:if>
-							<c:if test="${i!=pg}">
-								<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
-								<%-- <li><a href="listReplyRequest.htm?pg=${i}&st=${st_query}&me=${memo}&se=${search}">${i}</a></li> --%>
+							<c:if test="${pg<=block}">
+								<li><a href="#">««</a></li>
+								<li><a href="#">«</a></li>
 							</c:if>
-						</c:forEach>
-						<c:if test="${to_page<all_page}">
-							<li><a href="#" onclick="pazing4Btn()">»</a></li>
-							<li><a href="#" onclick="pazing5Btn()">»»</a></li>
+							<c:forEach begin="${from_page}" end="${to_page}" var="i">
+								<c:if test="${i==pg}">
+									<li class="active"><a href="#">${i}</a></li>
+								</c:if>
+								<c:if test="${i!=pg}">
+									<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
+								</c:if>
+							</c:forEach>
+							<c:if test="${to_page<all_page}">
+								<li><a href="#" onclick="pazing4Btn()">»</a></li>
+								<li><a href="#" onclick="pazing5Btn()">»»</a></li>
 							</c:if>
-						<c:if test="${to_page>=all_page}">
-							<li><a href="#">»</a></li>
-							<li><a href="#">»»</a></li>
-						</c:if>
-					</ul>
+							<c:if test="${to_page>=all_page}">
+								<li><a href="#">»</a></li>
+								<li><a href="#">»»</a></li>
+							</c:if>
+						</ul>
+					</div>
 				</div>
-  		
-  		
-  		
-  		</div>
-  	
-		
-		
-		
+			<!--container div닫아주기 -->	
+			</div>
 			
-					
-</div>
-
+	
 
 		<!-- 상세보기 modal 부분-->
 			<div class="container">
@@ -543,26 +500,19 @@ function modifyReqCollabo(){
 					<div class="modal-dialog modal-lg">
 
 					<!-- Modal content-->
-						<div class="modal-content">
+						<div class="modal-content" id="detail2">
 							<div class="modal-header">
 
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 
 							<h4 class="modal-title">상세보기</h4>
-
-							</div>
-
-
-
+						</div>
 						<div class="modal-body" id="detail">
-							
 							<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
-							
-						
 						</div>
 						
 						<div class="modal-footer" id="detail_footer">
-							<input type="text" id="hidden">
+							<input type="hidden" id="hidden">
 							<input type="button" class="btn btn-default" onclick="modifyReqCollabo()" value="수정">
 							<button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
 						</div>
