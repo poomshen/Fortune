@@ -251,7 +251,7 @@
 				},
 				error:function(){
 					alert('ajax가 정상작동 안했음');
-					location.href="index.htm";
+					//location.href="index.htm";
 				}
 			
 			});
