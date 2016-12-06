@@ -77,6 +77,16 @@ ul a {
                         </li>
                         <li style="">
                         </li>
+                        <li>
+                        <a class="hvr-grow-shadow" href="#"><i class="fa fa-table fa-fw"></i>완료된프로젝트<span class="fa arrow"></span></a>
+                          <ul class="nav nav-second-level">
+                                <c:forEach var="n" items="${sessionScope.finishCollabo}">
+                                <li>
+                                 <a href="schedule.htm?collabo_no=${n.collabo_no}"> ${n.collabo_req_title}</a>
+                                </li>
+                                </c:forEach>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

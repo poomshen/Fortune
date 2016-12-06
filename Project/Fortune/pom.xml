@@ -188,6 +188,23 @@
       	<artifactId>hibernate-validator</artifactId>
       	<version>5.1.1.Final</version>
       </dependency>
+      <!--  이메일 -->
+     <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.2.5.RELEASE</version>
+		</dependency>
+		<!-- executor, schedule -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.0.4.RELEASE</version>
+		</dependency>
+      <dependency>
+      	<groupId>javax.mail</groupId>
+      	<artifactId>mail</artifactId>
+      	<version>1.4.7</version>
+      </dependency>
   </dependencies>
     <build>
         <plugins>
