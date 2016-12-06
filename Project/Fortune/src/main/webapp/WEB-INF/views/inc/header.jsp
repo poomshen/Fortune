@@ -94,6 +94,7 @@ $(document).ready(function() {
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+            <span>${sessionScope.info.user_name} 님 환영합니다</span>
                  <!-- /.dropdown -->
                 <li id="alarm" class="dropdown">
    <a class="dropdown-toggle" style="color:#194f89" data-toggle="dropdown" href="#">
