@@ -97,6 +97,7 @@
    		
    		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
    			$('#requestlist').html(data);
+   			
    			//console.log(data);
    		});
    	}
@@ -127,7 +128,6 @@
    	}
 
      
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //페이징 처리를 비동기 처리로 처리 하였습니다. << 버튼으로 처리하였습니다.
 function pazingBtn(){
 
@@ -294,9 +294,11 @@ alert('Error while request..'	);
 	<div class="w3-panel w3-card-4">
 
 		<div class="w3-dropdown-hover w3-left">
+			<a onclick="selectState('전체')" class="btn btn-primary">전체</a>
 			<a onclick="selectState('대기')" class="btn btn-primary">대기</a> 
 			<a onclick="selectState('수락')" class="btn btn-primary">수락</a> 
 			<a onclick="selectState('거절')" class="btn btn-primary">거절</a>
+			<a onclick="selectState('완료')" class="btn btn-primary">완료</a>
 		</div>
 		
 		

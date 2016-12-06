@@ -59,6 +59,7 @@ public class ProService {
 		String memo = "collabo_req_title";
 		String search = "%%";
 		//////////////////////////////////////
+		
 		if (pg != null) {
 			page = Integer.parseInt(pg);
 		}
@@ -142,6 +143,7 @@ public class ProService {
 			String st_query = "%%"; //대기 , 수락 , 거절 결정
 			String memo = "collabo_req_title";
 			String search = "%%";
+			
 			//////////////////////////////////////
 			if (pg != null) {
 				page = Integer.parseInt(pg);
