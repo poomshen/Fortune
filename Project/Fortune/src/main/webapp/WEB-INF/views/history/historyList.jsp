@@ -40,7 +40,7 @@
                                 	</li>
                                 </c:forEach>
                                 	<script type="text/javascript">
-                                	 $("div#pageListLoader").html("<div  class='btn btn-primary btn-lg btn-block'><h1style='color: white;'>더 이상 존제하지 않습니다</h1></div>"); 
+                                	 $("div#pageListLoader").html("<div  class='btn btn-primary btn-lg btn-block'><h1style='color: white;'>더 이상 존재하지 않습니다</h1></div>"); 
                                 	</script>
 
 	
