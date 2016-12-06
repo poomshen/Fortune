@@ -108,8 +108,6 @@ Profile = {
      function detailReqCollabo(a){
 		
 		//modal body 부분 비워주기
-	
-    	 
  	   	 $.ajax({
  	   		 
  	 			type: "get",
