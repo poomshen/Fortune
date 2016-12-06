@@ -5,8 +5,6 @@ var clickobject;
 var clickobjectcolor= "";
 var scheduleusers;
 
-var aa= new Date();
-
 
 function schedule_type(){
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
