@@ -12,7 +12,7 @@
 function deleteok_id(){
 	swal({
 		  title: "정말로 탈퇴 하시겠습니까?",
-		  text: "회원 탈퇴시 탈퇴한 회원의 정보는 확인 불가합니다.",
+		  text: "탈퇴한 아이디와 데이터는 재사용 및 복구가 불가합니다..",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonColor: "#DD6B55",
