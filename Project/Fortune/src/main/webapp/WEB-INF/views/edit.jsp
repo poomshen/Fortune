@@ -130,8 +130,9 @@
 						<input type="text" class="form-control" id="user_dept" name="user_dept" value="${i.team_name}" readonly="readonly">
 					</c:if>
 				</c:forEach>
+					<c:if test="${sessionScope.info.team_no == 0}">
 						<input type="text" class="form-control" id="user_dept" name="user_dept" value="없음" readonly="readonly">
-							
+					</c:if>									
 			</div>
 		</div>
 		

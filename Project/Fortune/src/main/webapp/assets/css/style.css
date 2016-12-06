@@ -89,7 +89,7 @@ select {
     font-family: 'Lato', sans-serif;
     line-height: 1;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: transparent;
     color: #fff;
     font-size: 15px;
     -webkit-appearance: none;
@@ -110,7 +110,7 @@ select option {
     font-family: 'Lato', sans-serif;
     line-height: 1;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: transparent;
     color: #8000ff;
     font-size: 15px;
     -webkit-appearance: none;
