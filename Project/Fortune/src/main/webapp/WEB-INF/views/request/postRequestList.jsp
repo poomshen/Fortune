@@ -137,8 +137,10 @@ Profile = {
     		console.log(state);
     		$.get("listReplyRequest2.htm", {st :state}, function(data, textStatus, req) {
     		
-    			$('#'+state).addClass('active');
+    			
     			$('#requestlist').html(data);
+    			$('#'+state).addClass('active');
+    			
     			
     		})
     	}
@@ -316,8 +318,7 @@ function pazing5Btn(){
 	
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
+										///////
 function modifyReqCollabo(){
 	
 	var a=$('#hidden').val();
@@ -360,9 +361,11 @@ function modifyReqCollabo(){
 <!--대기/수락/거절 tab영역 -->
 <div class="tab-container">
   		<ul class="nav nav-tabs" style="width:950px">
-    		<li id="대기" class="active"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
+  			<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
+    		<li id="대기"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
     		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
     		<li id="거절"><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
+    		<li id="완료"><a onclick="selectState('완료')" data-toggle="tab">완료</a></li>
   		</ul>
 	<div class="tab-content">
     	<div class="tab-pane" ></div>
