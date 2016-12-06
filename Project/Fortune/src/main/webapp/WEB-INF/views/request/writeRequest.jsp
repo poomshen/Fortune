@@ -104,9 +104,7 @@
 				
 				  }
 			  });	
-			
 		
-			promodifyform.submit();
 			return true;
 		}
 	}
