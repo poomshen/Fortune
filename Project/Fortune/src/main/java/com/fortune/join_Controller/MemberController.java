@@ -98,10 +98,14 @@ public class MemberController {
 		if( result.getRole_no() == 2 ){
 			List<Select_Collabo_DTO> collabo = proDao.selectCollaboList2(result.getDept_no());
 			session.setAttribute("collabo", collabo);
+			List<Select_Collabo_DTO> finishCollabo = proDao.finishCollaboList2(result.getDept_no());
+			session.setAttribute("finishCollabo", finishCollabo);
 		}else{
 			//추가 사항
 			List<Select_Collabo_DTO> collabo = proDao.selectCollaboList(result.getUser_id());
 			session.setAttribute("collabo", collabo);
+			List<Select_Collabo_DTO> finishCollabo = proDao.finishCollaboList(result.getUser_id());
+			session.setAttribute("finishCollabo", finishCollabo);
 		}
 		
 		
