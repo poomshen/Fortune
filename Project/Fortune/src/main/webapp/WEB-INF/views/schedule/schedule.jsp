@@ -344,7 +344,7 @@ $(document).ready(function() {
         <div class="mutliSelect effect2" >
             <ul class="effect2" style="display: block; padding-right: 0px; height: 204px; width: 272px;">
         		<c:forEach items="${team_id}" var="obj" varStatus="status">
-					<li><input type="checkbox" value="${obj}" id="${obj}" name='userchk' onclick="scheduleuser()"><label for="${obj}" style="cursor: pointer ;">${obj}</label></li>
+					<li><input type="checkbox" value="${obj.user_id}" id="${obj.user_id}" name='userchk' onclick="scheduleuser()"><label for="${obj.user_id}" style="cursor: pointer ;">${obj.user_name}</label></li>
 				</c:forEach>
             </ul>
         </div>

@@ -5,8 +5,6 @@ var clickobject;
 var clickobjectcolor= "";
 var scheduleusers;
 
-var aa= new Date();
-
 
 function schedule_type(){
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
@@ -66,7 +64,6 @@ function schedule_type(){
 
 function detail(id, title, text, start, end, userids, progress_or_place){
 	//온클릭 함수에 가져올 데이터들
-	if(progress_or_place<10){
 		
 		$('#progress_value').text(progress_or_place*100+"%");
 		$('#progress_value').css("width",progress_or_place*100+"%");
@@ -119,7 +116,6 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 	 			$('#comment_text').html(comment_text);
 			}
 		});
-	}
 }
 
 
