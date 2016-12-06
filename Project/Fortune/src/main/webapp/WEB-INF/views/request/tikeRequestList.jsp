@@ -52,19 +52,13 @@ Profile = {
     social:function(){
         $('.plus').click(function(){
         	
-        	
-        	
         	$('#hidden').val($(this).attr('id'));
-        	
-        	detailReqCollabo($(this).attr('id'));
-        	
         	
          	$('#social-link'+$(this).attr('id')).toggleClass('active');
             $('#about-mesocial-link'+$(this).attr('id')).toggleClass('blur');
         });
-        $('.social-link').click(function(){
-        	
-        	alert("gg");
+        
+		$('.social-link').click(function(){
           	$(this).toggleClass('active');
             $('#about-me'+$(this).attr('id')).toggleClass('blur');
         });
@@ -102,10 +96,11 @@ Profile = {
  	 			cache: false,				
  	 			data:"collabo_req_index="+a,
  	 		    success:function(data){ //callback  
- 	 		    	$("#ReqCollabo").append("<div>");
+ 	 		    	/* $("#ReqCollabo").append("<div>");
  					$("#ReqCollabo").append($('#ReqCollabo').html(data)); 
- 					$("#ReqCollabo").append("</div>");
- 	 		      
+ 					$("#ReqCollabo").append("</div>"); */
+ 	 		    	$("#detail").html(data); 
+ 					$('#myModal3').modal('show');
  	 		     },
  	 			error: function(){						
  	 				alert('Error while request..'	);
@@ -180,7 +175,10 @@ Profile = {
    		
    		
    	}
-
+   	function linkdetail(index){
+   		console.log(index);
+   		detailReqCollabo(index);
+    }
      
 //페이징 처리를 비동기 처리로 처리 하였습니다. << 버튼으로 처리하였습니다.
 function pazingBtn(){
@@ -426,13 +424,13 @@ alert('Error while request..'	);
         <!-- card안에 간단한 상세 내역 -->
                   								
                 									
-        
+        <%-- <input type="hidden" id="hiddendetail${n.collabo_req_index}" value="${n.collabo_req_index}"><input type="hidden" id="hiddendetailvalue" value="${n.collabo_req_index}"> --%>
         
         <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
                 <div class="social-link" id="social-link${n.collabo_req_index}">
-                    <a class="link link-twitter" onclick="detailReqCollabo(${n.collabo_req_index});" target="_blank"><i class="fa fa-twitter"></i></a>
-                    <a class="link link-codepen" href="http://codepen.io/khadkamhn/" target="_blank"><i class="fa fa-codepen"></i></a>
-                    <a class="link link-facebook" href="http://facebook.com/khadkamhn/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <!-- 상세보기 --><a class="link link-twitter" onclick="detailReqCollabo(${n.collabo_req_index})" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <!-- 수락 --><a class="link link-codepen" onclick="detailReqCollabo(${n.collabo_req_index})" target="_blank"><i class="fa fa-codepen"></i></a>
+                    <!-- 거절 --><a class="link link-facebook" onclick="detailReqCollabo(${n.collabo_req_index})" target="_blank"><i class="fa fa-facebook"></i></a>
                 </div>
             </div>
         </div>
@@ -477,6 +475,45 @@ alert('Error while request..'	);
 				</div>
 			<!--container div닫아주기 -->	
 			</div>
+			
+			<!-- 상세보기 modal 부분-->
+         <div class="container">
+            <div class="modal fade" id="myModal3" role="dialog">
+               <div class="modal-dialog modal-lg">
+
+               <!-- Modal content-->
+                  <div class="modal-content">
+                     <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                     <h4 class="modal-title">상세보기</h4>
+
+                     </div>
+
+
+
+                  <div class="modal-body" id="detail">
+                     
+                     <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+                     
+                  
+                  </div>
+                  
+                  <div class="modal-footer" id="detail_footer">
+                     <input type="text" id="hidden">
+                     <input type="button" class="btn btn-default" onclick="modifyReqCollabo()" value="수정">
+                     <button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+
+      </div>
+			
+			
+			
 		<!-- 거절을 하였을때 거절 사유를 쓸 때 사용됩니다.-모델 창입니다. -->
 
 
