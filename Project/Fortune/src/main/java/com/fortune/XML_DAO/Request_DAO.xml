@@ -144,7 +144,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      g.collabo_req_id collabo_req_id ,g.collabo_sal collabo_sal from (SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo WHERE ${param2}
 		LIKE '%${param3}%' and COLLABO_STATE != '완료' ORDER BY collabo_no DESC ) N )
-		WHERE NUM BETWEEN (${param1}+1)  AND (4+${param1}) )G join 
+		WHERE NUM BETWEEN (${param1}-1) * 6  AND 6+(1-${param1})  * 6)G join 
 		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX ORDER by NUM
 	</select>
 	
@@ -162,7 +162,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 		and COLLABO_STATE != '완료'
 		 ORDER BY collabo_no DESC ) N )
-		WHERE NUM BETWEEN (${param1}+1)  AND (4+${param1}) )G join 
+		WHERE NUM BETWEEN (${param1}-1) * 6  AND 6+(1-${param1})  * 6) )G join 
 		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX  ORDER by NUM
 	</select>
 
@@ -267,5 +267,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectReqText" parameterType="Integer" resultType="String">
 		Select collabo_req_text from collabo_req where COLLABO_REQ_INDEX = #{param1}
 	</select>
-
+	
+	<!-- 작성자:이성준 날짜 :16-12-07 목적 : 요청 글 가지고 오기 -->
+	<select id="collaboCount" resultType="Integer">
+		SELECT COUNT(*) FROM collabo where ${param1}
+		in 
+		<foreach  item="querys"  collection="param2" open="(" separator="," close=")">
+			#{querys}
+		</foreach>
+		and COLLABO_STATE != '완료'
+	</select>
+	
 </mapper>

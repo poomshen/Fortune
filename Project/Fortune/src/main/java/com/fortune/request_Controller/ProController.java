@@ -329,17 +329,15 @@ public class ProController {
 			// 프로젝트의 협업상태를 보여주는 클래스이다.
 			
 			@RequestMapping("responseList.htm") // /customer/notice.htm
-			public String listResponse( String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
-
-				List<With_DTO> list = proservice.listResponse( pg, f, q, session);
+			public ModelAndView listResponse( String pg, String f, String q,HttpSession session ) throws ClassNotFoundException, SQLException {
+				ModelAndView mv = new ModelAndView();
+				mv = proservice.listResponse( pg, f, q, session);
 			
+				mv.setViewName("request.collaboList");
 				
-				model.addAttribute("list", list); // 리스트 협업상태
 				
 				
-				/*System.out.println("리스트 협업상태 : "+list);*/
-				
-				return "request.responseList";
+				return mv;
 
 			}	
 			
