@@ -25,6 +25,10 @@ h6 {
 .tg .title{text-align:center;font-weight:900;}
 
 </style>
+<%
+   request.setCharacterEncoding("UTF-8");
+   String selectId = (String)request.getAttribute("selectId");
+%>
 
 <script type="text/javascript">
 
@@ -33,17 +37,27 @@ h6 {
  추가작업 :카드형태의 dropdown 함수 
  작업일 : 2016/12/05
  */
-<%
-String selectId = (String)request.getSession().getAttribute("test1");
-%>
 
 
 $(function(){
+
     Profile.load();
-   
+
+   	console.log('<%=selectId%>');
+   	var select = '<%=selectId%>';
+    if(select!='null')
+    {
+    	setTimeout(function(){
+    		
+    		console.log("setTimeout / "+select)
+    		send(select)
+    			
+    	
+    	}, 3000); 
+    }
+
     
     
-     
     
 });
 
@@ -325,7 +339,6 @@ function pazing5Btn(){
 	
 }
 
-										///////
 function modifyReqCollabo(){
 	
 	var a=$('#hidden').val();
@@ -368,7 +381,7 @@ function modifyReqCollabo(){
 <!--대기/수락/거절 tab영역 -->
 <div class="tab-container">
   		<ul class="nav nav-tabs" style="width:950px">
-  		<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
+  			<li id="전체"><a onclick="selectState('')" data-toggle="tab">전체</a></li>
     		<li id="대기"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
     		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
     		<li id="거절"><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
@@ -530,7 +543,6 @@ function modifyReqCollabo(){
 			</div>
 
 		</div>
-		
 
 </body>
 </html>

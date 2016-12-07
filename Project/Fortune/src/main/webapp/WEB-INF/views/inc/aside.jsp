@@ -42,7 +42,7 @@
                             	</security:authorize>
                             	<security:authorize access="hasAnyRole('ROLE_MGR','ROLE_USER')">
                                 <li>
-                                    <a href="responseList.htm">MY 프로젝트</a>
+                                    <a href="responseList_ver1.htm">MY 프로젝트</a>
                                 </li>
                                 </security:authorize>
                             <!-- /.nav-second-level -->

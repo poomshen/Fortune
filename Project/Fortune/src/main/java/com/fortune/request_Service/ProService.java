@@ -45,8 +45,7 @@ public class ProService {
    private SqlSession sqlsession;
 
    //협업 답장자함 입니다.
-
-   public ModelAndView getRequest(String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
+   public ModelAndView getRequest(SqlSession sqlsession,String pg, String f, String q,String st,String rs,String me,String se,String collabo_req_date,HttpSession session)
 
          throws ClassNotFoundException, SQLException {
       System.out.println("집에 갑시다.");
@@ -155,13 +154,13 @@ public class ProService {
 			}
 			
 		}
-		mv.addObject("list", list);
-	    
+		mv.addObject("list", list);  
+	        
       return mv;
    }
    
    //협업 작성자 리스트 입니다.
-      public ModelAndView listReplyRequest(String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
+      public ModelAndView listReplyRequest(String selectId,String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
             throws ClassNotFoundException, SQLException {
          System.out.println("----service:listReplyRequest-----");
 
@@ -233,7 +232,8 @@ public class ProService {
          mv.addObject("memo", memo);
          mv.addObject("search", search);
          mv.setViewName(rs+".postRequestList");
-         
+         System.out.println("selectId:"+selectId);
+         mv.addObject("selectId",selectId);
          
          
          
