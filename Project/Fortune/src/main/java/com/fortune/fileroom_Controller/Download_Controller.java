@@ -1,3 +1,8 @@
+/*
+작성자 : 김중완
+최초 작업일 : 2016/11/14
+최종 수정일 : 2016/11/20
+*/
 package com.fortune.fileroom_Controller;
 
 import java.io.File;
@@ -21,22 +26,15 @@ public class Download_Controller {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	//파일 다운로드 컨트롤러 함수
 	@RequestMapping(value="/downloadfile.htm")
 	public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("downloadFile 컨트롤러");
 		String filename = request.getParameter("filename");
-		System.out.println("filename : " + filename);
 		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));
-		System.out.println("collabo_no : " + collabo_no);
-		//filename = new String(filename.getBytes("ISO8859_1"), "UTF-8");
-		//System.out.println("filename 인코딩 후 : " + filename);
 		String path = request.getServletContext().getRealPath("upload");
-
 		String fullPath = path + "/" + filename;
-		System.out.println("fullPath : " + fullPath);
-		
 		File downloadFile = new File(fullPath);
-		System.out.println("downloadFile : " + downloadFile);
 		
 		FileRoom_DTO fileroom_DTO = new FileRoom_DTO();
 		fileroom_DTO.setFile_room_rename(filename);
@@ -47,22 +45,16 @@ public class Download_Controller {
 		response.setContentLength((int) downloadFile.length());
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment;filename=" + new String(orginfilename.getBytes(), "ISO8859_1"));
-
 		response.setHeader("Content-Transfer-Encoding", "binary");
 
 		FileInputStream fin = new FileInputStream(downloadFile);
 		ServletOutputStream sout = response.getOutputStream();
-		
 		byte[] buf = new byte[1024];
 		int size = -1;
-		int index = 0;
-		System.out.println("fin : " + fin);
 		
 		while ((size = fin.read(buf, 0, buf.length)) != -1) {
 			sout.write(buf, 0, size);
-			index++;
 		}
-		System.out.println("index : " + index);
 		
 		fin.close();
 		sout.close();

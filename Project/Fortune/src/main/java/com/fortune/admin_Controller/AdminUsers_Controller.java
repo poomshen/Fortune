@@ -1,3 +1,8 @@
+/*
+작성자 : 김중완
+최초 작업일 : 2016/11/28
+최종 수정일 : 2016/11/28
+*/
 package com.fortune.admin_Controller;
 
 import java.util.ArrayList;
@@ -20,6 +25,7 @@ public class AdminUsers_Controller {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	//관리자 사원 정보
 	@RequestMapping(value="/adminusers.htm")
 	public String adminUsers(Model model){
 		System.out.println("userUpdate 컨트롤러");

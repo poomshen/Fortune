@@ -4,45 +4,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fortune.fileroom_DAO.IFileRoom">
+	<!-- 파일 업로드 -->
 	<insert id="insertFile" parameterType="com.fortune.Table_DTO.FileRoom_DTO">
 		insert into file_room values(#{user_id}, sysdate, #{file_room_name}, (SELECT nvl(MAX(TO_NUMBER(file_room_no)),0)+1 FROM file_room), #{file_room_ext}, #{file_room_rename}, #{file_room_cutname}, #{collabo_no})
 	</insert>
 	
+	<!-- 파일 이름 중복 확인 -->
 	<select id="selectOverlapNameFile" resultType="integer">
 		select count(*) from file_room where collabo_no = #{param2} and file_room_name = #{param1}
 	</select>
-
+	
+	<!-- 파일 실제 이름 확인 -->
 	<select id="selectNameFile" parameterType="com.fortune.Table_DTO.FileRoom_DTO" resultType="String">
 		select file_room_name from file_room where collabo_no = #{collabo_no} and file_room_rename = #{file_room_rename}
 	</select>
 	
+	<!-- 파일 리스트 -->
 	<select id="listFiles" parameterType="integer" resultType="com.fortune.Table_DTO.FileRoom_DTO">
 		select * from (select rownum num, n.* from (select * from file_room where collabo_no = #{param2} order by file_room_no desc) n)
 		 where num between 1 + (#{param1} - 1) * 12 and 12 + (#{param1} - 1) * 12
 	</select>
 	
+	<!-- 파일 삭제 -->
 	<delete id="deleteFile" parameterType="com.fortune.Table_DTO.FileRoom_DTO">
 		delete file_room where collabo_no = #{collabo_no} and file_room_rename = #{file_room_rename}
 	</delete>
 	
+	<!-- 파일 전체 개수 -->
 	<select id="countFile" parameterType="integer" resultType="integer">
 		select count(*) from file_room where collabo_no = #{collabo_no}
 	</select>
 	
+	<!-- 파일 이름 검색 -->
 	<select id="searchNameListFiles" resultType="com.fortune.Table_DTO.FileRoom_DTO">
 		select * from (select rownum num, n.* from (select * from file_room where collabo_no = #{param3} and file_room_name like '%'||#{param1}||'%' order by file_room_no desc) n)
 		 where num between 1 + (#{param2} - 1) * 12 and 12 + (#{param2} - 1) * 12
 	</select>
 	
+	<!-- 파일 이름 검색 개수 -->
 	<select id="countSearchNameFile" resultType="integer">
 		select count(*) from file_room where collabo_no = #{param2} and file_room_name like '%'||#{param1}||'%' 
 	</select>
 	
+	<!-- 파일 날짜 검색 -->
 	<select id="searchDateListFiles" resultType="com.fortune.Table_DTO.FileRoom_DTO">
 		select * from (select rownum num, n.* from (select * from file_room where collabo_no = #{param3} and to_char(file_room_date) like to_date(nvl(#{param1}, sysdate),'YY/MM/DD') order by file_room_no desc) n)
 		 where num between 1 + (#{param2} - 1) * 12 and 12 + (#{param2} - 1) * 12
 	</select>
 	 
+	<!-- 파일 날짜 검색 개수 -->
 	<select id="countSearchDateFile" parameterType="String" resultType="integer">
 		select count(*) from file_room where collabo_no = #{param2} and to_char(file_room_date) like to_date(nvl(#{param1}, sysdate),'YY/MM/DD')
 	</select>

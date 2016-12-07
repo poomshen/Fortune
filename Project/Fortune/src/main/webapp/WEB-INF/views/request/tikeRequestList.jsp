@@ -156,18 +156,53 @@ Profile = {
   	}
      //거절 사유를 val 로 받아서 사용하였습니다.
      function refuseReqCollabo(a){
-    	 $("#menuView2").empty();
-   		 $("#refuseindex").val(a); 
+    	 swal({
+    		  title: "거절 합니다!",
+    		  text: "합당한 거절사유:",
+    		  type: "input",
+    		  showCancelButton: true,
+    		  closeOnConfirm: false,
+    		  showLoaderOnConfirm: true,
+    		  animation: "slide-from-top",
+    		  inputPlaceholder: "거절사유를 입력 해주세요"
+    		},
+    		function(inputValue){
+    		  if (inputValue === false) return false;
+    		  
+    		  if (inputValue === "") {
+    		    swal.showInputError("거절 사유를 입력하지 않았습니다!");
+    		    return false
+    		  }else{
+    		 setTimeout(function(){
+    			  $.get("refuse.htm", {collabo_req_index:a ,
+    			  collabo_req_text:inputValue,
+    			  	pg: "${to_page}",
+    				st: "${st_query}",
+    				me: "${memo}", 
+    				se: "${search}"}, function(data, textStatus, req) {
+    		 		$("#requestlist").html(data); 
+    		 		 swal("거절성공!", "거절사유: " + inputValue, "success");
+    			  })
+    		 	},2000);
+    		  }
+    		  
+    		});
 	}
      //대기 수락 거절을 비동기 처리로 사용하였다.
    	function selectState(state){
    		console.log(state)
    		
+   		if(state == "수락"){
+   			$.get("responseList2.htm", function(data, textStatus, req) {
+   				$('div#requestlist').html(data);
+   			})
+   		}else{
    		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
-   			$('#requestlist').html(data);
+   			$('div#requestlist').html(data);
    			
    			//console.log(data);
    		});
+   		}
    	}
      //검색 기능 비동기 처리로 하였습니다.
    	function searchBtn(){
@@ -199,66 +234,8 @@ Profile = {
    		detailReqCollabo(index);
     }
      
-//페이징 처리를 비동기 처리로 처리 하였습니다. << 버튼으로 처리하였습니다.
-function pazingBtn(){
-
-$.ajax({
-
-			type: "get",
-			url:  "requestList2.htm",
-			cache: false,				
-			data:{pg:1,
-				st: "${st_query}",
-				me: "${memo}", 
-				se: "${search}"},
-			success:function(data){ //callback  
-				console.log('${st_query}');
-				console.log('${memo}');
-				console.log('${search}');
-
-
-
-			$("#requestlist").html(data); 
-
-		},
-			error: function(){						
-				alert('Error while request..'	);
-		}
-});
-
-
-}
-//페이징 처리를 비동기 처리로 처리 하였습니다. < 버튼으로 처리하였습니다.
-function pazingBtn2(){
-
-$.ajax({
-
-			type: "get",
-			url:  "requestList2.htm",
-			cache: false,				
-			data:{pg: "${from_page-1}",
-				st: "${st_query}",
-				me: "${memo}", 
-				se: "${search}"},
-			success:function(data){ //callback  
-				console.log('${st_query}');
-				console.log('${memo}');
-				console.log('${search}');
-
-
-
-			$("#requestlist").html(data); 
-
-		},
-			error: function(){						
-				alert('Error while request..'	);
-		}
-});
-
-
-}
-//페이징 처리를 비동기 처리로 처리 하였습니다. 번호 버튼으로 처리하였습니다.
-function pazing3Btn(page){
+//페이지 처리
+function pazingBtn(page){
 
 $.ajax({
 
@@ -282,64 +259,6 @@ $.ajax({
 			error: function(){						
 			alert('Error while request..'	);
 	}
-});
-
-
-}
-//페이징 처리를 비동기 처리로 처리 하였습니다. > 버튼으로 처리하였습니다.
-function pazing4Btn(){
-
-$.ajax({
-
-		type: "get",
-		url:  "requestList2.htm",
-		cache: false,				
-		data:{pg: "${to_page+1}",
-			st: "${st_query}",
-			me: "${memo}", 
-			se: "${search}"},
-		success:function(data){ //callback  
-			console.log('${st_query}');
-			console.log('${memo}');
-			console.log('${search}');
-
-
-
-		$("#requestlist").html(data); 
-
-	},
-		error: function(){						
-			alert('Error while request..'	);
-	}
-});
-
-
-}
-//페이징 처리를 비동기 처리로 처리 하였습니다. >> 버튼으로 처리하였습니다.
-function pazing5Btn(){
-
-	$.ajax({
-
-			type: "get",
-			url:  "requestList2.htm",
-			cache: false,				
-			data:{pg: "${all_page}",
-				st: "${st_query}",
-				me: "${memo}", 
-				se: "${search}"},
-			success:function(data){ //callback  
-				console.log('${st_query}');
-				console.log('${memo}');
-				console.log('${search}');
-
-
-
-$("#requestlist").html(data); 
-
-},
-error: function(){						
-alert('Error while request..'	);
-}
 });
 
 
@@ -442,9 +361,9 @@ function proAdd(){
 <!--대기/수락/거절 tab영역 -->
 <div class="tab-container">
   		<ul class="nav nav-tabs" style="width:950px">
-  			<li id="전체"><a onclick="selectState('')" data-toggle="tab">전체</a></li>
+  		<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
+    		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">진행중</a></li>
     		<li id="대기"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
-    		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
     		<li id="거절"><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
     		<li id="완료"><a onclick="selectState('완료')" data-toggle="tab">완료</a></li>
   		</ul>
@@ -493,9 +412,8 @@ function proAdd(){
             						<div class="html about-me" id="about-mesocial-link${req}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
                        					<div class="photo" style=
-                
                								 <c:choose>
-												<c:when test="${n.collabo_req_state == '수락'}">
+												<c:when test="${n.collabo_req_state == '수락' || n.collabo_req_state == '완료'}">
               										 "border:3px solid #1e851f; margin-right:0px"
                 								</c:when>
                 								
@@ -523,8 +441,10 @@ function proAdd(){
         <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
                 <div class="social-link" id="social-link${req}">
                     <!-- 상세보기 --><a class="link link-twitter" onclick="detailReqCollabo(${req})" target="_blank"><i class="fa fa-twitter"></i></a>
-                    <!-- 수락 --><a  data-toggle="modal" class="link link-codepen" onclick="memoReqCollabo(${req})" target="_blank"><i class="fa fa-codepen"></i></a>
-                    <!-- 거절 --><a  data-toggle="modal" data-target="#myModal4" class="link link-facebook" onclick="refuseReqCollabo(${req})" target="_blank"><i class="fa fa-facebook"></i></a>
+                   <c:if test="${sessionScope.info.user_id == n.collabo_req_ID&&n.collabo_req_state == '대기'}">
+                    <!-- 수락 --><a  data-toggle="modal" data-target="#myModal2" class="link link-codepen" onclick="memoReqCollabo(${req})" target="_blank"><i class="fa fa-codepen"></i></a>
+                    <!-- 거절 --><a  class="link link-facebook" onclick="refuseReqCollabo(${req})" target="_blank"><i class="fa fa-facebook"></i></a>
+                  </c:if>
                 </div>
             </div>
         </div>
@@ -541,29 +461,29 @@ function proAdd(){
 		  		<div style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
 							<c:if test="${pg>block}">
-								<li><a href="#" onclick="pazingBtn()">««</a></li>
-								<li><a href="#" onclick="pazingBtn2()">«</a></li>
-							</c:if>
-							<c:if test="${pg<=block}">
-								<li><a href="#">««</a></li>
-								<li><a href="#">«</a></li>
-							</c:if>
-							<c:forEach begin="${from_page}" end="${to_page}" var="i">
-								<c:if test="${i==pg}">
-									<li class="active"><a href="#">${i}</a></li>
+									<li><a href="#" onclick="pazingBtn('1')">««</a></li>
+									<li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
 								</c:if>
-								<c:if test="${i!=pg}">
-									<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
+								<c:if test="${pg<=block}">
+									<li><a href="#">««</a></li>
+									<li><a href="#">«</a></li>
 								</c:if>
-							</c:forEach>
-							<c:if test="${to_page<all_page}">
-								<li><a href="#" onclick="pazing4Btn()">»</a></li>
-								<li><a href="#" onclick="pazing5Btn()">»»</a></li>
-							</c:if>
-							<c:if test="${to_page>=all_page}">
-								<li><a href="#">»</a></li>
-								<li><a href="#">»»</a></li>
-							</c:if>
+								<c:forEach begin="${from_page}" end="${to_page}" var="i">
+									<c:if test="${i==pg}">
+										<li class="active"><a href="#">${i}</a></li>
+									</c:if>
+									<c:if test="${i!=pg}">
+										<li><a href="#" onclick="pazingBtn(${i})">${i}</a></li>
+									</c:if>
+								</c:forEach>
+								<c:if test="${to_page<all_page}">
+									<li><a href="#" onclick="pazingBtn('${to_page+1}')">»</a></li>
+									<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
+								</c:if>
+								<c:if test="${to_page>=all_page}">
+									<li><a href="#">»</a></li>
+									<li><a href="#">»»</a></li>
+								</c:if>
 						</ul>
 					</div>
 				</div>
@@ -602,74 +522,6 @@ function proAdd(){
 
       </div>
 			
-			
-			
-		<!-- 거절을 하였을때 거절 사유를 쓸 때 사용됩니다.-모델 창입니다. -->
-
-
-
-		<div class="container">
-			<!-- Modal -->
-			<div class="modal fade" id="myModal4" role="dialog">
-				<div class="modal-dialog">
-
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">거절 사유</h4>
-
-						</div>
-
-						<div class="modal-body">
-
-					<div id="menuView3">
-								<!-- CSS 구성  -->
-								<form action="refuse.htm" method="get" name="refusemenform">
-
-									<div class="col-sm-6"></div>
-									<br>
-									<div>
-
-										<input type="hidden" name="collabo_req_index" id="refuseindex"> 
-
-										<dl>
-											<dt>거절 사유</dt>
-											<dd>
-												<textarea class="form-control" name="collabo_req_text"
-													id="collabo_req_text" rows="3" cols="20"></textarea>
-											</dd>
-										</dl>
-										<br />
-
-										<div class="col-sm-2"></div>
-										<div class="col-sm-10"></div>
-									</div>
-
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Close</button>
-										<input type="button" class="btn btn-primary" value="거절 완료"
-											onclick="refuse()">
-
-									</div>
-
-								</form>
-							</div>
-
-
-						</div>
-
-
-					</div>
-
-				</div>
-			</div>
-
-		</div>
-		
-		
-		
 
 
 		<!-- 수락  내용을 확인 할때 쓰입니다. -->
