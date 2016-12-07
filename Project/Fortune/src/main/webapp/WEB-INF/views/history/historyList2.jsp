@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <!-- Timeline CSS -->
     <link href="dist/css/timeline.css" rel="stylesheet">
+     <style type="text/css">
+	#historytitle{
+	float:right;
+	}
+</style>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script type="text/javascript">
 		function lastPostFunc(){
@@ -45,7 +51,7 @@
                             <ul class="timeline">
                                 <c:forEach var="historylist" items="${list}">
                                 <c:choose >
-                                	<c:when test="${historylist.history_title=='요청'||historylist.history_title=='최초요청'||historylist.history_title=='거절'}">
+                                	<c:when test="${historylist.history_title=='요청'||historylist.history_title=='거절'}">
                                 	 <li  class="wrdLatest" id="${historylist.num }">
                                 	</c:when>
                                 	<c:otherwise>
@@ -67,17 +73,19 @@
                                 	</c:otherwise>
                                 </c:choose>
                                     <div class="timeline-panel">
-                                        <div class="timeline-heading">
+                                        <div class="timeline-heading" id="historytitle">
                                             <h4 class="timeline-title">${historylist.history_title}</h4>
-                                            <p><small class="text-muted"><i class="fa fa-clock-o"></i> ${historylist.history_date }</small>
+                                            <p><small class="text-muted"><i class="fa fa-clock-o"></i>
+                                            ${fn: substring(historylist.history_date,0,16) }</small>
                                             </p>
                                         </div>
                                         <div class="timeline-body">
                                             <h4 class="timeline-title">${historylist.collabo_req_title}</h4>
+                                            <br>
                                             <p>${historylist.collabo_req_text}</p>
                                             <c:choose>
                                             <c:when test="${historylist.history_title!='거절'}">
-                                            <p>${historylist.history_text}</p>
+                                            <%-- <p>${historylist.history_text}</p> --%>
                                             </c:when>
                                             </c:choose>
                                         </div>
