@@ -2,6 +2,7 @@ package com.fortune.request_Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,15 +16,23 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.alarm_DAO.IAlarm;
+import com.fortune.function_DTO.All_Alarm_DTO;
 import com.fortune.function_DTO.ProgectName_DTO;
+import com.fortune.function_DTO.Schedule_AlarmList_DTO;
+import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.history_Service.HistoryService;
+import com.fortune.req_alarm_DAO.IReqAlarm;
 import com.fortune.request_DTO.Passion_DTO;
 import com.fortune.request_Service.ProService;
+import com.fortune.schedule_alarm_DAO.IScheduleAlarm;
 
 
 @Controller
@@ -39,7 +48,7 @@ public class ProController {
 	 @Autowired
 	 private SqlSession sqlSession;
 	
-	@RequestMapping("/writerequest.htm")
+	@RequestMapping(value = "/writerequest.htm")
 	public String writeForm(Model model) throws ClassNotFoundException, SQLException {
 			//성준 추가 16-11-30 초기 헙업 가져오기
 			List<ProgectName_DTO> pList = historyService.progetctNameList();
@@ -55,36 +64,38 @@ public class ProController {
 
 	}
 
-	// 프로젝트를 요청해주는 클래스 이다.
-	@RequestMapping(value = "writerequest.htm", method = RequestMethod.POST)
-	public String regRequest(Request_DTO n, HttpServletRequest request)
-			throws IOException, ClassNotFoundException, SQLException {
-			
-		System.out.println("writeRequest.htm 컨트롤러 start");
-		try {
-			//추가 사항 req_no 바꿔주기
-			
-			
-			// 실DB저장
-			proservice.regRequest(n, request);
-			
+	   // 프로젝트를 요청해주는 클래스 이다.
+	   @RequestMapping(value = "writerequest.htm", method = RequestMethod.POST)
+	   public String regRequest(Request_DTO n, HttpServletRequest request,HttpSession session)
+	         throws IOException, ClassNotFoundException, SQLException {
+	         
+	      System.out.println("writeRequest.htm 컨트롤러 start");
+	      try {
+	         //추가 사항 req_no 바꿔주기
+	         
+	         
+	         // 실DB저장
+	         proservice.regRequest(n, request);
+	         session.setAttribute("test",n.getCollabo_req_ID());
+	         
 
-			
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return "redirect:listReplyRequest.htm";
+	         
+	      } catch (Exception e) {
+	         System.out.println(e.getMessage());
+	      }
+	      return "redirect:listReplyRequest.htm";
 
-	}
+	   }
 
 	// 만든 목적: 발신자가 보낸 것을 리스트로 보여주는 클래스입니다,
 	// 만든 날짜: 2016-11-28
-	 @Transactional
+	// 추가 작업: 이예지 알림 new list 불러오기
+	@Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
 	public ModelAndView requestList(String pg, String f, String q, String st,String me,String se, HttpSession session ,String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
 		 
 		String rs = "request";
-		ModelAndView mv = proservice.getRequest(pg, f, q, st,rs,me,se,collabo_req_date, session);
+		ModelAndView mv = proservice.getRequest(sqlSession,pg, f, q, st,rs,me,se,collabo_req_date, session);
 		
 		System.out.println("데이터 변환중:"+ collabo_req_date);
 		return mv;
@@ -103,7 +114,7 @@ public class ProController {
 		}
 		 System.out.println("전체일경우 :"+st);
 		 String rs = "cen";
-		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, me, se,collabo_req_date, session);
+		 ModelAndView mv =proservice.getRequest(sqlSession,pg, f, q, st,rs, me, se,collabo_req_date, session);
 		 System.out.println("데이터 변환중:"+ collabo_req_date);
 		 return mv;
 		 
@@ -118,7 +129,8 @@ public class ProController {
 		String rs = "request";
 		ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs,me,se, session);
 		 // 자동 forward
-		
+	    session.setAttribute("test1",session.getAttribute("test"));
+	     
 		
 		
 		return mv;
@@ -170,12 +182,45 @@ public class ProController {
 	}*/
 
 	// 글상세보기
+	// 추가) 알림 db지워주기
 	@RequestMapping("ProDetail.htm")
-	public String ProDetail(String collabo_req_index, Model model) throws ClassNotFoundException, SQLException {
+	public String ProDetail(String collabo_req_index, Model model,HttpSession session) throws ClassNotFoundException, SQLException {
 
 		Request_DTO proDto = proservice.ProDetail(collabo_req_index);
 		model.addAttribute("list", proDto);
 		System.out.println(proDto.toString());
+		
+        //알림 삭제하기
+        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
+				
+		Join_DTO dto = (Join_DTO)session.getAttribute("info");
+	
+		IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
+		
+		int result=req_alarm_DAO.deleteReqAlarm(collabo_req_index);
+		
+		System.out.println("지운 결과 : "+result);
+		
+		IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
+		
+		List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+		
+		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
+		
+		int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+		
+	
+		
+		session.setAttribute("alarm", alist);
+		
+		session.setAttribute("totalCount",tatalCount);
+        
+		//추가 작업
+		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+		sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+		session.setAttribute("sch_alist", sch_alist);
+		
+		
 
 		// Tiles
 		return "cen.proDetail";
@@ -215,7 +260,7 @@ public class ProController {
 		   SQLException {
 			 System.out.println("인덱스:"+collabo_req_index);
 			 System.out.println("텍스트:"+collabo_req_text);
-		 proservice.Refuse(collabo_req_index,collabo_req_text);
+			 proservice.Refuse(collabo_req_index,collabo_req_text);
 		
 		  return "redirect:listReplyRequest.htm"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	

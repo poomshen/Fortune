@@ -157,10 +157,10 @@
 		<span class="field">	 
 		   <div class="col-sm-2">
 		   	<!-- <input type="text" name="year" id="year" size="5" class="form-control hvr-glow" required="required">생년 -->	   	
-		   	<select style="width: 100px" name="year" id="year" required="required">
+		   	<select style="width: 100px;" name="year" id="year" required="required">
 			   	<option value="-1">생년 선택 </option>
 			   		<c:forEach var="i" begin="1970" end="2000">
-			   			<option value="${i}">${i}</option>
+			   			<option style="background-color:transparent;" value="${i}">${i}</option>
 			   		</c:forEach>
 		  	</select>년
 		  	</div>
@@ -265,7 +265,8 @@
 <!-- Button -->
 <div class="form-group">
   <label class="control-label"></label>  
-    <input type="button" name="joinbtn" id="joinbtn" onclick="joinchk();" class="btn hvr-forward" style="margin-top: 50px;" value="join">
+    <input type="button" name="joinbtn" id="joinbtn" onclick="joinchk();" class="btn hvr-forward" style="margin-top: 50px;" value="join">&nbsp; &nbsp; 
+    <input type="button" class="btn hvr-forward" style="margin-top: 50px;" value="back" onclick="history.go(-1)">
 </div>
 
 
@@ -294,8 +295,8 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  
    <!-- <script src="ios-7-date-picker.js"></script>
     --><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-   <!-- <script type="text/javascript" src="assets/js/jquery.dropdown.js"></script>
-    --><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/jquery.dropdown.js"></script> -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
    
    <script type="text/javascript">
          

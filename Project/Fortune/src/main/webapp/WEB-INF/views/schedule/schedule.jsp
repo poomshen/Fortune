@@ -7,11 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
 <script>
 //캘린더 등록, 수정, 삭제권한 체를 위한 role변수 선언
 var role;
-if(${role_no}==3){
+if(${role_no}==3){ 
 	role= true;
 }else{
 	role=false;
@@ -108,11 +107,13 @@ $(document).ready(function() {
 			
 		
 	        $('#content').html(content)
+	        
 	        //fullcalendar 불러오는 함수
 	        //parameter로 false,false 를 주면 캘린더에 일정수정 및 일정등록 불가함
 	        //parameter로 true, true 를 주면 캘린더에 일정수정 및 일정등록 가능함
 			loadCalendar(role,role);
-			$.each(data.new_alarm, function(index, obj) {
+			
+	        $.each(data.new_alarm, function(index, obj) {
 				
 				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
 				
@@ -219,9 +220,6 @@ $(document).ready(function() {
 
 
 </script>
-<style>
-
-</style>
 
 </head>
 <body>
@@ -232,9 +230,6 @@ $(document).ready(function() {
 <input type="hidden" id="modal_start_ms">
 <input type="hidden" id="modal_end_ms">
 <input type="hidden" id="check">
-
-
-
 
 	<br>
 	<br>
@@ -373,8 +368,7 @@ $(document).ready(function() {
 			<div class="col-sm-5" style="padding-right: 0px;">
 				<div class="row" style="padding-right: 0px; margin-top: 10px; margin-bottom: 11px;">
 					<select id="schedule_type" onchange="schedule_type()" style="height: 20px;">
-						<option> 선 택  </option>
-						<option value="0"> 전 체 보 기 </option>
+						<option id="default_option" value="0"> 전 체 보 기 </option>
 						<option value="1">업무일정 보기</option>
 						<option value="2">회의일정 보기</option>
 						<option value="3">내 일정 보기</option>
@@ -387,30 +381,29 @@ $(document).ready(function() {
 					<div id="content_detail" style="display: none; padding-right:0px;">
 					<!-- 수정, 저장, 삭제 버튼 팀장만 보여주기 (권한처리) -->
 						<c:if test="${role_no==3}">
-						<input type="button" value="일정 수정하기" id="update_btn" onclick="work_update()">
-						<input type="hidden" value="일정 저장하기" id="updateok_btn" class="btn-success" onclick="work_updateok()">
-						<input type="button" value="일정 삭제하기" id="delete_btn"><br>
-						</c:if>
-						<label>제목 : </label> <input type="text" id="detail_title" readonly="readonly"><br>
-						<label>내용 : </label> <textarea rows="5" cols="50" id="detail_text" readonly="readonly"></textarea><br>
-						<!-- progress bar -->
-						<div class="progress">
-						    <div class="progress-bar progress-bar-striped active" value="0" id="progress_value" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-							0%</div>
-					  	</div>
-					  	<!-- 아래 6개 버튼 팀장만 보여주기 (권한처리) -->
-					  	<c:if test="${role_no==3}">
-					  	<button type="button" onclick="progress_0()"> 0% </button>
-					  	<button type="button" onclick="progress_20()"> 20% </button>
-					  	<button type="button" onclick="progress_40()"> 40% </button>
-					    <button type="button" onclick="progress_60()"> 60% </button>
-					    <button type="button" onclick="progress_80()"> 80% </button>
-					    <button type="button" onclick="progress_100()"> 100% </button>
-					    <button type="button" onclick="update_progress()"> 등록 </button><br>
+							<!-- progress bar -->
+							<div class="progress">
+							    <div class="progress-bar progress-bar-striped active" value="0" id="progress_value" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+								0%</div>
+						  	</div>
+						  	<!-- 아래 6개 버튼 팀장만 보여주기 (권한처리) -->
+						  	<button type="button" onclick="progress_0()"> 0% </button>
+						  	<button type="button" onclick="progress_20()"> 20% </button>
+						  	<button type="button" onclick="progress_40()"> 40% </button>
+						    <button type="button" onclick="progress_60()"> 60% </button>
+						    <button type="button" onclick="progress_80()"> 80% </button>
+						    <button type="button" onclick="progress_100()"> 100% </button>
+						    <button type="button" onclick="update_progress()"> 등록 </button><br>
+					   		<br>
+							<input type="button" value="일정 수정하기" id="update_btn" onclick="work_update()">
+							<input type="hidden" value="일정 저장하기" id="updateok_btn" class="btn-success" onclick="work_updateok()">
+							<input type="button" value="일정 삭제하기" id="delete_btn"><br>
 					    </c:if>
+						<label>제목 : </label> <input type="text" id="detail_title" class="form-control" readonly="readonly" style="color: black;"><br>
+						<label>내용 : </label> <textarea rows="5" cols="50" id="detail_text" class="form-control" readonly="readonly" style="color: black;"></textarea><br>
 					    
-					    <label>일정 담당자</label><br>
-					    <div id="usersdiv"></div>
+					    <label>일정 담당자 : </label><br>
+					    <input type="text" id="usersdiv" class="form-control" readonly="readonly" style="color: black;">
 					    
 							<hr>
 							<input type="hidden" id="detail_id">
@@ -433,10 +426,12 @@ $(document).ready(function() {
 				</div>
 				<!-- panel-footer -->
 				<div class="panel-footer">
-					<div class="input-group row">
-						<input type="text" placeholder="Type your message here..." id="comment_textarea">
-						<input type="button" value="등록" onclick="insert_comment()">
-					</div>
+					<div class="input-group">
+                       <input id="comment_textarea" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                       <span class="input-group-btn">
+                           <button class="btn-warning btn-sm" onclick="insert_comment()">등 록</button>
+                       </span>
+                   </div>
 				</div>
 			</div>
 						
@@ -455,14 +450,13 @@ $(document).ready(function() {
 						<input type="hidden" value="회의일정 저장" id="meet_updateok_btn" class="btn-success" onclick="work_updateok2()">
 						<input type="button" value="회의일정 삭제" id="meet_delete_btn"><br>
 						</c:if>
-						<label>제목 : </label> <input type="text" id="meet_detail_title" readonly="readonly"><br>
-						<label>내용 : </label> <textarea rows="5" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
-						<label>회의장소 : </label> <div id="place"></div> 
-						<br>
-						<label>회의 참가자</label><br>
-					    <div id="usersdiv2"></div>
+						<label>제목 : </label> <input type="text" class="form-control" style="color:black;" id="meet_detail_title" readonly="readonly"><br>
+						<label>내용 : </label> <textarea rows="5" class="form-control" style="color:black;" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
 						<hr>
-						<input type="hidden" id="meet_detail_id"><input type="hidden" id="meet_detail_start"><input type="hidden" id="meet_detail_end">
+						<label>회의 참가자</label><br>
+						<input type="text" id=usersdiv2 class="form-control" readonly="readonly" style="color: black;">
+						<label>회의장소 : </label> <div id="place"></div> 
+						<input type="hidden" id="meet_detail_id"><input type="hidden" id="meet_detail_start"><input type="hidden" id="meet_detail_end"><br>
 					
 					
 					
@@ -479,6 +473,5 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
-	
 </body>
 </html>

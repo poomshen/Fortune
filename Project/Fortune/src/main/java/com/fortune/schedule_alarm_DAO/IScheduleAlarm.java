@@ -26,4 +26,6 @@ public interface IScheduleAlarm {
 	public Schedule_Work_Meeting_DTO selectScheduleAlarm_one(String user_id,String schedule_no);
 	
 	public int deleteScheAlarm(String user_id,int schedule_no);
+	
+	public int deleteScheAll(String schedule_no);
 }

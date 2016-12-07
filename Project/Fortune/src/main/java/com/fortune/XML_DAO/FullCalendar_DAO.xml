@@ -235,7 +235,8 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 
 <!-- 일정 상세보기의 comment select하기 -->
 <select id="selectComment" resultType="com.fortune.Table_DTO.Work_Comment_DTO">
-	select * from work_comment where schedule_no = #{id} order by work_comment_date desc
+	select work_comment_no, user_name as "user_id", work_comment_text, work_comment_date, schedule_no from work_comment wc join users u
+	on wc.user_id = u.user_id where schedule_no = #{id} order by work_comment_date desc
 </select>
 
 

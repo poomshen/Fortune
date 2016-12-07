@@ -5,25 +5,20 @@
 */
 package com.fortune.req_alarm_DAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fortune.Table_DTO.Alarm_DTO;
+import com.fortune.Table_DTO.Req_Alarm_DTO;
+import com.fortune.function_DTO.All_Alarm_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 
-public interface IAlarm {
+public interface IReqAlarm {
 
 	//해당 아이디와 업무에 해당하는 알람을 체크 
-	public Select_Alarm_DTO checkAlarm(Alarm_DTO dto);	
-	
-	//알림 해줘야 할것을 넣어주기
-	public int insertAlarm(Alarm_DTO dto);
+	public List<Req_Alarm_DTO> selectReqAlarm();	
 	
 	//알림 확인할시에 해당 알림 지워주기 
-	public int deleteAlarm(Alarm_DTO dto);
+	public int deleteReqAlarm(String collabo_req_index);
 	
-	public List<Select_Alarm_DTO> checkAlarmAll(String user_id);
-	
-	public int totalCount(String user_id);
-	
+		
 }

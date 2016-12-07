@@ -2,12 +2,17 @@ package com.fortune.Ajax_Controller;
 
 import java.util.Random;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.catalina.connector.Request;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +26,14 @@ import com.fortune.password_Service.PassWord_Service;
 @Controller
 public class IdSearchAjax_Controller {
 
+	private JavaMailSender mailSender;
+	
+	@Autowired
+	public void setMailSender(JavaMailSender mailSender){
+		this.mailSender=mailSender;
+	}
+	
+	
 	@Autowired
 	public SqlSession sqlsession;
 	
@@ -39,7 +52,7 @@ public class IdSearchAjax_Controller {
 		return resultId;
 	}
 	@RequestMapping("/pwdsearch.ajax")
-	public @ResponseBody int getpwd(HttpServletRequest request){
+	public @ResponseBody int getpwd(HttpServletRequest request) throws MessagingException{
 		//System.out.println("컨트롤러 오긴 오냐?ㅅㅂ");
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		PassWord_Service passWord_Service = new PassWord_Service();
@@ -62,6 +75,13 @@ public class IdSearchAjax_Controller {
 		if(result!=0){
 			//update 성공
 			result=ranNum;
+			MimeMessage mimemessage = mailSender.createMimeMessage();
+			mimemessage.setSubject("변경된 비밀번호는.", "utf-8");
+			String htmlContent="<strong>[MimeMessage]</strong><br>" + ranNum + "<br>";
+			mimemessage.setText(htmlContent, "utf-8", "html");
+			
+			mimemessage.addRecipient(RecipientType.TO, new InternetAddress(search_id));
+			mailSender.send(mimemessage);
 		}
 		
 		return result;

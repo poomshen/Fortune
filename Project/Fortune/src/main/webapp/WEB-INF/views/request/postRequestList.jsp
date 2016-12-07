@@ -33,9 +33,18 @@ h6 {
  추가작업 :카드형태의 dropdown 함수 
  작업일 : 2016/12/05
  */
+<%
+String selectId = (String)request.getSession().getAttribute("test1");
+%>
+
 
 $(function(){
     Profile.load();
+   
+    send('<%=selectId%>'); 
+    
+     
+    
 });
 
 Profile = {
@@ -108,8 +117,6 @@ Profile = {
      function detailReqCollabo(a){
 		
 		//modal body 부분 비워주기
-	
-    	 
  	   	 $.ajax({
  	   		 
  	 			type: "get",
@@ -496,7 +503,7 @@ function modifyReqCollabo(){
 
 		<!-- 상세보기 modal 부분-->
 			<div class="container">
-				<div class="modal fade" id="myModal3" role="dialog">
+				<div class="modal fade " id="myModal3" role="dialog">
 					<div class="modal-dialog modal-lg">
 
 					<!-- Modal content-->
@@ -523,7 +530,20 @@ function modifyReqCollabo(){
 
 		</div>
 		
-
-
+<button class="md-trigger" data-modal="modal-8">3D Flip (horizontal)</button>
+<div class="md-modal md-effect-8" id="modal-8">
+			<div class="md-content">
+				<h3>Modal Dialog</h3>
+				<div>
+					<p>This is a modal window. You can do the following things with it:</p>
+					<ul>
+						<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+						<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+						<li><strong>Close:</strong> click on the button below to close the modal.</li>
+					</ul>
+					<button class="md-close">Close me!</button>
+				</div>
+			</div>
+		</div>
 </body>
 </html>

@@ -38,7 +38,7 @@ var msg
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://192.168.0.4:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://192.168.1.103:8090/fortune/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -54,7 +54,7 @@ function onOpen(evt) {
 function onMessage(evt) {
 
 	console.log("받은 메세지 내용은??"+evt.data);
-
+	 
 	$.ajax({
 		  
 		  type:"post",
@@ -62,13 +62,14 @@ function onMessage(evt) {
 		  url:"newAlarm.htm",
 		  data:{"newAlarm": evt.data},
 		  success:function(data){
-			  
+			 
+		
 			  console.log("헤더 업데이트 성공");
 			  console.log(data);
 			  $('#alarm').empty();  
 			  $('#alarm').html(data);
 			 
-			  promodifyform.submit(); 
+			
 		
 		  }
 	  });	
@@ -108,6 +109,42 @@ $(document).ready(function() {
 
 
 </script>
+<!-- 로딩 gif style태그 -->
+<style type="text/css" >
+.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+	position: fixed;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+ 	/* background: rgba(33,33,33,0.09);*/ /*not in ie */
+ 	
+ 	/* 2016.12.07 김지현 
+ 	로딩 이미지 돌아가는동안 비활성화/화면 어둡게 하는 코드 추가*/
+ 	
+ 	background-color :  rgba(0,0,0,0.3);
+	z-index : 100;
+
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#08212121', endColorstr='#08212121');    /* ie */
+ }
+.wrap-loading div{ /*로딩 이미지*/
+	position: fixed;
+	top:50%;
+	left:50%;
+	margin-left: -21px;
+	margin-top: -21px;
+}
+.display-none{ /*감추기*/
+	display:none;
+}  
+</style>
+<!-- 로딩 gif화면 -->
+<div class="wrap-loading display-none">
+    <div><img src="./images/default.gif" style="width: 50; height: 50px;" /></div>
+</div>
+
+
+
  <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;border-color:#f8f8f8;background-color:rgba(248,248,248,0);box-shadow: 2px 2px 5px hsla(0,0%,0%,0.58);height: 41px;">
             <div class="navbar-header">

@@ -66,7 +66,7 @@ table, th, td {
 
 <script type="text/javascript">
 $(function() {
-	alert('잠시만 기다려주세요...');
+	
 
 	$.ajax({
 		type:"get",
@@ -79,12 +79,18 @@ $(function() {
 		},
 		error:function(){
 			alert('처음 띄우는데에서 에러남!');
-		}
+		},
+	      beforeSend:function(){
+           $('.wrap-loading').removeClass('display-none');
+	       },
+	       complete:function(){
+	           $('.wrap-loading').addClass('display-none');
+	       }
 	});	
 });
 
 function deptshow(){
-	alert('잠시만 기다려주세요...');
+	
 
 	$.ajax({
 		type:"get",
@@ -103,7 +109,13 @@ function deptshow(){
 		},
 		error:function(){
 			alert('검색 에러! 관리자에게 문의하세요');
-		}
+		},
+	      beforeSend:function(){
+	           $('.wrap-loading').removeClass('display-none');
+	       },
+	       complete:function(){
+	           $('.wrap-loading').addClass('display-none');
+	       }
 		
 	}); 
 }
