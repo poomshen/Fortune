@@ -42,6 +42,7 @@ h6 {
 $(function(){
 
     Profile.load();
+
    	console.log('<%=selectId%>');
    	var select = '<%=selectId%>';
     if(select!='null')
@@ -54,6 +55,7 @@ $(function(){
     	
     	}, 3000); 
     }
+
     
     
     
@@ -379,7 +381,7 @@ function modifyReqCollabo(){
 <!--대기/수락/거절 tab영역 -->
 <div class="tab-container">
   		<ul class="nav nav-tabs" style="width:950px">
-  			<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
+  		<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
     		<li id="대기"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
     		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
     		<li id="거절"><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
@@ -525,8 +527,9 @@ function modifyReqCollabo(){
 
 							<h4 class="modal-title">상세보기</h4>
 						</div>
+						
 						<div class="modal-body" id="detail">
-							<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+						<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>	
 						</div>
 						
 						<div class="modal-footer" id="detail_footer">

@@ -631,7 +631,7 @@ function proAdd(){
 									<br>
 									<div>
 
-										<input type="hidden" name="collabo_req_index" id="refuseindex">
+										<input type="hidden" name="collabo_req_index" id="refuseindex"> 
 
 										<dl>
 											<dt>거절 사유</dt>

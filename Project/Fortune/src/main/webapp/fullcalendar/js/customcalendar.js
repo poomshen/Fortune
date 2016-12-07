@@ -4,6 +4,8 @@ var array = [];
 var clickobject;
 var clickobjectcolor= "";
 var scheduleusers;
+var before_text ="";
+var before_text2 ="";
 
 
 function schedule_type(){
@@ -88,10 +90,10 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 		var contentck = "";
 		
 		for(var i =0; i<userid.length-1; i++){
-			contentck += userid[i] + "&nbsp;&nbsp;&nbsp;"
+			contentck += userid[i] + " "
 		}
 		
-	 	$('#usersdiv').html(contentck);
+	 	$('#usersdiv').val(contentck);
 	 	
 	 	
 	 	//상세보기 내용에 comment 뿌려주는 내용
@@ -103,19 +105,17 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 				var comment_text = "";
 	 			$.each(data, function(index, obj) {
 	 				if(index%2==0){
-	 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
-	 					comment_text += '<button type="button" ';
-	 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
-	 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
-	 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
-	 					comment_text += obj.work_comment_text+'</p></div></li>';
+	 					comment_text += '<li class="left clearfix"><span class="pull-left"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
+	 					comment_text += '<br><strong class="primary-font"> &nbsp;&nbsp;'+obj.user_id+'</strong></span><div class="chat-body clearfix"><div class="header">';
+	 					comment_text += '<small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date +' &nbsp;&nbsp;&nbsp;'
+	 					comment_text += '<button type="button" onclick="delete_comment('+obj.work_comment_no+')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button></small></div>'
+	 					comment_text += '<br><p style="word-break:break-all; width:241px;">'+obj.work_comment_text+'</p></div></li>';
 	 				}else{
-	 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
-	 					comment_text += '<button type="button" ';
-	 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
-	 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
-	 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
-	 					comment_text += obj.work_comment_text+'</p></div></li>'
+	 					comment_text += '<li class="right clearfix"><span class="pull-right"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
+	 					comment_text += '<br><strong class="pull-right primary-font">'+obj.user_id+'&nbsp;&nbsp;</strong></span><div class="chat-body clearfix"><div class="header">'
+	 					comment_text += '<small class=" text-muted"><button type="button" onclick="delete_comment('+obj.work_comment_no;
+	 					comment_text += ')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button>&nbsp;&nbsp;<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+	 					comment_text += '</small></div><p style="word-break:break-all; width:241px; margin-left:28px;">'+obj.work_comment_text+'</p></div></li>'
 	 				}
 				});
 	 			$('#comment_text').html(comment_text);
@@ -140,15 +140,12 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 	$('#meet_detail_end').val(end);
 	$('#check').val("check");
 	
-	//회의실 번호 뿌려주는 코드
-	$('#place_no').val(progress_or_place);
-	
 	//상세보기 내용에 참가자 인원 뿌려주는 코드
 	var userid = userids.split("/");
 	var contentck = "";
 	
 	for(var i =0; i<userid.length-1; i++){
-		contentck += userid[i] + "&nbsp;&nbsp;&nbsp;"
+		contentck += userid[i] + " "
 	}
 	
 	if(progress_or_place==10){
@@ -163,7 +160,7 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 	
 	
 	
- 	$('#usersdiv2').html(contentck)
+ 	$('#usersdiv2').val(contentck)
  	
  	//회의 상세보기 클릭시 알림 delete
  	$.ajax({
@@ -188,6 +185,7 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 
 //수정하기 버튼 클릭시 readonly속성 없애줌
 function work_update(){
+	before_text=$('#detail_title').val();
 	if($('#detail_progress').val()==1){
 		swal('완료된 일정입니다.')
 	}else{
@@ -208,11 +206,11 @@ function work_updateok(){
 
 //회의일정 수정 버튼 클릭시 readonly속성 없애줌
 function work_update2(){
+	before_text2=$('#meet_detail_title').val();
 	$('#meet_update_btn').attr('type','hidden');
 	$('#meet_updateok_btn').attr('type','button');
 	document.getElementById("meet_detail_title").readOnly = false;
 	document.getElementById("meet_detail_text").readOnly = false;
-	document.getElementById("place_no").readOnly = false;
 }
 
 //회의일정 저장 버튼 클릭시 DB에 update작업
@@ -236,19 +234,17 @@ function insert_comment(){
 			console.log('comment 등록 성공')
  			$.each(data, function(index, obj) {
  				if(index%2==0){
- 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
- 					comment_text += '<button type="button" ';
- 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
- 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
- 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
- 					comment_text += obj.work_comment_text+'</p></div></li>';
+ 					comment_text += '<li class="left clearfix"><span class="pull-left"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
+ 					comment_text += '<br><strong class="primary-font"> &nbsp;&nbsp;'+obj.user_id+'</strong></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date +' &nbsp;&nbsp;&nbsp;'
+ 					comment_text += '<button type="button" onclick="delete_comment('+obj.work_comment_no+')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button></small></div>'
+ 					comment_text += '<br><p style="word-break:break-all; width:241px;">'+obj.work_comment_text+'</p></div></li>';
  				}else{
- 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
- 					comment_text += '<button type="button" ';
- 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
- 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
- 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
- 					comment_text += obj.work_comment_text+'</p></div></li>'
+ 					comment_text += '<li class="right clearfix"><span class="pull-right"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
+ 					comment_text += '<br><strong class="pull-right primary-font">'+obj.user_id+'&nbsp;&nbsp;</strong></span><div class="chat-body clearfix"><div class="header">'
+ 					comment_text += '<small class=" text-muted"><button type="button" onclick="delete_comment('+obj.work_comment_no;
+ 					comment_text += ')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button>&nbsp;&nbsp;<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+ 					comment_text += '</small></div><p style="word-break:break-all; width:241px; margin-left:28px;">'+obj.work_comment_text+'</p></div></li>'
  				}
 			});
 			$('#comment_text').html(comment_text);
@@ -269,19 +265,17 @@ function delete_comment(commend_id){
 			console.log(' cocmment 삭제 성공')
  			$.each(data, function(index, obj) {
  				if(index%2==0){
- 					comment_text += '<li class="left clearfix"><span class="chat-img pull-left">';
- 					comment_text += '<button type="button" ';
- 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
- 					comment_text += '<strong class="primary-font">아이디 : '+obj.user_id+'</strong><small class="pull-right text-muted">'
- 					comment_text += '<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date+'</small></div><p>';
- 					comment_text += obj.work_comment_text+'</p></div></li>';
+ 					comment_text += '<li class="left clearfix"><span class="pull-left"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
+ 					comment_text += '<br><strong class="primary-font"> &nbsp;&nbsp;'+obj.user_id+'</strong></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date +' &nbsp;&nbsp;&nbsp;'
+ 					comment_text += '<button type="button" onclick="delete_comment('+obj.work_comment_no+')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button></small></div>'
+ 					comment_text += '<br><p style="word-break:break-all; width:241px;">'+obj.work_comment_text+'</p></div></li>';
  				}else{
- 					comment_text += '<li class="right clearfix"><span class="chat-img pull-right">';
- 					comment_text += '<button type="button" ';
- 					comment_text += 'onclick="delete_comment('+obj.work_comment_no+')">삭제</button></span><div class="chat-body clearfix"><div class="header">';
- 					comment_text += '<small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
- 					comment_text += '</small> <strong class="pull-right primary-font">아이디 : '+obj.user_id+'</strong></div><p>';
- 					comment_text += obj.work_comment_text+'</p></div></li>'
+ 					comment_text += '<li class="right clearfix"><span class="pull-right"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
+ 					comment_text += '<br><strong class="pull-right primary-font">'+obj.user_id+'&nbsp;&nbsp;</strong></span><div class="chat-body clearfix"><div class="header">'
+ 					comment_text += '<small class=" text-muted"><button type="button" onclick="delete_comment('+obj.work_comment_no;
+ 					comment_text += ')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button>&nbsp;&nbsp;<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+ 					comment_text += '</small></div><p style="word-break:break-all; width:241px; margin-left:28px;">'+obj.work_comment_text+'</p></div></li>'
  				}
 			});
 			$('#comment_text').html(comment_text);
@@ -717,40 +711,55 @@ function loadCalendar(role1,role2) {
 	        // 일반업무 업데이트 함수
 	        updateEvent: {
 	            click: $('#updateok_btn').click(function(){
-	            
-	            	var check = confirm('일정을 수정 하시겠습니까?');
-	            	if(check){
-	            		var id = $('#detail_id').val();
-	            		var calEvent;
-	            		for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
-	            			if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
-	            				calEvent = calendar.fullCalendar( 'getEventSources' )[0].events[i];
-	            				calendar.fullCalendar( 'getEventSources' )[0].events[i].title =$('#detail_title').val();
-	            				calendar.fullCalendar('updateEvent', calEvent);
-	            				var j = i;
-	            			}
-	            	}
-	            		
-					var updateschedule = {
-						"title": $('#detail_title').val(),
-						"text": $('#detail_text').val(),
-						"schedule_no": $('#detail_id').val(),
-		                "schedule_start" : $('#detail_start').val(),
-		                "schedule_end" : $('#detail_end').val()
-					}
-            		
-            		$.ajax({
-						type: 'post',
-						url: 'work_update.ajax',
-						data: updateschedule,
-						success : function(data) {
-							console.log('업데이트 성공');
-						}
-					});
-            		
-            		
-	            	}
 	            	
+	            	swal({
+	            		  title: "수정 하시겠습니까?",
+	            		  text: "효율적인 업무 fortune",
+	            		  type: "info",
+	            		  showCancelButton: true,
+	            		  confirmButtonColor: "#DD6B55",
+	            		  confirmButtonText: "수정하기",
+	            		  cancelButtonText: "취소",
+	            		  closeOnConfirm: false,
+	            		  closeOnCancel: true
+	            		},
+	            		function(isConfirm){
+		            		if(isConfirm){
+		            		  swal("수정이 완료되었습니다.", "효율적인 업무 fortune", "success");
+		            		  
+		            		  var id = $('#detail_id').val();
+		            		  var calEvent;
+		            		  
+		            		  for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
+		            			  if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
+		            				  calEvent = calendar.fullCalendar( 'getEventSources' )[0].events[i];
+		            				  calendar.fullCalendar( 'getEventSources' )[0].events[i].title =$('#detail_title').val();
+		            				  calendar.fullCalendar('updateEvent', calEvent);
+		            			  }
+		            		  }
+		            		  
+		            		  var updateschedule = {
+		            				  "title": $('#detail_title').val(),
+		            				  "text": $('#detail_text').val(),
+		            				  "schedule_no": $('#detail_id').val(),
+		            				  "schedule_start" : $('#detail_start').val(),
+		            				  "schedule_end" : $('#detail_end').val()
+		            		  }
+		            		  
+		            		  $.ajax({
+		            			  type: 'post',
+		            			  url: 'work_update.ajax',
+		            			  data: updateschedule,
+		            			  success : function(data) {
+		            				  console.log('업데이트 성공');
+		            			  }
+		            		  });
+		            		  
+		            		}else{
+		            			$("#detail_title").val(before_text);
+		            		}
+	            		}	
+	            	);
 	            })
 	        },
 
@@ -759,40 +768,56 @@ function loadCalendar(role1,role2) {
 	        updateEvent: {
 	            click: $('#meet_updateok_btn').click(function(){
 	            
-	            	var check = confirm('일정을 수정 하시겠습니까?');
-	            	if(check){
-	            		var id = $('#meet_detail_id').val();
-	            		var calEvent;
-	            		for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
-	            			if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
-	            				calEvent = calendar.fullCalendar( 'getEventSources' )[0].events[i];
-	            				calendar.fullCalendar( 'getEventSources' )[0].events[i].title =$('#meet_detail_title').val();
-	            				calendar.fullCalendar('updateEvent', calEvent);
-	            				var j = i;
-	            			}
-	            	}
-	            		
-					var updateschedule = {
-						"title": $('#meet_detail_title').val(),
-						"text": $('#meet_detail_text').val(),
-						"schedule_no": $('#meet_detail_id').val(),
-		                "schedule_start" : $('#meet_detail_start').val(),
-		                "schedule_end" : $('#meet_detail_end').val(),
-		                "meeting_place_no" : $('#place_no').val()
-					}
-            		
-            		$.ajax({
-						type: 'post',
-						url: 'meeting_update.ajax',
-						data: updateschedule,
-						success : function(data) {
-							console.log('업데이트 성공');
-						}
-					});
-            		
-            		
-	            	}
 	            	
+	            	swal({
+	            		  title: "수정 하시겠습니까?",
+	            		  text: "효율적인 업무 fortune",
+	            		  type: "info",
+	            		  showCancelButton: true,
+	            		  confirmButtonColor: "#DD6B55",
+	            		  confirmButtonText: "수정하기",
+	            		  cancelButtonText: "취소",
+	            		  closeOnConfirm: false,
+	            		  closeOnCancel: true
+	            		},
+	            		function(isConfirm){
+		            		if(isConfirm){
+		            			swal("수정이 완료되었습니다.", "효율적인 업무 fortune", "success");
+		            			
+			            		var id = $('#meet_detail_id').val();
+			            		var calEvent;
+			            		
+			            		for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
+			            			if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
+			            				calEvent = calendar.fullCalendar( 'getEventSources' )[0].events[i];
+			            				calendar.fullCalendar( 'getEventSources' )[0].events[i].title =$('#meet_detail_title').val();
+			            				calendar.fullCalendar('updateEvent', calEvent);
+			            			}
+				            	}
+				            		
+								var updateschedule = {
+									"title": $('#meet_detail_title').val(),
+									"text": $('#meet_detail_text').val(),
+									"schedule_no": $('#meet_detail_id').val(),
+					                "schedule_start" : $('#meet_detail_start').val(),
+					                "schedule_end" : $('#meet_detail_end').val(),
+								}
+			            		
+			            		$.ajax({
+									type: 'post',
+									url: 'meeting_update.ajax',
+									data: updateschedule,
+									success : function(data) {
+										console.log('업데이트 성공');
+									}
+								});
+		            		}else{
+		            			$('#meet_detail_title').val(before_text2)
+		            		}
+	            		}
+	            	);
+	            	
+            		
 	            })
 	        },
 	        

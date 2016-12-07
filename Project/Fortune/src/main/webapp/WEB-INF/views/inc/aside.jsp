@@ -78,7 +78,7 @@ ul a {
                         <li style="">
                         </li>
                         <li>
-                        <a class="hvr-grow-shadow" href="#"><i class="fa fa-table fa-fw"></i>완료된프로젝트<span class="fa arrow"></span></a>
+                        <a class="hvr-grow-shadow" href="#" style="text-decoration:line-through;"><i class="fa fa-table fa-fw"></i>완료된프로젝트<span class="fa arrow"></span></a>
                           <ul class="nav nav-second-level">
                                 <c:forEach var="n" items="${sessionScope.finishCollabo}">
                                 <li>

@@ -83,6 +83,7 @@
                   
                   
                   </script>
+
 <form action="writeresponse.htm" method="post" name="proaddform">
    <input type="hidden" name="collabo_req_index" value="${acceptlist.collabo_req_index}"> 
     <input type="hidden" name="collabo_req_no" value="${acceptlist.collabo_req_no}">
@@ -125,9 +126,7 @@
       </div>
       <br>
       
-
-
-      
+    
       <div class="form-group ">
             <label>예상 수익 :</label> <input type="text" name="collabo_sal"
               onkeyup="cmaComma(this);" onchange="cmaComma(this);"

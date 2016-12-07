@@ -44,8 +44,8 @@
     <td class="title">수신자</td>
     <td class="tg-baqh">${list.collabo_req_ID}</td>
     <td class="title">첨부파일</td>
-    <td class="tg-baqh"><input type="file" name="files[0]" class="form-control" value="${list.collabo_req_filesrc}"></td>
-
+    <td class="tg-baqh"><input type="file" name="files[0]" class="form-control" value="${list.collabo_req_filesrc}" ></td>
+	
   </tr>
 </table>
 
