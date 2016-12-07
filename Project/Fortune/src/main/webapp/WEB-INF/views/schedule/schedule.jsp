@@ -381,30 +381,29 @@ $(document).ready(function() {
 					<div id="content_detail" style="display: none; padding-right:0px;">
 					<!-- 수정, 저장, 삭제 버튼 팀장만 보여주기 (권한처리) -->
 						<c:if test="${role_no==3}">
-						<input type="button" value="일정 수정하기" id="update_btn" onclick="work_update()">
-						<input type="hidden" value="일정 저장하기" id="updateok_btn" class="btn-success" onclick="work_updateok()">
-						<input type="button" value="일정 삭제하기" id="delete_btn"><br>
-						</c:if>
-						<label>제목 : </label> <input type="text" id="detail_title" readonly="readonly"><br>
-						<label>내용 : </label> <textarea rows="5" cols="50" id="detail_text" readonly="readonly"></textarea><br>
-						<!-- progress bar -->
-						<div class="progress">
-						    <div class="progress-bar progress-bar-striped active" value="0" id="progress_value" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-							0%</div>
-					  	</div>
-					  	<!-- 아래 6개 버튼 팀장만 보여주기 (권한처리) -->
-					  	<c:if test="${role_no==3}">
-					  	<button type="button" onclick="progress_0()"> 0% </button>
-					  	<button type="button" onclick="progress_20()"> 20% </button>
-					  	<button type="button" onclick="progress_40()"> 40% </button>
-					    <button type="button" onclick="progress_60()"> 60% </button>
-					    <button type="button" onclick="progress_80()"> 80% </button>
-					    <button type="button" onclick="progress_100()"> 100% </button>
-					    <button type="button" onclick="update_progress()"> 등록 </button><br>
+							<!-- progress bar -->
+							<div class="progress">
+							    <div class="progress-bar progress-bar-striped active" value="0" id="progress_value" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+								0%</div>
+						  	</div>
+						  	<!-- 아래 6개 버튼 팀장만 보여주기 (권한처리) -->
+						  	<button type="button" onclick="progress_0()"> 0% </button>
+						  	<button type="button" onclick="progress_20()"> 20% </button>
+						  	<button type="button" onclick="progress_40()"> 40% </button>
+						    <button type="button" onclick="progress_60()"> 60% </button>
+						    <button type="button" onclick="progress_80()"> 80% </button>
+						    <button type="button" onclick="progress_100()"> 100% </button>
+						    <button type="button" onclick="update_progress()"> 등록 </button><br>
+					   		<br>
+							<input type="button" value="일정 수정하기" id="update_btn" onclick="work_update()">
+							<input type="hidden" value="일정 저장하기" id="updateok_btn" class="btn-success" onclick="work_updateok()">
+							<input type="button" value="일정 삭제하기" id="delete_btn"><br>
 					    </c:if>
+						<label>제목 : </label> <input type="text" id="detail_title" class="form-control" readonly="readonly" style="color: black;"><br>
+						<label>내용 : </label> <textarea rows="5" cols="50" id="detail_text" class="form-control" readonly="readonly" style="color: black;"></textarea><br>
 					    
-					    <label>일정 담당자</label><br>
-					    <div id="usersdiv"></div>
+					    <label>일정 담당자 : </label><br>
+					    <input type="text" id="usersdiv" class="form-control" readonly="readonly" style="color: black;">
 					    
 							<hr>
 							<input type="hidden" id="detail_id">
@@ -427,10 +426,12 @@ $(document).ready(function() {
 				</div>
 				<!-- panel-footer -->
 				<div class="panel-footer">
-					<div class="input-group row">
-						<input type="text" placeholder="Type your message here..." id="comment_textarea">
-						<input type="button" value="등록" onclick="insert_comment()">
-					</div>
+					<div class="input-group">
+                       <input id="comment_textarea" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                       <span class="input-group-btn">
+                           <button class="btn-warning btn-sm" onclick="insert_comment()">등 록</button>
+                       </span>
+                   </div>
 				</div>
 			</div>
 						
@@ -449,14 +450,13 @@ $(document).ready(function() {
 						<input type="hidden" value="회의일정 저장" id="meet_updateok_btn" class="btn-success" onclick="work_updateok2()">
 						<input type="button" value="회의일정 삭제" id="meet_delete_btn"><br>
 						</c:if>
-						<label>제목 : </label> <input type="text" id="meet_detail_title" readonly="readonly"><br>
-						<label>내용 : </label> <textarea rows="5" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
-						<label>회의장소 : </label> <div id="place"></div> 
-						<br>
-						<label>회의 참가자</label><br>
-					    <div id="usersdiv2"></div>
+						<label>제목 : </label> <input type="text" class="form-control" style="color:black;" id="meet_detail_title" readonly="readonly"><br>
+						<label>내용 : </label> <textarea rows="5" class="form-control" style="color:black;" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
 						<hr>
-						<input type="hidden" id="meet_detail_id"><input type="hidden" id="meet_detail_start"><input type="hidden" id="meet_detail_end">
+						<label>회의 참가자</label><br>
+						<input type="text" id=usersdiv2 class="form-control" readonly="readonly" style="color: black;">
+						<label>회의장소 : </label> <div id="place"></div> 
+						<input type="hidden" id="meet_detail_id"><input type="hidden" id="meet_detail_start"><input type="hidden" id="meet_detail_end"><br>
 					
 					
 					
