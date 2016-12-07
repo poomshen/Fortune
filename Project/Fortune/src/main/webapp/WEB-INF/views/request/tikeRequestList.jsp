@@ -156,8 +156,37 @@ Profile = {
   	}
      //거절 사유를 val 로 받아서 사용하였습니다.
      function refuseReqCollabo(a){
-    	 $("#menuView2").empty();
-   		 $("#refuseindex").val(a); 
+    	 swal({
+    		  title: "거절 합니다!",
+    		  text: "합당한 거절사유:",
+    		  type: "input",
+    		  showCancelButton: true,
+    		  closeOnConfirm: false,
+    		  showLoaderOnConfirm: true,
+    		  animation: "slide-from-top",
+    		  inputPlaceholder: "거절사유를 입력 해주세요"
+    		},
+    		function(inputValue){
+    		  if (inputValue === false) return false;
+    		  
+    		  if (inputValue === "") {
+    		    swal.showInputError("거절 사유를 입력하지 않았습니다!");
+    		    return false
+    		  }else{
+    		 setTimeout(function(){
+    			  $.get("refuse.htm", {collabo_req_index:a ,
+    			  collabo_req_text:inputValue,
+    			  	pg: "${to_page}",
+    				st: "${st_query}",
+    				me: "${memo}", 
+    				se: "${search}"}, function(data, textStatus, req) {
+    		 		$("#requestlist").html(data); 
+    		 		 swal("거절성공!", "거절사유: " + inputValue, "success");
+    			  })
+    		 	},2000);
+    		  }
+    		  
+    		});
 	}
      //대기 수락 거절을 비동기 처리로 사용하였다.
    	function selectState(state){
@@ -530,7 +559,7 @@ function proAdd(){
                     <!-- 상세보기 --><a class="link link-twitter" onclick="detailReqCollabo(${req})" target="_blank"><i class="fa fa-twitter"></i></a>
                    <c:if test="${sessionScope.info.user_id == n.collabo_req_ID&&n.collabo_req_state == '대기'}">
                     <!-- 수락 --><a  data-toggle="modal" data-target="#myModal2" class="link link-codepen" onclick="memoReqCollabo(${req})" target="_blank"><i class="fa fa-codepen"></i></a>
-                    <!-- 거절 --><a  data-toggle="modal" data-target="#myModal4" class="link link-facebook" onclick="refuseReqCollabo(${req})" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <!-- 거절 --><a  class="link link-facebook" onclick="refuseReqCollabo(${req})" target="_blank"><i class="fa fa-facebook"></i></a>
                   </c:if>
                 </div>
             </div>
@@ -609,74 +638,6 @@ function proAdd(){
 
       </div>
 			
-			
-			
-		<!-- 거절을 하였을때 거절 사유를 쓸 때 사용됩니다.-모델 창입니다. -->
-
-
-
-		<div class="container">
-			<!-- Modal -->
-			<div class="modal fade" id="myModal4" role="dialog">
-				<div class="modal-dialog">
-
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">거절 사유</h4>
-
-						</div>
-
-						<div class="modal-body">
-
-					<div id="menuView3">
-								<!-- CSS 구성  -->
-								<form action="refuse.htm" method="get" name="refusemenform">
-
-									<div class="col-sm-6"></div>
-									<br>
-									<div>
-
-										<input type="hidden" name="collabo_req_index" id="refuseindex"> 
-
-										<dl>
-											<dt>거절 사유</dt>
-											<dd>
-												<textarea class="form-control" name="collabo_req_text"
-													id="collabo_req_text" rows="3" cols="20"></textarea>
-											</dd>
-										</dl>
-										<br />
-
-										<div class="col-sm-2"></div>
-										<div class="col-sm-10"></div>
-									</div>
-
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Close</button>
-										<input type="button" class="btn btn-primary" value="거절 완료"
-											onclick="refuse()">
-
-									</div>
-
-								</form>
-							</div>
-
-
-						</div>
-
-
-					</div>
-
-				</div>
-			</div>
-
-		</div>
-		
-		
-		
 
 
 		<!-- 수락  내용을 확인 할때 쓰입니다. -->

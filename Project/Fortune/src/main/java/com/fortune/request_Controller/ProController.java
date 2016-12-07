@@ -255,13 +255,17 @@ public class ProController {
 		
 	//거절 하기 했을 경우 화면 출력
 		 @RequestMapping("refuse.htm")
-		 public String Refuse(String collabo_req_index,String collabo_req_text) throws ClassNotFoundException,
+		 public ModelAndView Refuse(String collabo_req_index,String collabo_req_text,String pg, String f, String q, String st,String me,String se,HttpSession session) throws ClassNotFoundException,
 		   SQLException {
 			 System.out.println("인덱스:"+collabo_req_index);
 			 System.out.println("텍스트:"+collabo_req_text);
 			 proservice.Refuse(collabo_req_index,collabo_req_text);
 		
-		  return "redirect:listReplyRequest.htm"; //리스트 화면 (controller 타서 데이터 출력)
+			 String rs = "cen";
+
+			 ModelAndView mv =proservice.getRequest(sqlSession,pg, f, q, st,rs,me,se,collabo_req_index, session);
+			 
+		  return mv; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	
 		 
 		
