@@ -7,13 +7,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="showdept" resultType="com.fortune.Table_DTO.Join_DTO">  
 select USER_ID, USER_NAME, USER_PHONE, USER_JOIN, DEPT_NO, TEAM_NO, POSITION_NO from users
-where DEPT_NO=#{param1} and TEAM_NO=#{param2}
+where DEPT_NO=#{param1} and TEAM_NO=#{param2} order by USER_NAME asc
 </select>
 
 <!-- 관리자 사원 수정 할때 사원 정보 -->
 <select id="showdeptadmin" resultType="com.fortune.Table_DTO.Join_DTO">  
 select * from users
-where DEPT_NO=#{param1}
+where DEPT_NO=#{param1} order by TEAM_NO asc, USER_NAME asc
 </select>
 
 <select id="showteam" resultType="com.fortune.Table_DTO.Team_DTO">

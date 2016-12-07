@@ -53,20 +53,7 @@
 		<url-pattern>*.ajax</url-pattern>
 	</servlet-mapping>
 	
-	<!-- 성준 추가 이메일 보내기 -->
-	<servlet>
-		<servlet-name>mails</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet_email.xml</param-value>
-		</init-param>
-		<load-on-startup>3</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>mails</servlet-name>
-		<url-pattern>*.mail</url-pattern>
-	</servlet-mapping>
+
 	
 	<filter>
 		<filter-name>EncodingFilter</filter-name>

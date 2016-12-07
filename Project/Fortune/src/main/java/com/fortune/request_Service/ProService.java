@@ -45,7 +45,8 @@ public class ProService {
    private SqlSession sqlsession;
 
    //협업 답장자함 입니다.
-   public ModelAndView getRequest(SqlSession sqlsession,String pg, String f, String q,String st,String rs,String me,String se,String collabo_req_date, HttpSession session)
+   public ModelAndView getRequest(SqlSession sqlsession,String pg, String f, String q,String st,String rs,String me,String se,String collabo_req_date,HttpSession session)
+
          throws ClassNotFoundException, SQLException {
       System.out.println("집에 갑시다.");
 
@@ -112,10 +113,7 @@ public class ProService {
 
       List<Request_DTO> list = proDao.getRequest(page, field, query,st_query, memo, search);
       
-      SimpleDateFormat sdfCurrent = new SimpleDateFormat("yyyy-mm-dd hh시:mm분:ss초"); 
-      Timestamp currentTime = new Timestamp(Long.parseLong("1141952708997")); 
-      collabo_req_date = sdfCurrent.format(currentTime); 
-      System.out.println("collabo_req_date==="+collabo_req_date);
+     
       
       
       
@@ -156,13 +154,13 @@ public class ProService {
 			}
 			
 		}
-		mv.addObject("list", list);
-	    
+		mv.addObject("list", list);  
+	        
       return mv;
    }
    
    //협업 작성자 리스트 입니다.
-      public ModelAndView listReplyRequest(String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
+      public ModelAndView listReplyRequest(String selectId,String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
             throws ClassNotFoundException, SQLException {
          System.out.println("----service:listReplyRequest-----");
 
@@ -234,7 +232,8 @@ public class ProService {
          mv.addObject("memo", memo);
          mv.addObject("search", search);
          mv.setViewName(rs+".postRequestList");
-         
+         System.out.println("selectId:"+selectId);
+         mv.addObject("selectId",selectId);
          
          
          
@@ -489,12 +488,12 @@ public class ProService {
    // 전체 협업 리스트 입니다. 
    // 즉 협업요청이 아닌 협업이 완료된 상태를 의미합니다.
    
-   public List<With_DTO> listResponse(String pg, String f, String q, HttpSession session)
+   public ModelAndView listResponse(String pg, String f, String q, HttpSession session)
          throws ClassNotFoundException, SQLException {
-      System.out.println("집에 갑시다.");
+      System.out.println("집에 갑시다. :" + pg);
 
       // 게시판 기본 설정(기본값 처리)/////////////
-      int page = 0;
+      int page = 1;
       String query="";
       String field = "";
       // 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
@@ -502,6 +501,10 @@ public class ProService {
       ProDao proDao = sqlsession.getMapper(ProDao.class);
       System.out.println("pg  :" +pg);
       //////////////////////////////////////
+      
+      ModelAndView mv = new ModelAndView();
+      //페이지 처리를 위한 코드
+     
       //추가 2016-12-01 부장 ,팀장 ,사원 리스트 보여주기
       if(ids.getRole_no() == 2){
           query = "%" + ids.getUser_id() + "%";
@@ -511,10 +514,35 @@ public class ProService {
           query = "%" + ids.getUser_id() + "%";
       }else if(ids.getRole_no() == 4){
          field = "user_ID";
-         List<String> timeId = proDao.selectTeamMGR(ids.getTeam_no()) ;
+         List<String>  timeId = proDao.selectTeamMGR(ids.getTeam_no()) ;
+         
          if(timeId.size() != 0 ){
             List<With_DTO> list = proDao.listResponse2(page, field, timeId);
-            return list;
+            int row_size = 6;
+            int total_count = proDao.collaboCount(field, timeId) ; // 공지사항 글 개수
+            System.out.println("total_count : " + total_count);
+            // 공지사항 글 목록
+            int all_page = (int) Math.ceil(total_count / (double) row_size); // 페이지수
+            // int totalPage = total/rowSize + (total%rowSize==0?0:1);
+            System.out.println("페이지수 : " + all_page);
+            int block = 5; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
+            // [10] >>
+            int from_page = ((page - 1) / block * block) + 1; // 보여줄 페이지의 시작
+            System.out.println("from_page :"+from_page);
+            // ((1-1)/10*10)
+            int to_page = ((page - 1) / block * block) + block; // 보여줄 페이지의 끝
+            if (to_page > all_page) { // 예) 20>17
+               to_page = all_page;
+            }
+            mv.addObject("total_count", total_count);
+            mv.addObject("pg", page);
+            mv.addObject("all_page", all_page);
+            mv.addObject("block", block);
+            mv.addObject("from_page", from_page);
+            mv.addObject("to_page", to_page);
+            mv.addObject("list",list);
+            
+            return mv;
          }
          return null;
       }else if(ids.getRole_no() == 1||ids.getRole_no() == 0){
@@ -535,13 +563,39 @@ public class ProService {
       if (q != null && q.equals("")) {
          query = q;
       }
-      System.out.println("sdkf;hasdihoghaoishegoihowaehsoigfhoih:"+ page);
-
+      System.out.println( "asdfasjiewjoirhq 페이지 :"+ page);
+      List<String> timeId = new ArrayList<String>();
+      timeId.add(ids.getUser_id());
+      int row_size = 6;
+      int total_count = proDao.collaboCount(field, timeId) ; // 글 개수
+      System.out.println("total_count : " + total_count);
+      // 공지사항 글 목록
+      int all_page = (int) Math.ceil(total_count / (double) row_size); // 페이지수
+      // int totalPage = total/rowSize + (total%rowSize==0?0:1);
+      System.out.println("페이지수 : " + all_page);
+      int block = 5; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
+      // [10] >>
+      int from_page = ((page - 1) / block * block) + 1; // 보여줄 페이지의 시작
+      System.out.println("from_page :"+from_page);
+      // ((1-1)/10*10)
+      int to_page = ((page - 1) / block * block) + block; // 보여줄 페이지의 끝
+      if (to_page > all_page) { // 예) 20>17
+         to_page = all_page;
+      }
+      mv.addObject("total_count", total_count);
+      mv.addObject("pg", page);
+      mv.addObject("all_page", all_page);
+      mv.addObject("block", block);
+      mv.addObject("from_page", from_page);
+      mv.addObject("to_page", to_page);
+      
       // Mybatis 적용
-
+      System.out.println( "asdfasjiewjoirhq 페이지1241224as :"+ page);
       List<With_DTO> list = proDao.listResponse(page, field, query);
-
-      return list;
+      System.out.println("sdkfjasfjsaodjgosadhgip:" +list.toString());
+      mv.addObject("list",list);
+      
+      return mv;
    }
 
    // 담당자 화면
@@ -630,55 +684,5 @@ public class ProService {
            sout.close();
           
        }
-       
-       
-      /*//만든 목적: 페이징 처리할때 사용하는데 협업 요청 하는데 많은 리스트를 뽑는다 그것을 페이징 처리하기 위한 클래스입니다.
-      //날짜 일자 :2016-11-26
-         public ModelAndView ListPaging(String pg) throws ClassNotFoundException, SQLException {
-         
-            System.out.println("NoticeController의 noticeList를 탑니다~");
-            
-            ProDao proDao = sqlsession.getMapper(ProDao.class);
-            
-            int page = 1;
-            String str_pg = pg;
-            if (str_pg != null) {
-               page = Integer.parseInt(str_pg);
-            }
-            int row_size = 9;
-            
-            int total_count = proDao.countNotice(); //공지사항 글 개수
-            System.out.println("total_count : " + total_count);
-            
-            //공지사항 글 목록
-            int all_page = (int)Math.ceil(total_count / (double)row_size); //페이지수
-            // int totalPage = total/rowSize + (total%rowSize==0?0:1);
-            System.out.println("페이지수 : " + all_page);
-
-            int block = 5; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
-            // [10] >>
-            int from_page = ((page - 1) / block * block) + 1; // 보여줄 페이지의 시작
-            // ((1-1)/10*10)
-            int to_page = ((page - 1) / block * block) + block; // 보여줄 페이지의 끝
-            if (to_page > all_page) { // 예) 20>17
-               to_page = all_page;
-            }
-
-            List<Notice_DTO> noticelist = noticeListDao.listNotice(page);   //공지사항 리스트
-            
-            ModelAndView mv = new ModelAndView();
-            mv.addObject("noticelist", noticelist);
-            mv.addObject("total_count", total_count);
-            mv.addObject("pg", page);
-            mv.addObject("all_page", all_page);
-            mv.addObject("block", block);
-            mv.addObject("from_page", from_page);
-            mv.addObject("to_page", to_page);
-            mv.setViewName("notice.noticeList");
-            
-            return mv;
-
-         }*/
-   
 
 }

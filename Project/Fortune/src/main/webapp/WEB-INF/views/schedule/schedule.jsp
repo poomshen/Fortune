@@ -9,16 +9,16 @@
 <title>Insert title here</title>
 <script>
 //캘린더 등록, 수정, 삭제권한 체를 위한 role변수 선언
+
+
+$(document).ready(function() {
+	
 var role;
 if(${role_no}==3){ 
 	role= true;
 }else{
 	role=false;
 }
-
-
-$(document).ready(function() {
-	
 	
     $('[data-toggle="tooltip"]').tooltip();
     
@@ -158,6 +158,7 @@ $(document).ready(function() {
 				fcontent();
 				
 	        });
+	        
 	        
 	        
 		}
@@ -381,6 +382,17 @@ $(document).ready(function() {
 					<div id="content_detail" style="display: none; padding-right:0px;">
 					<!-- 수정, 저장, 삭제 버튼 팀장만 보여주기 (권한처리) -->
 						<c:if test="${role_no==3}">
+							<div class="row">
+							<div class="col-sm-5"></div>
+								<div class="col-sm-7">
+									<input type="button" value="일정 수정하기" id="update_btn" onclick="work_update()">
+									<input type="hidden" value="일정 저장하기" id="updateok_btn" class="btn-success" onclick="work_updateok()">
+									<input type="button" value="일정 삭제하기" id="delete_btn"><br>
+								</div>
+							</div>
+							
+							
+							
 							<!-- progress bar -->
 							<div class="progress">
 							    <div class="progress-bar progress-bar-striped active" value="0" id="progress_value" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%">
@@ -393,11 +405,8 @@ $(document).ready(function() {
 						    <button type="button" onclick="progress_60()"> 60% </button>
 						    <button type="button" onclick="progress_80()"> 80% </button>
 						    <button type="button" onclick="progress_100()"> 100% </button>
-						    <button type="button" onclick="update_progress()"> 등록 </button><br>
+						    <button type="button" id="update_progress"> 등록 </button><br> <!-- onclick="update_progress()" -->
 					   		<br>
-							<input type="button" value="일정 수정하기" id="update_btn" onclick="work_update()">
-							<input type="hidden" value="일정 저장하기" id="updateok_btn" class="btn-success" onclick="work_updateok()">
-							<input type="button" value="일정 삭제하기" id="delete_btn"><br>
 					    </c:if>
 						<label>제목 : </label> <input type="text" id="detail_title" class="form-control" readonly="readonly" style="color: black;"><br>
 						<label>내용 : </label> <textarea rows="5" cols="50" id="detail_text" class="form-control" readonly="readonly" style="color: black;"></textarea><br>
