@@ -27,5 +27,5 @@ public interface IScheduleAlarm {
 	
 	public int deleteScheAlarm(String user_id,int schedule_no);
 	
-	
+	public int deleteScheAll(String schedule_no);
 }

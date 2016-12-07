@@ -8,7 +8,6 @@ var scheduleusers;
 
 function schedule_type(){
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
-	
 	$.ajax({
 		url : 'schedule_type.ajax',
 		type : 'post',
@@ -18,7 +17,6 @@ function schedule_type(){
 				 "month" : $('#month').val()
 		        },
 				success : function(data) {
-					console.log(data)
 					$.each(data.schedulelist, function(index, obj) {
 						if(obj.progress_or_place<10){
 							if(obj.progress_or_place==1){
@@ -51,12 +49,16 @@ function schedule_type(){
 			        
 					$.each(data.new_alarm, function(index, obj) {
 						
-						alert(obj.schedule_no);
-						
 						$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
 						
 					});
-				}
+				},
+				beforeSend:function(){
+			        $('.wrap-loading').removeClass('display-none');
+			    },
+			    complete:function(){
+			        $('.wrap-loading').addClass('display-none');
+			    }
 	}); 
 }
 
@@ -339,7 +341,7 @@ function update_progress(){
 //추가작업 : 알림DB NEW 가져오기
 function fcontent() {
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
-	$('#content').empty();
+	$('#default_option').attr("selected","selected")
 	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
@@ -376,7 +378,7 @@ function fcontent() {
 			});
 			$('#content_detail').css("display", "none");
 			$('#content_detail2').css("display", "none");
-	        
+			$('#content').empty();	        
 	        $('#content').html(content)
 
 	        $.each(data.new_alarm, function(index, obj) {
@@ -384,8 +386,13 @@ function fcontent() {
 				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
 				
 			});
-		} 
-
+		},
+		beforeSend:function(){
+	        $('.wrap-loading').removeClass('display-none');
+	    },
+	    complete:function(){
+	        $('.wrap-loading').addClass('display-none');
+	    }
 	});
 }
 
@@ -623,25 +630,41 @@ function loadCalendar(role1,role2) {
 	    	//일정 삭제 함수
 	    	deleteEvent: {
 	            click: $('#delete_btn').click(function(){
-	            	if( $('#check').val() ){ 
-		            	var check = confirm('일정을 삭제 하시겠습니까?');
-		            	if(check){
-
-		            		var id = $('#detail_id').val();
-		            		calendar.fullCalendar('removeEvents', id);
-		            		$.ajax({
-								type: 'post',
-								url: 'deleteSchedule.ajax',
-								data: {"id" : id},
-								success : function(data) {
-									console.log("삭제성공");
-									fcontent();
-								}
-							});
-		            		
-		            	}
-		            	$('#check').val("")
-	            	}//test if문 끝
+	            	if( $('#check').val() ){
+	            		var check = swal({
+	            			  title: "일정을 삭제 하시겠습니까?",
+	            			  text: "삭제된 데이터는 복구할 수 없습니다.",
+	            			  type: "warning",
+	            			  showCancelButton: true,
+	            			  confirmButtonColor: "#DD6B55",
+	            			  confirmButtonText: "삭제",
+	            			  cancelButtonText: "취소",
+	            			  showLoaderOnConfirm: true,
+	            			  closeOnConfirm: false
+	            			},
+	            			function(){
+	            			  var id = $('#detail_id').val();
+	            			  calendar.fullCalendar('removeEvents', id);
+	            			  $.ajax({
+	            				  type: 'post',
+	            				  url: 'deleteSchedule.ajax',
+	            				  data: {"id" : id},
+	            				  success : function(data) {
+	            					  console.log("삭제성공");
+	            					  fcontent();
+	            					  setTimeout(function(){
+	            						  swal("삭제 성공!", "선택된 일정이 삭제되었습니다.", "success");
+	            					  }, 0);
+	            				  },
+	            				  error:function(){
+	            					  swal("삭제 실패!","error발생", "error");
+	            				  }
+	            			  });
+	            			  
+	            			  $('#check').val("")
+	            			});
+	            		
+	            	}//check if문 끝
 	            })
 	        },
 	        
@@ -651,24 +674,39 @@ function loadCalendar(role1,role2) {
 	    	deleteEvent2: {
 	            click: $('#meet_delete_btn').click(function(){
 	            	if( $('#check').val() ){
-		            	var check = confirm('일정을 삭제 하시겠습니까?');
-		            	if(check){
-	
-		            		var id = $('#meet_detail_id').val();
-		            		calendar.fullCalendar('removeEvents', id);
-		            		
-		            		$.ajax({
-								type: 'post',
-								url: 'deleteMeetingSchedule.ajax',
-								data: {"id" : id},
-								success : function(data) {
-									console.log("삭제성공");
-									fcontent();
-								}
-							});
-		            		
-		            	}
-		            	$('#check').val("");
+	            		var check = swal({
+	            			  title: "일정을 삭제 하시겠습니까?",
+	            			  text: "삭제된 데이터는 복구할 수 없습니다.",
+	            			  type: "warning",
+	            			  showCancelButton: true,
+	            			  confirmButtonColor: "#DD6B55",
+	            			  confirmButtonText: "삭제",
+	            			  cancelButtonText: "취소",
+	            			  showLoaderOnConfirm: true,
+	            			  closeOnConfirm: false
+	            			},
+	            			function(){
+			            		var id = $('#meet_detail_id').val();
+			            		calendar.fullCalendar('removeEvents', id);
+		            			  $.ajax({
+		            				  type: 'post',
+		            				  url: 'deleteMeetingSchedule.ajax',
+		            				  data: {"id" : id},
+		            				  success : function(data) {
+		            					  console.log("삭제성공");
+		            					  fcontent();
+		            					  setTimeout(function(){
+		            						  swal("삭제 성공!", "선택된 일정이 삭제되었습니다.", "success");
+		            					  }, 0);
+		            				  },
+		            				  error:function(){
+		            					  swal("삭제 실패!","error발생", "error");
+		            				  }
+		            			  });
+		            			  
+		            			  $('#check').val("")
+		            			}
+	            			);
 	            	}//check if문 끝
 	            })
 	        },
@@ -763,7 +801,7 @@ function loadCalendar(role1,role2) {
 	        //추가 작업 : new 알림 가져오기
 	    	insertEvent: {
 	    		click: $('#modal_ok').click(function(){
-	    			if( $('#check').val() ){ 
+	    			if( $('#check').val() ){
 	    				
 		    			var eventData;
 						var count=",";
@@ -778,7 +816,6 @@ function loadCalendar(role1,role2) {
 								"scheduleusers" : scheduleusers,
 								"meeting_place_no" : "0"
 						}
-	
 						
 						$.ajax({
 							type: 'post',
@@ -816,7 +853,13 @@ function loadCalendar(role1,role2) {
 								
 				    			$('input[type="checkbox"]').prop("checked",false);
 				    			$('.multiSel').text("");
-								}
+								},
+								beforeSend:function(){
+							        $('.wrap-loading').removeClass('display-none');
+							    },
+							    complete:function(){
+							        $('.wrap-loading').addClass('display-none');
+							    }
 			    		});
 						
 						
@@ -897,7 +940,13 @@ function loadCalendar(role1,role2) {
 				    			$('input[type="checkbox"]').prop("checked",false);
 				    			$('.multiSel').text("");
 				    			
-								}
+								},
+								beforeSend:function(){
+							        $('.wrap-loading').removeClass('display-none');
+							    },
+							    complete:function(){
+							        $('.wrap-loading').addClass('display-none');
+							    }
 							});
 						
 										

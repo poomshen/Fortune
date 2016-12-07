@@ -194,10 +194,12 @@ public class FullCalendarController {
 		System.out.println("위치 : FullCalendarController // 내용 : 일정 delete작업 // 작업자: 이명철");
         
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+        IScheduleAlarm IScheduleAlarm = sqlSession.getMapper(IScheduleAlarm.class);
         
         fullcalendarDAO.deleteWork_Comment(id);
         fullcalendarDAO.deleteWork_Users(id);
         fullcalendarDAO.deleteWork(id);
+        IScheduleAlarm.deleteScheAll(id);
         fullcalendarDAO.deleteSchedule(id);
         System.out.println("삭제성공");
 		return 1;
@@ -218,9 +220,12 @@ public class FullCalendarController {
 		System.out.println("위치 : FullCalendarController // 내용 : 회의 일정 delete작업 // 작업자: 이명철");
         
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
+        IScheduleAlarm IScheduleAlarm = sqlSession.getMapper(IScheduleAlarm.class);
+        
         
         fullcalendarDAO.deleteMeet_Users(id);
         fullcalendarDAO.deleteMeeting(id);
+        IScheduleAlarm.deleteScheAll(id);
         fullcalendarDAO.deleteSchedule(id);
         System.out.println("삭제성공");
 		return 1;

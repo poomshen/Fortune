@@ -7,11 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
 <script>
 //캘린더 등록, 수정, 삭제권한 체를 위한 role변수 선언
 var role;
-if(${role_no}==3){
+if(${role_no}==3){ 
 	role= true;
 }else{
 	role=false;
@@ -108,11 +107,13 @@ $(document).ready(function() {
 			
 		
 	        $('#content').html(content)
+	        
 	        //fullcalendar 불러오는 함수
 	        //parameter로 false,false 를 주면 캘린더에 일정수정 및 일정등록 불가함
 	        //parameter로 true, true 를 주면 캘린더에 일정수정 및 일정등록 가능함
 			loadCalendar(role,role);
-			$.each(data.new_alarm, function(index, obj) {
+			
+	        $.each(data.new_alarm, function(index, obj) {
 				
 				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
 				
@@ -219,9 +220,6 @@ $(document).ready(function() {
 
 
 </script>
-<style>
-
-</style>
 
 </head>
 <body>
@@ -232,9 +230,6 @@ $(document).ready(function() {
 <input type="hidden" id="modal_start_ms">
 <input type="hidden" id="modal_end_ms">
 <input type="hidden" id="check">
-
-
-
 
 	<br>
 	<br>
@@ -373,8 +368,7 @@ $(document).ready(function() {
 			<div class="col-sm-5" style="padding-right: 0px;">
 				<div class="row" style="padding-right: 0px; margin-top: 10px; margin-bottom: 11px;">
 					<select id="schedule_type" onchange="schedule_type()" style="height: 20px;">
-						<option> 선 택  </option>
-						<option value="0"> 전 체 보 기 </option>
+						<option id="default_option" value="0"> 전 체 보 기 </option>
 						<option value="1">업무일정 보기</option>
 						<option value="2">회의일정 보기</option>
 						<option value="3">내 일정 보기</option>
@@ -479,6 +473,5 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
-	
 </body>
 </html>

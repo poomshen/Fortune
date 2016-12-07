@@ -779,7 +779,7 @@ body.stop-scrolling {
 .la-ball-fall > div {
   width: 10px;
   height: 10px;
-  margin: 4px;
+  margin: 2px;
   border-radius: 100%;
   opacity: 0;
   -webkit-animation: ball-fall 1s ease-in-out infinite;

@@ -29,9 +29,12 @@ import org.springframework.web.servlet.View;
 
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Notice_DTO;
+import com.fortune.Table_DTO.Req_Alarm_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.notice_DAO.INotice;
+import com.fortune.req_alarm_DAO.IReqAlarm;
 import com.fortune.request_DAO.ProDao;
 import com.fortune.request_DTO.Passion_DTO;
 
@@ -42,7 +45,7 @@ public class ProService {
    private SqlSession sqlsession;
 
    //협업 답장자함 입니다.
-   public ModelAndView getRequest(String pg, String f, String q,String st,String rs,String me,String se,String collabo_req_date, HttpSession session)
+   public ModelAndView getRequest(SqlSession sqlsession,String pg, String f, String q,String st,String rs,String me,String se,String collabo_req_date, HttpSession session)
          throws ClassNotFoundException, SQLException {
       System.out.println("집에 갑시다.");
 
@@ -115,7 +118,8 @@ public class ProService {
       System.out.println("collabo_req_date==="+collabo_req_date);
       
       
-      mv.addObject("list", list);
+      
+      
       mv.addObject("total_count", total_count);
       mv.addObject("pg", page);
       mv.addObject("all_page", all_page);
@@ -126,13 +130,41 @@ public class ProService {
       mv.addObject("memo", memo);
       mv.addObject("search", search);
       mv.setViewName(rs+".tikeRequestList");
+      
+      
+      //추가사항 : 알림 new할것 가져오기
+		List<Req_Alarm_DTO> alist = new ArrayList<Req_Alarm_DTO>();
+		IReqAlarm req_alarmDAO = sqlsession.getMapper(IReqAlarm.class);
+		alist =req_alarmDAO.selectReqAlarm();
+		
+		for(int list_i=0;list_i<list.size();list_i++){
+			for(int alist_i=0;alist_i<alist.size();alist_i++){
+				String new_req_alarm ="";
+				
+				new_req_alarm=list.get(list_i).getCollabo_req_index();
+				System.out.println("---new--- / "+new_req_alarm);
+				System.out.println("---newA---/"+alist.get(alist_i).getCollabo_req_index());
+				if(Integer.parseInt(new_req_alarm)==alist.get(alist_i).getCollabo_req_index())
+				{
+					String real_new_req_alarm="";
+					real_new_req_alarm=list.get(list_i).getCollabo_req_index()+"n";
+					System.out.println("----같은req--- : "+real_new_req_alarm);
+					list.get(list_i).setCollabo_req_index(real_new_req_alarm);
+					alist_i=alist.size();
+				}
+					
+			}
+			
+		}
+		mv.addObject("list", list);
+	    
       return mv;
    }
    
    //협업 작성자 리스트 입니다.
       public ModelAndView listReplyRequest(String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
             throws ClassNotFoundException, SQLException {
-         System.out.println("집에 갑시다.");
+         System.out.println("----service:listReplyRequest-----");
 
          // 게시판 기본 설정(기본값 처리)/////////////
          int page = 1;
@@ -165,12 +197,6 @@ public class ProService {
          }
          ModelAndView mv = new ModelAndView();
          ProDao proDao = sqlsession.getMapper(ProDao.class);
-         
-         
-         
-
-         System.out.println(page + " / " + field + " / " + query+" / "+st_query);
-
          
          int row_size = 9;
          int total_count = proDao.requestCount(field,query,st_query, memo,search); // 공지사항 글 개수
@@ -208,6 +234,9 @@ public class ProService {
          mv.addObject("memo", memo);
          mv.addObject("search", search);
          mv.setViewName(rs+".postRequestList");
+         
+         
+         
          
          
          return mv;
