@@ -14,6 +14,7 @@ public interface IJoin {
 	int insertMember(Join_DTO joinDto);
 	int deleteMember(String id);
 	int updateMember(Join_DTO joinDto);
+	//사원 검색(추가작업 : 김중완)
 	Join_DTO searchMember(String user_id);
 	Join_DTO login(Join_DTO joinDto);
 	ArrayList<Dept_DTO> searchDept();
@@ -27,7 +28,10 @@ public interface IJoin {
 	String searchId(String search_name, String search_phone, String search_birth);
 	int searchpwd(String ranNum2, String search_id, String search_name2,String search_phone2);
 	
+	//관리자 사원 수정(추가작업 : 김중완)
 	int updateMemberAdmin(Join_DTO joinDto);
+	//사원 상세 정보(추가작업 : 김중완)
 	Join_DTO memberInfo(Join_DTO joinDto);
+	//권한 정보 가져오기(추가작업 : 김중완)
 	ArrayList<Role_DTO> searchRole();
 }
