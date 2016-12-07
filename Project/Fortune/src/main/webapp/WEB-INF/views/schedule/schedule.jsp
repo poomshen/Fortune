@@ -7,6 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+
+
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="button_style/buttons.css">
+<script type="text/javascript" src="button_style/buttons.js"></script>
+
+
+
 <script>
 //캘린더 등록, 수정, 삭제권한 체를 위한 role변수 선언
 
@@ -14,7 +24,7 @@
 $(document).ready(function() {
 	
 var role;
-if(${role_no}==3){ 
+if( (${role_no}==3) && (${finish_check}==0) ){ 
 	role= true;
 }else{
 	role=false;
@@ -381,7 +391,7 @@ if(${role_no}==3){
 					</div>
 					<div id="content_detail" style="display: none; padding-right:0px;">
 					<!-- 수정, 저장, 삭제 버튼 팀장만 보여주기 (권한처리) -->
-						<c:if test="${role_no==3}">
+						<c:if test="${role_no==3 && finish_check==0}">
 							<div class="row">
 							<div class="col-sm-5"></div>
 								<div class="col-sm-7">
@@ -399,26 +409,38 @@ if(${role_no}==3){
 								0%</div>
 						  	</div>
 						  	<!-- 아래 6개 버튼 팀장만 보여주기 (권한처리) -->
-						  	<button type="button" onclick="progress_0()"> 0% </button>
-						  	<button type="button" onclick="progress_20()"> 20% </button>
-						  	<button type="button" onclick="progress_40()"> 40% </button>
-						    <button type="button" onclick="progress_60()"> 60% </button>
-						    <button type="button" onclick="progress_80()"> 80% </button>
-						    <button type="button" onclick="progress_100()"> 100% </button>
-						    <button type="button" id="update_progress"> 등록 </button><br> <!-- onclick="update_progress()" -->
-					   		<br>
+						  	<div class="row">
+						  		<div class="col-sm-2"></div>
+							  	<div class="col-sm-1"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 0px;height: 28px;padding-left: 0px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.2"onclick="progress_0()"> 0% </button></div>
+							  	<div class="col-sm-1"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 0px;height: 28px;padding-left: 0px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.3"onclick="progress_20()"> 20% </button></div>
+							  	<div class="col-sm-1"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 0px;height: 28px;padding-left: 0px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.4"onclick="progress_40()"> 40% </button></div>
+							    <div class="col-sm-1"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 0px;height: 28px;padding-left: 0px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.6"onclick="progress_60()"> 60% </button></div>
+							    <div class="col-sm-1"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 0px;height: 28px;padding-left: 0px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.8"onclick="progress_80()"> 80% </button></div>
+							    <div class="col-sm-1"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 0px;height: 28px;padding-left: 0px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;"onclick="progress_100()"> 100% </button></div>
+							    <div class="col-sm-3"><button type="button" id="update_progress" class="button button-pill button-tiny"><i class="fa fa-check"></i></button></div>
+						  		<div class="col-sm-1"></div>
+						  	</div>
 					    </c:if>
-						<label>제목 : </label> <input type="text" id="detail_title" class="form-control" readonly="readonly" style="color: black;"><br>
-						<label>내용 : </label> <textarea rows="5" cols="50" id="detail_text" class="form-control" readonly="readonly" style="color: black;"></textarea><br>
+					    <div class="row">
+					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">제 목</label></div>
+					    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" id="detail_title" class="form-control" readonly="readonly" style="color: black; margin-bottom: 5px;"></div>
+					    </div>
+						
+						<div class="row">
+					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 40px;">내 용 </label></div>
+					    	<div class="col-sm-10" style="padding-left: 0px;"><textarea rows="5" cols="50" id="detail_text" class="form-control" readonly="readonly" style="color: black; margin-bottom: 5px;"></textarea></div>
+					    </div>
 					    
-					    <label>일정 담당자 : </label><br>
-					    <input type="text" id="usersdiv" class="form-control" readonly="readonly" style="color: black;">
+						<div class="row">
+					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">담당자</label></div>
+					    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" id="usersdiv" class="form-control" readonly="readonly" style="color: black;"></div>
+					    </div>
 					    
-							<hr>
-							<input type="hidden" id="detail_id">
-							<input type="hidden" id="detail_start">
-							<input type="hidden" id="detail_end">
-							<input type="hidden" id="detail_progress">
+						<hr>
+						<input type="hidden" id="detail_id">
+						<input type="hidden" id="detail_start">
+						<input type="hidden" id="detail_end">
+						<input type="hidden" id="detail_progress">
 			
 			<!-- comment 보여주는 div영역 -->
 			<!-- panel-heading -->	
@@ -454,19 +476,31 @@ if(${role_no}==3){
 					
 					<div id="content_detail2" style="display: none; padding-right:0px;">
 						<!-- 회의일정 수정, 회의일정 삭제 버튼 팀장만 보여주기 (권한처리) -->
-						<c:if test="${role_no==3}">
+						<c:if test="${role_no==3 && finish_check==0}">
 						<input type="button" value="회의일정 수정" id="meet_update_btn" onclick="work_update2()">
 						<input type="hidden" value="회의일정 저장" id="meet_updateok_btn" class="btn-success" onclick="work_updateok2()">
 						<input type="button" value="회의일정 삭제" id="meet_delete_btn"><br>
 						</c:if>
-						<label>제목 : </label> <input type="text" class="form-control" style="color:black;" id="meet_detail_title" readonly="readonly"><br>
-						<label>내용 : </label> <textarea rows="5" class="form-control" style="color:black;" cols="50" id="meet_detail_text" readonly="readonly"></textarea><br>
-						<hr>
-						<label>회의 참가자</label><br>
-						<input type="text" id=usersdiv2 class="form-control" readonly="readonly" style="color: black;">
-						<label>회의장소 : </label> <div id="place"></div> 
+						
 						<input type="hidden" id="meet_detail_id"><input type="hidden" id="meet_detail_start"><input type="hidden" id="meet_detail_end"><br>
-					
+						<div class="row">
+					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">제 목</label></div>
+					    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" class="form-control" style="color:black; margin-bottom: 5px;" id="meet_detail_title" readonly="readonly"></div>
+					    </div>
+						
+						<div class="row">
+					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 40px;">내 용 </label></div>
+					    	<div class="col-sm-10" style="padding-left: 0px;"><textarea rows="5" class="form-control" style="color:black; margin-bottom: 5px;" cols="50" id="meet_detail_text" readonly="readonly"></textarea></div>
+					    </div>
+					    
+						<div class="row">
+					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">참가자</label></div>
+					    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" id=usersdiv2 class="form-control" readonly="readonly" style="color: black; margin-bottom: 5px;"></div>
+					    </div>
+					    <div class="row">
+					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">회의장소</label></div>
+					    	<div class="col-sm-10" style="padding-right: 0px;"><label id="place" style="padding-top: 8px; font-weight: lighter;"></label></div>
+					    </div>
 					
 					
 					
