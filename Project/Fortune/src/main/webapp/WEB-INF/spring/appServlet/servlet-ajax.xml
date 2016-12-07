@@ -27,5 +27,21 @@
  	<context:component-scan base-package="com.fortune.history_Controller"></context:component-scan>
 	<context:component-scan base-package="com.fortune.request_Service"/>
 
+
+<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com"></beans:property>
+		<beans:property name="port" value="465"></beans:property>
+		<beans:property name="username" value="heyzenmate"></beans:property>
+		<beans:property name="password" value="kosta129th"></beans:property>
+		<beans:property name="defaultEncoding" value="utf-8"></beans:property>
+		<beans:property name="protocol" value="smtps"></beans:property>
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
 	
 </beans:beans>
