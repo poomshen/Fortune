@@ -83,6 +83,8 @@
 						
 						
 						</script>
+						
+						
 <form action="writeresponse.htm" method="post" name="proaddform">
 	<input type="hidden" name="collabo_req_index"
 		value="${acceptlist.collabo_req_index}"> <input type="hidden"
@@ -126,44 +128,7 @@
 		</div>
 		<br>
 		
-		
-<script type="text/javascript">
 
-//정규 표현식을 사용하여 돈 원 단위로 계산하였습니다. 
-//자동 콤마가 가능합니다
-function cmaComma(obj) {
-    var firstNum = obj.value.substring(0,1); // 첫글자 확인 변수
-    var strNum = /^[/,/,0,1,2,3,4,5,6,7,8,9,/]/; // 숫자와 , 만 가능
-    var str = "" + obj.value.replace(/,/gi,''); // 콤마 제거  
-    var regx = new RegExp(/(-?\d+)(\d{3})/);  
-    var bExists = str.indexOf(".",0);  
-    var strArr = str.split('.');  
- 
-   /*  if (!strNum.test(obj.value)) {
-        alert("숫자만 입력하십시오.\n\n특수문자와 한글/영문은 사용할수 없습니다.");
-        obj.value = 1;
-        obj.focus();
-        return false;
-    }
- 
-    if ((firstNum < "0" || "9" < firstNum)){
-        alert("숫자만 입력하십시오.");
-        obj.value = 1;
-        obj.focus();
-        return false;
-    } */
- 
-    while(regx.test(strArr[0])){  
-        strArr[0] = strArr[0].replace(regx,"$1,$2");  
-    }  
-    if (bExists > -1)  {
-        obj.value = strArr[0] + "." + strArr[1];  
-    } else  {
-        obj.value = strArr[0]; 
-    }
-}
-
-</script>
 
 		
 		<div class="form-group has-success">
