@@ -17,7 +17,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
 		infrastructure -->
 
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
+	<mvc:annotation-driven />
 
 	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
 
@@ -114,6 +114,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
 	<!-- <beans:bean class="com.fortune.exception.CommonExceptionHandler" /> -->
 	
 	<!-- Validator start -->
+	<beans:bean id="customExceptionHandler" class="com.fortune.exception.CustomExceptionHandler"/>
 	<beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 	<!-- Validator end -->
 
