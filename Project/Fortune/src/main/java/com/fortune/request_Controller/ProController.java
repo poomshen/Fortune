@@ -113,9 +113,7 @@ public class ProController {
 	 public ModelAndView requestList2(String pg, String f, String q, String st,String me,String se,HttpSession session,String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
 		 System.out.println("수락,거절등 :"+st);
 		 
-		 if(st.equals("전체")){
-				st = "%%";
-		}
+		
 		 System.out.println("전체일경우 :"+st);
 		 String rs = "cen";
 
@@ -145,9 +143,7 @@ public class ProController {
 	 public ModelAndView listReplyRequest2( String pg, String f, String q,String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		 System.out.println("수락,거절등 :"+st);
 		 
-		 if(st.equals("전체")){
-				st = "%%";
-		}
+		 
 		 System.out.println("전체일경우 :"+st);
 		 String rs = "cen";
 		 ModelAndView mv = proservice.listReplyRequest((String)session.getAttribute("req_selectId"),pg, f, q,st,rs,me,se, session);
