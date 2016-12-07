@@ -419,6 +419,12 @@
 
 	<!-- Contact us -->
 
+	<div align="center">
+	<img alt="fortune" src="http://cfile9.uf.tistory.com/image/21432B4D5203839212F543">
+	<br><strong>[임시 비밀번호 를 발송하였습니다.]</strong><br>
+
+	</div>
+
 
 	<!-- Scroll to top -->
 	<div class="section-container section-container-gray">

@@ -88,12 +88,12 @@ public class ProController {
 	// 추가 작업: 이예지 알림 new list 불러오기
 	@Transactional
 	@RequestMapping("requestList.htm") // /customer/notice.htm
-	public ModelAndView requestList(String pg, String f, String q, String st,String me,String se, HttpSession session ,String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
+	public ModelAndView requestList(String pg, String f, String q, String st,String me,String se, HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 		 
 		String rs = "request";
-		ModelAndView mv = proservice.getRequest(pg, f, q, st,rs,me,se,collabo_req_date, session);
+		ModelAndView mv = proservice.getRequest(pg, f, q, st,rs,me,se, session);
 		
-		System.out.println("데이터 변환중:"+ collabo_req_date);
+		
 		return mv;
 		
 
@@ -102,7 +102,7 @@ public class ProController {
 	 // 만든 날짜 : 2016 -12-02
 	 @Transactional
 	 @RequestMapping("requestList2.htm") // /customer/notice.htm
-	 public ModelAndView requestList2(String pg, String f, String q, String st,String me,String se,HttpSession session, String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
+	 public ModelAndView requestList2(String pg, String f, String q, String st,String me,String se,HttpSession session,Model model) throws ClassNotFoundException, SQLException {
 		 System.out.println("수락,거절등 :"+st);
 		 
 		 if(st.equals("전체")){
@@ -110,8 +110,8 @@ public class ProController {
 		}
 		 System.out.println("전체일경우 :"+st);
 		 String rs = "cen";
-		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, me, se,collabo_req_date, session);
-		 System.out.println("데이터 변환중:"+ collabo_req_date);
+		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, me, se, session);
+		
 		 return mv;
 		 
 		 
