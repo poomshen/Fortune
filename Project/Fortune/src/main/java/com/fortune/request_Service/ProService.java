@@ -156,13 +156,13 @@ public class ProService {
 			}
 			
 		}
-		mv.addObject("list", list);
-	    
+		mv.addObject("list", list);  
+	        
       return mv;
    }
    
    //협업 작성자 리스트 입니다.
-      public ModelAndView listReplyRequest(String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
+      public ModelAndView listReplyRequest(String selectId,String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
             throws ClassNotFoundException, SQLException {
          System.out.println("----service:listReplyRequest-----");
 
@@ -234,7 +234,8 @@ public class ProService {
          mv.addObject("memo", memo);
          mv.addObject("search", search);
          mv.setViewName(rs+".postRequestList");
-         
+         System.out.println("selectId:"+selectId);
+         mv.addObject("selectId",selectId);
          
          
          

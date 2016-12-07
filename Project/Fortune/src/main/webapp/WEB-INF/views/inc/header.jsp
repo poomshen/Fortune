@@ -38,7 +38,7 @@ var msg
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://192.168.1.103:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://192.168.0.4:8090/fortune/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -62,14 +62,11 @@ function onMessage(evt) {
 		  url:"newAlarm.htm",
 		  data:{"newAlarm": evt.data},
 		  success:function(data){
-			 
-		
+			  
 			  console.log("헤더 업데이트 성공");
 			  console.log(data);
 			  $('#alarm').empty();  
 			  $('#alarm').html(data);
-			 
-			
 		
 		  }
 	  });	
@@ -83,7 +80,8 @@ function onClose(evt) {
 function send(selectId) {
 
 	console.log("메세지 받을 사람~?"+selectId);
-	 wsocket.send(selectId);
+	
+	wsocket.send(selectId);
 	
 	
 }
@@ -98,11 +96,7 @@ function appendMessage(msg) {
 $(document).ready(function() {
 		connect();
 		
-		$("#alarmList li").click(function() {
-		    alert(this.id); 
-		    
-		    window.location.href = "alarmCheck.htm?work_type="+this.id;
-		});
+	
 
 });
 
@@ -171,7 +165,7 @@ $(document).ready(function() {
                   		
                         <li id="${alarm.work_type}">
                        
-                            <a href="#">
+                            <a href="requestList.htm">
                                 <div> 
                                 
                    <c:choose>

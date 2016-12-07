@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+ 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- 
 작성자 : 이예지
 최초작업일 : 2016/12/05
@@ -29,7 +27,10 @@ h6 {
 .tg .title{text-align:center;font-weight:900;}
 
 </style>
-
+<%
+   request.setCharacterEncoding("UTF-8");
+   String selectId = (String)request.getAttribute("accept_selectId");
+%>
 <script type="text/javascript">
 
 /* 
@@ -39,54 +40,69 @@ h6 {
  */
 
 $(function(){
+
     Profile.load();
+   	console.log('<%=selectId%>');
+   	var select = '<%=selectId%>';
+    if(select!='null')
+    {
+    	setTimeout(function(){
+    		
+    		console.log("setTimeout / "+select)
+    		send(select)
+    			
+    	
+    	}, 3000); 
+    }
+    
 });
 
+
 Profile = {
-    load:function(){
-        this.links();
-        this.social();
-        this.accordion();
-    },
-    links:function(){
-        $('a[href="#"]').click(function(e){
-            e.preventDefault();
-        });
-    },
-    social:function(){
-        $('.plus').click(function(){
-        	
-        	$('#hidden').val($(this).attr('id'));
-        	
-         	$('#social-link'+$(this).attr('id')).toggleClass('active');
-            $('#about-mesocial-link'+$(this).attr('id')).toggleClass('blur');
-        });
-        
-		$('.social-link').click(function(){
-          	$(this).toggleClass('active');
-            $('#about-me'+$(this).attr('id')).toggleClass('blur');
-        });
-    },
-    accordion:function(){
-        var subMenus = $('.accordion .sub-nav').hide();
-        $('.accordion > a').each(function(){
-            if($(this).hasClass('active')){
-                $(this).next().slideDown(100);
-            }
-        });
-        $('.accordion > a').click(function(){
-            $this = $(this);
-            $target =  $this.next();
-            $this.siblings('a').removeAttr('class');
-            $this.addClass('active');
-            if(!$target.hasClass('active')){
-                subMenus.removeClass('active').slideUp(100);
-                $target.addClass('active').slideDown(100);
-            }
-            return false;
-        });
+        load:function(){
+            this.links();
+            this.social();
+            this.accordion();
+        },
+        links:function(){
+            $('a[href="#"]').click(function(e){
+                e.preventDefault();
+            });
+        },
+        social:function(){
+            $('.plus').click(function(){
+            	
+            	$('#hidden').val($(this).attr('id'));
+            	
+             	$('#social-link'+$(this).attr('id')).toggleClass('active');
+                $('#about-mesocial-link'+$(this).attr('id')).toggleClass('blur');
+            });
+            
+    		$('.social-link').click(function(){
+              	$(this).toggleClass('active');
+                $('#about-me'+$(this).attr('id')).toggleClass('blur');
+            });
+        },
+        accordion:function(){
+            var subMenus = $('.accordion .sub-nav').hide();
+            $('.accordion > a').each(function(){
+                if($(this).hasClass('active')){
+                    $(this).next().slideDown(100);
+                }
+            });
+            $('.accordion > a').click(function(){
+                $this = $(this);
+                $target =  $this.next();
+                $this.siblings('a').removeAttr('class');
+                $this.addClass('active');
+                if(!$target.hasClass('active')){
+                    subMenus.removeClass('active').slideUp(100);
+                    $target.addClass('active').slideDown(100);
+                }
+                return false;
+            });
+        }
     }
-}
      //상세 정보를 보여주는 ajax 입니다.
      function detailReqCollabo(a){
     	 //$("#menuView2").empty();
@@ -125,9 +141,10 @@ Profile = {
 	 				  "dept_no":${sessionScope.info.dept_no}},
 	 		    success:function(data){ //callback  
 	 		    	//alert(a);
-	 		    	//console.log(data);
+	 		    	console.log(data);
 	 		    	
-	 		    	$("#meneview").append($('#meneview').html(data)); 
+	 		    	$("#meneview").html(data); 
+	 		   		$('#myModal2').modal('show');
 	 		    
 	 		    },
 	 			error: function(){						
@@ -141,7 +158,7 @@ Profile = {
      function refuseReqCollabo(a){
     	 $("#menuView2").empty();
    		 $("#refuseindex").val(a); 
-}
+	}
      //대기 수락 거절을 비동기 처리로 사용하였다.
    	function selectState(state){
    		console.log(state)
@@ -329,10 +346,87 @@ alert('Error while request..'	);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
+function cmaComma(obj) {
+    var firstNum = obj.value.substring(0,1); // 첫글자 확인 변수
+    var strNum = /^[/,/,0,1,2,3,4,5,6,7,8,9,/]/; // 숫자와 , 만 가능
+    var str = "" + obj.value.replace(/,/gi,''); // 콤마 제거  
+    var regx = new RegExp(/(-?\d+)(\d{3})/);  
+    var bExists = str.indexOf(".",0);  
+    var strArr = str.split('.');  
+ 
+   /*  if (!strNum.test(obj.value)) {
+        alert("숫자만 입력하십시오.\n\n특수문자와 한글/영문은 사용할수 없습니다.");
+        obj.value = 1;
+        obj.focus();
+        return false;
+    }
+ 
+    if ((firstNum < "0" || "9" < firstNum)){
+        alert("숫자만 입력하십시오.");
+        obj.value = 1;
+        obj.focus();
+        return false;
+    } */
+ 
+    while(regx.test(strArr[0])){  
+        strArr[0] = strArr[0].replace(regx,"$1,$2");  
+    }  
+    if (bExists > -1)  {
+        obj.value = strArr[0] + "." + strArr[1];  
+    } else  {
+        obj.value = strArr[0]; 
+    }
+}
      
  
+
+function refuse() {
+	 
 	
+	 
+	if($('#collabo_req_text').val() == "") {
+		alert("거절 사유를 입력하세요. ");
+		$('#collabo_req_text').focus();
+		return false;
+	}else{
+			alert("완료");
+			refusemenform.submit(); 
+			return true;
+	}
+	
+}
+
+function proAdd(){
+	 
+	 
+	 
+ 	if($('#startDate').val() == ""){
+ 		alert(" 날짜 입력해주세요");
+ 		$('#startDate').focus();
+ 		return false;
+ 	}
+ 	else if($('#endDate').val() == "" ){
+ 		alert(" 날짜 입력해주세요");
+ 		$('#endDate').focus();
+ 		return false;
+ 	}else if($('#collabo_sal').val() == "" ){
+ 		alert("예상수익 입력해주세요");
+ 		$('#collabo_sal').focus();
+ 		return false;
+	}
+ 	else {
+ 		alert("완료");
+ 		
+ 			
+
+
+ 		
+ 		proaddform.submit();
+ 		return true;
+ 	}
+ 	
+ 	
+ }
 
 </script>
 
@@ -423,21 +517,13 @@ alert('Error while request..'	);
 	                    						</div>
 	                    						<h6>제목 : ${n.collabo_req_title}</h6>
                 							 	<h6 style="font-weight: inherit;">작성일:${n.collabo_req_date}</h6>
-                    						
-                    						
-                    								
-        	            						
-                    					
-                    						  
-        <!-- card안에 간단한 상세 내역 -->
-                  								
-                									
+                  									
         <%-- <input type="hidden" id="hiddendetail${n.collabo_req_index}" value="${n.collabo_req_index}"><input type="hidden" id="hiddendetailvalue" value="${n.collabo_req_index}"> --%>
         
         <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
                 <div class="social-link" id="social-link${req}">
                     <!-- 상세보기 --><a class="link link-twitter" onclick="detailReqCollabo(${req})" target="_blank"><i class="fa fa-twitter"></i></a>
-                    <!-- 수락 --><a  data-toggle="modal" data-target="#myModal2" class="link link-codepen" onclick="memoReqCollabo(${req})" target="_blank"><i class="fa fa-codepen"></i></a>
+                    <!-- 수락 --><a  data-toggle="modal" class="link link-codepen" onclick="memoReqCollabo(${req})" target="_blank"><i class="fa fa-codepen"></i></a>
                     <!-- 거절 --><a  data-toggle="modal" data-target="#myModal4" class="link link-facebook" onclick="refuseReqCollabo(${req})" target="_blank"><i class="fa fa-facebook"></i></a>
                 </div>
             </div>
@@ -502,16 +588,12 @@ alert('Error while request..'	);
 
 
                   <div class="modal-body" id="detail">
-                     
-                     <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
-                     
                   
                   </div>
                   
                   <div class="modal-footer" id="detail_footer">
-                     <input type="text" id="hidden">
-                     <input type="button" class="btn btn-default" onclick="modifyReqCollabo()" value="수정">
-                     <button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
+                      <input type="hidden" id="hidden">
+                      <button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
                   </div>
                </div>
 
@@ -541,29 +623,7 @@ alert('Error while request..'	);
 
 						<div class="modal-body">
 
-
-
-							<!-- 거절사유를 사용해서 유효성 검사를 해놓았습니다. -->
-							<script type="text/javascript">
-
-function refuse() {
-	 
-	
-	 
-	if($('#collabo_req_text').val() == "") {
-		alert("거절 사유를 입력하세요. ");
-		$('#collabo_req_text').focus();
-		return false;
-	}else{
-			alert("완료");
-			refusemenform.submit(); 
-			return true;
-	}
-	
-}
-
-</script>
-							<div id="menuView3">
+					<div id="menuView3">
 								<!-- CSS 구성  -->
 								<form action="refuse.htm" method="get" name="refusemenform">
 
@@ -630,47 +690,9 @@ function refuse() {
 
 
 
-						<div class="modal-body">
-							<!-- 날짜 유효성 검사를 한 곳입니다. -->
-							<script type="text/javascript">
-						 function proAdd(){
-							 
-							
-							 
-							 
-						     	if($('#startDate').val() == ""){
-						     		alert(" 날짜 입력해주세요");
-						     		$('#startDate').focus();
-						     		return false;
-						     	}
-						     	else if($('#endDate').val() == "" ){
-						     		alert(" 날짜 입력해주세요");
-						     		$('#endDate').focus();
-						     		return false;
-						     	}else if($('#collabo_sal').val() == "" ){
-						     		alert("예상수익 입력해주세요");
-						     		$('#collabo_sal').focus();
-						     		return false;
-								}
-						     	else {
-						     		alert("완료");
-						     		
-						     			
-
-
-						     		
-						     		proaddform.submit();
-						     		return true;
-						     	}
-						     	
-						     	
-						     }
-						
-						</script>
-							<!-- 비동기 처리로 불렀습니다 .. lord -->
-							<div id="meneview"></div>
-
-
+						<div class="modal-body"  style="height:500px">
+		
+						<div id="meneview"></div>
 
 						</div>
 						<div class="modal-footer">
@@ -683,5 +705,12 @@ function refuse() {
 			</div>
 
 		</div>
+		
+		
+		
+		
+		
+		
+		
 </body>
 </html>

@@ -35,7 +35,7 @@ ul a {
                                    <li> <a href="listallRequest.htm">요청리스트</a></li>
                                    </security:authorize>
                                 <li>
-                                    <a href="responseList.htm">MY 프로젝트</a>
+                                    <a href="responseList_ver1.htm">MY 프로젝트</a>
                                 </li>
                             	</ul>
                             	</li>
