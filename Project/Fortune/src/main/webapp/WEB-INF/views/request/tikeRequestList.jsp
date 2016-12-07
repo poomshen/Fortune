@@ -146,11 +146,17 @@ Profile = {
    	function selectState(state){
    		console.log(state)
    		
+   		if(state == "수락"){
+   			$.get("responseList2.htm", function(data, textStatus, req) {
+   				$('div#requestlist').html(data);
+   			})
+   		}else{
    		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
-   			$('#requestlist').html(data);
+   			$('div#requestlist').html(data);
    			
    			//console.log(data);
    		});
+   		}
    	}
      //검색 기능 비동기 처리로 하였습니다.
    	function searchBtn(){
@@ -348,9 +354,9 @@ alert('Error while request..'	);
 <!--대기/수락/거절 tab영역 -->
 <div class="tab-container">
   		<ul class="nav nav-tabs" style="width:950px">
-  			<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
+  		<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
+    		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">진행중</a></li>
     		<li id="대기"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
-    		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
     		<li id="거절"><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
     		<li id="완료"><a onclick="selectState('완료')" data-toggle="tab">완료</a></li>
   		</ul>
@@ -399,9 +405,8 @@ alert('Error while request..'	);
             						<div class="html about-me" id="about-mesocial-link${req}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
                        					<div class="photo" style=
-                
                								 <c:choose>
-												<c:when test="${n.collabo_req_state == '수락'}">
+												<c:when test="${n.collabo_req_state == '수락' || n.collabo_req_state == '완료'}">
               										 "border:3px solid #1e851f; margin-right:0px"
                 								</c:when>
                 								
@@ -437,8 +442,10 @@ alert('Error while request..'	);
         <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
                 <div class="social-link" id="social-link${req}">
                     <!-- 상세보기 --><a class="link link-twitter" onclick="detailReqCollabo(${req})" target="_blank"><i class="fa fa-twitter"></i></a>
+                   <c:if test="${sessionScope.info.user_id == n.collabo_req_ID&&n.collabo_req_state == '대기'}">
                     <!-- 수락 --><a  data-toggle="modal" data-target="#myModal2" class="link link-codepen" onclick="memoReqCollabo(${req})" target="_blank"><i class="fa fa-codepen"></i></a>
                     <!-- 거절 --><a  data-toggle="modal" data-target="#myModal4" class="link link-facebook" onclick="refuseReqCollabo(${req})" target="_blank"><i class="fa fa-facebook"></i></a>
+                  </c:if>
                 </div>
             </div>
         </div>

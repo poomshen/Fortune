@@ -3,7 +3,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <style>
-ul a {
+.sidebar-nav ul a {
      color: white;
     text-decoration: none;
 }
@@ -19,7 +19,7 @@ ul a {
                     <li>
                             <a class="hvr-grow-shadow" href="noticeList.htm"><i class="fa fa-edit fa-fw"></i>공지 사항</a>
                         </li>
-                            	<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMI','ROLE_MGR','ROLE_USER')">
+                            	<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMI')">
                         <li>
                             <a class="hvr-grow-shadow" href="#" >
                             <i class="fa fa-bar-chart-o fa-fw hvr-pop"></i>프로젝트<span class="fa arrow"></span></a>
@@ -33,19 +33,18 @@ ul a {
                                    </security:authorize>
                                    <security:authorize access="hasAnyRole('ROLE_ADMIN')">
                                    <li> <a href="listallRequest.htm">요청리스트</a></li>
-                                   </security:authorize>
-                                <li>
-                                    <a href="responseList.htm">MY 프로젝트</a>
-                                </li>
-                            	</ul>
-                            	</li>
-                            	</security:authorize>
-                                <security:authorize access="hasAnyRole('ROLE_ADMIN')">
                                 <li>
                                     <a href="historyAllList.htm">모든 히스토리</a>
                                 </li>
+                                   </security:authorize>
+                            	</ul>
+                            	</li>
+                            	</security:authorize>
+                            	<security:authorize access="hasAnyRole('ROLE_MGR','ROLE_USER')">
+                                <li>
+                                    <a href="responseList.htm">MY 프로젝트</a>
+                                </li>
                                 </security:authorize>
-                            
                             <!-- /.nav-second-level -->
                        
                         <li>

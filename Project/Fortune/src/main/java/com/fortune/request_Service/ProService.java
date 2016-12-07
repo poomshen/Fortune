@@ -517,7 +517,6 @@ public class ProService {
          List<String>  timeId = proDao.selectTeamMGR(ids.getTeam_no()) ;
          
          if(timeId.size() != 0 ){
-            List<With_DTO> list = proDao.listResponse2(page, field, timeId);
             int row_size = 6;
             int total_count = proDao.collaboCount(field, timeId) ; // 공지사항 글 개수
             System.out.println("total_count : " + total_count);
@@ -534,12 +533,17 @@ public class ProService {
             if (to_page > all_page) { // 예) 20>17
                to_page = all_page;
             }
+            if (pg != null ) {
+            	System.out.println("proServie  파라미터 들어옴:");
+            	page = Integer.parseInt(pg);
+            }
             mv.addObject("total_count", total_count);
             mv.addObject("pg", page);
             mv.addObject("all_page", all_page);
             mv.addObject("block", block);
             mv.addObject("from_page", from_page);
             mv.addObject("to_page", to_page);
+            List<With_DTO> list = proDao.listResponse2(page, field, timeId);
             mv.addObject("list",list);
             
             return mv;
@@ -590,9 +594,7 @@ public class ProService {
       mv.addObject("to_page", to_page);
       
       // Mybatis 적용
-      System.out.println( "asdfasjiewjoirhq 페이지1241224as :"+ page);
       List<With_DTO> list = proDao.listResponse(page, field, query);
-      System.out.println("sdkfjasfjsaodjgosadhgip:" +list.toString());
       mv.addObject("list",list);
       
       return mv;
