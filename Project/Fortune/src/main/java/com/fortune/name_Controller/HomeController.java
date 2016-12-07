@@ -40,8 +40,9 @@ public class HomeController {
 
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String index(Model model) {
-	
+		
 		System.out.println("index 컨트롤러");
+		//권한이 ROLE_NOUSER이면 로그인 막기(추가작업 : 김중완)
 		if(homeindex == 0){
 			model.addAttribute("msg", 0);
 		}else{

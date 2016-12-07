@@ -72,5 +72,10 @@ public interface ProDao {
 	*/
 		public List<Select_Collabo_DTO> finishCollaboList(String user_id);
 		public List<Select_Collabo_DTO> finishCollaboList2(int deptno);
-		
+		/*
+	 	작성자 :이성준
+	 	2016-12-07
+	 	프로젝트 개수 보기
+		 */
+		public int collaboCount(String field, List<String>  query) ;
 }
