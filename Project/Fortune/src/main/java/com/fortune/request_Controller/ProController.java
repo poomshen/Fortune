@@ -345,7 +345,7 @@ public class ProController {
 				ModelAndView mv = new ModelAndView();
 				mv = proservice.listResponse( pg, f, q, session);
 				
-				mv.setViewName("request.responseList");
+				mv.setViewName("request.collaboList");
 				
 				
 				
