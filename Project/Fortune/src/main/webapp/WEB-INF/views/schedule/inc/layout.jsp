@@ -33,7 +33,9 @@
 <script src='fullcalendar/js/lib/moment.min.js'></script>
 <script src='fullcalendar/js/fullcalendar.min.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!-- <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
 <script src="fullcalendar/js/customcalendar.js" ></script>
+
 
 
 </head>

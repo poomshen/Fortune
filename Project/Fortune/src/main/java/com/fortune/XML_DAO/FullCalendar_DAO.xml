@@ -212,7 +212,7 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 </update>
 <!-- 회의일정 update -->
 <update id="updateMeeting">
-	UPDATE MEETING SET MEETING_TITLE = #{meeting_title}, MEETING_TEXT = #{meeting_text}, MEETING_PLACE_NO = #{meeting_place_no}
+	UPDATE MEETING SET MEETING_TITLE = #{meeting_title}, MEETING_TEXT = #{meeting_text}
 	WHERE SCHEDULE_NO = #{schedule_no}
 </update>
 <!-- progress update -->

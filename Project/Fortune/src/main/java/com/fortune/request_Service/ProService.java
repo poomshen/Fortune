@@ -45,7 +45,9 @@ public class ProService {
    private SqlSession sqlsession;
 
    //협업 답장자함 입니다.
-   public ModelAndView getRequest(SqlSession sqlsession,String pg, String f, String q,String st,String rs,String me,String se,String collabo_req_date, HttpSession session)
+
+   public ModelAndView getRequest(String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
+
          throws ClassNotFoundException, SQLException {
       System.out.println("집에 갑시다.");
 
@@ -112,10 +114,7 @@ public class ProService {
 
       List<Request_DTO> list = proDao.getRequest(page, field, query,st_query, memo, search);
       
-      SimpleDateFormat sdfCurrent = new SimpleDateFormat("yyyy-mm-dd hh시:mm분:ss초"); 
-      Timestamp currentTime = new Timestamp(Long.parseLong("1141952708997")); 
-      collabo_req_date = sdfCurrent.format(currentTime); 
-      System.out.println("collabo_req_date==="+collabo_req_date);
+     
       
       
       

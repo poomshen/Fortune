@@ -41,7 +41,7 @@ String selectId = (String)request.getSession().getAttribute("test1");
 $(function(){
     Profile.load();
    
-    send('<%=selectId%>'); 
+    
     
      
     
@@ -514,8 +514,9 @@ function modifyReqCollabo(){
 
 							<h4 class="modal-title">상세보기</h4>
 						</div>
+						
 						<div class="modal-body" id="detail">
-							<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+						<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>	
 						</div>
 						
 						<div class="modal-footer" id="detail_footer">

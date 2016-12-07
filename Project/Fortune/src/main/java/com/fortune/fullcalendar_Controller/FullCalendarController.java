@@ -273,8 +273,7 @@ public class FullCalendarController {
 	@RequestMapping(value="meeting_update.ajax", method = RequestMethod.POST)
 	public @ResponseBody Schedule_Meeting_DTO meeting_update(@RequestParam(value="title") String title, 
 			@RequestParam(value="text") String text, @RequestParam(value="schedule_no") int schedule_no, 
-			@RequestParam(value="schedule_start") String schedule_start, @RequestParam(value="schedule_end") String schedule_end, 
-			@RequestParam(value="meeting_place_no") int meeting_place_no)  
+			@RequestParam(value="schedule_start") String schedule_start, @RequestParam(value="schedule_end") String schedule_end)  
 			throws ClassNotFoundException, SQLException {
 		System.out.println("위치 : FullCalendarController // 내용 : (회의 일정 제목, 내용, 참여자) update작업 // 작업자: 이명철"); 
         
@@ -287,7 +286,6 @@ public class FullCalendarController {
 	    smdto.setSchedule_no(schedule_no);
 	    smdto.setSchedule_start(schedule_start);
 	    smdto.setSchedule_end(schedule_end);
-	    smdto.setMeeting_place_no(meeting_place_no);
 	    
 	    int i = fullcalendarDAO.updateMeeting(smdto);
 	    
