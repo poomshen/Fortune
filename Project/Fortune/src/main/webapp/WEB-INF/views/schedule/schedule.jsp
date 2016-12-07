@@ -369,9 +369,9 @@ $(document).ready(function() {
 				<div class="row" style="padding-right: 0px; margin-top: 10px; margin-bottom: 11px;">
 					<select id="schedule_type" onchange="schedule_type()" style="height: 20px;">
 						<option id="default_option" value="0"> 전 체 보 기 </option>
+						<option value="3">내 일정 보기</option>
 						<option value="1">업무일정 보기</option>
 						<option value="2">회의일정 보기</option>
-						<option value="3">내 일정 보기</option>
 					</select>
 				</div>
 
