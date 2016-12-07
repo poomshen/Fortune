@@ -77,7 +77,12 @@ public class IdSearchAjax_Controller {
 			result=ranNum;
 			MimeMessage mimemessage = mailSender.createMimeMessage();
 			mimemessage.setSubject("변경된 비밀번호는.", "utf-8");
-			String htmlContent="<strong>[MimeMessage]</strong><br>" + ranNum + "<br>";
+			
+			String htmlContent = "<div align='center'>";
+			htmlContent += "<img alt='fortune' src='http://cfile9.uf.tistory.com/image/21432B4D5203839212F543'>";
+			htmlContent+= "<br><strong>[임시 비밀번호 를 발송하였습니다.]</strong><br>" + ranNum;
+			htmlContent +="</div>";
+			 
 			mimemessage.setText(htmlContent, "utf-8", "html");
 			
 			mimemessage.addRecipient(RecipientType.TO, new InternetAddress(search_id));

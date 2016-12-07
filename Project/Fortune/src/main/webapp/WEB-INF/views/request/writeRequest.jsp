@@ -94,8 +94,8 @@
 			
 			 promodifyform.submit(); 
 	
-			 send($('#collabo_req_ID').val());
-
+			// send($('#collabo_req_ID').val());
+			
 		
 			return true;
 		}

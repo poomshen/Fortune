@@ -27,13 +27,16 @@ table, th, td {
 <div class="col-lg-12">
 <form action="" >
 	<select id="deptSelect" name="deptSelect" onchange="deptchange()">
-		<c:forEach var="i" items="${dept}">			
+		<c:forEach var="i" items="${dept}">
 			<c:choose>
 				<c:when test="${i.dept_no == sessionScope.info.dept_no}">
 					<option value="${i.dept_no}" selected>${i.dept_name}</option>
 				</c:when>
 				<c:otherwise>
-					<option value="${i.dept_no}">${i.dept_name}</option>
+					<c:if test="${i.dept_no ne 50}">
+						<option value="${i.dept_no}">${i.dept_name}</option>
+					</c:if>
+					
 				</c:otherwise>
 			</c:choose>		
 		</c:forEach>
@@ -101,7 +104,7 @@ function deptshow(){
 			//console.log("teamSelect value : "+team_no);
 			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 
 			if(data != null){
-				alert('검색 완료');
+				//alert('검색 완료');
 			
 			}else{
 				alert('회원 목록을 가져오는데 실패했습니다');
@@ -131,9 +134,10 @@ function deptchange() {
 			//console.log(data[0].team_name);
 			//alert('팀목록 바뀜요');
 			$("#teamSelect").html("");
+			$('#teamSelect').append("<option value='"+999+"' selected>전체</option>");
 			for(var i=0; i<data.length; i++){
 				if(i==0){
-					$('#teamSelect').append("<option value='"+data[i].team_no+"' selected>"+data[i].team_name+"</option>");
+					$('#teamSelect').append("<option value='"+data[i].team_no+"'>"+data[i].team_name+"</option>");
 				}else{
 					$('#teamSelect').append("<option value='"+data[i].team_no+"'>"+data[i].team_name+"</option>");
 				}
@@ -143,7 +147,13 @@ function deptchange() {
 		},
 		error:function(){
 			alert('팀목록 가져오는데서 에러남!');
-		}
+		},
+	      beforeSend:function(){
+	           $('.wrap-loading').removeClass('display-none');
+	       },
+	       complete:function(){
+	           $('.wrap-loading').addClass('display-none');
+	       }
 	});	
 }
 

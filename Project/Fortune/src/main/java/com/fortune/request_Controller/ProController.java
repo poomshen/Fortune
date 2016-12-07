@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,8 @@ public class ProController {
 	         
 	         // 실DB저장
 	         proservice.regRequest(n, request);
-	         session.setAttribute("test",n.getCollabo_req_ID());
+	         
+	         session.setAttribute("req_selectId",n.getCollabo_req_ID());
 	         
 
 	         
@@ -95,9 +97,11 @@ public class ProController {
 	public ModelAndView requestList(String pg, String f, String q, String st,String me,String se, HttpSession session ,String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
 		 
 		String rs = "request";
+		
 		ModelAndView mv = proservice.getRequest(sqlSession,pg, f, q, st,rs,me,se,collabo_req_date, session);
 		
-		System.out.println("데이터 변환중:"+ collabo_req_date);
+
+		
 		return mv;
 		
 
@@ -106,16 +110,15 @@ public class ProController {
 	 // 만든 날짜 : 2016 -12-02
 	 @Transactional
 	 @RequestMapping("requestList2.htm") // /customer/notice.htm
-	 public ModelAndView requestList2(String pg, String f, String q, String st,String me,String se,HttpSession session, String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
+	 public ModelAndView requestList2(String pg, String f, String q, String st,String me,String se,HttpSession session,String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
 		 System.out.println("수락,거절등 :"+st);
 		 
-		 if(st.equals("전체")){
-				st = "%%";
-		}
+		
 		 System.out.println("전체일경우 :"+st);
 		 String rs = "cen";
-		 ModelAndView mv =proservice.getRequest(sqlSession,pg, f, q, st,rs, me, se,collabo_req_date, session);
-		 System.out.println("데이터 변환중:"+ collabo_req_date);
+
+		 ModelAndView mv =proservice.getRequest(sqlSession,pg, f, q, st,rs,me,se,collabo_req_date, session);
+
 		 return mv;
 		 
 		 
@@ -127,11 +130,9 @@ public class ProController {
 	public ModelAndView listReplyRequest( String pg, String f, String q,String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		
 		String rs = "request";
-		ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs,me,se, session);
+		ModelAndView mv = proservice.listReplyRequest((String)session.getAttribute("req_selectId"),pg, f, q,st,rs,me,se, session);
 		 // 자동 forward
-	    session.setAttribute("test1",session.getAttribute("test"));
-	     
-		
+	   
 		
 		return mv;
 
@@ -142,12 +143,10 @@ public class ProController {
 	 public ModelAndView listReplyRequest2( String pg, String f, String q,String st,String me,String se, HttpSession session ,String collabo_req_index,Model model) throws ClassNotFoundException, SQLException {
 		 System.out.println("수락,거절등 :"+st);
 		 
-		 if(st.equals("전체")){
-				st = "%%";
-		}
+		 
 		 System.out.println("전체일경우 :"+st);
 		 String rs = "cen";
-		 ModelAndView mv = proservice.listReplyRequest(pg, f, q,st,rs,me,se, session);
+		 ModelAndView mv = proservice.listReplyRequest((String)session.getAttribute("req_selectId"),pg, f, q,st,rs,me,se, session);
 		  // 자동 forward
 		 
 		 
@@ -283,7 +282,6 @@ public class ProController {
 		 @RequestMapping(value = "proEdit.htm", method = RequestMethod.POST)
 		 public String proEdit(Request_DTO n,HttpServletRequest request) throws ClassNotFoundException,
 		   SQLException, IOException {
-			 System.out.println("/////////////////////////////");
 			System.out.println(n.toString());
 			proservice.proEdit(n,request);
 		  return "redirect:listReplyRequest.htm";
@@ -304,8 +302,11 @@ public class ProController {
 		 
 		 
 		// 프로젝트를 요청해주는 클래스 이다.
+		// 추가) 팀장에게 알림 띄워주기
+			
+		
 			@RequestMapping(value = "writeresponse.htm", method = RequestMethod.POST)
-			public String regResponse(With_DTO n, String collabo_req_index)
+			public String regResponse(With_DTO n, String collabo_req_index,HttpSession session)
 					throws IOException, ClassNotFoundException, SQLException {
 					
 				System.out.println("계산중 :"+ n.getCollabo_sal());
@@ -320,6 +321,9 @@ public class ProController {
 					 proservice.Accept(collabo_req_index);
 					// 실DB저장
 				
+					 //알림 DB에 insert 해주기(트리거에서 저장)					 
+					 System.out.println("//////프로젝트 요청 팀장 id///////"+n.getCollabo_req_ID());
+					 session.setAttribute("accept_selectId",n.getUser_ID());
 				
 				return "redirect:responseList.htm";
 
@@ -328,19 +332,73 @@ public class ProController {
 		
 			// 프로젝트의 협업상태를 보여주는 클래스이다.
 			
-			@RequestMapping("responseList.htm") // /customer/notice.htm
-			public String listResponse( String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 
-				List<With_DTO> list = proservice.listResponse( pg, f, q, session);
+			@RequestMapping("responseList_ver1.htm") // /customer/notice.htm
+			public ModelAndView listResponse_ver1(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+				
+				//성준이 협업 리스트 코드
+				
+				ModelAndView mv = new ModelAndView();
+				mv = proservice.listResponse( pg, f, q, session);
+				
+				mv.setViewName("request.collaboList");
+				
+				
+				
+				return mv;
+				
+				
+			}
+			
+		
+			
+			
+			
+			
+			
+			
+			@RequestMapping("responseList.htm") // /customer/notice.htm
+			public ModelAndView listResponse(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+
+				
+				
+				String st=null;
+				String me=null;
+				String se=null;
+				String collabo_req_date=null;
+				
+				String rs = "request";
+				ModelAndView mv = proservice.getRequest(sqlSession,pg, f, q, st,rs,me,se,collabo_req_date, session);
+				
+
+				
+				//성준이 협업 리스트 코드
+				//List<With_DTO> list = proservice.listResponse( pg, f, q, session);
 			
 				
-				model.addAttribute("list", list); // 리스트 협업상태
+				//model.addAttribute("list", list); // 리스트 협업상태
 				
 				
+				
+				System.out.println("--------accept_selectId--------controller");
+				model.addAttribute("accept_selectId",session.getAttribute("accept_selectId"));
 				/*System.out.println("리스트 협업상태 : "+list);*/
-				
-				return "request.responseList";
 
+				
+				return mv;
+
+			}	
+			@RequestMapping("responseList2.htm") // /customer/notice.htm
+			public ModelAndView listResponse2( String pg, String f, String q,HttpSession session ) throws ClassNotFoundException, SQLException {
+				ModelAndView mv = new ModelAndView();
+				mv = proservice.listResponse( pg, f, q, session);
+				
+				mv.setViewName("cen.collaboList");
+				
+				
+				
+				return mv;
+				
 			}	
 			
 			//담당자 선택역할을 하는 클래스입니다.
