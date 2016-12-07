@@ -2,6 +2,7 @@ package com.fortune.request_Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +26,13 @@ import com.fortune.Table_DTO.With_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.function_DTO.All_Alarm_DTO;
 import com.fortune.function_DTO.ProgectName_DTO;
+import com.fortune.function_DTO.Schedule_AlarmList_DTO;
+import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.history_Service.HistoryService;
 import com.fortune.req_alarm_DAO.IReqAlarm;
 import com.fortune.request_DTO.Passion_DTO;
 import com.fortune.request_Service.ProService;
+import com.fortune.schedule_alarm_DAO.IScheduleAlarm;
 
 
 @Controller
@@ -91,8 +95,10 @@ public class ProController {
 	public ModelAndView requestList(String pg, String f, String q, String st,String me,String se, HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 		 
 		String rs = "request";
+
 		ModelAndView mv = proservice.getRequest(pg, f, q, st,rs,me,se, session);
 		
+
 		
 		return mv;
 		
@@ -110,8 +116,9 @@ public class ProController {
 		}
 		 System.out.println("전체일경우 :"+st);
 		 String rs = "cen";
+
 		 ModelAndView mv =proservice.getRequest(pg, f, q, st,rs, me, se, session);
-		
+
 		 return mv;
 		 
 		 
@@ -178,12 +185,45 @@ public class ProController {
 	}*/
 
 	// 글상세보기
+	// 추가) 알림 db지워주기
 	@RequestMapping("ProDetail.htm")
-	public String ProDetail(String collabo_req_index, Model model) throws ClassNotFoundException, SQLException {
+	public String ProDetail(String collabo_req_index, Model model,HttpSession session) throws ClassNotFoundException, SQLException {
 
 		Request_DTO proDto = proservice.ProDetail(collabo_req_index);
 		model.addAttribute("list", proDto);
 		System.out.println(proDto.toString());
+		
+        //알림 삭제하기
+        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
+				
+		Join_DTO dto = (Join_DTO)session.getAttribute("info");
+	
+		IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
+		
+		int result=req_alarm_DAO.deleteReqAlarm(collabo_req_index);
+		
+		System.out.println("지운 결과 : "+result);
+		
+		IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
+		
+		List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+		
+		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
+		
+		int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+		
+	
+		
+		session.setAttribute("alarm", alist);
+		
+		session.setAttribute("totalCount",tatalCount);
+        
+		//추가 작업
+		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+		sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+		session.setAttribute("sch_alist", sch_alist);
+		
+		
 
 		// Tiles
 		return "cen.proDetail";
