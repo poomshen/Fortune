@@ -5,6 +5,8 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
+
+<!-- 사원 테이블 -->
 <table class="table table-striped table-bordered table-hover">
 	<tr>
 		<th>아이디</th>
@@ -13,8 +15,7 @@
 		<th>부서명</th>
 	</tr>
 	<c:forEach var="i" items="${deptlist}">
-		<c:if
-			test="${not (i.user_id eq 'admin@fortune.com')}">
+		<c:if test="${not (i.user_id eq 'admin@fortune.com')}">
 			<tr>
 				<td><input type="button" value="${i.user_id}" class="buttonLink" onclick="ShowUserInfo('${i.user_id}')" ></td>
 				<td><c:out value="${i.user_name}"></c:out></td>

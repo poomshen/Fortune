@@ -74,9 +74,6 @@ public class MemberController {
 	//수정추가 : 이성준 2016-11-26 로그인 했을시 자신 참조 프로젝트
 	@RequestMapping(value="/FortuneMain.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session ,Authentication authentication,Model model){
-
-	
-		
 		System.out.println("로그인 버튼 눌렀고요");
 		UserDetails details = (UserDetails)authentication.getPrincipal();
 		String user_id = details.getUsername();
@@ -156,13 +153,9 @@ public class MemberController {
 		//공지사항 최신글 뽑는 부분 (추가 작업 : 김중완)
 		INotice notice_dao = sqlsession.getMapper(INotice.class);
 		List<Notice_DTO> nlist = notice_dao.mainListNotice();
-		System.out.println(nlist);
 		model.addAttribute("nlist", nlist);
 
 		return "home.main";
-		
-			
-	
 	}
 	
 	

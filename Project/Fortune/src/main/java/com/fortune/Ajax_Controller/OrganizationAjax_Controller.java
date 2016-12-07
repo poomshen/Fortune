@@ -116,11 +116,14 @@ public class OrganizationAjax_Controller {
 		return tdto;
 	}
 
+	//관리자 부서 검색 컨트롤러 함수 (추가작업 : 김중완)
 	@RequestMapping(value="/deptsearchadmin.ajax", method=RequestMethod.GET)
 	public String deptsearch(int dept_no, Model model){
-		//System.out.println("같은 부서 리스트 쫙 뽑을거");
+		System.out.println("deptsearch 컨트롤러");
+		
 		ArrayList<Join_DTO> dto = new ArrayList<Join_DTO>();
 		IOrganization dao = sqlsession.getMapper(IOrganization.class);
+		
 		if(dept_no == -1){
 			dto = dao.usersDeptNull();
 		}else{
@@ -138,16 +141,15 @@ public class OrganizationAjax_Controller {
 		return "/WEB-INF/views/admin/orgTable.jsp";
 	}
 	
+	//사원 정보 가져오기 컨트롤러 함수 (추가작업 : 김중완)
 	@RequestMapping(value="/userinfoadmin.ajax", method=RequestMethod.GET)
 	public String userInfoAdmin(HttpServletRequest request, Model model){
 		System.out.println("userinfoadmin 컨트롤러");
+		
 		String user_id = request.getParameter("user_id");
-		System.out.println("user_id : " + user_id);
-
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		Join_DTO join_DTO = dao.searchMember(user_id);
 		model.addAttribute("join_DTO", join_DTO);
-		
 		
 		ArrayList<Dept_DTO> ddto = new ArrayList<Dept_DTO>();
 		ddto = dao.searchDept();
@@ -171,10 +173,10 @@ public class OrganizationAjax_Controller {
 		return "/WEB-INF/views/admin/editDiv.jsp";
 	}
 	
+	//관리자 사원 수정 컨트롤러 함수 (추가작업 : 김중완)
 	@RequestMapping(value="/userupdateadmin.ajax")
 	public String userUpdateAdmin(Join_DTO dto, Model model){
 		System.out.println("userUpdateAdmin 컨트롤러");
-		System.out.println(dto);
 		
 		PassWord_Service passWord_Service = new PassWord_Service();
 		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
@@ -205,13 +207,4 @@ public class OrganizationAjax_Controller {
 		
 		return "/WEB-INF/views/admin/editDiv.jsp";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

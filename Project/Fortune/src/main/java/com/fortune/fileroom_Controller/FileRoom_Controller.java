@@ -1,3 +1,8 @@
+/*
+작성자 : 김중완
+최초 작업일 : 2016/11/14
+최종 수정일 : 2016/11/20
+*/
 package com.fortune.fileroom_Controller;
 
 import java.util.List;
@@ -19,30 +24,26 @@ public class FileRoom_Controller {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	//자료실 메인 화면 컨트롤러 함수
 	@RequestMapping(value="/mainfile.htm")
 	public ModelAndView mainFile(HttpServletRequest request){
-		System.out.println("mainFile 컨트롤러");
 		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));
-		System.out.println("collabo_no : " + collabo_no);
 		String pg = request.getParameter("pg");
-		System.out.println("pg : " + pg);
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		int page = 1;
 		String str_pg = pg;
+		
 		if (str_pg != null) {
 			page = Integer.parseInt(str_pg);
 		}
+		
 		int row_size = 12;
-
 		int total_count = fileromm_DAO.countFile(collabo_no);
-		System.out.println("totalcount : " + total_count);
-
 		int all_page = (int) Math.ceil(total_count / (double) row_size);
-		System.out.println("all_page : " + all_page);
-
 		int block = 5;
 		int from_page = ((page - 1) / block * block) + 1;
 		int to_page = ((page - 1) / block * block) + block;
+		
 		if (to_page > all_page) {
 			to_page = all_page;
 		}
