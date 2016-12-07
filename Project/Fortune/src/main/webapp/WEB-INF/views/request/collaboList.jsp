@@ -170,7 +170,7 @@ h6 {
 	<div class="container" id="requestlist" style="margin-top: 20px">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">[협업 목록]</h1>
+				<h6 class="page-header">[협업 목록]</h6>
 			</div>
 			<!-- /.col-lg-12 -->
 			<div id="pageside">
