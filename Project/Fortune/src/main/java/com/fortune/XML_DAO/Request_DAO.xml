@@ -144,7 +144,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      g.collabo_req_id collabo_req_id ,g.collabo_sal collabo_sal from (SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo WHERE ${param2}
 		LIKE '%${param3}%' and COLLABO_STATE != '완료' ORDER BY collabo_no DESC ) N )
-		WHERE NUM BETWEEN (${param1}-1) * 6  AND 6+(1-${param1})  * 6)G join 
+		WHERE NUM BETWEEN 1+ (${param1}-1) * 6  AND 6+((${param1}-1)  * 6))G join 
 		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX ORDER by NUM
 	</select>
 	
@@ -162,7 +162,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 		and COLLABO_STATE != '완료'
 		 ORDER BY collabo_no DESC ) N )
-		WHERE NUM BETWEEN (${param1}-1) * 6  AND 6+(1-${param1})  * 6) )G join 
+		WHERE NUM BETWEEN 1+(${param1}-1) * 6  AND 6+((${param1}-1)  * 6) )G join 
 		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX  ORDER by NUM
 	</select>
 

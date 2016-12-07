@@ -143,18 +143,16 @@ h6 {
 		
 		//페이징 처리를 비동기 처리로 처리 하였습니다. 
 		function pazingBtn(pg){
+			console.log(pg);
 
 		$.ajax({
 
 					type: "get",
-					url:  "responseList.htm",
+					url:  "responseList2.htm",
 					cache: false,				
-					data:{pg:pg,
-						st: "${st_query}",
-						me: "${memo}", 
-						se: "${search}"},
+					data:{pg:pg},
 					success:function(data){ //callback  
-
+					console.log("dasfsd")
 					$("#collaboList").html(data); 
 
 				},
@@ -167,7 +165,7 @@ h6 {
 		//////
 	</script>
 	<!--전체 div영역 -->
-<div class="container" id="responsbody" style="margin-top:20px">
+<div class="container" id="collaboList" style="margin-top:20px">
 
 	<div class="container" id="requestlist" style="margin-top: 20px">
 		<div class="row">
@@ -242,8 +240,8 @@ h6 {
 					<div style="text-align: center; margin-left: -80px;">
 						<ul class="pagination">
 							<c:if test="${pg>block}">
-								<li><a href="#" onclick="pazingBtn()">««</a></li>
-								<li><a href="#" onclick="pazingBtn()">«</a></li>
+								<li><a href="#" onclick="pazingBtn('1')">««</a></li>
+								<li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
 							</c:if>
 							<c:if test="${pg<=block}">
 								<li><a href="#">««</a></li>
@@ -258,8 +256,8 @@ h6 {
 								</c:if>
 							</c:forEach>
 							<c:if test="${to_page<all_page}">
-								<li><a href="#" onclick="pazingBtn()">»</a></li>
-								<li><a href="#" onclick="pazingBtn()">»»</a></li>
+								<li><a href="#" onclick="pazingBtn('${to_page+1}')">»</a></li>
+								<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
 							</c:if>
 							<c:if test="${to_page>=all_page}">
 								<li><a href="#">»</a></li>

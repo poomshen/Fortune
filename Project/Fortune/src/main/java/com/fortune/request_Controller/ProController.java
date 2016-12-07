@@ -343,6 +343,18 @@ public class ProController {
 				return mv;
 
 			}	
+			@RequestMapping("responseList2.htm") // /customer/notice.htm
+			public ModelAndView listResponse2( String pg, String f, String q,HttpSession session ) throws ClassNotFoundException, SQLException {
+				ModelAndView mv = new ModelAndView();
+				mv = proservice.listResponse( pg, f, q, session);
+				
+				mv.setViewName("cen.collaboList");
+				
+				
+				
+				return mv;
+				
+			}	
 			
 			//담당자 선택역할을 하는 클래스입니다.
 			 @RequestMapping(value = "insertmanager.htm", method= RequestMethod.GET)

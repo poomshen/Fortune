@@ -490,10 +490,10 @@ public class ProService {
    
    public ModelAndView listResponse(String pg, String f, String q, HttpSession session)
          throws ClassNotFoundException, SQLException {
-      System.out.println("집에 갑시다.");
+      System.out.println("집에 갑시다. :" + pg);
 
       // 게시판 기본 설정(기본값 처리)/////////////
-      int page = 0;
+      int page = 1;
       String query="";
       String field = "";
       // 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
@@ -518,7 +518,7 @@ public class ProService {
          
          if(timeId.size() != 0 ){
             List<With_DTO> list = proDao.listResponse2(page, field, timeId);
-            int row_size = 9;
+            int row_size = 6;
             int total_count = proDao.collaboCount(field, timeId) ; // 공지사항 글 개수
             System.out.println("total_count : " + total_count);
             // 공지사항 글 목록
@@ -563,12 +563,10 @@ public class ProService {
       if (q != null && q.equals("")) {
          query = q;
       }
-      
-      System.out.println("이성준 tset :"+field);
+      System.out.println( "asdfasjiewjoirhq 페이지 :"+ page);
       List<String> timeId = new ArrayList<String>();
       timeId.add(ids.getUser_id());
-      System.out.println("이성준 tset :"+timeId.get(0));
-      int row_size = 9;
+      int row_size = 6;
       int total_count = proDao.collaboCount(field, timeId) ; // 글 개수
       System.out.println("total_count : " + total_count);
       // 공지사항 글 목록
@@ -592,7 +590,9 @@ public class ProService {
       mv.addObject("to_page", to_page);
       
       // Mybatis 적용
+      System.out.println( "asdfasjiewjoirhq 페이지1241224as :"+ page);
       List<With_DTO> list = proDao.listResponse(page, field, query);
+      System.out.println("sdkfjasfjsaodjgosadhgip:" +list.toString());
       mv.addObject("list",list);
       
       return mv;
