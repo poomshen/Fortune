@@ -548,6 +548,14 @@ public class ProService {
             mv.addObject("to_page", to_page);
             List<With_DTO> list = proDao.listResponse2(page, field, timeId);
             mv.addObject("list",list);
+            List<Select_name_DTO> teamName =new ArrayList<Select_name_DTO>();
+            List<Select_name_DTO> deptName = new ArrayList<Select_name_DTO>();
+            for(int i = 0; i<list.size() ; i++){
+          	  deptName.add(proDao.searchName(list.get(i).getCollabo_req_ID()));//부장 아이디 에 부서,팀
+          	  teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
+            } 
+            mv.addObject("deptName", deptName);
+            mv.addObject("teamName", teamName);
             
             return mv;
          }
