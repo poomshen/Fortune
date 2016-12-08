@@ -76,7 +76,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
     
 	
 	//화면 로드시 일정을 DB에서 불러오는 코드  
-	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
+	content = "<table class='table table-striped'><tr><th style='width:80px;'>시작일</th><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
  	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
@@ -90,7 +90,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 			$.each(data.schedulelist, function(index, obj) {
 				if(obj.progress_or_place<10){
 					if(obj.progress_or_place==1){
-				        content += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
+				        content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
 				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 				        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
@@ -98,7 +98,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 				        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 					}else{
 
-				        content += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
+				        content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgb(51, 122, 183); font-weight: bold;">업무</td>';
 				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 				        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
@@ -107,7 +107,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 
 					}
 				} else{
-					content += '<tr><td style="color:rgb(71, 142, 72);">회의</td>';
+					content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgb(71, 142, 72); font-weight: bold;">회의</td>';
 			        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 			        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 			        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>';
@@ -393,16 +393,13 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 						<!-- 수정, 저장, 삭제 버튼 팀장만 보여주기 (권한처리) -->
 					<c:if test="${role_no==3 && finish_check==0}">
 						<div class="col-sm-6"></div>
-						<div class="col-sm-2" style="padding-right: 0px;  margin-right: 0px;">
+						<div class="col-sm-4" style="padding-right: 0px;  margin-right: 0px;">
 							<input type="hidden" value="수정" id="update_btn" onclick="work_update()" class="button button-tiny" style="padding-right: 10px; padding-left: 10px; margin-right: 0px; margin-left: 20px;">
 							<input type="hidden" value="저장" id="updateok_btn" onclick="work_updateok()" class="button button-action button-tiny" style="padding-right: 10px; padding-left: 10px; margin-right: 0px;  margin-left: 20px;">
-
 							<input type="hidden" value="수정" id="meet_update_btn" onclick="work_update2()" class="button button-tiny" style="padding-right: 10px; padding-left: 10px; margin-right: 0px; margin-left: 20px;">
 							<input type="hidden" value="저장" id="meet_updateok_btn" onclick="work_updateok2()" class="button button-action button-tiny" style="padding-right: 10px; padding-left: 10px; margin-right: 0px; margin-left: 20px;">
-						</div>
-						<div class="col-sm-2" style="padding-left: 0px; padding-right: 0px; margin-left: 0px;">
+							
 							<input type="hidden" value="삭제" id="delete_btn" class="button button-caution button-tiny" style="padding-right: 10px; padding-left: 10px; margin-left: 0px;">
-
 							<input type="hidden" value="삭제" id="meet_delete_btn" class="button button-caution button-tiny" style="padding-right: 10px; padding-left: 10px;  margin-left: 0px;">
 						</div>
 					</c:if>

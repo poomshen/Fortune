@@ -59,7 +59,7 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 	SELECT S.SCHEDULE_NO, SCHEDULE_START, SCHEDULE_END, WORK_TITLE AS "WM_TITLE", WORK_TEXT AS "WM_TEXT", WORK_PROGRESS as "progress_or_place" FROM 
 	SCHEDULE S JOIN WORK W 
 	ON S.SCHEDULE_NO = W.SCHEDULE_NO 
-	WHERE S.COLLABO_NO = #{collabo_no}
+	WHERE S.COLLABO_NO = #{param1} and s.schedule_start like #{param2}||'%'
 	ORDER BY SCHEDULE_START desc
 </select>
 <!-- 모든 일정(회의업무) select -1.1 -->
@@ -67,7 +67,7 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 	SELECT S.SCHEDULE_NO, SCHEDULE_START, SCHEDULE_END, meeting_title AS "WM_TITLE", meeting_title AS "WM_TEXT", meeting_place_no as "progress_or_place" FROM 
 	SCHEDULE S JOIN meeting m 
 	ON S.SCHEDULE_NO = m.SCHEDULE_NO 
-	WHERE S.COLLABO_NO = #{collabo_no}
+	WHERE S.COLLABO_NO = #{param1} and s.schedule_start like #{param2}||'%'
 	ORDER BY SCHEDULE_START desc
 </select>
 <!-- 일반 일정마다 참가자 select -2 -->
@@ -119,13 +119,13 @@ INSERT INTO schedule(SCHEDULE_NO, COLLABO_NO, SCHEDULE_START, SCHEDULE_END)
 	on w.SCHEDULE_NO = s.schedule_no join
 	collabo c on s.collabo_no = c.collabo_no join
 	work_users wu on s.schedule_no = wu.schedule_no
-	where S.COLLABO_NO = #{param1} and wu.user_id = #{param2}
+	where S.COLLABO_NO = #{param1} and wu.user_id = #{param2} and s.schedule_start like #{param3}||'%'
 	union
 	select s.schedule_no, s.schedule_start, s.schedule_end, m.meeting_title as "title", m.meeting_text, m.MEETING_PLACE_NO, mu.USER_ID from meeting m join schedule s
 	on m.schedule_no = s.schedule_no join
 	collabo c on s.collabo_no = c.collabo_no join
 	meet_users mu on s.schedule_no = mu.schedule_no
-	where s.collabo_no = #{param1} and mu.user_id = #{param2}
+	where s.collabo_no = #{param1} and mu.user_id = #{param2} and s.schedule_start like #{param3}||'%'
 	order by schedule_start desc
 </select>
 
