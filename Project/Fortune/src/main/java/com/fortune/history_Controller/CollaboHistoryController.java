@@ -14,8 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.function_DTO.Select_Collabo_DTO;
 import com.fortune.history_DAO.IHistory;
+import com.fortune.request_DAO.ProDao;
 import com.fortune.request_Service.ProService;
 
 /**
@@ -45,6 +48,15 @@ public class CollaboHistoryController {
 		history.collaboComplete("완료", Integer.parseInt(collabo_no));
 		ModelAndView mv = new ModelAndView();
 		List<With_DTO> list = null;
+		 Join_DTO ids = (Join_DTO) session.getAttribute("info");
+		 ProDao proDao = SqlSession.getMapper(ProDao.class);
+		if(ids.getRole_no() == 2 ){
+			List<Select_Collabo_DTO> finishCollabo = proDao.finishCollaboList2(ids.getDept_no());
+			session.setAttribute("finishCollabo", finishCollabo);
+		}else {
+			List<Select_Collabo_DTO> finishCollabo = proDao.finishCollaboList(ids.getUser_id());
+			session.setAttribute("finishCollabo", finishCollabo);
+		}
 		try {
 		    mv = proservice.listResponse(pg, f, q, session);
 		} catch (ClassNotFoundException e) {

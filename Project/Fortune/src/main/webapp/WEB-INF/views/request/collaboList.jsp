@@ -226,7 +226,6 @@ h6 {
 	</script>
 	<!--전체 div영역 -->
 	<div class="container" id="collaboList" style="margin-top: 20px">
-
 			<security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
 
 			<!--대기/수락/거절 tab영역 -->
@@ -268,7 +267,7 @@ h6 {
 											
 						  	
 										<a href="#" class="active"><i class="fa fa-user"></i>
-											${n.collabo_req_title} <c:set value="${n.collabo_req_index}"
+											[${teamName[status.index].team_name}]${teamName[status.index].user_name}<c:set value="${n.collabo_req_index}"
 												var="req" /> <c:if test="${fn:endsWith(req,'n')}">
 												<img src="assets/img/alarm/new1.png" />
 												<c:set value="${fn:substringBefore(req,'n')}" var="req" />
