@@ -629,9 +629,6 @@ function proAdd(){
 						<h4 class="modal-title">수락</h4>
 
 						</div>
-					</div>
-
-
 
 					<div class="modal-body" style="height: 500px">
 
