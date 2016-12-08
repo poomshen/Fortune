@@ -16,6 +16,13 @@ on c.chart_date=m.chart_date where c.collabo_no=m.collabo_no
   select chart_date,collabo_no,chart_progress,chart_total_date,chart_seq from chart_data where collabo_no=#{collabo_no} order by chart_date  
 </select>
 
+<select id="selectSumSal" resultType="com.fortune.function_DTO.Pie_Data_DTO">
+select a.sum_sal,b.dept_name from 
+(select * from (select sum(collabo_sal)as sum_sal,collabo_req_id from collabo group by collabo_req_id) c join users u on c.collabo_req_id=u.user_id)
+a join (select d.dept_name,u.user_id from users u join dept d on u.dept_no=d.dept_no) b on a.user_id=b.user_id
+</select>
+
+
  </mapper>
  
  

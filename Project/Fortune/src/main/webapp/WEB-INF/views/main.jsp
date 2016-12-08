@@ -15,6 +15,9 @@
    request.setCharacterEncoding("UTF-8");
    ArrayList chart_x = (ArrayList)request.getAttribute("chart_x");
    ArrayList chart_y = (ArrayList)request.getAttribute("chart_y");
+   ArrayList pie_x = (ArrayList)request.getAttribute("pie_x");
+   ArrayList pie_y = (ArrayList)request.getAttribute("pie_y");
+   Long total_pie =(Long)request.getAttribute("total_count");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -149,7 +152,7 @@
 	               text: '사업규모'
 	           },
 	           tooltip: {
-	               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	        	   dataFormat:'{series.name}: <b>{point.percentage:.1f}%</b>'
 	           },
 	           plotOptions: {
 	               pie: {
@@ -158,33 +161,29 @@
 	                   dataLabels: {
 	                       enabled: false
 	                   },
-	                   showInLegend: true
+	                   showInLegend: true,
+	                   slicedOffset: 10
 	               }
 	           },
 	           series: [{
-	               name: 'Brands',
+	               name: '사업규모',
 	               colorByPoint: true,
 	               data: [{
-	                   name: 'Microsoft Internet Explorer',
-	                   y: 56.33
-	               }, {
-	                   name: 'Chrome',
-	                   y: 24.03,
-	                   sliced: true,
-	                   selected: true
-	               }, {
-	                   name: 'Firefox',
-	                   y: 10.38
-	               }, {
-	                   name: 'Safari',
-	                   y: 4.77
-	               }, {
-	                   name: 'Opera',
-	                   y: 0.91
-	               }, {
-	                   name: 'Proprietary or Undetectable',
-	                   y: 0.2
-	               }]
+	                    name: '<%=pie_x.get(0)%>',
+	                    y: (<%=pie_y.get(0)%>/<%=total_pie%>)*100
+	                }, {
+	                    name: '<%=pie_x.get(1)%>',
+	                    y: (<%=pie_y.get(1)%>/<%=total_pie%>)*100
+	                },
+	                	{
+	                    name: '<%=pie_x.get(2)%>',
+	                    y: (<%=pie_y.get(2)%>/<%=total_pie%>)*100
+	                }, {
+	                    name: '<%=pie_x.get(3)%>',
+	                    y: (<%=pie_y.get(3)%>/<%=total_pie%>)*100,
+	                sliced: true,
+	                selected: true
+	                }]
 	           }]
 	       });
 	   });

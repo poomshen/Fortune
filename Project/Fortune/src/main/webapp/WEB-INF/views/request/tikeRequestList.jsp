@@ -474,7 +474,7 @@ function proAdd(){
         					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}
         					<c:set value="${n.collabo_req_index}" var="req"/>
         					<c:if test="${fn:endsWith(req,'n')}">
-        				<img src="assets/img/alarm/new1.png"/>
+        				<img style="width: 28px;height: 16px" src="assets/img/alarm/new1.png"/>
         					<c:set value="${fn:substringBefore(req,'n')}" var="req"/> 
         					</c:if>
        					</a>
