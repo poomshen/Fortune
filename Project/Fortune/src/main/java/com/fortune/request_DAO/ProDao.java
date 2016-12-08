@@ -80,4 +80,6 @@ public interface ProDao {
 	 	프로젝트 개수 보기
 		 */
 		public int collaboCount(String field, List<String>  query) ;
+		
+		public With_DTO myProDetail(String collabo_no);
 }

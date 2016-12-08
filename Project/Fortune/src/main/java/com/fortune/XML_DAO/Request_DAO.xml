@@ -278,4 +278,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and COLLABO_STATE != '완료'
 	</select>
 	
+	<!-- my 프로젝트 디테일에 기간/수익 가져오기 -->
+	
+	<select id="myProDetail" resultType="com.fortune.Table_DTO.With_DTO">
+	
+	select collabo_start,collabo_end,collabo_sal from collabo where collabo_no=#{param1}
+	
+	</select>
+	
 </mapper>

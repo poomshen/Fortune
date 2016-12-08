@@ -9,6 +9,7 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="button_style/buttons.css">
 <script type="text/javascript" src="button_style/buttons.js"></script>
+
 <!-- 
 작성자 : 이예지
 최초작업일 : 2016/12/05
@@ -77,13 +78,7 @@ Profile = {
             });
         },
         social:function(){
-            $('.plus').click(function(){
-            	
-            	$('#hidden').val($(this).attr('id'));
-            	detailReqCollabo($(this).attr('id'));
-             	//$('#social-link'+$(this).attr('id')).toggleClass('active');
-            });
-            
+ 
     		$('.social-link').click(function(){
               	$(this).toggleClass('active');
             });
@@ -96,6 +91,7 @@ Profile = {
                 }
             });
             $('.accordion > a').click(function(){
+            	
                 $this = $(this);
                 $target =  $this.next();
                 $this.siblings('a').removeAttr('class');
@@ -108,8 +104,39 @@ Profile = {
             });
         }
     };
-</script>
-<script type="text/javascript">
+
+
+function detail(req,collabo_no){
+	
+	if(collabo_no=="null"){
+		
+		$('#hidden').val(req);
+		detailReqCollabo(req);
+		
+	}else{
+	
+   	 $.ajax({
+   		 
+ 			type: "post",
+ 			url:  "MyProDetail.htm",
+ 			cache: false,				
+ 			data:{
+ 			
+ 				"collabo_req_index":req,
+ 				"collabo_no":collabo_no
+ 			},
+ 		    success:function(data){ 
+				$("#detail").html(data); 
+				$('#myModal3').modal('show');
+ 		     },
+ 			error: function(){						
+ 				alert('Error while request..'	);
+ 			}
+ 		});
+	}
+
+}
+
      //상세 정보를 보여주는 ajax 입니다.
      function detailReqCollabo(a){
     	 //$("#menuView2").empty();
@@ -338,11 +365,6 @@ function proAdd(){
 	}
  	else {
  		alert("완료");
- 		
- 			
-
-
- 		
  		proaddform.submit();
  		return true;
  	}
@@ -402,9 +424,9 @@ function proAdd(){
 <c:forEach items="${list}" var="n" varStatus="status">
 
      	<!-- 가로로 한줄 ■ㅁㅁ (첫번째)-->
-    			<div id="row1" style="height:280px" class="col-md-4 col">
-					<div class="accordion-wrap" style="height:200px">
-	   					<div class="accordion" style="height:200px">
+    			<div id="row1" style="height:230px" class="col-md-4 col">
+					<div class="accordion-wrap" style="height:180px">
+	   					<div class="accordion" style="height:180px">
 	   					
                 
         					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}
@@ -417,14 +439,16 @@ function proAdd(){
         						<div class="sub-nav active">
             						<div class="html about-me" id="about-mesocial-link${req}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
-         
-         							<div class="row" style="margin-bottom: 0px;padding-bottom: 10px;">
-						  				<div class="col-sm-2" style="padding-right: 0px;"></div>
-							  			<div class="col-sm-1"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 0px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.2"onclick="progress_0()"> 대기 </button></div>
-							  			<div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.3"onclick="progress_20()"> 수락 </button></div>
-							  			<div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.4"onclick="progress_40()"> 거절 </button></div>
-							    		<div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.6"onclick="progress_60()"> 60% </button></div>
-							    		</div>
+              			<div class="row" style="margin-bottom: 0px;padding-bottom: 10px;">
+              			
+              			<c:if test="${sessionScope.info.user_id == n.collabo_req_ID&&n.collabo_req_state == '대기'}">
+              				
+						  		<div class="col-sm-7" style="padding-right: 0px;"></div>
+							  	<div class="col-sm-1" style="margin-left: 4px;"><button data-toggle="modal" data-target="#myModal2" type="button" onclick="memoReqCollabo(${req})" target="_blank"class="button button-circle button-flat-primary button-tiny" style="margin-left:13px;background-color: rgb(71, 142, 72); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;"><i class="fa fa-check" aria-hidden="true"></i></button></div>
+							  	<div class="col-sm-1" style="margin-left: 4px;"><button type="button"  onclick="refuseReqCollabo(${req})"class="button button-circle button-flat-primary button-tiny" style="margin-left:15px;background-color: #d43722; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;"onclick="progress_40()"><i class="fa fa-times" aria-hidden="true"></i></button></div>
+							
+						</c:if>
+						 </div>
                        				<div class="photo" style=
                								 <c:choose>
 												<c:when test="${n.collabo_req_state == '수락' || n.collabo_req_state == '완료'}">
@@ -443,28 +467,13 @@ function proAdd(){
                  							<img src="images/언니회색.jpg" style="background:no-repeat center;width:100%; height: 100%">
          <!-- 사람 아이콘에 마우스 갖다댈시에 + 모양 띄우기-->
                     							<div class="photo-overlay" >
-                        							<span id="${req}" class="plus">+</span>
+                        							<span id="${req}" onclick="detail(${req},'null')" class="plus">+</span>
                     							</div>
            		         						
 	                    						</div>
 	                    						<h6>제목 : ${n.collabo_req_title}</h6>
                 							 	<h6 style="font-weight: inherit;">작성일:${n.collabo_req_date}</h6>
-                  									
-        <%-- <input type="hidden" id="hiddendetail${n.collabo_req_index}" value="${n.collabo_req_index}"><input type="hidden" id="hiddendetailvalue" value="${n.collabo_req_index}"> --%>
-        
-        <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
-       
-<%--                 <div class="social-link active" id="social-link${req}">
-                   
-                   
-                   
-                   
-                    <!-- 상세보기 --><a class="link link-twitter" onclick="detailReqCollabo(${req})" target="_blank"><i class="fa fa-twitter"></i></a>
-                   <c:if test="${sessionScope.info.user_id == n.collabo_req_ID&&n.collabo_req_state == '대기'}">
-                    <!-- 수락 --><a  data-toggle="modal" data-target="#myModal2" class="link link-codepen" onclick="memoReqCollabo(${req})" target="_blank"><i class="fa fa-codepen"></i></a>
-                    <!-- 거절 --><a  class="link link-facebook" onclick="refuseReqCollabo(${req})" target="_blank"><i class="fa fa-facebook"></i></a>
-                  </c:if>
-                </div> --%>
+   
             </div>
         </div>
 
