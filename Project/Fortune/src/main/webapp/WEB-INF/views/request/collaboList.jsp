@@ -420,12 +420,7 @@ h6 {
 
 						</div>
 
-						<div class="modal-footer" id="detail_footer">
-							<input type="text" id="hidden"> <input type="button"
-								class="btn btn-default" onclick="modifyReqCollabo()" value="수정">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-						</div>
+						
 					</div>
 
 				</div>
