@@ -178,8 +178,8 @@ public class OrganizationAjax_Controller {
 	public String userUpdateAdmin(Join_DTO dto, Model model){
 		System.out.println("userUpdateAdmin 컨트롤러");
 		
-		PassWord_Service passWord_Service = new PassWord_Service();
-		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
+		/*PassWord_Service passWord_Service = new PassWord_Service();
+		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));*/
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		dao.updateMemberAdmin(dto);
 
