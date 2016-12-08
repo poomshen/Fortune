@@ -28,6 +28,7 @@ import com.fortune.function_DTO.Search_Page_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.history_Service.HistoryService;
 import com.fortune.req_alarm_DAO.IReqAlarm;
+import com.fortune.request_DAO.ProDao;
 import com.fortune.request_DTO.Passion_DTO;
 import com.fortune.request_Service.ProService;
 
@@ -225,6 +226,43 @@ public class ProController {
 		// View
 
 	}
+	
+	
+	//작성자 : 이예지
+	//작성일:2016/12/08
+	//글상세보기(가격/기간 추가된 상세보기)
+	@RequestMapping("MyProDetail.htm")
+	public String MyProDetail(String collabo_req_index,String collabo_no,Model model,HttpSession session) throws ClassNotFoundException, SQLException {
+
+		Request_DTO proDto = proservice.ProDetail(collabo_req_index);
+		model.addAttribute("list", proDto);
+		System.out.println(proDto.toString());
+		ProDao prodao = sqlSession.getMapper(ProDao.class);
+		With_DTO withDto = prodao.myProDetail(collabo_no);
+		
+		model.addAttribute("mylist",withDto);
+		// Tiles
+		return "cen.myproDetail";
+		// View
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//글삭제 하기
 	 @RequestMapping("proDel.htm")

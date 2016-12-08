@@ -34,6 +34,7 @@ import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
 import com.fortune.function_DTO.Search_Page_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
+import com.fortune.function_DTO.Select_name_DTO;
 import com.fortune.notice_DAO.INotice;
 import com.fortune.req_alarm_DAO.IReqAlarm;
 import com.fortune.request_DAO.ProDao;
@@ -595,6 +596,14 @@ public class ProService {
       // Mybatis 적용
       List<With_DTO> list = proDao.listResponse(page, field, query);
       mv.addObject("list",list);
+      List<Select_name_DTO> teamName =new ArrayList<Select_name_DTO>();
+      List<Select_name_DTO> deptName = new ArrayList<Select_name_DTO>();
+      for(int i = 0; i<list.size() ; i++){
+    	  deptName.add(proDao.searchName(list.get(i).getCollabo_req_ID()));//부장 아이디 에 부서,팀
+    	  teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
+      } 
+      mv.addObject("deptName", deptName);
+      mv.addObject("teamName", teamName);
       
       return mv;
    }

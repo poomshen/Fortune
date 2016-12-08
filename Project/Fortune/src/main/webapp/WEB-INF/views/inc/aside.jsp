@@ -19,7 +19,7 @@
                     <li>
                             <a class="hvr-grow-shadow" href="noticeList.htm"><i class="fa fa-edit fa-fw"></i>공지 사항</a>
                         </li>
-                            	<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMI')">
+                            	<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
                         <li>
                             <a class="hvr-grow-shadow" href="#" >
                             <i class="fa fa-bar-chart-o fa-fw hvr-pop"></i>프로젝트<span class="fa arrow"></span></a>
@@ -32,9 +32,8 @@
                                    <li> <a href="requestList.htm">받은 요청함</a></li>
                                    </security:authorize>
                                    <security:authorize access="hasAnyRole('ROLE_ADMIN')">
-                                   <li> <a href="listallRequest.htm">요청리스트</a></li>
                                 <li>
-                                    <a href="historyAllList.htm">모든 히스토리</a>
+                                    <a href="historyAllList.htm">전체 히스토리</a>
                                 </li>
                                    </security:authorize>
                             	</ul>
@@ -46,7 +45,7 @@
                                 </li>
                                 </security:authorize>
                             <!-- /.nav-second-level -->
-                       
+                       <security:authorize access="hasAnyRole('ROLE_MGR','ROLE_USER','ROLE_SUPERMGR')">
                         <li>
                             <a class="hvr-grow-shadow" href="#"><i class="fa fa-table fa-fw"></i>일정<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -57,7 +56,7 @@
                                 </c:forEach>
                             </ul>
                         </li>
-                        
+                        </security:authorize>
                         <security:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <li>
                             <a class="hvr-grow-shadow" href="#"><i class="fa fa-wrench fa-fw"></i>관리<span class="fa arrow"></span></a>
@@ -77,7 +76,9 @@
                         <li style="">
                         </li>
                         <li>
+                        <security:authorize access="hasAnyRole('ROLE_MGR','ROLE_USER','ROLE_SUPERMGR')">
                         <a class="hvr-grow-shadow" href="#" style="text-decoration:line-through;"><i class="fa fa-table fa-fw"></i>완료된프로젝트<span class="fa arrow"></span></a>
+                          </security:authorize>
                           <ul class="nav nav-second-level">
                                 <c:forEach var="n" items="${sessionScope.finishCollabo}">
                                 <li>
