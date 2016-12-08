@@ -87,4 +87,6 @@ public interface ProDao {
 	 	프로젝트 관리자 이름 보기
 		 */
 		public Select_name_DTO searchName(String user_id);
+		
+		public With_DTO myProDetail(String collabo_no);
 }

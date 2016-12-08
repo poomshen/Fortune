@@ -82,13 +82,11 @@ Profile = {
         	
         	detailReqCollabo($(this).attr('id'));
          	$('#social-link'+$(this).attr('id')).toggleClass('active');
-            $('#about-mesocial-link'+$(this).attr('id')).toggleClass('blur');
         });
         $('.social-link').click(function(){
         	
         	alert("gg");
           	$(this).toggleClass('active');
-            $('#about-me'+$(this).attr('id')).toggleClass('blur');
         });
     },
     accordion:function(){
@@ -357,23 +355,7 @@ function modifyReqCollabo(){
 	                    						<h6>제목 : ${n.collabo_req_title}</h6>
                 							 	<h6 style="font-weight: inherit;">작성일:${n.collabo_req_date}</h6>
                     						
-                    						
-                    								
-        	            						
-                    					
-                    						  
-        <!-- card안에 간단한 상세 내역 -->
-                  								
-                									
-        
-        
-        <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
-                <div class="social-link" id="social-link${n.collabo_req_index}">
-                    <a class="link link-twitter" href="http://twitter.com/khadkamhn/" target="_blank"><i class="fa fa-twitter"></i></a>
-                    <a class="link link-codepen" href="http://codepen.io/khadkamhn/" target="_blank"><i class="fa fa-codepen"></i></a>
-                    <a class="link link-facebook" href="http://facebook.com/khadkamhn/" target="_blank"><i class="fa fa-facebook"></i></a>
-                    <a class="link link-dribbble" href="http://dribbble.com/khadkamhn" target="_blank"><i class="fa fa-dribbble"></i></a>
-                </div>
+
             </div>
         </div>
 

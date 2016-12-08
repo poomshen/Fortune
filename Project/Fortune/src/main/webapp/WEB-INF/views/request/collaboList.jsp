@@ -8,6 +8,9 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="button_style/buttons.css">
+<script type="text/javascript" src="button_style/buttons.js"></script>
 <html>
 <style type="text/css">
 h6 {
@@ -66,36 +69,40 @@ h6 {
 			},
 			links : function() {
 				$('a[href="#"]').click(function(e) {
+					console.log("link함수 실행?");
 					e.preventDefault();
 				});
 			},
 			social : function() {
-				$('.plus').click(function() {
+				/* 	
+				
+					$('.plus').click(function() {
+					
+					$(this)
 	
 					$('#hidden').val($(this).attr('id'));
-	
-					$('#social-link' + $(this).attr('id')).toggleClass('active');
-					$('#about-mesocial-link' + $(this).attr('id')).toggleClass('blur');
-				});
-	
-				$('.social-link').click(function() {
-					$(this).toggleClass('active');
-					$('#about-me' + $(this).attr('id')).toggleClass('blur');
-				});
+				 	detailReqCollabo($(this).attr('id'));
+				}); */
+
 			},
 			accordion : function() {
+				console.log("accordian");
 				var subMenus = $('.accordion .sub-nav').hide();
 				$('.accordion > a').each(function() {
 					if ($(this).hasClass('active')) {
+						
 						$(this).next().slideDown(100);
+						
 					}
 				});
 				$('.accordion > a').click(function() {
+					
 					$this = $(this);
 					$target = $this.next();
 					$this.siblings('a').removeAttr('class');
 					$this.addClass('active');
 					if (!$target.hasClass('active')) {
+						
 						subMenus.removeClass('active').slideUp(100);
 						$target.addClass('active').slideDown(100);
 					}
@@ -105,9 +112,40 @@ h6 {
 		}
 		
 		
+		
+		function detail(req,collabo_no){
+			
+		
+				
+
+			
+		   	 $.ajax({
+		   		 
+		 			type: "post",
+		 			url:  "MyProDetail.htm",
+		 			cache: false,				
+		 			data:{
+		 			
+		 				"collabo_req_index":req,
+		 				"collabo_no":collabo_no
+		 			},
+		 		    success:function(data){ 
+						$("#detail").html(data); 
+						$('#myModal3').modal('show');
+		 		     },
+		 			error: function(){						
+		 				alert('Error while request..'	);
+		 			}
+		 		});
+			
+		
+		}
+		
 		//비동기 상세 보기를 위한 함수	
 		function detailReqCollabo(a){
 		console.log(a);
+		
+		
 	   	 $.ajax({
 	   		 
 	 			type: "get",
@@ -221,63 +259,78 @@ h6 {
 						<c:forEach items="${list}" var="n" varStatus="status">
 
 							<!-- 가로로 한줄 ■ㅁㅁ (첫번째)-->
-							<div id="row1" style="height: 200px" class="col-md-4 col">
-								<security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
-									<a data-toggle="modal" data-target="#myModal"
-										onclick="ctionQuestion(${n.collabo_no })">완료</a>
-								</security:authorize>
-								<div class="accordion-wrap">
-									<div class="accordion">
+							<div id="row1" style="height: 230px" class="col-md-4 col">
+						
+								
+								<div class="accordion-wrap" style="height:180px">
+									<div class="accordion" style="height:180px">
+											
+						  	
 										<a href="#" class="active"><i class="fa fa-user"></i>
 											${n.collabo_req_title} <c:set value="${n.collabo_req_index}"
 												var="req" /> <c:if test="${fn:endsWith(req,'n')}">
 												<img src="assets/img/alarm/new1.png" />
 												<c:set value="${fn:substringBefore(req,'n')}" var="req" />
 											</c:if> </a>
-										<div class="sub-nav active">
-											<div class="html about-me" id="about-mesocial-link${req}">
-												<!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
+								<div class="sub-nav active">
+								<div class="html about-me" style="height:150px" id="about-mesocial-link${req}">
+								
+								<div class="row" style="margin-bottom: 0px;padding-bottom: 10px;">
+								<div class="col-sm-4" style="padding-right: 0px;"></div>
+							  	
+							  	<div class="col-sm-1" style="margin-left: 2px;">
+							  	
+							  	<security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
+							  	<button type="button" class="button button-circle button-flat-primary button-tiny"  data-toggle="modal" data-target="#myModal"onclick="ctionQuestion(${n.collabo_no })" style="margin-left:15px;background-color:rgba(153, 153, 153, 0.45); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;">
+							   	<i style="color:#194f89"class="fa fa-check-square-o" aria-hidden="true"></i>
+							   	</button>
+							   	
+								</security:authorize>
+							  	</div>
+							  	
+							  	<div class="col-sm-1" style="margin-left: 4px;">
+							  	
+							  	<button data-toggle="modal" data-target="#myModal2" type="button" target="_blank"class="button button-circle button-flat-primary button-tiny" style="margin-left:13px;background-color:rgba(153, 153, 153, 0.45); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;">
+							  		<i style="color:#194f89;padding-top: 2px;" class="fa fa-calendar" aria-hidden="true"></i><a href="schedule.htm?collabo_no=${n.collabo_no}"></a>
+							  	</button></div>
+							  	
+							  	<div class="col-sm-1" style="margin-left: 4px;">
+							  	
+							  	<button type="button" class="button button-circle button-flat-primary button-tiny" style="margin-left:15px;background-color: rgba(153, 153, 153, 0.45); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;">
+							   		<i style="color:#194f89;padding-top: 2px;" class="fa fa-file-text-o" aria-hidden="true"></i><a href="mainfile.htm?collabo_no=${n.collabo_no}"></a>
+							  	</button>
+							  	
+							  	</div>
+							  
+							  	<div class="col-sm-1" style="margin-left: 4px;">
+							  	
+							  	<button type="button" class="button button-circle button-flat-primary button-tiny" style="margin-left:15px;background-color: rgba(153, 153, 153, 0.45); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;">
+							   		<i style="color:#194f89;padding-top: 2px;" class="fa fa-history" aria-hidden="true"></i><a href="historyList.htm?collabo_req_no=${n.collabo_req_no }"></a>
+							  	</button>
+							  	
+							  	</div>
+							  	
+						
+							  	</div>
+										<!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
 												<div class="photo"
 													style="border: 3px solid #1e851f; margin-right: 0px">
 													<img src="images/언니회색.jpg"
 														style="background: no-repeat center; width: 100%; height: 100%">
 													<!-- 사람 아이콘에 마우스 갖다댈시에 + 모양 띄우기-->
 													<div class="photo-overlay">
-														<span id="${req}" class="plus">+</span>
+														<span id="${req}" onclick="detail(${req},${n.collabo_no})" class="plus">+</span>
 													</div>
 
 												</div>
-												<h6 style="font-weight: inherit;">예상 수익:
-													${n.collabo_sal}￦</h6>
-												<h6 style="font-weight: inherit;">기간:
-													${n.collabo_start}~ ${n.collabo_end}</h6>
-												<h6>팀장 : ${n.user_ID}</h6>
-												<h6>부장 : ${n.collabo_req_ID}</h6>
-												<!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
-												<div class="social-link" id="social-link${req}">
-													<a href="schedule.htm?collabo_no=${n.collabo_no}"
-														class="link link-twitter"> <i
-														class="glyphicon glyphicon-calendar"></i>
-													<!-- 일정 -->
-													</a> <a href="mainfile.htm?collabo_no=${n.collabo_no}"
-														class="link link-twitter"> <i
-														class="glyphicon  glyphicon-cloud"></i>
-													<!-- 자료실 -->
-													</a> <a onclick="detailReqCollabo(${req})"
-														class="link link-twitter"> <i
-														class="glyphicon  glyphicon-th-list"></i>
-													<!-- 상세보기  -->
-													</a> <a
-														href="historyList.htm?collabo_req_no=${n.collabo_req_no }"
-														class="link link-twitter"> <i
-														class="glyphicon  glyphicon-th-list"></i>
-													<!-- 히스토리 보기 -->
-													</a>
-												</div>
+												
+												<h6>제목 : ${n.collabo_req_title}</h6>
+                							 	<h6 style="font-weight: inherit;">기간 ${n.collabo_start}-${n.collabo_end}</h6>
+
 											</div>
 										</div>
 
-									</div>
+        							</div>
 								</div>
 							</div>
 						</c:forEach>

@@ -10,6 +10,8 @@ var before_progress ="";
 
 
 function schedule_type(){
+	if($('#schedule_type').val()=="4"){
+	}else{
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 	$.ajax({
 		url : 'schedule_type.ajax',
@@ -38,7 +40,7 @@ function schedule_type(){
 						        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 							}
 						} else{
-							content += '<tr><td style="color:#23b100;">회의</td>';
+							content += '<tr><td style="color:rgb(71, 142, 72);">회의</td>';
 					        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 					        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 					        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>';
@@ -48,8 +50,17 @@ function schedule_type(){
 					
 					$('#content_detail').css("display", "none");
 					$('#content_detail2').css("display", "none");
-					$('#content').html(content)
-			        
+					$('#update_btn').attr('type','hidden');
+					$('#updateok_btn').attr('type','hidden');
+					$('#meet_update_btn').attr('type','hidden');
+					$('#meet_updateok_btn').attr('type','hidden');
+					$('#delete_btn').attr('type','hidden');
+					$('#meet_delete_btn').attr('type','hidden');
+					$('#content').html(content);
+					if(clickobject != null){
+						clickobject.css('background-color',clickobjectcolor);
+					}
+					
 					$.each(data.new_alarm, function(index, obj) {
 						
 						$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
@@ -63,6 +74,7 @@ function schedule_type(){
 			        $('.wrap-loading').addClass('display-none');
 			    }
 	}); 
+	}
 }
 
 
@@ -89,6 +101,8 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 		$('#detail_end').val(end);
 		$('#detail_progress').val(progress_or_place);
 		$('#check').val("check");
+		$('#default_option').attr("selected","selected");
+		
 		
 		before_progress = progress_or_place;
 		
@@ -147,6 +161,7 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 	$('#meet_detail_start').val(start);
 	$('#meet_detail_end').val(end);
 	$('#check').val("check");
+	$('#default_option').attr("selected","selected");
 	
 	//상세보기 내용에 참가자 인원 뿌려주는 코드
 	var userid = userids.split("/");
@@ -331,7 +346,6 @@ function progress_100(){
 //추가작업 : 알림DB NEW 가져오기
 function fcontent() {
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
-	$('#default_option').attr("selected","selected")
 	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
@@ -360,7 +374,7 @@ function fcontent() {
 				        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 					}
 				} else{
-					content += '<tr><td style="color:#23b100;">회의</td>';
+					content += '<tr><td style="color:rgb(71, 142, 72);">회의</td>';
 			        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 			        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 			        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>'
@@ -506,7 +520,7 @@ function loadCalendar(role1,role2) {
 			clickobjectcolor = $(this).css('background-color');
 			
 			//클릭된 일정의 배경색을 red로 설정
-			$(this).css('background-color', 'rgba(237,0,0,0.66');
+			$(this).css('background-color', 'rgba(237,0,0,0.66)');
 			
 			
 			content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
@@ -536,7 +550,7 @@ function loadCalendar(role1,role2) {
 					        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 						}
 					} else{
-						content += '<tr><td style="color:#23b100;">회의</td>';
+						content += '<tr><td style="color:rgb(71, 142, 72);">회의</td>';
 				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 				        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>'
@@ -557,7 +571,13 @@ function loadCalendar(role1,role2) {
 						$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
 						
 					}
-				}
+				},
+			      beforeSend:function(){
+			           $('.wrap-loading').removeClass('display-none');
+			       },
+			       complete:function(){
+			           $('.wrap-loading').addClass('display-none');
+			       }
 			});
 
 			
@@ -600,19 +620,44 @@ function loadCalendar(role1,role2) {
 		// 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
 		// 작업내용: 날짜 늘리는 이벤트
 		eventResize : function(calevent) {
-		     $.ajax({
-	        	type : 'post',
-	            url : 'dragupdate.ajax',
-	            data : {
-					"schedule_no": calevent.id,
-	            	"schedule_start" : calevent.start.format('YYYY-MM-DD'),
-	                "schedule_end" : calevent.end.format('YYYY-MM-DD')
-	            },
-	            success : function(data) {
-	            console.log("날짜 길이 조정 성공");
-	            fcontent();
-	            }
-		     });
+			var id = calevent.id;
+			var calEvent2;
+			if(calevent.backgroundColor == 'rgb(71, 142, 72)'){
+				swal('회의 일정은 1일만 가능합니다.');
+
+				for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
+					if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
+						calEvent2 = calendar.fullCalendar( 'getEventSources' )[0].events[i];
+						calevent.end = calEvent2.start;
+					}
+				}
+				
+			}else if(calevent.backgroundColor == 'rgba(51, 122, 183, 0.22)'){
+				swal('완료된 일정입니다.')
+				
+				for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
+					if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
+						calEvent2 = calendar.fullCalendar( 'getEventSources' )[0].events[i];
+						calevent.end = calEvent2.start;
+						console.log(calevent.end)
+					}
+				}
+			
+			}else{
+			     $.ajax({
+		        	type : 'post',
+		            url : 'dragupdate.ajax',
+		            data : {
+						"schedule_no": calevent.id,
+		            	"schedule_start" : calevent.start.format('YYYY-MM-DD'),
+		                "schedule_end" : calevent.end.format('YYYY-MM-DD')
+		            },
+		            success : function(data) {
+		            console.log("날짜 길이 조정 성공");
+		            fcontent();
+		            }
+			     });
+			 }
 		},
 		// 작업자: 이명철  // 최근 수정일: 16-11-21 --------------------- E N D ------------------------	
 		
@@ -895,6 +940,18 @@ function loadCalendar(role1,role2) {
 	        //추가 작업 : new 알림 가져오기
 	    	insertEvent: {
 	    		click: $('#modal_ok').click(function(){
+
+	    			if( $('#modal_title').val() == null || $('#modal_title').val() =="" ){
+	    				swal('제목을 입력하세요.');
+	    				$('#modal_title').focus();
+	    			}else if($('#modal_text').val() == null || $('#modal_text').val() ==""){
+	    				swal('내용을 입력하세요.');
+	    				$('#modal_text').focus();
+	    			}else if( scheduleusers == null || scheduleusers == ""){
+	    				swal('참가자를 1명이상 선택하세요.');
+	    			}else{
+
+	    				
 	    			if( $('#check').val() ){
 	    				
 		    			var eventData;
@@ -910,6 +967,8 @@ function loadCalendar(role1,role2) {
 								"scheduleusers" : scheduleusers,
 								"meeting_place_no" : "0"
 						}
+						
+		    			$('#modal_close').click();
 						
 						$.ajax({
 							type: 'post',
@@ -959,6 +1018,7 @@ function loadCalendar(role1,role2) {
 						
 	    				$('#check').val("");
 	    			}
+	    			}
 		    	})
 	    	},
 	 // 작업자: 이명철  // 최근 수정일: 16-11-21 --------------------- E N D ------------------------
@@ -973,6 +1033,20 @@ function loadCalendar(role1,role2) {
 	    //추가 작업 : new 알림 가져오기
     	insertEvent2: {
     		click: $('#modal_ok2').click(function(){
+    			
+    			if( $('#modal_title2').val() == null || $('#modal_title2').val() =="" ){
+    				swal('제목을 입력하세요.');
+    				$('#modal_title2').focus();
+    			}else if($('#modal_text2').val() == null || $('#modal_text2').val() ==""){
+    				swal('내용을 입력하세요.');
+    				$('#modal_text2').focus();
+    			}else if( scheduleusers == null || scheduleusers == ""){
+    				swal('참가자를 1명이상 선택하세요.');
+    			}else if( $('input[type=radio]:checked').val() == null || $('input[type=radio]:checked').val() == "" ){
+    				swal('회의실을 선택하세요.');
+    			}else{
+    			
+    			
     			if( $('#check').val() ){ 
     			
 	    			console.log( $('#modal_start_ms').val() )
@@ -996,22 +1070,24 @@ function loadCalendar(role1,role2) {
 								"meeting_place_no" : $('input[type=radio]:checked').val(),
 						}
 		
+						$('#modal_close').click();
 						
 						$.ajax({
 							type: 'post',
 							url: 'select.ajax',
 							data: newschedule,
 							success : function(data) {
-								console.log(data);
 								eventData = {
 										id: data.schedule.schedule_no,
 										title: data.schedule.meeting_title,
 										start: data.schedule.schedule_start,
 										end: data.schedule.schedule_end,
-										backgroundColor: '#23b100'
+										backgroundColor: 'rgb(71, 142, 72)'
 								}
 								
+								
 								calendar.fullCalendar('renderEvent', eventData , true);
+								
 								fcontent();
 								console.log('회의업무 insert 성공')
 								
@@ -1047,11 +1123,11 @@ function loadCalendar(role1,role2) {
 		    			}
 					$('#check').val("");
     			}
+    			}
     			})
 	    	}
 	    	// 작업자: 이명철  // 최근 수정일: 16-11-29 --------------------- E N D ------------------------
 	    	// ------------------------------------------------------------------------------------    
-	    	
 	    	
 	    }, //custombutton 끝
 	    
