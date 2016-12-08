@@ -78,6 +78,8 @@ $(function() {
 			  "team_no": ${sessionScope.info.team_no} },
 		success:function(data){
 			//console.log(data);
+			//$("#deptshowDiv").css("overflow-y", "scroll");
+			//$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 		
 		},
 		error:function(){
@@ -102,6 +104,8 @@ function deptshow(){
 			  "team_no": $('#teamSelect').val()},
 		success:function(data){
 			//console.log("teamSelect value : "+team_no);
+			//$("#deptshowDiv").css("overflow-y", "scroll");
+			//$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 
 			if(data != null){
 				//alert('검색 완료');
