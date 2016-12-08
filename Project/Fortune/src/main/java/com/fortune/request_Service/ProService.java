@@ -51,7 +51,7 @@ public class ProService {
 
          throws ClassNotFoundException, SQLException {
       System.out.println("집에 갑시다.");
-
+      System.out.println(search_Page_DTO);
       // 게시판 기본 설정(기본값 처리)/////////////
       int page = 1;
       String field = "collabo_req_ID";
@@ -101,10 +101,10 @@ public class ProService {
       System.out.println("페이지수 : " + all_page);
       int block = 5; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
       // [10] >>
-      int from_page = ((page - 1) / block * block) + 1; // 보여줄 페이지의 시작
+      int from_page = ((search_Page_DTO.getPg() - 1) / block * block) + 1; // 보여줄 페이지의 시작
       System.out.println("from_page :"+from_page);
       // ((1-1)/10*10)
-      int to_page = ((page - 1) / block * block) + block; // 보여줄 페이지의 끝
+      int to_page = ((search_Page_DTO.getPg() - 1) / block * block) + block; // 보여줄 페이지의 끝
       if (to_page > all_page) { // 예) 20>17
          to_page = all_page;
       }

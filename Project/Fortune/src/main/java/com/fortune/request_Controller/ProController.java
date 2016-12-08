@@ -143,6 +143,7 @@ public class ProController {
 	 @Transactional
 	 @RequestMapping("listReplyRequest2.htm") // /customer/notice.htm
 	 public ModelAndView listReplyRequest2(Search_Page_DTO search_Page_DTO, HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+		 System.out.println(search_Page_DTO);
 		 String rs = "cen";
 		 search_Page_DTO.setRs(rs);
 		 ModelAndView mv = proservice.listReplyRequest((String)session.getAttribute("req_selectId"),search_Page_DTO, session);

@@ -8,31 +8,6 @@
 <script src="alert_style/js/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 <script>
-
-function deleteok_id(){
-	swal({
-		  title: "정말로 탈퇴 하시겠습니까?",
-		  text: "탈퇴한 아이디와 데이터는 재사용 및 복구가 불가합니다..",
-		  type: "warning",
-		  showCancelButton: true,
-		  confirmButtonColor: "#DD6B55",
-		  confirmButtonText: "네, 탈퇴하겠습니다.",
-		  cancelButtonText: "아니요, 계속 사용하겠습니다.",
-		  closeOnConfirm: false,
-		  closeOnCancel: false
-		},
-		function(isConfirm){
-		  if (isConfirm) {
-		    swal("삭제완료", "그동안 고생하셨습니다!.", "success");
-		    location.replace('deleteMemember.htm')
-		  } else {
-		    swal("삭제취소", "앞으로 열일 바랍니다.^^!", "error");
-		  }
-	});
-}
-
-</script>
-<script>
 var wsocket;
 var msg 
 function connect() {
@@ -253,8 +228,6 @@ $(document).ready(function() {
                         <li class="divider"></li>
                         <li><a href="logOut.htm"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
-                        <li class="divider"></li>
-                        <li><a href="#" onclick="deleteok_id()"><i class="fa fa-times fa-fw"></i> delete ID</a>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
