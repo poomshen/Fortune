@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="requestCount" resultType="Integer"  parameterType="com.fortune.function_DTO.Search_Page_DTO">
 		SELECT COUNT(*) CNT
 		FROM collabo_req
-		WHERE (${f} like #{q} AND collabo_req_state LIKE #{st} AND #{me} LIKE #{se})
+		WHERE (${f} like #{q} AND collabo_req_state LIKE #{st} AND ${me} LIKE #{se})
 	</select>
 
 	<select id="getRequest" parameterType="com.fortune.function_DTO.Search_Page_DTO" resultType="com.fortune.Table_DTO.Request_DTO">
@@ -276,6 +276,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{querys}
 		</foreach>
 		and COLLABO_STATE != '완료'
+	</select>
+	
+	<!-- 작성자:이성준  날짜 : 16-12-08 목적: 이름과 부서, 부서명, 팀명 가져오기 -->
+	<select id="searchName"  resultType="com.fortune.function_DTO.Select_name_DTO">
+		select dept_name , TEAM_NAME, USER_NAME,USER_ID from USERNAMEVIEW where USER_ID = #{param1}
 	</select>
 	
 	<!-- my 프로젝트 디테일에 기간/수익 가져오기 -->

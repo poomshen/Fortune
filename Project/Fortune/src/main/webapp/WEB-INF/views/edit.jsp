@@ -159,7 +159,6 @@
 		</div>
 		<div class="form-group container" align="center">
 			<input type="submit" class="btn btn-primary" value="수정완료">
-	
 		</div>
     </form>
 </body>

@@ -227,10 +227,24 @@
 					  "search_birth":$('#search_birth').val()},
 				success:function(data){
 					//console.log('>'+data+'<');
+				
+					
 					if(data != null && data != ""){
 						//alert('null 값임?');
-						swal('아이디는 : '+ data + '입니다');
-						location.href = "index.htm";
+						//swal('아이디는 : '+ data + '입니다');
+						swal({
+				        	   title: "아이디는 "+data+" 입니다 ",
+
+				        	   type: "success",
+				        	   showCancelButton: false,
+				        	   confirmButtonColor: "#194f89",
+				        	   confirmButtonText: "확인",
+				        	   closeOnConfirm: false
+				        	 },
+				        	 function(){
+					           location.href="index.htm";
+				        	 });
+						
 					}else if(data == ""){
 						swal('해당 정보에 맞는 아이디가 없습니다. 정보를 확인해주세요');
 					}else{
@@ -238,9 +252,16 @@
 					}
 					
 				},
+				beforeSend:function(){
+			           $('.wrap-loading').removeClass('display-none');
+			    },
+			    complete:function(){
+			    	   $('.wrap-loading').addClass('display-none');
+			    	   
+			    },
 				error:function(){
-					swal('ajax 제대로 안돔');
-					location.href="index.htm";
+					swal('비밀번호 찾기ajax 제대로 안돔');
+					//location.href="index.htm";
 				}
 			});
 		}
@@ -271,13 +292,10 @@
 				success:function(data){
 					//console.log("result 뭐야!?!?!?!?!!??"+data);
 					if(data!=null && data!=""){
-						//console.log(data);
-						
-						
-						
+						//console.log(data);					
 						
 					}else if(data == 0){
-						swal('해당 정보에 맞는 아이디가 없습니다. 정보를 확인해주세요');
+						swal('해당 정보에 맞는 계정이 없습니다. 정보를 확인해주세요');
 					}else{
 						swal('에러입니다. 관리자에게 문의하세요');
 					}

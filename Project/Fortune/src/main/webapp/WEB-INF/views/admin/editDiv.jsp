@@ -20,7 +20,7 @@
 </div>
 
 <!-- 비밀번호 -->
-<div class="form-group">
+<%-- <div class="form-group">
 	<label for="lastname" class="col-md-5" style="margin-top: 5px;">
 		<span class="addon" style="padding-bottom: 0px;">
 			<i class="glyphicon glyphicon-lock"></i>
@@ -30,7 +30,7 @@
 		<input type="password" style="color: #777" class="form-control"
 			value="${join_DTO.user_password}" id="user_password" name="user_password" readonly="readonly">
 	</div>
-</div>
+</div> --%>
 
 <!-- 이름 -->
 <div class="form-group">
@@ -110,7 +110,7 @@
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
 		<span class="addon" style="padding-bottom: 0px;">
-			<i class="glyphicon glyphicon-calendar"></i>
+			<i class="glyphicon glyphicon-list-alt"></i>
 		</span>부서명
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
@@ -135,7 +135,7 @@
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
 		<span class="addon" style="padding-bottom: 0px;">
-			<i class="glyphicon glyphicon-calendar"></i>
+			<i class="glyphicon glyphicon-menu-right"></i>
 		</span>팀명
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
@@ -160,7 +160,7 @@
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
 		<span class="addon" style="padding-bottom: 0px;">
-			<i class="glyphicon glyphicon-calendar"></i>
+			<i class="glyphicon glyphicon-menu-right"></i>
 		</span>직급명
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
@@ -185,7 +185,7 @@
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
 		<span class="addon" style="padding-bottom: 0px;">
-			<i class="glyphicon glyphicon-calendar"></i>
+			<i class="glyphicon glyphicon-menu-right"></i>
 		</span>권한
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
@@ -207,7 +207,8 @@
 <!-- 수정, 취소 버튼 -->
 <div class="form-group">
 	<div class="content col-md-12" align="center">
-		<input type="button" class="btn btn-primary " onclick="UserUpdate()" value="수정"> 
+		<input type="button" class="btn btn-primary " onclick="UserUpdate()" value="수정">
+		<input type="button" class="btn btn-primary " onclick="deleteok_id('${join_DTO.user_id}')" value="삭제"> 
 		<input type="button" class="btn btn-primary" onclick="CancelUpdate()" value="취소">
 	</div>
 </div>

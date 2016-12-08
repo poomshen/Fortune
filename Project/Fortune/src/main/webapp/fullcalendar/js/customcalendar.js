@@ -64,7 +64,7 @@ function schedule_type(){
 					
 					$.each(data.new_alarm, function(index, obj) {
 						
-						$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
+						$("#td"+obj.schedule_no).append('<img style="width: 28px;height: 16px" src="assets/img/alarm/new1.png"/>');
 						
 					});
 				},
@@ -394,7 +394,7 @@ function fcontent() {
 
 	        $.each(data.new_alarm, function(index, obj) {
 				
-				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
+				$("#td"+obj.schedule_no).append('<img style="width: 28px;height: 16px" src="assets/img/alarm/new1.png"/>');
 				
 			});
 		},
@@ -569,7 +569,7 @@ function loadCalendar(role1,role2) {
 					//새로왔다면 new이미지 붙이기
 					if(obj.isNew){
 						
-						$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
+						$("#td"+obj.schedule_no).append('<img style="width: 28px;height: 16px"src="assets/img/alarm/new1.png"/>');
 						
 					}
 				},

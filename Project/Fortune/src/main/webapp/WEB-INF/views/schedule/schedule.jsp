@@ -128,7 +128,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 			
 	        $.each(data.new_alarm, function(index, obj) {
 				
-				$("#td"+obj.schedule_no).append('<img src="assets/img/alarm/new1.png"/>');
+				$("#td"+obj.schedule_no).append('<img style="width: 28px;height: 16px" src="assets/img/alarm/new1.png"/>');
 				
 			});
 
