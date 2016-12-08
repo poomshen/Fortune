@@ -5,6 +5,10 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="button_style/buttons.css">
+<script type="text/javascript" src="button_style/buttons.js"></script>
 <!-- 
 작성자 : 이예지
 최초작업일 : 2016/12/05
@@ -76,14 +80,12 @@ Profile = {
             $('.plus').click(function(){
             	
             	$('#hidden').val($(this).attr('id'));
-            	
-             	$('#social-link'+$(this).attr('id')).toggleClass('active');
-                $('#about-mesocial-link'+$(this).attr('id')).toggleClass('blur');
+            	detailReqCollabo($(this).attr('id'));
+             	//$('#social-link'+$(this).attr('id')).toggleClass('active');
             });
             
     		$('.social-link').click(function(){
               	$(this).toggleClass('active');
-                $('#about-me'+$(this).attr('id')).toggleClass('blur');
             });
         },
         accordion:function(){
@@ -390,13 +392,21 @@ function proAdd(){
 
 
 <div class="col-lg-12" style="width:1000px; margin-top:20px">
+         
+                
+
+
+
+
 <!-- 가로로 한줄 ㅁㅁㅁ 씩 채우기-->
 <c:forEach items="${list}" var="n" varStatus="status">
 
      	<!-- 가로로 한줄 ■ㅁㅁ (첫번째)-->
-    			<div id="row1" style="height:200px" class="col-md-4 col">
-					<div class="accordion-wrap">
-	   					<div class="accordion">
+    			<div id="row1" style="height:280px" class="col-md-4 col">
+					<div class="accordion-wrap" style="height:200px">
+	   					<div class="accordion" style="height:200px">
+	   					
+                
         					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}
         					<c:set value="${n.collabo_req_index}" var="req"/>
         					<c:if test="${fn:endsWith(req,'n')}">
@@ -407,7 +417,15 @@ function proAdd(){
         						<div class="sub-nav active">
             						<div class="html about-me" id="about-mesocial-link${req}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
-                       					<div class="photo" style=
+         
+         							<div class="row" style="margin-bottom: 0px;padding-bottom: 10px;">
+						  				<div class="col-sm-2" style="padding-right: 0px;"></div>
+							  			<div class="col-sm-1"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 0px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.2"onclick="progress_0()"> 대기 </button></div>
+							  			<div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.3"onclick="progress_20()"> 수락 </button></div>
+							  			<div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.4"onclick="progress_40()"> 거절 </button></div>
+							    		<div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.6"onclick="progress_60()"> 60% </button></div>
+							    		</div>
+                       				<div class="photo" style=
                								 <c:choose>
 												<c:when test="${n.collabo_req_state == '수락' || n.collabo_req_state == '완료'}">
               										 "border:3px solid #1e851f; margin-right:0px"
@@ -435,13 +453,18 @@ function proAdd(){
         <%-- <input type="hidden" id="hiddendetail${n.collabo_req_index}" value="${n.collabo_req_index}"><input type="hidden" id="hiddendetailvalue" value="${n.collabo_req_index}"> --%>
         
         <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
-                <div class="social-link" id="social-link${req}">
+       
+<%--                 <div class="social-link active" id="social-link${req}">
+                   
+                   
+                   
+                   
                     <!-- 상세보기 --><a class="link link-twitter" onclick="detailReqCollabo(${req})" target="_blank"><i class="fa fa-twitter"></i></a>
                    <c:if test="${sessionScope.info.user_id == n.collabo_req_ID&&n.collabo_req_state == '대기'}">
                     <!-- 수락 --><a  data-toggle="modal" data-target="#myModal2" class="link link-codepen" onclick="memoReqCollabo(${req})" target="_blank"><i class="fa fa-codepen"></i></a>
                     <!-- 거절 --><a  class="link link-facebook" onclick="refuseReqCollabo(${req})" target="_blank"><i class="fa fa-facebook"></i></a>
                   </c:if>
-                </div>
+                </div> --%>
             </div>
         </div>
 
