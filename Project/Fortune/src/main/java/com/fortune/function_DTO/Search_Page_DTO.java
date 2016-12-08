@@ -141,6 +141,15 @@ public class Search_Page_DTO {
 	public void setState(String state) {
 		this.state = state;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Search_Page_DTO [pg=" + pg + ", f=" + f + ", q=" + q + ", st=" + st + ", rs=" + rs + ", me=" + me
+				+ ", se=" + se + ", collabo_req_index=" + collabo_req_index + ", state=" + state + ", fieldnot="
+				+ fieldnot + "]";
+	}
 	
 	
 	
