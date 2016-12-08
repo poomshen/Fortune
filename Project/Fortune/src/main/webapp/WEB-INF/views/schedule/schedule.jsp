@@ -64,7 +64,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 							title : obj.wm_title,
 							start : obj.schedule_start,
 							end : obj.schedule_end,
-							backgroundColor : '#23b100'
+							backgroundColor : 'rgb(71, 142, 72)'
 					};
 					array.push(item);
 				}
@@ -107,7 +107,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 
 					}
 				} else{
-					content += '<tr><td style="color:#23b100;">회의</td>';
+					content += '<tr><td style="color:rgb(71, 142, 72);">회의</td>';
 			        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 			        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 			        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>';
@@ -122,6 +122,9 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 	        //parameter로 false,false 를 주면 캘린더에 일정수정 및 일정등록 불가함
 	        //parameter로 true, true 를 주면 캘린더에 일정수정 및 일정등록 가능함
 			loadCalendar(role,role);
+	        $('#content_parent').css("height", $('.fc-view-container').css("height") );
+	        $('#content_detail').css("height", $('.fc-view-container').css("height") );
+	        $('#content_detail2').css("height", $('.fc-view-container').css("height") );
 			
 	        $.each(data.new_alarm, function(index, obj) {
 				
@@ -260,7 +263,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
     <div class="modal-dialog modal-lg" style="height:500px">
         <div class="modal-content"style="height:500px">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <button type="button" class="close" id="modal_close" data-dismiss="modal" aria-hidden="true">
                     &times;</button>
                 <h4 class="modal-title" id="myModalLabel">
                     일반/회의 업무 등록</h4>
@@ -292,7 +295,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="button" data-dismiss="modal" class="btn hvr-grow-shadow" id="modal_ok">
+                                        <button type="button" class="btn hvr-grow-shadow" id="modal_ok">
                                             일반업무 등록</button>
                                         
                                     </div>
@@ -333,7 +336,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
                                     <div class="col-sm-2">
                                     </div>
                                     <div class="col-sm-10" style="margin-top:50px">
-                                        <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" id="modal_ok2">
+                                        <button type="button" class="btn btn-primary btn-sm" id="modal_ok2">
                                             회의업무 등록</button>
                                     </div>
                                 </div>
@@ -380,7 +383,8 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 					<div class="row" style="padding-right: 0px; margin-top: 11px; margin-bottom: 11px;">
 						<div class="col-sm-2">
 							<select id="schedule_type" onchange="schedule_type()" style="height: 20px;">
-								<option id="default_option" value="0"> 전 체 보 기 </option>
+								<option id="default_option" value="4"> 선 택 </option>
+								<option value="0"> 전 체 보 기 </option>
 								<option value="3" >내 일정 보기</option>
 								<option value="1" >업무일정 보기</option>
 								<option value="2" >회의일정 보기</option>
@@ -388,136 +392,138 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 						</div>
 						<!-- 수정, 저장, 삭제 버튼 팀장만 보여주기 (권한처리) -->
 					<c:if test="${role_no==3 && finish_check==0}">
-						<div class="col-sm-4"></div>
-						<div class="col-sm-3" style="padding-right: 0px;">
-							<input type="hidden" value="업무 수정" id="update_btn" onclick="work_update()" class="button button-tiny" style="padding-right: 10px; padding-left: 10px;">
-							<input type="hidden" value="업무 저장" id="updateok_btn" onclick="work_updateok()" class="button button-action button-tiny" style="padding-right: 10px; padding-left: 10px;">
+						<div class="col-sm-6"></div>
+						<div class="col-sm-2" style="padding-right: 0px;  margin-right: 0px;">
+							<input type="hidden" value="수정" id="update_btn" onclick="work_update()" class="button button-tiny" style="padding-right: 10px; padding-left: 10px; margin-right: 0px; margin-left: 20px;">
+							<input type="hidden" value="저장" id="updateok_btn" onclick="work_updateok()" class="button button-action button-tiny" style="padding-right: 10px; padding-left: 10px; margin-right: 0px;  margin-left: 20px;">
 
-							<input type="hidden" value="회의 수정" id="meet_update_btn" onclick="work_update2()" class="button button-tiny" style="padding-right: 10px; padding-left: 10px;">
-							<input type="hidden" value="회의 저장" id="meet_updateok_btn" onclick="work_updateok2()" class="button button-action button-tiny" style="padding-right: 10px; padding-left: 10px;">
+							<input type="hidden" value="수정" id="meet_update_btn" onclick="work_update2()" class="button button-tiny" style="padding-right: 10px; padding-left: 10px; margin-right: 0px; margin-left: 20px;">
+							<input type="hidden" value="저장" id="meet_updateok_btn" onclick="work_updateok2()" class="button button-action button-tiny" style="padding-right: 10px; padding-left: 10px; margin-right: 0px; margin-left: 20px;">
 						</div>
-						<div class="col-sm-3" style="padding-left: 0px; padding-right: 0px;">
-							<input type="hidden" value="업무 삭제" id="delete_btn" class="button button-caution button-tiny" style="padding-right: 10px; padding-left: 10px;">
+						<div class="col-sm-2" style="padding-left: 0px; padding-right: 0px; margin-left: 0px;">
+							<input type="hidden" value="삭제" id="delete_btn" class="button button-caution button-tiny" style="padding-right: 10px; padding-left: 10px; margin-left: 0px;">
 
-							<input type="hidden" value="회의 삭제" id="meet_delete_btn" class="button button-caution button-tiny" style="padding-right: 10px; padding-left: 10px;">
+							<input type="hidden" value="삭제" id="meet_delete_btn" class="button button-caution button-tiny" style="padding-right: 10px; padding-left: 10px;  margin-left: 0px;">
 						</div>
-					</c:if>	
+					</c:if>
 				</div>
-
-				<div id="content_parent" style="overflow: auto; width: 100%; height: 435px; overflow-x: hidden; padding-left: 0px; padding-right: 0px;">
-					<div id="content" style="padding-right:0px;">
-					</div>
-					<div id="content_detail" style="display: none; padding-right:0px;">
-							
-							<!-- progress bar -->
-							<div class="row" style="padding-right: 0px;">
-								<div class="col-sm-2"><label style="padding-top: 3px;">진척률</label></div>
-								<div class="col-sm-10" style="padding-left: 0px; padding-right: 0px;">
-									<div class="progress" style="width: 330px; padding-right: 0px; margin-bottom: 2px;">
-									    <div class="progress-bar progress-bar-striped active" value="0" id="progress_value" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%; padding-right: 0px;">
-										0%</div>
-								  	</div>
+					<hr style="margin-top: 0px; margin-bottom: 0px;">
+				<div class="row">
+					<div id="content_parent" style="overflow: auto; width: 100%; overflow-x: hidden; padding-left: 0px; padding-right: 0px;">
+						<div id="content" style="padding-right:0px;">
+						</div>
+						<div id="content_detail" style="display: none; padding-right:0px;">
+								
+								<!-- progress bar -->
+								<div class="row" style="padding-right: 0px;">
+									<div class="col-sm-2"><label style="padding-top: 3px;">진척률</label></div>
+									<div class="col-sm-10" style="padding-left: 0px; padding-right: 0px;">
+										<div class="progress" style="width: 330px; padding-right: 0px; margin-bottom: 2px;">
+										    <div class="progress-bar progress-bar-striped active" value="0" id="progress_value" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%; padding-right: 0px;">
+											0%</div>
+									  	</div>
+									</div>
 								</div>
-							</div>
+								
+						  	<!-- 아래 6개 버튼 팀장만 보여주기 (권한처리) -->
+							<c:if test="${role_no==3 && finish_check==0}">
+							  	<div class="row" style="margin-bottom: 30px;">
+							  		<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px; padding-right: 0px;">등록하기</label></div>
+								  	<div class="col-sm-1"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 0px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.2"onclick="progress_0()"> 0% </button></div>
+								  	<div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.3"onclick="progress_20()"> 20% </button></div>
+								  	<div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.4"onclick="progress_40()"> 40% </button></div>
+								    <div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.6"onclick="progress_60()"> 60% </button></div>
+								    <div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.8"onclick="progress_80()"> 80% </button></div>
+								    <div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;"onclick="progress_100()"> 100% </button></div>
+								    <div class="col-sm-3" style="margin-left: 15px;"><button type="button" id="update_progress" class="button button-pill button-tiny"><i class="fa fa-check"></i></button></div>
+							  	</div>
+						    </c:if>
+						    <div class="row">
+						    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 4px;">제 목</label></div>
+						    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" id="detail_title" class="form-control" readonly="readonly" style="color: black; margin-bottom: 5px; padding-bottom: 0px; padding-top: 0px; height: 25px; font-size: small;"></div>
+						    </div>
 							
-					  	<!-- 아래 6개 버튼 팀장만 보여주기 (권한처리) -->
-						<c:if test="${role_no==3 && finish_check==0}">
-						  	<div class="row" style="margin-bottom: 30px;">
-						  		<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px; padding-right: 0px;">등록하기</label></div>
-							  	<div class="col-sm-1"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 0px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.2"onclick="progress_0()"> 0% </button></div>
-							  	<div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.3"onclick="progress_20()"> 20% </button></div>
-							  	<div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.4"onclick="progress_40()"> 40% </button></div>
-							    <div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.6"onclick="progress_60()"> 60% </button></div>
-							    <div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;opacity:0.8"onclick="progress_80()"> 80% </button></div>
-							    <div class="col-sm-1" style="margin-left: 4px;"><button type="button" class="button button-circle button-flat-primary button-tiny" style="background-color: #194f89; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;"onclick="progress_100()"> 100% </button></div>
-							    <div class="col-sm-3" style="margin-left: 15px;"><button type="button" id="update_progress" class="button button-pill button-tiny"><i class="fa fa-check"></i></button></div>
-						  	</div>
-					    </c:if>
-					    <div class="row">
-					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 4px;">제 목</label></div>
-					    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" id="detail_title" class="form-control" readonly="readonly" style="color: black; margin-bottom: 5px; padding-bottom: 0px; padding-top: 0px; height: 25px; font-size: small;"></div>
-					    </div>
+							<div class="row">
+						    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 25px;">내 용 </label></div>
+						    	<div class="col-sm-10" style="padding-left: 0px;"><textarea rows="5" cols="50" id="detail_text" class="form-control" readonly="readonly" style="color: black; margin-bottom: 5px; font-size: small;"></textarea></div>
+						    </div>
+						    
+							<div class="row">
+						    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 4px; ">담당자</label></div>
+						    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" id="usersdiv" class="form-control" readonly="readonly" style="color: black; padding-bottom: 0px; padding-top: 0px; height: 25px; font-size: small;"></div>
+						    </div>
+						    
+							<hr style="margin-top: 7px; margin-bottom: 7px;">
+							<input type="hidden" id="detail_id">
+							<input type="hidden" id="detail_start">
+							<input type="hidden" id="detail_end">
+							<input type="hidden" id="detail_progress">
+				
+				<!-- comment 보여주는 div영역 -->
+				<!-- panel-heading -->	
+				<div class="chat-panel panel panel-default" style="margin-bottom: 0px;">
+					<div class="panel-heading" style="height: 25px; padding-top: 4px;">
+						<i class="fa fa-comments fa-fw"></i> Comment
+					</div>
+					<!-- panel-body -->
+					<div class="panel-body" style="height: 170px;">
+						<!-- comment_text 내용추가 하는 영역 -->
+						<ul class="chat">
+						<div id="comment_text"></div>
+						</ul>
+					</div>
+					<!-- panel-footer -->
+					<div class="panel-footer" style="height: 35px; padding-top: 2px;">
+						<div class="input-group" style="padding-top: 0px;">
+	                       <input id="comment_textarea" type="text" class="form-control input-sm" placeholder="Type your message here...">
+	                       <span class="input-group-btn">
+	                           <button type="button" class="button button-rounded button-tiny" style="background-color: #194f89;" onclick="insert_comment()">등록</button>
+	                       </span>
+	                   </div>
+					</div>
+				</div>
+							
+							
+						</div>
 						
-						<div class="row">
-					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 25px;">내 용 </label></div>
-					    	<div class="col-sm-10" style="padding-left: 0px;"><textarea rows="5" cols="50" id="detail_text" class="form-control" readonly="readonly" style="color: black; margin-bottom: 5px; font-size: small;"></textarea></div>
-					    </div>
-					    
-						<div class="row">
-					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 4px; ">담당자</label></div>
-					    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" id="usersdiv" class="form-control" readonly="readonly" style="color: black; padding-bottom: 0px; padding-top: 0px; height: 25px; font-size: small;"></div>
-					    </div>
-					    
-						<hr style="margin-top: 7px; margin-bottom: 7px;">
-						<input type="hidden" id="detail_id">
-						<input type="hidden" id="detail_start">
-						<input type="hidden" id="detail_end">
-						<input type="hidden" id="detail_progress">
-			
-			<!-- comment 보여주는 div영역 -->
-			<!-- panel-heading -->	
-			<div class="chat-panel panel panel-default" style="margin-bottom: 0px;">
-				<div class="panel-heading" style="height: 25px; padding-top: 4px;">
-					<i class="fa fa-comments fa-fw"></i> Comment
-				</div>
-				<!-- panel-body -->
-				<div class="panel-body" style="height: 170px;">
-					<!-- comment_text 내용추가 하는 영역 -->
-					<ul class="chat">
-					<div id="comment_text"></div>
-					</ul>
-				</div>
-				<!-- panel-footer -->
-				<div class="panel-footer" style="height: 35px; padding-top: 2px;">
-					<div class="input-group" style="padding-top: 0px;">
-                       <input id="comment_textarea" type="text" class="form-control input-sm" placeholder="Type your message here...">
-                       <span class="input-group-btn">
-                           <button type="button" class="button button-rounded button-tiny" style="background-color: #194f89;" onclick="insert_comment()">등록</button>
-                       </span>
-                   </div>
-				</div>
-			</div>
+						
+						
+						
+						
+						
+						<div id="content_detail2" style="display: none; padding-right:0px;">
+	
+							<input type="hidden" id="meet_detail_id"><input type="hidden" id="meet_detail_start"><input type="hidden" id="meet_detail_end"><br>
+							<div class="row">
+						    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">제 목</label></div>
+						    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" class="form-control" style="color:black; margin-bottom: 5px;" id="meet_detail_title" readonly="readonly"></div>
+						    </div>
+							
+							<div class="row">
+						    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 40px;">내 용 </label></div>
+						    	<div class="col-sm-10" style="padding-left: 0px;"><textarea rows="5" class="form-control" style="color:black; margin-bottom: 5px;" cols="50" id="meet_detail_text" readonly="readonly"></textarea></div>
+						    </div>
+						    
+							<div class="row">
+						    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">참가자</label></div>
+						    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" id=usersdiv2 class="form-control" readonly="readonly" style="color: black; margin-bottom: 5px;"></div>
+						    </div>
+						    <div class="row">
+						    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">회의장소</label></div>
+						    	<div class="col-sm-10" style="padding-right: 0px;"><label id="place" style="padding-top: 8px; font-weight: lighter;"></label></div>
+						    </div>
+						
+						
+						
+						</div>
+						
+						
+						
+						
+						
 						
 						
 					</div>
-					
-					
-					
-					
-					
-					
-					<div id="content_detail2" style="display: none; padding-right:0px;">
-
-						<input type="hidden" id="meet_detail_id"><input type="hidden" id="meet_detail_start"><input type="hidden" id="meet_detail_end"><br>
-						<div class="row">
-					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">제 목</label></div>
-					    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" class="form-control" style="color:black; margin-bottom: 5px;" id="meet_detail_title" readonly="readonly"></div>
-					    </div>
-						
-						<div class="row">
-					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 40px;">내 용 </label></div>
-					    	<div class="col-sm-10" style="padding-left: 0px;"><textarea rows="5" class="form-control" style="color:black; margin-bottom: 5px;" cols="50" id="meet_detail_text" readonly="readonly"></textarea></div>
-					    </div>
-					    
-						<div class="row">
-					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">참가자</label></div>
-					    	<div class="col-sm-10" style="padding-left: 0px;"><input type="text" id=usersdiv2 class="form-control" readonly="readonly" style="color: black; margin-bottom: 5px;"></div>
-					    </div>
-					    <div class="row">
-					    	<div class="col-sm-2" style="padding-right: 0px;"><label style="padding-top: 8px;">회의장소</label></div>
-					    	<div class="col-sm-10" style="padding-right: 0px;"><label id="place" style="padding-top: 8px; font-weight: lighter;"></label></div>
-					    </div>
-					
-					
-					
-					</div>
-					
-					
-					
-					
-					
-					
-					
 				</div>
 			</div>
 		</div>

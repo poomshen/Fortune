@@ -207,7 +207,9 @@ public class MemberController {
 		IJoin jdao = sqlsession.getMapper(IJoin.class);
 		jdto = jdao.searchTitle();
 		model.addAttribute("position", jdto);
-
+		
+		model.addAttribute("check","10");
+		
 		return "home.edit";
 		
 	}
@@ -219,7 +221,7 @@ public class MemberController {
 		PassWord_Service passWord_Service = new PassWord_Service();
 		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
 		IJoin dao = sqlsession.getMapper(IJoin.class);
-		dao.updateMember(dto);
+		int check = dao.updateMember(dto);
 		
 		Join_DTO  result = new Join_DTO();
 		result = dao.searchMember(dto.getUser_id());
@@ -242,6 +244,12 @@ public class MemberController {
 		IJoin jdao = sqlsession.getMapper(IJoin.class);
 		jdto = jdao.searchTitle();
 		model.addAttribute("position", jdto);
+		
+		if(check > 0){
+			model.addAttribute("check","1");
+		}else{
+			model.addAttribute("check","0");
+		}
 		
 		return "home.edit";
 	}

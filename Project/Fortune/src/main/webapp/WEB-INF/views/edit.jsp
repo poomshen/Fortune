@@ -4,12 +4,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%
    request.setCharacterEncoding("UTF-8");
+	String check = (String)request.getAttribute("check");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	var check = <%=check%>;
+	if(check=="1"){
+		swal("수정 완료");
+	}else if(check=="0"){
+		swal("수정 실패");
+	}
+	</script>
 </head>
 <body style="color:#777">
 <h3 style="
@@ -149,8 +158,8 @@
 			</div>
 		</div>
 		<div class="form-group container" align="center">
-			<input type="submit" class="btn btn-primary" onclick="alert('수정 완료')" value="수정완료">
-			<input type="button" class="btn btn-primary" onclick="history.go(-1)" value="취소">
+			<input type="submit" class="btn btn-primary" value="수정완료">
+	
 		</div>
     </form>
 </body>

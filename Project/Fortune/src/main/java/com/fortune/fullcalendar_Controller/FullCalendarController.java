@@ -351,7 +351,7 @@ public class FullCalendarController {
         if(color_check.equals("rgb(51, 122, 183)")||color_check.equals("rgba(51, 122, 183, 0.219608)")){
         	//일반일정
         	user_ids = fullcalendarDAO.selectClick_users(schedule_no);
-        }else if(color_check.equals("rgb(35, 177, 0)")){
+        }else if(color_check.equals("rgb(71, 142, 72)")){
         	user_ids = fullcalendarDAO.selectClick_users2(schedule_no);
 
         }
