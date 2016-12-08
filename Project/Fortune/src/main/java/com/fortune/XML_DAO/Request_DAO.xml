@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="requestCount" resultType="Integer"  parameterType="com.fortune.function_DTO.Search_Page_DTO">
 		SELECT COUNT(*) CNT
 		FROM collabo_req
-		WHERE (${f} like #{q} AND collabo_req_state LIKE #{st} AND #{me} LIKE #{se})
+		WHERE (${f} like #{q} AND collabo_req_state LIKE #{st} AND ${me} LIKE #{se})
 	</select>
 
 	<select id="getRequest" parameterType="com.fortune.function_DTO.Search_Page_DTO" resultType="com.fortune.Table_DTO.Request_DTO">

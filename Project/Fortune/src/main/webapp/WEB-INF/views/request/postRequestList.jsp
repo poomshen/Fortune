@@ -388,30 +388,35 @@ function modifyReqCollabo(){
   		  		<!-- 페이징 처리하기  -->
 		  		<div style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
-							<c:if test="${pg>block}">
+							<c:if test="${pg != 1}">
+								<c:if test="${pg == from_page}">
 									<li><a href="#" onclick="pazingBtn('1')">««</a></li>
 									<li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
 								</c:if>
-								<c:if test="${pg<=block}">
-									<li><a href="#">««</a></li>
-									<li><a href="#">«</a></li>
+								<c:if test="${pg > from_page}">
+									<li><a href="#" onclick="pazingBtn('1')">««</a></li>
+									<li><a href="#" onclick="pazingBtn('${pg - 1}')">«</a></li>
 								</c:if>
+							</c:if>
 								<c:forEach begin="${from_page}" end="${to_page}" var="i">
 									<c:if test="${i==pg}">
 										<li class="active"><a href="#">${i}</a></li>
 									</c:if>
 									<c:if test="${i!=pg}">
-										<li><a href="#" onclick="pazingBtn(${i})">${i}</a></li>
+										<li><a href="#" onclick="pazingBtn('${i}')">${i}</a></li>
 									</c:if>
 								</c:forEach>
-								<c:if test="${to_page<all_page}">
-									<li><a href="#" onclick="pazingBtn('${to_page+1}')">»</a></li>
+								<!-- 다음 페이지 -->
+							<c:if test="${list.size() != 0}">
+								<c:if test="${pg < to_page || pg != all_page}">
+									<li><a href="#" onclick="pazingBtn('${pg + 1}')">»</a></li>
 									<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
 								</c:if>
-								<c:if test="${to_page>=all_page}">
-									<li><a href="#">»</a></li>
-									<li><a href="#">»»</a></li>
+								<c:if test="${to_page > all_page && pg != all_page}">
+									<li><a href="#" onclick="pazingBtn('${to_page + 1}')">»</a></li>
+									<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
 								</c:if>
+							</c:if>
 						</ul>
 					</div>
 				</div>

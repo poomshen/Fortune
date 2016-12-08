@@ -150,7 +150,6 @@
 		</div>
 		<div class="form-group container" align="center">
 			<input type="submit" class="btn btn-primary" onclick="alert('수정 완료')" value="수정완료">
-			<input type="button" class="btn btn-primary" onclick="history.go(-1)" value="취소">
 		</div>
     </form>
 </body>

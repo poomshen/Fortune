@@ -38,14 +38,7 @@ input.buttonLink {
 			<select id="deptSelect1" name="deptSelect1">
 				<option value="-1" selected="selected">부서 선택</option>
 				<c:forEach var="i" items="${dept}">
-					<c:choose>
-						<c:when test="${i.dept_no == sessionScope.info.dept_no}">
-							<option value="${i.dept_no}" selected>${i.dept_name}</option>
-						</c:when>
-						<c:otherwise>
-							<option value="${i.dept_no}">${i.dept_name}</option>
-						</c:otherwise>
-					</c:choose>
+					<option value="${i.dept_no}">${i.dept_name}</option>
 				</c:forEach>
 			</select> 
 			<input type="button" class="btn btn-primary" onclick="deptshowadmin()" value="검색">
@@ -103,6 +96,7 @@ function deptchange() {
 		data:{"dept_no":$('#deptSelect').val()},
 		success:function(data){
 			$("#teamSelect").html("");
+			$('#teamSelect').append("<option value=-1 'selected'>선택</option>");
 			for(var i=0; i<data.length; i++){
 				if(i==0){
 					$('#teamSelect').append("<option value='"+data[i].team_no+"' selected>"+data[i].team_name+"</option>");
@@ -112,7 +106,7 @@ function deptchange() {
 			}
 		},
 		error:function(){
-			alert('팀목록 가져오는데서 에러남!');
+			swal('팀목록 가져오는데서 에러남!');
 		}
 	});
 }
@@ -128,8 +122,14 @@ function deptshowadmin(){
 			$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data));
 		},
+		beforeSend:function(){
+			$('.wrap-loading').removeClass('display-none');
+		},
+		complete:function(){
+			$('.wrap-loading').addClass('display-none');
+		},
 		error:function(){
-			alert('회원 목록을 가져오는데 실패했습니다');
+			swal('회원 목록을 가져오는데 실패했습니다');
 		}
 	}); 
 }
@@ -143,8 +143,14 @@ function ShowUserInfo(userid){
 		success:function(data){
 			$("#usershowDiv").append($('#usershowDiv').html(data)); 
 		},
+		beforeSend:function(){
+			$('.wrap-loading').removeClass('display-none');
+		},
+		complete:function(){
+			$('.wrap-loading').addClass('display-none');
+		},
 		error:function(){
-			alert('회원 상제 정보 가져오기 실패');
+			swal('회원 상제 정보 가져오기 실패');
 		}
 	});
 }
@@ -179,6 +185,12 @@ function UserUpdate(){
 			swal('수정 성공');
 			deptshowadmin();
 			$("#usershowDiv").append($('#usershowDiv').html(data)); 
+		},
+		beforeSend:function(){
+			$('.wrap-loading').removeClass('display-none');
+		},
+		complete:function(){
+			$('.wrap-loading').addClass('display-none');
 		},
 		error:function(){
 			swal('수정 실패');
