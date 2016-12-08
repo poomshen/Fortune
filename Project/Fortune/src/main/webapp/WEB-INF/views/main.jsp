@@ -219,7 +219,7 @@
 					</div>
 				</div>
 				<div id="nn" style="height:280px" class="col-md-4 col">
-					<div>
+					<div style="height:280px">
 						<b>공지사항</b>
                       	 
                       	 <table class="table table-striped table-bordered table-hover">
