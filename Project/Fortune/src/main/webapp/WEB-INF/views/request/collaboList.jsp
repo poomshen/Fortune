@@ -165,7 +165,7 @@ h6 {
 		//대기 수락 거절을 비동기 처리로 사용하였다.
    	function selectState(state){
    		if(state == "전체"){
-    	 	$.get("listReplyRequest2.htm", function(data, textStatus, req) {
+    	 	$.get("requestList2.htm", function(data, textStatus, req) {
     			$('.requestpage').html(data);
     			$('#'+state).addClass('active');
     	 		});	
@@ -193,7 +193,7 @@ h6 {
 
 			<!--대기/수락/거절 tab영역 -->
 			<div class="tab-container">
-				<input type="hidden" id="states">
+				
 				<ul class="nav nav-tabs" style="width: 950px">
 					<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
 					<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">진행중</a></li>
