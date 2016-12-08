@@ -160,7 +160,7 @@ function CancelUpdate(){
 	$("#usershowDiv").append($('#usershowDiv').html("")); 
 }
 
-//회원 수정
+//사원 수정
 function UserUpdate(){
 	if($('#user_name').val() == null || $('#user_name').val() == ""){		
 		swal('이름을 작성해주세요.');
@@ -195,6 +195,29 @@ function UserUpdate(){
 		error:function(){
 			swal('수정 실패');
 		}
+	});
+}
+
+//사원 삭제
+function deleteok_id(user_id){
+	swal({
+		  title: "정말로 탈퇴 하시겠습니까?",
+		  text: "탈퇴한 아이디와 데이터는 재사용 및 복구가 불가합니다..",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "네, 탈퇴하겠습니다.",
+		  cancelButtonText: "아니요, 계속 사용하겠습니다.",
+		  closeOnConfirm: false,
+		  closeOnCancel: false
+		},
+		function(isConfirm){
+		  if (isConfirm) {
+		    swal("삭제완료", "그동안 고생하셨습니다!.", "success");
+		    location.replace('deleteMemember.htm?user_id='+user_id);
+		  } else {
+		    swal("삭제취소", "앞으로 열일 바랍니다.^^!", "error");
+		  }
 	});
 }
 </script>

@@ -7,7 +7,6 @@
 package com.fortune.join_Controller;
 
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +15,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fortune.Table_DTO.Chart_Data_DTO;
 
@@ -171,18 +166,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/deleteMemember.htm")
-	public String deleteMemberView(HttpSession session){
+	public String deleteMemberView(HttpServletRequest request){
 		
 		IJoin dao = sqlsession.getMapper(IJoin.class);
-		Join_DTO dto = (Join_DTO)session.getAttribute("info");
-		System.out.println("id값 : "+dto.getUser_id());
-		dao.deleteMember(dto.getUser_id());
+		String user_id = request.getParameter("user_id");
+		dao.deleteMember(user_id);
 		
-		
-		//System.out.println("삭제완료!!~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		
-		return "redirect:index.htm";
-		
+		return "redirect:adminusers.htm";
 	}
 	
 	@RequestMapping("/updateMember.htm")

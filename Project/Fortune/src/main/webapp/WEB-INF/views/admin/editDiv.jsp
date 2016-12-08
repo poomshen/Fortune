@@ -207,7 +207,8 @@
 <!-- 수정, 취소 버튼 -->
 <div class="form-group">
 	<div class="content col-md-12" align="center">
-		<input type="button" class="btn btn-primary " onclick="UserUpdate()" value="수정"> 
+		<input type="button" class="btn btn-primary " onclick="UserUpdate()" value="수정">
+		<input type="button" class="btn btn-primary " onclick="deleteok_id('${join_DTO.user_id}')" value="삭제"> 
 		<input type="button" class="btn btn-primary" onclick="CancelUpdate()" value="취소">
 	</div>
 </div>
