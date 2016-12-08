@@ -45,7 +45,7 @@ public class ProService {
 
    @Autowired
    private SqlSession sqlsession;
-
+   
    //협업 답장자함 입니다.
    public ModelAndView getRequest(SqlSession sqlsession,Search_Page_DTO search_Page_DTO,HttpSession session)
 
@@ -58,6 +58,9 @@ public class ProService {
       Join_DTO ids = (Join_DTO) session.getAttribute("info");
       
       // 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
+      
+      System.out.println("null exception 에러 (proservice-getRequest 함수)"+ids.getUser_id());
+      
       
       String query = "%" + ids.getUser_id() + "%";
       String st_query ="%%";
@@ -88,7 +91,6 @@ public class ProService {
       if (search_Page_DTO.getMe() == null) {
          search_Page_DTO.setMe(memo);
       }
-      
       ModelAndView mv = new ModelAndView();
       ProDao proDao = sqlsession.getMapper(ProDao.class);
 
