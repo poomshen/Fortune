@@ -124,7 +124,7 @@ function deptshowadmin(){
 		url:"deptsearchadmin.ajax",
 		data:{"dept_no": $('#deptSelect1').val()},
 		success:function(data){
-			$("#deptshowDiv").css("overflow-y", "scroll");
+			$("#deptshowDiv").css("overflow-y", "auto");
 			$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data));
 		},

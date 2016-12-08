@@ -61,11 +61,12 @@ table, th, td {
 	
 	<input type="button" class="btn btn-primary" onclick="deptshow()" value="검색">
 </form>
-</div>
-
 <!-- 표 부분 -->
 <div id="deptshowDiv">
 </div>
+</div>
+
+
 
 <script type="text/javascript">
 $(function() {
@@ -75,11 +76,11 @@ $(function() {
 		type:"get",
 		url:"deptsearch2.ajax",
 		data:{"dept_no": ${sessionScope.info.dept_no}, 
-			  "team_no": ${sessionScope.info.team_no} },
+			  "team_no": ${sessionScope.info.team_no}},
 		success:function(data){
 			//console.log(data);
-			//$("#deptshowDiv").css("overflow-y", "scroll");
-			//$("#deptshowDiv").css("height", "500px");
+			$("#deptshowDiv").css("overflow-y", "auto");
+			$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 		
 		},
 		error:function(){
@@ -104,8 +105,8 @@ function deptshow(){
 			  "team_no": $('#teamSelect').val()},
 		success:function(data){
 			//console.log("teamSelect value : "+team_no);
-			//$("#deptshowDiv").css("overflow-y", "scroll");
-			//$("#deptshowDiv").css("height", "500px");
+			$("#deptshowDiv").css("overflow-y", "auto");
+			$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 
 			if(data != null){
 				//alert('검색 완료');
