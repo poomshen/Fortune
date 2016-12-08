@@ -81,7 +81,7 @@
                           <ul class="nav nav-second-level">
                                 <c:forEach var="n" items="${sessionScope.finishCollabo}">
                                 <li>
-                                 <a href="schedule.htm?collabo_no=${n.collabo_no}"> ${n.collabo_req_title}</a>
+                                 <a href="schedule2.htm?collabo_no=${n.collabo_no}"> ${n.collabo_req_title}</a>
                                 </li>
                                 </c:forEach>
                             </ul>

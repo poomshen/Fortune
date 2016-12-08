@@ -72,7 +72,7 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 		if(progress_or_place==1){
 			swal('완료된 일정입니다.')
 		}
-	
+		$('#delete_btn').attr('type','button');
 		$('#update_btn').attr('type','button');
 		$('#updateok_btn').attr('type','hidden');
 		document.getElementById("detail_title").readOnly = true;
@@ -134,6 +134,7 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 //회의일정의 상세보기 페이지
 function detail2(id, title, text, start, end, userids, progress_or_place){
 	
+	$('#meet_delete_btn').attr('type','button');
 	$('#meet_update_btn').attr('type','button');
 	$('#meet_updateok_btn').attr('type','hidden');
 	document.getElementById("meet_detail_title").readOnly = true;
@@ -367,6 +368,12 @@ function fcontent() {
 			});
 			$('#content_detail').css("display", "none");
 			$('#content_detail2').css("display", "none");
+			$('#update_btn').attr('type','hidden');
+			$('#updateok_btn').attr('type','hidden');
+			$('#meet_update_btn').attr('type','hidden');
+			$('#meet_updateok_btn').attr('type','hidden');
+			$('#delete_btn').attr('type','hidden');
+			$('#meet_delete_btn').attr('type','hidden');
 			$('#content').empty();	        
 	        $('#content').html(content)
 
@@ -536,6 +543,12 @@ function loadCalendar(role1,role2) {
 					}
 					$('#content_detail').css("display", "none");
 					$('#content_detail2').css("display", "none");
+					$('#update_btn').attr('type','hidden');
+					$('#updateok_btn').attr('type','hidden');
+					$('#meet_update_btn').attr('type','hidden');
+					$('#meet_updateok_btn').attr('type','hidden');
+					$('#delete_btn').attr('type','hidden');
+					$('#meet_delete_btn').attr('type','hidden');
 					$('#content').html(content)
 					
 					//새로왔다면 new이미지 붙이기
@@ -835,7 +848,6 @@ function loadCalendar(role1,role2) {
 	            		},
 	            		function(isConfirm){
 		            		if(isConfirm){
-		            			swal("등록 완료되었습니다.", "효율적인 업무 fortune", "success");
 		            			var id = $('#detail_id').val();
 		            			var calEvent;
 		            			

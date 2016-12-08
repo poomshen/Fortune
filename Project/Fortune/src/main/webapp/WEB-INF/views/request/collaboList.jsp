@@ -134,7 +134,7 @@ h6 {
 		//완료후 비동기 처리
 		function collaboComplete(collabo){
 			$.get("collaboComplet.htm", {collabo_no:collabo }, function(data, textStatus, req) {
-				$("#collaboList").html(data);
+				$(".requestpage").html(data);
 			})
 				$("#myModal").modal("hide");
 		}
@@ -151,7 +151,7 @@ h6 {
 					data:{pg:pg},
 					success:function(data){ //callback  
 					console.log("dasfsd")
-					$("div#collaboList").html(data); 
+					$(".requestpage").html(data); 
 
 				},
 					error: function(){						
@@ -164,30 +164,36 @@ h6 {
 		//대기 수락 거절 메뉴 비동기 위한 함수
 		//대기 수락 거절을 비동기 처리로 사용하였다.
    	function selectState(state){
-   		console.log(state)
-   		
+   		if(state == "전체"){
+    	 	$.get("listReplyRequest2.htm", function(data, textStatus, req) {
+    			$('.requestpage').html(data);
+    			$('#'+state).addClass('active');
+    	 		});	
+    		}else{
    		if(state == "수락"){
    			$.get("responseList2.htm", function(data, textStatus, req) {
-   				$('div#collaboList').html(data);
+   				$('.requestpage').html(data);
+   				$('#'+state).addClass('active');
    			})
    		}else{
    		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
-   			$('div#collaboList').html(data);
+   			$('.requestpage').html(data);
+   			$('#'+state).addClass('active');
    			
    			//console.log(data);
    		});
    		}
+    		}
    	}
 	</script>
 	<!--전체 div영역 -->
 	<div class="container" id="collaboList" style="margin-top: 20px">
 
-		<!--전체 div영역 -->
-		<div class="container" id="requestlist" style="margin-top: 20px">
 			<security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
 
 			<!--대기/수락/거절 tab영역 -->
 			<div class="tab-container">
+				<input type="hidden" id="states">
 				<ul class="nav nav-tabs" style="width: 950px">
 					<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
 					<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">진행중</a></li>

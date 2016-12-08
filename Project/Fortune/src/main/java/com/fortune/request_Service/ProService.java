@@ -32,6 +32,7 @@ import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.Table_DTO.Req_Alarm_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.function_DTO.Search_Page_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.notice_DAO.INotice;
 import com.fortune.req_alarm_DAO.IReqAlarm;
@@ -45,7 +46,7 @@ public class ProService {
    private SqlSession sqlsession;
 
    //협업 답장자함 입니다.
-   public ModelAndView getRequest(SqlSession sqlsession,String pg, String f, String q,String st,String rs,String me,String se,String collabo_req_date,HttpSession session)
+   public ModelAndView getRequest(SqlSession sqlsession,Search_Page_DTO search_Page_DTO,HttpSession session)
 
          throws ClassNotFoundException, SQLException {
       System.out.println("집에 갑시다.");
@@ -64,33 +65,34 @@ public class ProService {
       String search = "%%";
       //////////////////////////////////////
       
-      if (pg != null) {
-         page = Integer.parseInt(pg);
+      if (search_Page_DTO.getPg() == 0) {
+          search_Page_DTO.setPg(page);;
       }
-      if (f != null && f.equals("")) {
-         field = f;
+      if (search_Page_DTO.getF() == null || search_Page_DTO.getF() .equals("")) {
+         search_Page_DTO.setF(field); 
       }
-      if (q != null && q.equals("")) {
-         query = q;
+      if (search_Page_DTO.getQ()  == null || search_Page_DTO.getQ().equals("")) {
+         search_Page_DTO.setQ(query);
       }
-      if (st != null) {
-         st_query = st;
+      if (search_Page_DTO.getSt()  == null) {
+        search_Page_DTO.setSt(st_query);
       }
-      if (se != null) {
-         search = se;
+      if (search_Page_DTO.getSe() == null) {
+         search_Page_DTO.setSe(search);
       }
-      if (me != null) {
-         memo = me;
+      if (search_Page_DTO.getMe() == null) {
+         search_Page_DTO.setMe(memo);
       }
-      
-      
+      System.out.println("???");
       ModelAndView mv = new ModelAndView();
       ProDao proDao = sqlsession.getMapper(ProDao.class);
 
+      System.out.println( search_Page_DTO.getPg() + " / " + search_Page_DTO.getF() + " / " + query + "/"+ st_query);
       System.out.println(page + " / " + field + " / " + query + "/"+ st_query);
 
       int row_size = 9;
-      int total_count = proDao.requestCount(field,query,st_query,memo,search); // 공지사항 글 개수
+      System.out.println( search_Page_DTO.getQ() +"/"+search_Page_DTO.getSe()+"/"+search_Page_DTO.getSe());
+      int total_count = proDao.requestCount(search_Page_DTO); // 공지사항 글 개수
       System.out.println("total_count : " + total_count);
       // 공지사항 글 목록
       int all_page = (int) Math.ceil(total_count / (double) row_size); // 페이지수
@@ -109,9 +111,8 @@ public class ProService {
       
       
       // Mybatis 적용
-      
 
-      List<Request_DTO> list = proDao.getRequest(page, field, query,st_query, memo, search);
+      List<Request_DTO> list = proDao.getRequest(search_Page_DTO);
       
      
       
@@ -119,7 +120,7 @@ public class ProService {
       
       
       mv.addObject("total_count", total_count);
-      mv.addObject("pg", page);
+      mv.addObject("pg", search_Page_DTO.getPg());
       mv.addObject("all_page", all_page);
       mv.addObject("block", block);
       mv.addObject("from_page", from_page);
@@ -127,7 +128,7 @@ public class ProService {
       mv.addObject("st_query", st_query);
       mv.addObject("memo", memo);
       mv.addObject("search", search);
-      mv.setViewName(rs+".tikeRequestList");
+      mv.setViewName(search_Page_DTO.getRs()+".tikeRequestList");
       
       
       //추가사항 : 알림 new할것 가져오기
@@ -160,7 +161,7 @@ public class ProService {
    }
    
    //협업 작성자 리스트 입니다.
-      public ModelAndView listReplyRequest(String selectId,String pg, String f, String q,String st,String rs,String me,String se, HttpSession session)
+      public ModelAndView listReplyRequest(String selectId,Search_Page_DTO search_Page_DTO, HttpSession session)
             throws ClassNotFoundException, SQLException {
          System.out.println("----service:listReplyRequest-----");
 
@@ -175,29 +176,29 @@ public class ProService {
          String search = "%%";
          
          //////////////////////////////////////
-         if (pg != null) {
-            page = Integer.parseInt(pg);
+         if (search_Page_DTO.getPg() == 0) {
+             search_Page_DTO.setPg(page);;
          }
-         if (f != null && f.equals("")) {
-            field = f;
+         if (search_Page_DTO.getF() == null || search_Page_DTO.getF() .equals("")) {
+            search_Page_DTO.setF(field); 
          }
-         if (q != null && q.equals("")) {
-            query = q;
+         if (search_Page_DTO.getQ()  == null || search_Page_DTO.getQ().equals("")) {
+            search_Page_DTO.setQ(query);
          }
-         if (st != null) {
-            st_query = st;
+         if (search_Page_DTO.getSt()  == null) {
+           search_Page_DTO.setSt(st_query);
          }
-         if (se != null) {
-            search = se;
+         if (search_Page_DTO.getSe() == null) {
+            search_Page_DTO.setSe(search);
          }
-         if (me != null) {
-            memo = me;
+         if (search_Page_DTO.getMe() == null) {
+            search_Page_DTO.setMe(memo);
          }
          ModelAndView mv = new ModelAndView();
          ProDao proDao = sqlsession.getMapper(ProDao.class);
          
          int row_size = 9;
-         int total_count = proDao.requestCount(field,query,st_query, memo,search); // 공지사항 글 개수
+         int total_count = proDao.requestCount(search_Page_DTO); // 공지사항 글 개수
          System.out.println("total_count : " + total_count);
          // 공지사항 글 목록
          int all_page = (int) Math.ceil(total_count / (double) row_size); // 페이지수
@@ -217,13 +218,12 @@ public class ProService {
          
          // Mybatis 적용
          
-
-         List<Request_DTO> list = proDao.getRequest(page, field, query, st_query,memo, search);
+         List<Request_DTO> list = proDao.getRequest(search_Page_DTO);
 
          
          mv.addObject("list", list);
          mv.addObject("total_count", total_count);
-         mv.addObject("pg", page);
+         mv.addObject("pg", search_Page_DTO.getPg());
          mv.addObject("all_page", all_page);
          mv.addObject("block", block);
          mv.addObject("from_page", from_page);
@@ -231,7 +231,7 @@ public class ProService {
          mv.addObject("st_query", st_query);
          mv.addObject("memo", memo);
          mv.addObject("search", search);
-         mv.setViewName(rs+".postRequestList");
+         mv.setViewName(search_Page_DTO.getRs()+".postRequestList");
          System.out.println("selectId:"+selectId);
          mv.addObject("selectId",selectId);
          
@@ -242,7 +242,7 @@ public class ProService {
       }
 
       //협업 전체 리스트 입니다.
-            public List<Request_DTO> listallRequest(String pg, String f, String q,String st,String me,String se, HttpSession session)
+            public List<Request_DTO> listallRequest(Search_Page_DTO search_Page_DTO, HttpSession session)
                   throws ClassNotFoundException, SQLException {
 
                // 게시판 기본 설정(기본값 처리)/////////////
@@ -255,31 +255,30 @@ public class ProService {
                String memo = "collabo_req_title";
                String search = "%%";
                //////////////////////////////////////
-               if (pg != null && pg.equals("")) {
-                  page = Integer.parseInt(pg);
+               if (search_Page_DTO.getPg() == 0) {
+                   search_Page_DTO.setPg(page);;
                }
-               if (f != null && f.equals("")) {
-                  field = f;
+               if (search_Page_DTO.getF() == null || search_Page_DTO.getF() .equals("")) {
+                  search_Page_DTO.setF(field); 
                }
-               if (q != null && q.equals("")) {
-                  query = q;
+               if (search_Page_DTO.getQ()  == null || search_Page_DTO.getQ().equals("")) {
+                  search_Page_DTO.setQ(query);
                }
-               if (st != null) {
-                  st_query = st;
+               if (search_Page_DTO.getSt()  == null) {
+                 search_Page_DTO.setSt(st_query);
                }
-               if (se != null) {
-                  search = se;
+               if (search_Page_DTO.getSe() == null) {
+                  search_Page_DTO.setSe(search);
                }
-               if (me != null) {
-                  memo = me;
+               if (search_Page_DTO.getMe() == null) {
+                  search_Page_DTO.setMe(memo);
                }
-               System.out.println("***"+st);
                System.out.println(page + " / " + field + " / " + query+"/"+st_query);
 
                // Mybatis 적용
                ProDao proDao = sqlsession.getMapper(ProDao.class);
                
-               List<Request_DTO> list = proDao.getRequest(page, field, query,st_query,memo, search);
+               List<Request_DTO> list = proDao.getRequest(search_Page_DTO);
                   
                return list;
             }

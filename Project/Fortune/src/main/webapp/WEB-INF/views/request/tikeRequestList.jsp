@@ -12,8 +12,6 @@
 추가작업 : css 변경 및 상세보기 -> modal로 변경
  -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
 <style>
 h6 {
     color: #777;
@@ -40,12 +38,17 @@ h6 {
  */
 
 $(function(){
-
+	//성준 추가
+	$("#${state}").addClass('active');
+	$("#states").val('${state}');
     Profile.load();
-   	console.log('<%=selectId%>');
-   	var select = '<%=selectId%>';
-    if(select!='null')
-    {
+    
+   console.log('<%=selectId%>');
+  
+   var select = '<%=selectId%>';
+   
+    if(select!='null'){
+    
     	setTimeout(function(){
     		
     		console.log("setTimeout / "+select)
@@ -102,7 +105,9 @@ Profile = {
                 return false;
             });
         }
-    }
+    };
+</script>
+<script type="text/javascript">
      //상세 정보를 보여주는 ajax 입니다.
      function detailReqCollabo(a){
     	 //$("#menuView2").empty();
@@ -118,10 +123,11 @@ Profile = {
  	 		    success:function(data){ //callback  
  	 		  
  	 		    	$("#detail").html(data); 
- 					$('#myModal3').modal('show');
+ 					$("#myModal3").modal("show");
+ 					
  	 		     },
  	 			error: function(){						
- 	 				alert('Error while request..'	);
+ 	 				alert("Error while request.."	);
  	 			}
  	 		});
  	}
@@ -144,11 +150,11 @@ Profile = {
 	 		    	console.log(data);
 	 		    	
 	 		    	$("#meneview").html(data); 
-	 		   		$('#myModal2').modal('show');
+	 		   		$("#myModal2").modal("show");
 	 		    
 	 		    },
 	 			error: function(){						
-	 				alert('Error while request..'	);
+	 				alert("Error while request..");
 	 			}
 	 		});
   		
@@ -180,7 +186,7 @@ Profile = {
     				st: "${st_query}",
     				me: "${memo}", 
     				se: "${search}"}, function(data, textStatus, req) {
-    		 		$("#requestlist").html(data); 
+    		 		$(".requestpage").html(data); 
     		 		 swal("거절성공!", "거절사유: " + inputValue, "success");
     			  })
     		 	},2000);
@@ -190,19 +196,29 @@ Profile = {
 	}
      //대기 수락 거절을 비동기 처리로 사용하였다.
    	function selectState(state){
-   		console.log(state)
-   		
+   		if(state == "전체"){
+    	 	$.get("requestList2.htm", function(data, textStatus, req) {
+    			$('.requestpage').html(data);
+    			$('#'+state).addClass('active');
+    			$("#states").val(state);
+    			
+    	 		});	
+    		}else{
    		if(state == "수락"){
    			$.get("responseList2.htm", function(data, textStatus, req) {
-   				$('div#requestlist').html(data);
+   				$(".requestpage").html(data);
+   				$("#"+state).addClass('active');
+   				$("#states").val(state);
+		
    			})
    		}else{
    		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
-   			$('div#requestlist').html(data);
-   			
-   			//console.log(data);
+   			$(".requestpage").html(data);
+   			$("#"+state).addClass('active');
+   			$("#states").val(state);
    		});
    		}
+    		}
    	}
      //검색 기능 비동기 처리로 하였습니다.
    	function searchBtn(){
@@ -212,18 +228,18 @@ Profile = {
 	 			type: "get",
 	 			url:  "requestList2.htm",
 	 			cache: false,				
-	 			data:{me : $('#memoselect').val(),
-	 				  se:$('#search').val()},
+	 			data:{me : $("#memoselect").val(),
+	 				  se:$("#search").val()},
 	 		    success:function(data){ //callback  
-	 		    	console.log($('#search').val());
-	 		    	console.log($('#memoselect').val());
+	 		    	console.log($("#search").val());
+	 		    	console.log($("#memoselect").val());
 	 		    
 	 		    	
-	 		    	$("#requestlist").html(data); 
+	 		    	$(".requestpage").html(data); 
 	 		    
 	 		    },
 	 			error: function(){						
-	 				alert('Error while request..'	);
+	 				alert("Error while request.."	);
 	 			}
 	 		});
    		
@@ -245,15 +261,17 @@ $.ajax({
 			data:{pg: page,
 				st: "${st_query}",
 				me: "${memo}", 
-				se: "${search}"},
+				se: "${search}",
+				state:$("#states").val()},
 			success:function(data){ //callback  
-				console.log('${st_query}');
-				console.log('${memo}');
-				console.log('${search}');
 
 
 
-			$("#requestlist").html(data); 
+			$(".requestpage").html(data);
+			$("#${state}").addClass('active');
+			$("#states").val('${state}');
+			console.log($("#states").val())
+			
 
 		},
 			error: function(){						
@@ -297,23 +315,6 @@ function cmaComma(obj) {
     }
 }
      
- 
-
-function refuse() {
-	 
-	
-	 
-	if($('#collabo_req_text').val() == "") {
-		alert("거절 사유를 입력하세요. ");
-		$('#collabo_req_text').focus();
-		return false;
-	}else{
-			alert("완료");
-			refusemenform.submit(); 
-			return true;
-	}
-	
-}
 
 function proAdd(){
 	 
@@ -349,17 +350,12 @@ function proAdd(){
 
 </script>
 
-
-
-<title>Insert title here</title>
-</head>
-<body>
 <!--전체 div영역 -->
 <div class="container" id="requestlist" style="margin-top:20px">
 
-
 <!--대기/수락/거절 tab영역 -->
 <div class="tab-container">
+		<input type="hidden" id="states">
   		<ul class="nav nav-tabs" style="width:950px">
   		<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
     		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">진행중</a></li>
@@ -487,8 +483,7 @@ function proAdd(){
 						</ul>
 					</div>
 				</div>
-			<!--container div닫아주기 -->	
-			</div>
+			
 			
 			<!-- 상세보기 modal 부분-->
          <div class="container">
@@ -559,10 +554,9 @@ function proAdd(){
 		</div>
 		
 		
+		<!--container div닫아주기 -->	
+		</div>
 		
 		
 		
 		
-		
-</body>
-</html>

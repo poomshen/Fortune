@@ -43,6 +43,32 @@ public class FCMainController {
 
 		model.addAttribute("role_no", dto.getRole_no());
 		model.addAttribute("team_id", user_id);
+		model.addAttribute("finish_check", "0");
+
+		return "schedule.schedule";
+	}
+	
+	
+    /* 작업자 : 이명철  // 최초 작업일 : 11.19 // 최종 작업일 : 12.07
+     * 작업 내용 : 완료된 프로젝트 캘린더 화면으로 넘어가는 부분
+     * version : v1.0
+    */
+	@RequestMapping(value= "/schedule2.htm", method = RequestMethod.GET)
+	public String schedule2(Model model,@RequestParam(value="collabo_no") int collabo_no, HttpSession session) throws ClassNotFoundException, SQLException {
+		
+		System.out.println("위치 : FCMainController // 내용 : 완료된 프로젝트 캘린더 화면으로 넘어가는 부분 // 작업자: 이명철");
+		
+		IFullCalendar fullcalendarDAO = sqlsession.getMapper(IFullCalendar.class);
+		
+		model.addAttribute("collabo_no", collabo_no);
+		
+		Join_DTO dto = (Join_DTO) session.getAttribute("info");
+		
+		List<Team_Users_DTO> user_id = fullcalendarDAO.selectTeam_id(dto.getUser_id());
+
+		model.addAttribute("role_no", dto.getRole_no());
+		model.addAttribute("team_id", user_id);
+		model.addAttribute("finish_check", "1");
 
 		return "schedule.schedule";
 	}
