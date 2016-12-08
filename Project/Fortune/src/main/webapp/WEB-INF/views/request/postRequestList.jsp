@@ -425,11 +425,7 @@ function modifyReqCollabo(){
 						<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>	
 						</div>
 						
-						<div class="modal-footer" id="detail_footer">
-							<input type="hidden" id="hidden">
-							<input type="button" class="btn btn-default" onclick="modifyReqCollabo()" value="수정">
-							<button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
-						</div>
+						
 					</div>
 
 				</div>

@@ -425,9 +425,6 @@ h6 {
 
 						</div>
 
-						<div class="modal-footer" id="detail_footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
 					</div>
 
 				</div>

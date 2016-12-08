@@ -138,6 +138,8 @@ Profile = {
 
 function detail(req,collabo_no){
 	
+	
+		console.log(req+"/"+collabo_no);
 	if(collabo_no=="null"){
 		
 		$('#hidden').val(req);
@@ -172,7 +174,7 @@ function detail(req,collabo_no){
     	 //$("#menuView2").empty();
     	 //$("#ReqCollabo").empty();
  	  	
-    	 
+    	 	console.log("asd");
  	   	 $.ajax({
  	   		 
  	 			type: "get",
@@ -490,7 +492,8 @@ function proAdd(){
 							  	<div class="col-sm-1" style="margin-left: 4px;"><button type="button"  onclick="refuseReqCollabo(${req})"class="button button-circle button-flat-primary button-tiny" style="margin-left:15px;background-color: #d43722; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;"onclick="progress_40()"><i class="fa fa-times" aria-hidden="true"></i></button></div>
 							
 						</c:if>
-						 </div>
+						
+						</div>
                        				<div class="photo" style=
                								 <c:choose>
 												<c:when test="${n.collabo_req_state == '수락' || n.collabo_req_state == '완료'}">
@@ -508,7 +511,7 @@ function proAdd(){
 										style="background: no-repeat center; width: 100%; height: 100%">
 									<!-- 사람 아이콘에 마우스 갖다댈시에 + 모양 띄우기-->
 									<div class="photo-overlay">
-										<span id="${req}" class="plus">+</span>
+										<span id="${req}" onclick="detail(${req},'null')"class="plus">+</span>
 									</div>
 
 								</div>
@@ -601,10 +604,7 @@ function proAdd(){
 
 					<div class="modal-body" id="detail"></div>
 
-					<div class="modal-footer" id="detail_footer">
-						<input type="hidden" id="hidden">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
+					
 				</div>
 
 			</div>
@@ -628,6 +628,7 @@ function proAdd(){
 
 						<h4 class="modal-title">수락</h4>
 
+						</div>
 					</div>
 
 
