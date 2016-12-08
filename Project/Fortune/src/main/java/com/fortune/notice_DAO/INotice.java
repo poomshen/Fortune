@@ -39,6 +39,6 @@ public interface INotice {
 	public int countTextListNotices(String searchvalue);
 	//조회수
 	public void updateHits(int notice_no);
-	//메인 화면 최신글
+	//메인 화면 최신글 (추가작성 : 김중완)
 	public List<Notice_DTO> mainListNotice();
 }

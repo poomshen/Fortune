@@ -6,6 +6,7 @@ var clickobjectcolor= "";
 var scheduleusers;
 var before_text ="";
 var before_text2 ="";
+var before_progress ="";
 
 
 function schedule_type(){
@@ -68,6 +69,10 @@ function schedule_type(){
 
 function detail(id, title, text, start, end, userids, progress_or_place){
 	//온클릭 함수에 가져올 데이터들
+		if(progress_or_place==1){
+			swal('완료된 일정입니다.')
+		}
+		$('#delete_btn').attr('type','button');
 		$('#update_btn').attr('type','button');
 		$('#updateok_btn').attr('type','hidden');
 		document.getElementById("detail_title").readOnly = true;
@@ -84,6 +89,8 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 		$('#detail_end').val(end);
 		$('#detail_progress').val(progress_or_place);
 		$('#check').val("check");
+		
+		before_progress = progress_or_place;
 		
 		//상세보기 내용에 참가자 인원 뿌려주는 코드
 		var userid = userids.split("/");
@@ -127,6 +134,7 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 //회의일정의 상세보기 페이지
 function detail2(id, title, text, start, end, userids, progress_or_place){
 	
+	$('#meet_delete_btn').attr('type','button');
 	$('#meet_update_btn').attr('type','button');
 	$('#meet_updateok_btn').attr('type','hidden');
 	document.getElementById("meet_detail_title").readOnly = true;
@@ -319,19 +327,7 @@ function progress_100(){
 	$('#progress_value').attr("value","1");
 }
 
-function update_progress(){
-	
-	$.ajax({
-		url : 'update_progress.ajax',
-		type : 'post',
-		data : {"schedule_no": $('#detail_id').val(),
-				"work_progress" : $('#progress_value').attr("value")
-				},
-		success : function(data) {
-			alert('등록 성공')
-		}
-	});
-}
+
 //추가작업 : 알림DB NEW 가져오기
 function fcontent() {
 	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
@@ -372,6 +368,12 @@ function fcontent() {
 			});
 			$('#content_detail').css("display", "none");
 			$('#content_detail2').css("display", "none");
+			$('#update_btn').attr('type','hidden');
+			$('#updateok_btn').attr('type','hidden');
+			$('#meet_update_btn').attr('type','hidden');
+			$('#meet_updateok_btn').attr('type','hidden');
+			$('#delete_btn').attr('type','hidden');
+			$('#meet_delete_btn').attr('type','hidden');
 			$('#content').empty();	        
 	        $('#content').html(content)
 
@@ -503,10 +505,6 @@ function loadCalendar(role1,role2) {
 			//클릭된 일정의 객체 배경색 값을 변수에 담음
 			clickobjectcolor = $(this).css('background-color');
 			
-			if(clickobjectcolor=='rgba(51, 122, 183, 0.219608)'){
-				swal('완료된 일정입니다.')
-			}
-			
 			//클릭된 일정의 배경색을 red로 설정
 			$(this).css('background-color', 'rgba(237,0,0,0.66');
 			
@@ -545,6 +543,12 @@ function loadCalendar(role1,role2) {
 					}
 					$('#content_detail').css("display", "none");
 					$('#content_detail2').css("display", "none");
+					$('#update_btn').attr('type','hidden');
+					$('#updateok_btn').attr('type','hidden');
+					$('#meet_update_btn').attr('type','hidden');
+					$('#meet_updateok_btn').attr('type','hidden');
+					$('#delete_btn').attr('type','hidden');
+					$('#meet_delete_btn').attr('type','hidden');
 					$('#content').html(content)
 					
 					//새로왔다면 new이미지 붙이기
@@ -819,6 +823,71 @@ function loadCalendar(role1,role2) {
 	            	
             		
 	            })
+	        },
+	        
+
+	        // 작업자: 이명철  // 최근 수정일: 16-12-07 ---------------------S T A R T------------------------
+	        // progress업데이트
+	        updateEvent: {
+	        	
+	            click: $('#update_progress').click(function(){
+	            if(before_progress==1){
+	            	swal('완료된 일정입니다.')
+	            }else{
+	            
+	            	swal({
+	            		  title: "등록 하시겠습니까?",
+	            		  text: "효율적인 업무 fortune",
+	            		  type: "info",
+	            		  showCancelButton: true,
+	            		  confirmButtonColor: "#DD6B55",
+	            		  confirmButtonText: "등록하기",
+	            		  cancelButtonText: "취소",
+	            		  closeOnConfirm: false,
+	            		  closeOnCancel: true
+	            		},
+	            		function(isConfirm){
+		            		if(isConfirm){
+		            			var id = $('#detail_id').val();
+		            			var calEvent;
+		            			
+		            			if($('#progress_value').attr("value")==1){
+				            		for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
+				            			if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
+				            				calEvent = calendar.fullCalendar( 'getEventSources' )[0].events[i];
+				            				calendar.fullCalendar( 'getEventSources' )[0].events[i].backgroundColor ='rgba(51, 122, 183, 0.22)';
+				            				calendar.fullCalendar('updateEvent', calEvent);
+				            			}
+					            	}
+		            			}else{
+		            				for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
+				            			if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
+				            				calEvent = calendar.fullCalendar( 'getEventSources' )[0].events[i];
+				            				calendar.fullCalendar( 'getEventSources' )[0].events[i].backgroundColor ='rgb(51, 122, 183)';
+				            				calendar.fullCalendar('updateEvent', calEvent);
+				            			}
+					            	}
+		            			}
+		            			
+								$.ajax({
+									url : 'update_progress.ajax',
+									type : 'post',
+									data : {"schedule_no": $('#detail_id').val(),
+											"work_progress" : $('#progress_value').attr("value")
+											},
+									success : function(data) {
+										swal("등록성공", "효율적인 업무 fortune", "success")
+									}
+								});
+		            		}else{
+		            			$('#meet_detail_title').val(before_text2)
+		            		}
+	            		}
+	            	);
+	            	
+	            }
+	            })
+	        	
 	        },
 	        
 	        // 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------

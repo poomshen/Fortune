@@ -110,10 +110,12 @@ public class NoticeInsert_Controller {
 			ndto.setNotice_fileext(originalFileExtension);
 		}
 
+        //접속한 회원 아이디 얻어오기(추가 작업 : 김중완)
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
 		Join_DTO join_DTO = (Join_DTO) session.getAttribute("info");
 		ndto.setUser_id(join_DTO.getUser_id());
 		
+		//파일 업로드 NULL값 확인 후 공지사항 작성(추가 작업 : 김중완)
 		if(multipartFile.getSize() == 0){
 			noticeDao.insertFileNullNotice(ndto);
 		}else{
