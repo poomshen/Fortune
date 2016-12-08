@@ -13,9 +13,8 @@ on c.chart_date=m.chart_date where c.collabo_no=m.collabo_no
  
 <!-- 알림  추가 -->
  <select id="selectChart" resultType="com.fortune.Table_DTO.Chart_Data_DTO">
-  select chart_date,collabo_no,chart_progress,chart_total_date,chart_seq from chart_data where collabo_no=#{collabo_no}  
+  select chart_date,collabo_no,chart_progress,chart_total_date,chart_seq from chart_data where collabo_no=#{collabo_no} order by chart_date  
 </select>
-
 
  </mapper>
  
