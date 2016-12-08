@@ -10,6 +10,7 @@ package com.fortune.chart_DAO;
 import java.util.List;
 
 import com.fortune.Table_DTO.Chart_Data_DTO;
+import com.fortune.function_DTO.Pie_Data_DTO;
 
 
 
@@ -20,5 +21,6 @@ public interface IChart {
 	//꺾은선 그래프 나타낼 차트
 	public List<Chart_Data_DTO> selectChart(int collabo_no);
 	
-
+	//pie 차트 
+	public List<Pie_Data_DTO> selectSumSal();
 }

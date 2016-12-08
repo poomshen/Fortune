@@ -51,7 +51,7 @@ public class ProService {
 
          throws ClassNotFoundException, SQLException {
       System.out.println("집에 갑시다.");
-
+      System.out.println(search_Page_DTO);
       // 게시판 기본 설정(기본값 처리)/////////////
       int page = 1;
       String field = "collabo_req_ID";
@@ -91,8 +91,8 @@ public class ProService {
       System.out.println( search_Page_DTO.getPg() + " / " + search_Page_DTO.getF() + " / " + query + "/"+ st_query);
       System.out.println(page + " / " + field + " / " + query + "/"+ st_query);
 
-      int row_size = 9;
-      System.out.println( search_Page_DTO.getQ() +"/"+search_Page_DTO.getSe()+"/"+search_Page_DTO.getSe());
+      int row_size = 6;
+      System.out.println( search_Page_DTO.getQ() +"/"+search_Page_DTO.getMe()+"/"+search_Page_DTO.getSe());
       int total_count = proDao.requestCount(search_Page_DTO); // 공지사항 글 개수
       System.out.println("total_count : " + total_count);
       // 공지사항 글 목록
@@ -101,10 +101,10 @@ public class ProService {
       System.out.println("페이지수 : " + all_page);
       int block = 5; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
       // [10] >>
-      int from_page = ((page - 1) / block * block) + 1; // 보여줄 페이지의 시작
+      int from_page = ((search_Page_DTO.getPg() - 1) / block * block) + 1; // 보여줄 페이지의 시작
       System.out.println("from_page :"+from_page);
       // ((1-1)/10*10)
-      int to_page = ((page - 1) / block * block) + block; // 보여줄 페이지의 끝
+      int to_page = ((search_Page_DTO.getPg() - 1) / block * block) + block; // 보여줄 페이지의 끝
       if (to_page > all_page) { // 예) 20>17
          to_page = all_page;
       }
@@ -198,7 +198,7 @@ public class ProService {
          ModelAndView mv = new ModelAndView();
          ProDao proDao = sqlsession.getMapper(ProDao.class);
          
-         int row_size = 9;
+         int row_size = 6;
          int total_count = proDao.requestCount(search_Page_DTO); // 공지사항 글 개수
          System.out.println("total_count : " + total_count);
          // 공지사항 글 목록
@@ -207,10 +207,10 @@ public class ProService {
          System.out.println("페이지수 : " + all_page);
          int block = 5; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
          // [10] >>
-         int from_page = ((page - 1) / block * block) + 1; // 보여줄 페이지의 시작
+         int from_page = ((search_Page_DTO.getPg() - 1) / block * block) + 1; // 보여줄 페이지의 시작
          System.out.println("from_page :"+from_page);
          // ((1-1)/10*10)
-         int to_page = ((page - 1) / block * block) + block; // 보여줄 페이지의 끝
+         int to_page = ((search_Page_DTO.getPg() - 1) / block * block) + block; // 보여줄 페이지의 끝
          if (to_page > all_page) { // 예) 20>17
             to_page = all_page;
          }
