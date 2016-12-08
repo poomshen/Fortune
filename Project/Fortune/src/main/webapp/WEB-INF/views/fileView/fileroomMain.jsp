@@ -180,90 +180,91 @@
 <script src="dist/js/dragdrop.js"></script>
 <script>
 //드래그 이벤트
-(function() {
+function dragtest() {
 	var body = document.body,
-		dropArea = document.getElementById( 'drop-area' ),
-		droppableArr = [], dropAreaTimeout;
+	dropArea = document.getElementById( 'drop-area' ),
+	droppableArr = [], dropAreaTimeout;
 
-	// initialize droppables
-	[].slice.call( document.querySelectorAll( '#drop-area .drop-area__item' )).forEach( function( el ) {
-		droppableArr.push( new Droppable( el, {
-			onDrop : function( instance, draggable ) {
-				if(instance.el.id == 'trash'){
-					var deletefilename = $('#deletename').val();
-					
-					$.ajax({
-						url : 'deletefiles.ajax',
-						type : 'post',
-						data : {"deletefilename": deletefilename, "collabo_no" : $('#collabo_no').val()},
-						dataType : "json",
-						success : function(data, statusText) {
-							console.log("success");
-							console.log(data);
-							output(data);
-						},
-						beforeSend:function(){
-					        $('.wrap-loading').removeClass('display-none');
-					    },
-					    complete:function(){
-					        $('.wrap-loading').addClass('display-none');
-					    },
-						error : function(e) {
-							console.log("error");
-							console.log(e);
-						}
-					});
-				} 
-
-				// show checkmark inside the droppabe element
-				classie.add( instance.el, 'drop-feedback' );
-				clearTimeout( instance.checkmarkTimeout );
-				instance.checkmarkTimeout = setTimeout( function() { 
-					classie.remove( instance.el, 'drop-feedback' );
-				}, 800 );
-				// ...
-			}
-		} ) );
-	} );
-
-	// initialize draggable(s)
-	[].slice.call(document.querySelectorAll( '.drag' )).forEach( function( el ) {
-		new Draggable( el, droppableArr, {
-			draggabilly : { containment: document.body },
-			onStart : function() {
-				// add class 'drag-active' to body
-				classie.add( body, 'drag-active' );
-				// clear timeout: dropAreaTimeout (toggle drop area)
-				clearTimeout( dropAreaTimeout );
-				// show dropArea
-				classie.add( dropArea, 'show' );
-			},
-			onEnd : function( wasDropped ) {
+// initialize droppables
+[].slice.call( document.querySelectorAll( '#drop-area .drop-area__item' )).forEach( function( el ) {
+	droppableArr.push( new Droppable( el, {
+		onDrop : function( instance, draggable ) {
+			if(instance.el.id == 'trash'){
+				var deletefilename = $('#deletename').val();
 				
-				var afterDropFn = function() {
-					// hide dropArea
-					classie.remove( dropArea, 'show' );
-					// remove class 'drag-active' from body
-					classie.remove( body, 'drag-active' );
-					
-				};
+				$.ajax({
+					url : 'deletefiles.ajax',
+					type : 'post',
+					data : {"deletefilename": deletefilename, "collabo_no" : $('#collabo_no').val()},
+					dataType : "json",
+					success : function(data, statusText) {
+						console.log("success");
+						output(data);
+						dragtest();
+					},
+					beforeSend:function(){
+				        $('.wrap-loading').removeClass('display-none');
+				    },
+				    complete:function(){
+				        $('.wrap-loading').addClass('display-none');
+				    },
+					error : function(e) {
+						console.log("error");
+						console.log(e);
+					}
+				});
+			} 
 
-				if( !wasDropped ) {
-					afterDropFn();
-				}
-				else {
-					// after some time hide drop area and remove class 'drag-active' from body
-					clearTimeout( dropAreaTimeout );
-					dropAreaTimeout = setTimeout( afterDropFn, 400 );
-				}
+			// show checkmark inside the droppabe element
+			classie.add( instance.el, 'drop-feedback' );
+			clearTimeout( instance.checkmarkTimeout );
+			instance.checkmarkTimeout = setTimeout( function() { 
+				classie.remove( instance.el, 'drop-feedback' );
+			}, 800 );
+			// ...
+		}
+	} ) );
+} );
+
+// initialize draggable(s)
+[].slice.call(document.querySelectorAll( '.drag' )).forEach( function( el ) {
+	new Draggable( el, droppableArr, {
+		draggabilly : { containment: document.body },
+		onStart : function() {
+			// add class 'drag-active' to body
+			classie.add( body, 'drag-active' );
+			// clear timeout: dropAreaTimeout (toggle drop area)
+			clearTimeout( dropAreaTimeout );
+			// show dropArea
+			classie.add( dropArea, 'show' );
+		},
+		onEnd : function( wasDropped ) {
+			
+			var afterDropFn = function() {
+				// hide dropArea
+				classie.remove( dropArea, 'show' );
+				// remove class 'drag-active' from body
+				classie.remove( body, 'drag-active' );
+				
+			};
+
+			if( !wasDropped ) {
+				afterDropFn();
 			}
-		} );
+			else {
+				// after some time hide drop area and remove class 'drag-active' from body
+				clearTimeout( dropAreaTimeout );
+				dropAreaTimeout = setTimeout( afterDropFn, 400 );
+			}
+		}
 	} );
-});
+} );
+};
 
 
 $(function() {
 	//업로드 버튼
+	dragtest();
 	$('#upload_btn').click(function() {
 		$('#multiform').ajaxForm({
 			cache : false,
@@ -272,6 +273,7 @@ $(function() {
 			success : function(data, statusText) {
 				console.log("success");
 				output(data);
+				dragtest();
 			},
 			beforeSend:function(){
 		        $('.wrap-loading').removeClass('display-none');
@@ -301,6 +303,7 @@ $(function() {
 			success : function(data, statusText) {
 				console.log("success");
 				output(data);
+				dragtest();
 			},
 			error : function(e) {
 				console.log("error");
@@ -311,6 +314,7 @@ $(function() {
 });
 	
 function output(data) {
+	$('#divrow1').empty();
 	$('#divrow2').empty();
 	$('#upload-file-info').html("");
 	
