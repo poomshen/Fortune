@@ -124,7 +124,7 @@ function deptshowadmin(){
 		url:"deptsearchadmin.ajax",
 		data:{"dept_no": $('#deptSelect1').val()},
 		success:function(data){
-			$("#deptshowDiv").css("overflow-y", "scroll");
+			$("#deptshowDiv").css("overflow-y", "auto");
 			$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data));
 		},
@@ -157,11 +157,11 @@ function CancelUpdate(){
 //회원 수정
 function UserUpdate(){
 	if($('#user_name').val() == null || $('#user_name').val() == ""){		
-		alert('이름을 작성해주세요.');
+		swal('이름을 작성해주세요.');
 		$('#user_name').focus();
 		return;
 	}else if($('#user_phone').val() == null || $('#user_phone').val() == ""){
-		alert('ex)01x-xxxx-xxxx 형식으로 작성해주세요');
+		swal('ex)01x-xxxx-xxxx 형식으로 작성해주세요');
 		$('#user_phone').focus();
 		return;
 	}
@@ -176,12 +176,12 @@ function UserUpdate(){
 			"team_no":$('#teamSelect').val(),"position_no":$('#positionSelect').val(),
 			"role_no":$('#roleSelect').val()},
 		success:function(data){
-			alert('수정 성공');
+			swal('수정 성공');
 			deptshowadmin();
 			$("#usershowDiv").append($('#usershowDiv').html(data)); 
 		},
 		error:function(){
-			alert('수정 실패');
+			swal('수정 실패');
 		}
 	});
 }
