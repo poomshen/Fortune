@@ -7,12 +7,13 @@ var scheduleusers;
 var before_text ="";
 var before_text2 ="";
 var before_progress ="";
+var test;
 
 
 function schedule_type(){
 	if($('#schedule_type').val()=="4"){
 	}else{
-	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
+	content = "<table class='table table-striped'><tr><th style='width:80px;'>시작일</th><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 	$.ajax({
 		url : 'schedule_type.ajax',
 		type : 'post',
@@ -25,14 +26,14 @@ function schedule_type(){
 					$.each(data.schedulelist, function(index, obj) {
 						if(obj.progress_or_place<10){
 							if(obj.progress_or_place==1){
-						        content += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
+						        content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
 						        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 						        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 						        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
 						        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
 						        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 							}else{
-						        content += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
+						        content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgb(51, 122, 183);">업무</td>';
 						        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 						        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 						        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
@@ -40,7 +41,7 @@ function schedule_type(){
 						        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 							}
 						} else{
-							content += '<tr><td style="color:rgb(71, 142, 72);">회의</td>';
+							content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgb(71, 142, 72);">회의</td>';
 					        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 					        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 					        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>';
@@ -345,7 +346,7 @@ function progress_100(){
 
 //추가작업 : 알림DB NEW 가져오기
 function fcontent() {
-	content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
+	content = "<table class='table table-striped'><tr><th style='width:80px;'>시작일</th><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 	$.ajax({
 		url : 'calendarload.ajax',
 		type : 'post',
@@ -359,14 +360,14 @@ function fcontent() {
 			$.each(data.schedulelist, function(index, obj) {
 				if(obj.progress_or_place<10){
 					if(obj.progress_or_place==1){
-				        content += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
+				        content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
 				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 				        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
 				        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemax="100" style="width:'+obj.progress_or_place*100;
 				        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 					} else{
-				        content += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
+				        content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgb(51, 122, 183);">업무</td>';
 				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 				        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
@@ -374,7 +375,7 @@ function fcontent() {
 				        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 					}
 				} else{
-					content += '<tr><td style="color:rgb(71, 142, 72);">회의</td>';
+					content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgb(71, 142, 72);">회의</td>';
 			        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 			        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 			        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>'
@@ -523,7 +524,7 @@ function loadCalendar(role1,role2) {
 			$(this).css('background-color', 'rgba(237,0,0,0.66)');
 			
 			
-			content = "<table class='table table-striped'><tr><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
+			content = "<table class='table table-striped'><tr><th style='width:80px;'>시작일</th><th style='width:50px;'>구분</th><th style='width:250px; text-align:center;'>제목</th><th style='width:70px;'>진척률</th></tr>";
 			$.ajax({
 				url : 'eventclick.ajax',
 				type : 'post',
@@ -535,14 +536,14 @@ function loadCalendar(role1,role2) {
 				success : function(obj) {
 					if(obj.progress_or_place<10){
 						if(obj.progress_or_place==1){
-					        content += '<tr><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
+					        content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgba(51, 122, 183, 0.22); text-decoration:line-through;">업무</td>';
 					        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 					        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 					        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
 					        content += '<div class="progress-bar progress-bar-striped active" role="progressbar" style="width:'+obj.progress_or_place*100;
 					        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 						} else{
-					        content += '<tr><td style="color:rgb(51, 122, 183);">업무</td>';
+					        content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgb(51, 122, 183);">업무</td>';
 					        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 					        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 					        content += ')">'+ obj.wm_title + '</a></td><td><div class="progress" style="margin-bottom:0px;">'
@@ -550,7 +551,7 @@ function loadCalendar(role1,role2) {
 					        content += '%;">'+ obj.progress_or_place*100 +'%</div></div></td></tr>'
 						}
 					} else{
-						content += '<tr><td style="color:rgb(71, 142, 72);">회의</td>';
+						content += '<tr><td>'+obj.schedule_start.substring(5,7)+'월 '+obj.schedule_start.substring(8,10)+'일</td><td style="color:rgb(71, 142, 72);">회의</td>';
 				        content += '<td id=td' +obj.schedule_no+ '><a onclick="detail2(' + obj.schedule_no + ",'" + obj.wm_title + "','" + obj.wm_text;
 				        content += "','" + obj.schedule_start +"','" + obj.schedule_end + "','" + obj.users + "','" + obj.progress_or_place + "'";
 				        content += ')">'+ obj.wm_title + '</a></td><td></td></tr>'
@@ -593,57 +594,72 @@ function loadCalendar(role1,role2) {
 		
 		// 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
 		// 작업내용: 날짜 드래그 이벤트
-		eventDrop : function(calevent) {
-	         $.ajax({
-	        	type : 'post',
-	            url : 'dragupdate.ajax',
-	            data : {
-					"schedule_no": calevent.id,
-	            	"schedule_start" : calevent.start.format('YYYY-MM-DD'),
-	                "schedule_end" : calevent.end.format('YYYY-MM-DD')
-	            },
-	            success : function(data) {
-	            console.log("날짜이동성공");
-	            fcontent();
-	            }
-	            
-	         });
+		eventDrop : function(calevent, delta, revertFunc) {
+			if(calevent.backgroundColor == 'rgba(51, 122, 183, 0.22)'){
+				swal('완료된 일정입니다.');
+				revertFunc();
+			}else{
+		         $.ajax({
+		        	type : 'post',
+		        	url : 'dragupdate.ajax',
+		        	data : {
+		        	"schedule_no": calevent.id,
+		        	"schedule_start" : calevent.start.format('YYYY-MM-DD'),
+		        	"schedule_end" : calevent.end.format('YYYY-MM-DD')
+		        	},
+		        	success : function(data) {
+		        		console.log("날짜이동성공");
+		        	fcontent();
+		           }
+		        });
+			}
 
 	      },
 		// 작업자: 이명철  // 최근 수정일: 16-11-21 --------------------- E N D ------------------------		
 		
 	    
-	      
-	      
+		// 작업자: 이명철  // 최근 수정일: 16-12-08 ---------------------S T A R T------------------------
+		// 작업내용: 회의일정 + 완료된 일정의 날짜를 늘리기 전의 초기값을 저장해 놓기 위한 이벤트
+		eventResizeStart : function(event, jsEvent, ui, view){
+			if(event.backgroundColor == "rgb(71, 142, 72)"){
+				test = event.end;
+			}else if(event.backgroundColor == 'rgba(51, 122, 183, 0.22)'){
+				test = event.end;
+			}
+		},
+		// 작업자: 이명철  // 최근 수정일: 16-12-08 --------------------- E N D ------------------------  
 	      
 	    
 		// 작업자: 이명철  // 최근 수정일: 16-11-21 ---------------------S T A R T------------------------
 		// 작업내용: 날짜 늘리는 이벤트
 		eventResize : function(calevent) {
 			var id = calevent.id;
-			var calEvent2;
-			if(calevent.backgroundColor == 'rgb(71, 142, 72)'){
-				swal('회의 일정은 1일만 가능합니다.');
-
-				for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
-					if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
-						calEvent2 = calendar.fullCalendar( 'getEventSources' )[0].events[i];
-						calevent.end = calEvent2.start;
-					}
-				}
-				
-			}else if(calevent.backgroundColor == 'rgba(51, 122, 183, 0.22)'){
-				swal('완료된 일정입니다.')
-				
-				for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
-					if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
-						calEvent2 = calendar.fullCalendar( 'getEventSources' )[0].events[i];
-						calevent.end = calEvent2.start;
-						console.log(calevent.end)
-					}
-				}
+			var calEvent2 = null;
 			
-			}else{
+	    	  if(calevent.backgroundColor == "rgb(71, 142, 72)"){
+	    		  swal('회의 일정은 1일만 선택 가능합니다.')
+        		  for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
+        			  if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
+        				  calEvent2 = calendar.fullCalendar( 'getEventSources' )[0].events[i]
+        				  calendar.fullCalendar( 'getEventSources' )[0].events[i].end = test;
+        				  //calendar.fullCalendar('updateEvent', calEvent2);
+        			  }
+        		  }
+	    	  
+	    	  
+	    	  }else if(calevent.backgroundColor == 'rgba(51, 122, 183, 0.22)'){
+	    		  swal('완료된 일정입니다.')
+        		  for(var i=0; i<calendar.fullCalendar( 'getEventSources' )[0].events.length; i++){
+        			  if(calendar.fullCalendar( 'getEventSources' )[0].events[i].id == id){
+        				  calEvent2 = calendar.fullCalendar( 'getEventSources' )[0].events[i]
+        				  calendar.fullCalendar( 'getEventSources' )[0].events[i].end = test;
+        				  //calendar.fullCalendar('updateEvent', calEvent2);
+        			  }
+        		  }
+	    	  }
+			
+			
+			else{
 			     $.ajax({
 		        	type : 'post',
 		            url : 'dragupdate.ajax',
@@ -924,8 +940,6 @@ function loadCalendar(role1,role2) {
 										swal("등록성공", "효율적인 업무 fortune", "success")
 									}
 								});
-		            		}else{
-		            			$('#meet_detail_title').val(before_text2)
 		            		}
 	            		}
 	            	);
