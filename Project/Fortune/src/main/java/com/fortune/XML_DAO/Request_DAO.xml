@@ -278,4 +278,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and COLLABO_STATE != '완료'
 	</select>
 	
+	<!-- 작성자:이성준  날짜 : 16-12-08 목적: 이름과 부서, 부서명, 팀명 가져오기 -->
+	<select id="searchName"  resultType="com.fortune.function_DTO.Select_name_DTO">
+		select dept_name , TEAM_NAME, USER_NAME,USER_ID from USERNAMEVIEW where USER_ID = #{param1}
+	</select>
+	
 </mapper>

@@ -188,7 +188,6 @@ h6 {
 	</script>
 	<!--전체 div영역 -->
 	<div class="container" id="collaboList" style="margin-top: 20px">
-
 			<security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
 
 			<!--대기/수락/거절 tab영역 -->
