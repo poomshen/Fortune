@@ -6,6 +6,7 @@ import java.util.List;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.function_DTO.Search_Page_DTO;
 import com.fortune.function_DTO.Select_Collabo_DTO;
 import com.fortune.request_DTO.Passion_DTO;
 
@@ -14,9 +15,10 @@ import com.fortune.request_DTO.Passion_DTO;
 public interface ProDao {
 
 		//게시물 개수
-		public int requestCount(String field, String query,String st_query,String memo,String search) throws ClassNotFoundException, SQLException;
+		public int requestCount(Search_Page_DTO Serarch) throws ClassNotFoundException, SQLException;
 		//전체 게시물
-		public List<Request_DTO> getRequest(int page, String field, String query, String st_query,String memo,String search) throws ClassNotFoundException, SQLException;
+		//public List<Request_DTO> getRequest(int page, String field, String query, String st_query,String memo,String search) throws ClassNotFoundException, SQLException;
+		public List<Request_DTO> getRequest(Search_Page_DTO Serarch) throws ClassNotFoundException, SQLException;
 		//게시물 삭제
 		public String delete(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//게시물 수정
