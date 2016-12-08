@@ -67,7 +67,7 @@
 					<a href="noticeUpdate.htm?notice_no=${noticeDetail.notice_no}"><input type="button" class="btn btn-primary" value="수정"></a>
 					<a href="noticeDelete.htm?notice_no=${noticeDetail.notice_no}"><input type="button" class="btn btn-primary" value="삭제"></a>
 				</security:authorize>
-				<a href="noticeList.htm"><input type="button" class="btn btn-primary" value="취소"></a>
+				<a href="noticeList.htm"><input type="button" class="btn btn-primary" value="돌아가기"></a>
 			</div>
 		</div>
 		<!-- /.panel -->

@@ -44,9 +44,9 @@
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="aside" />
 	<!-- Page Content -->
-	<div id="page-wrapper" style="padding-left: 10px;">
+	<div id="page-wrapper" style="padding-left: 10px;min-height: 644px;margin-left: 150px;">
 		<div class="container-fluid">
-			<div class="row" style="padding-left: 15px; padding-right: 15px;">
+			<div class="row" style="padding-left: 35px; padding-right: 15px;">
 				<div class="col-lg-12" style="padding-right: 0px; padding-left: 0px;">
 					<tiles:insertAttribute name="content" />
 				</div>

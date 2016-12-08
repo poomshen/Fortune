@@ -6,7 +6,9 @@ import java.util.List;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.function_DTO.Search_Page_DTO;
 import com.fortune.function_DTO.Select_Collabo_DTO;
+import com.fortune.function_DTO.Select_name_DTO;
 import com.fortune.request_DTO.Passion_DTO;
 
 
@@ -14,9 +16,10 @@ import com.fortune.request_DTO.Passion_DTO;
 public interface ProDao {
 
 		//게시물 개수
-		public int requestCount(String field, String query,String st_query,String memo,String search) throws ClassNotFoundException, SQLException;
+		public int requestCount(Search_Page_DTO Serarch) throws ClassNotFoundException, SQLException;
 		//전체 게시물
-		public List<Request_DTO> getRequest(int page, String field, String query, String st_query,String memo,String search) throws ClassNotFoundException, SQLException;
+		//public List<Request_DTO> getRequest(int page, String field, String query, String st_query,String memo,String search) throws ClassNotFoundException, SQLException;
+		public List<Request_DTO> getRequest(Search_Page_DTO Serarch) throws ClassNotFoundException, SQLException;
 		//게시물 삭제
 		public String delete(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//게시물 수정
@@ -72,5 +75,18 @@ public interface ProDao {
 	*/
 		public List<Select_Collabo_DTO> finishCollaboList(String user_id);
 		public List<Select_Collabo_DTO> finishCollaboList2(int deptno);
+		/*
+	 	작성자 :이성준
+	 	2016-12-07
+	 	프로젝트 개수 보기
+		 */
+		public int collaboCount(String field, List<String>  query) ;
+		/*
+	 	작성자 :이성준
+	 	2016-12-07
+	 	프로젝트 관리자 이름 보기
+		 */
+		public Select_name_DTO searchName(String user_id);
 		
+		public With_DTO myProDetail(String collabo_no);
 }

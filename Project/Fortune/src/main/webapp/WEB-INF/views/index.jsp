@@ -117,59 +117,39 @@
 	<div class="what-we-do-container section-container">
 		<div class="container">
 			<div class="row">
-				<div
-					class="col-sm-12 what-we-do section-description wow fadeIn animated"
-					style="visibility: visible; animation-name: fadeIn;">
-					<h2>What we do</h2>
-					<div class="divider-1 wow fadeInUp animated"
-						style="visibility: visible; animation-name: fadeInUp;">
-						<span></span>
+				<div class="col-sm-12 what-we-do section-description wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+					<h2>What we aim</h2>
+					<div class="divider-1 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+					<span></span>
 					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Ut enim ad minim veniam, quis nostrud exercitation.</p>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-4 what-we-do-box wow fadeInUp animated"
-					style="visibility: visible; animation-name: fadeInUp;">
+				<div class="col-sm-4 what-we-do-box wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
 					<div class="what-we-do-box-icon">
-						<i class="fa fa-pencil"></i>
+						<i class="fa fa-eye"></i>
 					</div>
-					<h3>Web design</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore.</p>
+					<h3><font color="black">업무의 시각화</font></h3>
+					<p><font color="#aaaaaa">한눈에 보는 업무 진행상황</font></p>
 				</div>
-				<div class="col-sm-4 what-we-do-box wow fadeInDown animated"
-					style="visibility: visible; animation-name: fadeInDown;">
+				<div class="col-sm-4 what-we-do-box wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
 					<div class="what-we-do-box-icon">
-						<i class="fa fa-gears"></i>
+						<i class="fa fa-link"></i>
 					</div>
-					<h3>Development</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore.</p>
+					<h3><font color="black">캘린더 공유</font></h3>
+					<p><font color="#aaaaaa">같은 프로젝트 진행중인 팀원 간<br>업무 캘린더 공유</font></p>
 				</div>
 				<div class="col-sm-4 what-we-do-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<div class="what-we-do-box-icon">
-						<i class="fa fa-twitter"></i>
+						<i class="fa fa-wifi"></i>
 					</div>
-					<h3>Social media</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore.</p>
+					<h3><font color="black">On-line</font></h3>
+					<p><font color="#aaaaaa">프로젝트 생성, 진행, 종료 모두<br>on-line으로 가능</font></p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- Our process -->
-
-
-	<!-- Clients -->
-
-
-	<!-- Counters -->
-
 
 	<!-- Portfolio -->
 	<div class="portfolio-container section-container">
@@ -351,20 +331,17 @@
 
 
 
-	<!-- The team -->
+	<!-- Team members -->
 	<div class="team-container section-container">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 team section-description wow fadeIn animated"
 					style="visibility: visible; animation-name: fadeIn;">
-					<h2>The team</h2>
+					<h2>Team members</h2>
 					<div class="divider-1 wow fadeInUp animated"
 						style="visibility: visible; animation-name: fadeInUp;">
 						<span></span>
 					</div>
-					<p>Ut wisi enim ad minim veniam, quis gostrud exerci tation
-						ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-						consequat. Ut wisi enim ad minim veniam, quis nostrud.</p>
 				</div>
 			</div>
 			<div class="row">
@@ -377,11 +354,7 @@
 					<h3>John Doe</h3>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
 						sed do eiusmod.</p>
-					<div class="team-social">
-						<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-							class="fa fa-dribbble"></i></a> <a href="#"><i
-							class="fa fa-twitter"></i></a>
-					</div>
+					
 				</div>
 				<div class="col-sm-4 team-box wow fadeInDown animated"
 					style="visibility: visible; animation-name: fadeInDown;">
@@ -392,11 +365,7 @@
 					<h3>Tim Brown</h3>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
 						sed do eiusmod.</p>
-					<div class="team-social">
-						<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-							class="fa fa-dribbble"></i></a> <a href="#"><i
-							class="fa fa-twitter"></i></a>
-					</div>
+				
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
@@ -407,24 +376,11 @@
 					<h3>Sarah Red</h3>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
 						sed do eiusmod.</p>
-					<div class="team-social">
-						<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-							class="fa fa-dribbble"></i></a> <a href="#"><i
-							class="fa fa-twitter"></i></a>
-					</div>
+				
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- Contact us -->
-
-	<div align="center">
-	<img alt="fortune" src="http://cfile9.uf.tistory.com/image/21432B4D5203839212F543">
-	<br><strong>[임시 비밀번호 를 발송하였습니다.]</strong><br>
-
-	</div>
-
 
 	<!-- Scroll to top -->
 	<div class="section-container section-container-gray">
@@ -444,15 +400,8 @@
 	<footer>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-7 footer-copyright">
-					© Riona Bootstrap Template by <a href="http://azmind.com">Azmind</a>.
-				</div>
-				<div class="col-sm-5 footer-social">
-					<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-						class="fa fa-dribbble"></i></a> <a href="#"><i
-						class="fa fa-twitter"></i></a> <a href="#"><i
-						class="fa fa-google-plus"></i></a> <a href="#"><i
-						class="fa fa-pinterest"></i></a>
+				<div class="col-sm-12">
+					<p style=" color: gray;" >Copyright © 2016 Fortune. All rights reserved.</p>
 				</div>
 			</div>
 		</div>
@@ -479,119 +428,6 @@
 		location.href="searchpage.htm";
 	}
 	
-	function getid() {
-		//alert($('#searchname').val());
-		
-		if($('#search_name').val() ==""){
-			alert('이름 비었어요!');
-			$('#search_name').focus();
-		}else if($('#search_phone').val() ==""){
-			alert('전화번호 비었어요!');
-			$('#search_phone').focus();
-		}else if(idsearch1 == false){
-			alert('유효한 전화번호 형식이 아닙니다.');
-			$('#search_phone').focus();
-		}else if($('#search_birth').val() ==""){
-			alert('생년월일 비었어요!');
-			$('#search_birth').focus();
-		}
-		else{
-			$.ajax({
-				type:"get",
-				url:"idsearch.ajax",
-				data:{"search_name":$('#search_name').val(),
-					  "search_phone":$('#search_phone').val(),
-					  "search_birth":$('#search_birth').val()},
-				success:function(data){
-					//console.log('>'+data+'<');
-					if(data != null && data != ""){
-						//alert('null 값임?');
-						alert('아이디는 : '+ data + '입니다');
-						location.href = "index.htm";
-					}else if(data == ""){
-						alert('해당 정보에 맞는 아이디가 없습니다. 정보를 확인해주세요');
-					}else{
-						alert('에러입니다. 관리자에게 문의하세요');
-					}
-					
-				},
-				error:function(){
-					alert('ajax 제대로 안돔');
-					location.href="index.htm";
-				}
-			});
-		}
-		
-	}
-	function getpwd() {
-		//alert('버튼 누름');
-		if($('#search_id').val() ==""){
-			alert('아이디 비었어요!');
-			$('#search_id').focus();
-		}else if($('#search_name2').val() ==""){
-			alert('이름 비었어요!');
-			$('#search_name2').focus();
-		}else if($('#search_phone2').val() ==""){
-			alert('전화번호 비었어요!');
-			$('#search_phone2').focus();
-		}else if(idsearch2==false){
-			alert('유효한 전화번호 형식이 아닙니다.');
-			$('#search_phone2').focus();
-		}else{
-			$.ajax({
-				type:"get",
-				url:"pwdsearch.ajax",
-				data:{"search_id":$('#search_id').val(),
-					  "search_name2":$('#search_name2').val(),
-					  "search_phone2":$('#search_phone2').val()},
-				
-				success:function(data){
-					console.log("result 뭐야!?!?!?!?!!??"+data);
-					if(data!=null && data!=""){
-						console.log(data);
-						alert('임시 비밀번호는 '+data+'입니다.');
-						location.href="index.htm";
-					}else if(data == 0){
-						alert('해당 정보에 맞는 아이디가 없습니다. 정보를 확인해주세요');
-					}else{
-						alert('에러입니다. 관리자에게 문의하세요');
-					}
-					
-				},
-				error:function(){
-					alert('ajax가 정상작동 안했음');
-					location.href="index.htm";
-				}
-			
-			});
-		}
-		
-	}
-
-	 $('#search_phone').keyup(function() {
-		 var phoneRex = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
-	 	
-		 if(phoneRex.test($('#search_phone').val())){
-			 idsearch1 = true;
-			 console.log(idsearch1);
-	 	}else{     
-	 		 idsearch1 = false;
-	 		 console.log(idsearch1);
-	 	}
-	});
-	 
-	 $('#search_phone2').keyup(function() {
-		 var phoneRex = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
-	 	
-		 if(phoneRex.test($('#search_phone2').val())){
-			 idsearch2 = true;
-			 console.log(idsearch2);
-	 	}else{     
-	 		idsearch2 = false;
-	 		 console.log(idsearch2);
-	 	}
-	});
-
 
 	function joins() {
 		location.href="sign.htm";

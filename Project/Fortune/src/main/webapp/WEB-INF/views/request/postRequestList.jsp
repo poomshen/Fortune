@@ -25,6 +25,10 @@ h6 {
 .tg .title{text-align:center;font-weight:900;}
 
 </style>
+<%
+   request.setCharacterEncoding("UTF-8");
+   String selectId = (String)request.getAttribute("selectId");
+%>
 
 <script type="text/javascript">
 
@@ -33,17 +37,30 @@ h6 {
  추가작업 :카드형태의 dropdown 함수 
  작업일 : 2016/12/05
  */
-<%
-String selectId = (String)request.getSession().getAttribute("test1");
-%>
 
 
 $(function(){
+	//성준 추가
+	$("#${state}").addClass('active');
+	$("#states").val('${state}');
+
     Profile.load();
-   
+
+   	console.log('<%=selectId%>');
+   	var select = '<%=selectId%>';
+    if(select!='null')
+    {
+    	setTimeout(function(){
+    		
+    		console.log("setTimeout / "+select)
+    		send(select)
+    			
+    	
+    	}, 3000); 
+    }
+
     
     
-     
     
 });
 
@@ -65,13 +82,11 @@ Profile = {
         	
         	detailReqCollabo($(this).attr('id'));
          	$('#social-link'+$(this).attr('id')).toggleClass('active');
-            $('#about-mesocial-link'+$(this).attr('id')).toggleClass('blur');
         });
         $('.social-link').click(function(){
         	
         	alert("gg");
           	$(this).toggleClass('active');
-            $('#about-me'+$(this).attr('id')).toggleClass('blur');
         });
     },
     accordion:function(){
@@ -141,15 +156,21 @@ Profile = {
  	}
      //대기 수락 거절을 비동기 처리로 사용하였다.
      function selectState(state){
-    		console.log(state);
-    		$.get("listReplyRequest2.htm", {st :state}, function(data, textStatus, req) {
-    		
-    			
-    			$('#requestlist').html(data);
+    		if(state == '전체'){
+    	 	$.get("listReplyRequest2.htm", function(data, textStatus, req) {
+    			$('.requestpage').html(data);
     			$('#'+state).addClass('active');
+    			$("#states").val(state);
+    	 		});
+    		}else{
+    	 	$.get("listReplyRequest2.htm", {st :state,state:state}, function(data, textStatus, req) {
     			
+    			$('.requestpage').html(data);
+    			$('#'+state).addClass('active');
+    			$("#states").val(state);
     			
-    		})
+    		});
+    		}
     	}
 
      
@@ -168,7 +189,9 @@ Profile = {
  	 		    	console.log($('#memoselect').val());
  	 		    
  	 		    	
- 	 		    	$("#requestlist").html(data); 
+ 	 		    	$(".requestpage").html(data); 
+ 	 		    	$("#${state}").addClass('active');
+ 	 				$("#states").val('${state}');
  	 		    
  	 		    },
  	 			error: function(){						
@@ -180,152 +203,46 @@ Profile = {
     	}
      
     	//페이징 처리를 비동기 처리로 처리 하였습니다. << 버튼으로 처리하였습니다.
-    	function pazingBtn(){
+    	function pazingBtn(page){
+    		if($("#states").val() == '전체'){
+        	 	$.get("listReplyRequest2.htm",{pg:page,
+	 				  st: '${st_query}',
+	 				  me: "${memo}", 
+	 				  se: "${search}",
+	 				state:$("#states").val()}, function(data, textStatus, req) {
+        			$('.requestpage').html(data);
+        			$("#${state}").addClass('active');
+        			$("#states").val('${state}');
+        	 		});
+        		}else{
     		
     		$.ajax({
   	   		 
  	 			type: "get",
  	 			url:  "listReplyRequest2.htm",
  	 			cache: false,				
- 	 			data:{pg:1,
- 	 				  st: "${st_query}",
+ 	 			data:{pg:page,
+ 	 				  st: $("#states").val(),
  	 				  me: "${memo}", 
- 	 				  se: "${search}"},
+ 	 				  se: "${search}",
+ 	 				state:$("#states").val()},
  	 		    success:function(data){ //callback  
- 	 		    	console.log('${st_query}');
- 	 		    	console.log('${memo}');
- 	 		    	console.log('${search}');
  	 		    	
- 	 		    
- 	 		    	
- 	 		    	$("#requestlist").html(data); 
+ 	 		    	$(".requestpage").html(data); 
+ 	 		    	$("#${state}").addClass('active');
+ 	 			$("#states").val('${state}');
+ 	 				
  	 		    
  	 		    },
  	 			error: function(){						
  	 				alert('Error while request..'	);
  	 			}
  	 		});
-    		
-    		
-    	}
-    	//페이징 처리를 비동기 처리로 처리 하였습니다. < 버튼으로 처리하였습니다.
-function pazingBtn2(){
-    		
-    		$.ajax({
-  	   		 
- 	 			type: "get",
- 	 			url:  "listReplyRequest2.htm",
- 	 			cache: false,				
- 	 			data:{pg: "${from_page-1}",
- 	 				  st: "${st_query}",
- 	 				  me: "${memo}", 
- 	 				  se: "${search}"},
- 	 		    success:function(data){ //callback  
- 	 		    	console.log('${st_query}');
- 	 		    	console.log('${memo}');
- 	 		    	console.log('${search}');
- 	 		    	
- 	 		    
- 	 		    	
- 	 		    	$("#requestlist").html(data); 
- 	 		    
- 	 		    },
- 	 			error: function(){						
- 	 				alert('Error while request..'	);
- 	 			}
- 	 		});
-    		
+        		}
     		
     	}
-//페이징 처리를 비동기 처리로 처리 하였습니다. 번호 버튼으로 처리하였습니다.
-function pazing3Btn(page){
-	
-	$.ajax({
- 		 
-			type: "get",
-			url:  "listReplyRequest2.htm",
-			cache: false,				
-			data:{pg: page,
-				  st: "${st_query}",
-				  me: "${memo}", 
-				  se: "${search}"},
-		    success:function(data){ //callback  
-		    	console.log('${st_query}');
-		    	console.log('${memo}');
-		    	console.log('${search}');
-		    	
-		    
-		    	
-		    	$("#requestlist").html(data); 
-		    
-		    },
-			error: function(){						
-				alert('Error while request..'	);
-			}
-		});
-	
-	
-}
-//페이징 처리를 비동기 처리로 처리 하였습니다. > 버튼으로 처리하였습니다.
-function pazing4Btn(){
-	
-	$.ajax({
- 		 
-			type: "get",
-			url:  "listReplyRequest2.htm",
-			cache: false,				
-			data:{pg: "${to_page+1}",
-				  st: "${st_query}",
-				  me: "${memo}", 
-				  se: "${search}"},
-		    success:function(data){ //callback  
-		    	console.log('${st_query}');
-		    	console.log('${memo}');
-		    	console.log('${search}');
-		    	
-		    
-		    	
-		    	$("#requestlist").html(data); 
-		    
-		    },
-			error: function(){						
-				alert('Error while request..'	);
-			}
-		});
-	
-	
-}
-//페이징 처리를 비동기 처리로 처리 하였습니다. >> 버튼으로 처리하였습니다.
-function pazing5Btn(){
-	
-	$.ajax({
- 		 
-			type: "get",
-			url:  "listReplyRequest2.htm",
-			cache: false,				
-			data:{pg: "${all_page}",
-				  st: "${st_query}",
-				  me: "${memo}", 
-				  se: "${search}"},
-		    success:function(data){ //callback  
-		    	console.log('${st_query}');
-		    	console.log('${memo}');
-		    	console.log('${search}');
-		    	
-		    
-		    	
-		    	$("#requestlist").html(data); 
-		    
-		    },
-			error: function(){						
-				alert('Error while request..'	);
-			}
-		});
-	
-	
-}
 
-										///////
+
 function modifyReqCollabo(){
 	
 	var a=$('#hidden').val();
@@ -364,11 +281,11 @@ function modifyReqCollabo(){
 <!--전체 div영역 -->
 <div class="container" id="requestlist" style="margin-top:20px">
 
-
 <!--대기/수락/거절 tab영역 -->
 <div class="tab-container">
+		<input type="hidden" id="states">
   		<ul class="nav nav-tabs" style="width:950px">
-  			<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
+  		<li id="전체"><a onclick="selectState('전체')" data-toggle="tab">전체</a></li>
     		<li id="대기"><a onclick="selectState('대기')" data-toggle="tab">대기</a></li>
     		<li id="수락"><a onclick="selectState('수락')" data-toggle="tab">수락</a></li>
     		<li id="거절"><a onclick="selectState('거절')" data-toggle="tab">거절</a></li>
@@ -438,23 +355,7 @@ function modifyReqCollabo(){
 	                    						<h6>제목 : ${n.collabo_req_title}</h6>
                 							 	<h6 style="font-weight: inherit;">작성일:${n.collabo_req_date}</h6>
                     						
-                    						
-                    								
-        	            						
-                    					
-                    						  
-        <!-- card안에 간단한 상세 내역 -->
-                  								
-                									
-        
-        
-        <!-- +클릭시 나오는 작은 아이콘 (나중에 구현할 css 우선 보류) -->
-                <div class="social-link" id="social-link${n.collabo_req_index}">
-                    <a class="link link-twitter" href="http://twitter.com/khadkamhn/" target="_blank"><i class="fa fa-twitter"></i></a>
-                    <a class="link link-codepen" href="http://codepen.io/khadkamhn/" target="_blank"><i class="fa fa-codepen"></i></a>
-                    <a class="link link-facebook" href="http://facebook.com/khadkamhn/" target="_blank"><i class="fa fa-facebook"></i></a>
-                    <a class="link link-dribbble" href="http://dribbble.com/khadkamhn" target="_blank"><i class="fa fa-dribbble"></i></a>
-                </div>
+
             </div>
         </div>
 
@@ -469,29 +370,34 @@ function modifyReqCollabo(){
   		  		<!-- 페이징 처리하기  -->
 		  		<div style="text-align: center; margin-left: -80px;">
 					<ul class="pagination">
-							<c:if test="${pg>block}">
-								<li><a href="#" onclick="pazingBtn()">««</a></li>
-								<li><a href="#" onclick="pazingBtn2()">«</a></li>
-							</c:if>
-							<c:if test="${pg<=block}">
-								<li><a href="#">««</a></li>
-								<li><a href="#">«</a></li>
-							</c:if>
-							<c:forEach begin="${from_page}" end="${to_page}" var="i">
-								<c:if test="${i==pg}">
-									<li class="active"><a href="#">${i}</a></li>
+							<c:if test="${pg != 1}">
+								<c:if test="${pg == from_page}">
+									<li><a href="#" onclick="pazingBtn('1')">««</a></li>
+									<li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
 								</c:if>
-								<c:if test="${i!=pg}">
-									<li><a href="#" onclick="pazing3Btn(${i})">${i}</a></li>
+								<c:if test="${pg > from_page}">
+									<li><a href="#" onclick="pazingBtn('1')">««</a></li>
+									<li><a href="#" onclick="pazingBtn('${pg - 1}')">«</a></li>
 								</c:if>
-							</c:forEach>
-							<c:if test="${to_page<all_page}">
-								<li><a href="#" onclick="pazing4Btn()">»</a></li>
-								<li><a href="#" onclick="pazing5Btn()">»»</a></li>
 							</c:if>
-							<c:if test="${to_page>=all_page}">
-								<li><a href="#">»</a></li>
-								<li><a href="#">»»</a></li>
+								<c:forEach begin="${from_page}" end="${to_page}" var="i">
+									<c:if test="${i==pg}">
+										<li class="active"><a href="#">${i}</a></li>
+									</c:if>
+									<c:if test="${i!=pg}">
+										<li><a href="#" onclick="pazingBtn('${i}')">${i}</a></li>
+									</c:if>
+								</c:forEach>
+								<!-- 다음 페이지 -->
+							<c:if test="${list.size() != 0}">
+								<c:if test="${pg < to_page || pg != all_page}">
+									<li><a href="#" onclick="pazingBtn('${pg + 1}')">»</a></li>
+									<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
+								</c:if>
+								<c:if test="${to_page > all_page && pg != all_page}">
+									<li><a href="#" onclick="pazingBtn('${to_page + 1}')">»</a></li>
+									<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
+								</c:if>
 							</c:if>
 						</ul>
 					</div>
@@ -519,32 +425,13 @@ function modifyReqCollabo(){
 						<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>	
 						</div>
 						
-						<div class="modal-footer" id="detail_footer">
-							<input type="hidden" id="hidden">
-							<input type="button" class="btn btn-default" onclick="modifyReqCollabo()" value="수정">
-							<button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
-						</div>
+						
 					</div>
 
 				</div>
 			</div>
 
 		</div>
-		
-<button class="md-trigger" data-modal="modal-8">3D Flip (horizontal)</button>
-<div class="md-modal md-effect-8" id="modal-8">
-			<div class="md-content">
-				<h3>Modal Dialog</h3>
-				<div>
-					<p>This is a modal window. You can do the following things with it:</p>
-					<ul>
-						<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-						<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-						<li><strong>Close:</strong> click on the button below to close the modal.</li>
-					</ul>
-					<button class="md-close">Close me!</button>
-				</div>
-			</div>
-		</div>
+
 </body>
 </html>

@@ -6,10 +6,12 @@
    request.setCharacterEncoding("UTF-8");
 %>
 
+<!-- 아이디 -->
 <div class="form-group">
 	<label for="firstname" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-user"></i></span>아이디
+		<span class="addon" style="padding-bottom: 0px;">
+			<i class="glyphicon glyphicon-user"></i>
+		</span>아이디
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px">
 		<input type="text" id="user_id" name="user_id" readonly="readonly" 
@@ -17,21 +19,25 @@
 	</div>
 </div>
 
-<div class="form-group">
+<!-- 비밀번호 -->
+<%-- <div class="form-group">
 	<label for="lastname" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-lock"></i></span>비밀번호
+		<span class="addon" style="padding-bottom: 0px;">
+			<i class="glyphicon glyphicon-lock"></i>
+		</span>비밀번호
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px">
 		<input type="password" style="color: #777" class="form-control"
 			value="${join_DTO.user_password}" id="user_password" name="user_password" readonly="readonly">
 	</div>
-</div>
+</div> --%>
 
+<!-- 이름 -->
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-font"></i></span> 이름
+		<span class="addon" style="padding-bottom: 0px;">
+			<i class="glyphicon glyphicon-font"></i>
+		</span> 이름
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px">
 		<input type="text" style="color: #777" class="form-control" id="user_name"
@@ -39,10 +45,12 @@
 	</div>
 </div>
 
+<!-- 성별 -->
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-user"></i></span>성별
+		<span class="addon" style="padding-bottom: 0px;">
+			<i class="glyphicon glyphicon-user"></i>
+		</span>성별
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px">
 		<span class="field">
@@ -58,22 +66,25 @@
 	</div>
 </div>
 
+<!-- 생년월일 -->
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-calendar"></i></span>생년월일
+		<span class="addon" style="padding-bottom: 0px;">
+			<i class="glyphicon glyphicon-calendar"></i>
+		</span>생년월일
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px">
-
 		<input type="text" style="color: #777" class="form-control" id="user_date"
 			name="user_date" value="${join_DTO.user_date}">
 	</div>
 </div>
 
+<!-- 휴대폰 번호 -->
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-phone"></i></span>휴대폰 번호
+		<span class="addon" style="padding-bottom: 0px;">
+			<i class="glyphicon glyphicon-phone"></i>
+		</span>휴대폰 번호
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px">
 		<input type="text" style="color: #777;" class="form-control"
@@ -81,10 +92,12 @@
 	</div>
 </div>
 
+<!-- 입사일 -->
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-calendar"></i></span>입사일
+		<span class="addon" style="padding-bottom: 0px;">
+			<i class="glyphicon glyphicon-calendar"></i>
+		</span>입사일
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px">
 		<input type="text" style="color: #777" class="form-control" id="user_join"
@@ -92,16 +105,17 @@
 	</div>
 </div>
 
-<!--부서명 입력-->
-<!--select id 변경 : 변경불가 -->
+<!-- 부서명 -->
+<!-- select id 변경 : 변경불가 -->
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-calendar"></i></span>부서명
+		<span class="addon" style="padding-bottom: 0px;">
+			<i class="glyphicon glyphicon-list-alt"></i>
+		</span>부서명
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
 		<select class="selectpicker" id="deptSelect" name="dept_no" onchange="deptchange()" style="width: 150px;">
-		<option value="-1" selected>선택</option>
+			<option value="-1" selected>선택</option>
 			<c:forEach var="i" items="${deptselect}">
 				<c:choose>
 					<c:when test="${i.dept_no == join_DTO.dept_no}">
@@ -116,10 +130,13 @@
 	</div>
 </div>
 
+<!-- 팀명 -->
+<!-- select id 변경 : 변경불가 -->
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-calendar"></i></span>팀명
+		<span class="addon" style="padding-bottom: 0px;">
+			<i class="glyphicon glyphicon-menu-right"></i>
+		</span>팀명
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
 		<select class="selectpicker" id="teamSelect" name="team_no" style="width: 150px;">
@@ -138,10 +155,13 @@
 	</div>
 </div>
 
+<!-- 직급명 -->
+<!-- select id 변경 : 변경불가 -->
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
-		<span class="addon" style="padding-bottom: 0px;"><i
-			class="glyphicon glyphicon-calendar"></i></span>직급명
+		<span class="addon" style="padding-bottom: 0px;">
+			<i class="glyphicon glyphicon-menu-right"></i>
+		</span>직급명
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
 		<select class="selectpicker" name="position_no" id="positionSelect" style="width: 150px;">
@@ -160,10 +180,13 @@
 	</div>
 </div>
 
+<!-- 권한 -->
+<!-- select id 변경 : 변경불가 -->
 <div class="form-group">
 	<label for="emailaddress" class="col-md-5" style="margin-top: 5px;">
 		<span class="addon" style="padding-bottom: 0px;">
-		<i class="glyphicon glyphicon-calendar"></i></span>권한
+			<i class="glyphicon glyphicon-menu-right"></i>
+		</span>권한
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
 		<select id="roleSelect" name="role_no" style="width: 150px;">
@@ -180,9 +203,12 @@
 		</select>
 	</div>
 </div>
+
+<!-- 수정, 취소 버튼 -->
 <div class="form-group">
 	<div class="content col-md-12" align="center">
-		<input type="button" class="btn btn-primary " onclick="UserUpdate()" value="수정"> 
+		<input type="button" class="btn btn-primary " onclick="UserUpdate()" value="수정">
+		<input type="button" class="btn btn-primary " onclick="deleteok_id('${join_DTO.user_id}')" value="삭제"> 
 		<input type="button" class="btn btn-primary" onclick="CancelUpdate()" value="취소">
 	</div>
 </div>

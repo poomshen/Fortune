@@ -33,10 +33,44 @@
 	href="assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
+<script src="alert_style/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
+<style type="text/css">
+.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+	position: fixed;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+ 	/* background: rgba(33,33,33,0.09);*/ /*not in ie */
+ 	
+ 	/* 2016.12.07 김지현 
+ 	로딩 이미지 돌아가는동안 비활성화/화면 어둡게 하는 코드 추가*/
+ 	
+ 	background-color :  rgba(0,0,0,0.3);
+	z-index : 100;
+
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#08212121', endColorstr='#08212121');    /* ie */
+ }
+.wrap-loading div{ /*로딩 이미지*/
+	position: fixed;
+	top:50%;
+	left:50%;
+	margin-left: -21px;
+	margin-top: -21px;
+}
+.display-none{ /*감추기*/
+	display:none;
+}  
+</style>
+
 
 </head>
 <body>
-
+<!-- 로딩 gif화면 -->
+<div class="wrap-loading display-none">
+    <div><img src="./images/default.gif" style="width: 50; height: 50px;" /></div>
+</div>
 	<!-- Loader -->
 	<div class="loader" style="display: none;">
 		<div class="loader-img" style="display: none;"></div>
@@ -172,16 +206,16 @@
 		//alert($('#searchname').val());
 		
 		if($('#search_name').val() ==""){
-			alert('이름 비었어요!');
+			swal('이름 비었어요!');
 			$('#search_name').focus();
 		}else if($('#search_phone').val() ==""){
-			alert('전화번호 비었어요!');
+			swal('전화번호 비었어요!');
 			$('#search_phone').focus();
 		}else if(idsearch1 == false){
-			alert('유효한 전화번호 형식이 아닙니다.');
+			swal('유효한 전화번호 형식이 아닙니다.');
 			$('#search_phone').focus();
 		}else if($('#search_birth').val() ==""){
-			alert('생년월일 비었어요!');
+			swal('생년월일 비었어요!');
 			$('#search_birth').focus();
 		}
 		else{
@@ -193,20 +227,41 @@
 					  "search_birth":$('#search_birth').val()},
 				success:function(data){
 					//console.log('>'+data+'<');
+				
+					
 					if(data != null && data != ""){
 						//alert('null 값임?');
-						alert('아이디는 : '+ data + '입니다');
-						location.href = "index.htm";
+						//swal('아이디는 : '+ data + '입니다');
+						swal({
+				        	   title: "아이디는 "+data+" 입니다 ",
+
+				        	   type: "success",
+				        	   showCancelButton: false,
+				        	   confirmButtonColor: "#194f89",
+				        	   confirmButtonText: "확인",
+				        	   closeOnConfirm: false
+				        	 },
+				        	 function(){
+					           location.href="index.htm";
+				        	 });
+						
 					}else if(data == ""){
-						alert('해당 정보에 맞는 아이디가 없습니다. 정보를 확인해주세요');
+						swal('해당 정보에 맞는 아이디가 없습니다. 정보를 확인해주세요');
 					}else{
-						alert('에러입니다. 관리자에게 문의하세요');
+						swal('에러입니다. 관리자에게 문의하세요');
 					}
 					
 				},
+				beforeSend:function(){
+			           $('.wrap-loading').removeClass('display-none');
+			    },
+			    complete:function(){
+			    	   $('.wrap-loading').addClass('display-none');
+			    	   
+			    },
 				error:function(){
-					alert('ajax 제대로 안돔');
-					location.href="index.htm";
+					swal('비밀번호 찾기ajax 제대로 안돔');
+					//location.href="index.htm";
 				}
 			});
 		}
@@ -215,16 +270,16 @@
 	function getpwd() {
 		//alert('버튼 누름');
 		if($('#search_id').val() ==""){
-			alert('아이디 비었어요!');
+			swal('아이디 비었어요!');
 			$('#search_id').focus();
 		}else if($('#search_name2').val() ==""){
-			alert('이름 비었어요!');
+			swal('이름 비었어요!');
 			$('#search_name2').focus();
 		}else if($('#search_phone2').val() ==""){
-			alert('전화번호 비었어요!');
+			swal('전화번호 비었어요!');
 			$('#search_phone2').focus();
 		}else if(idsearch2==false){
-			alert('유효한 전화번호 형식이 아닙니다.');
+			swal('유효한 전화번호 형식이 아닙니다.');
 			$('#search_phone2').focus();
 		}else{
 			$.ajax({
@@ -237,20 +292,35 @@
 				success:function(data){
 					//console.log("result 뭐야!?!?!?!?!!??"+data);
 					if(data!=null && data!=""){
-						//console.log(data);
-						
-						alert('임시 비밀번호가 발송 되었습니다.');
-						location.href="index.htm";
+						//console.log(data);					
 						
 					}else if(data == 0){
-						alert('해당 정보에 맞는 아이디가 없습니다. 정보를 확인해주세요');
+						swal('해당 정보에 맞는 계정이 없습니다. 정보를 확인해주세요');
 					}else{
-						alert('에러입니다. 관리자에게 문의하세요');
+						swal('에러입니다. 관리자에게 문의하세요');
 					}
 					
 				},
+			      beforeSend:function(){
+			           $('.wrap-loading').removeClass('display-none');
+			       },
+			       complete:function(){
+			           $('.wrap-loading').addClass('display-none');
+			           swal({
+			        	   title: "메일로 임시 비밀번호를 보냈습니다",
+
+			        	   type: "success",
+			        	   showCancelButton: false,
+			        	   confirmButtonColor: "#194f89",
+			        	   confirmButtonText: "확인",
+			        	   closeOnConfirm: false
+			        	 },
+			        	 function(){
+				           location.href="index.htm";
+			        	 });
+			       },
 				error:function(){
-					alert('ajax가 정상작동 안했음');
+					swal('ajax가 정상작동 안했음');
 					//location.href="index.htm";
 				}
 			
@@ -289,5 +359,6 @@
 	} 
 
 </script>
+
 </body>
 </html>

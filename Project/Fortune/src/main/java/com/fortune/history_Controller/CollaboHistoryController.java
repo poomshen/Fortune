@@ -12,9 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.function_DTO.Select_Collabo_DTO;
 import com.fortune.history_DAO.IHistory;
+import com.fortune.request_DAO.ProDao;
 import com.fortune.request_Service.ProService;
 
 /**
@@ -37,15 +41,24 @@ public class CollaboHistoryController {
 	// 완료 수정후 ajax 로 리스트 재호출
 	@Transactional
 	@RequestMapping("collaboComplet.htm")
-	public String collaboComplete( String  collabo_no ,
-			String pg, String f, String q,HttpSession session ,Model  model){
+	public ModelAndView collaboComplete( String  collabo_no ,
+			String pg, String f, String q,HttpSession session){
 		
 		IHistory history = SqlSession.getMapper(IHistory.class);
 		history.collaboComplete("완료", Integer.parseInt(collabo_no));
-		
+		ModelAndView mv = new ModelAndView();
 		List<With_DTO> list = null;
+		 Join_DTO ids = (Join_DTO) session.getAttribute("info");
+		 ProDao proDao = SqlSession.getMapper(ProDao.class);
+		if(ids.getRole_no() == 2 ){
+			List<Select_Collabo_DTO> finishCollabo = proDao.finishCollaboList2(ids.getDept_no());
+			session.setAttribute("finishCollabo", finishCollabo);
+		}else {
+			List<Select_Collabo_DTO> finishCollabo = proDao.finishCollaboList(ids.getUser_id());
+			session.setAttribute("finishCollabo", finishCollabo);
+		}
 		try {
-			list = proservice.listResponse(pg, f, q, session);
+		    mv = proservice.listResponse(pg, f, q, session);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,12 +66,12 @@ public class CollaboHistoryController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		model.addAttribute("list", list);
+		mv.setViewName("cen.collaboList");
 		
-		return "cen.responseList";
+		return mv;
 	}
 	
-	@RequestMapping("responseListFrom.htm")
+/*	@RequestMapping("responseListFrom.htm")
 	public String collaboselectList(String pg, String f, String q,HttpSession session ,Model model){
 		try {
 			System.out.println("성준이 :::"+pg);
@@ -72,5 +85,5 @@ public class CollaboHistoryController {
 		
 		
 		return "cen.responseList_From";
-	}
+	}*/
 }

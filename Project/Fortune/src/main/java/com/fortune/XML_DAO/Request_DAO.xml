@@ -6,19 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.fortune.request_DAO.ProDao">
 
 
-	<select id="requestCount" resultType="Integer">
+	<select id="requestCount" resultType="Integer"  parameterType="com.fortune.function_DTO.Search_Page_DTO">
 		SELECT COUNT(*) CNT
 		FROM collabo_req
-		WHERE (${param1} like '%${param2}%'AND collabo_req_state LIKE '%${param3}%' AND ${param4} LIKE '%${param5}%')
+		WHERE (${f} like #{q} AND collabo_req_state LIKE #{st} AND ${me} LIKE #{se})
 	</select>
 
-	<select id="getRequest" parameterType="String" resultType="com.fortune.Table_DTO.Request_DTO">
+	<select id="getRequest" parameterType="com.fortune.function_DTO.Search_Page_DTO" resultType="com.fortune.Table_DTO.Request_DTO">
 		 SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT re.COLLABO_REQ_TEXT,re.COLLABO_REQ_TITLE,re.COLLABO_REQ_STATE,re.COLLABO_REQ_ID,re.COLLABO_REQ_DATE,
     re.USER_ID,re.COLLABO_REQ_FILESRC,re.COLLABO_REQ_INDEX,re.COLLABO_REQ_NO,u.dept_no ,de.dept_name, u.user_name from collabo_req re
-    join users u on re.collabo_req_ID = u.user_ID join dept de on u.dept_no = de.dept_no WHERE (re.${param2}
-		LIKE '%${param3}%' AND re.${param5} LIKE '%${param6}%' AND re.collabo_req_state LIKE '%${param4}%') ORDER BY re.collabo_req_date DESC ) N )
-		WHERE NUM BETWEEN 1 + (${param1} - 1) * 6 AND 6 + (${param1} - 1) * 6 
+    join users u on re.${fieldnot} = u.user_ID join dept de on u.dept_no = de.dept_no WHERE (re.${f}
+		LIKE '%${q}%' AND re.${me} LIKE '%${se}%' AND re.collabo_req_state LIKE '%${st}%') ORDER BY re.collabo_req_date DESC ) N )
+		WHERE NUM BETWEEN 1 + (${pg} - 1) * 6 AND 6 + (${pg} - 1) * 6 
 		
 		
 	</select>
@@ -144,7 +144,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      g.collabo_req_id collabo_req_id ,g.collabo_sal collabo_sal from (SELECT * FROM (SELECT ROWNUM NUM, N.* FROM
 		( SELECT * FROM collabo WHERE ${param2}
 		LIKE '%${param3}%' and COLLABO_STATE != '완료' ORDER BY collabo_no DESC ) N )
-		WHERE NUM BETWEEN (${param1}+1)  AND (4+${param1}) )G join 
+		WHERE NUM BETWEEN 1+ (${param1}-1) * 6  AND 6+((${param1}-1)  * 6))G join 
 		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX ORDER by NUM
 	</select>
 	
@@ -162,7 +162,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 		and COLLABO_STATE != '완료'
 		 ORDER BY collabo_no DESC ) N )
-		WHERE NUM BETWEEN (${param1}+1)  AND (4+${param1}) )G join 
+		WHERE NUM BETWEEN 1+(${param1}-1) * 6  AND 6+((${param1}-1)  * 6) )G join 
 		collabo_req r on g.collabo_req_index = r.COLLABO_REQ_INDEX  ORDER by NUM
 	</select>
 
@@ -267,5 +267,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectReqText" parameterType="Integer" resultType="String">
 		Select collabo_req_text from collabo_req where COLLABO_REQ_INDEX = #{param1}
 	</select>
-
+	
+	<!-- 작성자:이성준 날짜 :16-12-07 목적 : 요청 글 가지고 오기 -->
+	<select id="collaboCount" resultType="Integer">
+		SELECT COUNT(*) FROM collabo where ${param1}
+		in 
+		<foreach  item="querys"  collection="param2" open="(" separator="," close=")">
+			#{querys}
+		</foreach>
+		and COLLABO_STATE != '완료'
+	</select>
+	
+	<!-- 작성자:이성준  날짜 : 16-12-08 목적: 이름과 부서, 부서명, 팀명 가져오기 -->
+	<select id="searchName"  resultType="com.fortune.function_DTO.Select_name_DTO">
+		select dept_name , TEAM_NAME, USER_NAME,USER_ID from USERNAMEVIEW where USER_ID = #{param1}
+	</select>
+	
+	<!-- my 프로젝트 디테일에 기간/수익 가져오기 -->
+	
+	<select id="myProDetail" resultType="com.fortune.Table_DTO.With_DTO">
+	
+	select collabo_start,collabo_end,collabo_sal from collabo where collabo_no=#{param1}
+	
+	</select>
+	
 </mapper>

@@ -7,7 +7,6 @@
 package com.fortune.join_Controller;
 
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +15,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fortune.Table_DTO.Chart_Data_DTO;
 
@@ -37,6 +32,7 @@ import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.Table_DTO.Team_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.chart_DAO.IChart;
+import com.fortune.function_DTO.Pie_Data_DTO;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.function_DTO.Select_Collabo_DTO;
@@ -74,9 +70,6 @@ public class MemberController {
 	//수정추가 : 이성준 2016-11-26 로그인 했을시 자신 참조 프로젝트
 	@RequestMapping(value="/FortuneMain.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session ,Authentication authentication,Model model){
-
-	
-		
 		System.out.println("로그인 버튼 눌렀고요");
 		UserDetails details = (UserDetails)authentication.getPrincipal();
 		String user_id = details.getUsername();
@@ -109,7 +102,8 @@ public class MemberController {
 		}
 		
 		
-		//메뉴에 차트 가져오기( 추가작업 : 이예지)
+		//메뉴에 차트 가져오기(추가작업 : 이예지)
+		//pie차트 가져오기 2016/12/08
 		IChart cdao = sqlsession.getMapper(IChart.class);
 		List<Chart_Data_DTO> clist = new ArrayList<Chart_Data_DTO>();
 		
@@ -129,6 +123,23 @@ public class MemberController {
 		model.addAttribute("chart_y",chart_y);
 		System.out.println("메뉴 컨트롤러");
 		
+		//사업규모 차트 가져오기 (추가 작업 : 이예지)
+		List<Pie_Data_DTO> plist = new ArrayList<Pie_Data_DTO>();
+		plist = cdao.selectSumSal();
+		
+		ArrayList<String> pie_x = new ArrayList<String>();
+		ArrayList<Long> pie_y = new ArrayList<Long>();
+		long total_count = 0;
+		for(int i=0;i<plist.size();i++){
+			
+			pie_x.add(plist.get(i).getDept_name());
+			pie_y.add(plist.get(i).getSum_sal());
+			total_count+=plist.get(i).getSum_sal();
+		}
+		
+		model.addAttribute("pie_x",pie_x);
+		model.addAttribute("pie_y",pie_y);
+		model.addAttribute("total_count",total_count);
 		
 		//추가사항  
 		//로그인했을때 알림 체크한뒤 해당 알림 리스트를 session에 저장
@@ -156,13 +167,9 @@ public class MemberController {
 		//공지사항 최신글 뽑는 부분 (추가 작업 : 김중완)
 		INotice notice_dao = sqlsession.getMapper(INotice.class);
 		List<Notice_DTO> nlist = notice_dao.mainListNotice();
-		System.out.println(nlist);
 		model.addAttribute("nlist", nlist);
 
 		return "home.main";
-		
-			
-	
 	}
 	
 	
@@ -178,18 +185,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/deleteMemember.htm")
-	public String deleteMemberView(HttpSession session){
+	public String deleteMemberView(HttpServletRequest request){
 		
 		IJoin dao = sqlsession.getMapper(IJoin.class);
-		Join_DTO dto = (Join_DTO)session.getAttribute("info");
-		System.out.println("id값 : "+dto.getUser_id());
-		dao.deleteMember(dto.getUser_id());
+		String user_id = request.getParameter("user_id");
+		dao.deleteMember(user_id);
 		
-		
-		//System.out.println("삭제완료!!~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		
-		return "redirect:index.htm";
-		
+		return "redirect:adminusers.htm";
 	}
 	
 	@RequestMapping("/updateMember.htm")
@@ -214,7 +216,9 @@ public class MemberController {
 		IJoin jdao = sqlsession.getMapper(IJoin.class);
 		jdto = jdao.searchTitle();
 		model.addAttribute("position", jdto);
-
+		
+		model.addAttribute("check","10");
+		
 		return "home.edit";
 		
 	}
@@ -226,7 +230,7 @@ public class MemberController {
 		PassWord_Service passWord_Service = new PassWord_Service();
 		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
 		IJoin dao = sqlsession.getMapper(IJoin.class);
-		dao.updateMember(dto);
+		int check = dao.updateMember(dto);
 		
 		Join_DTO  result = new Join_DTO();
 		result = dao.searchMember(dto.getUser_id());
@@ -249,6 +253,12 @@ public class MemberController {
 		IJoin jdao = sqlsession.getMapper(IJoin.class);
 		jdto = jdao.searchTitle();
 		model.addAttribute("position", jdto);
+		
+		if(check > 0){
+			model.addAttribute("check","1");
+		}else{
+			model.addAttribute("check","0");
+		}
 		
 		return "home.edit";
 	}

@@ -27,9 +27,12 @@
 <link href="bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 	
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
 <link rel="stylesheet" href="assets/css/hover.css">	
+
+
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 <body>
@@ -39,7 +42,7 @@
 	<div id="page-wrapper" style="min-height: 644px;margin-left: 150px;">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-12 requestpage">
 					<tiles:insertAttribute name="content" />
 				</div>
 				<!-- /.col-lg-12 -->

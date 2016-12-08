@@ -94,8 +94,8 @@
 			
 			 promodifyform.submit(); 
 	
-			 send($('#collabo_req_ID').val());
-
+			// send($('#collabo_req_ID').val());
+			
 		
 			return true;
 		}
@@ -111,18 +111,18 @@
 </head>
 <body>
 
-
-	<h3 style="margin-bottom: 40px; margin-top: 30px;">프로젝트 생성</h3>
+	
+	<h3 style=" margin-top: 20px;">프로젝트 생성</h3>
 	<hr>
-	<div class="container">
+	<div class="col-lg-12">
+	<div class="panel panel-default" style=" margin-left:10%; margin-right:10%; width: 80%">
+	<div class="panel-heading">프로젝트를 요청 합니다</div>
+	<div class="panel-body" style="width: 100%;">
 		<form action="" method="post" name="promodifyform"
 			enctype="multipart/form-data">
-		<div class="col-sm-1"></div>
-			<div class="col-sm-8">
-
-
+			<div style="width: 100%;" >
 				<div class="form-group">
-				<label>새로운 요청 :</label> 
+				<label>새로운 요청 </label> 
 				<select name="collabo_req_no" id="collabo_req_no" class="form-control">
 					<option value="${collabo_req_no}">새로운 요청</option>
 				 	<c:forEach var="pname" items="${pList}">
@@ -188,11 +188,12 @@
 					onclick="promodify()">저장</button>
 				&nbsp;&nbsp; <a href="FortuneMain.htm"
 					class="btn btn-default hvr-grow-shadow">취소하기</a>
-			</div>
 			<br> <br>
+		</div>
 		</form>
 	</div>
-
+		</div>
+	</div>
 
 
 </body>

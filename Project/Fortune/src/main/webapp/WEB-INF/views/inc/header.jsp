@@ -8,37 +8,12 @@
 <script src="alert_style/js/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 <script>
-
-function deleteok_id(){
-	swal({
-		  title: "정말로 탈퇴 하시겠습니까?",
-		  text: "탈퇴한 아이디와 데이터는 재사용 및 복구가 불가합니다..",
-		  type: "warning",
-		  showCancelButton: true,
-		  confirmButtonColor: "#DD6B55",
-		  confirmButtonText: "네, 탈퇴하겠습니다.",
-		  cancelButtonText: "아니요, 계속 사용하겠습니다.",
-		  closeOnConfirm: false,
-		  closeOnCancel: false
-		},
-		function(isConfirm){
-		  if (isConfirm) {
-		    swal("삭제완료", "그동안 고생하셨습니다!.", "success");
-		    location.replace('deleteMemember.htm')
-		  } else {
-		    swal("삭제취소", "앞으로 열일 바랍니다.^^!", "error");
-		  }
-	});
-}
-
-</script>
-<script>
 var wsocket;
 var msg 
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://192.168.1.103:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://192.168.0.4:8090/fortune/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -62,14 +37,11 @@ function onMessage(evt) {
 		  url:"newAlarm.htm",
 		  data:{"newAlarm": evt.data},
 		  success:function(data){
-			 
-		
+			  
 			  console.log("헤더 업데이트 성공");
 			  console.log(data);
 			  $('#alarm').empty();  
 			  $('#alarm').html(data);
-			 
-			
 		
 		  }
 	  });	
@@ -83,7 +55,8 @@ function onClose(evt) {
 function send(selectId) {
 
 	console.log("메세지 받을 사람~?"+selectId);
-	 wsocket.send(selectId);
+	
+	wsocket.send(selectId);
 	
 	
 }
@@ -98,11 +71,7 @@ function appendMessage(msg) {
 $(document).ready(function() {
 		connect();
 		
-		$("#alarmList li").click(function() {
-		    alert(this.id); 
-		    
-		    window.location.href = "alarmCheck.htm?work_type="+this.id;
-		});
+	
 
 });
 
@@ -178,7 +147,7 @@ $(document).ready(function() {
                   		
                         <li id="${alarm.work_type}">
                        
-                            <a href="#">
+                            <a href="requestList.htm">
                                 <div> 
                                 
                    <c:choose>
@@ -259,8 +228,6 @@ $(document).ready(function() {
                         <li class="divider"></li>
                         <li><a href="logOut.htm"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
-                        <li class="divider"></li>
-                        <li><a href="#" onclick="deleteok_id()"><i class="fa fa-times fa-fw"></i> delete ID</a>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>

@@ -12,7 +12,6 @@
 <title>관리자 회원 수정</title>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-
 <style type="text/css">
 table, th, td {
     border: 1px solid black;
@@ -27,103 +26,67 @@ input.buttonLink {
 </style>
 </head>
 <body style="color:#777">
-	<h3 style="margin-bottom: 40px; margin-top: 30px;">사원정보 수정</h3>
-	<hr>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">[사원 정보 수정]</h1>
+		</div>
+	</div>
+	
+	<!-- 부서명 -->
 	<div class="col-sm-6" style="padding-left: 0px;">
 		<form action="">
 			<select id="deptSelect1" name="deptSelect1">
 				<option value="-1" selected="selected">부서 선택</option>
 				<c:forEach var="i" items="${dept}">
-					<c:choose>
-						<c:when test="${i.dept_no == sessionScope.info.dept_no}">
-							<option value="${i.dept_no}" selected>${i.dept_name}</option>
-						</c:when>
-						<c:otherwise>
-							<option value="${i.dept_no}">${i.dept_name}</option>
-						</c:otherwise>
-					</c:choose>
+					<option value="${i.dept_no}">${i.dept_name}</option>
 				</c:forEach>
 			</select> 
-			
-			<%-- <select id="teamSelect" name="teamSelect">
-				<c:forEach var="j" items="${team}">
-					<c:if test="${sessionScope.info.dept_no == j.dept_no}">
-						<c:choose>
-							<c:when test="${sessionScope.info.team_no == j.team_no}">
-								<option value="${j.team_no}" selected>${j.team_name}</option>
-							</c:when>
-							<c:otherwise>
-								<option value="${j.team_no}">${j.team_name}</option>
-							</c:otherwise>
-						</c:choose>
-					</c:if>
-				</c:forEach>
-			</select>  --%>
 			<input type="button" class="btn btn-primary" onclick="deptshowadmin()" value="검색">
 		</form>
-		<form action="">
 		
 		<div id="deptshowDiv">
-				<table class="table table-striped table-bordered table-hover">
-					<tr>
-						<th>아이디</th>
-						<th>이름</th>
-						<th>전화번호</th>
-						<th>부서명</th>
-					</tr>
-					<c:forEach var="i" items="${deptlist}">
-						<c:if test="${not (i.user_id eq 'admin@fortune.com')}">
-							<tr>
-								<td><input type="button" value="${i.user_id}" class="buttonLink" onclick="ShowUserInfo('${i.user_id}')"></td>
-								<td><c:out value="${i.user_name}"></c:out></td>
-								<td><c:out value="${i.user_phone}"></c:out></td>
-								<c:if test="${i.dept_no == 0}">
-									<td><c:out value="없음"></c:out></td>
-								</c:if>
-								<c:forEach var="j" items="${dept}">
-									<c:choose>
-										<c:when test="${i.dept_no == j.dept_no}">
-											<td><c:out value="${j.dept_name}"></c:out></td>
-										</c:when>
-									</c:choose>
-								</c:forEach>
-							</tr>
-						</c:if>
-					</c:forEach>
-				</table>
-			</div>
-		</form>
+			<table class="table table-striped table-bordered table-hover">
+				<tr>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>전화번호</th>
+					<th>부서명</th>
+				</tr>
+				<c:forEach var="i" items="${deptlist}">
+					<c:if test="${not (i.user_id eq 'admin@fortune.com')}">
+						<tr>
+							<td><input type="button" value="${i.user_id}" class="buttonLink" onclick="ShowUserInfo('${i.user_id}')"></td>
+							<td><c:out value="${i.user_name}"></c:out></td>
+							<td><c:out value="${i.user_phone}"></c:out></td>
+							<c:if test="${i.dept_no == 0}">
+								<td><c:out value="없음"></c:out></td>
+							</c:if>
+							<c:forEach var="j" items="${dept}">
+								<c:choose>
+									<c:when test="${i.dept_no == j.dept_no}">
+										<td><c:out value="${j.dept_name}"></c:out></td>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</table>
+		</div>
 	</div>
 	
 	<div class="col-sm-6" style="padding-right: 0px;">
 		<div class="row" style="padding-right: 0px;">
-		<label style="height: 32px; margin-top: 10px;"> &nbsp;&nbsp;&nbsp; 사원 상세 정보</label>
+			<label style="height: 32px; margin-top: 10px;"> &nbsp;&nbsp;&nbsp; 사원 상세 정보</label>
 			<form action="">
 				<div id="usershowDiv"></div>
 			</form>
 		</div>
 	</div>
 </body>
+
 <script type="text/javascript">
-/* $(document).ready(function() {
-	phonechk = false;
-	
-	//핸드폰번호 유효성 검사
-	$('#user_phone').keyup(function(){
-		alert('하하0');
-		var phoneRex = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
-		console.log($('#user_phone').val());
-		if(phoneRex.test($('#user_phone').val())){
-			alert('통과');
-			phonechk = true;
-	   	}else{
-	   		alert('실패');
-	   		phonechk = false;
-	   	}
-	});
-}); */ 
-
-
+//부서명 변경하면 팀명 자동으로 변경
 function deptchange() {
 	var deptval = $('#deptSelect').val();
 	
@@ -133,6 +96,7 @@ function deptchange() {
 		data:{"dept_no":$('#deptSelect').val()},
 		success:function(data){
 			$("#teamSelect").html("");
+			$('#teamSelect').append("<option value=-1 'selected'>선택</option>");
 			for(var i=0; i<data.length; i++){
 				if(i==0){
 					$('#teamSelect').append("<option value='"+data[i].team_no+"' selected>"+data[i].team_name+"</option>");
@@ -142,27 +106,35 @@ function deptchange() {
 			}
 		},
 		error:function(){
-			alert('팀목록 가져오는데서 에러남!');
+			swal('팀목록 가져오는데서 에러남!');
 		}
 	});
 }
 
+//부서명 검색 버튼 클릭
 function deptshowadmin(){
 	$.ajax({
 		type:"get",
 		url:"deptsearchadmin.ajax",
 		data:{"dept_no": $('#deptSelect1').val()},
 		success:function(data){
-			$("#deptshowDiv").css("overflow-y", "scroll");
+			$("#deptshowDiv").css("overflow-y", "auto");
 			$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data));
 		},
+		beforeSend:function(){
+			$('.wrap-loading').removeClass('display-none');
+		},
+		complete:function(){
+			$('.wrap-loading').addClass('display-none');
+		},
 		error:function(){
-			alert('회원 목록을 가져오는데 실패했습니다');
+			swal('회원 목록을 가져오는데 실패했습니다');
 		}
 	}); 
 }
 
+//회원 상제 정보보기 위해서 회원 아이디 클릭 
 function ShowUserInfo(userid){
 	$.ajax({
 		type: "get",
@@ -171,27 +143,31 @@ function ShowUserInfo(userid){
 		success:function(data){
 			$("#usershowDiv").append($('#usershowDiv').html(data)); 
 		},
+		beforeSend:function(){
+			$('.wrap-loading').removeClass('display-none');
+		},
+		complete:function(){
+			$('.wrap-loading').addClass('display-none');
+		},
 		error:function(){
-			alert('회원 상제 정보 가져오기 실패');
+			swal('회원 상제 정보 가져오기 실패');
 		}
 	});
 }
 
+//상세정보 보기에서 취소 버튼 클릭
 function CancelUpdate(){
 	$("#usershowDiv").append($('#usershowDiv').html("")); 
 }
 
+//사원 수정
 function UserUpdate(){
-	if($('#user_password').val() == null || $('#user_password').val() == ""){
-		alert('비밀번호를 작성해주세요.');
-		$('#user_password').focus();
-		return;
-	}else if($('#user_name').val() == null || $('#user_name').val() == ""){		
-		alert('이름을 작성해주세요.');
+	if($('#user_name').val() == null || $('#user_name').val() == ""){		
+		swal('이름을 작성해주세요.');
 		$('#user_name').focus();
 		return;
-	}else if(/* phonechk == false ||  */$('#user_phone').val() == null || $('#user_phone').val() == ""){
-		alert('ex)01x-xxxx-xxxx 형식으로 작성해주세요');
+	}else if($('#user_phone').val() == null || $('#user_phone').val() == ""){
+		swal('ex)01x-xxxx-xxxx 형식으로 작성해주세요');
 		$('#user_phone').focus();
 		return;
 	}
@@ -206,13 +182,42 @@ function UserUpdate(){
 			"team_no":$('#teamSelect').val(),"position_no":$('#positionSelect').val(),
 			"role_no":$('#roleSelect').val()},
 		success:function(data){
-			alert('수정 성공');
+			swal('수정 성공');
 			deptshowadmin();
 			$("#usershowDiv").append($('#usershowDiv').html(data)); 
 		},
+		beforeSend:function(){
+			$('.wrap-loading').removeClass('display-none');
+		},
+		complete:function(){
+			$('.wrap-loading').addClass('display-none');
+		},
 		error:function(){
-			alert('수정 실패');
+			swal('수정 실패');
 		}
+	});
+}
+
+//사원 삭제
+function deleteok_id(user_id){
+	swal({
+		  title: "정말로 탈퇴 하시겠습니까?",
+		  text: "탈퇴한 아이디와 데이터는 재사용 및 복구가 불가합니다..",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "네, 탈퇴하겠습니다.",
+		  cancelButtonText: "아니요, 계속 사용하겠습니다.",
+		  closeOnConfirm: false,
+		  closeOnCancel: false
+		},
+		function(isConfirm){
+		  if (isConfirm) {
+		    swal("삭제완료", "그동안 고생하셨습니다!.", "success");
+		    location.replace('deleteMemember.htm?user_id='+user_id);
+		  } else {
+		    swal("삭제취소", "앞으로 열일 바랍니다.^^!", "error");
+		  }
 	});
 }
 </script>

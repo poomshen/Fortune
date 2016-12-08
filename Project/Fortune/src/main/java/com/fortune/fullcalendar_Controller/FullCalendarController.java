@@ -351,7 +351,7 @@ public class FullCalendarController {
         if(color_check.equals("rgb(51, 122, 183)")||color_check.equals("rgba(51, 122, 183, 0.219608)")){
         	//일반일정
         	user_ids = fullcalendarDAO.selectClick_users(schedule_no);
-        }else if(color_check.equals("rgb(35, 177, 0)")){
+        }else if(color_check.equals("rgb(71, 142, 72)")){
         	user_ids = fullcalendarDAO.selectClick_users2(schedule_no);
 
         }
@@ -551,7 +551,7 @@ public class FullCalendarController {
         //selectbox 일반일정보기 클릭시
         }else if(schedule_type.equals("1")){
         	System.out.println("스케줄 타입 : 1");
-        	schedulelist = fullcalendarDAO.selectSWList(collabo_no);
+        	schedulelist = fullcalendarDAO.selectSWList(collabo_no, yearmonth);
         	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no, yearmonth);
         	
             for(Schedule_Work_Meeting_DTO swm : schedulelist){
@@ -574,7 +574,7 @@ public class FullCalendarController {
         }else if(schedule_type.equals("2")){
         	System.out.println("스케줄 타입 : 2");
         	
-        	schedulelist = fullcalendarDAO.selectSMList(collabo_no);
+        	schedulelist = fullcalendarDAO.selectSMList(collabo_no, yearmonth);
         	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no, yearmonth);
         	
             for(Schedule_Work_Meeting_DTO swm : schedulelist){
@@ -597,7 +597,7 @@ public class FullCalendarController {
         }else if(schedule_type.equals("3")){
         	System.out.println("스케줄 타입 : 3");
         	Join_DTO jdto = (Join_DTO) session.getAttribute("info");
-        	schedulelist = fullcalendarDAO.selectMySWMList(collabo_no, jdto.getUser_id());
+        	schedulelist = fullcalendarDAO.selectMySWMList(collabo_no, jdto.getUser_id(), yearmonth);
         	List<Work_Users_DTO> wulist = fullcalendarDAO.selectWUList(collabo_no, yearmonth);
         	List<Meet_Users_DTO> mulist = fullcalendarDAO.selectMUList(collabo_no, yearmonth);
         	
