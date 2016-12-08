@@ -229,7 +229,7 @@
 					//console.log('>'+data+'<');
 					if(data != null && data != ""){
 						//alert('null 값임?');
-						swal('아이디는 : '+ data + '입니다');
+						alert('아이디는 : '+ data + '입니다');
 						location.href = "index.htm";
 					}else if(data == ""){
 						swal('해당 정보에 맞는 아이디가 없습니다. 정보를 확인해주세요');
