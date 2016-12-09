@@ -47,7 +47,7 @@
 <input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_state}">
 <label>작성일</label>
 <input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_date}">
-<label>제목</label>
+<label>프로젝트명</label>
 <input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_title}">
 <label>프로젝트 내용 </label>
 <div class="form-control" style="height: 200px; overflow: auto;" >
