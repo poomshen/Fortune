@@ -20,6 +20,7 @@ ${list.collabo_req_text}
   <div  class="form-control">
  <a class="w3-small" href="download.htm?p=upload&f=${list.collabo_req_filesrc}">${list.collabo_req_filesrc}</a>
  </div>
+ <input type="hidden" id="hidden" value="${list.collabo_req_index}">
 <div class="modal-footer" id="detail_footer">
 							<input type="hidden" id="hidden">
 							<c:if test='${list.collabo_req_state eq "대기"}'>

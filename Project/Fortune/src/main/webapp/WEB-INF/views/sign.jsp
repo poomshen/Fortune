@@ -38,13 +38,13 @@
 <link rel="apple-touch-icon-precomposed"
    href="assets/ico/apple-touch-icon-57-precomposed.png">
 
-   
-
 <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css">
 
+<script src="alert_style/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 <style type="text/css">
 .button {
     background-color: #4CAF50; /* Green */
@@ -84,21 +84,21 @@
 
 <form class="form-horizontal" action="JoinSubmit.htm" method="post" id="contact_form">
 <fieldset>
-
+  
 <!-- 아이디  입력-->
 
 <div class="form-group">
 	<div class="inner-addon left-addon" style="margin-left:37%">
 		<span class="field">
 			<span class="addon" style="padding-bottom: 0px;"><i class="glyphicon glyphicon-user"></i></span>
-			    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;" required="required"> 
-			    <input type="button" id="idchk" name="idchk" class="button" value="아이디 중복확인" onclick="idchkclk()" style="display: none;">
-			   
-			    <label id="idselect" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
-				<!-- <input type="hidden" id="nextchk" value="다음걸로 못넘어가게하는거">  -->
+			    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;" required="required">
+			    <label id="idselect" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label> 
+			  	<br><br>
+			  <input type="button" id="idchk" name="idchk" style="width: 200px; margin-left:100px; font-size: 20;" class="col-sm-3 btn hvr-forward" value="이메일 중복확인" onclick="idchkclk()"> 		  	
 		</span>
 	</div>
 </div>
+  
 
 <!-- 비밀번호  입력-->
 <div class="form-group">
@@ -264,7 +264,7 @@
  --%>
 <!-- Button -->
 <div class="form-group">
-  <label class="control-label"></label>  
+  <label class="control-label"></label>
     <input type="button" name="joinbtn" id="joinbtn" onclick="joinchk();" class="btn hvr-forward" style="margin-top: 50px;" value="join">&nbsp; &nbsp; 
     <input type="button" class="btn hvr-forward" style="margin-top: 50px;" value="back" onclick="history.go(-1)">
 </div>
@@ -371,12 +371,16 @@
     	    		  success:function(data){
     	    			  //console.log(data);
     	    			  if(data == "yes"){
+    	    				  //alert('중복 있음');
     	    			  	$("#idselect").html("중복되는 아이디입니다"); 
+    	    			  	$('#id').focus();
     	    			    joinchk1 = false;
     	    			 
     	    			
     	    			  }else{
+    	    				// alert('중복없음');
     	    				 $("#idselect").html("사용가능한 아이디 입니다");
+    	    				 $('#id').focus();
     	    				  /* $('#nextchk').val()= "okay"; */
     	    				 joinchk1 = true;
     	    				
@@ -413,7 +417,7 @@
 			data:{"user_password":$('#user_password').val(),
 				"user_password_chk":$('#user_password_chk').val()},		
 			success:function(data){
-				console.log(data);
+				//console.log(data);
 					if(data=="ok"){
 						$('#pwdchklb').html("비밀번호 통과");
 						joinchk2=true;
@@ -451,31 +455,31 @@
   	//유효성 검사로 join 막기
  	function joinchk() {				
 		if(joinchk1 == false){
-			alert('아이디 유효성을 확인해주세요');
+			swal('아이디 유효성을 확인해주세요');
 			$('#id').focus();
 		}else if(joinchk2 == false){
-			alert('비밀번호 유효성을 확인해주세요');
+			swal('비밀번호 유효성을 확인해주세요');
 			$('#user_password').focus();
 		}else if($('#name').val() == null||$('#name').val() == "" ){		
-			alert('이름을 작성해주세요');
+			swal('이름을 작성해주세요');
 			$('#name').focus();
 		}else if($('#year').val() == '-1'){
-			alert('년도를 선택해주세요');
+			swal('년도를 선택해주세요');
 			$('#year').focus();
 		}else if($('#month').val() == '-1'){
-			alert('월을 선택해주세요');
+			swal('월을 선택해주세요');
 			$('#month').focus();
 		}else if($('#day').val() == '-1'){
-			alert('일을 선택해주세요');
+			swal('일을 선택해주세요');
 			$('#day').focus();
 		}else if(joinchk3 == false){
-			alert('핸드폰 번호 유효성을 확인해주세요');
+			swal('핸드폰 번호 유효성을 확인해주세요');
 			$('#phone').focus();
 		}else if($('#enterdate').val() == null||$('#enterdate').val() == "" ){
-			alert('입사일을 입력해주세요');
+			swal('입사일을 입력해주세요');
 			$('#enterdate').focus();
 		}else{
-			alert('회원가입 완료!');
+			swal('회원가입 완료!');
 			birth();
 			$('#contact_form').submit();	
 		}

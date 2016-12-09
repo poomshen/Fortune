@@ -142,13 +142,13 @@ public class ProController {
 	 // ajax 태울 곳
 	 @Transactional
 	 @RequestMapping("listReplyRequest2.htm") // /customer/notice.htm
-	 public ModelAndView listReplyRequest2(Search_Page_DTO search_Page_DTO, HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
-		 System.out.println(search_Page_DTO);
+	 public ModelAndView listReplyRequest2(Search_Page_DTO search_Page_DTO, HttpSession session, Model model) throws ClassNotFoundException, SQLException {
+		 System.out.println("컨트롤러 : " + search_Page_DTO);
 		 String rs = "cen";
 		 search_Page_DTO.setRs(rs);
-		 ModelAndView mv = proservice.listReplyRequest((String)session.getAttribute("req_selectId"),search_Page_DTO, session);
+		 ModelAndView mv = proservice.listReplyRequest((String)session.getAttribute("req_selectId"), search_Page_DTO, session);
 		  // 자동 forward
-		 System.out.println(search_Page_DTO.getState());
+		 System.out.println("상태  : " + search_Page_DTO.getState());
 		 
 		 mv.addObject("state", search_Page_DTO.getState());
 		 
