@@ -297,8 +297,8 @@ function detail(req,collabo_no){
 	 		    
 	 		    	
 	 		    	$(".requestpage").html(data);
-	 		    	$("#${state}").addClass('active');
-	 				$("#states").val('${state}')
+	 		    	$("#전체").addClass('active');
+ 	 				$("#states").val('전체');
 	 		    
 	 		    },
 	 			error: function(){						
@@ -314,18 +314,42 @@ function detail(req,collabo_no){
     }
      
 //페이지 처리
-function pazingBtn(page){
+function pazingBtn(page,searchval,memoval){
 	if($("#states").val() == '전체'){
 	 	$.get("requestList2.htm",{pg:page,
 				  st: '${st_query}',
-				  me: "${memo}", 
-				  se: "${search}",
+				  me: memoval, 
+				  se: searchval,
 				state:$("#states").val()}, function(data, textStatus, req) {
 			$('.requestpage').html(data);
 			$("#${state}").addClass('active');
 			$("#states").val('${state}');
 	 		});
-		}else{
+		}else if($("#states").val() == '대기' || $("#states").val() == '수락' || $("#states").val() == '거절' || $("#states").val() == '완료'){
+    		
+    		$.ajax({
+  	   		 
+ 	 			type: "get",
+ 	 			url:  "requestList2.htm",
+ 	 			cache: false,				
+ 	 			data:{pg:page,
+ 	 				  st: $("#states").val(),
+ 	 				  me: "${memo}", 
+ 	 				  se: "${search}",
+ 	 				state:$("#states").val()},
+ 	 		    success:function(data){ //callback  
+ 	 		    	
+ 	 		    	$(".requestpage").html(data); 
+ 	 		    	$("#${state}").addClass('active');
+ 	 			$("#states").val('${state}');
+ 	 				
+ 	 		    
+ 	 		    },
+ 	 			error: function(){						
+ 	 				alert('Error while request..'	);
+ 	 			}
+ 	 		});
+        		}else{
 			
 $.ajax({
 
@@ -333,7 +357,7 @@ $.ajax({
 			url:  "requestList2.htm",
 			cache: false,				
 			data:{pg: page,
-				st: $("#states").val(),
+				st: '${st_query}',
 				me: "${memo}", 
 				se: "${search}",
 				state:$("#states").val()},
@@ -553,12 +577,12 @@ function proAdd(){
 			<ul class="pagination">
 				<c:if test="${pg != 1}">
 					<c:if test="${pg == from_page}">
-						<li><a href="#" onclick="pazingBtn('1')">««</a></li>
-						<li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
+						<li><a href="#" onclick="pazingBtn('1','${search}','${memo}')">««</a></li>
+						<li><a href="#" onclick="pazingBtn('${from_page-1}','${search}','${memo}')">«</a></li>
 					</c:if>
 					<c:if test="${pg > from_page}">
-						<li><a href="#" onclick="pazingBtn('1')">««</a></li>
-						<li><a href="#" onclick="pazingBtn('${pg - 1}')">«</a></li>
+						<li><a href="#" onclick="pazingBtn('1','${search}','${memo}')">««</a></li>
+						<li><a href="#" onclick="pazingBtn('${pg - 1}','${search}','${memo}')">«</a></li>
 					</c:if>
 				</c:if>
 				<c:forEach begin="${from_page}" end="${to_page}" var="i">
@@ -566,18 +590,18 @@ function proAdd(){
 						<li class="active"><a href="#">${i}</a></li>
 					</c:if>
 					<c:if test="${i!=pg}">
-						<li><a href="#" onclick="pazingBtn('${i}')">${i}</a></li>
+						<li><a href="#" onclick="pazingBtn('${i}','${search}','${memo}')">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				<!-- 다음 페이지 -->
 				<c:if test="${list.size() != 0}">
 					<c:if test="${pg < to_page || pg != all_page}">
-						<li><a href="#" onclick="pazingBtn('${pg + 1}')">»</a></li>
-						<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
+						<li><a href="#" onclick="pazingBtn('${pg + 1}','${search}','${memo}')">»</a></li>
+						<li><a href="#" onclick="pazingBtn('${all_page}','${search}','${memo}')">»»</a></li>
 					</c:if>
 					<c:if test="${to_page > all_page && pg != all_page}">
-						<li><a href="#" onclick="pazingBtn('${to_page + 1}')">»</a></li>
-						<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
+						<li><a href="#" onclick="pazingBtn('${to_page + 1}','${search}','${memo}')">»</a></li>
+						<li><a href="#" onclick="pazingBtn('${all_page}','${search}','${memo}')">»»</a></li>
 					</c:if>
 				</c:if>
 			</ul>
@@ -629,9 +653,6 @@ function proAdd(){
 						<h4 class="modal-title">수락</h4>
 
 						</div>
-					</div>
-
-
 
 					<div class="modal-body" style="height: 500px">
 
