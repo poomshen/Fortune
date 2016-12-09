@@ -189,6 +189,13 @@ public class ProController {
 
 			Request_DTO proDto = proservice.ProDetail(collabo_req_index);
 			model.addAttribute("list", proDto);
+			
+			
+			//collabo_no 뽑아와야됨
+/*			ProDao prodao = sqlSession.getMapper(ProDao.class);
+			With_DTO withDto = prodao.myProDetail(collabo_no);
+			model.addAttribute("mylist",withDto);*/
+			
 			System.out.println(proDto.toString());
 			
 	        //알림 삭제하기
@@ -237,6 +244,11 @@ public class ProController {
 			Request_DTO proDto = proservice.ProDetail(collabo_req_index);
 			model.addAttribute("list", proDto);
 			System.out.println(proDto.toString());
+			
+			ProDao proDao = sqlSession.getMapper(ProDao.class);
+			
+			With_DTO wdto = proDao.myProDetail(proDto.getCollabo_req_ID());
+			model.addAttribute("wdto", wdto);
 			
 	        //알림 삭제하기
 	        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);

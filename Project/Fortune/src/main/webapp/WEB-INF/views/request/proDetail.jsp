@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<!-- 보낸 요청함, 상세보기 -->
 <form action="proEdit.htm" method="post" name="modifyform" enctype="multipart/form-data">
 <label>프로젝트명</label>
 <input type="text" id="collabo_req_title" name="collabo_req_title" class="form-control" readonly="readonly" value="${list.collabo_req_title}">

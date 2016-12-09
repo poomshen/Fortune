@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
+<!-- 받은요청함 상세보기( 진행중은 다른jsp파일임 ) -->
 <script type="text/javascript">
                   $(function(){
                      
