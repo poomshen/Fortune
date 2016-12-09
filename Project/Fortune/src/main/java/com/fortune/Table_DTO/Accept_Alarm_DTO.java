@@ -4,6 +4,7 @@ public class Accept_Alarm_DTO {
 	
 	private int collabo_no;
 	private int alarm_index;
+	
 	public int getCollabo_no() {
 		return collabo_no;
 	}
