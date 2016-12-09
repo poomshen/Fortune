@@ -190,7 +190,8 @@ h6 {
 					success:function(data){ //callback  
 					console.log("dasfsd")
 					$(".requestpage").html(data); 
-
+					$("#${state}").addClass('active');
+					$("#states").val('${state}');
 				},
 					error: function(){						
 						alert('Error while request..'	);
@@ -206,17 +207,20 @@ h6 {
     	 	$.get("requestList2.htm", function(data, textStatus, req) {
     			$('.requestpage').html(data);
     			$('#'+state).addClass('active');
+   				$("#states").val(state);
     	 		});	
     		}else{
    		if(state == "수락"){
    			$.get("responseList2.htm", function(data, textStatus, req) {
    				$('.requestpage').html(data);
-   				$('#'+state).addClass('active');
+   				$("#"+state).addClass('active');
+   				$("#states").val(state);
    			})
    		}else{
    		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
    			$('.requestpage').html(data);
    			$('#'+state).addClass('active');
+			$("#states").val(state);
    			
    			//console.log(data);
    		});
@@ -244,6 +248,22 @@ h6 {
 					<div class="tab-pane"></div>
 				</div>
 			</div>
+			<!-- 보낸 요청함 card 띄워주는 영역 -->
+	<!-- 검색영역   -->
+	<div class="row grid-columns"
+		style="width: 1000px; height: 20px; margin-top: 2px">
+		<div id="row" style="height: 20px; margin-left: 700px;"
+			class="col-md-6 col">
+
+			<select id="memoselect">
+				<option value="collabo_req_title">제목</option>
+				<option value="collabo_req_text">내용</option>
+			</select> <input type="text" id="search" placeholder="Search">
+
+			<button onclick="searchBtn()">검색</button>
+
+		</div>
+	</div>
 			</security:authorize>
 			<security:authorize access="hasAnyRole('ROLE_MGR','ROLE_USER')">
 			<div class="row">

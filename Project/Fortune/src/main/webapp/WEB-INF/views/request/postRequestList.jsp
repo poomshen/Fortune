@@ -308,6 +308,7 @@ function modifyReqCollabo(){
 <div class="container" id="requestlist" style="margin-top:20px">
 
 <!--대기/수락/거절 tab영역 -->
+
 <div class="tab-container">
 		<input type="hidden" id="states">
   		<ul class="nav nav-tabs" style="width:950px">
@@ -323,7 +324,6 @@ function modifyReqCollabo(){
     	<div class="tab-pane" ></div>
 	</div>
 </div>
-
 <!-- 보낸 요청함 card 띄워주는 영역 -->
 <!-- 검색영역   -->
 <div class="row grid-columns"style="width:1000px; height:20px; margin-top:2px">
