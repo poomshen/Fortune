@@ -176,7 +176,33 @@ h6 {
 			})
 				$("#myModal").modal("hide");
 		}
-		
+		 //검색 기능 비동기 처리로 하였습니다.
+	   	function searchBtn(){
+	   		console.log()
+	   		$.ajax({
+	 	   		 
+		 			type: "get",
+		 			url:  "requestList2.htm",
+		 			cache: false,				
+		 			data:{me : $("#memoselect").val(),
+		 				se:$("#search").val()},
+		 		    success:function(data){ //callback  
+		 		    	console.log($("#search").val());
+		 		    	console.log($("#memoselect").val());
+		 		    
+		 		    	
+		 		    	$(".requestpage").html(data);
+		 		    	$("#전체").addClass('active');
+	 	 				$("#states").val('전체');
+		 		    
+		 		    },
+		 			error: function(){						
+		 				alert("Error while request.."	);
+		 			}
+		 		});
+	   		
+	   		
+	   	}
 		//페이징 처리를 비동기 처리로 처리 하였습니다. 
 		function pazingBtn(pg){
 			console.log(pg);
@@ -190,8 +216,8 @@ h6 {
 					success:function(data){ //callback  
 					console.log("dasfsd")
 					$(".requestpage").html(data); 
-					$("#${state}").addClass('active');
-					$("#states").val('${state}');
+					$("#수락").addClass('active');
+					$("#states").val('수락');
 				},
 					error: function(){						
 						alert('Error while request..'	);
