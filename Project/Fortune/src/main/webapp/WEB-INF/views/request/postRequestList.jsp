@@ -176,22 +176,18 @@ Profile = {
      
      //검색 기능 비동기 처리로 하였습니다.
     	function searchBtn(){
-    		console.log()
     		$.ajax({
   	   		 
  	 			type: "get",
  	 			url:  "listReplyRequest2.htm",
  	 			cache: false,				
- 	 			data:{me : $('#memoselect').val(),
+ 	 			data:{
+ 	 				me : $('#memoselect').val(),
  	 				  se:$('#search').val()},
- 	 		    success:function(data){ //callback  
- 	 		    	console.log($('#search').val());
- 	 		    	console.log($('#memoselect').val());
- 	 		    
- 	 		    	
+ 	 		    success:function(data){ //callback 
  	 		    	$(".requestpage").html(data); 
- 	 		    	$("#${state}").addClass('active');
- 	 				$("#states").val('${state}');
+ 	 		    	$("#전체").addClass('active');
+ 	 				$("#states").val('전체');
  	 		    
  	 		    },
  	 			error: function(){						
@@ -203,42 +199,72 @@ Profile = {
     	}
      
     	//페이징 처리를 비동기 처리로 처리 하였습니다. << 버튼으로 처리하였습니다.
-    	function pazingBtn(page){
+    	function pazingBtn(page,searchval,memoval){
+    		console.log('페이지 :' + searchval);
+		    console.log('페이지 :' + memoval);
+		    console.log("상태 : " + '${st_query}');
+		    console.log("상태 : " + $("#states").val());
     		if($("#states").val() == '전체'){
         	 	$.get("listReplyRequest2.htm",{pg:page,
 	 				  st: '${st_query}',
-	 				  me: "${memo}", 
-	 				  se: "${search}",
+	 				  me: memoval,
+	 				  se: searchval,
+	 				  /* me: "${memo}",
+	 				  se: "${search}", */
 	 				state:$("#states").val()}, function(data, textStatus, req) {
         			$('.requestpage').html(data);
         			$("#${state}").addClass('active');
         			$("#states").val('${state}');
         	 		});
-        		}else{
-    		
-    		$.ajax({
-  	   		 
- 	 			type: "get",
- 	 			url:  "listReplyRequest2.htm",
- 	 			cache: false,				
- 	 			data:{pg:page,
- 	 				  st: $("#states").val(),
- 	 				  me: "${memo}", 
- 	 				  se: "${search}",
- 	 				state:$("#states").val()},
- 	 		    success:function(data){ //callback  
- 	 		    	
- 	 		    	$(".requestpage").html(data); 
- 	 		    	$("#${state}").addClass('active');
- 	 			$("#states").val('${state}');
- 	 				
- 	 		    
- 	 		    },
- 	 			error: function(){						
- 	 				alert('Error while request..'	);
- 	 			}
- 	 		});
-        		}
+        		}else if($("#states").val() == '대기' || $("#states").val() == '수락' || $("#states").val() == '거절' || $("#states").val() == '완료'){
+            		
+            		$.ajax({
+          	   		 
+         	 			type: "get",
+         	 			url:  "listReplyRequest2.htm",
+         	 			cache: false,				
+         	 			data:{pg:page,
+         	 				  st: $("#states").val(),
+         	 				  me: "${memo}", 
+         	 				  se: "${search}",
+         	 				state:$("#states").val()},
+         	 		    success:function(data){ //callback  
+         	 		    	
+         	 		    	$(".requestpage").html(data); 
+         	 		    	$("#${state}").addClass('active');
+         	 			$("#states").val('${state}');
+         	 				
+         	 		    
+         	 		    },
+         	 			error: function(){						
+         	 				alert('Error while request..'	);
+         	 			}
+         	 		});
+                		}else{
+                    		
+                    		$.ajax({
+                  	   		 
+                 	 			type: "get",
+                 	 			url:  "listReplyRequest2.htm",
+                 	 			cache: false,				
+                 	 			data:{pg:page,
+                 	 				  st: '${st_query}',
+                 	 				  me: "${memo}", 
+                 	 				  se: "${search}",
+                 	 				state:$("#states").val()},
+                 	 		    success:function(data){ //callback  
+                 	 		    	
+                 	 		    	$(".requestpage").html(data); 
+                 	 		    	$("#${state}").addClass('active');
+                 	 			$("#states").val('${state}');
+                 	 				
+                 	 		    
+                 	 		    },
+                 	 			error: function(){						
+                 	 				alert('Error while request..'	);
+                 	 			}
+                 	 		});
+                        		}
     		
     	}
 
@@ -282,6 +308,7 @@ function modifyReqCollabo(){
 <div class="container" id="requestlist" style="margin-top:20px">
 
 <!--대기/수락/거절 tab영역 -->
+
 <div class="tab-container">
 		<input type="hidden" id="states">
   		<ul class="nav nav-tabs" style="width:950px">
@@ -297,8 +324,6 @@ function modifyReqCollabo(){
     	<div class="tab-pane" ></div>
 	</div>
 </div>
-
-
 <!-- 보낸 요청함 card 띄워주는 영역 -->
 <!-- 검색영역   -->
 <div class="row grid-columns"style="width:1000px; height:20px; margin-top:2px">
@@ -312,7 +337,6 @@ function modifyReqCollabo(){
 		<input type="text" id="search" placeholder="Search" >
 		
 		<button onclick="searchBtn()">검색</button>
-		
 	</div>
 </div>
 
@@ -372,12 +396,12 @@ function modifyReqCollabo(){
 					<ul class="pagination">
 							<c:if test="${pg != 1}">
 								<c:if test="${pg == from_page}">
-									<li><a href="#" onclick="pazingBtn('1')">««</a></li>
-									<li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
+									<li><a href="#" onclick="pazingBtn('1','${search}','${memo}')">««</a></li>
+									<li><a href="#" onclick="pazingBtn('${from_page-1}','${search}','${memo}')">«</a></li>
 								</c:if>
 								<c:if test="${pg > from_page}">
-									<li><a href="#" onclick="pazingBtn('1')">««</a></li>
-									<li><a href="#" onclick="pazingBtn('${pg - 1}')">«</a></li>
+									<li><a href="#" onclick="pazingBtn('1','${search}','${memo}')">««</a></li>
+									<li><a href="#" onclick="pazingBtn('${pg - 1}','${search}','${memo}')">«</a></li>
 								</c:if>
 							</c:if>
 								<c:forEach begin="${from_page}" end="${to_page}" var="i">
@@ -385,18 +409,18 @@ function modifyReqCollabo(){
 										<li class="active"><a href="#">${i}</a></li>
 									</c:if>
 									<c:if test="${i!=pg}">
-										<li><a href="#" onclick="pazingBtn('${i}')">${i}</a></li>
+										<li><a href="#" onclick="pazingBtn('${i}','${search}','${memo}')">${i}</a></li>
 									</c:if>
 								</c:forEach>
 								<!-- 다음 페이지 -->
 							<c:if test="${list.size() != 0}">
 								<c:if test="${pg < to_page || pg != all_page}">
-									<li><a href="#" onclick="pazingBtn('${pg + 1}')">»</a></li>
-									<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
+									<li><a href="#" onclick="pazingBtn('${pg + 1}','${search}','${memo}')">»</a></li>
+									<li><a href="#" onclick="pazingBtn('${all_page}','${search}','${memo}')">»»</a></li>
 								</c:if>
 								<c:if test="${to_page > all_page && pg != all_page}">
-									<li><a href="#" onclick="pazingBtn('${to_page + 1}')">»</a></li>
-									<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
+									<li><a href="#" onclick="pazingBtn('${to_page + 1}','${search}','${memo}')">»</a></li>
+									<li><a href="#" onclick="pazingBtn('${all_page}','${search}','${memo}')">»»</a></li>
 								</c:if>
 							</c:if>
 						</ul>

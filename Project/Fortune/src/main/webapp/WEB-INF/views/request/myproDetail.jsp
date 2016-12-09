@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 <label>상태</label>
 <input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_state}">
 <label>작성일</label>
@@ -16,7 +17,7 @@ ${list.collabo_req_text}
 <label>수신자 </label>
 <input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_ID}">
 <label>예상 수익 </label>
-<input type="text" class="form-control" readonly="readonly" value="${mylist.collabo_sal}">
+<input type="text" class="form-control" id="sal" readonly="readonly" value="${mylist.collabo_sal}">
 <label>프로젝트 기간 </label>
 <input type="text" class="form-control" readonly="readonly" value="${mylist.collabo_start} - ${mylist.collabo_end}">
  <label>첨부파일</label>

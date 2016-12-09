@@ -32,12 +32,12 @@
 <div class="modal-body" id="detail">
 						
 <form action="proEdit.htm" method="post" name="modifyform" enctype="multipart/form-data">
-<label>상태</label>
-<input type="text" class="form-control"  placeholder="제목을 입력하세요" value="${list.collabo_req_title}">
+<label>제목</label>
+<input type="text" class="form-control" name="collabo_req_title"  placeholder="제목을 입력하세요" value="${list.collabo_req_title}">
 <label>작성일</label>
 <input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_date}">
-<label>제목</label>
-<input type="text" name="collabo_req_title" class="form-control" readonly="readonly" value="${list.collabo_req_title}">
+<label>상태</label>
+<input type="text"  class="form-control" readonly="readonly" value="${list.collabo_req_state}">
 <label>프로젝트 내용 </label>
 <textarea rows="4" cols="50" class="form-control"
 						name="collabo_req_text" id="collabo_req_text">${list.collabo_req_text}</textarea>
