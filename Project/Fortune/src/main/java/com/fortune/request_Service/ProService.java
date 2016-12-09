@@ -27,11 +27,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import com.fortune.Table_DTO.Accept_Alarm_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.Table_DTO.Req_Alarm_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.accept_alarm_DAO.IAcceptAlarm;
 import com.fortune.function_DTO.Search_Page_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.function_DTO.Select_name_DTO;
@@ -81,12 +83,12 @@ public class ProService {
       if (search_Page_DTO.getSt()  == null) {
         search_Page_DTO.setSt(st_query);
       }else{
-      	 search_Page_DTO.setSt(search_Page_DTO.getSt());
+          search_Page_DTO.setSt(search_Page_DTO.getSt());
       }
       if (search_Page_DTO.getSe() == null) {
-    	   search_Page_DTO.setSe(search);
+          search_Page_DTO.setSe(search);
       }else{
-    	   search_Page_DTO.setSe(search_Page_DTO.getSe());
+          search_Page_DTO.setSe(search_Page_DTO.getSe());
       }
       if (search_Page_DTO.getMe() == null) {
          search_Page_DTO.setMe(memo);
@@ -134,28 +136,28 @@ public class ProService {
       
       
       //추가사항 : 알림 new할것 가져오기
-		List<Req_Alarm_DTO> alist = new ArrayList<Req_Alarm_DTO>();
-		IReqAlarm req_alarmDAO = sqlsession.getMapper(IReqAlarm.class);
-		alist =req_alarmDAO.selectReqAlarm();
-		
-		for(int list_i=0;list_i<list.size();list_i++){
-			for(int alist_i=0;alist_i<alist.size();alist_i++){
-				String new_req_alarm ="";
-				
-				new_req_alarm=list.get(list_i).getCollabo_req_index();
-				if(Integer.parseInt(new_req_alarm)==alist.get(alist_i).getCollabo_req_index())
-				{
-					String real_new_req_alarm="";
-					real_new_req_alarm=list.get(list_i).getCollabo_req_index()+"n";
-					list.get(list_i).setCollabo_req_index(real_new_req_alarm);
-					alist_i=alist.size();
-				}
-					
-			}
-			
-		}
-		mv.addObject("list", list);  
-	        
+      List<Req_Alarm_DTO> alist = new ArrayList<Req_Alarm_DTO>();
+      IReqAlarm req_alarmDAO = sqlsession.getMapper(IReqAlarm.class);
+      alist =req_alarmDAO.selectReqAlarm();
+      
+      for(int list_i=0;list_i<list.size();list_i++){
+         for(int alist_i=0;alist_i<alist.size();alist_i++){
+            String new_req_alarm ="";
+            
+            new_req_alarm=list.get(list_i).getCollabo_req_index();
+            if(Integer.parseInt(new_req_alarm)==alist.get(alist_i).getCollabo_req_index())
+            {
+               String real_new_req_alarm="";
+               real_new_req_alarm=list.get(list_i).getCollabo_req_index()+"n";
+               list.get(list_i).setCollabo_req_index(real_new_req_alarm);
+               alist_i=alist.size();
+            }
+               
+         }
+         
+      }
+      mv.addObject("list", list);  
+           
       return mv;
    }
    
@@ -186,12 +188,12 @@ public class ProService {
          if (search_Page_DTO.getSt()  == null) {
            search_Page_DTO.setSt(st_query);
          }else{
-        	 search_Page_DTO.setSt(search_Page_DTO.getSt());
+            search_Page_DTO.setSt(search_Page_DTO.getSt());
          }
          if (search_Page_DTO.getSe() == null) {
             search_Page_DTO.setSe(search);
          }else{
-        	 search_Page_DTO.setSe(search_Page_DTO.getSe());
+            search_Page_DTO.setSe(search_Page_DTO.getSe());
          }
          if (search_Page_DTO.getMe() == null) {
             search_Page_DTO.setMe(memo);
@@ -491,10 +493,11 @@ public class ProService {
 
    // 전체 협업 리스트 입니다. 
    // 즉 협업요청이 아닌 협업이 완료된 상태를 의미합니다.
-   
+   // 추가사항: 이예지 MYPROJECT에 알림 띄워주기 
+   //	->작업일 : 2016/12/09
    public ModelAndView listResponse(String pg, String f, String q, HttpSession session)
          throws ClassNotFoundException, SQLException {
-      System.out.println("집에 갑시다. :" + pg);
+      System.out.println("proservice/listResponse의 pg :" + pg);
 
       // 게시판 기본 설정(기본값 처리)/////////////
       int page = 1;
@@ -516,6 +519,7 @@ public class ProService {
       }else if(ids.getRole_no() == 3){
           field = "user_ID";
           query = "%" + ids.getUser_id() + "%";
+          
       }else if(ids.getRole_no() == 4){
          field = "user_ID";
          List<String>  timeId = proDao.selectTeamMGR(ids.getTeam_no()) ;
@@ -538,8 +542,8 @@ public class ProService {
                to_page = all_page;
             }
             if (pg != null ) {
-            	System.out.println("proServie  파라미터 들어옴:");
-            	page = Integer.parseInt(pg);
+               System.out.println("proServie  파라미터 들어옴:");
+               page = Integer.parseInt(pg);
             }
             mv.addObject("total_count", total_count);
             mv.addObject("pg", page);
@@ -551,7 +555,7 @@ public class ProService {
             mv.addObject("list",list);
             List<Select_name_DTO> teamName =new ArrayList<Select_name_DTO>();
             for(int i = 0; i<list.size() ; i++){
-          	  teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
+               teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
             } 
             mv.addObject("teamName", teamName);
             
@@ -576,7 +580,7 @@ public class ProService {
       if (q != null && q.equals("")) {
          query = q;
       }
-      System.out.println( "asdfasjiewjoirhq 페이지 :"+ page);
+      System.out.println( "proservice/listResponse 페이지 :"+ page);
       List<String> timeId = new ArrayList<String>();
       timeId.add(ids.getUser_id());
       int row_size = 6;
@@ -604,13 +608,59 @@ public class ProService {
       
       // Mybatis 적용
       List<With_DTO> list = proDao.listResponse(page, field, query);
+      
+      
+      //알림할것 가져오기
+      //추가사항 : 알림 new할것 가져오기
+      if(ids.getRole_no() == 3){
+      List<Accept_Alarm_DTO> ac_list = new ArrayList<Accept_Alarm_DTO>();
+      IAcceptAlarm accept_alarmDAO = sqlsession.getMapper(IAcceptAlarm.class);
+      ac_list =accept_alarmDAO.selectAcceptAlarm(ids.getUser_id());
+      
+      for(int list_i=0;list_i<list.size();list_i++){
+         for(int ac_list_i=0;ac_list_i<ac_list.size();ac_list_i++){
+            String new_accept_alarm ="";
+            
+            System.out.println("collabo_no"+list.get(list_i).getCollabo_no());
+            System.out.println("collabo_no_alarm"+ac_list.get(ac_list_i).getCollabo_no());
+            System.out.println("ac_list.size()"+ac_list.size());
+            
+            new_accept_alarm=list.get(list_i).getCollabo_no();
+            if(Integer.parseInt(new_accept_alarm)==ac_list.get(ac_list_i).getCollabo_no())
+            {
+               String real_new_accept_alarm="";
+               real_new_accept_alarm=list.get(list_i).getCollabo_no()+"n";
+               list.get(list_i).setCollabo_no(real_new_accept_alarm);
+               System.out.println("--같은것 발생---"+real_new_accept_alarm);
+               System.out.println("--ac_list_i"+ac_list_i);
+               ac_list_i=ac_list.size();
+               System.out.println("--ac_list_i after"+ac_list_i);
+            }
+               
+         }
+         
+      }
+      
+      mv.addObject("list",list);
+      List<Select_name_DTO> teamName =new ArrayList<Select_name_DTO>();
+      
+      for(int i = 0; i<list.size() ; i++){
+         teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
+      } 
+     System.out.println("---------1------------"); 
+      mv.addObject("teamName", teamName);
+      return mv;
+           
+      }
+     System.out.println("----------타지마1---------");
       mv.addObject("list",list);
       List<Select_name_DTO> teamName =new ArrayList<Select_name_DTO>();
       for(int i = 0; i<list.size() ; i++){
-    	  teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
+         teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
+     
       } 
       mv.addObject("teamName", teamName);
-      
+      System.out.println("--------타지마2---------");
       return mv;
    }
 

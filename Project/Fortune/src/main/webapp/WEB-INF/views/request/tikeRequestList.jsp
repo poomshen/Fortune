@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
@@ -158,7 +157,7 @@ function detail(req,collabo_no){
  				"collabo_no":collabo_no
  			},
  		    success:function(data){ 
-				$("#detail").html(data); 
+				$("#detail").html(data);
 				$('#myModal3').modal('show');
  		     },
  			error: function(){						
@@ -225,13 +224,13 @@ function detail(req,collabo_no){
      //거절 사유를 val 로 받아서 사용하였습니다.
      function refuseReqCollabo(a){
     	 swal({
-    		  title: "거절 합니다!",
+    		  title: "거절 사유",
     		  type: "input",
     		  showCancelButton: true,
     		  closeOnConfirm: false,
     		  showLoaderOnConfirm: true,
     		  animation: "slide-from-top",
-    		  inputPlaceholder: "거절사유를 입력 해주세요"
+    		  inputPlaceholder: "거절사유를 입력 하세요"
     		},
     		function(inputValue){
     		  if (inputValue === false) return false;
@@ -251,7 +250,7 @@ function detail(req,collabo_no){
     				se: "${search}"},
     				function(data, textStatus, req) {
     		 		$(".requestpage").html(data);
-    		 		swal("거절성공!", "", "success");
+    		 		swal("처리완료", "", "success");
     			  })
     		 	},0);
     		  }

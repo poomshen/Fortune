@@ -33,6 +33,7 @@
 	href="assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
+	
 <script src="alert_style/js/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 <style type="text/css">

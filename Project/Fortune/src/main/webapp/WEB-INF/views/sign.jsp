@@ -62,11 +62,12 @@
 
 </head>
 
-<body style="height: 800px;">
+<body>
 
-   <div class="backstretch" style="left: 0px;top: 0px;overflow: hidden;margin: 0px;padding: 0px;height: 1000px;width: 1600px;z-index: -999998;position: absolute;">
-   <img src="assets/img/backgrounds/1.jpg" style="position: absolute;margin: 0px;padding: 0px;border: none;width: 1500px;height: 1200px;max-height: none;max-width: none;z-index: -999999;left: -51.6984px;top: 0px;"></div>
-   
+   <div class="backstretch" style="left: 0px;top: 0px;overflow: hidden;margin: 0px;padding: 0px; height: 1200px;width: 1600px; z-index: -999998;position: absolute;">
+   <img src="assets/img/backgrounds/1.jpg" style="position: absolute;margin: 0px;padding: 0px;border: none;width: 1700px;height: 1200px;max-height: none;max-width: none;z-index: -999999;left: -51.6984px;top: 0px;"></div>
+ 
+ 
    <!-- Loader -->
    <div class="loader" style="display: none;">
       <div class="loader-img" style="display: none;"></div>
@@ -94,7 +95,7 @@
 			    <input type="text" id="id" name="user_id" class="form-control" style="width: 340px;margin-left:20px;" required="required">
 			    <label id="idselect" class="col-md-4 control-label" style="text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label> 
 			  	<br><br>
-			  <input type="button" id="idchk" name="idchk" style="width: 200px; margin-left:100px; font-size: 20;" class="col-sm-3 btn hvr-forward" value="이메일 중복확인" onclick="idchkclk()"> 		  	
+			  <input type="button" id="idchk" name="idchk" style="width: 180px; margin-left: 100px; height:50; font-size: 15px; display: inline-block;" class="col-sm-3 btn hvr-forward" value="이메일 중복확인" onclick="idchkclk()"> 		  	
 		</span>
 	</div>
 </div>
@@ -265,8 +266,8 @@
 <!-- Button -->
 <div class="form-group">
   <label class="control-label"></label>
-    <input type="button" name="joinbtn" id="joinbtn" onclick="joinchk();" class="btn hvr-forward" style="margin-top: 50px;" value="join">&nbsp; &nbsp; 
-    <input type="button" class="btn hvr-forward" style="margin-top: 50px;" value="back" onclick="history.go(-1)">
+    <button type="button" name="joinbtn" id="joinbtn" onclick="joinchk();" class="btn hvr-forward" style="margin-top: 50px;"><span class="glyphicon glyphicon-ok" > Join</span></button>&nbsp; &nbsp; 
+    <button type="button" class="btn hvr-forward" style="margin-top: 50px;" onclick="history.go(-1)"><span class="glyphicon glyphicon-repeat" aria-hidden="true"> Back</span></button>
 </div>
 
 
@@ -479,11 +480,26 @@
 			swal('입사일을 입력해주세요');
 			$('#enterdate').focus();
 		}else{
-			swal('회원가입 완료!');
-			birth();
-			$('#contact_form').submit();	
+			 swal({
+	        	   title: "회원가입 완료!",
+
+	        	   type: "success",
+	        	   showCancelButton: false,
+	        	   confirmButtonColor: "#194f89",
+	        	   confirmButtonText: "확인",
+	        	   closeOnConfirm: false
+	        	   
+	        	 },
+	        	 function(isConfirm){
+	        		  if (isConfirm) {
+	        			  location.href="index.htm";
+	        			  birth(); 
+	        				$('#contact_form').submit();
+	        		  }
+				 }
+	    );
 		}
-	}
+  	}
       </script>
 
 

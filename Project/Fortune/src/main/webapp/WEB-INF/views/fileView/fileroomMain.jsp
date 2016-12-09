@@ -85,6 +85,10 @@
 				<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
 			</form>
 		</div>
+		<!-- 일정 보기 -->
+		<div style="float: left; margin-left: 10px;">
+				<input type="button" class="btn btn-primary" onclick="calendar_btn()" value="일정"/><br>
+		</div>
 	</div>
 	
 	<!-- 파일 리스트 -->
@@ -385,5 +389,16 @@ function output(data) {
 function indexselect(index) {
 	$('#deletename').val($('#deletefilename'+index).val());
 }
+
+
+//켈린더 페이지로 이동하는 버튼, 작업자: 이명철, 작업일: 12-09,
+function calendar_btn(){
+	location.href='schedule.htm?collabo_no=${collabo_no}';
+}
+
+
+
+
+
 </script>
 </html>

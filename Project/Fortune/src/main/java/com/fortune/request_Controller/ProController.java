@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.accept_alarm_DAO.IAcceptAlarm;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.function_DTO.ProgectName_DTO;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
@@ -291,6 +292,38 @@ public class ProController {
 		
 		model.addAttribute("mylist",withDto);
 		// Tiles
+		
+		//알림 지워주기 추가)2016.12.09 예지
+		
+        //알림 삭제하기
+        System.out.println("my프로젝트 상세 클릭시 알림삭제"+collabo_req_index);
+				
+		Join_DTO dto = (Join_DTO)session.getAttribute("info");
+	
+		IAcceptAlarm accept_alarm_DAO = sqlSession.getMapper(IAcceptAlarm.class);
+		
+		int result=accept_alarm_DAO.deleteAcceptAlarm(collabo_no);
+		
+		System.out.println("지운 결과 : "+result);
+		
+		IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
+		
+		List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+		
+		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
+		
+		int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+			
+		session.setAttribute("alarm", alist);
+		
+		session.setAttribute("totalCount",tatalCount);
+        
+		//추가 작업
+		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+		sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+		session.setAttribute("sch_alist", sch_alist);
+		
+		
 		return "cen.myproDetail";
 		// View
 
@@ -500,18 +533,14 @@ public class ProController {
 			 public String InsertManager(String collabo_req_index,String dept_no ,Model model)
 			   throws ClassNotFoundException, SQLException {
 			 
-				 //아 힘들다..
+			
 				 
 				 With_DTO req_Dto =  proservice.managerDto(collabo_req_index);
 					List<Join_DTO> listmanager = proservice.listManager(dept_no); 
 				 
 					model.addAttribute("listmanager", listmanager); // 담당자 리스트 
 				  model.addAttribute("list", req_Dto);	//협업상태 보여준다.
-				  
-				 /* System.out.println(req_Dto.toString());
-				  System.out.println("담당자 : "+listmanager.toString());*/
-				  
-				  
+		
 			  return "cen.proManager";
 			 }
 			
