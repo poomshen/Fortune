@@ -598,7 +598,7 @@ public class ProService {
       
       // Mybatis 적용
       List<With_DTO> list = proDao.listResponse(page, field, query);
-      mv.addObject("list",list);
+     
       List<Select_name_DTO> teamName =new ArrayList<Select_name_DTO>();
       List<Select_name_DTO> deptName = new ArrayList<Select_name_DTO>();
       for(int i = 0; i<list.size() ; i++){
@@ -607,6 +607,38 @@ public class ProService {
       } 
       mv.addObject("deptName", deptName);
       mv.addObject("teamName", teamName);
+      
+      
+      
+      //추가사항 : 알림 new할것 가져오기
+ 		List<Req_Alarm_DTO> alist = new ArrayList<Req_Alarm_DTO>();
+ 		IReqAlarm req_alarmDAO = sqlsession.getMapper(IReqAlarm.class);
+ 		alist =req_alarmDAO.selectReqAlarm();
+ 		
+ 		for(int list_i=0;list_i<list.size();list_i++){
+ 			for(int alist_i=0;alist_i<alist.size();alist_i++){
+ 				String new_req_alarm ="";
+ 				
+ 				new_req_alarm=list.get(list_i).getCollabo_req_index();
+ 				System.out.println("---new--- / "+new_req_alarm);
+ 				System.out.println("---newA---/"+alist.get(alist_i).getCollabo_req_index());
+ 				if(Integer.parseInt(new_req_alarm)==alist.get(alist_i).getCollabo_req_index())
+ 				{
+ 					String real_new_req_alarm="";
+ 					real_new_req_alarm=list.get(list_i).getCollabo_req_index()+"n";
+ 					System.out.println("----같은req--- : "+real_new_req_alarm);
+ 					list.get(list_i).setCollabo_req_index(real_new_req_alarm);
+ 					alist_i=alist.size();
+ 				}
+ 					
+ 			}
+ 			
+ 		}
+      
+      
+ 		 mv.addObject("list",list);
+      
+      
       
       return mv;
    }

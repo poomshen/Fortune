@@ -51,10 +51,9 @@
 		<div class="top-content-text wow fadeInUp animated"
 			style="visibility: visible; animation-name: fadeInUp;">
 
-			<br /><!-- 
-			<img src="assets/img/logo/fortune.png"/> -->
+			<br />
 			<h1>
-				<a href="">fortune</a>
+				<a href=""><img src="assets/img/logo/fortune_final.png"/></a>
 			</h1>
 			
 

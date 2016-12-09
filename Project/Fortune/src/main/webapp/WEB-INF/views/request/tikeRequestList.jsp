@@ -224,8 +224,8 @@ function detail(req,collabo_no){
      //거절 사유를 val 로 받아서 사용하였습니다.
      function refuseReqCollabo(a){
     	 swal({
-    		  title: "거절 합니다!",
-    		  text: "합당한 거절사유:",
+    		  title: "거절 사유",
+    		  text: "사유를 입력하세요",
     		  type: "input",
     		  showCancelButton: true,
     		  closeOnConfirm: false,

@@ -117,7 +117,7 @@ h6 {
 			
 		
 				
-
+	console.log(req+"/"+collabo_no);
 			
 		   	 $.ajax({
 		   		 
@@ -252,6 +252,7 @@ h6 {
 				</div>
 				<!-- /.col-lg-12 -->
 				<div id="pageside">
+			
 			</security:authorize>
 
 					<div class="col-lg-12" style="width: 1000px; margin-top: 20px">
@@ -267,11 +268,15 @@ h6 {
 											
 						  	
 										<a href="#" class="active"><i class="fa fa-user"></i>
-											[${teamName[status.index].team_name}]${teamName[status.index].user_name}<c:set value="${n.collabo_req_index}"
-												var="req" /> <c:if test="${fn:endsWith(req,'n')}">
+											[${teamName[status.index].team_name}]${teamName[status.index].user_name}
+											<c:set value="${n.collabo_req_index}"var="req" />
+												
+												<c:if test="${fn:endsWith(req,'n')}">
 												<img style="width: 28px;height: 16px"src="assets/img/alarm/new1.png" />
 												<c:set value="${fn:substringBefore(req,'n')}" var="req" />
-											</c:if> </a>
+												</c:if> 
+											
+										</a>
 								<div class="sub-nav active">
 								<div class="html about-me" style="height:150px" id="about-mesocial-link${req}">
 								
@@ -397,8 +402,9 @@ h6 {
 
 						</div>
 					</div>
-
 				</div>
+			
+			
 			</div>
 		</div>
 

@@ -452,18 +452,14 @@ public class ProController {
 			 public String InsertManager(String collabo_req_index,String dept_no ,Model model)
 			   throws ClassNotFoundException, SQLException {
 			 
-				 //아 힘들다..
+			
 				 
 				 With_DTO req_Dto =  proservice.managerDto(collabo_req_index);
 					List<Join_DTO> listmanager = proservice.listManager(dept_no); 
 				 
 					model.addAttribute("listmanager", listmanager); // 담당자 리스트 
 				  model.addAttribute("list", req_Dto);	//협업상태 보여준다.
-				  
-				 /* System.out.println(req_Dto.toString());
-				  System.out.println("담당자 : "+listmanager.toString());*/
-				  
-				  
+		
 			  return "cen.proManager";
 			 }
 			
