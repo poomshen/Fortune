@@ -182,51 +182,99 @@ public class ProController {
 	}*/
 
 	// 글상세보기
-	// 추가) 알림 db지워주기
-	@RequestMapping("ProDetail.htm")
-	public String ProDetail(String collabo_req_index, Model model,HttpSession session) throws ClassNotFoundException, SQLException {
+		// 추가) 알림 db지워주기
+		@RequestMapping("ProDetail.htm")
+		public String ProDetail(String collabo_req_index, Model model,HttpSession session) throws ClassNotFoundException, SQLException {
 
-		Request_DTO proDto = proservice.ProDetail(collabo_req_index);
-		model.addAttribute("list", proDto);
-		System.out.println(proDto.toString());
+			Request_DTO proDto = proservice.ProDetail(collabo_req_index);
+			model.addAttribute("list", proDto);
+			System.out.println(proDto.toString());
+			
+	        //알림 삭제하기
+	        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
+					
+			Join_DTO dto = (Join_DTO)session.getAttribute("info");
 		
-        //알림 삭제하기
-        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
-				
-		Join_DTO dto = (Join_DTO)session.getAttribute("info");
-	
-		IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
+			IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
+			
+			int result=req_alarm_DAO.deleteReqAlarm(collabo_req_index);
+			
+			System.out.println("지운 결과 : "+result);
+			
+			IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
+			
+			List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+			
+			alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
+			
+			int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+			
 		
-		int result=req_alarm_DAO.deleteReqAlarm(collabo_req_index);
-		
-		System.out.println("지운 결과 : "+result);
-		
-		IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
-		
-		List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
-		
-		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
-		
-		int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
-		
-	
-		
-		session.setAttribute("alarm", alist);
-		
-		session.setAttribute("totalCount",tatalCount);
-        
-		//추가 작업
-		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
-		sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
-		session.setAttribute("sch_alist", sch_alist);
-		
-		
+			
+			session.setAttribute("alarm", alist);
+			
+			session.setAttribute("totalCount",tatalCount);
+	        
+			//추가 작업
+			List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+			sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+			session.setAttribute("sch_alist", sch_alist);
+			
+			
 
-		// Tiles
-		return "cen.proDetail";
-		// View
+			// Tiles
+			return "cen.proDetail";
+			// View
 
-	}
+		}
+		
+		// 글상세보기
+		// 추가) 알림 db지워주기
+		@RequestMapping("ProDetail2.htm")
+		public String ProDetail2(String collabo_req_index, String dept_no, Model model,HttpSession session) throws ClassNotFoundException, SQLException {
+
+			Request_DTO proDto = proservice.ProDetail(collabo_req_index);
+			model.addAttribute("list", proDto);
+			System.out.println(proDto.toString());
+			
+	        //알림 삭제하기
+	        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
+					
+			Join_DTO dto = (Join_DTO)session.getAttribute("info");
+		
+			IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
+			
+			int result=req_alarm_DAO.deleteReqAlarm(collabo_req_index);
+			
+			System.out.println("지운 결과 : "+result);
+			
+			IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
+			
+			List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+			
+			alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
+			
+			int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+			
+		
+			
+			session.setAttribute("alarm", alist);
+			
+			session.setAttribute("totalCount",tatalCount);
+	        
+			//추가 작업
+			List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+			sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+			session.setAttribute("sch_alist", sch_alist);
+			
+			List<Join_DTO> listmanager = proservice.listManager(dept_no); 
+			model.addAttribute("listmanager", listmanager); // 담당자 리스트 
+
+			// Tiles
+			return "cen.proEdit";
+			// View
+
+		}
 	
 	
 	//작성자 : 이예지
@@ -358,7 +406,7 @@ public class ProController {
 				    n.setCollabo_sal(n.getCollabo_sal().replaceAll(",", ""));
 				    System.out.println("계산완료 :"+n.getCollabo_sal());
 					/*System.out.println(n.toString());*/
-					 proservice.regResponse(n, collabo_req_index);
+					 proservice.regResponse(n, collabo_req_index,session);
 					 proservice.Accept(collabo_req_index);
 					// 실DB저장
 				

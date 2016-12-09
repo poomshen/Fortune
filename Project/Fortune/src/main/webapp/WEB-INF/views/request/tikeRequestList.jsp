@@ -64,8 +64,8 @@ h6 {
 	request.setCharacterEncoding("UTF-8");
 	String selectId = (String) request.getAttribute("accept_selectId");
 %>
-<script type="text/javascript">
 
+<script type="text/javascript">
 /* 
  작성자 : 이예지
  추가작업 :카드형태의 dropdown 함수 
@@ -178,9 +178,10 @@ function detail(req,collabo_no){
  	   	 $.ajax({
  	   		 
  	 			type: "get",
- 	 			url:  "ProDetail.htm",
+ 	 			url:  "ProDetail2.htm",
  	 			cache: false,				
- 	 			data:"collabo_req_index="+a,
+ 	 			data:{"collabo_req_index" : a,
+ 	 				"dept_no":${sessionScope.info.dept_no}},
  	 		    success:function(data){ //callback  
  	 		  
  	 		    	$("#detail").html(data); 
@@ -225,7 +226,6 @@ function detail(req,collabo_no){
      function refuseReqCollabo(a){
     	 swal({
     		  title: "거절 합니다!",
-    		  text: "합당한 거절사유:",
     		  type: "input",
     		  showCancelButton: true,
     		  closeOnConfirm: false,
@@ -241,16 +241,19 @@ function detail(req,collabo_no){
     		    return false
     		  }else{
     		 setTimeout(function(){
+    		 		$('#myModal3').modal("hide");
+    		 		$('#myModal2').modal("hide");
     			  $.get("refuse.htm", {collabo_req_index:a ,
     			  collabo_req_text:inputValue,
     			  	pg: "${to_page}",
     				st: "${st_query}",
     				me: "${memo}", 
-    				se: "${search}"}, function(data, textStatus, req) {
-    		 		$(".requestpage").html(data); 
-    		 		 swal("거절성공!", "거절사유: " + inputValue, "success");
+    				se: "${search}"},
+    				function(data, textStatus, req) {
+    		 		$(".requestpage").html(data);
+    		 		swal("거절성공!", "", "success");
     			  })
-    		 	},2000);
+    		 	},0);
     		  }
     		  
     		});
@@ -312,7 +315,7 @@ function detail(req,collabo_no){
    		console.log(index);
    		detailReqCollabo(index);
     }
-     
+  
 //페이지 처리
 function pazingBtn(page,searchval,memoval){
 	if($("#states").val() == '전체'){
@@ -618,7 +621,7 @@ function proAdd(){
 				<div class="modal-content">
 					<div class="modal-header">
 
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<button id="modal_close_btn" type="button" class="close" data-dismiss="modal">&times;</button>
 
 						<h4 class="modal-title">상세보기</h4>
 
