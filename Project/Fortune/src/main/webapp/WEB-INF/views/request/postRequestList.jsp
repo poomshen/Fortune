@@ -457,7 +457,7 @@ function post_request_update(){
 						</div>
 						
 						<div class="modal-body" id="detail">
-						<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>	
+						
 						</div>
 						
 						
