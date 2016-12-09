@@ -97,13 +97,13 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>요청 부서</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_ID}">
+			<input type="text" class="form-control" readonly="readonly" value="${requestuser_info.dept_name}">
 		</div>
 		<div class="col-sm-2" style="margin-top: 10px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>요청자</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${list.user_ID}">
+			<input type="text" class="form-control" readonly="readonly" value="${requestuser_info.user_name}">
 		</div>
 	</div>
 	
@@ -113,13 +113,13 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>수신 부서</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_ID}">
+			<input type="text" class="form-control" readonly="readonly" value="${receiveuser_info.dept_name}">
 		</div>
 		<div class="col-sm-2" style="margin-top: 10px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>수신자</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${list.user_ID}">
+			<input type="text" class="form-control" readonly="readonly" value="${receiveuser_info.user_name}">
 		</div>
 	</div>
 	

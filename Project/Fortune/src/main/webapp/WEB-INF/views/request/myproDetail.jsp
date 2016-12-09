@@ -7,15 +7,15 @@
 
 	<div class="row" style="margin-top: 5px;">
 		<div class="col-sm-2" style="margin-top: 10px;" align="left"><lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;요청 부서</lable></div>
-		<div class="col-sm-4">ㅇㅇ부서</div>
+		<div class="col-sm-4"><input type="text" class="form-control" readonly="readonly" value="${requestuser_info.dept_name}"></div>
 		<div class="col-sm-2" style="margin-top: 10px;" align="center"><lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;요청자</lable></div>
-		<div class="col-sm-4">ㅇㅇㅇ</div>
+		<div class="col-sm-4"><input type="text" class="form-control" readonly="readonly" value="${requestuser_info.user_name}"></div>
 	</div>
 	<div class="row" style="margin-top: 5px;">
 		<div class="col-sm-2" style="margin-top: 10px;" align="left"><lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수신 부서</lable></div>
-		<div class="col-sm-4"><input type="text" class="form-control" readonly="readonly" value="${list.dept_name}"></div>
+		<div class="col-sm-4"><input type="text" class="form-control" readonly="readonly" value="${receiveuser_info.dept_name}"></div>
 		<div class="col-sm-2" style="margin-top: 10px;" align="center"><lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수신자</lable></div>
-		<div class="col-sm-4"><input type="text" class="form-control" readonly="readonly" value="${list.user_name}"></div>
+		<div class="col-sm-4"><input type="text" class="form-control" readonly="readonly" value="${receiveuser_info.user_name}"></div>
 	</div>
 	<div class="row" style="margin-top: 5px;">
 		<div class="col-sm-2" style="margin-top: 10px;" align="left"><lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일</lable></div>
