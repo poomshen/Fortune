@@ -436,9 +436,9 @@ function loadCalendar(role1,role2) {
 		
 		//캘린더 헤더 부분 css요소
 		header: {
-	        left: 'prev,next today',
-	        center: 'title',
-	        right: '여긴 뭐가 들어옴?'
+	        left: 'prev,next,today, fileroombtn',
+	        center: '', //
+	        right: 'title'
 	    },
 
 		
@@ -1139,9 +1139,17 @@ function loadCalendar(role1,role2) {
     			}
     			}
     			})
-	    	}
+	    	},
 	    	// 작업자: 이명철  // 최근 수정일: 16-11-29 --------------------- E N D ------------------------
 	    	// ------------------------------------------------------------------------------------    
+	    	fileroombtn : {
+	    		text :'자료실',
+	    		click : function(){
+	    			location.href='mainfile.htm?collabo_no='+$("#collabo_no").val();
+	    		}
+	    	}
+	    	
+	    	
 	    	
 	    }, //custombutton 끝
 	    

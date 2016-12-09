@@ -158,7 +158,7 @@ function detail(req,collabo_no){
  				"collabo_no":collabo_no
  			},
  		    success:function(data){ 
-				$("#detail").html(data); 
+				$("#detail").html(data);
 				$('#myModal3').modal('show');
  		     },
  			error: function(){						
