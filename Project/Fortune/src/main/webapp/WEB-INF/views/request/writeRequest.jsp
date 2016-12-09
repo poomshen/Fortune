@@ -151,10 +151,6 @@
 					<label>프로젝트 내용 </label>
 					<textarea rows="4" cols="50" class="form-control"
 						name="collabo_req_text" id="collabo_req_text"></textarea>
-					<script>
-                
-                CKEDITOR.replace( 'collabo_req_text' );
-            </script>
 				</div>
 				<br>
 
@@ -184,10 +180,8 @@
 			<div class="col-sm-1"></div>
 			<div class="col-sm-6" style="text-align: right">
 
-				<button type="button" class="btn hvr-grow-shadow"
-					onclick="promodify()">저장</button>
-				&nbsp;&nbsp; <a href="FortuneMain.htm"
-					class="btn btn-default hvr-grow-shadow">취소하기</a>
+				<input type="button" class="btn btn-primary" onclick="promodify()" value="등록">
+				&nbsp;&nbsp; <a href="FortuneMain.htm"><input type="button" class="btn btn-primary" value="취소"></a>
 			<br> <br>
 		</div>
 		</form>
