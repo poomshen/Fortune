@@ -22,11 +22,11 @@ ${list.collabo_req_text}
  </div>
  <input type="hidden" id="hidden" value="${list.collabo_req_index}">
 <div class="modal-footer" id="detail_footer">
-							<input type="hidden" id="hidden">
-							<c:if test='${list.collabo_req_state eq "대기"}'>
-							<button type="button" class="btn btn-default" onclick="modifyReqCollabo()" >수정</button>
-							</c:if>
-							<button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
+		<input type="hidden" id="hidden">
+			<c:if test='${list.collabo_req_state eq "대기"}'>
+				<button type="button" class="btn btn-default" onclick="modifyReqCollabo()" >수정</button>
+			</c:if>
+				<button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
 </div>
 
 
