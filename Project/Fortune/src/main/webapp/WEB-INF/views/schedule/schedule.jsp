@@ -380,9 +380,9 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 
 			<!-- 업무상세 보여주는 div 영역 -->
 			<div class="col-sm-5" style="padding-right: 0px;">
-					<div class="row" style="padding-right: 0px; margin-top: 11px; margin-bottom: 11px;">
-						<div class="col-sm-2">
-							<select id="schedule_type" onchange="schedule_type()" style="height: 20px;">
+					<div class="row" style="padding-right: 0px; margin-top: 11px; margin-bottom: 2px;">
+						<div class="col-sm-2" style="padding-left:0px;">
+							<select id="schedule_type" class="form-control" onchange="schedule_type()" style="height: 100%; width:125px; display: inline; font-size: 12px; color: #666;">
 								<option id="default_option" value="4"> 선 택 </option>
 								<option value="0"> 전 체 보 기 </option>
 								<option value="3" >내 일정 보기</option>
