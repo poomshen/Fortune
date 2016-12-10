@@ -5,7 +5,7 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">[공지사항 목록]</h1>
+		<h1 class="page-header">[공지사항]</h1>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
@@ -17,11 +17,11 @@
 			<!-- 검색폼 추가 -->
 			<div style="margin-top: 10px; margin-left: 15px;">
 				<form name="searchform" id="searchform" action="noticeSearch.htm" method="get">
-					<select name="selectvalue" id="selectvalue" class="cd-select">
+					<select name="selectvalue" id="selectvalue" class="cd-select form-control" style="width: 7%; display: inline; font-size: 12px; color: #666;">
 						<option style="text-align: center" value="notice_title">제목</option>
 						<option style="text-align: center" value="notice_text">내용</option>
 					</select> 
-					<input type="text" name="searchvalue"> 
+					<input type="text" name="searchvalue" class="form-control" style="width: 20%; display: inline; font-size: 12px; color: #666;"> 
 					<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
 					<security:authorize access="hasAnyRole('ROLE_ADMIN')">
 						<div style="float: right; margin-right: 15px;">
