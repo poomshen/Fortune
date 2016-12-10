@@ -9,9 +9,23 @@
 		float:right;
 		
 	}
+	#HbtnStyle{
+	background-color: #194f89;
+	 padding: 10px 10px; 
+	 margin-left: 0;
+	  margin-top: 0;
+	  height: auto;
+	  color:  white;
+	}
+	#HbtnStyle i{
+	height:20px;
+	 width: 20px;
+	  font-size: 20px;
+	}
 </style>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script type="text/javascript">
+	console.log("dkdkdkdk");
 		function lastPostFunc(){
 			console.log("스크롤 끝");
 			 $("div#pageListLoader").html("<div  class='btn btn-primary btn-lg btn-block'><h1style='color: white;'>로딩중..</h1></div>");  
@@ -26,7 +40,9 @@
 	
 	
 	$(window).scroll(function(){  
-        if  ($(window).scrollTop() == $(document).height() - $(window).height()){  
+		console.log($(document).height() - $(window).height());
+		console.log($(window).scrollTop());
+        if  (($(window).scrollTop()+1) > $(document).height() - $(window).height()){  
            lastPostFunc();  
         }  
 	});  
@@ -49,12 +65,13 @@
             </div>
             
                     <!-- /.panel -->
-                    <div class="panel panel-default">
+                  <!--   <div class="panel panel-default">
                     
                         <div class="panel-heading">
                             <i class="fa fa-clock-o fa-fw"></i>프로젝트 히스토리
-                        </div>
+                        </div> -->
                         <!-- /.panel-heading -->
+                        <div>
                         <div class="panel-body">
                             <ul class="timeline">
                                <c:forEach var="historylist" items="${list}">
@@ -78,7 +95,7 @@
                                     		</div>
                                 	</c:when>
                                 	<c:when test="${historylist.history_title=='수락'}">
-                                    <div class="timeline-badge info"><i style="margin-top:30%;" class="fa fa-check-square-o"></i>
+                                    <div class="timeline-badge" style="background-color: #194f89;"><i style="margin-top:30%;" class="fa fa-check-square-o"></i>
                                     </div>
                                 	</c:when>
                                 	<c:when test="${historylist.history_title=='거절'}">
@@ -121,6 +138,9 @@
                         </div>
                         <div id ="pageListLoader"></div>
                         <!-- /.panel-body -->
+                        <br>
+                        <br>
+                        <br>
                     </div>
                     <!-- /.panel -->
 
