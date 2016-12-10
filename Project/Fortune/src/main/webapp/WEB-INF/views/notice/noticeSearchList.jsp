@@ -11,8 +11,8 @@
 <!-- /.row -->
 <div class="row">
 	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">안녕하세요, 관리자의 공지사항공간이랍니다~</div>
+		<!-- <div class="panel panel-default"> -->
+			<!-- <div class="panel-heading">안녕하세요, 관리자의 공지사항공간이랍니다~</div> -->
 			<!-- 검색폼 추가 -->
 			<div style="margin-top: 10px; margin-left: 15px;">
 				<form name="searchform" id="searchform" action="noticeSearch.htm" method="get">
@@ -88,7 +88,7 @@
 
 			</div>
 			<!-- /.panel-body -->
-		</div>
+	
 		<!-- /.panel -->
 	</div>
 	<!-- /.col-lg-12 -->
