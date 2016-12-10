@@ -74,7 +74,7 @@
                         <div>
                         <div class="panel-body">
                             <ul class="timeline">
-                               <c:forEach var="historylist" items="${list}">
+                           <c:forEach var="historylist" items="${list}">
                                 <!-- 타임라인 왼쪽 오른쪽 주기  -->
                                 <c:choose >
                                 	<c:when test="${historylist.history_title=='요청'||historylist.history_title=='거절'||historylist.history_title=='수정'}">
@@ -87,27 +87,27 @@
                                     <!--  글 아이콘 설정 -->
                                 <c:choose>
                                 	<c:when test="${historylist.history_title=='요청'}">
-                                		<div class="timeline-badge "><i style="margin-top:30%;" class="fa fa-edit"></i>
+                                		<div class="timeline-badge "><i style="margin-top:35%;" class="fa fa-edit"></i>
                                     		</div>
                                 	</c:when>
                                 	<c:when test="${historylist.history_title=='수정'}">
-                                		<div class="timeline-badge "><i style="margin-top:30%;" class="fa fa-gears"></i>
+                                		<div class="timeline-badge "><i style="margin-top:35%;" class="fa fa-gears"></i>
                                     		</div>
                                 	</c:when>
                                 	<c:when test="${historylist.history_title=='수락'}">
-                                    <div class="timeline-badge" style="background-color: #194f89;"><i style="margin-top:30%;" class="fa fa-check-square-o"></i>
+                                    <div class="timeline-badge" style="background-color: #194f89;"><i style="margin-top:35%;" class="fa fa-check-square-o"></i>
                                     </div>
                                 	</c:when>
                                 	<c:when test="${historylist.history_title=='거절'}">
-                                    <div class="timeline-badge danger"><i style="margin-top:30%;" class="fa fa-share-square-o"></i>
+                                    <div class="timeline-badge danger"><i style="margin-top:35%;" class="fa fa-share-square-o"></i>
                                     </div>
                                 	</c:when>
                                 	<c:when test="${historylist.history_title=='완료'}">
-                                    <div class="timeline-badge success"><i style="margin-top:30%;" class="fa fa-flag"></i>
+                                    <div class="timeline-badge success"><i style="margin-top:35%;" class="fa fa-flag"></i>
                                     </div>
                                 	</c:when>
                                 	<c:otherwise>
-                                    <div class="timeline-badge "><i style="margin-top:30%;" class="fa fa-check"></i>
+                                    <div class="timeline-badge "><i style="margin-top:35%;" class="fa fa-check"></i>
                                     </div>
                                 	</c:otherwise>
                                 </c:choose>
@@ -125,6 +125,15 @@
                                              <c:choose>
                                             <c:when test="${ historylist.history_title != '수정'&& historylist.history_title != '거절'}">
                                             <p>${fn:replace(historylist.collabo_req_text, crcn, br)}</p> 
+                                            <c:if test="${ historylist.history_title == '완료'|| historylist.history_title == '수락'}">
+                                            <hr>
+                                            <div style="float: right;">
+                                            <a  class="btn" id="HbtnStyle"  href="mainfile.htm?collabo_no=${historylist.collaboration_NO}">
+                                            <i class="fa fa-cloud" ></i></a>
+                                            <a   class="btn"id="HbtnStyle"    href="schedule.htm?collabo_no=${historylist.collaboration_NO}">
+                                            <i class="fa fa-calendar"  ></i></a>
+                                            </div>
+                                            </c:if>
                                             </c:when>
 					<c:otherwise>
 					  <p>${fn:replace(historylist.history_text, crcn, br)}</p>
@@ -133,6 +142,9 @@
                                         </div>
                                     </div>
                                 	</li>
+                                <script type="text/javascript">
+                                	 $("div#pageListLoader").html("<div  class='btn btn-primary btn-lg btn-block'><h1style='color: white;'>더 보기</h1></div>"); 
+                                </script>
                                 </c:forEach>
                             </ul>
                         </div>

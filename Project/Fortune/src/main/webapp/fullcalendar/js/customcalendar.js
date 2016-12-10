@@ -125,16 +125,18 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 			data : 'schedule_no='+ id,
 			success : function(data) {
 				var comment_text = "";
-	 			$.each(data, function(index, obj) {
+	 			var id_color = [];
+				$.each(data, function(index, obj) {
+					//obj.color = 0 ~ i값임 
 	 				if(index%2==0){
-	 					comment_text += '<li class="left clearfix"><span class="pull-left"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
-	 					comment_text += '<br><strong class="primary-font"> &nbsp;&nbsp;'+obj.user_id+'</strong></span><div class="chat-body clearfix"><div class="header">';
+	 					comment_text += '<li class="left clearfix"><span class="pull-left"><div class="image_main"><img src="assets/img/comment/'+obj.color+'.png" style="background:no-repeat center; width:60px; height: 60px; padding: 3px 3px 3px 3px;">';
+	 					comment_text += '<span class="image_main_up">'+obj.user_id+'</span></div></span><div class="chat-body clearfix"><div class="header">';
 	 					comment_text += '<small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date +' &nbsp;&nbsp;&nbsp;'
 	 					comment_text += '<button type="button" onclick="delete_comment('+obj.work_comment_no+')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button></small></div>'
 	 					comment_text += '<br><p style="word-break:break-all; width:241px;">'+obj.work_comment_text+'</p></div></li>';
 	 				}else{
-	 					comment_text += '<li class="right clearfix"><span class="pull-right"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
-	 					comment_text += '<br><strong class="pull-right primary-font">'+obj.user_id+'&nbsp;&nbsp;</strong></span><div class="chat-body clearfix"><div class="header">'
+	 					comment_text += '<li class="right clearfix"><span class="pull-right"><div class="image_main"><img src="assets/img/comment/'+obj.color+'.png" style="background:no-repeat center; width:60px; height: 60px; padding: 3px 3px 3px 3px;">';
+	 					comment_text += '<span class="image_main_up">'+obj.user_id+'</span></div></span><div class="chat-body clearfix"><div class="header">'
 	 					comment_text += '<small class=" text-muted"><button type="button" onclick="delete_comment('+obj.work_comment_no;
 	 					comment_text += ')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button>&nbsp;&nbsp;<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
 	 					comment_text += '</small></div><p style="word-break:break-all; width:241px; margin-left:28px;">'+obj.work_comment_text+'</p></div></li>'
@@ -257,15 +259,16 @@ function insert_comment(){
 			var comment_text = "";
 			console.log('comment 등록 성공')
  			$.each(data, function(index, obj) {
+				//obj.color = 0 ~ i값임 
  				if(index%2==0){
- 					comment_text += '<li class="left clearfix"><span class="pull-left"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
- 					comment_text += '<br><strong class="primary-font"> &nbsp;&nbsp;'+obj.user_id+'</strong></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<li class="left clearfix"><span class="pull-left"><div class="image_main"><img src="assets/img/comment/'+obj.color+'.png" style="background:no-repeat center; width:60px; height: 60px; padding: 3px 3px 3px 3px;">';
+ 					comment_text += '<span class="image_main_up">'+obj.user_id+'</span></div></span><div class="chat-body clearfix"><div class="header">';
  					comment_text += '<small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date +' &nbsp;&nbsp;&nbsp;'
  					comment_text += '<button type="button" onclick="delete_comment('+obj.work_comment_no+')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button></small></div>'
  					comment_text += '<br><p style="word-break:break-all; width:241px;">'+obj.work_comment_text+'</p></div></li>';
  				}else{
- 					comment_text += '<li class="right clearfix"><span class="pull-right"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
- 					comment_text += '<br><strong class="pull-right primary-font">'+obj.user_id+'&nbsp;&nbsp;</strong></span><div class="chat-body clearfix"><div class="header">'
+ 					comment_text += '<li class="right clearfix"><span class="pull-right"><div class="image_main"><img src="assets/img/comment/'+obj.color+'.png" style="background:no-repeat center; width:60px; height: 60px; padding: 3px 3px 3px 3px;">';
+ 					comment_text += '<span class="image_main_up">'+obj.user_id+'</span></div></span><div class="chat-body clearfix"><div class="header">'
  					comment_text += '<small class=" text-muted"><button type="button" onclick="delete_comment('+obj.work_comment_no;
  					comment_text += ')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button>&nbsp;&nbsp;<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
  					comment_text += '</small></div><p style="word-break:break-all; width:241px; margin-left:28px;">'+obj.work_comment_text+'</p></div></li>'
@@ -288,15 +291,16 @@ function delete_comment(commend_id){
 			var comment_text = "";
 			console.log(' cocmment 삭제 성공')
  			$.each(data, function(index, obj) {
+				//obj.color = 0 ~ i값임 
  				if(index%2==0){
- 					comment_text += '<li class="left clearfix"><span class="pull-left"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
- 					comment_text += '<br><strong class="primary-font"> &nbsp;&nbsp;'+obj.user_id+'</strong></span><div class="chat-body clearfix"><div class="header">';
+ 					comment_text += '<li class="left clearfix"><span class="pull-left"><div class="image_main"><img src="assets/img/comment/'+obj.color+'.png" style="background:no-repeat center; width:60px; height: 60px; padding: 3px 3px 3px 3px;">';
+ 					comment_text += '<span class="image_main_up">'+obj.user_id+'</span></div></span><div class="chat-body clearfix"><div class="header">';
  					comment_text += '<small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date +' &nbsp;&nbsp;&nbsp;'
  					comment_text += '<button type="button" onclick="delete_comment('+obj.work_comment_no+')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button></small></div>'
  					comment_text += '<br><p style="word-break:break-all; width:241px;">'+obj.work_comment_text+'</p></div></li>';
  				}else{
- 					comment_text += '<li class="right clearfix"><span class="pull-right"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
- 					comment_text += '<br><strong class="pull-right primary-font">'+obj.user_id+'&nbsp;&nbsp;</strong></span><div class="chat-body clearfix"><div class="header">'
+ 					comment_text += '<li class="right clearfix"><span class="pull-right"><div class="image_main"><img src="assets/img/comment/'+obj.color+'.png" style="background:no-repeat center; width:60px; height: 60px; padding: 3px 3px 3px 3px;">';
+ 					comment_text += '<span class="image_main_up">'+obj.user_id+'</span></div></span><div class="chat-body clearfix"><div class="header">'
  					comment_text += '<small class=" text-muted"><button type="button" onclick="delete_comment('+obj.work_comment_no;
  					comment_text += ')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button>&nbsp;&nbsp;<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
  					comment_text += '</small></div><p style="word-break:break-all; width:241px; margin-left:28px;">'+obj.work_comment_text+'</p></div></li>'
