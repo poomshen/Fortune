@@ -7,6 +7,7 @@
    ArrayList each_chart_x =(ArrayList)request.getAttribute("eachChart_x");
    ArrayList each_chart_y = (ArrayList)request.getAttribute("eachChart_y");
    int project_num =(Integer)request.getAttribute("project_num");
+   String project_name =(String)request.getAttribute("project_name");
    System.out.println(each_chart_x.get(0));
    
 %>
@@ -54,7 +55,7 @@ $(function () {
             borderWidth: 0
         },
         series: [{
-            name:<%=project_num%>,
+            name:'<%=project_name%>',
             data:<%=each_chart_y%>
           
         }]

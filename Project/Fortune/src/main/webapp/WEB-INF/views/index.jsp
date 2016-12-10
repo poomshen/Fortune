@@ -1,3 +1,10 @@
+<!-- 
+작성자  : 김지현
+최초작업일 : 2016/12/10
+최종수정일 : 2016/12/10
+작업내용 : 로그인/조원 소개 페이지
+-->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,11 +19,9 @@
 <title>Riona - One Page Bootstrap Business Template</title>
 
 <!-- CSS -->
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Lato:400,700">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,700">
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="assets/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/css/animate.css">
 <link rel="stylesheet" href="assets/css/magnific-popup.css">
 <link rel="stylesheet" href="assets/css/form-elements.css">
@@ -35,7 +40,6 @@
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
 
-
 <script src="alert_style/js/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 
@@ -47,7 +51,6 @@
 	<div class="loader" style="display: none;">
 		<div class="loader-img" style="display: none;"></div>
 	</div>
-
 
 	<!-- Top content -->
 	<div class="top-content"
@@ -90,22 +93,13 @@
 
 					<div style="margin-left: -3%">
 						<button type="button" onclick="joins()" class="btn hvr-forward" tabindex="4"><span class="glyphicon glyphicon-pencil"> Join</span></button>
-
 						&nbsp; &nbsp; &nbsp;						
 						<button type="submit" class="btn hvr-forward" tabindex="3" ><span class="glyphicon glyphicon-log-in"> Login</span></button>
 					</div>
-
 				</form>
-				<!-- 
-					</div>
-
-				</div>
-			</div>
- -->
 		</div>
 		<a href="searchpage.htm" style="color: rgba(255, 255, 255, 0.58); text-decoration: underline;"> ID/Password를 잊어버리셨나요?</a>
-	<!-- 	 <button class="btn hvr-forward" id="idSearchBtn" onclick="moveSearchpage()"> ID/Password 찾기</button>
- -->
+
 	</div>
 	
 </div>
@@ -115,7 +109,6 @@
 		<img src="assets/img/backgrounds/1.jpg"
 			style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1082.67px; height: 609px; max-height: none; max-width: none; z-index: -999999; top: 0px; left: -55.3333px;">
 	</div>
-
 
 	<!-- What we do -->
 	<div class="what-we-do-container section-container">
@@ -352,30 +345,18 @@
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
-				<!-- 	<div class="team-photo">
-						<img src="assets/img/about/1.jpg" alt=""
-							data-at2x="assets/img/about/1.jpg">
-					</div> -->
 					<h3><font color="black">이성준</font><h3>
 					<p></p>
 					
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
-					<!-- <div class="team-photo">
-						<img src="assets/img/about/2.jpg" alt=""
-							data-at2x="assets/img/about/2.jpg">
-					</div> -->
 					<h3><font color="black">김지율</font></h3>
 					<p></p>
 				
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
-					<!-- <div class="team-photo">
-						<img src="assets/img/about/3.jpg" alt=""
-							data-at2x="assets/img/about/3.jpg">
-					</div> -->
 					<h3><font color="black">이명철</font></h3>
 					<p></p>		
 				</div>
@@ -383,28 +364,16 @@
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
-					<!-- <div class="team-photo">
-						<img src="assets/img/about/3.jpg" alt=""
-							data-at2x="assets/img/about/3.jpg">
-					</div> -->
 					<h3><font color="black">김중완</font></h3>
 					<p></p>		
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
-					<!-- <div class="team-photo">
-						<img src="assets/img/about/3.jpg" alt=""
-							data-at2x="assets/img/about/3.jpg">
-					</div> -->
 					<h3><font color="black">이예지</font></h3>
 					<p></p>		
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
-					<!-- <div class="team-photo">
-						<img src="assets/img/about/3.jpg" alt=""
-							data-at2x="assets/img/about/3.jpg">
-					</div> -->
 					<h3><font color="black">김지현</font></h3>
 					<p></p>		
 				</div>
@@ -412,10 +381,6 @@
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
-					<!-- <div class="team-photo">
-						<img src="assets/img/about/3.jpg" alt=""
-							data-at2x="assets/img/about/3.jpg">
-					</div> -->
 					<h3><font color="black">이승훈</font></h3>
 					<p></p>		
 				</div>
@@ -454,8 +419,7 @@
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
-	<script src="assets/js/wow.min.js"></script>
-	
+	<script src="assets/js/wow.min.js"></script>	
 	<script src="assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="assets/js/masonry.pkgd.min.js"></script>
 	<script src="assets/js/scripts.js"></script>

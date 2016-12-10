@@ -32,7 +32,7 @@ public class Chart_Controller {
 	
 	
 	@RequestMapping(value="selectChart.htm", method = RequestMethod.POST)
-    public String selectChart(@RequestParam(value="project_num") int project_num,HttpSession session,Model model)
+    public String selectChart(@RequestParam(value="project_num") int project_num,@RequestParam(value="project_name") String project_name,HttpSession session,Model model)
             throws ClassNotFoundException, SQLException{
 	
 		
@@ -62,6 +62,7 @@ public class Chart_Controller {
 			model.addAttribute("eachChart_x",chart_x);
 			model.addAttribute("eachChart_y",chart_y);
 			model.addAttribute("project_num",project_num);
+			model.addAttribute("project_name",project_name);
 			System.out.println("chart 각각 뿌려주는 컨트롤러 Chart_controller");
 	      
 	      return "chart";

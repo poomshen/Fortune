@@ -1,3 +1,9 @@
+<!-- 
+작성자  : 김지현
+최초작업일 : 2016/12/10
+최종수정일 : 2016/12/10
+작업내용 : 주소록에 회원 리스트를 보여준다
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -26,7 +32,7 @@ table, th, td {
 
 <div class="col-lg-12">
 <form action="" >
-	<select id="deptSelect" name="deptSelect" class="form-control" style="width: 10%; display: inline; font-size: 12px;" onchange="deptchange()">
+	<select id="deptSelect" name="deptSelect" class="form-control" style="width: 10%; display: inline; font-size: 12px; color: #666;" onchange="deptchange()">
 		<c:forEach var="i" items="${dept}">
 			<c:choose>
 				<c:when test="${i.dept_no == sessionScope.info.dept_no}">
@@ -41,7 +47,7 @@ table, th, td {
 		</c:forEach>
 	</select>
 
-	 <select id="teamSelect" class="form-control" style="width: 10%; display: inline; font-size: 12px;" name="teamSelect">
+	 <select id="teamSelect" class="form-control" style="width: 10%; display: inline; font-size: 12px; color: #666;" name="teamSelect">
 	 <option value="999">전체</option>
 		<c:forEach var="j" items="${team}">				
 			<c:if test="${sessionScope.info.dept_no == j.dept_no}">
@@ -77,7 +83,7 @@ $(function() {
 		data:{"dept_no": ${sessionScope.info.dept_no}, 
 			  "team_no": ${sessionScope.info.team_no}},
 		success:function(data){
-			//console.log(data);
+		
 			$("#deptshowDiv").css("overflow-y", "auto");
 			$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 		
@@ -103,12 +109,11 @@ function deptshow(){
 		data:{"dept_no": $('#deptSelect').val(), 
 			  "team_no": $('#teamSelect').val()},
 		success:function(data){
-			//console.log("teamSelect value : "+team_no);
+		
 			$("#deptshowDiv").css("overflow-y", "auto");
 			$("#deptshowDiv").css("height", "500px");
 			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 
 			if(data != null){
-				//alert('검색 완료');
 			
 			}else{
 				alert('회원 목록을 가져오는데 실패했습니다');
@@ -135,8 +140,7 @@ function deptchange() {
 		url:"getteam.ajax",
 		data:{"dept_no":$('#deptSelect').val()},
 		success:function(data){
-			//console.log(data[0].team_name);
-			//alert('팀목록 바뀜요');
+
 			$("#teamSelect").html("");
 			$('#teamSelect').append("<option value='"+999+"' selected>전체</option>");
 			for(var i=0; i<data.length; i++){

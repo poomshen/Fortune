@@ -1,8 +1,3 @@
-/*
-* @Filename : MemberController
-* @Date : 2016.11.17
-* @Author : 김지현
-* @Desc : 회원가입/정보수정/탈퇴 컨트롤러 */
 
 package com.fortune.join_Controller;
 
@@ -44,40 +39,45 @@ import com.fortune.request_DAO.ProDao;
 
 @Controller
 public class MemberController {
-	
+	/* 
+	작성자  : 김지현
+	최초작업일 : 2016/11/17
+	최종수정일 : 2016/12/10
+	작업내용 : 회원가입 후 첫 화면으로 이동하는 컨트롤러
+	*/	
 	@Autowired
 	public SqlSession sqlsession;
-		
+	
+	
 	@RequestMapping("/JoinSubmit.htm")
 	public String addMember(Join_DTO dto){
-		System.out.println("join submit 버튼 눌렀음");
+		
 		PassWord_Service passWord_Service = new PassWord_Service();
 		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 	
 		dao.insertMember(dto);
-		
-		System.out.println("id : " + dto.getUser_id());
-		System.out.println("pwd : " + dto.getUser_password());
-		
+
 		return "redirect:index.htm";
 		
 	}
 
-	
-	
-	/*수정 : 이예지 2016-11-24 로그인했을시 알림 db 체크 */
-	//수정추가 : 이성준 2016-11-26 로그인 했을시 자신 참조 프로젝트
+	/* 
+	작성자  : 김지현
+	최초작업일 : 2016/11/17
+	최종수정일 : 2016/12/10
+	작업내용 : 로그인 후 첫 화면으로 이동
+	수정 : 이예지 2016-11-24 로그인했을시 알림 db 체크 
+	수정추가 : 이성준 2016-11-26 로그인 했을시 자신 참조 프로젝트*/
 	@RequestMapping(value="/FortuneMain.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session ,Authentication authentication,Model model){
-		System.out.println("로그인 버튼 눌렀고요");
+		
 		UserDetails details = (UserDetails)authentication.getPrincipal();
 		String user_id = details.getUsername();
 		
 		Join_DTO  result = new Join_DTO();
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		result = dao.searchMember(user_id);
-		System.out.println("login dao 동작 완료");
 		
 		//권한이 ROLE_NOUSER이면 로그인 막기(추가작업 : 김중완)
 		if(result.getRole_no() == 5){
@@ -101,8 +101,6 @@ public class MemberController {
 			session.setAttribute("finishCollabo", finishCollabo);
 		}
 	
-		System.out.println("메뉴 컨트롤러");
-		
 		//사업규모 차트 가져오기 (추가 작업 : 이예지)
 		List<Pie_Data_DTO> plist = new ArrayList<Pie_Data_DTO>();
 		IChart cdao = sqlsession.getMapper(IChart.class);
@@ -133,8 +131,6 @@ public class MemberController {
 		
 		int tatalCount = adao.totalCount(user_id);
 		
-		System.out.println("size:"+alist.size());
-		
 		session.setAttribute("alarm", alist);
 		session.setAttribute("totalCount", tatalCount);	
 		
@@ -142,9 +138,7 @@ public class MemberController {
 		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
 		sch_alist  = adao.checkScheduleAlarm(user_id);
 		session.setAttribute("sch_alist", sch_alist);
-		
-		
-		
+					
 		//공지사항 최신글 뽑는 부분 (추가 작업 : 김중완)
 		INotice notice_dao = sqlsession.getMapper(INotice.class);
 		List<Notice_DTO> nlist = notice_dao.mainListNotice();
