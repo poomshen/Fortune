@@ -491,7 +491,6 @@ public class ProController {
 			public ModelAndView listResponse_ver1(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 				
 				//성준이 협업 리스트 코드
-				
 				ModelAndView mv = new ModelAndView();
 				mv = proservice.listResponse( pg, f, q, session);
 				

@@ -510,7 +510,7 @@ public class ProService {
       // 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
       Join_DTO ids = (Join_DTO) session.getAttribute("info");
       ProDao proDao = sqlsession.getMapper(ProDao.class);
-      System.out.println("pg  :" +pg);
+      System.out.println("ids  :" +ids);
       //////////////////////////////////////
       
       ModelAndView mv = new ModelAndView();
@@ -527,7 +527,7 @@ public class ProService {
       }else if(ids.getRole_no() == 4){
          field = "user_ID";
          List<String>  timeId = proDao.selectTeamMGR(ids.getTeam_no()) ;
-         
+         System.out.println("timeId : " + timeId);
          if(timeId.size() != 0 ){
             int row_size = 6;
             int total_count = proDao.collaboCount(field, timeId) ; // 공지사항 글 개수
@@ -565,7 +565,8 @@ public class ProService {
             
             return mv;
          }
-         return null;
+         mv.addObject("collabo_null", 777);
+         return mv;
       }else if(ids.getRole_no() == 1||ids.getRole_no() == 0){
           query = "%%";
           field = "collabo_req_ID";

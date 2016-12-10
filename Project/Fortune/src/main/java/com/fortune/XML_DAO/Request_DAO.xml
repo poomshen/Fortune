@@ -252,7 +252,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 작성자 : 이성준  날짜: 16-12-01 목적: 팀원들의 팀장 보기 -->
 	<select id="selectTeamMGR" parameterType="Integer"  resultType="String">
-		Select distinct c.user_Id From Users U Join (Select * From Collabo) C On U.User_Id = C.User_Id where team_no = #{param1}	
+		Select distinct c.user_Id From Users U Join Collabo C On U.User_Id = C.User_Id where team_no = #{param1}	
 	</select>
 	
 	<!-- 작성자: 이성준 날짜: 16-12-06 목적: 요청 글 가지고 오기 -->
