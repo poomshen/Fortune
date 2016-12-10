@@ -237,7 +237,7 @@ $(document).ready(function() {
 
 <style>
 .image_main {position: relative;}
-.image_main_up{ position: absolute;left: 0; bottom: 0; padding-left:2px; font-size: 1em; font-weight: bold;}
+.image_main_up{ position: absolute;left: 0; bottom: 0; padding-left:11px; padding-bottom:20px; color:white; font-size: 1.1em; font-weight: bold;}
 </style>
 
 
@@ -469,7 +469,7 @@ $(document).ready(function() {
 						<i class="fa fa-comments fa-fw"></i> Comment
 					</div>
 					<!-- panel-body -->
-					<div class="panel-body" style="height: 170px;">
+					<div class="panel-body" style="height: 100%; overflow: hidden;">
 						<!-- comment_text 내용추가 하는 영역 -->
 						<ul class="chat">
 						<div id="comment_text"></div>
@@ -478,7 +478,7 @@ $(document).ready(function() {
 					<!-- panel-footer -->
 					<div class="panel-footer" style="height: 35px; padding-top: 2px;">
 						<div class="input-group" style="padding-top: 0px;">
-	                       <input id="comment_textarea" type="text" class="form-control input-sm" placeholder="Type your message here...">
+	                       <input id="comment_textarea" type="text" class="form-control input-sm" placeholder="코멘트를 등록하세요">
 	                       <span class="input-group-btn">
 	                           <button type="button" class="button button-rounded button-tiny" style="background-color: #194f89;" onclick="insert_comment()">등록</button>
 	                       </span>
