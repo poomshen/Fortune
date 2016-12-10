@@ -33,7 +33,7 @@
     margin-top: 30px;
 ">회원정보 수정</h3>
 <hr>
-<div class="col-sm-10" style="width: 60%">
+<div class="col-sm-10" style="width: 60%" align="center">
   <form  action="updateConfirm.htm" method="post">
    <div class="form-group">
       <label for="firstname" class="col-md-2" style="
