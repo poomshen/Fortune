@@ -26,7 +26,7 @@ table, th, td {
 
 <div class="col-lg-12">
 <form action="" >
-	<select id="deptSelect" name="deptSelect" onchange="deptchange()">
+	<select id="deptSelect" name="deptSelect" class="form-control" style="width: 10%; display: inline; font-size: 12px;" onchange="deptchange()">
 		<c:forEach var="i" items="${dept}">
 			<c:choose>
 				<c:when test="${i.dept_no == sessionScope.info.dept_no}">
@@ -35,14 +35,13 @@ table, th, td {
 				<c:otherwise>
 					<c:if test="${i.dept_no ne 50}">
 						<option value="${i.dept_no}">${i.dept_name}</option>
-					</c:if>
-					
+					</c:if>			
 				</c:otherwise>
 			</c:choose>		
 		</c:forEach>
 	</select>
 
-	 <select id="teamSelect" name="teamSelect">
+	 <select id="teamSelect" class="form-control" style="width: 10%; display: inline; font-size: 12px;" name="teamSelect">
 	 <option value="999">전체</option>
 		<c:forEach var="j" items="${team}">				
 			<c:if test="${sessionScope.info.dept_no == j.dept_no}">
@@ -58,7 +57,7 @@ table, th, td {
 			
 		</c:forEach>		
 	</select> 
-	
+	&nbsp;
 	<input type="button" class="btn btn-primary" onclick="deptshow()" value="검색">
 </form>
 <!-- 표 부분 -->
