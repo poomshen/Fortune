@@ -6,7 +6,7 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">[공지사항 글쓰기]</h1>
+		<h1 class="page-header">[공지사항]</h1>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
@@ -20,7 +20,7 @@
 					<div class="col-lg-12">
 						<form:form role="form" action="" method="post" enctype="multipart/form-data">
 							<div class="form-group">
-								<input class="form-control" placeholder="제목을 작성해주세요." type="text" name="notice_title" id="notice_title">
+								<input class="form-control" placeholder="제목을 작성해주세요." type="text" name="notice_title" id="notice_title" style="color: #666;">
 									<form:errors path="notice_title"/>
 							</div>
 							<!-- <div class="form-group">

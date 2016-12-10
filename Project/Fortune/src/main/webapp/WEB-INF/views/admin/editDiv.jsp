@@ -114,7 +114,7 @@
 		</span>부서명
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
-		<select class="selectpicker" id="deptSelect" name="dept_no" onchange="deptchange()" style="width: 150px;">
+		<select class="selectpicker form-control" id="deptSelect" name="dept_no" onchange="deptchange()" style="width: 17%; display: inline; font-size: 12px; width: 150px; color: #666;">
 			<option value="-1" selected>선택</option>
 			<c:forEach var="i" items="${deptselect}">
 				<c:choose>
@@ -139,7 +139,7 @@
 		</span>팀명
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
-		<select class="selectpicker" id="teamSelect" name="team_no" style="width: 150px;">
+		<select class="selectpicker form-control" id="teamSelect" name="team_no" style="width: 17%; display: inline; font-size: 12px; width: 150px; color: #666;">
 			<option value="-1" selected>선택</option>
 			<c:forEach var="j" items="${teamselect}">
 				<c:choose>
@@ -164,7 +164,7 @@
 		</span>직급명
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
-		<select class="selectpicker" name="position_no" id="positionSelect" style="width: 150px;">
+		<select class="selectpicker form-control" name="position_no" id="positionSelect" style="width: 17%; display: inline; font-size: 12px; width: 150px; color: #666;">
 			<option value="-1" selected>선택</option>
 			<c:forEach var="i" items="${positionselect}">
 				<c:choose>
@@ -189,7 +189,7 @@
 		</span>권한
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
-		<select id="roleSelect" name="role_no" style="width: 150px;">
+		<select id="roleSelect " class="form-control" name="role_no" style="width: 17%; display: inline; font-size: 12px; width: 150px; color: #666;">
 			<c:forEach var="i" items="${roleselect}">
 				<c:choose>
 					<c:when test="${i.role_no == join_DTO.role_no}">
