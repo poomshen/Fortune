@@ -169,12 +169,29 @@ h6 {
       }
       // 완료하기  수락 버튼 함수
       function ctionQuestion(collabo){
-         console.log(collabo);
-         $("#modaldivs").html("<button type='button' class='btn btn-default'"
-               +"onclick='collaboComplete("+collabo+")' >수락</button>"
-               +"<button type='button' class='btn btn-default' data-dismiss='modal'>취소</button>"      
-         );
-      }
+    	  
+    	  
+          swal({
+              title: "프로젝트를 완료하시겠습니까?",
+              type: "info",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "완료",
+              cancelButtonText: "취소",
+              showLoaderOnConfirm: false,
+              closeOnConfirm: false
+            },
+            function(){
+            	
+            	collaboComplete(collabo);
+            	swal("완료!", "완료된 프로젝트에서 확인해주세요", "success");
+          
+               }
+            );
+      }  
+    	  
+
+      
       //완료후 비동기 처리
       function collaboComplete(collabo){
          $.get("collaboComplet.htm", {collabo_no:collabo }, function(data, textStatus, req) {
@@ -228,6 +245,18 @@ h6 {
          });
          }
           }
+      }
+      
+      function goSchedule(collabo_no){
+    	  
+    	  location.href="schedule.htm?collabo_no="+collabo_no;       
+    	  
+      }
+   
+  	 function goHistory(collabo_req_no){
+    	  
+    	  location.href="historyList.htm?collabo_req_no="+collabo_req_no;      
+    	  
       }
    </script>
    <!--전체 div영역 -->
@@ -295,41 +324,23 @@ h6 {
                         <div class="html about-me" style="height:150px" id="about-mesocial-link${n.collabo_req_index}">
                         
                         <div class="row" style="margin-bottom: 0px;padding-bottom: 10px;">
-                        <div class="col-sm-4" style="padding-right: 0px;"></div>
+                   
+                          <div class="col-sm-2" style="margin-left: 4px;">
                           
-                          <div class="col-sm-1" style="margin-left: 2px;">
-                          
-                          <security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
-                          <button type="button" class="button button-circle button-flat-primary button-tiny"  data-toggle="modal" data-target="#myModal"onclick="ctionQuestion(${collabo_no})" style="margin-left:15px;background-color:rgba(153, 153, 153, 0.45); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;">
-                           <i style="color:#194f89"class="fa fa-check-square-o" aria-hidden="true"></i>
-                           </button>
-                           
-                        </security:authorize>
-                          </div>
-                          
-                          <div class="col-sm-1" style="margin-left: 4px;">
-                          
-                          <button data-toggle="modal" data-target="#myModal2" type="button" target="_blank"class="button button-circle button-flat-primary button-tiny" style="margin-left:13px;background-color:rgba(153, 153, 153, 0.45); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;">
-                             <i style="color:#194f89;padding-top: 2px;" class="fa fa-calendar" aria-hidden="true"></i><a href="schedule.htm?collabo_no=${collabo_no}"></a>
-                          </button></div>
-                          
-                          <div class="col-sm-1" style="margin-left: 4px;">
-                          
-                          <button type="button" class="button button-circle button-flat-primary button-tiny" style="margin-left:15px;background-color: rgba(153, 153, 153, 0.45); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;">
-                              <i style="color:#194f89;padding-top: 2px;" class="fa fa-file-text-o" aria-hidden="true"></i><a href="mainfile.htm?collabo_no=${collabo_no}"></a>
-                          </button>
-                          
+                          <input type="button" style="color:#194f89;background-color: #fff;width: 41px;height: 24px;padding-left: 5px;padding-top: 3px;padding-right: 5px;"class="btn btn-primary hvr-ripple-out" onclick="goSchedule('${collabo_no}')" value="일정">
                           </div>
                        
-                          <div class="col-sm-1" style="margin-left: 4px;">
+                          <div class="col-sm-3" style="margin-left: 4px;">
                           
-                          <button type="button" class="button button-circle button-flat-primary button-tiny" style="margin-left:15px;background-color: rgba(153, 153, 153, 0.45); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;">
-                              <i style="color:#194f89;padding-top: 2px;" class="fa fa-history" aria-hidden="true"></i><a href="historyList.htm?collabo_req_no=${n.collabo_req_no }"></a>
-                          </button>
-                          
+                          <input type="button" style="color:#194f89;background-color: #fff;width: 60px;height: 24px;padding-left: 5px;padding-top: 3px;padding-right: 5px;"class="btn btn-primary hvr-ripple-out" onclick="goHistory(${n.collabo_req_no})" value="history">
                           </div>
-                          
-                  
+                         
+                         <div class="col-sm-1" style="margin-left:4px">
+                          <security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
+                          <input type="button" style="color:#194f89;background-color: #fff;width: 41px;height: 24px;padding-left: 5px;padding-top: 3px;padding-right: 5px;"class="btn btn-primary hvr-ripple-out"  onclick="ctionQuestion(${collabo_no})" value="완료">
+                        
+                         </security:authorize>
+                   		 </div>
                           </div>
                               <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
                                     <div class="photo"
@@ -399,29 +410,7 @@ h6 {
             </div>
 
 
-            <!-- 완료 확인  모달 창  -->
-            <div class="container">
-               <!-- Modal -->
-               <div class="modal fade" id="myModal" role="dialog">
-                  <div class="modal-dialog">
 
-                     <!-- Modal content-->
-                     <div class="modal-content">
-                        <div class="modal-header">
-                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                           <h4 class="modal-title">정말 프로젝트가 완료 되었습니까?</h4>
-                        </div>
-                        <div class="modal-footer">
-                           <span id="modaldivs"> </span>
-                        </div>
-                     </div>
-
-                  </div>
-               </div>
-
-            </div>
-         </div>
-      </div>
 
 
       <!-- 상세보기 modal 부분 -->

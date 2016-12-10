@@ -376,7 +376,9 @@ function post_request_update(){
 												<c:when test="${n.collabo_req_state == '수락'}">
               										 "border:3px solid #1e851f; margin-right:0px"
                 								</c:when>
-                								
+                								<c:when test="${n.collabo_req_state == '완료'}">
+								 					"border:3px solid black"
+												</c:when>
                 								<c:when test="${n.collabo_req_state == '거절'}">
 								 					"border:3px solid #dd2d16"
 												</c:when>

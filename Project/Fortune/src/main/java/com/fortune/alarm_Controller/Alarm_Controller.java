@@ -96,6 +96,7 @@ public class Alarm_Controller {
 			int totalCount = alarm_DAO.totalCount(dto.getUser_id());
 			
 			sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+			
 			System.out.println("size:"+alist.size());
 			System.out.println("newAlarm totalcount:"+totalCount);
 			
