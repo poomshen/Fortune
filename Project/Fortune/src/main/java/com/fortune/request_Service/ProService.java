@@ -482,9 +482,13 @@ public class ProService {
         n.setCollabo_req_filesrc(filenames.get(0));  // 파일명 1 
         
         
-        
       ProDao proDao = sqlsession.getMapper(ProDao.class);
-      proDao.update(n);
+      if(n.getCollabo_req_filesrc().isEmpty()){
+    	  proDao.updatenull(n);
+      }else{
+    	  proDao.update(n);
+      }
+      
       return n;
 
    }
