@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <div class="row">
 	<div class="col-lg-12">
@@ -22,9 +23,11 @@
 					</select> 
 					<input type="text" name="searchvalue"> 
 					<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
-					<div style="float: right; margin-right: 15px;">
-						<a href="noticeInsert.htm"><input type="button" class="btn btn-primary" value="글쓰기"></a>
-					</div>
+					<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+						<div style="float: right; margin-right: 15px;">
+							<a href="noticeInsert.htm"><input type="button" class="btn btn-primary" value="글쓰기"></a>
+						</div>
+					</security:authorize>
 				</form>
 			</div>
 			<!-- /.panel-heading -->
