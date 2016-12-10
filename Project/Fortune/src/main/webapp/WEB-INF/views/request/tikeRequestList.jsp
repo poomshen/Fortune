@@ -256,7 +256,6 @@ function detail(req,collabo_no){
     		 		$('#myModal2').modal("hide");
     			  $.get("refuse.htm", {collabo_req_index:a ,
     			  collabo_req_text:inputValue,
-    			  	pg: "${to_page}",
     				st: "${st_query}",
     				me: "${memo}", 
     				se: "${search}"},
