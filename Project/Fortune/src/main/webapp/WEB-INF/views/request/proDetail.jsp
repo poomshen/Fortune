@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
 <!-- 보낸 요청함 상세보기 -->
 <form action="proEdit.htm" method="post" name="modifyform" enctype="multipart/form-data">
+
 
 	<!-- 요청 부서, 요청자 -->
 	<div class="row" style="margin-top: 5px;">	

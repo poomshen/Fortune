@@ -35,16 +35,18 @@ input.buttonLink {
 	<!-- 부서명 -->
 	<div class="col-sm-6" style="padding-left: 0px;">
 		<form action="">
-			<select id="deptSelect1" name="deptSelect1">
+			<select id="deptSelect1" name="deptSelect1" class=" form-control" style="width: 18%; display: inline; font-size: 12px; color: #666;">
 				<option value="-1" selected="selected">부서 선택</option>
 				<c:forEach var="i" items="${dept}">
 					<option value="${i.dept_no}">${i.dept_name}</option>
 				</c:forEach>
 			</select> 
-			<input type="button" class="btn btn-primary" onclick="deptshowadmin()" value="검색">
+			&nbsp;<input type="button" class="btn btn-primary" onclick="deptshowadmin()" value="검색">
+		
 		</form>
 		
 		<div id="deptshowDiv">
+		<br>
 			<table class="table table-striped table-bordered table-hover">
 				<tr>
 					<th>아이디</th>
@@ -202,7 +204,7 @@ function UserUpdate(){
 function deleteok_id(user_id){
 	swal({
 		  title: "정말로 삭제 하시겠습니까?",
-		  text: "삭제한 아이디와 데이터는 재사용 및 복구가 불가합니다..",
+		  text: "삭제한 아이디와 데이터는 복구가 불가합니다..",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonColor: "#DD6B55",

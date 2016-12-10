@@ -287,7 +287,7 @@ function detail(req,collabo_no){
 		
    			})
    		}else{
-   		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
+   		$.get("requestList2.htm",{st :state,state:state}, function(data, textStatus, req) {
    			$(".requestpage").html(data);
    			$("#"+state).addClass('active');
    			$("#states").val(state);
