@@ -1,3 +1,9 @@
+<!-- 
+작성자  : 김지현
+최초작업일 : 2016/12/10
+최종수정일 : 2016/12/10
+작업내용 : 회원 정보를 db에 넣는다
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -215,54 +221,6 @@
 	</div>
 </div>
 
-
-<%-- 
-<!--부서명 입력-->
-<!--select id 변경 : 변경불가 -->
-<div class="form-group">
-
-	<div class="col-sm-3 col-sm-offset-1" style="margin-left:10%">
-	         <section class="main clearfix">
-	               <div class="fleft">
-	               <select name="dept_no" id="cd-dropdown" class="cd-select">
-	                <option value="-1" selected>부서명을 선택하세요</option>
-	            	<c:forEach var="i" items="${dept}">            
-	                   <option style="text-align:center" value="${i.dept_no}">${i.dept_name}</option>
-	                </c:forEach> 
-	               </select>
-	            </div>
-	         </section>
-	</div>
-	
-	<div class="col-sm-3">
-	         <section class="main clearfix">
-	               <div class="fleft">
-	               <select name="team_no" id="cd-dropdown2" class="cd-select">
-	                  <option value="-1" selected>팀을 선택하세요</option>
-	            <c:forEach var="i" items="${team}">
-	                     <option style="text-align:center" value="${i.team_no}">${i.team_name}</option>
-	                  </c:forEach>
-	         
-	               </select>
-	            </div>
-	         </section>
-	</div>
-	
-	<div class="col-sm-3">
-	         <section class="main clearfix">
-	               <div class="fleft">
-	               <select name="position_no"  id="cd-dropdown3" class="cd-select">
-	                  <option value="-1" selected>직급을 선택하세요</option>
-	               <c:forEach var="i" items="${position}">
-	                     <option style="text-align:center" value="${i.position_no}">${i.position_name}</option>
-	                  </c:forEach>   
-	         
-	               </select>
-	            </div>
-	         </section>
-	</div>
-</div>
- --%>
 <!-- Button -->
 <div class="form-group">
   <label class="control-label"></label>
@@ -270,35 +228,27 @@
     <button type="button" class="btn hvr-forward" style="margin-top: 50px;" onclick="history.go(-1)"><span class="glyphicon glyphicon-repeat" aria-hidden="true"> Back</span></button>
 </div>
 
-
 </fieldset>
 </form>
 </div>
-   <!-- /.container -->
-  
-                       
-                 </div>
+</div>
 
-   <!-- Footer -->
-   
-
-
-   <!-- Javascript -->
-    <script src="assets/js/jquery-1.11.1.min.js"></script>
+<!-- Javascript -->
+   <script src="assets/js/jquery-1.11.1.min.js"></script>
    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
    <script src="assets/js/jquery.backstretch.min.js"></script>
    <script src="assets/js/wow.min.js"></script>
-  <!--  <script src="assets/js/retina-1.1.0.min.js"></script> -->
+   <script src="assets/js/retina-1.1.0.min.js"></script>
    <script src="assets/js/jquery.magnific-popup.min.js"></script>
- <!--   <script src="assets/js/masonry.pkgd.min.js"></script> -->
-<!--    <script src="assets/js/scripts.js"></script> -->
-<!--    <script src="assets/js/modernizr.custom.63321.js"></script> -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  
-   <!-- <script src="ios-7-date-picker.js"></script>
-    --><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <!-- <script type="text/javascript" src="assets/js/jquery.dropdown.js"></script> -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-   
+   <script src="assets/js/masonry.pkgd.min.js"></script>
+   <script src="assets/js/scripts.js"></script>
+   <script src="assets/js/modernizr.custom.63321.js"></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  
+   <script src="ios-7-date-picker.js"></script>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+   <script type="text/javascript" src="assets/js/jquery.dropdown.js"></script>
+   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+
    <script type="text/javascript">
          
       $( function() {
@@ -307,27 +257,7 @@
     	 joinchk1 = false;
     	 joinchk2 = false;
     	 joinchk3 = false;
-    	 
-    	 
-      /*    $( '#cd-dropdown' ).dropdown( {
-            gutter : 5,
-            stack : false,
-            delay : 100,
-            slidingIn : 100
-         } );
-         $( '#cd-dropdown2' ).dropdown( {
-            gutter : 5,
-            stack : false,
-            delay : 100,
-            slidingIn : 100
-         } );
-         
-         $( '#cd-dropdown3' ).dropdown( {
-            gutter : 5,
-            stack : false,
-            delay : 100,
-            slidingIn : 100
-         } ); */
+
       });
      
       //년,월,일 합치기
@@ -353,36 +283,31 @@
         		 var b = y+'-'+m+'-'+d;
         	 }
          }
-        
-         
-         
+     
          document.getElementById("birthday").value = b;
-         //alert(document.getElementById("birthday").value);
       }   
       
       //아이디 중복 검사
       function idchkclk() { 
-    			//alert($('#id').val().toLowerCase());
-    			//console.log($('#id').val().toLowerCase());
-    			
+    		
     	    	  $.ajax({
     	    		  type:"get",
     	    		  url:"idchk.ajax",
     	    		  data:{"user_id": $('#id').val().toLowerCase()},
     	    		  success:function(data){
-    	    			  //console.log(data);
+    	    			
     	    			  if(data == "yes"){
-    	    				  //alert('중복 있음');
+    	    				
     	    			  	$("#idselect").html("중복되는 아이디입니다"); 
     	    			  	$('#id').focus();
     	    			    joinchk1 = false;
     	    			 
     	    			
     	    			  }else{
-    	    				// alert('중복없음');
+    	    				
     	    				 $("#idselect").html("사용가능한 아이디 입니다");
     	    				 $('#id').focus();
-    	    				  /* $('#nextchk').val()= "okay"; */
+    	    				
     	    				 joinchk1 = true;
     	    				
     	    			  }
@@ -396,7 +321,6 @@
     //아이디 이메일 형식 검사
     $('#id').keyup(function(){
 	var idRex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-	//console.log($('#id').val());
     	
     	if(idRex.test($('#id').val())){
     		$('#idselect').html("이메일 중복검사 버튼을 눌러주세요");
@@ -407,10 +331,8 @@
     	} 
     });
 
- 
     //password 두개 일치하는지 확인
     $('#user_password_chk').keyup(function(){
-    	//alert('keydown test');
     	
 		$.ajax({
 			type:"get",
@@ -418,7 +340,7 @@
 			data:{"user_password":$('#user_password').val(),
 				"user_password_chk":$('#user_password_chk').val()},		
 			success:function(data){
-				//console.log(data);
+
 					if(data=="ok"){
 						$('#pwdchklb').html("비밀번호 통과");
 						joinchk2=true;
@@ -431,19 +353,14 @@
 					$('#pwdchklb').html("에러에요");
 				}	
 		});
-		/* console.log( "처음값 :>"+ $('#user_password').val()+"<");
-		console.log( "두번째값 :>"+ $('#user_password_chk').val()+"<");	
-		 */
-    });
-    
 
-    
+    });
+
     //핸드폰번호 유효성 검사
      $('#phone').keyup(function(){
 
     	 var phoneRex = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
     	 
-    	 //console.log("phone value: " + $('#phone').val());
     		if(phoneRex.test($('#phone').val())){
     			$('#phonelbl').html("전화번호가 유효합니다");
     			joinchk3 = true;
@@ -453,6 +370,7 @@
         	}
     		
     	});
+    	
   	//유효성 검사로 join 막기
  	function joinchk() {				
 		if(joinchk1 == false){
@@ -500,9 +418,7 @@
 	    );
 		}
   	}
-      </script>
-
-
+	</script>
 
 </body>
 </html>

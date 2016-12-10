@@ -1,3 +1,9 @@
+<!-- 
+작성자  : 김지현
+최초작업일 : 2016/12/10
+최종수정일 : 2016/12/10
+작업내용 : 회원의 비밀번호/전화번호를 수정 할 수 있다
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
