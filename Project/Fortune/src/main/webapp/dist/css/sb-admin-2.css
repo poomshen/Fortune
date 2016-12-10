@@ -573,7 +573,7 @@ background:#194f89;
     opacity:0;
     visibility:hidden;
     position:absolute;
-    background:rgba(0,0,0,.4);
+   
 }
 .accordion .about-me .photo .photo-overlay .plus{
     top:50%;

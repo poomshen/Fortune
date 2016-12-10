@@ -13,13 +13,13 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>요청 부서</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${requestuser_info.dept_name}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${requestuser_info.dept_name}">
 		</div>
 		<div class="col-sm-2" style="margin-top: 10px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>요청자</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${requestuser_info.user_name}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${requestuser_info.user_name}">
 		</div>
 	</div>
 	
@@ -29,13 +29,13 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>수신 부서</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${receiveuser_info.dept_name}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${receiveuser_info.dept_name}">
 		</div>
 		<div class="col-sm-2" style="margin-top: 10px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>수신자</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${receiveuser_info.user_name}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${receiveuser_info.user_name}">
 		</div>
 	</div>
 	
@@ -45,13 +45,13 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>작성일</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_date}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${list.collabo_req_date}">
 		</div>
 		<div class="col-sm-2" style="margin-top: 10px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>상태</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_state}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${list.collabo_req_state}">
 		</div>
 	</div>
 	
@@ -62,8 +62,8 @@
 		</div>
 		<div class="col-sm-10">
 			<div class="form-control">
-				<a style="display: inline;" id="file_src_tag" class="w3-small" href="download.htm?p=upload&f=${list.collabo_req_filesrc}">${list.collabo_req_filesrc}</a>
-				<input id="collabo_req_filesrc" type="hidden" name="files[0]" value="${list.collabo_req_filesrc}">
+				<a style="display: inline; color:#666;" id="file_src_tag" class="w3-small" href="download.htm?p=upload&f=${list.collabo_req_filesrc}">${list.collabo_req_filesrc}</a>
+				<input style="color:#666;" id="collabo_req_filesrc" type="hidden" name="files[0]" value="${list.collabo_req_filesrc}">
 			</div>
 		</div>
 	</div>
@@ -74,7 +74,7 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>프로젝트명</label>
 		</div>
 		<div class="col-sm-10">
-			<input type="text" id="collabo_req_title" name="collabo_req_title" class="form-control" readonly="readonly" value="${list.collabo_req_title}">
+			<input style="color:#666;" type="text" id="collabo_req_title" name="collabo_req_title" class="form-control" readonly="readonly" value="${list.collabo_req_title}">
 		</div>
 	</div>
 	
@@ -84,7 +84,7 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>프로젝트 내용 </label>
 		</div>
 		<div class="col-sm-10">
-			<textarea readonly="readonly" rows="8" cols="50" class="form-control"
+			<textarea style="color:#666;" readonly="readonly" rows="8" cols="50" class="form-control"
 				name="collabo_req_text" id="collabo_req_text">${list.collabo_req_text}</textarea>
 		</div>
 	</div>

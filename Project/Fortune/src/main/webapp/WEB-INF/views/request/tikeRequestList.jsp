@@ -519,7 +519,7 @@ function proAdd(){
         					</c:if>
        					</a>
         						<div class="sub-nav active">
-            						<div class="html about-me" id="about-mesocial-link${req}">
+            						<div class="html about-me" style="height:150px" id="about-mesocial-link${req}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
               			<div class="row" style="margin-bottom: 0px;padding-bottom: 10px;">
            

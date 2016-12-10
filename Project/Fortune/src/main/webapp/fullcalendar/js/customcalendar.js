@@ -145,6 +145,23 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 	 			$('#comment_text').html(comment_text);
 			}
 		});
+	 	
+		 
+		$.ajax({
+			  
+			  type:"post",
+			  dataType: "html",
+			  url:"newAlarm.htm",
+			  data:{"newAlarm": "삭제"},
+			  success:function(data){
+				  
+				  console.log("헤더 업데이트 성공");
+				  console.log(data);
+				  $('#alarm').empty();  
+				  $('#alarm').html(data);
+			
+			  }
+		  });	
 }
 
 
@@ -200,7 +217,22 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 		}
 	});
  	
- 	
+	 
+	$.ajax({
+		  
+		  type:"post",
+		  dataType: "html",
+		  url:"newAlarm.htm",
+		  data:{"newAlarm": "삭제"},
+		  success:function(data){
+			  
+			  console.log("헤더 업데이트 성공");
+			  console.log(data);
+			  $('#alarm').empty();  
+			  $('#alarm').html(data);
+		
+		  }
+	  });	
  	
 	
 	
