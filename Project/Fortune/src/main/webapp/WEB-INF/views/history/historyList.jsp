@@ -60,9 +60,9 @@
                                             <hr>
                                             ${historylist.collaboration_NO}
                                             <div style="float: right;">
-                                            <a  class="btn" id="HbtnStyle"  href="schedule.htm?collabo_no=${historylist.collaboration_NO}">
+                                            <a  class="btn" id="HbtnStyle"  href="mainfile.htm?collabo_no=${historylist.collaboration_NO}">
                                             <i class="fa fa-cloud" ></i></a>
-                                            <a   class="btn"id="HbtnStyle"    href="mainfile.htm?collabo_no=${historylist.collaboration_NO}">
+                                            <a   class="btn"id="HbtnStyle"    href="schedule.htm?collabo_no=${historylist.collaboration_NO}">
                                             <i class="fa fa-calendar"  ></i></a>
                                             </div>
                                             </c:if>
