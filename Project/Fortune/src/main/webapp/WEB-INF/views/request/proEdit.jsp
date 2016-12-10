@@ -98,13 +98,13 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>요청 부서</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${requestuser_info.dept_name}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${requestuser_info.dept_name}">
 		</div>
 		<div class="col-sm-2" style="margin-top: 10px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>요청자</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${requestuser_info.user_name}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${requestuser_info.user_name}">
 		</div>
 	</div>
 	
@@ -114,13 +114,13 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>수신 부서</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${receiveuser_info.dept_name}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${receiveuser_info.dept_name}">
 		</div>
 		<div class="col-sm-2" style="margin-top: 10px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>수신자</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${receiveuser_info.user_name}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${receiveuser_info.user_name}">
 		</div>
 	</div>
 	
@@ -130,13 +130,13 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>작성일</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_date}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${list.collabo_req_date}">
 		</div>
 		<div class="col-sm-2" style="margin-top: 10px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>상태</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" readonly="readonly" value="${list.collabo_req_state}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${list.collabo_req_state}">
 		</div>
 	</div>
 	
@@ -148,7 +148,7 @@ $(function(){
 		<div class="col-sm-10">
 			<div class="form-control">
 				<a style="display: inline;" id="file_src_tag" class="w3-small" href="download.htm?p=upload&f=${list.collabo_req_filesrc}">${list.collabo_req_filesrc}</a>
-				<input id="collabo_req_filesrc" type="hidden" name="files[0]" value="${list.collabo_req_filesrc}">
+				<input style="color:#666;" id="collabo_req_filesrc" type="hidden" name="files[0]" value="${list.collabo_req_filesrc}">
 			</div>
 		</div>
 	</div>
@@ -159,7 +159,7 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>프로젝트명</label>
 		</div>
 		<div class="col-sm-10">
-			<input type="text" id="collabo_req_title" name="collabo_req_title" class="form-control" readonly="readonly" value="${list.collabo_req_title}">
+			<input style="color:#666;" type="text" id="collabo_req_title" name="collabo_req_title" class="form-control" readonly="readonly" value="${list.collabo_req_title}">
 		</div>
 	</div>
 	
@@ -169,7 +169,7 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>프로젝트 내용 </label>
 		</div>
 		<div class="col-sm-10">
-			<textarea readonly="readonly" rows="8" cols="50" class="form-control"
+			<textarea style="color:#666;" readonly="readonly" rows="8" cols="50" class="form-control"
 				name="collabo_req_text" id="collabo_req_text">${list.collabo_req_text}</textarea>
 		</div>
 	</div>
@@ -181,7 +181,7 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>팀장</label>
 		</div>
 		<div class="col-sm-4">
-			<select name="user_ID" class="form-control">
+			<select style="color:#666;" name="user_ID" class="form-control">
 				<c:forEach items="${listmanager}" var="list">
 					<option value="${list.user_id}">[${list.team_name}]팀장:${list.user_name}</option>
 				</c:forEach>
@@ -192,7 +192,7 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>예상 수익</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" name="collabo_sal" onkeyup="cmaComma(this);" onchange="cmaComma(this);"
+			<input style="color:#666;" type="text" name="collabo_sal" onkeyup="cmaComma(this);" onchange="cmaComma(this);"
                   id="collabo_sal" class="form-control" placeholder="원단위 입력하세요">
 		</div>
 	</div>
@@ -203,14 +203,14 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>시작 날짜</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" name="collabo_start" class="form-control" id="startDate">
+			<input style="color:#666;" type="text" name="collabo_start" class="form-control" id="startDate">
 		</div>
 		
 		<div class="col-sm-2" style="margin-top: 10px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>끝 날짜</label>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" name="collabo_end" class="form-control" id="endDate">
+			<input style="color:#666;" type="text" name="collabo_end" class="form-control" id="endDate">
 		</div>
 	</div>
 	</c:if>
