@@ -184,7 +184,7 @@ $(document).ready(function() {
             
                     		    <c:forEach var="scheduleAlarmList" items="${sessionScope.sch_alist}"> 
                    					 <li id="${scheduleAlarmList.collabo_no}">  
-                   			 			<a href="schedule.htm?collabo_no=${scheduleAlarmList.collabo_no}">프로젝트${scheduleAlarmList.collabo_no}
+                   			 			<a href="schedule.htm?collabo_no=${scheduleAlarmList.collabo_no}">프로젝트[${scheduleAlarmList.collabo_req_title}]
                    		 			     	<span class="pull-right text-muted small" style="padding: 3px 7px 3px 7px;background:#ffff;color: #cc0000;font-weight: bold;border-radius: 9px;">
  										${scheduleAlarmList.total_collabo}건</span>
                    			 			</a>

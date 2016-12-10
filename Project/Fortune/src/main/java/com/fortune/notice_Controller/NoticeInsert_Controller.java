@@ -75,7 +75,6 @@ public class NoticeInsert_Controller {
         String originalFileName = null;
         String originalFileExtension = null;
         String storedFileName = null;
-        
         File file = new File(filePath);
         if(file.exists() == false){
             file.mkdirs();

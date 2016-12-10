@@ -115,7 +115,10 @@ h6 {
       //추가사항) detail누를 때 알림 삭제
       function detail(req,collabo_no){
          alert(req+"/"+collabo_no);
-            $.ajax({
+         
+         $('#img'+collabo_no+'n').css("display","none");
+           
+         $.ajax({
                 
                 type: "post",
                 url:  "MyProDetail.htm",
@@ -128,6 +131,7 @@ h6 {
                  success:function(data){ 
                   $("#detail").html(data); 
                   $('#myModal3').modal('show');
+                
                   },
                 error: function(){                  
                    alert('Error while request..'   );
@@ -265,7 +269,7 @@ h6 {
                               <a href="#" class="active"><i class="fa fa-user"></i>
                                  [${teamName[status.index].team_name}]${teamName[status.index].user_name}<c:set value="${n.collabo_no}"
                                     var="collabo_no" /> <c:if test="${fn:endsWith(collabo_no,'n')}">
-                                    <img style="width: 28px;height: 16px"src="assets/img/alarm/new1.png" />
+                                    <img id="img${collabo_no}"style="width: 28px;height: 16px"src="assets/img/alarm/new1.png" />
                                     <c:set value="${fn:substringBefore(collabo_no,'n')}" var="collabo_no" />
                                  </c:if> </a>
                         <div class="sub-nav active">
@@ -333,19 +337,20 @@ h6 {
 
                </div>
                <!-- container div영역 닫기 -->
+               <c:if test="${collabo_null != 777}">
                <div class="row grid-columns"
                   style="width: 1000px; height: 100px; margin-top: 2px">
                   <!-- 페이징 처리하기  -->
                   <div style="text-align: center; margin-left: -80px;">
                      <ul class="pagination">
                         <c:if test="${pg != 1}">
-                        <c:if test="${pg == from_page}">
-                           <li><a href="#" onclick="pazingBtn('1')">««</a></li>
-                           <li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
-                        </c:if>
+							<c:if test="${pg == from_page}">
+                           		<li><a href="#" onclick="pazingBtn('1')">««</a></li>
+                           		<li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
+                        	</c:if>
                         <c:if test="${pg > from_page}">
-                           <li><a href="#" onclick="pazingBtn('1')">««</a></li>
-                           <li><a href="#" onclick="pazingBtn('${pg - 1}')">«</a></li>
+							<li><a href="#" onclick="pazingBtn('1')">««</a></li>
+							<li><a href="#" onclick="pazingBtn('${pg - 1}')">«</a></li>
                         </c:if>
                      </c:if>
                         <c:forEach begin="${from_page}" end="${to_page}" var="i">
@@ -370,6 +375,7 @@ h6 {
                      </ul>
                   </div>
                </div>
+               </c:if>
                <!--container div닫아주기 -->
             </div>
 

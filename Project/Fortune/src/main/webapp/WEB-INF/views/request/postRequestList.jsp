@@ -425,7 +425,7 @@ function post_request_update(){
 								</c:forEach>
 								<!-- 다음 페이지 -->
 							<c:if test="${list.size() != 0}">
-								<c:if test="${pg < to_page || pg != all_page}">
+                        		<c:if test="${pg < to_page || pg != all_page}">
 									<li><a href="#" onclick="pazingBtn('${pg + 1}','${search}','${memo}')">»</a></li>
 									<li><a href="#" onclick="pazingBtn('${all_page}','${search}','${memo}')">»»</a></li>
 								</c:if>
