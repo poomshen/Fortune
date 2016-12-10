@@ -30,9 +30,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	select count(*) from alarm where USER_ID=#{user_id} 
  </select>
  
- <select id="checkScheduleAlarm" resultType="com.fortune.function_DTO.Schedule_AlarmList_DTO">
- select count(collabo_no)as total_collabo,sa.collabo_no from alarm a join schedule_alarm sa on sa.ALARM_INDEX = a.ALARM_INDEX where user_id=#{user_id} group by sa.collabo_no
- </select>
+<select id="checkScheduleAlarm" resultType="com.fortune.function_DTO.Schedule_AlarmList_DTO">
+ 
+ select aa.total_collabo,bb.collabo_no,bb.collabo_req_title from
+(select count(collabo_no)as total_collabo,sa.collabo_no from alarm a join schedule_alarm sa on sa.ALARM_INDEX = a.ALARM_INDEX 
+where user_id=#{param1}
+group by sa.collabo_no) aa join (select cr.collabo_req_title,c.collabo_no,c.user_id from collabo_req cr join collabo c on cr.COLLABO_REQ_INDEX=c.COLLABO_REQ_INDEX)
+bb on aa.collabo_no=bb.collabo_no
+
+</select>
  
 
  
