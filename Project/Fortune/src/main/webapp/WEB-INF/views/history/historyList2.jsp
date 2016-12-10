@@ -8,6 +8,19 @@
 	#historytitle{
 	float:right;
 	}
+	#HbtnStyle{
+	background-color: #194f89;
+	 padding: 10px 10px; 
+	 margin-left: 0;
+	  margin-top: 0;
+	  height: auto;
+	  color:  white;
+	}
+	#HbtnStyle i{
+	height:20px;
+	 width: 20px;
+	  font-size: 20px;
+	}
 </style>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script type="text/javascript">
@@ -25,7 +38,7 @@
 	
 	
 	$(window).scroll(function(){  
-        if  ($(window).scrollTop() == $(document).height() - $(window).height()){  
+	if  (($(window).scrollTop()+1) > $(document).height() - $(window).height()){  
            lastPostFunc();  
         }  
 	});  
@@ -40,31 +53,39 @@
             </div>
             
                     <!-- /.panel -->
-                    <div class="panel panel-default">
-                    
-                        <div class="panel-heading">
-                            <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
-                        </div>
-                        
-                        <!-- /.panel-heading -->
+                    <div>
                         <div class="panel-body">
                             <ul class="timeline">
-                                <c:forEach var="historylist" items="${list}">
+                               <c:forEach var="historylist" items="${list}">
+                                <!-- 타임라인 왼쪽 오른쪽 주기  -->
                                 <c:choose >
-                                	<c:when test="${historylist.history_title=='요청'||historylist.history_title=='거절'}">
+                                	<c:when test="${historylist.history_title=='요청'||historylist.history_title=='거절'||historylist.history_title=='수정'}">
                                 	 <li  class="wrdLatest" id="${historylist.num }">
                                 	</c:when>
                                 	<c:otherwise>
                                 	 <li class="timeline-inverted wrdLatest" id="${historylist.num }">
                                 	</c:otherwise>
                                 </c:choose>
+                                    <!--  글 아이콘 설정 -->
                                 <c:choose>
+                                	<c:when test="${historylist.history_title=='요청'}">
+                                		<div class="timeline-badge "><i style="margin-top:30%;" class="fa fa-edit"></i>
+                                    		</div>
+                                	</c:when>
+                                	<c:when test="${historylist.history_title=='수정'}">
+                                		<div class="timeline-badge "><i style="margin-top:30%;" class="fa fa-gears"></i>
+                                    		</div>
+                                	</c:when>
                                 	<c:when test="${historylist.history_title=='수락'}">
-                                    <div class="timeline-badge success"><i style="margin-top:30%;" class="fa fa-check"></i>
+                                    <div class="timeline-badge" style="background-color: #194f89;"><i style="margin-top:30%;" class="fa fa-check-square-o"></i>
                                     </div>
                                 	</c:when>
                                 	<c:when test="${historylist.history_title=='거절'}">
-                                    <div class="timeline-badge danger"><i style="margin-top:30%;" class="fa fa-times"></i>
+                                    <div class="timeline-badge danger"><i style="margin-top:30%;" class="fa fa-share-square-o"></i>
+                                    </div>
+                                	</c:when>
+                                	<c:when test="${historylist.history_title=='완료'}">
+                                    <div class="timeline-badge success"><i style="margin-top:30%;" class="fa fa-flag"></i>
                                     </div>
                                 	</c:when>
                                 	<c:otherwise>
@@ -72,21 +93,24 @@
                                     </div>
                                 	</c:otherwise>
                                 </c:choose>
+                                <!-- 글 내용   -->
                                     <div class="timeline-panel">
                                         <div class="timeline-heading" id="historytitle">
                                             <h4 class="timeline-title">${historylist.history_title}</h4>
                                             <p><small class="text-muted"><i class="fa fa-clock-o"></i>
-                                            ${fn: substring(historylist.history_date,0,16) }</small>
+                                            ${fn: substring(historylist.history_date,0,16) }</small> 
                                             </p>
                                         </div>
                                         <div class="timeline-body">
                                             <h4 class="timeline-title">${historylist.collabo_req_title}</h4>
                                             <br>
-                                            <p>${historylist.collabo_req_text}</p>
-                                            <c:choose>
-                                            <c:when test="${historylist.history_title!='거절'}">
-                                            <%-- <p>${historylist.history_text}</p> --%>
+                                             <c:choose>
+                                            <c:when test="${ historylist.history_title != '수정'&& historylist.history_title != '거절'}">
+                                            <p>${fn:replace(historylist.collabo_req_text, crcn, br)}</p> 
                                             </c:when>
+					<c:otherwise>
+					  <p>${fn:replace(historylist.history_text, crcn, br)}</p>
+					</c:otherwise>                                            
                                             </c:choose>
                                         </div>
                                     </div>
@@ -96,6 +120,9 @@
                         </div>
                         <div id ="pageListLoader"></div>
                         <!-- /.panel-body -->
+                        <br>
+                        <br>
+                        <br>
                     </div>
                     <!-- /.panel -->
 

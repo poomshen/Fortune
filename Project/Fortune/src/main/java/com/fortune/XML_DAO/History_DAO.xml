@@ -32,4 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="collaboComplete" >
 	 	update collabo set COLLABO_STATE = #{param1} where collabo_no = ${param2}
 	</update>
+	
+	<select id="progectName" resultType="String">
+		select PROJECT_NAME from PROJECTNAMEVIEW where  Collabo_Req_No = #{param1}
+	</select>
 </mapper>

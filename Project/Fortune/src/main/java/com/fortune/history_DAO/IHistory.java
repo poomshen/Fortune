@@ -30,4 +30,7 @@ public interface IHistory {
 	
 	//협업  테이블 수정 되는 값  16/12/02
 	public void collaboComplete(String  change , int  collabo_no);
+	
+	//협업 제목 가져오는 DAO
+	public String progectName(String collabo_req_no);
 }
