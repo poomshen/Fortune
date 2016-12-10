@@ -109,7 +109,7 @@ $(document).ready(function() {
 </style>
 <!-- 로딩 gif화면 -->
 <div class="wrap-loading display-none">
-    <div><img src="./images/spin.gif" style="width: 100px; height: 100px;" /></div>
+    <div><img src="./images/spin (3).gif" style="width: 100px; height: 100px;" /></div>
 </div>
 
 

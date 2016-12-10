@@ -88,6 +88,12 @@
 			return false;
 			
 
+		} else if ($('#collabo_req_text').val() == "") {
+			alert("내용 입력바랍니다 ");
+			$('#collabo_req_text').focus();
+			return false;
+			
+
 		} else {
 			
 			
