@@ -20,6 +20,7 @@ import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.fullcalendar_DAO.IFullCalendar;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
+import com.fortune.function_DTO.Team_Users_DTO;
 import com.fortune.schedule_alarm_DAO.IScheduleAlarm;
 
 @Controller
@@ -44,13 +45,29 @@ public class CommentController {
         
         IFullCalendar fullcalendarDAO = sqlSession.getMapper(IFullCalendar.class);
         
+        
+        
         List<Work_Comment_DTO> wcdtolist = new ArrayList<Work_Comment_DTO>();
         wcdtolist = fullcalendarDAO.selectComment(schedule_no);
+
+        Join_DTO dto = (Join_DTO)session.getAttribute("info");
+        
+        List<Team_Users_DTO> tudto = fullcalendarDAO.selectTeam_id(dto.getUser_id());
+        
+        
+        for(int i = 0; i<tudto.size(); i++){
+        	for(int j =0; j<wcdtolist.size(); j++){
+        		if( tudto.get(i).getUser_id().equals(wcdtolist.get(j).getUser_id()) ){
+        			wcdtolist.get(j).setColor(i);
+        		}
+        		
+        	}
+        }
+        
         
         //알림 삭제하기
         System.out.println("일정클릭시 알림삭제"+schedule_no);
 				
-		Join_DTO dto = (Join_DTO)session.getAttribute("info");
 	
 		IScheduleAlarm sche_alarm_DAO = sqlSession.getMapper(IScheduleAlarm.class);
 		

@@ -125,9 +125,11 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 			data : 'schedule_no='+ id,
 			success : function(data) {
 				var comment_text = "";
-	 			$.each(data, function(index, obj) {
+	 			var id_color = [];
+				$.each(data, function(index, obj) {
+					//obj.color = 0 ~ i값임 
 	 				if(index%2==0){
-	 					comment_text += '<li class="left clearfix"><span class="pull-left"><img src="images/언니회색.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;">';
+	 					comment_text += '<li class="left clearfix"><span class="pull-left"><div class="image_main"><img src="images/'+obj.color+'.jpg" style="background:no-repeat center; width:50px; height: 50px; padding: 3px 3px 3px 3px;"><span class="image_main_up">이명철</span></div>';
 	 					comment_text += '<br><strong class="primary-font"> &nbsp;&nbsp;'+obj.user_id+'</strong></span><div class="chat-body clearfix"><div class="header">';
 	 					comment_text += '<small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date +' &nbsp;&nbsp;&nbsp;'
 	 					comment_text += '<button type="button" onclick="delete_comment('+obj.work_comment_no+')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button></small></div>'

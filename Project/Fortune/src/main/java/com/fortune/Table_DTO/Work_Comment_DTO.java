@@ -6,8 +6,17 @@ public class Work_Comment_DTO {
 	private String user_id;
 	private String work_comment_text;
 	private String work_comment_date;
+	private int color;
 	
 	
+	
+	
+	public int getColor() {
+		return color;
+	}
+	public void setColor(int color) {
+		this.color = color;
+	}
 	public int getWork_comment_no() {
 		return work_comment_no;
 	}

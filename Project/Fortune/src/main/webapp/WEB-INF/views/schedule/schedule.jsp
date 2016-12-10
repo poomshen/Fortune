@@ -23,12 +23,12 @@
 
 $(document).ready(function() {
 	
-var role;
-if( (${role_no}==3) && (${finish_check}==0) ){ 
-	role= true;
-}else{
-	role=false;
-}
+	var role;
+	if( (${role_no}==3) && (${finish_check}==0) ){ 
+		role= true;
+	}else{
+		role=false;
+	}
 	
     $('[data-toggle="tooltip"]').tooltip();
     
@@ -234,6 +234,12 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 
 
 </script>
+
+<style>
+.image_main {position: relative;}
+.image_main_up{ position: absolute;left: 0; bottom: 0; padding-left:2px; font-size: 1em; font-weight: bold;}
+</style>
+
 
 </head>
 <body>
