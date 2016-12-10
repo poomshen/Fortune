@@ -202,7 +202,7 @@ function UserUpdate(){
 function deleteok_id(user_id){
 	swal({
 		  title: "정말로 삭제 하시겠습니까?",
-		  text: "삭제한 아이디와 데이터는 재사용 및 복구가 불가합니다..",
+		  text: "삭제한 아이디와 데이터는 복구가 불가합니다..",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonColor: "#DD6B55",
