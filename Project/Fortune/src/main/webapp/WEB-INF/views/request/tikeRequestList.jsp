@@ -480,7 +480,7 @@ function proAdd(){
 				<option value="collabo_req_text">내용</option>
 			</select> <input type="text" id="search" placeholder="Search">
 
-			<button onclick="searchBtn()">검색</button>
+			<input type="button" class="btn btn-primary" onclick="searchBtn()" value="검색">
 
 		</div>
 	</div>
@@ -510,22 +510,17 @@ function proAdd(){
             						<div class="html about-me" id="about-mesocial-link${req}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
               			<div class="row" style="margin-bottom: 0px;padding-bottom: 10px;">
-              			
-              			<c:if test="${sessionScope.info.user_id == n.collabo_req_ID&&n.collabo_req_state == '대기'}">
-              				
-						  		<div class="col-sm-7" style="padding-right: 0px;"></div>
-							  	<div class="col-sm-1" style="margin-left: 4px;"><button data-toggle="modal" data-target="#myModal2" type="button" onclick="memoReqCollabo(${req})" target="_blank"class="button button-circle button-flat-primary button-tiny" style="margin-left:13px;background-color: rgb(71, 142, 72); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;"><i class="fa fa-check" aria-hidden="true"></i></button></div>
-							  	<div class="col-sm-1" style="margin-left: 4px;"><button type="button"  onclick="refuseReqCollabo(${req})"class="button button-circle button-flat-primary button-tiny" style="margin-left:15px;background-color: #d43722; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;"onclick="progress_40()"><i class="fa fa-times" aria-hidden="true"></i></button></div>
-							
-						</c:if>
+           
 						
 						</div>
                        				<div class="photo" style=
                								 <c:choose>
-												<c:when test="${n.collabo_req_state == '수락' || n.collabo_req_state == '완료'}">
+												<c:when test="${n.collabo_req_state == '수락'}">
               										 "border:3px solid #1e851f; margin-right:0px"
                 								</c:when>
-                								
+                								<c:when test="${n.collabo_req_state == '완료'}">
+								 					"border:3px solid black"
+												</c:when>
                 								<c:when test="${n.collabo_req_state == '거절'}">
 								 					"border:3px solid #dd2d16"
 												</c:when>
