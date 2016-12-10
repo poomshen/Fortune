@@ -91,7 +91,7 @@ $(document).ready(function() {
  	/* 2016.12.07 김지현 
  	로딩 이미지 돌아가는동안 비활성화/화면 어둡게 하는 코드 추가*/
  	
- 	background-color :  rgba(0,0,0,0.3);
+ 	background-color :  rgba(0,0,0,0.5);
 	z-index : 100;
 
 	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#08212121', endColorstr='#08212121');    /* ie */
@@ -109,7 +109,7 @@ $(document).ready(function() {
 </style>
 <!-- 로딩 gif화면 -->
 <div class="wrap-loading display-none">
-    <div><img src="./images/default.gif" style="width: 50; height: 50px;" /></div>
+    <div><img src="./images/spin.gif" style="width: 100px; height: 100px;" /></div>
 </div>
 
 

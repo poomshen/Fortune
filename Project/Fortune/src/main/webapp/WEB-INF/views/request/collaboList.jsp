@@ -131,6 +131,12 @@ h6 {
                   },
                 error: function(){                  
                    alert('Error while request..'   );
+                },
+                beforeSend:function(){
+                    $('.wrap-loading').removeClass('display-none');
+                },
+                complete:function(){
+                    $('.wrap-loading').addClass('display-none');
                 }
              });
          

@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <!-- 보낸 요청함 상세보기 -->
 <form action="proEdit.htm" method="post" name="modifyform" enctype="multipart/form-data">
 
@@ -95,7 +97,7 @@
 	<!-- <input type="hidden" id="hidden"> -->
 	<c:if test='${list.collabo_req_state eq "대기"}'>
 		<input type="button" id="post_update" class="btn btn-primary" onclick="post_request_update()" value="수정">
-		<input type="hidden" id="post_updateok" class="btn btn-primary" onclick="modify()" value="저장">
+		<input type="hidden" id="post_updateok" class="btn btn-primary" onclick="modify()" value="저장"> 
 	</c:if>
 	<input type="button" class="btn btn-primary" data-dismiss="modal" value="취소">
 </div>
