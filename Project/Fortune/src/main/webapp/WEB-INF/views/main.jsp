@@ -130,8 +130,11 @@
 	        	        type:"post",
 	        	        dataType: "html",
 	        	        url:"selectChart.htm",
-	        	        data:{"project_num": chart.series[0].name[0]},
-	        	        success:function(data){
+	        	        data:{
+	        	        	"project_num": chart.series[0].name[0],
+	        	        	"project_name": chart_x[0]        	       
+	        	        },
+	          	        success:function(data){
 	        	        
 
 	        	           $('#kk').html(data);
@@ -149,7 +152,10 @@
 	    	 	           type:"post",
 	    	 	           dataType: "html",
 	    	 	           url:"selectChart.htm",
-	    	 	           data:{"project_num": chart.series[0].name[$(this).index()]},
+	    	 	           data:{
+	    	 	        	   "project_num"  :chart.series[0].name[$(this).index()],
+	    	 	        	   "project_name" :$(this).text()
+	    	 	           },
 	    	 	           success:function(data){
 	    	 	           
 	    	 	              
