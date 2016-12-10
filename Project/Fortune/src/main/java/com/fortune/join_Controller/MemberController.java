@@ -100,31 +100,12 @@ public class MemberController {
 			List<Select_Collabo_DTO> finishCollabo = proDao.finishCollaboList(result.getUser_id());
 			session.setAttribute("finishCollabo", finishCollabo);
 		}
-		
-		
-		//메뉴에 차트 가져오기(추가작업 : 이예지)
-		//pie차트 가져오기 2016/12/08
-		IChart cdao = sqlsession.getMapper(IChart.class);
-		List<Chart_Data_DTO> clist = new ArrayList<Chart_Data_DTO>();
-		
-		clist=cdao.selectChartAll();
-		System.out.println("clist"+clist.size());
-		ArrayList<Integer> chart_x =new ArrayList<Integer>();
-		ArrayList<Float> chart_y =new ArrayList<Float>();
-		for(int i=0;i<clist.size();i++){
-			
 	
-			chart_x.add(clist.get(i).getCollabo_no());
-			chart_y.add((float)(clist.get(i).getChart_progress()/(float)clist.get(i).getChart_total_date()));
-		
-		}
-		
-		model.addAttribute("chart_x",chart_x);
-		model.addAttribute("chart_y",chart_y);
 		System.out.println("메뉴 컨트롤러");
 		
 		//사업규모 차트 가져오기 (추가 작업 : 이예지)
 		List<Pie_Data_DTO> plist = new ArrayList<Pie_Data_DTO>();
+		IChart cdao = sqlsession.getMapper(IChart.class);
 		plist = cdao.selectSumSal();
 		
 		ArrayList<String> pie_x = new ArrayList<String>();

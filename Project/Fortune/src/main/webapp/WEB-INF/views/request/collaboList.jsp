@@ -115,7 +115,10 @@ h6 {
       //추가사항) detail누를 때 알림 삭제
       function detail(req,collabo_no){
          alert(req+"/"+collabo_no);
-            $.ajax({
+         
+         $('#img'+collabo_no+'n').css("display","none");
+           
+         $.ajax({
                 
                 type: "post",
                 url:  "MyProDetail.htm",
@@ -128,9 +131,16 @@ h6 {
                  success:function(data){ 
                   $("#detail").html(data); 
                   $('#myModal3').modal('show');
+                
                   },
                 error: function(){                  
                    alert('Error while request..'   );
+                },
+                beforeSend:function(){
+                    $('.wrap-loading').removeClass('display-none');
+                },
+                complete:function(){
+                    $('.wrap-loading').addClass('display-none');
                 }
              });
          
@@ -265,7 +275,7 @@ h6 {
                               <a href="#" class="active"><i class="fa fa-user"></i>
                                  [${teamName[status.index].team_name}]${teamName[status.index].user_name}<c:set value="${n.collabo_no}"
                                     var="collabo_no" /> <c:if test="${fn:endsWith(collabo_no,'n')}">
-                                    <img style="width: 28px;height: 16px"src="assets/img/alarm/new1.png" />
+                                    <img id="img${collabo_no}"style="width: 28px;height: 16px"src="assets/img/alarm/new1.png" />
                                     <c:set value="${fn:substringBefore(collabo_no,'n')}" var="collabo_no" />
                                  </c:if> </a>
                         <div class="sub-nav active">

@@ -151,7 +151,13 @@ Profile = {
  	 		     },
  	 			error: function(){						
  	 				alert('Error while request..'	);
- 	 			}
+ 	 			},
+ 	 	      beforeSend:function(){
+ 	 	           $('.wrap-loading').removeClass('display-none');
+ 	 	       },
+ 	 	       complete:function(){
+ 	 	           $('.wrap-loading').addClass('display-none');
+ 	 	       }
  	 		});
  	}
      //대기 수락 거절을 비동기 처리로 사용하였다.
