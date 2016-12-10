@@ -333,19 +333,20 @@ h6 {
 
                </div>
                <!-- container div영역 닫기 -->
+               <c:if test="${collabo_null != 777}">
                <div class="row grid-columns"
                   style="width: 1000px; height: 100px; margin-top: 2px">
                   <!-- 페이징 처리하기  -->
                   <div style="text-align: center; margin-left: -80px;">
                      <ul class="pagination">
                         <c:if test="${pg != 1}">
-                        <c:if test="${pg == from_page}">
-                           <li><a href="#" onclick="pazingBtn('1')">««</a></li>
-                           <li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
-                        </c:if>
+							<c:if test="${pg == from_page}">
+                           		<li><a href="#" onclick="pazingBtn('1')">««</a></li>
+                           		<li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
+                        	</c:if>
                         <c:if test="${pg > from_page}">
-                           <li><a href="#" onclick="pazingBtn('1')">««</a></li>
-                           <li><a href="#" onclick="pazingBtn('${pg - 1}')">«</a></li>
+							<li><a href="#" onclick="pazingBtn('1')">««</a></li>
+							<li><a href="#" onclick="pazingBtn('${pg - 1}')">«</a></li>
                         </c:if>
                      </c:if>
                         <c:forEach begin="${from_page}" end="${to_page}" var="i">
@@ -370,6 +371,7 @@ h6 {
                      </ul>
                   </div>
                </div>
+               </c:if>
                <!--container div닫아주기 -->
             </div>
 

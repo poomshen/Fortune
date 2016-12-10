@@ -149,8 +149,7 @@
 				<div class="form-group">
 
 					<label>프로젝트 내용 </label>
-					<textarea rows="4" cols="50" class="form-control"
-						name="collabo_req_text" id="collabo_req_text"></textarea>
+					<textarea rows="4" cols="50" class="form-control" name="collabo_req_text" id="collabo_req_text"></textarea>
 				</div>
 				<br>
 

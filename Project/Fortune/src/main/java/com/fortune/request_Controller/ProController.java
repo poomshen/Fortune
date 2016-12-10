@@ -27,6 +27,7 @@ import com.fortune.function_DTO.ProgectName_DTO;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Search_Page_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
+import com.fortune.function_DTO.Select_name_DTO;
 import com.fortune.history_Service.HistoryService;
 import com.fortune.req_alarm_DAO.IReqAlarm;
 import com.fortune.request_DAO.ProDao;
@@ -189,12 +190,24 @@ public class ProController {
 
 			Request_DTO proDto = proservice.ProDetail(collabo_req_index);
 			model.addAttribute("list", proDto);
+			
+			ProDao proDao = sqlSession.getMapper(ProDao.class);
+			
+			//요청받은 user의 정보를 receiveuser_info에 담음
+			Select_name_DTO sndto = proDao.searchName(proDto.getCollabo_req_ID());
+			model.addAttribute("receiveuser_info", sndto);
+
+			//요청한 user의 정보를 receiveuser_info에 담음
+			sndto = proDao.searchName(proDto.getUser_ID());
+			model.addAttribute("requestuser_info", sndto);
+			
+			
 			System.out.println(proDto.toString());
 			
 	        //알림 삭제하기
 	        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
+	        Join_DTO dto = (Join_DTO)session.getAttribute("info");
 					
-			Join_DTO dto = (Join_DTO)session.getAttribute("info");
 		
 			IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
 			
@@ -238,10 +251,20 @@ public class ProController {
 			model.addAttribute("list", proDto);
 			System.out.println(proDto.toString());
 			
+			ProDao proDao = sqlSession.getMapper(ProDao.class);
+			
+			//요청한 user의 정보를 requestuser_info에 담음
+			Select_name_DTO sndto = proDao.searchName(proDto.getCollabo_req_ID());
+			model.addAttribute("receiveuser_info", sndto);
+
+			//요청받은 user의 정보를 receiveuseruser_info에 담음
+			sndto = proDao.searchName(proDto.getUser_ID());
+			model.addAttribute("requestuser_info", sndto);
+			
 	        //알림 삭제하기
 	        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
+	        Join_DTO dto = (Join_DTO)session.getAttribute("info");
 					
-			Join_DTO dto = (Join_DTO)session.getAttribute("info");
 		
 			IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
 			
@@ -289,6 +312,15 @@ public class ProController {
 		System.out.println(proDto.toString());
 		ProDao prodao = sqlSession.getMapper(ProDao.class);
 		With_DTO withDto = prodao.myProDetail(collabo_no);
+		
+		//요청받은 user의 정보를 receiveuser_info에 담음
+		Select_name_DTO sndto = prodao.searchName(proDto.getCollabo_req_ID());
+		model.addAttribute("receiveuser_info", sndto);
+
+		//요청한 user의 정보를 receiveuser_info에 담음
+		sndto = prodao.searchName(proDto.getUser_ID());
+		model.addAttribute("requestuser_info", sndto);
+		
 		
 		model.addAttribute("mylist",withDto);
 		// Tiles
@@ -459,7 +491,6 @@ public class ProController {
 			public ModelAndView listResponse_ver1(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 				
 				//성준이 협업 리스트 코드
-				
 				ModelAndView mv = new ModelAndView();
 				mv = proservice.listResponse( pg, f, q, session);
 				
