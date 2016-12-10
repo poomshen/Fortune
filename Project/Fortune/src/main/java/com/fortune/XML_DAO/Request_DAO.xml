@@ -87,6 +87,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE collabo_req_index=#{collabo_req_index}
 
 	</update>
+	
+	<update id="updatenull" parameterType="com.fortune.Table_DTO.Request_DTO">
+
+		UPDATE COLLABO_REQ SET
+		collabo_req_title=#{collabo_req_title},
+		collabo_req_text=#{collabo_req_text}
+		WHERE collabo_req_index=#{collabo_req_index}
+
+	</update>
 
 
 	
@@ -112,28 +121,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insertResponse">
-
-
-		<!-- <selectKey order="BEFORE" keyProperty="collabo_no" resultType="String"> 
-			SELECT MAX(TO_NUMBER(collabo_no))+1 FROM collabo </selectKey> -->
-		<choose>
-			<when test="collabo_no == null">
 				Insert into collabo(collabo_no,collabo_req_index,collabo_req_no,user_ID,
 				collabo_start, collabo_end, collabo_state, collabo_req_ID,collabo_sal)
 				VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no},
 				#{user_ID}, #{collabo_start}, #{collabo_end}, #{collabo_state},
 				#{collabo_req_ID},#{collabo_sal})
-			</when>
-
-			<otherwise>
-				Insert into collabo(collabo_no,collabo_req_index,collabo_req_no,user_ID,
-				collabo_start, collabo_end, collabo_state, collabo_req_ID,collabo_sal)
-				VALUES(collabo_seq.nextval,#{collabo_req_index},#{collabo_req_no},
-				#{user_ID}, #{collabo_start}, #{collabo_end}, #{collabo_state} ,
-				#{collabo_req_ID},#{collabo_sal})
-			</otherwise>
-		</choose>
-
 	</insert>
 
 	<select id="listResponse" resultType="com.fortune.Table_DTO.With_DTO">
@@ -260,7 +252,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 작성자 : 이성준  날짜: 16-12-01 목적: 팀원들의 팀장 보기 -->
 	<select id="selectTeamMGR" parameterType="Integer"  resultType="String">
-		Select distinct c.user_Id From Users U Join (Select * From Collabo) C On U.User_Id = C.User_Id where team_no = #{param1}	
+		Select distinct c.user_Id From Users U Join Collabo C On U.User_Id = C.User_Id where team_no = #{param1}	
 	</select>
 	
 	<!-- 작성자: 이성준 날짜: 16-12-06 목적: 요청 글 가지고 오기 -->

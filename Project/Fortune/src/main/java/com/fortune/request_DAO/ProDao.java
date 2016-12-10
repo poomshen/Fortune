@@ -24,6 +24,8 @@ public interface ProDao {
 		public String delete(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//게시물 수정
 		public int update(Request_DTO n) throws ClassNotFoundException, SQLException;
+		//게시물 수정 파일 NULL 값
+		public int updatenull(Request_DTO n) throws ClassNotFoundException, SQLException;
 		//게시물 상세
 		public Request_DTO getProDto(String collabo_req_index) throws ClassNotFoundException, SQLException;
 		//게시물 입력

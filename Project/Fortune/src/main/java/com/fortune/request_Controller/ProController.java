@@ -27,6 +27,7 @@ import com.fortune.function_DTO.ProgectName_DTO;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Search_Page_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
+import com.fortune.function_DTO.Select_name_DTO;
 import com.fortune.history_Service.HistoryService;
 import com.fortune.req_alarm_DAO.IReqAlarm;
 import com.fortune.request_DAO.ProDao;
@@ -183,51 +184,121 @@ public class ProController {
 	}*/
 
 	// 글상세보기
-	// 추가) 알림 db지워주기
-	@RequestMapping("ProDetail.htm")
-	public String ProDetail(String collabo_req_index, Model model,HttpSession session) throws ClassNotFoundException, SQLException {
+		// 추가) 알림 db지워주기
+		@RequestMapping("ProDetail.htm")
+		public String ProDetail(String collabo_req_index, Model model,HttpSession session) throws ClassNotFoundException, SQLException {
 
-		Request_DTO proDto = proservice.ProDetail(collabo_req_index);
-		model.addAttribute("list", proDto);
-		System.out.println(proDto.toString());
-		
-        //알림 삭제하기
-        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
-				
-		Join_DTO dto = (Join_DTO)session.getAttribute("info");
-	
-		IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
-		
-		int result=req_alarm_DAO.deleteReqAlarm(collabo_req_index);
-		
-		System.out.println("지운 결과 : "+result);
-		
-		IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
-		
-		List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
-		
-		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
-		
-		int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
-		
-	
-		
-		session.setAttribute("alarm", alist);
-		
-		session.setAttribute("totalCount",tatalCount);
-        
-		//추가 작업
-		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
-		sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
-		session.setAttribute("sch_alist", sch_alist);
-		
-		
+			Request_DTO proDto = proservice.ProDetail(collabo_req_index);
+			model.addAttribute("list", proDto);
+			
+			ProDao proDao = sqlSession.getMapper(ProDao.class);
+			
+			//요청받은 user의 정보를 receiveuser_info에 담음
+			Select_name_DTO sndto = proDao.searchName(proDto.getCollabo_req_ID());
+			model.addAttribute("receiveuser_info", sndto);
 
-		// Tiles
-		return "cen.proDetail";
-		// View
+			//요청한 user의 정보를 receiveuser_info에 담음
+			sndto = proDao.searchName(proDto.getUser_ID());
+			model.addAttribute("requestuser_info", sndto);
+			
+			
+			System.out.println(proDto.toString());
+			
+	        //알림 삭제하기
+	        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
+	        Join_DTO dto = (Join_DTO)session.getAttribute("info");
+					
+		
+			IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
+			
+			int result=req_alarm_DAO.deleteReqAlarm(collabo_req_index);
+			
+			System.out.println("지운 결과 : "+result);
+			
+			IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
+			
+			List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+			
+			alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
+			
+			int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+			
+		
+			
+			session.setAttribute("alarm", alist);
+			
+			session.setAttribute("totalCount",tatalCount);
+	        
+			//추가 작업
+			List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+			sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+			session.setAttribute("sch_alist", sch_alist);
+			
+			
 
-	}
+			// Tiles
+			return "cen.proDetail";
+			// View
+
+		}
+		
+		// 글상세보기
+		// 추가) 알림 db지워주기
+		@RequestMapping("ProDetail2.htm")
+		public String ProDetail2(String collabo_req_index, String dept_no, Model model,HttpSession session) throws ClassNotFoundException, SQLException {
+
+			Request_DTO proDto = proservice.ProDetail(collabo_req_index);
+			model.addAttribute("list", proDto);
+			System.out.println(proDto.toString());
+			
+			ProDao proDao = sqlSession.getMapper(ProDao.class);
+			
+			//요청한 user의 정보를 requestuser_info에 담음
+			Select_name_DTO sndto = proDao.searchName(proDto.getCollabo_req_ID());
+			model.addAttribute("receiveuser_info", sndto);
+
+			//요청받은 user의 정보를 receiveuseruser_info에 담음
+			sndto = proDao.searchName(proDto.getUser_ID());
+			model.addAttribute("requestuser_info", sndto);
+			
+	        //알림 삭제하기
+	        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
+	        Join_DTO dto = (Join_DTO)session.getAttribute("info");
+					
+		
+			IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
+			
+			int result=req_alarm_DAO.deleteReqAlarm(collabo_req_index);
+			
+			System.out.println("지운 결과 : "+result);
+			
+			IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
+			
+			List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+			
+			alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
+			
+			int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+			
+		
+			
+			session.setAttribute("alarm", alist);
+			
+			session.setAttribute("totalCount",tatalCount);
+	        
+			//추가 작업
+			List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+			sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+			session.setAttribute("sch_alist", sch_alist);
+			
+			List<Join_DTO> listmanager = proservice.listManager(dept_no); 
+			model.addAttribute("listmanager", listmanager); // 담당자 리스트 
+
+			// Tiles
+			return "cen.proEdit";
+			// View
+
+		}
 	
 	
 	//작성자 : 이예지
@@ -241,6 +312,15 @@ public class ProController {
 		System.out.println(proDto.toString());
 		ProDao prodao = sqlSession.getMapper(ProDao.class);
 		With_DTO withDto = prodao.myProDetail(collabo_no);
+		
+		//요청받은 user의 정보를 receiveuser_info에 담음
+		Select_name_DTO sndto = prodao.searchName(proDto.getCollabo_req_ID());
+		model.addAttribute("receiveuser_info", sndto);
+
+		//요청한 user의 정보를 receiveuser_info에 담음
+		sndto = prodao.searchName(proDto.getUser_ID());
+		model.addAttribute("requestuser_info", sndto);
+		
 		
 		model.addAttribute("mylist",withDto);
 		// Tiles
@@ -391,7 +471,7 @@ public class ProController {
 				    n.setCollabo_sal(n.getCollabo_sal().replaceAll(",", ""));
 				    System.out.println("계산완료 :"+n.getCollabo_sal());
 					/*System.out.println(n.toString());*/
-					 proservice.regResponse(n, collabo_req_index);
+					 proservice.regResponse(n, collabo_req_index,session);
 					 proservice.Accept(collabo_req_index);
 					// 실DB저장
 				
@@ -411,7 +491,6 @@ public class ProController {
 			public ModelAndView listResponse_ver1(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 				
 				//성준이 협업 리스트 코드
-				
 				ModelAndView mv = new ModelAndView();
 				mv = proservice.listResponse( pg, f, q, session);
 				

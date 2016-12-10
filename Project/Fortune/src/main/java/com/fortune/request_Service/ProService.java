@@ -411,7 +411,7 @@ public class ProService {
    }
 
    // 글요청 처리
-   public Request_DTO regResponse(With_DTO n, String collabo_req_index)
+   public Request_DTO regResponse(With_DTO n, String collabo_req_index, HttpSession session)
          throws IOException, ClassNotFoundException, SQLException {
 
       System.out.println("실제 글 등록 처리");
@@ -428,7 +428,9 @@ public class ProService {
       // 아주좋소
       /* n.setCollabo_end(java.sql.Timestamp.valueOf(n.getCollabo_end2())); */
       // 실DB저장
-
+      Join_DTO ids = (Join_DTO) session.getAttribute("info");
+      n.setCollabo_state("진행중");
+      n.setCollabo_req_ID(ids.getUser_id());
       ProDao proDao = sqlsession.getMapper(ProDao.class);
       proDao.insertResponse(n);
       Request_DTO proDto = proDao.detailResponse(collabo_req_index);
@@ -480,9 +482,13 @@ public class ProService {
         n.setCollabo_req_filesrc(filenames.get(0));  // 파일명 1 
         
         
-        
       ProDao proDao = sqlsession.getMapper(ProDao.class);
-      proDao.update(n);
+      if(n.getCollabo_req_filesrc().isEmpty()){
+    	  proDao.updatenull(n);
+      }else{
+    	  proDao.update(n);
+      }
+      
       return n;
 
    }
@@ -504,7 +510,7 @@ public class ProService {
       // 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
       Join_DTO ids = (Join_DTO) session.getAttribute("info");
       ProDao proDao = sqlsession.getMapper(ProDao.class);
-      System.out.println("pg  :" +pg);
+      System.out.println("ids  :" +ids);
       //////////////////////////////////////
       
       ModelAndView mv = new ModelAndView();
@@ -521,7 +527,7 @@ public class ProService {
       }else if(ids.getRole_no() == 4){
          field = "user_ID";
          List<String>  timeId = proDao.selectTeamMGR(ids.getTeam_no()) ;
-         
+         System.out.println("timeId : " + timeId);
          if(timeId.size() != 0 ){
             int row_size = 6;
             int total_count = proDao.collaboCount(field, timeId) ; // 공지사항 글 개수
@@ -559,7 +565,8 @@ public class ProService {
             
             return mv;
          }
-         return null;
+         mv.addObject("collabo_null", 777);
+         return mv;
       }else if(ids.getRole_no() == 1||ids.getRole_no() == 0){
           query = "%%";
           field = "collabo_req_ID";

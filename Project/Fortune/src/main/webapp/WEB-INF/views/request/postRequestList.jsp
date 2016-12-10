@@ -290,6 +290,17 @@ function modifyReqCollabo(){
  		});
 }
 
+//작성자 : 김중완
+//작성일:2016/12/09
+//글상세보기(수정 버튼 클릭시 readonly 풀어주는 부분)
+function post_request_update(){
+	$('#post_update').attr('type','hidden');
+	$('#post_updateok').attr('type','button');
+	$('#collabo_req_filesrc').attr('type','file');
+	$('#file_src_tag').css('display','none');
+	document.getElementById("collabo_req_title").readOnly = false;
+	document.getElementById("collabo_req_text").readOnly = false;
+}
      
      
 </script>
@@ -414,7 +425,7 @@ function modifyReqCollabo(){
 								</c:forEach>
 								<!-- 다음 페이지 -->
 							<c:if test="${list.size() != 0}">
-								<c:if test="${pg < to_page || pg != all_page}">
+                        		<c:if test="${pg < to_page || pg != all_page}">
 									<li><a href="#" onclick="pazingBtn('${pg + 1}','${search}','${memo}')">»</a></li>
 									<li><a href="#" onclick="pazingBtn('${all_page}','${search}','${memo}')">»»</a></li>
 								</c:if>
@@ -446,7 +457,7 @@ function modifyReqCollabo(){
 						</div>
 						
 						<div class="modal-body" id="detail">
-						<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>	
+						
 						</div>
 						
 						

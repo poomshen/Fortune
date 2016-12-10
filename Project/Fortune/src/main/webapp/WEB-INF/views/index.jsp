@@ -35,6 +35,10 @@
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
 
+
+<script src="alert_style/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
+
 </head>
 
 <body>
@@ -176,7 +180,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 portfolio-masonry"
+				<div class="col-sm-12 portfolio-masonry"
 					style="position: relative; height: 700px;">
 					<div class="portfolio-box design"
 						style="position: absolute; left: 15px; top: 0px;">
@@ -185,7 +189,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">관리자 Main 화면</a>
+									<a href="#">Main 화면</a>
 								</p>
 							</div>
 						</div>
@@ -250,6 +254,8 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- 
 					<div class="portfolio-box design"
 						style="position: absolute; left: 15px; top: 350px;">
 						<img src="assets/img/portfolio/7.jpg" alt=""
@@ -322,6 +328,7 @@
 							</div>
 						</div>
 					</div>
+					 -->
 				</div>
 			</div>
 		</div>
@@ -401,6 +408,7 @@
 					<h3><font color="black">김지현</font></h3>
 					<p></p>		
 				</div>
+			</div>
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
@@ -412,7 +420,7 @@
 					<p></p>		
 				</div>
 			</div>	
-			</div>
+			
 		</div>
 	</div>
 
@@ -447,7 +455,7 @@
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
 	<script src="assets/js/wow.min.js"></script>
-
+	
 	<script src="assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="assets/js/masonry.pkgd.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
@@ -464,6 +472,7 @@
 	
 
 	function joins() {
+		
 		location.href="sign.htm";
 	}
 	
@@ -471,7 +480,7 @@
 		var message1 = <%=message%>;
 		
 		if(message1 == 1){
-			alert('권한이 없습니다.');
+			swal('권한이 없습니다.');
 		}
 	});
 	</script>
