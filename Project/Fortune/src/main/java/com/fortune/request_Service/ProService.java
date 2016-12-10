@@ -411,7 +411,7 @@ public class ProService {
    }
 
    // 글요청 처리
-   public Request_DTO regResponse(With_DTO n, String collabo_req_index)
+   public Request_DTO regResponse(With_DTO n, String collabo_req_index, HttpSession session)
          throws IOException, ClassNotFoundException, SQLException {
 
       System.out.println("실제 글 등록 처리");
@@ -428,7 +428,9 @@ public class ProService {
       // 아주좋소
       /* n.setCollabo_end(java.sql.Timestamp.valueOf(n.getCollabo_end2())); */
       // 실DB저장
-
+      Join_DTO ids = (Join_DTO) session.getAttribute("info");
+      n.setCollabo_state("진행중");
+      n.setCollabo_req_ID(ids.getUser_id());
       ProDao proDao = sqlsession.getMapper(ProDao.class);
       proDao.insertResponse(n);
       Request_DTO proDto = proDao.detailResponse(collabo_req_index);
@@ -480,9 +482,13 @@ public class ProService {
         n.setCollabo_req_filesrc(filenames.get(0));  // 파일명 1 
         
         
-        
       ProDao proDao = sqlsession.getMapper(ProDao.class);
-      proDao.update(n);
+      if(n.getCollabo_req_filesrc().isEmpty()){
+    	  proDao.updatenull(n);
+      }else{
+    	  proDao.update(n);
+      }
+      
       return n;
 
    }
