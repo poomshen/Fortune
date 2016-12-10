@@ -30,12 +30,20 @@
            lastPostFunc();  
         }  
 	});  
+	
 	</script>
+	<%
+	   //치환 변수 선언
+	    pageContext.setAttribute("cr", "\r"); //Space
+	    pageContext.setAttribute("cn", "\n"); //Enter
+	    pageContext.setAttribute("crcn", "\r\n"); //Space, Enter
+	    pageContext.setAttribute("br", "<br/>"); //br 태그
+	%> 
 
 <body>
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">프로젝트 히스토리</h1>
+                    <h1 class="page-header">${progectName }</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -44,28 +52,41 @@
                     <div class="panel panel-default">
                     
                         <div class="panel-heading">
-                            <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
+                            <i class="fa fa-clock-o fa-fw"></i>프로젝트 히스토리
                         </div>
-                        
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <ul class="timeline">
-                                <c:forEach var="historylist" items="${list}">
+                               <c:forEach var="historylist" items="${list}">
+                                <!-- 타임라인 왼쪽 오른쪽 주기  -->
                                 <c:choose >
-                                	<c:when test="${historylist.history_title=='요청'||historylist.history_title=='거절'}">
+                                	<c:when test="${historylist.history_title=='요청'||historylist.history_title=='거절'||historylist.history_title=='수정'}">
                                 	 <li  class="wrdLatest" id="${historylist.num }">
                                 	</c:when>
                                 	<c:otherwise>
                                 	 <li class="timeline-inverted wrdLatest" id="${historylist.num }">
                                 	</c:otherwise>
                                 </c:choose>
+                                    <!--  글 아이콘 설정 -->
                                 <c:choose>
+                                	<c:when test="${historylist.history_title=='요청'}">
+                                		<div class="timeline-badge "><i style="margin-top:30%;" class="fa fa-edit"></i>
+                                    		</div>
+                                	</c:when>
+                                	<c:when test="${historylist.history_title=='수정'}">
+                                		<div class="timeline-badge "><i style="margin-top:30%;" class="fa fa-gears"></i>
+                                    		</div>
+                                	</c:when>
                                 	<c:when test="${historylist.history_title=='수락'}">
-                                    <div class="timeline-badge success"><i style="margin-top:30%;" class="fa fa-check"></i>
+                                    <div class="timeline-badge info"><i style="margin-top:30%;" class="fa fa-check-square-o"></i>
                                     </div>
                                 	</c:when>
                                 	<c:when test="${historylist.history_title=='거절'}">
-                                    <div class="timeline-badge danger"><i style="margin-top:30%;" class="fa fa-times"></i>
+                                    <div class="timeline-badge danger"><i style="margin-top:30%;" class="fa fa-share-square-o"></i>
+                                    </div>
+                                	</c:when>
+                                	<c:when test="${historylist.history_title=='완료'}">
+                                    <div class="timeline-badge success"><i style="margin-top:30%;" class="fa fa-flag"></i>
                                     </div>
                                 	</c:when>
                                 	<c:otherwise>
@@ -73,6 +94,7 @@
                                     </div>
                                 	</c:otherwise>
                                 </c:choose>
+                                <!-- 글 내용   -->
                                     <div class="timeline-panel">
                                         <div class="timeline-heading" id="historytitle">
                                             <h4 class="timeline-title">${historylist.history_title}</h4>
@@ -83,11 +105,13 @@
                                         <div class="timeline-body">
                                             <h4 class="timeline-title">${historylist.collabo_req_title}</h4>
                                             <br>
-                                            <p>${historylist.collabo_req_text}</p>
                                              <c:choose>
-                                            <c:when test="${historylist.history_title!='거절'}">
-                                            <%-- <p>${historylist.history_text}</p> --%>
+                                            <c:when test="${ historylist.history_title != '수정'&& historylist.history_title != '거절'}">
+                                            <p>${fn:replace(historylist.collabo_req_text, crcn, br)}</p> 
                                             </c:when>
+					<c:otherwise>
+					  <p>${fn:replace(historylist.history_text, crcn, br)}</p>
+					</c:otherwise>                                            
                                             </c:choose>
                                         </div>
                                     </div>
