@@ -151,7 +151,13 @@ Profile = {
  	 		     },
  	 			error: function(){						
  	 				alert('Error while request..'	);
- 	 			}
+ 	 			},
+ 	 	      beforeSend:function(){
+ 	 	           $('.wrap-loading').removeClass('display-none');
+ 	 	       },
+ 	 	       complete:function(){
+ 	 	           $('.wrap-loading').addClass('display-none');
+ 	 	       }
  	 		});
  	}
      //대기 수락 거절을 비동기 처리로 사용하였다.
@@ -338,16 +344,16 @@ function post_request_update(){
 <!-- 보낸 요청함 card 띄워주는 영역 -->
 <!-- 검색영역   -->
 <div class="row grid-columns"style="width:1000px; height:20px; margin-top:2px">
-     <div id="row" style="height:20px;margin-left: 700px;" class="col-md-6 col">
+     <div id="row" style="height:20px;margin-left: 620px;" class="col-md-6 col">
 		
-		<select id="memoselect">
+		<select id="memoselect" class="form-control" style="width: 20%; display: inline; font-size: 12px; color: #666;">
 			<option value="collabo_req_title">제목</option>
 			<option value="collabo_req_text">내용</option>
 		</select>
 		
-		<input type="text" id="search" placeholder="Search" >
+		<input type="text" id="search" placeholder="Search" class="form-control" style="width: 35%; display: inline; font-size: 12px; color: #666;">
 		
-		<button onclick="searchBtn()">검색</button>
+		<input class="btn btn-primary" onclick="searchBtn()" value="검색" style="width: 60px;">
 	</div>
 </div>
 
