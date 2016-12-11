@@ -10,6 +10,8 @@
 
 <title>[효율적인업무 For春]</title>
 
+<!-- Favicon and touch icons -->
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/ico/four_leaf_clover2.png">
 
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>	

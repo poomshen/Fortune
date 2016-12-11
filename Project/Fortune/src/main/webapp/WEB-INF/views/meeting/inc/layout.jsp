@@ -5,7 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>[효율적인업무 For春]</title>
+
+<!-- Favicon and touch icons -->
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/ico/four_leaf_clover2.png">
+
+
 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 
