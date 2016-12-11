@@ -120,49 +120,58 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 	 	
 	 	
 	 	//상세보기 내용에 comment 뿌려주는 내용
-	 	$.ajax({
-			url : 'select_comment.ajax',
-			type : 'post',
-			data : 'schedule_no='+ id,
-			success : function(data) {
-				var comment_text = "";
-	 			var id_color = [];
-				$.each(data, function(index, obj) {
-					//obj.color = 0 ~ i값임 
-	 				if(index%2==0){
-	 					comment_text += '<li class="left clearfix"><span class="pull-left"><div class="image_main"><img src="assets/img/comment/'+obj.color+'.png" style="background:no-repeat center; width:60px; height: 60px; padding: 3px 3px 3px 3px;">';
-	 					comment_text += '<span class="image_main_up">'+obj.user_id+'</span></div></span><div class="chat-body clearfix"><div class="header">';
-	 					comment_text += '<small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date +' &nbsp;&nbsp;&nbsp;'
-	 					comment_text += '<button type="button" onclick="delete_comment('+obj.work_comment_no+')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button></small></div>'
-	 					comment_text += '<br><p style="word-break:break-all; width:241px;">'+obj.work_comment_text+'</p></div></li>';
-	 				}else{
-	 					comment_text += '<li class="right clearfix"><span class="pull-right"><div class="image_main"><img src="assets/img/comment/'+obj.color+'.png" style="background:no-repeat center; width:60px; height: 60px; padding: 3px 3px 3px 3px;">';
-	 					comment_text += '<span class="image_main_up">'+obj.user_id+'</span></div></span><div class="chat-body clearfix"><div class="header">'
-	 					comment_text += '<small class=" text-muted"><button type="button" onclick="delete_comment('+obj.work_comment_no;
-	 					comment_text += ')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button>&nbsp;&nbsp;<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
-	 					comment_text += '</small></div><p style="word-break:break-all; width:241px; margin-left:28px;">'+obj.work_comment_text+'</p></div></li>'
-	 				}
-				});
-	 			$('#comment_text').html(comment_text);
-			}
-		});
-	 	
-		 
-		$.ajax({
-			  
-			  type:"post",
-			  dataType: "html",
-			  url:"newAlarm.htm",
-			  data:{"newAlarm": "삭제"},
-			  success:function(data){
+
+	
 				  
-				  console.log("헤더 업데이트 성공");
-				  console.log(data);
-				  $('#alarm').empty();  
-				  $('#alarm').html(data);
-			
-			  }
-		  });	
+				 	$.ajax({
+						url : 'select_comment.ajax',
+						type : 'post',
+						data : 'schedule_no='+ id,
+						success : function(data) {
+							var comment_text = "";
+				 			var id_color = [];
+							$.each(data, function(index, obj) {
+								//obj.color = 0 ~ i값임 
+				 				if(index%2==0){
+				 					comment_text += '<li class="left clearfix"><span class="pull-left"><div class="image_main"><img src="assets/img/comment/'+obj.color+'.png" style="background:no-repeat center; width:60px; height: 60px; padding: 3px 3px 3px 3px;">';
+				 					comment_text += '<span class="image_main_up">'+obj.user_id+'</span></div></span><div class="chat-body clearfix"><div class="header">';
+				 					comment_text += '<small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date +' &nbsp;&nbsp;&nbsp;'
+				 					comment_text += '<button type="button" onclick="delete_comment('+obj.work_comment_no+')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button></small></div>'
+				 					comment_text += '<br><p style="word-break:break-all; width:241px;">'+obj.work_comment_text+'</p></div></li>';
+				 				}else{
+				 					comment_text += '<li class="right clearfix"><span class="pull-right"><div class="image_main"><img src="assets/img/comment/'+obj.color+'.png" style="background:no-repeat center; width:60px; height: 60px; padding: 3px 3px 3px 3px;">';
+				 					comment_text += '<span class="image_main_up">'+obj.user_id+'</span></div></span><div class="chat-body clearfix"><div class="header">'
+				 					comment_text += '<small class=" text-muted"><button type="button" onclick="delete_comment('+obj.work_comment_no;
+				 					comment_text += ')" class="btn-xs" style="border:0px;"><i class="fa fa-times"></i></button>&nbsp;&nbsp;<i class="fa fa-clock-o fa-fw"></i>등록시간 : '+obj.work_comment_date;
+				 					comment_text += '</small></div><p style="word-break:break-all; width:241px; margin-left:28px;">'+obj.work_comment_text+'</p></div></li>'
+				 				}
+							});
+				 			$('#comment_text').html(comment_text);
+				 			
+				 			
+				 	    	 
+				    		$.ajax({
+				    			  
+				    			  type:"post",
+				    			  dataType: "html",
+				    			  url:"newAlarm.htm",
+				    			  data:{"newAlarm": "상세 삭제"},
+				    			  success:function(data){
+				    				  
+				    				  console.log("헤더 업데이트 성공");
+				    				  console.log(data);
+				    				  $('#alarm').empty();  
+				    				  $('#alarm').html(data);
+				    			  }
+				    			
+				    		});
+				 			
+				 			
+				 			
+						}
+					});
+				 	
+
 }
 
 
@@ -213,27 +222,16 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 		data : 'schedule_no='+ id,
 		success : function(data) {
 			
-			console.log("회의 알림 삭제!");
- 	
-		}
-	});
- 	
-	 
-	$.ajax({
-		  
-		  type:"post",
-		  dataType: "html",
-		  url:"newAlarm.htm",
-		  data:{"newAlarm": "삭제"},
-		  success:function(data){
-			  
 			  console.log("헤더 업데이트 성공");
 			  console.log(data);
 			  $('#alarm').empty();  
 			  $('#alarm').html(data);
-		
-		  }
-	  });	
+			  
+		}
+	});
+ 	
+	 
+
  	
 	
 	

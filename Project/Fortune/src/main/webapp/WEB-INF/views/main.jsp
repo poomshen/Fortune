@@ -12,10 +12,10 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-   request.setCharacterEncoding("UTF-8");
+/* request.setCharacterEncoding("UTF-8");
    ArrayList pie_x = (ArrayList)request.getAttribute("pie_x");
    ArrayList pie_y = (ArrayList)request.getAttribute("pie_y");
-   Long total_pie =(Long)request.getAttribute("total_count");
+   Long total_pie =(Long)request.getAttribute("total_count"); */
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -44,7 +44,7 @@
 <script>
 
 //모든 프로젝트의 진척률을 나타내는 차트
-
+<%-- 
 	$(function (){
 
 		var chart_x=[];
@@ -241,7 +241,7 @@
 	   
 	   
 	   
-
+ --%>
 	  	
 </script>
 <body>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <script src="alert_style/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 <script type="text/javascript">
                   $(function(){
                      
@@ -72,7 +74,7 @@
                           $('#datecount').val((( date2 - date1 ) / (60*60*24*1000))+1); 
                         
                             if(date2 - date1 < 0){
-                                     alert("끝 날짜가 시작날짜보다 이전일수 없습니다"); 
+                                     swal("끝 날짜가 시작날짜보다 이전일수 없습니다"); 
                                               
                                     return false;
                                  

@@ -20,7 +20,7 @@
 	</div>
 	<div class="row" style="margin-top: 5px;">
 		<div class="col-sm-2" style="margin-top: 10px;" align="left"><lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일</lable></div>
-		<div class="col-sm-4"><input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${list.collabo_req_date}"></div>
+		<div class="col-sm-4"><input style="color:#666;" type="text" class="form-control" readonly="readonly" value=" ${fn: substring(list.collabo_req_date,0,16) }"></div>
 		<div class="col-sm-2" style="margin-top: 10px;" align="left"><lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상태</lable></div>
 		<div class="col-sm-4"><input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${list.collabo_req_state}"></div>
 	</div>
