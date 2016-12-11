@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- 
 작성자 : 이예지
 최초작업일 : 2016/12/05
@@ -29,8 +30,10 @@ h6 {
    request.setCharacterEncoding("UTF-8");
    String selectId = (String)request.getAttribute("selectId");
 %>
-
+<script src="alert_style/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 <script type="text/javascript">
+
 
 /* 
  작성자 : 이예지
@@ -114,11 +117,11 @@ Profile = {
 	function modify() {
 	 
 	if($('#collabo_req_title').val() == "") {
-		alert("협업 제목을 입력하세요 ");
+		swal("협업 제목을 입력하세요 ");
 		$('#collabo_req_title').focus();
 		return false;
 	}else{
-			alert("완료");
+			swal("완료");
 			modifyform.submit(); 
 			return true;
 		}
