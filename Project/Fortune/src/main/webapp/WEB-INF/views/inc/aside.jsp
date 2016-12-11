@@ -22,7 +22,7 @@
                             	<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
                         <li>
                             <a class="hvr-grow-shadow" href="#" >
-                            <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>프로젝트<span class="fa arrow"></span></a>
+                            <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> 프로젝트<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                             	<security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
                                 <li>
