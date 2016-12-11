@@ -43,6 +43,7 @@
 <script src="alert_style/js/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 
+
 </head>
 
 <body>
@@ -124,25 +125,25 @@
 			<div class="row">
 				<div class="col-sm-4 what-we-do-box wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
 					<div class="what-we-do-box-icon">
+						<i class="fa fa-share-alt"></i>
+					</div>
+					<h3><font color="black">캘린더 공유</font></h3>
+					<p><font color="#aaaaaa">같은 프로젝트 진행중인 팀원 간<br>업무 캘린더 / 자료실 공유</font></p>
+				</div>
+				<div class="col-sm-4 what-we-do-box wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+					<div class="what-we-do-box-icon">
 						<i class="fa fa-eye"></i>
 					</div>
 					<h3><font color="black">업무의 시각화</font></h3>
 					<p><font color="#aaaaaa">한눈에 보는 업무 진행상황</font></p>
 				</div>
-				<div class="col-sm-4 what-we-do-box wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
-					<div class="what-we-do-box-icon">
-						<i class="fa fa-link"></i>
-					</div>
-					<h3><font color="black">캘린더 공유</font></h3>
-					<p><font color="#aaaaaa">같은 프로젝트 진행중인 팀원 간<br>업무 캘린더 공유</font></p>
-				</div>
 				<div class="col-sm-4 what-we-do-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<div class="what-we-do-box-icon">
-						<i class="fa fa-wifi"></i>
+						<i class="fa fa-user"></i>
 					</div>
-					<h3><font color="black">On-line</font></h3>
-					<p><font color="#aaaaaa">프로젝트 생성, 진행, 종료 모두<br>on-line으로 가능</font></p>
+					<h3><font color="black">UI / UX</font></h3>
+					<p><font color="#aaaaaa">사용자 중심적 Interface</font></p>
 				</div>
 			</div>
 		</div>
@@ -166,67 +167,57 @@
 			<div class="row">
 				<div class="col-sm-12 portfolio-filters wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
-					<a href="#" class="filter-all active">All</a> / <a href="#"
-						class="filter-design">Design</a> / <a href="#"
-						class="filter-development">Development</a> / <a href="#"
-						class="filter-branding">Branding</a>
+					<!--<a href="#" class="filter-all active">All</a> /
+					 <a href="#" class="filter-design">Admin</a> / 
+					<a href="#" class="filter-development">SuperManager</a> / 
+					<a href="#" class="filter-branding">Manager</a> -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-12 portfolio-masonry"
 					style="position: relative; height: 700px;">
-					<div class="portfolio-box design"
-						style="position: absolute; left: 15px; top: 0px;">
-						<img src="assets/img/portfolio/indexImage.JPG" alt=""
-							data-at2x="assets/img/portfolio/1.jpg">
+					<div class="portfolio-box design" style="position: absolute; top: 0px;">
+						<img src="assets/img/portfolio/Ybridge1.png" alt="" data-at2x="assets/img/portfolio/1.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Main 화면</a>
+									<a href="#">조잡한 UI</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box development"
-						style="position: absolute; left: 255px; top: 0px;">
-						<img src="assets/img/portfolio/2.jpg" alt=""
-							data-at2x="assets/img/portfolio/2.jpg">
+					<div class="portfolio-box development" style="position: absolute; left: 255px; top: 0px;">
+						<img src="assets/img/portfolio/fortune1.png" alt="" data-at2x="assets/img/portfolio/2.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Sit amet logo</a>
+									<a href="#">chart화된 UI</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box branding"
-						style="position: absolute; left: 495px; top: 0px;">
-						<img src="assets/img/portfolio/3.jpg" alt=""
-							data-at2x="assets/img/portfolio/3.jpg">
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 0px;">
+						<img src="assets/img/portfolio/Ybridge2.png" alt="" data-at2x="assets/img/portfolio/3.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Ipsum social</a>
+									<a href="#">하루에 하나만의 일정</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box development"
-						style="position: absolute; left: 15px; top: 175px;">
-						<img src="assets/img/portfolio/4.jpg" alt=""
-							data-at2x="assets/img/portfolio/4.jpg">
+					<div class="portfolio-box development" style="position: absolute; left: 15px; top: 175px;">
+						<img src="assets/img/portfolio/fortune2.png" alt="" data-at2x="assets/img/portfolio/4.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Etiam processus dynamicus</a>
+									<a href="#">여러일에 걸친 일정</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box design"
-						style="position: absolute; left: 255px; top: 175px;">
-						<img src="assets/img/portfolio/5.jpg" alt=""
-							data-at2x="assets/img/portfolio/5.jpg">
+					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
+						<img src="assets/img/portfolio/5.jpg" alt="" data-at2x="assets/img/portfolio/5.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -235,10 +226,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box development"
-						style="position: absolute; left: 495px; top: 175px;">
-						<img src="assets/img/portfolio/6.jpg" alt=""
-							data-at2x="assets/img/portfolio/6.jpg">
+					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
+						<img src="assets/img/portfolio/6.jpg" alt="" data-at2x="assets/img/portfolio/6.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -327,8 +316,6 @@
 		</div>
 	</div>
 
-
-
 	<!-- Team members -->
 	<div class="team-container section-container">
 		<div class="container">
@@ -343,46 +330,51 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-4 team-box wow fadeInUp animated"
+			
+			<div class="col-sm-4 team-box wow fadeInUp animated"
+					style="visibility: visible; animation-name: fadeInUp;">
+					<h3><font color="black">이성준</font></h3>
+					<p>Project Manager</p>				
+				</div>
+	
+				<!-- <div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">이성준</font><h3>
-					<p></p>
-					
-				</div>
+					<p>Project Manager</p>	
+				</div> -->
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">김지율</font></h3>
-					<p></p>
-				
+					<p>Admin Manager</p>				
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">이명철</font></h3>
-					<p></p>		
+					<p>DataBase Manager</p>		
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">김중완</font></h3>
-					<p></p>		
-				</div>
-				<div class="col-sm-4 team-box wow fadeInUp animated"
-					style="visibility: visible; animation-name: fadeInUp;">
-					<h3><font color="black">이예지</font></h3>
-					<p></p>		
+					<p>Server Client</p>		
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">김지현</font></h3>
-					<p></p>		
+					<p>UI Client</p>		
+				</div>
+				<div class="col-sm-4 team-box wow fadeInUp animated"
+					style="visibility: visible; animation-name: fadeInUp;">
+					<h3><font color="black">이예지</font></h3>
+					<p>UI Manager</p>		
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">이승훈</font></h3>
-					<p></p>		
+					<p>Server Manager</p>		
 				</div>
 			</div>	
 			
