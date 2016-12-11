@@ -25,6 +25,7 @@ import com.fortune.Table_DTO.Alarm_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.fileroom_DAO.IFileRoom;
+import com.fortune.function_DTO.All_Alarm_DTO;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 
@@ -62,13 +63,13 @@ public class Alarm_Controller {
 		
 		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
 		
-		int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+		All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
 		
 	
 		
 		session.setAttribute("alarm", alist);
 		
-		session.setAttribute("totalCount",tatalCount);
+		session.setAttribute("totalCount",tatalCount.getTotal_count());
 		
 
 		
@@ -93,15 +94,15 @@ public class Alarm_Controller {
 			
 			alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
 			
-			int totalCount = alarm_DAO.totalCount(dto.getUser_id());
+			All_Alarm_DTO totalCount = alarm_DAO.totalCount(dto.getUser_id());
 			
 			sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
 			
 			System.out.println("size:"+alist.size());
-			System.out.println("newAlarm totalcount:"+totalCount);
+			System.out.println("newAlarm totalcount:"+totalCount.getTotal_count());
 			
 			session.setAttribute("alarm", alist);
-			session.setAttribute("totalCount", totalCount);
+			session.setAttribute("totalCount", totalCount.getTotal_count());
 			session.setAttribute("sch_alist", sch_alist);
 			
 	      return "newAlarm";

@@ -137,14 +137,21 @@ Profile = {
 
 function detail(req,collabo_no){
 	
+	console.log("req"+req);
 	
-		console.log(req+"/"+collabo_no);
+	
 	if(collabo_no=="null"){
+	
+		$('#img'+req+'n').css("display","none");
 		
 		$('#hidden').val(req);
+		
+		
 		detailReqCollabo(req);
 		
 	}else{
+		
+		
 	
    	 $.ajax({
    		 
@@ -176,35 +183,51 @@ function detail(req,collabo_no){
 
      //상세 정보를 보여주는 ajax 입니다.
      function detailReqCollabo(a){
-    	 //$("#menuView2").empty();
-    	 //$("#ReqCollabo").empty();
- 	  	
-    	 	console.log("asd");
- 	   	 $.ajax({
- 	   		 
- 	 			type: "get",
- 	 			url:  "ProDetail2.htm",
- 	 			cache: false,				
- 	 			data:{"collabo_req_index" : a,
- 	 				"dept_no":${sessionScope.info.dept_no}},
- 	 		    success:function(data){ //callback  
- 	 		  
- 	 		    	$("#detail").html(data); 
- 					$("#myModal3").modal("show");
- 					
- 	 		     },
- 	 			error: function(){						
- 	 				alert("Error while request.."	);
- 	 			},
- 	 	      beforeSend:function(){
- 	 	           $('.wrap-loading').removeClass('display-none');
- 	 	       },
- 	 	       complete:function(){
- 	 	           $('.wrap-loading').addClass('display-none');
- 	 	       }
- 	 		});
- 	}
-     
+    	
+
+    			    	 
+    			 	   	 $.ajax({
+    			 	   		 
+    			 	 			type: "get",
+    			 	 			url:  "ProDetail2.htm",
+    			 	 			cache: false,				
+    			 	 			data:{"collabo_req_index" : a,
+    			 	 				"dept_no":${sessionScope.info.dept_no}},
+    			 	 		    success:function(data){ //callback  
+    			 	 		  
+    			 	 		    	$("#detail").html(data); 
+    			 					$("#myModal3").modal("show");
+    			 			    	 
+    			 		    		$.ajax({
+    			 		    			  
+    			 		    			  type:"post",
+    			 		    			  dataType: "html",
+    			 		    			  url:"newAlarm.htm",
+    			 		    			  data:{"newAlarm": "상세 삭제"},
+    			 		    			  success:function(data){
+    			 		    				  
+    			 		    				  console.log("헤더 업데이트 성공");
+    			 		    				  console.log(data);
+    			 		    				  $('#alarm').empty();  
+    			 		    				  $('#alarm').html(data);
+    			 		    				  
+    			 		    			  	}
+    			 		    			  });
+    			 					
+    		 	 		     },
+    			 	 			error: function(){						
+    			 	 				alert("Error while request.."	);
+    			 	 			},
+    			 	 	      beforeSend:function(){
+    			 	 	           $('.wrap-loading').removeClass('display-none');
+    			 	 	       },
+    			 	 	       complete:function(){
+    			 	 	           $('.wrap-loading').addClass('display-none');
+    			 	 	       }
+    			 	 		});
+    				  
+    			  }
+
      
      //수락을 하였을 때 비동기 처리로 하였습니다.
      function memoReqCollabo(a){
@@ -516,7 +539,8 @@ function proAdd(){
         					<a href="#" class="active"><i class="fa fa-user"></i>&nbsp;[${n.dept_name}]${n.user_name}
         					<c:set value="${n.collabo_req_index}" var="req"/>
         					<c:if test="${fn:endsWith(req,'n')}">
-        				<img style="width: 28px;height: 16px" src="assets/img/alarm/new1.png"/>
+        					
+        				<img id="img${req}"style="width: 28px;height: 16px" src="assets/img/alarm/new1.png"/>
         					<c:set value="${fn:substringBefore(req,'n')}" var="req"/> 
         					</c:if>
        					</a>

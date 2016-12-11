@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fortune.Table_DTO.Alarm_DTO;
+import com.fortune.function_DTO.All_Alarm_DTO;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 
@@ -25,7 +26,7 @@ public interface IAlarm {
 	
 	public List<Select_Alarm_DTO> checkAlarmAll(String user_id);
 	
-	public int totalCount(String user_id);
+	public All_Alarm_DTO totalCount(String user_id);
 	
 	public List<Schedule_AlarmList_DTO> checkScheduleAlarm(String user_id);
 	

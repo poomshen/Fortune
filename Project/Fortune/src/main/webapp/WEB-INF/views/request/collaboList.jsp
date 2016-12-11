@@ -114,38 +114,66 @@ h6 {
       
       //추가사항) detail누를 때 알림 삭제
       function detail(req,collabo_no){
-         alert(req+"/"+collabo_no);
+       
          
          $('#img'+collabo_no+'n').css("display","none");
-           
-         $.ajax({
-                
-                type: "post",
-                url:  "MyProDetail.htm",
-                cache: false,            
-                data:{
-                
-                   "collabo_req_index":req,
-                   "collabo_no":collabo_no
-                },
-                 success:function(data){ 
-                  $("#detail").html(data); 
-                  $('#myModal3').modal('show');
-                
-                  },
-                error: function(){                  
-                   alert('Error while request..'   );
-                },
-                beforeSend:function(){
-                    $('.wrap-loading').removeClass('display-none');
-                },
-                complete:function(){
-                    $('.wrap-loading').addClass('display-none');
-                }
-             });
+       
+   
+  			  
+  	         
+  	         $.ajax({
+  	                
+  	                type: "post",
+  	                url:  "MyProDetail.htm",
+  	                cache: false,            
+  	                data:{
+  	                
+  	                   "collabo_req_index":req,
+  	                   "collabo_no":collabo_no
+  	                },
+  	                 success:function(data){ 
+  	                  $("#detail").html(data); 
+  	                  $('#myModal3').modal('show');
+  	                  
+  	              	$.ajax({
+  	          		  
+  	          		  type:"post",
+  	          		  dataType: "html",
+  	          		  url:"newAlarm.htm",
+  	          		  data:{"newAlarm": "상세 삭제"},
+  	          		  success:function(data){
+  	          			  
+  	          			  console.log("헤더 업데이트 성공");
+  	          			  console.log(data);
+  	          			  $('#alarm').empty();  
+  	          			  $('#alarm').html(data);  
+  	                  
+  	          		  }
+  	                  
+  	               });	
+  	                
+  	                  },
+  	                error: function(){                  
+  	                   alert('Error while request..'   );
+  	                },
+  	                beforeSend:function(){
+  	                    $('.wrap-loading').removeClass('display-none');
+  	                },
+  	                complete:function(){
+  	                    $('.wrap-loading').addClass('display-none');
+  	                }
+  	             });
+  			  
+  			  
+  		
+  		  }
+  	 
+  	
+         
+
          
       
-      }
+      
       
       //비동기 상세 보기를 위한 함수   
       function detailReqCollabo(a){

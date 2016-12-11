@@ -189,7 +189,7 @@
 		</span>권한
 	</label>
 	<div class="col-md-7" style="margin-bottom: 10px; margin-top: 5px;">
-		<select id="roleSelect " class="form-control" name="role_no" style="width: 17%; display: inline; font-size: 12px; width: 150px; color: #666;">
+		<select id="roleSelect" class="form-control" name="role_no" style="width: 17%; display: inline; font-size: 12px; width: 150px; color: #666;">
 			<c:forEach var="i" items="${roleselect}">
 				<c:choose>
 					<c:when test="${i.role_no == join_DTO.role_no}">

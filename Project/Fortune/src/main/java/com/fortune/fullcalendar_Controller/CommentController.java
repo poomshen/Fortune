@@ -18,6 +18,7 @@ import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Work_Comment_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.fullcalendar_DAO.IFullCalendar;
+import com.fortune.function_DTO.All_Alarm_DTO;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.function_DTO.Team_Users_DTO;
@@ -81,13 +82,13 @@ public class CommentController {
 		
 		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
 		
-		int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+		All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
 		
 	
 		
 		session.setAttribute("alarm", alist);
 		
-		session.setAttribute("totalCount",tatalCount);
+		session.setAttribute("totalCount",tatalCount.getTotal_count());
         
 		//추가 작업
 		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
@@ -104,7 +105,7 @@ public class CommentController {
     	작업내용 : 회의 선택시 new alarm삭제
     */
     @RequestMapping(value="select_comment_alarm.ajax", method = RequestMethod.POST)
-    public void select_Comment_alarm(@RequestParam(value="schedule_no") int schedule_no,HttpSession session) 
+    public String select_Comment_alarm(@RequestParam(value="schedule_no") int schedule_no,HttpSession session) 
     		throws ClassNotFoundException, SQLException{
         System.out.println("위치 : CommentController // 작업자: 이예지 // 내용 :회의 상세보기 클릭시 알림 삭제");        
         
@@ -128,19 +129,21 @@ public class CommentController {
 		
 		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
 		
-		int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+		All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
 		
 	
 		
 		session.setAttribute("alarm", alist);
 		
-		session.setAttribute("totalCount",tatalCount);
+		session.setAttribute("totalCount",tatalCount.getTotal_count());
 		//추가작업 일정 알림 상세 리스트
 		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
 		sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
 		session.setAttribute("sch_alist", sch_alist);
         
 
+		
+		return "newAlarm";
 	}
     
     

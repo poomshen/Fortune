@@ -173,7 +173,7 @@ function UserUpdate(){
 		$('#user_phone').focus();
 		return;
 	}
-	
+
 	$.ajax({
 		type: "get",
 		url : "userupdateadmin.ajax",

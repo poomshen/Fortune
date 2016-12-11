@@ -49,6 +49,7 @@
                    		      	<span class="pull-right text-muted small"style="padding: 3px 7px 3px 7px;background:#ffff;color: #cc0000;font-weight: bold;border-radius: 9px;">
  										${scheduleAlarmList.total_collabo}건</span>
                    			 </a>
+                   		
                    		 </li>
                     		
                    	 	</c:forEach>
