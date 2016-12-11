@@ -65,7 +65,7 @@
 	               $.each(data,function(){ 
 	                  
 	            	  console.log(data);
-	            	  chart_x.push(this.collabo_req_title);
+	            	  chart_x.push(this.project_name);
 	                  chart_y.push(this.chart_progress);
 	                  chart_id.push(this.collabo_no);
 	                  
