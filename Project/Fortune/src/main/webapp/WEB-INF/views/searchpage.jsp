@@ -76,7 +76,7 @@
 <body>
 <!-- 로딩 gif화면 -->
 <div class="wrap-loading display-none">
-    <div><img src="./images/default.gif" style="width: 50; height: 50px;" /></div>
+    <div><img src="./images/spin (3).gif" style="width: 100px; height: 100px;" /></div>
 </div>
 	<!-- Loader -->
 	<div class="loader" style="display: none;">
@@ -103,7 +103,7 @@
 								<span class="field">
 									<input type="text" id="search_name" name="search_name" style="background-color: transparent; color: white;"
 										class="form-control hvr-glow"><br>
-									<label id="idselect" class="col-md-4 control-label" style="width:150px;text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
+									<label id="idselect" class="col-md-4 control-label" style="width:150px;text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">이름 입력</label>
 								</span>
 								</div>
 							</div>
