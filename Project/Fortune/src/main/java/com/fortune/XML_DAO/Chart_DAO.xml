@@ -7,11 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- chart 체크 -->
  <select id="selectChartAll" resultType="com.fortune.Table_DTO.Chart_Data_DTO">
  
-select cdl.chart_date,cdl.chart_progress,cdl.chart_total_date,cr.collabo_req_title,cdl.collabo_no from 
-(select cd.chart_date,cd.chart_progress,cd.chart_total_date,cd.collabo_no,cl.collabo_req_index from (select m.chart_date,c.collabo_no,c.chart_progress,c.chart_total_date,c.chart_seq from CHART_DATA c
-join (select max(chart_date)as chart_date,collabo_no from chart_data group by collabo_no)m 
-on c.chart_date=m.chart_date where c.collabo_no=m.collabo_no) cd join collabo cl on cd.collabo_no = cl.collabo_no) cdl join collabo_req cr on cdl.collabo_req_index = cr.collabo_req_index 
-
+select distinct( bb.project_name),aa.chart_progress,aa.collabo_no from 
+(
+select a.chart_progress,a.collabo_no,cb.collabo_req_no 
+from (select max(chart_progress)as chart_progress,collabo_no from chart_data group by collabo_no)
+a join (select c.collabo_no,b.collabo_req_no from collabo c join collabo_req b on c.collabo_req_no=b.collabo_req_no) cb on a.collabo_no=cb.collabo_no
+)aa join projectnameview bb on aa.collabo_req_no=bb.collabo_req_no
  </select>
  
 <!-- chart  추가 -->

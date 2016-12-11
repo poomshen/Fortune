@@ -65,7 +65,7 @@
 	               $.each(data,function(){ 
 	                  
 	            	  console.log(data);
-	            	  chart_x.push(this.collabo_req_title);
+	            	  chart_x.push(this.project_name);
 	                  chart_y.push(this.chart_progress);
 	                  chart_id.push(this.collabo_no);
 	                  
@@ -232,7 +232,7 @@
 		     	                   allowPointSelect: true,
 		     	                   cursor: 'pointer',
 		     	                   dataLabels: {
-		     	                       enabled: false
+		     	                       enabled: true
 		     	                   },
 		     	                   showInLegend: true,
 		     	                   slicedOffset: 10
@@ -281,7 +281,7 @@
 			</div>
 
             <div class="row grid-columns"style="width:1000px">
-				<div id="kk" style="height:280px" class="col-md-8 col">
+				<div id="kk" style="height:280px" class="col-md-8 colg">
 					<div>
 						<b>2</b>
 						위의 각 프로젝트 x축 클릭시 상세 차트( 비동기 )화면
