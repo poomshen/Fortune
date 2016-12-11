@@ -22,7 +22,7 @@
                             	<security:authorize access="hasAnyRole('ROLE_SUPERMGR','ROLE_ADMIN')">
                         <li>
                             <a class="hvr-grow-shadow" href="#" >
-                            <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>프로젝트<span class="fa arrow"></span></a>
+                            <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> 프로젝트<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                             	<security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
                                 <li>
@@ -41,13 +41,13 @@
                             	</security:authorize>
                             	<security:authorize access="hasAnyRole('ROLE_MGR','ROLE_USER')">
                                 <li>
-                                 <a href="responseList_ver1.htm"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>MY 프로젝트<span class="fa arrow"></span></a>
+                                 <a href="responseList_ver1.htm"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> MY 프로젝트<span class="fa arrow"></span></a>
                                 </li>
                                 </security:authorize>
                             <!-- /.nav-second-level -->
                        <security:authorize access="hasAnyRole('ROLE_MGR','ROLE_USER','ROLE_SUPERMGR')">
                         <li>
-                            <a class="hvr-grow-shadow" href="#"><i class="fa fa-calendar-o" aria-hidden="true"></i>일정<span class="fa arrow"></span></a>
+                            <a class="hvr-grow-shadow" href="#"><i class="fa fa-calendar-o" aria-hidden="true"></i> 일정<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <c:forEach var="n" items="${sessionScope.collabo}">
                                 <li>
@@ -71,7 +71,7 @@
                         </li>
                         </security:authorize>
 			<li>
-                            <a class="hvr-grow-shadow" href="dept.htm"><i class="fa fa-book" aria-hidden="true"></i>주소록<span class="fa arrow"></span></a>
+                            <a class="hvr-grow-shadow" href="dept.htm"><i class="fa fa-book" aria-hidden="true"></i> 주소록<span class="fa arrow"></span></a>
                         </li>
                         <li style="">
                         </li>
