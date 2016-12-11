@@ -174,10 +174,10 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-12 portfolio-masonry"
-					style="position: relative; height: 700px;">
+				<div class="col-sm-12 portfolio-masonry" style="position: relative; height: 700px;">
+			<!-- 차트 이미지 -->
 					<div class="portfolio-box design" style="position: absolute; top: 0px;">
-						<img src="assets/img/portfolio/fortune1-1.png" alt="" data-at2x="assets/img/portfolio/1.jpg">
+						<img src="assets/img/portfolio/fortune2-1.png" alt="" data-at2x="assets/img/portfolio/1.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -186,18 +186,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box development" style="position: absolute; left: 255px; top: 0px;">
-						<img src="assets/img/portfolio/fortune1-1.png" alt="" data-at2x="assets/img/portfolio/2.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">chart화된 UI</a>
-								</p>
-							</div>
-						</div>
-					</div>
+			<!-- 일정 처음 들어간 부분 -->
 					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 0px;">
-						<img src="assets/img/portfolio/fortune2-1.png" alt="" data-at2x="assets/img/portfolio/3.jpg">
+						<img src="assets/img/portfolio/fortune1-1.png" alt="" data-at2x="assets/img/portfolio/3.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -206,46 +197,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box development" style="position: absolute; left: 15px; top: 175px;">
-						<img src="assets/img/portfolio/fortune2-2.png" alt="" data-at2x="assets/img/portfolio/4.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">여러일에 걸친 일정</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
-						<img src="assets/img/portfolio/Ybridge3-1.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">Processus dynamicus logo</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
-						<img src="assets/img/portfolio/fortune3-2.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">Processus dynamicus logo</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
-						<img src="assets/img/portfolio/Ybridge3-3.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">Processus dynamicus logo</a>
-								</p>
-							</div>
-						</div>
-					</div>
+			<!-- 일정 상세 페이지 -->
 					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
 						<img src="assets/img/portfolio/fortune3-4.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
 						<div class="portfolio-box-text-container">
@@ -256,47 +208,53 @@
 							</div>
 						</div>
 					</div>
-					
-					<div class="portfolio-box design"
-						style="position: absolute; left: 15px; top: 350px;">
-						<img src="assets/img/portfolio/fortune4.png" alt=""
-							data-at2x="assets/img/portfolio/7.jpg">
+			<!-- 히스토리 이미지 -->		
+					<div class="portfolio-box development" style="position: absolute; left: 15px; top: 175px;">
+						<img src="assets/img/portfolio/fortune2-2.png" alt="" data-at2x="assets/img/portfolio/4.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">March notare site</a>
+									<a href="#">여러일에 걸친 일정</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box development"
-						style="position: absolute; left: 255px; top: 350px;">
-						<img src="assets/img/portfolio/fortune5.png" alt=""
-							data-at2x="assets/img/portfolio/8.jpg">
+			<!-- 와이브릿지 처음 화면 -->		
+					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
+						<img src="assets/img/portfolio/Ybridge3-1.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Sit amet logo</a>
+									<a href="#">Processus dynamicus logo</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box branding"
-						style="position: absolute; left: 495px; top: 350px;">
-						<img src="assets/img/portfolio/fortune6-1.png" alt=""
-							data-at2x="assets/img/portfolio/9.jpg">
+			<!-- 공지사항  -->		
+					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
+						<img src="assets/img/portfolio/fortune3-2.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Lorem website</a>
+									<a href="#">Processus dynamicus logo</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box design"
-						style="position: absolute; left: 15px; top: 525px;">
-						<img src="assets/img/portfolio/fortune6-2.png" alt=""
-							data-at2x="assets/img/portfolio/10.jpg">
+			<!-- 와이브릿지 일정 -->		
+					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
+						<img src="assets/img/portfolio/Ybridge3-3.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">Processus dynamicus logo</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- 비었음 -->		
+					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
+						<img src="assets/img/portfolio/" alt="" data-at2x="assets/img/portfolio/6.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -305,10 +263,53 @@
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box development"
-						style="position: absolute; left: 255px; top: 525px;">
-						<img src="assets/img/portfolio/fortune6-3.png" alt=""
-							data-at2x="assets/img/portfolio/11.jpg">
+			<!-- 에센스  -->		
+					<div class="portfolio-box design" style="position: absolute; left: 15px; top: 350px;">
+						<img src="assets/img/portfolio/fortune4.png" alt="" data-at2x="assets/img/portfolio/7.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">March notare site</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- 사용 시스템 환경 -->		
+					<div class="portfolio-box development" style="position: absolute; left: 255px; top: 350px;">
+						<img src="assets/img/portfolio/fortune5.png" alt="" data-at2x="assets/img/portfolio/8.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">Sit amet logo</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- db1 -->		
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 350px;">
+						<img src="assets/img/portfolio/fortune6-1.png" alt="" data-at2x="assets/img/portfolio/9.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">Lorem website</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- db2 -->		
+					<div class="portfolio-box design" style="position: absolute; left: 15px; top: 525px;">
+						<img src="assets/img/portfolio/fortune6-2.png" alt="" data-at2x="assets/img/portfolio/10.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">Mirum est notare</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- db3 -->		
+					<div class="portfolio-box development" style="position: absolute; left: 255px; top: 525px;">
+						<img src="assets/img/portfolio/fortune6-3.png" alt="" data-at2x="assets/img/portfolio/11.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -317,10 +318,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box branding"
-						style="position: absolute; left: 495px; top: 525px;">
-						<img src="assets/img/portfolio/fortune6-4.png" alt=""
-							data-at2x="assets/img/portfolio/12.jpg">
+			<!-- db4 -->		
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 525px;">
+						<img src="assets/img/portfolio/fortune6-4.png" alt="" data-at2x="assets/img/portfolio/12.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -329,10 +329,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box branding"
-						style="position: absolute; left: 495px; top: 525px;">
-						<img src="assets/img/portfolio/fortune7.png" alt=""
-							data-at2x="assets/img/portfolio/12.jpg">
+			<!-- 비었음 -->		
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 525px;">
+						<img src="assets/img/portfolio/" alt="" data-at2x="assets/img/portfolio/12.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -341,10 +340,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box branding"
-						style="position: absolute; left: 495px; top: 525px;">
-						<img src="assets/img/portfolio/fortune8.png" alt=""
-							data-at2x="assets/img/portfolio/12.jpg">
+			<!-- 일정 -->		
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 525px;">
+						<img src="assets/img/portfolio/fortune8.png" alt="" data-at2x="assets/img/portfolio/12.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -353,7 +351,7 @@
 							</div>
 						</div>
 					</div>
-					
+			<!-- 17 -->		
 				</div>
 			</div>
 		</div>
