@@ -81,7 +81,7 @@
 	</filter-mapping>
 
 	<!-- 에러페이지처리 추가 (지율) -->
-	<!-- <error-page>
+	<error-page>
 		<error-code>400</error-code>
 		<location>/WEB-INF/views/error/400.jsp</location>
 	</error-page>
@@ -92,6 +92,6 @@
 	<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/error/500.jsp</location>
-	</error-page> -->
+	</error-page> 
 	
 </web-app>

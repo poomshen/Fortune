@@ -84,6 +84,7 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 	//온클릭 함수에 가져올 데이터들
 		if(progress_or_place==1){
 			swal('완료된 일정입니다.')
+			progress_test ="1";
 		}
 		$('#delete_btn').attr('type','button');
 		$('#update_btn').attr('type','button');
@@ -484,7 +485,7 @@ function loadCalendar(role1,role2) {
 	    
 	    select: function(start, end) {
 			//모달 띄우는 함수
-	    	
+	    	scheduleusers="";
 	    	var test = $('#modal_btn').click();
 	    	$('#ptag').empty();
 	    	$('#spantag').css("display","inline")
@@ -726,39 +727,42 @@ function loadCalendar(role1,role2) {
 	    	deleteEvent: {
 	            click: $('#delete_btn').click(function(){
 	            	if( $('#check').val() ){
-	            		var check = swal({
-	            			  title: "일정을 삭제 하시겠습니까?",
-	            			  text: "삭제된 데이터는 복구할 수 없습니다.",
-	            			  type: "warning",
-	            			  showCancelButton: true,
-	            			  confirmButtonColor: "#DD6B55",
-	            			  confirmButtonText: "삭제",
-	            			  cancelButtonText: "취소",
-	            			  showLoaderOnConfirm: true,
-	            			  closeOnConfirm: false
-	            			},
-	            			function(){
-	            			  var id = $('#detail_id').val();
-	            			  calendar.fullCalendar('removeEvents', id);
-	            			  $.ajax({
-	            				  type: 'post',
-	            				  url: 'deleteSchedule.ajax',
-	            				  data: {"id" : id},
-	            				  success : function(data) {
-	            					  console.log("삭제성공");
-	            					  fcontent();
-	            					  setTimeout(function(){
-	            						  swal("삭제 성공!", "선택된 일정이 삭제되었습니다.", "success");
-	            					  }, 0);
-	            				  },
-	            				  error:function(){
-	            					  swal("삭제 실패!","error발생", "error");
-	            				  }
-	            			  });
-	            			  
-	            			  $('#check').val("")
-	            			});
-	            		
+	            		if(before_progress==1){
+	            			swal('완료된 일정입니다.')
+	            		}else{
+		            		var check = swal({
+		            			  title: "일정을 삭제 하시겠습니까?",
+		            			  text: "삭제된 데이터는 복구할 수 없습니다.",
+		            			  type: "warning",
+		            			  showCancelButton: true,
+		            			  confirmButtonColor: "#DD6B55",
+		            			  confirmButtonText: "삭제",
+		            			  cancelButtonText: "취소",
+		            			  showLoaderOnConfirm: true,
+		            			  closeOnConfirm: false
+		            			},
+		            			function(){
+		            			  var id = $('#detail_id').val();
+		            			  calendar.fullCalendar('removeEvents', id);
+		            			  $.ajax({
+		            				  type: 'post',
+		            				  url: 'deleteSchedule.ajax',
+		            				  data: {"id" : id},
+		            				  success : function(data) {
+		            					  console.log("삭제성공");
+		            					  fcontent();
+		            					  setTimeout(function(){
+		            						  swal("삭제 성공!", "선택된 일정이 삭제되었습니다.", "success");
+		            					  }, 0);
+		            				  },
+		            				  error:function(){
+		            					  swal("삭제 실패!","error발생", "error");
+		            				  }
+		            			  });
+		            			  
+		            			  $('#check').val("")
+		            		});
+	            		}
 	            	}//check if문 끝
 	            })
 	        },
@@ -815,7 +819,6 @@ function loadCalendar(role1,role2) {
 	            	
 	            	swal({
 	            		  title: "수정 하시겠습니까?",
-	            		  text: "효율적인 업무 fortune",
 	            		  type: "info",
 	            		  showCancelButton: true,
 	            		  confirmButtonColor: "#DD6B55",
@@ -826,7 +829,7 @@ function loadCalendar(role1,role2) {
 	            		},
 	            		function(isConfirm){
 		            		if(isConfirm){
-		            		  swal("수정이 완료되었습니다.", "효율적인 업무 fortune", "success");
+		            		  swal("수정이 완료되었습니다.", "", "success");
 		            		  
 		            		  var id = $('#detail_id').val();
 		            		  var calEvent;
@@ -872,7 +875,6 @@ function loadCalendar(role1,role2) {
 	            	
 	            	swal({
 	            		  title: "수정 하시겠습니까?",
-	            		  text: "효율적인 업무 fortune",
 	            		  type: "info",
 	            		  showCancelButton: true,
 	            		  confirmButtonColor: "#DD6B55",
@@ -883,7 +885,7 @@ function loadCalendar(role1,role2) {
 	            		},
 	            		function(isConfirm){
 		            		if(isConfirm){
-		            			swal("수정이 완료되었습니다.", "효율적인 업무 fortune", "success");
+		            			swal("수정이 완료되었습니다.", "", "success");
 		            			
 			            		var id = $('#meet_detail_id').val();
 			            		var calEvent;
@@ -934,7 +936,6 @@ function loadCalendar(role1,role2) {
 	            
 	            	swal({
 	            		  title: "등록 하시겠습니까?",
-	            		  text: "효율적인 업무 fortune",
 	            		  type: "info",
 	            		  showCancelButton: true,
 	            		  confirmButtonColor: "#DD6B55",
@@ -973,7 +974,7 @@ function loadCalendar(role1,role2) {
 											"work_progress" : $('#progress_value').attr("value")
 											},
 									success : function(data) {
-										swal("등록성공", "효율적인 업무 fortune", "success")
+										swal("등록성공", "", "success")
 									}
 								});
 		            		}
