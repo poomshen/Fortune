@@ -44,13 +44,23 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">${noticeDetail.notice_text}</td>
+								<td colspan="4">
+									<br/>${noticeDetail.notice_text}
+								</td>
 							</tr>
 						</tfoot>
 					</table>
 				
 			</div>
-			
+<!-- 			<div class="row contatiner">
+				<div class="col-md-2"></div>
+				<div class="col-md-2 col-md-8 offset-md-2">				
+					<ul class="pager">
+						<li class="previous"><a href="#">Previous</a></li>
+						<li class="next"><a href="#">Next</a></li>
+					</ul>				
+				</div>
+			</div> -->
 			<!-- /.panel-body -->
 			<div class="form-group container" align="center">
 				<security:authorize access="hasAnyRole('ROLE_ADMIN')">
