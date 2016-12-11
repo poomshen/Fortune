@@ -20,6 +20,7 @@ import com.fortune.Table_DTO.Chart_Data_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.chart_DAO.IChart;
+import com.fortune.function_DTO.Pie_Data_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.member_DAO.IJoin;
 
@@ -36,7 +37,7 @@ public class Chart_Controller {
             throws ClassNotFoundException, SQLException{
 	
 		
-	      System.out.println("selectChart.ajax");
+	      System.out.println("selectChart.htm");
 	      System.out.println("chart_type : "+project_num);
 	      
 			//메뉴에 비동기 차트 가져오기
@@ -63,9 +64,11 @@ public class Chart_Controller {
 			model.addAttribute("eachChart_y",chart_y);
 			model.addAttribute("project_num",project_num);
 			model.addAttribute("project_name",project_name);
-			System.out.println("chart 각각 뿌려주는 컨트롤러 Chart_controller");
+			
+			
+
 	      
-	      return "chart";
+			return "chart";
 	      
 	}
 

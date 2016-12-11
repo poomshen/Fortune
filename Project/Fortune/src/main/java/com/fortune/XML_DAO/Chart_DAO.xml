@@ -20,9 +20,22 @@ on c.chart_date=m.chart_date where c.collabo_no=m.collabo_no) cd join collabo cl
 </select>
 
 <select id="selectSumSal" resultType="com.fortune.function_DTO.Pie_Data_DTO">
-select a.sum_sal,b.dept_name from 
-(select * from (select sum(collabo_sal)as sum_sal,collabo_req_id from collabo group by collabo_req_id) c join users u on c.collabo_req_id=u.user_id)
-a join (select d.dept_name,u.user_id from users u join dept d on u.dept_no=d.dept_no) b on a.user_id=b.user_id
+
+
+
+select distinct(bb.project_name),aa.collabo_sal
+from
+(
+
+select a.collabo_sal,a.collabo_req_no from
+(
+select sum(collabo_sal)as collabo_sal,collabo_req_no from collabo group by collabo_req_no
+)a join collabo_req cr on a.collabo_req_no=cr.collabo_req_no
+
+
+)
+aa join projectnameview bb on aa.collabo_req_no=bb.collabo_req_no
+
 </select>
 
 

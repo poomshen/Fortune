@@ -101,25 +101,7 @@ public class MemberController {
 			List<Select_Collabo_DTO> finishCollabo = proDao.finishCollaboList(result.getUser_id());
 			session.setAttribute("finishCollabo", finishCollabo);
 		}
-	
-		//사업규모 차트 가져오기 (추가 작업 : 이예지)
-		List<Pie_Data_DTO> plist = new ArrayList<Pie_Data_DTO>();
-		IChart cdao = sqlsession.getMapper(IChart.class);
-		plist = cdao.selectSumSal();
-		
-		ArrayList<String> pie_x = new ArrayList<String>();
-		ArrayList<Long> pie_y = new ArrayList<Long>();
-		long total_count = 0;
-		for(int i=0;i<plist.size();i++){
-			
-			pie_x.add(plist.get(i).getDept_name());
-			pie_y.add(plist.get(i).getSum_sal());
-			total_count+=plist.get(i).getSum_sal();
-		}
-		
-		model.addAttribute("pie_x",pie_x);
-		model.addAttribute("pie_y",pie_y);
-		model.addAttribute("total_count",total_count);
+
 		
 		//추가사항  
 		//로그인했을때 알림 체크한뒤 해당 알림 리스트를 session에 저장

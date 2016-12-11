@@ -28,6 +28,7 @@ import com.fortune.fileroom_DAO.IFileRoom;
 import com.fortune.function_DTO.All_Alarm_DTO;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
+import com.fortune.schedule_alarm_DAO.IScheduleAlarm;
 
 @Controller
 public class Alarm_Controller {
@@ -65,7 +66,7 @@ public class Alarm_Controller {
 		
 		All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
 		
-	
+		
 		
 		session.setAttribute("alarm", alist);
 		
@@ -134,5 +135,51 @@ public class Alarm_Controller {
 			return "alarm_success";
 	      
 	}
+	
+    @RequestMapping(value="select_comment_alarm.htm", method = RequestMethod.POST)
+    public String select_Comment_alarm(@RequestParam(value="schedule_no") int schedule_no,HttpSession session) 
+    		throws ClassNotFoundException, SQLException{
+        System.out.println("위치 : CommentController // 작업자: 이예지 // 내용 :회의 상세보기 클릭시 알림 삭제");        
+         
+        //알림 삭제하기
+        System.out.println("일정클릭시 알림삭제"+schedule_no);
+				
+		Join_DTO dto = (Join_DTO)session.getAttribute("info");
+	
+		IScheduleAlarm sche_alarm_DAO = sqlsession.getMapper(IScheduleAlarm.class);
+		
+		int result=sche_alarm_DAO.deleteScheAlarm(dto.getUser_id(),schedule_no);
+		
+		System.out.println("지운 결과 : "+result);
+		
+		IAlarm alarm_DAO = sqlsession.getMapper(IAlarm.class);
+		
+		List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+		
+		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
+		
+		All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+		
+		session.removeAttribute("alarm");
+		session.removeAttribute("totlCount");
+		session.removeAttribute("sch_alist");
+		
+		
+		session.setAttribute("alarm", alist);
+	
+		session.setAttribute("totalCount",tatalCount.getTotal_count());
+		
+		//추가작업 일정 알림 상세 리스트
+		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+		
+		sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+	
+		session.setAttribute("sch_alist", sch_alist);
+		
+
+		
+		return "newAlarm";
+	}
+    
 
 }
