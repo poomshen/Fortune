@@ -177,7 +177,7 @@
 				<div class="col-sm-12 portfolio-masonry"
 					style="position: relative; height: 700px;">
 					<div class="portfolio-box design" style="position: absolute; top: 0px;">
-						<img src="assets/img/portfolio/Ybridge1.png" alt="" data-at2x="assets/img/portfolio/1.jpg">
+						<img src="assets/img/portfolio/fortune1-1.png" alt="" data-at2x="assets/img/portfolio/1.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -187,7 +187,7 @@
 						</div>
 					</div>
 					<div class="portfolio-box development" style="position: absolute; left: 255px; top: 0px;">
-						<img src="assets/img/portfolio/fortune1.png" alt="" data-at2x="assets/img/portfolio/2.jpg">
+						<img src="assets/img/portfolio/fortune1-1.png" alt="" data-at2x="assets/img/portfolio/2.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -197,7 +197,7 @@
 						</div>
 					</div>
 					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 0px;">
-						<img src="assets/img/portfolio/Ybridge2.png" alt="" data-at2x="assets/img/portfolio/3.jpg">
+						<img src="assets/img/portfolio/fortune2-1.png" alt="" data-at2x="assets/img/portfolio/3.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -207,7 +207,7 @@
 						</div>
 					</div>
 					<div class="portfolio-box development" style="position: absolute; left: 15px; top: 175px;">
-						<img src="assets/img/portfolio/fortune2.png" alt="" data-at2x="assets/img/portfolio/4.jpg">
+						<img src="assets/img/portfolio/fortune2-2.png" alt="" data-at2x="assets/img/portfolio/4.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -217,7 +217,27 @@
 						</div>
 					</div>
 					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
-						<img src="assets/img/portfolio/5.jpg" alt="" data-at2x="assets/img/portfolio/5.jpg">
+						<img src="assets/img/portfolio/Ybridge3-1.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">Processus dynamicus logo</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
+						<img src="assets/img/portfolio/fortune3-2.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">Processus dynamicus logo</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
+						<img src="assets/img/portfolio/Ybridge3-3.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -227,7 +247,7 @@
 						</div>
 					</div>
 					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
-						<img src="assets/img/portfolio/6.jpg" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<img src="assets/img/portfolio/fortune3-4.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -237,10 +257,9 @@
 						</div>
 					</div>
 					
-					<!-- 
 					<div class="portfolio-box design"
 						style="position: absolute; left: 15px; top: 350px;">
-						<img src="assets/img/portfolio/7.jpg" alt=""
+						<img src="assets/img/portfolio/fortune4.png" alt=""
 							data-at2x="assets/img/portfolio/7.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
@@ -252,7 +271,7 @@
 					</div>
 					<div class="portfolio-box development"
 						style="position: absolute; left: 255px; top: 350px;">
-						<img src="assets/img/portfolio/8.jpg" alt=""
+						<img src="assets/img/portfolio/fortune5.png" alt=""
 							data-at2x="assets/img/portfolio/8.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
@@ -264,7 +283,7 @@
 					</div>
 					<div class="portfolio-box branding"
 						style="position: absolute; left: 495px; top: 350px;">
-						<img src="assets/img/portfolio/9.jpg" alt=""
+						<img src="assets/img/portfolio/fortune6-1.png" alt=""
 							data-at2x="assets/img/portfolio/9.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
@@ -276,7 +295,7 @@
 					</div>
 					<div class="portfolio-box design"
 						style="position: absolute; left: 15px; top: 525px;">
-						<img src="assets/img/portfolio/10.jpg" alt=""
+						<img src="assets/img/portfolio/fortune6-2.png" alt=""
 							data-at2x="assets/img/portfolio/10.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
@@ -288,7 +307,7 @@
 					</div>
 					<div class="portfolio-box development"
 						style="position: absolute; left: 255px; top: 525px;">
-						<img src="assets/img/portfolio/11.jpg" alt=""
+						<img src="assets/img/portfolio/fortune6-3.png" alt=""
 							data-at2x="assets/img/portfolio/11.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
@@ -300,7 +319,7 @@
 					</div>
 					<div class="portfolio-box branding"
 						style="position: absolute; left: 495px; top: 525px;">
-						<img src="assets/img/portfolio/12.jpg" alt=""
+						<img src="assets/img/portfolio/fortune6-4.png" alt=""
 							data-at2x="assets/img/portfolio/12.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
@@ -310,7 +329,31 @@
 							</div>
 						</div>
 					</div>
-					 -->
+					<div class="portfolio-box branding"
+						style="position: absolute; left: 495px; top: 525px;">
+						<img src="assets/img/portfolio/fortune7.png" alt=""
+							data-at2x="assets/img/portfolio/12.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">Sit website logo</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="portfolio-box branding"
+						style="position: absolute; left: 495px; top: 525px;">
+						<img src="assets/img/portfolio/fortune8.png" alt=""
+							data-at2x="assets/img/portfolio/12.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">Sit website logo</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					
 				</div>
 			</div>
 		</div>
