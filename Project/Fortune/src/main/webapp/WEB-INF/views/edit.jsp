@@ -16,7 +16,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>[효율적인업무 For春]</title>
+
+<!-- Favicon and touch icons -->
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/ico/four_leaf_clover2.png">
+
+
 <script type="text/javascript">
    var check = <%=check%>;
    if(check=="1"){
