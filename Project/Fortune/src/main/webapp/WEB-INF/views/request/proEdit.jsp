@@ -5,6 +5,8 @@
 
 
 <!-- 받은 요청함 상세보기(진행중 X) -->
+<script src="alert_style/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 <script type="text/javascript">
 $(function(){
    
@@ -76,7 +78,7 @@ $(function(){
         $('#datecount').val((( date2 - date1 ) / (60*60*24*1000))+1); 
       
           if(date2 - date1 < 0){
-                   alert("끝 날짜가 시작날짜보다 이전일수 없습니다"); 
+                   swal("끝 날짜가 시작날짜보다 이전일수 없습니다"); 
                             
                   return false;
                
@@ -130,7 +132,7 @@ $(function(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>작성일</label>
 		</div>
 		<div class="col-sm-4">
-			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="${list.collabo_req_date}">
+			<input style="color:#666;" type="text" class="form-control" readonly="readonly" value="  ${fn: substring(list.collabo_req_date,0,16)} ">
 		</div>
 		<div class="col-sm-2" style="margin-top: 10px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>상태</label>

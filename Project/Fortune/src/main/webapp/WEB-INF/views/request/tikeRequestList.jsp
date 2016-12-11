@@ -457,21 +457,21 @@ function proAdd(){
 	 
 	 
  	if($('#startDate').val() == ""){
- 		alert(" 날짜 입력해주세요");
+ 		swal(" 날짜 입력해주세요");
  		$('#startDate').focus();
  		return false;
  	}
  	else if($('#endDate').val() == "" ){
- 		alert(" 날짜 입력해주세요");
+ 		swal(" 날짜 입력해주세요");
  		$('#endDate').focus();
  		return false;
  	}else if($('#collabo_sal').val() == "" ){
- 		alert("예상수익 입력해주세요");
+ 		swal("예상수익 입력해주세요");
  		$('#collabo_sal').focus();
  		return false;
 	}
  	else {
- 		alert("완료");
+ 		swal("완료");
  		proaddform.submit();
  		return true;
  	}
@@ -480,6 +480,8 @@ function proAdd(){
  }
 
 </script>
+<script src="alert_style/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 
 <!--전체 div영역 -->
 <div class="container" id="requestlist" style="margin-top: 20px">
@@ -573,7 +575,7 @@ function proAdd(){
 
 								</div>
 								<h6>제목 : ${n.collabo_req_title}</h6>
-								<h6 style="font-weight: inherit;">작성일:${n.collabo_req_date}</h6>
+								<h6 style="font-weight: inherit;">작성일: ${fn: substring(n.collabo_req_date,0,16) }</h6>
 
 								<%-- <input type="hidden" id="hiddendetail${n.collabo_req_index}" value="${n.collabo_req_index}"><input type="hidden" id="hiddendetailvalue" value="${n.collabo_req_index}"> --%>
 

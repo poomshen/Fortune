@@ -78,18 +78,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
+<script src="alert_style/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 <script type="text/javascript">
 	
 	function promodify() {
 		if ($('#collabo_req_title').val() == "") {
-			alert("제목 입력바랍니다 ");
+			swal("제목 입력바랍니다 ");
 			$('#collabo_req_title').focus();
 			return false;
 			
 
 		} else if ($('#collabo_req_text').val() == "") {
-			alert("내용 입력바랍니다 ");
+			swal("내용 입력바랍니다 ");
 			$('#collabo_req_text').focus();
 			return false;
 			
