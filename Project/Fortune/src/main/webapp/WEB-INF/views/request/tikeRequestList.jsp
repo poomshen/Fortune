@@ -566,8 +566,7 @@ function proAdd(){
 								 					"border:3px solid #ddd; margin-right:0px"
 												</c:otherwise>
 											</c:choose>>
-									<img src="images/언니회색.jpg"
-										style="background: no-repeat center; width: 100%; height: 100%">
+										<img src="images/회색돋보기.png" style="background:no-repeat center;width: 30px;height: 40px;padding-top: 10px;">
 									<!-- 사람 아이콘에 마우스 갖다댈시에 + 모양 띄우기-->
 									<div class="photo-overlay">
 										<span id="${req}" onclick="detail(${req},'null')"class="plus">+</span>

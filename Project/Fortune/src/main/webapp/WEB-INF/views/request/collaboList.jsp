@@ -373,8 +373,7 @@ h6 {
                               <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
                                     <div class="photo"
                                        style="border: 3px solid #1e851f; margin-right: 0px">
-                                       <img src="images/언니회색.jpg"
-                                          style="background: no-repeat center; width: 100%; height: 100%">
+                                     	<img src="images/회색돋보기.png" style="background:no-repeat center;width: 30px;height: 40px;padding-top: 10px;">
                                        <!-- 사람 아이콘에 마우스 갖다댈시에 + 모양 띄우기-->
                                        <div class="photo-overlay">
                                           <span id="${n.collabo_req_index}" onclick="detail(${n.collabo_req_index},${collabo_no})" class="plus">+</span>
