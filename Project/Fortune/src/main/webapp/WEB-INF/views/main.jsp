@@ -232,7 +232,7 @@
 		     	                   allowPointSelect: true,
 		     	                   cursor: 'pointer',
 		     	                   dataLabels: {
-		     	                       enabled: false
+		     	                       enabled: true
 		     	                   },
 		     	                   showInLegend: true,
 		     	                   slicedOffset: 10
