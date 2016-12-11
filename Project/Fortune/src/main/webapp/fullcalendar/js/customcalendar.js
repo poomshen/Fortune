@@ -178,6 +178,27 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 //회의일정의 상세보기 페이지
 function detail2(id, title, text, start, end, userids, progress_or_place){
 	
+	
+ 	$.ajax({
+		url : 'select_comment_alarm.htm',
+		type : 'post',
+		data : 'schedule_no='+ id,
+		success : function(data){
+			
+			  console.log("헤더 업데이트 성공");
+			  
+			  
+			  console.log(data);
+			  $('#alarm').empty();  
+			  $('#alarm').html(data);
+			  
+		}
+	});
+	
+	
+	
+	
+	
 	$('#meet_delete_btn').attr('type','button');
 	$('#meet_update_btn').attr('type','button');
 	$('#meet_updateok_btn').attr('type','hidden');
@@ -216,19 +237,7 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
  	$('#usersdiv2').val(contentck)
  	
  	//회의 상세보기 클릭시 알림 delete
- 	$.ajax({
-		url : 'select_comment_alarm.ajax',
-		type : 'post',
-		data : 'schedule_no='+ id,
-		success : function(data) {
-			
-			  console.log("헤더 업데이트 성공");
-			  console.log(data);
-			  $('#alarm').empty();  
-			  $('#alarm').html(data);
-			  
-		}
-	});
+
  	
 	 
 

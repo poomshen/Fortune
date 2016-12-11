@@ -21,7 +21,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>[효율적인업무 For春]</title>
 
 
 </head>
@@ -44,12 +44,14 @@
 <script>
 
 //모든 프로젝트의 진척률을 나타내는 차트
-<%-- 
+
 	$(function (){
 
 		var chart_x=[];
 		var chart_y=[];
 		var chart_id=[];
+		var pie_x=[];
+		var pie_y=[];
 	    
 	    $.ajax({
 	        
@@ -62,8 +64,8 @@
 	            
 	               $.each(data,function(){ 
 	                  
-	            	
-	            	  chart_x.push(this.collabo_req_title);
+	            	  console.log(data);
+	            	  chart_x.push(this.project_name);
 	                  chart_y.push(this.chart_progress);
 	                  chart_id.push(this.collabo_no);
 	                  
@@ -125,6 +127,21 @@
 	   	            
 	   	        
 	   	       });
+	               
+	               
+	               
+	               
+<%-- 	       
+	                --%>
+	               
+	               
+	               
+	               
+	               
+	               
+	               
+	               
+	               
 	        	    $.ajax({
 	        	        
 	        	        type:"post",
@@ -136,7 +153,7 @@
 	        	        },
 	          	        success:function(data){
 	        	        
-
+							
 	        	           $('#kk').html(data);
 	        	          
 	        	      
@@ -173,76 +190,74 @@
 	    
 	    });   
 	   
+	    
+   		$.ajax({
+	        
+	        type:"get",
+	        dataType: "json",
+	        url:"pieChart.ajax",
+	        success:function(data){
+	        	
+	   var pie=new Array();
 
-
-	    /* 
-		
-
-
-
- 	     */
-
- 	
- 	  	//모든 프로젝트의 x축 클릭시 상세 차트를 비동기로 불러오는 함수
-  	  /* $('.highcharts-xAxis-labels text').on('click', function () {
- 	       alert("aa");
- 	       console.log($(this).text());
-
- 	   });  */
+	            console.log(data);
+	               $.each(data,function(){ 
+	                  
+	            	   
+	            	   	 var sub_pie=new Array();
+	            	   	 sub_pie.push(this.project_name);
+	            	   	 sub_pie.push(this.collabo_sal);
+	            		 pie.push(sub_pie);
+		                  
+	                  
+	               });
+	               
+	               
+	           	//도넛형 차트
+		     	      Highcharts.chart('ll', {
+		     	           chart: {
+		     	               plotBackgroundColor: null,
+		     	               plotBorderWidth: null,
+		     	               plotShadow: false,
+		     	               type: 'pie'
+		     	           },
+		     	           title: {
+		     	               text: '사업규모(원)'
+		     	           },
+		     	           tooltip: {
+		     	        	   dataFormat:'{series.name}: <b>{point.percentage:f}원</b>'
+		     	           },
+		     	           plotOptions: {
+		     	               pie: {
+		     	                   allowPointSelect: true,
+		     	                   cursor: 'pointer',
+		     	                   dataLabels: {
+		     	                       enabled: false
+		     	                   },
+		     	                   showInLegend: true,
+		     	                   slicedOffset: 10
+		     	               }
+		     	           },
+		     	          series: [
+		     	        	  
+		     	             {
+		     	             
+		     	                type:"pie",
+		     	                sliced:true,
+		     	                name:pie_x,
+		     	                data:pie
+		     	             
+		     	             }]
+		     	       }); 
+	               
+		     	    
+	        }
 	
-	
-	//도넛형 차트
-	      Highcharts.chart('ll', {
-	           chart: {
-	               plotBackgroundColor: null,
-	               plotBorderWidth: null,
-	               plotShadow: false,
-	               type: 'pie'
-	           },
-	           title: {
-	               text: '사업규모'
-	           },
-	           tooltip: {
-	        	   dataFormat:'{series.name}: <b>{point.percentage:f}%</b>'
-	           },
-	           plotOptions: {
-	               pie: {
-	                   allowPointSelect: true,
-	                   cursor: 'pointer',
-	                   dataLabels: {
-	                       enabled: false
-	                   },
-	                   showInLegend: true,
-	                   slicedOffset: 10
-	               }
-	           },
-	           series: [{
-	               name: '사업규모',
-	               colorByPoint: true,
-	               data: [{
-	                    name: '<%=pie_x.get(0)%>',
-	                    y: (<%=pie_y.get(0)%>/<%=total_pie%>)*100
-	                }, {
-	                    name: '<%=pie_x.get(1)%>',
-	                    y: (<%=pie_y.get(1)%>/<%=total_pie%>)*100
-	                },
-	                	{
-	                    name: '<%=pie_x.get(2)%>',
-	                    y: (<%=pie_y.get(2)%>/<%=total_pie%>)*100
-	                }, {
-	                    name: '<%=pie_x.get(3)%>',
-	                    y: (<%=pie_y.get(3)%>/<%=total_pie%>)*100,
-	                sliced: true,
-	                selected: true
-	                }]
-	           }]
-	       });
+
 	   });
 	   
-	   
-	   
- --%>
-	  	
+
+	  });
 </script>
 <body>
 	<div class="container">
@@ -266,7 +281,7 @@
 			</div>
 
             <div class="row grid-columns"style="width:1000px">
-				<div id="kk" style="height:280px" class="col-md-8 col">
+				<div id="kk" style="height:280px" class="col-md-8 colg">
 					<div>
 						<b>2</b>
 						위의 각 프로젝트 x축 클릭시 상세 차트( 비동기 )화면

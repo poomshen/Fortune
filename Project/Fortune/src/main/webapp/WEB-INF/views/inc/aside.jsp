@@ -42,7 +42,7 @@
                             	<security:authorize access="hasAnyRole('ROLE_MGR','ROLE_USER')">
                                 <li>
 
-                                 <a href="responseList_ver1.htm"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>MY 프로젝트</span></a>
+                                 <a class="hvr-grow-shadow" href="responseList_ver1.htm"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>MY 프로젝트</span></a>
 
                                 </li>
                                 </security:authorize>

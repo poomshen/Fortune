@@ -9,6 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>[효율적인업무 For春]</title>
 
+<!-- Favicon and touch icons -->
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/ico/four_leaf_clover2.png">
+
 <!-- Bootstrap Core CSS -->
 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">

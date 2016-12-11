@@ -7,11 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- chart 체크 -->
  <select id="selectChartAll" resultType="com.fortune.Table_DTO.Chart_Data_DTO">
  
-select cdl.chart_date,cdl.chart_progress,cdl.chart_total_date,cr.collabo_req_title,cdl.collabo_no from 
-(select cd.chart_date,cd.chart_progress,cd.chart_total_date,cd.collabo_no,cl.collabo_req_index from (select m.chart_date,c.collabo_no,c.chart_progress,c.chart_total_date,c.chart_seq from CHART_DATA c
-join (select max(chart_date)as chart_date,collabo_no from chart_data group by collabo_no)m 
-on c.chart_date=m.chart_date where c.collabo_no=m.collabo_no) cd join collabo cl on cd.collabo_no = cl.collabo_no) cdl join collabo_req cr on cdl.collabo_req_index = cr.collabo_req_index 
-
+select distinct( bb.project_name),aa.chart_progress,aa.collabo_no from 
+(
+select a.chart_progress,a.collabo_no,cb.collabo_req_no 
+from (select max(chart_progress)as chart_progress,collabo_no from chart_data group by collabo_no)
+a join (select c.collabo_no,b.collabo_req_no from collabo c join collabo_req b on c.collabo_req_no=b.collabo_req_no) cb on a.collabo_no=cb.collabo_no
+)aa join projectnameview bb on aa.collabo_req_no=bb.collabo_req_no
  </select>
  
 <!-- chart  추가 -->
@@ -20,9 +21,22 @@ on c.chart_date=m.chart_date where c.collabo_no=m.collabo_no) cd join collabo cl
 </select>
 
 <select id="selectSumSal" resultType="com.fortune.function_DTO.Pie_Data_DTO">
-select a.sum_sal,b.dept_name from 
-(select * from (select sum(collabo_sal)as sum_sal,collabo_req_id from collabo group by collabo_req_id) c join users u on c.collabo_req_id=u.user_id)
-a join (select d.dept_name,u.user_id from users u join dept d on u.dept_no=d.dept_no) b on a.user_id=b.user_id
+
+
+
+select distinct(bb.project_name),aa.collabo_sal
+from
+(
+
+select a.collabo_sal,a.collabo_req_no from
+(
+select sum(collabo_sal)as collabo_sal,collabo_req_no from collabo group by collabo_req_no
+)a join collabo_req cr on a.collabo_req_no=cr.collabo_req_no
+
+
+)
+aa join projectnameview bb on aa.collabo_req_no=bb.collabo_req_no
+
 </select>
 
 

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fortune.Table_DTO.Chart_Data_DTO;
 import com.fortune.chart_DAO.IChart;
+import com.fortune.function_DTO.Pie_Data_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 
 @Controller
@@ -28,23 +29,43 @@ public class AlarmAjax_Controller {
 	public SqlSession sqlsession;
 	
 	@RequestMapping(value="/totalChart.ajax")
-	public @ResponseBody List<Chart_Data_DTO> geId(HttpServletRequest request, Model model){
+	public @ResponseBody List<Chart_Data_DTO> totalChart(HttpServletRequest request, Model model){
 		System.out.println("totalChart.ajax");
 		
 		//메뉴에 차트 가져오기(추가작업 : 이예지)
-		//pie차트 가져오기 2016/12/08
+		
 		IChart cdao = sqlsession.getMapper(IChart.class);
 		List<Chart_Data_DTO> clist = new ArrayList<Chart_Data_DTO>();
 		
 		clist=cdao.selectChartAll();
 		System.out.println("clist"+clist.size());
 		
-		
 	
 		
 		return clist;
 	}
 	
+	
+	@RequestMapping(value="/pieChart.ajax")
+	public @ResponseBody List<Pie_Data_DTO> pieChart(HttpServletRequest request, Model model){
+		System.out.println("pieChart.ajax");
+
+		
+		
+		//사업규모 차트 가져오기 (추가 작업 : 이예지)
+		IChart cdao = sqlsession.getMapper(IChart.class);
+		List<Pie_Data_DTO> plist = new ArrayList<Pie_Data_DTO>();
+		plist = cdao.selectSumSal();
+		
+		model.addAttribute("plist",plist);
+		
+		System.out.println("pieChart controller");
+		
+	
+	
+		
+		return plist;
+	}
 	
 
 	

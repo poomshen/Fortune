@@ -320,7 +320,7 @@ function post_request_update(){
 추가내용 : css 전체적으로 변경
  -->
 
-<title>Insert title here</title>
+<title>[효율적인업무 For春]</title>
 </head>
 <body>
 
@@ -391,7 +391,7 @@ function post_request_update(){
 
 											</c:choose>
 										>
-                 							<img src="images/언니회색.jpg" style="background:no-repeat center;width:100%; height: 100%">
+                 							<img src="images/회색돋보기.png" style="background:no-repeat center;width: 30px;height: 40px;padding-top: 10px;">
          <!-- 사람 아이콘에 마우스 갖다댈시에 + 모양 띄우기-->
                     							<div class="photo-overlay" >
                         							<span id="${n.collabo_req_index}" class="plus">+</span>
