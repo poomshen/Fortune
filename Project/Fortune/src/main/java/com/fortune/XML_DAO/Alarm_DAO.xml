@@ -26,8 +26,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  </select>
  
  <!-- 알림 total count 가져오기 -->
- <select id="totalCount" resultType="Integer">
- 	select count(*) from alarm where USER_ID=#{user_id} 
+ <select id="totalCount" resultType="com.fortune.function_DTO.All_Alarm_DTO">
+ 	select count(*) as total_count from alarm where USER_ID=#{user_id} 
  </select>
  
 <select id="checkScheduleAlarm" resultType="com.fortune.function_DTO.Schedule_AlarmList_DTO">

@@ -27,6 +27,7 @@ import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.Table_DTO.Team_DTO;
 import com.fortune.alarm_DAO.IAlarm;
 import com.fortune.chart_DAO.IChart;
+import com.fortune.function_DTO.All_Alarm_DTO;
 import com.fortune.function_DTO.Pie_Data_DTO;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
@@ -129,10 +130,10 @@ public class MemberController {
 		
 		alist = adao.checkAlarmAll(user_id);
 		
-		int tatalCount = adao.totalCount(user_id);
+		All_Alarm_DTO tatalCount = adao.totalCount(user_id);
 		
 		session.setAttribute("alarm", alist);
-		session.setAttribute("totalCount", tatalCount);	
+		session.setAttribute("totalCount", tatalCount.getTotal_count());	
 		
 		//일정 알림 (작성자 : 이예지)
 		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();

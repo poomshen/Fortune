@@ -23,6 +23,7 @@ import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
 import com.fortune.accept_alarm_DAO.IAcceptAlarm;
 import com.fortune.alarm_DAO.IAlarm;
+import com.fortune.function_DTO.All_Alarm_DTO;
 import com.fortune.function_DTO.ProgectName_DTO;
 import com.fortune.function_DTO.Schedule_AlarmList_DTO;
 import com.fortune.function_DTO.Search_Page_DTO;
@@ -221,13 +222,13 @@ public class ProController {
 			
 			alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
 			
-			int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+			All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
 			
 		
 			
 			session.setAttribute("alarm", alist);
 			
-			session.setAttribute("totalCount",tatalCount);
+			session.setAttribute("totalCount",tatalCount.getTotal_count());
 	        
 			//추가 작업
 			List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
@@ -278,13 +279,13 @@ public class ProController {
 			
 			alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
 			
-			int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+			All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
 			
 		
 			
 			session.setAttribute("alarm", alist);
 			
-			session.setAttribute("totalCount",tatalCount);
+			session.setAttribute("totalCount",tatalCount.getTotal_count());
 	        
 			//추가 작업
 			List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
@@ -344,11 +345,11 @@ public class ProController {
 		
 		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
 		
-		int tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+		All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
 			
 		session.setAttribute("alarm", alist);
 		
-		session.setAttribute("totalCount",tatalCount);
+		session.setAttribute("totalCount",tatalCount.getTotal_count());
         
 		//추가 작업
 		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();

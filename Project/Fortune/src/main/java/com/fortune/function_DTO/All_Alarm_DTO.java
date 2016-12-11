@@ -7,6 +7,7 @@ public class All_Alarm_DTO {
 	private int collabo_req_index;
 	private int collabo_req_no; 
 	private String user_id;
+	private int total_count;
 	
 	
 	public int getAlarm_index() {
@@ -44,6 +45,12 @@ public class All_Alarm_DTO {
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	public int getTotal_count() {
+		return total_count;
+	}
+	public void setTotal_count(int total_count) {
+		this.total_count = total_count;
 	}
 	
 	
