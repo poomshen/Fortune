@@ -6,26 +6,26 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">[공지사항 글쓰기]</h1>
+		<h1 class="page-header">[공지사항]</h1>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 <div class="row">
 	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">안녕하세요, 공지사항을 써봅시다</div>
+		<!-- <div class="panel panel-default"> -->
+			<!-- <div class="panel-heading">안녕하세요, 공지사항을 써봅시다</div> -->
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-12">
 						<form:form role="form" action="" method="post" enctype="multipart/form-data">
 							<div class="form-group">
-								<input class="form-control" placeholder="제목을 작성해주세요." type="text" name="notice_title" id="notice_title">
+								<input class="form-control" placeholder="제목을 작성해주세요." type="text" name="notice_title" id="notice_title" style="color: #666;">
 									<form:errors path="notice_title"/>
 							</div>
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<p class="form-control-static">admin@fortune.com</p>
-							</div>
+							</div> -->
 							<div class="form-group">
 							<input type="file" name="file" id="File">
 							</div>
@@ -46,9 +46,9 @@
 					</div>
 				</div>
 				<!-- /.row (nested) -->
-			</div>
+			
 			<!-- /.panel-body -->
-		</div>
+		
 		<!-- /.panel -->
 	</div>
 	<!-- /.col-lg-12 -->

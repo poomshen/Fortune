@@ -1,3 +1,9 @@
+<!-- 
+작성자  : 김지현
+최초작업일 : 2016/12/10
+최종수정일 : 2016/12/10
+작업내용 : 회원 리스트를 테이블 형식으로 보여주는 page
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

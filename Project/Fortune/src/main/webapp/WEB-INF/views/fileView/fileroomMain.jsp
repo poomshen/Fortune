@@ -18,38 +18,11 @@
 	<script src="<%=request.getContextPath() %>/js/jQuery.MultiFile.min.js"></script>
 </head>
 
-<style type="text/css" >
-.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
-	position: fixed;
-	left:0;
-	right:0;
-	top:0;
-	bottom:0;
-	background: rgba(0,0,0,0.2); /*not in ie */
-	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
-}
-.wrap-loading div{ /*로딩 이미지*/
-	position: fixed;
-	top:50%;
-	left:50%;
-	margin-left: -21px;
-	margin-top: -21px;
-}
-.display-none{ /*감추기*/
-	display:none;
-}  
-</style>
-
 <body class="skin-4">
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">[자료실]</h1>
 		</div>
-	</div>
-	
-	<!-- 로딩 이미지 -->
-	<div class="wrap-loading display-none">
-    	<div><img src="./images/default.gif" style="width: 50; height: 50px;" /></div>
 	</div>
 	
 	<div>
@@ -76,14 +49,18 @@
 		<!-- 파일 검색 -->
 		<div style="float: right; margin-right: 15px;">
 			<form name="searchform" id="searchform" action="searchfile.htm" method="get">
-				<select name="selectvalue" id="selectvalue" class="cd-select">
+				<select name="selectvalue" id="selectvalue" class="form-control" style="width: 30%; display: inline; font-size: 12px; color: #666;">
 					<option style="text-align:center" value="file_room_name">파일이름</option>
 					<option style="text-align:center" value="file_room_date">등록날짜</option>
 				</select>
-				<input type="text" name="searchvalue">
+				<input type="text" name="searchvalue" class="form-control" style="width: 50%; display: inline; font-size: 12px; color: #666;">
 				<input type="hidden" id="collabo_no" name="collabo_no" value="${collabo_no}">
 				<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
 			</form>
+		</div>
+		<!-- 일정 보기 -->
+		<div style="float: left; margin-left: 10px;">
+				<input type="button" class="btn btn-primary" onclick="calendar_btn()" value="일정"/><br>
 		</div>
 	</div>
 	
@@ -305,6 +282,12 @@ $(function() {
 				output(data);
 				dragtest();
 			},
+			beforeSend:function(){
+		        $('.wrap-loading').removeClass('display-none');
+		    },
+		    complete:function(){
+		        $('.wrap-loading').addClass('display-none');
+		    },
 			error : function(e) {
 				console.log("error");
 				console.log(e);
@@ -385,5 +368,16 @@ function output(data) {
 function indexselect(index) {
 	$('#deletename').val($('#deletefilename'+index).val());
 }
+
+
+//켈린더 페이지로 이동하는 버튼, 작업자: 이명철, 작업일: 12-09,
+function calendar_btn(){
+	location.href='schedule.htm?collabo_no=${collabo_no}';
+}
+
+
+
+
+
 </script>
 </html>

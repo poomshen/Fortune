@@ -4,15 +4,15 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">[공지사항 상세페이지]</h1>
+		<h1 class="page-header">[공지사항]</h1>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 <div class="row">
 	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">안녕하세요, 관리자의 공지사항 상세보기랍니다~</div>
+	<!-- 	<div class="panel panel-default"> -->
+			<!-- <div class="panel-heading">안녕하세요, 관리자의 공지사항 상세보기랍니다~</div> -->
 			<div class="panel-body">
 				<div class="dataTable_wrapper">
 					<table class="table table-striped table-bordered table-hover"
@@ -50,7 +50,7 @@
 							</tr>
 						</tfoot>
 					</table>
-				</div>
+				
 			</div>
 <!-- 			<div class="row contatiner">
 				<div class="col-md-2"></div>

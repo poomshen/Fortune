@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
@@ -64,8 +63,8 @@ h6 {
 	request.setCharacterEncoding("UTF-8");
 	String selectId = (String) request.getAttribute("accept_selectId");
 %>
-<script type="text/javascript">
 
+<script type="text/javascript">
 /* 
  작성자 : 이예지
  추가작업 :카드형태의 dropdown 함수 
@@ -158,12 +157,18 @@ function detail(req,collabo_no){
  				"collabo_no":collabo_no
  			},
  		    success:function(data){ 
-				$("#detail").html(data); 
+				$("#detail").html(data);
 				$('#myModal3').modal('show');
  		     },
  			error: function(){						
  				alert('Error while request..'	);
- 			}
+ 			},
+	       beforeSend:function(){
+	           $('.wrap-loading').removeClass('display-none');
+	       },
+	       complete:function(){
+	           $('.wrap-loading').addClass('display-none');
+	       }
  		});
 	}
 
@@ -178,9 +183,10 @@ function detail(req,collabo_no){
  	   	 $.ajax({
  	   		 
  	 			type: "get",
- 	 			url:  "ProDetail.htm",
+ 	 			url:  "ProDetail2.htm",
  	 			cache: false,				
- 	 			data:"collabo_req_index="+a,
+ 	 			data:{"collabo_req_index" : a,
+ 	 				"dept_no":${sessionScope.info.dept_no}},
  	 		    success:function(data){ //callback  
  	 		  
  	 		    	$("#detail").html(data); 
@@ -189,7 +195,13 @@ function detail(req,collabo_no){
  	 		     },
  	 			error: function(){						
  	 				alert("Error while request.."	);
- 	 			}
+ 	 			},
+ 	 	      beforeSend:function(){
+ 	 	           $('.wrap-loading').removeClass('display-none');
+ 	 	       },
+ 	 	       complete:function(){
+ 	 	           $('.wrap-loading').addClass('display-none');
+ 	 	       }
  	 		});
  	}
      
@@ -224,14 +236,13 @@ function detail(req,collabo_no){
      //거절 사유를 val 로 받아서 사용하였습니다.
      function refuseReqCollabo(a){
     	 swal({
-    		  title: "거절 합니다!",
-    		  text: "합당한 거절사유:",
+    		  title: "거절 사유",
     		  type: "input",
     		  showCancelButton: true,
     		  closeOnConfirm: false,
     		  showLoaderOnConfirm: true,
     		  animation: "slide-from-top",
-    		  inputPlaceholder: "거절사유를 입력 해주세요"
+    		  inputPlaceholder: "거절사유를 입력 하세요"
     		},
     		function(inputValue){
     		  if (inputValue === false) return false;
@@ -241,16 +252,18 @@ function detail(req,collabo_no){
     		    return false
     		  }else{
     		 setTimeout(function(){
+    		 		$('#myModal3').modal("hide");
+    		 		$('#myModal2').modal("hide");
     			  $.get("refuse.htm", {collabo_req_index:a ,
     			  collabo_req_text:inputValue,
-    			  	pg: "${to_page}",
     				st: "${st_query}",
     				me: "${memo}", 
-    				se: "${search}"}, function(data, textStatus, req) {
-    		 		$(".requestpage").html(data); 
-    		 		 swal("거절성공!", "거절사유: " + inputValue, "success");
+    				se: "${search}"},
+    				function(data, textStatus, req) {
+    		 		$(".requestpage").html(data);
+    		 		swal("처리완료", "", "success");
     			  })
-    		 	},2000);
+    		 	},0);
     		  }
     		  
     		});
@@ -273,7 +286,7 @@ function detail(req,collabo_no){
 		
    			})
    		}else{
-   		$.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
+   		$.get("requestList2.htm",{st :state,state:state}, function(data, textStatus, req) {
    			$(".requestpage").html(data);
    			$("#"+state).addClass('active');
    			$("#states").val(state);
@@ -297,8 +310,8 @@ function detail(req,collabo_no){
 	 		    
 	 		    	
 	 		    	$(".requestpage").html(data);
-	 		    	$("#${state}").addClass('active');
-	 				$("#states").val('${state}')
+	 		    	$("#전체").addClass('active');
+ 	 				$("#states").val('전체');
 	 		    
 	 		    },
 	 			error: function(){						
@@ -312,20 +325,44 @@ function detail(req,collabo_no){
    		console.log(index);
    		detailReqCollabo(index);
     }
-     
+  
 //페이지 처리
-function pazingBtn(page){
+function pazingBtn(page,searchval,memoval){
 	if($("#states").val() == '전체'){
 	 	$.get("requestList2.htm",{pg:page,
 				  st: '${st_query}',
-				  me: "${memo}", 
-				  se: "${search}",
+				  me: memoval, 
+				  se: searchval,
 				state:$("#states").val()}, function(data, textStatus, req) {
 			$('.requestpage').html(data);
 			$("#${state}").addClass('active');
 			$("#states").val('${state}');
 	 		});
-		}else{
+		}else if($("#states").val() == '대기' || $("#states").val() == '수락' || $("#states").val() == '거절' || $("#states").val() == '완료'){
+    		
+    		$.ajax({
+  	   		 
+ 	 			type: "get",
+ 	 			url:  "requestList2.htm",
+ 	 			cache: false,				
+ 	 			data:{pg:page,
+ 	 				  st: $("#states").val(),
+ 	 				  me: "${memo}", 
+ 	 				  se: "${search}",
+ 	 				state:$("#states").val()},
+ 	 		    success:function(data){ //callback  
+ 	 		    	
+ 	 		    	$(".requestpage").html(data); 
+ 	 		    	$("#${state}").addClass('active');
+ 	 			$("#states").val('${state}');
+ 	 				
+ 	 		    
+ 	 		    },
+ 	 			error: function(){						
+ 	 				alert('Error while request..'	);
+ 	 			}
+ 	 		});
+        		}else{
 			
 $.ajax({
 
@@ -333,7 +370,7 @@ $.ajax({
 			url:  "requestList2.htm",
 			cache: false,				
 			data:{pg: page,
-				st: $("#states").val(),
+				st: '${st_query}',
 				me: "${memo}", 
 				se: "${search}",
 				state:$("#states").val()},
@@ -444,20 +481,21 @@ function proAdd(){
 
 	<!-- 보낸 요청함 card 띄워주는 영역 -->
 	<!-- 검색영역   -->
-	<div class="row grid-columns"
-		style="width: 1000px; height: 20px; margin-top: 2px">
-		<div id="row" style="height: 20px; margin-left: 700px;"
-			class="col-md-6 col">
 
-			<select id="memoselect">
-				<option value="collabo_req_title">제목</option>
-				<option value="collabo_req_text">내용</option>
-			</select> <input type="text" id="search" placeholder="Search">
+	<div class="row grid-columns"style="width:1000px; height:20px; margin-top:2px">
+     <div id="row" style="height:20px;margin-left: 620px;" class="col-md-6 col">
+		
+		<select id="memoselect" class="form-control" style="width: 20%; display: inline; font-size: 12px; color: #666;">
+			<option value="collabo_req_title">제목</option>
+			<option value="collabo_req_text">내용</option>
+		</select>
+		
+		<input type="text" id="search" placeholder="Search" class="form-control" style="width: 35%; display: inline; font-size: 12px; color: #666;">
+		
+		<input class="btn btn-primary" onclick="searchBtn()" value="검색" style="width: 60px;">
 
-			<button onclick="searchBtn()">검색</button>
-
-		</div>
 	</div>
+</div>
 
 
 
@@ -481,25 +519,20 @@ function proAdd(){
         					</c:if>
        					</a>
         						<div class="sub-nav active">
-            						<div class="html about-me" id="about-mesocial-link${req}">
+            						<div class="html about-me" style="height:150px" id="about-mesocial-link${req}">
          <!-- 대기/수락/거절 상태에 따라 원 테두리 색 변경  -->
               			<div class="row" style="margin-bottom: 0px;padding-bottom: 10px;">
-              			
-              			<c:if test="${sessionScope.info.user_id == n.collabo_req_ID&&n.collabo_req_state == '대기'}">
-              				
-						  		<div class="col-sm-7" style="padding-right: 0px;"></div>
-							  	<div class="col-sm-1" style="margin-left: 4px;"><button data-toggle="modal" data-target="#myModal2" type="button" onclick="memoReqCollabo(${req})" target="_blank"class="button button-circle button-flat-primary button-tiny" style="margin-left:13px;background-color: rgb(71, 142, 72); width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;"><i class="fa fa-check" aria-hidden="true"></i></button></div>
-							  	<div class="col-sm-1" style="margin-left: 4px;"><button type="button"  onclick="refuseReqCollabo(${req})"class="button button-circle button-flat-primary button-tiny" style="margin-left:15px;background-color: #d43722; width: 30px;padding-right: 3px;height: 28px;padding-left: 3px;border-top-width: 2px;border-bottom-width: 2px;padding-top: 2px;padding-bottom: 2px;"onclick="progress_40()"><i class="fa fa-times" aria-hidden="true"></i></button></div>
-							
-						</c:if>
+           
 						
 						</div>
                        				<div class="photo" style=
                								 <c:choose>
-												<c:when test="${n.collabo_req_state == '수락' || n.collabo_req_state == '완료'}">
+												<c:when test="${n.collabo_req_state == '수락'}">
               										 "border:3px solid #1e851f; margin-right:0px"
                 								</c:when>
-                								
+                								<c:when test="${n.collabo_req_state == '완료'}">
+								 					"border:3px solid black"
+												</c:when>
                 								<c:when test="${n.collabo_req_state == '거절'}">
 								 					"border:3px solid #dd2d16"
 												</c:when>
@@ -553,12 +586,12 @@ function proAdd(){
 			<ul class="pagination">
 				<c:if test="${pg != 1}">
 					<c:if test="${pg == from_page}">
-						<li><a href="#" onclick="pazingBtn('1')">««</a></li>
-						<li><a href="#" onclick="pazingBtn('${from_page-1}')">«</a></li>
+						<li><a href="#" onclick="pazingBtn('1','${search}','${memo}')">««</a></li>
+						<li><a href="#" onclick="pazingBtn('${from_page-1}','${search}','${memo}')">«</a></li>
 					</c:if>
 					<c:if test="${pg > from_page}">
-						<li><a href="#" onclick="pazingBtn('1')">««</a></li>
-						<li><a href="#" onclick="pazingBtn('${pg - 1}')">«</a></li>
+						<li><a href="#" onclick="pazingBtn('1','${search}','${memo}')">««</a></li>
+						<li><a href="#" onclick="pazingBtn('${pg - 1}','${search}','${memo}')">«</a></li>
 					</c:if>
 				</c:if>
 				<c:forEach begin="${from_page}" end="${to_page}" var="i">
@@ -566,18 +599,18 @@ function proAdd(){
 						<li class="active"><a href="#">${i}</a></li>
 					</c:if>
 					<c:if test="${i!=pg}">
-						<li><a href="#" onclick="pazingBtn('${i}')">${i}</a></li>
+						<li><a href="#" onclick="pazingBtn('${i}','${search}','${memo}')">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				<!-- 다음 페이지 -->
 				<c:if test="${list.size() != 0}">
 					<c:if test="${pg < to_page || pg != all_page}">
-						<li><a href="#" onclick="pazingBtn('${pg + 1}')">»</a></li>
-						<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
+						<li><a href="#" onclick="pazingBtn('${pg + 1}','${search}','${memo}')">»</a></li>
+						<li><a href="#" onclick="pazingBtn('${all_page}','${search}','${memo}')">»»</a></li>
 					</c:if>
 					<c:if test="${to_page > all_page && pg != all_page}">
-						<li><a href="#" onclick="pazingBtn('${to_page + 1}')">»</a></li>
-						<li><a href="#" onclick="pazingBtn('${all_page}')">»»</a></li>
+						<li><a href="#" onclick="pazingBtn('${to_page + 1}','${search}','${memo}')">»</a></li>
+						<li><a href="#" onclick="pazingBtn('${all_page}','${search}','${memo}')">»»</a></li>
 					</c:if>
 				</c:if>
 			</ul>
@@ -594,7 +627,7 @@ function proAdd(){
 				<div class="modal-content">
 					<div class="modal-header">
 
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<button id="modal_close_btn" type="button" class="close" data-dismiss="modal">&times;</button>
 
 						<h4 class="modal-title">상세보기</h4>
 
@@ -629,9 +662,6 @@ function proAdd(){
 						<h4 class="modal-title">수락</h4>
 
 						</div>
-					</div>
-
-
 
 					<div class="modal-body" style="height: 500px">
 

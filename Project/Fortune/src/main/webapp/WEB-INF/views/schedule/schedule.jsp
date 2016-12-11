@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,9 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
-
-
 
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="button_style/buttons.css">
@@ -23,12 +19,12 @@
 
 $(document).ready(function() {
 	
-var role;
-if( (${role_no}==3) && (${finish_check}==0) ){ 
-	role= true;
-}else{
-	role=false;
-}
+	var role;
+	if( (${role_no}==3) && (${finish_check}==0) ){ 
+		role= true;
+	}else{
+		role=false;
+	}
 	
     $('[data-toggle="tooltip"]').tooltip();
     
@@ -235,6 +231,12 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 
 </script>
 
+<style>
+.image_main {position: relative;}
+.image_main_up{ position: absolute;left: 0; bottom: 0; padding-left:11px; padding-bottom:20px; color:white; font-size: 1.1em; font-weight: bold;}
+</style>
+
+
 </head>
 <body>
 <input type="hidden" id="collabo_no" value="${collabo_no}">
@@ -380,9 +382,9 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 
 			<!-- 업무상세 보여주는 div 영역 -->
 			<div class="col-sm-5" style="padding-right: 0px;">
-					<div class="row" style="padding-right: 0px; margin-top: 11px; margin-bottom: 11px;">
-						<div class="col-sm-2">
-							<select id="schedule_type" onchange="schedule_type()" style="height: 20px;">
+					<div class="row" style="padding-right: 0px; margin-top: 11px; margin-bottom: 2px;">
+						<div class="col-sm-2" style="padding-left:0px;">
+							<select id="schedule_type" class="form-control" onchange="schedule_type()" style="height: 100%; width:125px; display: inline; font-size: 12px; color: #666;">
 								<option id="default_option" value="4"> 선 택 </option>
 								<option value="0"> 전 체 보 기 </option>
 								<option value="3" >내 일정 보기</option>
@@ -463,7 +465,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 						<i class="fa fa-comments fa-fw"></i> Comment
 					</div>
 					<!-- panel-body -->
-					<div class="panel-body" style="height: 170px;">
+					<div class="panel-body" style="height: 100%; overflow: hidden;">
 						<!-- comment_text 내용추가 하는 영역 -->
 						<ul class="chat">
 						<div id="comment_text"></div>
@@ -472,7 +474,7 @@ if( (${role_no}==3) && (${finish_check}==0) ){
 					<!-- panel-footer -->
 					<div class="panel-footer" style="height: 35px; padding-top: 2px;">
 						<div class="input-group" style="padding-top: 0px;">
-	                       <input id="comment_textarea" type="text" class="form-control input-sm" placeholder="Type your message here...">
+	                       <input id="comment_textarea" type="text" class="form-control input-sm" placeholder="코멘트를 등록하세요">
 	                       <span class="input-group-btn">
 	                           <button type="button" class="button button-rounded button-tiny" style="background-color: #194f89;" onclick="insert_comment()">등록</button>
 	                       </span>

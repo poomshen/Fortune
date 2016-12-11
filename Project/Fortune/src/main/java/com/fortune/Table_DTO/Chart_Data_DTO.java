@@ -6,7 +6,7 @@ public class Chart_Data_DTO {
 	private float chart_progress;      
 	private int chart_total_date;       
 	private int chart_seq;
-	
+	private String collabo_req_title;
 	
 	public String getChart_date() {
 		return chart_date;
@@ -37,6 +37,12 @@ public class Chart_Data_DTO {
 	}
 	public void setChart_seq(int chart_seq) {
 		this.chart_seq = chart_seq;
+	}
+	public String getCollabo_req_title() {
+		return collabo_req_title;
+	}
+	public void setCollabo_req_title(String collabo_req_title) {
+		this.collabo_req_title = collabo_req_title;
 	}     
 	
 	

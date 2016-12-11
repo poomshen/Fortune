@@ -13,8 +13,6 @@
 
 <%
    request.setCharacterEncoding("UTF-8");
-   ArrayList chart_x = (ArrayList)request.getAttribute("chart_x");
-   ArrayList chart_y = (ArrayList)request.getAttribute("chart_y");
    ArrayList pie_x = (ArrayList)request.getAttribute("pie_x");
    ArrayList pie_y = (ArrayList)request.getAttribute("pie_y");
    Long total_pie =(Long)request.getAttribute("total_count");
@@ -38,7 +36,7 @@
 	border-radius: 6px;
 	height: 260px;
 	box-shadow: 7px 7px 10px 0px #AAA; 
-			}
+		}
 	​
     </style>
 
@@ -47,99 +45,152 @@
 
 //모든 프로젝트의 진척률을 나타내는 차트
 
-	$(function () {
+	$(function (){
 
+		var chart_x=[];
+		var chart_y=[];
+		var chart_id=[];
+	    
 	    $.ajax({
 	        
-	        type:"post",
-	        dataType: "html",
-	        url:"selectChart.htm",
-	        data:{"project_num": <%=chart_x.get(0)%>},
+	        type:"get",
+	        dataType: "json",
+	        url:"totalChart.ajax",
 	        success:function(data){
-	        
+	        console.log(data);
 
-	           $('#kk').html(data);
-	          
-	      
-	        }
-	     });   
-	   
-	   console.log(<%=chart_x%>);
-	   console.log(<%=chart_y%>);
-	  var chart=Highcharts.chart('gg',{
-	           chart: {
-	               type: 'column'
-	           },
-	           title: {
-	               text: '전체 프로젝트의 각 진척률%'
-	           },
-	           xAxis: {
-	               categories:<%=chart_x%>,
-	               labels: {
-	               
-	                   style: {
-	                       color: 'blue'
-	                   }
-	               }
-	           },
-	           yAxis: {
-	               title: {
-	                   text: '프로젝트 총 진척률%'
-	               }
-
-	           },
-	           legend: {
-	               enabled: false
-	           },
-	           plotOptions: {
-	               series: {
-	                   borderWidth: 1,
-	                   dataLabels: {
-	                       enabled: true,
-	                       format: '{point.y:.2f}%'
-	                   }
-	               }
-	           },
-	           credits:{ enabled:false },
-	           tooltip: {
-	               headerFormat: '<span style="font-size:11px">프로젝트{point.x}</span><br>',
-	               pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-	           },
-	    
-	               series: [{
-	                   data: <%=chart_y%>
-	               
-	               }]
 	            
-	        
-	       });
+	               $.each(data,function(){ 
+	                  
+	            	
+	            	  chart_x.push(this.collabo_req_title);
+	                  chart_y.push(this.chart_progress);
+	                  chart_id.push(this.collabo_no);
+	                  
+	               });
+	          
+	              console.log(chart_x);
+	              console.log(chart_y);
+	         	 
+	               chart=Highcharts.chart('gg',{
+	   	           chart: {
+	   	               type: 'column'
+	   	           },
+	   	           title: {
+	   	               text: '전체 프로젝트의 각 진척률%'
+	   	           },
+	   	           xAxis: {
+	   	               categories:chart_x
+	   	               
+	   	           },
+	   	               labels: {
+	   	            	items: [{
+	   	            		html: "abcdefg"
+	   	            		}],
+	   	                   style: {
+	   	                       color: 'blue'
+	   	                   }
+	   	               },
+	   	        
+	   	           yAxis: {
+	   	               title: {
+	   	                   text: '프로젝트 총 진척률%'
+	   	               }
 
+	   	           },
+	   	           legend: {
+	   	               enabled: false
+	   	           },
+	   	           plotOptions: {
+	   	               series: {
+	   	                   borderWidth: 1,
+	   	                   dataLabels: {
+	   	                       enabled: true,
+	   	                       format: '{point.y:f}%',
+	   	              
+	   	                   }  
+	   	               }
+	   	           },
+	   	           credits:{ enabled:false },
+	   	           tooltip: {
+	   	               headerFormat: '<span style="font-size:11px">프로젝트명:{point.x}</span><br>',
+	   	               pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:f}%</b> of total<br/>'
+	   	           },
+	   	    
+	   	               series: [{
+	   	            	   name: chart_id,
+	   	                   data: chart_y
+	   	               
+	   	               }]
+	   	            
+	   	        
+	   	       });
+	        	    $.ajax({
+	        	        
+	        	        type:"post",
+	        	        dataType: "html",
+	        	        url:"selectChart.htm",
+	        	        data:{
+	        	        	"project_num": chart.series[0].name[0],
+	        	        	"project_name": chart_x[0]        	       
+	        	        },
+	          	        success:function(data){
+	        	        
 
+	        	           $('#kk').html(data);
+	        	          
+	        	      
+	        	        }
+	        	     });   
+	               
+	          	 $('.highcharts-xaxis-labels text').click(function(){
+	          		 
+	          		 console.log($(this).index());
+	          		 console.log(chart.series[0].name[$(this).index()]);
+	    	          $.ajax({
+	    	 	           
+	    	 	           type:"post",
+	    	 	           dataType: "html",
+	    	 	           url:"selectChart.htm",
+	    	 	           data:{
+	    	 	        	   "project_num"  :chart.series[0].name[$(this).index()],
+	    	 	        	   "project_name" :$(this).text()
+	    	 	           },
+	    	 	           success:function(data){
+	    	 	           
+	    	 	              
+	    	 	              console.log("차트 종류 보내기");
+	    	 	              
+	    	 	              $('#kk').empty();
+	    	 	              $('#kk').html(data);
+	    	 	             
+	    	 	         
+	    	 	           }
+	    	 	        });   
+	    	          });
+	
+	       }
+	    
+	    });   
 	   
 
-	//모든 프로젝트의 x축 클릭시 상세 차트를 비동기로 불러오는 함수
-	   $('.highcharts-xaxis-labels text').on('click', function () {
-	      
-	       console.log($(this).text());
-	          $.ajax({
-	           
-	           type:"post",
-	           dataType: "html",
-	           url:"selectChart.htm",
-	           data:{"project_num": $(this).text()},
-	           success:function(data){
-	           
-	              
-	              console.log("차트 종류 보내기");
-	              
-	              $('#kk').empty();
-	              $('#kk').html(data);
-	             
-	         
-	           }
-	        });   
-	   });
 
+	    /* 
+		
+
+
+
+ 	     */
+
+ 	
+ 	  	//모든 프로젝트의 x축 클릭시 상세 차트를 비동기로 불러오는 함수
+  	  /* $('.highcharts-xAxis-labels text').on('click', function () {
+ 	       alert("aa");
+ 	       console.log($(this).text());
+
+ 	   });  */
+	
+	
 	//도넛형 차트
 	      Highcharts.chart('ll', {
 	           chart: {
@@ -152,7 +203,7 @@
 	               text: '사업규모'
 	           },
 	           tooltip: {
-	        	   dataFormat:'{series.name}: <b>{point.percentage:.1f}%</b>'
+	        	   dataFormat:'{series.name}: <b>{point.percentage:f}%</b>'
 	           },
 	           plotOptions: {
 	               pie: {
@@ -187,8 +238,11 @@
 	           }]
 	       });
 	   });
+	   
+	   
+	   
 
-
+	  	
 </script>
 <body>
 	<div class="container">

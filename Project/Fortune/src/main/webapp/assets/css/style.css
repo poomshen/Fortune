@@ -45,6 +45,7 @@ label {
     float: left;
     width: 300px;
     margin-bottom: 0;
+    
 }
 img { max-width: 100%; }
 
@@ -426,7 +427,7 @@ nav a:focus { color: #eee; outline: 0; }
 }
 
 .portfolio-box-text {
-	background: #8ec1cd;
+	background: #194f89;
 	color: #fff;
 }
 .portfolio-box:hover .portfolio-box-text-container { bottom: 0; }

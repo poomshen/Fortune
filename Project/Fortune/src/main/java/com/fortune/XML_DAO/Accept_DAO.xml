@@ -8,8 +8,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <delete id="deleteAcceptAlarm">
  
- delete from req_alarm where collabo_no=#{collabo_no}
+ delete from accept_alarm where collabo_no=#{param1}
  
  </delete>
+ 
+ <select id="selectAcceptAlarm" resultType="com.fortune.Table_DTO.Accept_Alarm_DTO">
+ 
+ select collabo_no from(select * from alarm a join accept_alarm aa on a.alarm_index=aa.alarm_index) where user_id=#{param1}
+ 
+ 
+ </select>
+ 
  
  </mapper>

@@ -27,11 +27,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import com.fortune.Table_DTO.Accept_Alarm_DTO;
 import com.fortune.Table_DTO.Join_DTO;
 import com.fortune.Table_DTO.Notice_DTO;
 import com.fortune.Table_DTO.Req_Alarm_DTO;
 import com.fortune.Table_DTO.Request_DTO;
 import com.fortune.Table_DTO.With_DTO;
+import com.fortune.accept_alarm_DAO.IAcceptAlarm;
 import com.fortune.function_DTO.Search_Page_DTO;
 import com.fortune.function_DTO.Select_Alarm_DTO;
 import com.fortune.function_DTO.Select_name_DTO;
@@ -70,7 +72,7 @@ public class ProService {
       //////////////////////////////////////
       
       if (search_Page_DTO.getPg() == 0) {
-          search_Page_DTO.setPg(page);;
+          search_Page_DTO.setPg(page);
       }
       if (search_Page_DTO.getF() == null || search_Page_DTO.getF() .equals("")) {
          search_Page_DTO.setF(field); 
@@ -80,14 +82,17 @@ public class ProService {
       }
       if (search_Page_DTO.getSt()  == null) {
         search_Page_DTO.setSt(st_query);
+      }else{
+          search_Page_DTO.setSt(search_Page_DTO.getSt());
       }
       if (search_Page_DTO.getSe() == null) {
-         search_Page_DTO.setSe(search);
+          search_Page_DTO.setSe(search);
+      }else{
+          search_Page_DTO.setSe(search_Page_DTO.getSe());
       }
       if (search_Page_DTO.getMe() == null) {
          search_Page_DTO.setMe(memo);
       }
-   
       ModelAndView mv = new ModelAndView();
       ProDao proDao = sqlsession.getMapper(ProDao.class);
 
@@ -117,12 +122,7 @@ public class ProService {
       // Mybatis 적용
 
       List<Request_DTO> list = proDao.getRequest(search_Page_DTO);
-      
-     
-      
-      
-      
-      
+  
       mv.addObject("total_count", total_count);
       mv.addObject("pg", search_Page_DTO.getPg());
       mv.addObject("all_page", all_page);
@@ -130,37 +130,34 @@ public class ProService {
       mv.addObject("from_page", from_page);
       mv.addObject("to_page", to_page);
       mv.addObject("st_query", st_query);
-      mv.addObject("memo", memo);
-      mv.addObject("search", search);
+      mv.addObject("memo", search_Page_DTO.getMe());
+      mv.addObject("search", search_Page_DTO.getSe());
       mv.setViewName(search_Page_DTO.getRs()+".tikeRequestList");
       
       
       //추가사항 : 알림 new할것 가져오기
-		List<Req_Alarm_DTO> alist = new ArrayList<Req_Alarm_DTO>();
-		IReqAlarm req_alarmDAO = sqlsession.getMapper(IReqAlarm.class);
-		alist =req_alarmDAO.selectReqAlarm();
-		
-		for(int list_i=0;list_i<list.size();list_i++){
-			for(int alist_i=0;alist_i<alist.size();alist_i++){
-				String new_req_alarm ="";
-				
-				new_req_alarm=list.get(list_i).getCollabo_req_index();
-				System.out.println("---new--- / "+new_req_alarm);
-				System.out.println("---newA---/"+alist.get(alist_i).getCollabo_req_index());
-				if(Integer.parseInt(new_req_alarm)==alist.get(alist_i).getCollabo_req_index())
-				{
-					String real_new_req_alarm="";
-					real_new_req_alarm=list.get(list_i).getCollabo_req_index()+"n";
-					System.out.println("----같은req--- : "+real_new_req_alarm);
-					list.get(list_i).setCollabo_req_index(real_new_req_alarm);
-					alist_i=alist.size();
-				}
-					
-			}
-			
-		}
-		mv.addObject("list", list);  
-	        
+      List<Req_Alarm_DTO> alist = new ArrayList<Req_Alarm_DTO>();
+      IReqAlarm req_alarmDAO = sqlsession.getMapper(IReqAlarm.class);
+      alist =req_alarmDAO.selectReqAlarm();
+      
+      for(int list_i=0;list_i<list.size();list_i++){
+         for(int alist_i=0;alist_i<alist.size();alist_i++){
+            String new_req_alarm ="";
+            
+            new_req_alarm=list.get(list_i).getCollabo_req_index();
+            if(Integer.parseInt(new_req_alarm)==alist.get(alist_i).getCollabo_req_index())
+            {
+               String real_new_req_alarm="";
+               real_new_req_alarm=list.get(list_i).getCollabo_req_index()+"n";
+               list.get(list_i).setCollabo_req_index(real_new_req_alarm);
+               alist_i=alist.size();
+            }
+               
+         }
+         
+      }
+      mv.addObject("list", list);  
+           
       return mv;
    }
    
@@ -168,7 +165,6 @@ public class ProService {
       public ModelAndView listReplyRequest(String selectId,Search_Page_DTO search_Page_DTO, HttpSession session)
             throws ClassNotFoundException, SQLException {
          System.out.println("----service:listReplyRequest-----");
-
          // 게시판 기본 설정(기본값 처리)/////////////
          int page = 1;
          String field = "user_ID";
@@ -181,7 +177,7 @@ public class ProService {
          
          //////////////////////////////////////
          if (search_Page_DTO.getPg() == 0) {
-             search_Page_DTO.setPg(page);;
+             search_Page_DTO.setPg(page);
          }
          if (search_Page_DTO.getF() == null || search_Page_DTO.getF() .equals("")) {
             search_Page_DTO.setF(field); 
@@ -191,16 +187,21 @@ public class ProService {
          }
          if (search_Page_DTO.getSt()  == null) {
            search_Page_DTO.setSt(st_query);
+         }else{
+            search_Page_DTO.setSt(search_Page_DTO.getSt());
          }
          if (search_Page_DTO.getSe() == null) {
             search_Page_DTO.setSe(search);
+         }else{
+            search_Page_DTO.setSe(search_Page_DTO.getSe());
          }
          if (search_Page_DTO.getMe() == null) {
             search_Page_DTO.setMe(memo);
          }
+         
          ModelAndView mv = new ModelAndView();
          ProDao proDao = sqlsession.getMapper(ProDao.class);
-         
+         System.out.println("값 입력 후 : " + search_Page_DTO);
          int row_size = 6;
          int total_count = proDao.requestCount(search_Page_DTO); // 공지사항 글 개수
          System.out.println("total_count : " + total_count);
@@ -233,8 +234,8 @@ public class ProService {
          mv.addObject("from_page", from_page);
          mv.addObject("to_page", to_page);
          mv.addObject("st_query", st_query);
-         mv.addObject("memo", memo);
-         mv.addObject("search", search);
+         mv.addObject("memo", search_Page_DTO.getMe());
+         mv.addObject("search", search_Page_DTO.getSe());
          mv.setViewName(search_Page_DTO.getRs()+".postRequestList");
          System.out.println("selectId:"+selectId);
          mv.addObject("selectId",selectId);
@@ -410,7 +411,7 @@ public class ProService {
    }
 
    // 글요청 처리
-   public Request_DTO regResponse(With_DTO n, String collabo_req_index)
+   public Request_DTO regResponse(With_DTO n, String collabo_req_index, HttpSession session)
          throws IOException, ClassNotFoundException, SQLException {
 
       System.out.println("실제 글 등록 처리");
@@ -427,7 +428,9 @@ public class ProService {
       // 아주좋소
       /* n.setCollabo_end(java.sql.Timestamp.valueOf(n.getCollabo_end2())); */
       // 실DB저장
-
+      Join_DTO ids = (Join_DTO) session.getAttribute("info");
+      n.setCollabo_state("진행중");
+      n.setCollabo_req_ID(ids.getUser_id());
       ProDao proDao = sqlsession.getMapper(ProDao.class);
       proDao.insertResponse(n);
       Request_DTO proDto = proDao.detailResponse(collabo_req_index);
@@ -479,9 +482,13 @@ public class ProService {
         n.setCollabo_req_filesrc(filenames.get(0));  // 파일명 1 
         
         
-        
       ProDao proDao = sqlsession.getMapper(ProDao.class);
-      proDao.update(n);
+      if(n.getCollabo_req_filesrc().isEmpty()){
+    	  proDao.updatenull(n);
+      }else{
+    	  proDao.update(n);
+      }
+      
       return n;
 
    }
@@ -490,10 +497,11 @@ public class ProService {
 
    // 전체 협업 리스트 입니다. 
    // 즉 협업요청이 아닌 협업이 완료된 상태를 의미합니다.
-   
+   // 추가사항: 이예지 MYPROJECT에 알림 띄워주기 
+   //	->작업일 : 2016/12/09
    public ModelAndView listResponse(String pg, String f, String q, HttpSession session)
          throws ClassNotFoundException, SQLException {
-      System.out.println("집에 갑시다. :" + pg);
+      System.out.println("proservice/listResponse의 pg :" + pg);
 
       // 게시판 기본 설정(기본값 처리)/////////////
       int page = 1;
@@ -502,7 +510,7 @@ public class ProService {
       // 아무리 생각해 봐도 세션이 필요하다고 생각해서 여기서 중단함.
       Join_DTO ids = (Join_DTO) session.getAttribute("info");
       ProDao proDao = sqlsession.getMapper(ProDao.class);
-      System.out.println("pg  :" +pg);
+      System.out.println("ids  :" +ids);
       //////////////////////////////////////
       
       ModelAndView mv = new ModelAndView();
@@ -515,10 +523,11 @@ public class ProService {
       }else if(ids.getRole_no() == 3){
           field = "user_ID";
           query = "%" + ids.getUser_id() + "%";
+          
       }else if(ids.getRole_no() == 4){
          field = "user_ID";
          List<String>  timeId = proDao.selectTeamMGR(ids.getTeam_no()) ;
-         
+         System.out.println("timeId : " + timeId);
          if(timeId.size() != 0 ){
             int row_size = 6;
             int total_count = proDao.collaboCount(field, timeId) ; // 공지사항 글 개수
@@ -537,8 +546,8 @@ public class ProService {
                to_page = all_page;
             }
             if (pg != null ) {
-            	System.out.println("proServie  파라미터 들어옴:");
-            	page = Integer.parseInt(pg);
+               System.out.println("proServie  파라미터 들어옴:");
+               page = Integer.parseInt(pg);
             }
             mv.addObject("total_count", total_count);
             mv.addObject("pg", page);
@@ -548,10 +557,16 @@ public class ProService {
             mv.addObject("to_page", to_page);
             List<With_DTO> list = proDao.listResponse2(page, field, timeId);
             mv.addObject("list",list);
+            List<Select_name_DTO> teamName =new ArrayList<Select_name_DTO>();
+            for(int i = 0; i<list.size() ; i++){
+               teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
+            } 
+            mv.addObject("teamName", teamName);
             
             return mv;
          }
-         return null;
+         mv.addObject("collabo_null", 777);
+         return mv;
       }else if(ids.getRole_no() == 1||ids.getRole_no() == 0){
           query = "%%";
           field = "collabo_req_ID";
@@ -570,7 +585,7 @@ public class ProService {
       if (q != null && q.equals("")) {
          query = q;
       }
-      System.out.println( "asdfasjiewjoirhq 페이지 :"+ page);
+      System.out.println( "proservice/listResponse 페이지 :"+ page);
       List<String> timeId = new ArrayList<String>();
       timeId.add(ids.getUser_id());
       int row_size = 6;
@@ -598,18 +613,75 @@ public class ProService {
       
       // Mybatis 적용
       List<With_DTO> list = proDao.listResponse(page, field, query);
+      
+      
+      //알림할것 가져오기
+      //추가사항 : 알림 new할것 가져오기
+      if(ids.getRole_no() == 3){
+      List<Accept_Alarm_DTO> ac_list = new ArrayList<Accept_Alarm_DTO>();
+      IAcceptAlarm accept_alarmDAO = sqlsession.getMapper(IAcceptAlarm.class);
+      ac_list =accept_alarmDAO.selectAcceptAlarm(ids.getUser_id());
+      
+      for(int list_i=0;list_i<list.size();list_i++){
+         for(int ac_list_i=0;ac_list_i<ac_list.size();ac_list_i++){
+            String new_accept_alarm ="";
+            
+            System.out.println("collabo_no"+list.get(list_i).getCollabo_no());
+            System.out.println("collabo_no_alarm"+ac_list.get(ac_list_i).getCollabo_no());
+            System.out.println("ac_list.size()"+ac_list.size());
+            
+            new_accept_alarm=list.get(list_i).getCollabo_no();
+            if(Integer.parseInt(new_accept_alarm)==ac_list.get(ac_list_i).getCollabo_no())
+            {
+               String real_new_accept_alarm="";
+               real_new_accept_alarm=list.get(list_i).getCollabo_no()+"n";
+               list.get(list_i).setCollabo_no(real_new_accept_alarm);
+               System.out.println("--같은것 발생---"+real_new_accept_alarm);
+               System.out.println("--ac_list_i"+ac_list_i);
+               ac_list_i=ac_list.size();
+               System.out.println("--ac_list_i after"+ac_list_i);
+            }
+               
+         }
+         
+      }
+      
       mv.addObject("list",list);
       List<Select_name_DTO> teamName =new ArrayList<Select_name_DTO>();
-      List<Select_name_DTO> deptName = new ArrayList<Select_name_DTO>();
-      for(int i = 0; i<list.size() ; i++){
-    	  deptName.add(proDao.searchName(list.get(i).getCollabo_req_ID()));//부장 아이디 에 부서,팀
-    	  teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
-      } 
-      mv.addObject("deptName", deptName);
-      mv.addObject("teamName", teamName);
       
+      for(int i = 0; i<list.size() ; i++){
+         teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
+      } 
+     System.out.println("---------1------------"); 
+      mv.addObject("teamName", teamName);
+      return mv;
+           
+      }
+     System.out.println("----------타지마1---------");
+      mv.addObject("list",list);
+      List<Select_name_DTO> teamName =new ArrayList<Select_name_DTO>();
+      for(int i = 0; i<list.size() ; i++){
+         teamName.add(proDao.searchName(list.get(i).getUser_ID()));//팀장 아이디 부서, 팀
+     
+      } 
+      mv.addObject("teamName", teamName);
+      System.out.println("--------타지마2---------");
       return mv;
    }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
    // 담당자 화면
    public With_DTO managerDto(String collabo_req_index) 

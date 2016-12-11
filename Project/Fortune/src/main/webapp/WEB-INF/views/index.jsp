@@ -1,3 +1,10 @@
+<!-- 
+작성자  : 김지현
+최초작업일 : 2016/12/10
+최종수정일 : 2016/12/10
+작업내용 : 로그인/조원 소개 페이지
+-->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,11 +19,9 @@
 <title>Riona - One Page Bootstrap Business Template</title>
 
 <!-- CSS -->
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Lato:400,700">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,700">
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="assets/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/css/animate.css">
 <link rel="stylesheet" href="assets/css/magnific-popup.css">
 <link rel="stylesheet" href="assets/css/form-elements.css">
@@ -35,6 +40,9 @@
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
 
+<script src="alert_style/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
+
 </head>
 
 <body>
@@ -44,17 +52,15 @@
 		<div class="loader-img" style="display: none;"></div>
 	</div>
 
-
 	<!-- Top content -->
 	<div class="top-content"
 		style="position: relative; z-index: 0; background: none;">
 		<div class="top-content-text wow fadeInUp animated"
 			style="visibility: visible; animation-name: fadeInUp;">
 
-			<br /><!-- 
-			<img src="assets/img/logo/fortune.png"/> -->
+			<br />
 			<h1>
-				<a href="">fortune</a>
+				<a href=""><img src="assets/img/logo/fortune_final.png"/></a>
 			</h1>
 			
 
@@ -86,21 +92,13 @@
 					</div>
 
 					<div style="margin-left: -3%">
-						<input type="button" onclick="joins()" class="btn hvr-forward" tabindex="4" value="join">
-
+						<button type="button" onclick="joins()" class="btn hvr-forward" tabindex="4"><span class="glyphicon glyphicon-pencil"> Join</span></button>
 						&nbsp; &nbsp; &nbsp;						
-						<button type="submit"  class="btn hvr-forward" tabindex="3" >login</button>
+						<button type="submit" class="btn hvr-forward" tabindex="3" ><span class="glyphicon glyphicon-log-in"> Login</span></button>
 					</div>
-
 				</form>
-				<!-- 
-					</div>
-
-				</div>
-			</div>
- -->
 		</div>
-		 <button type="button" class="btn hvr-forward" id="idSearchBtn" onclick="moveSearchpage()">ID/Password 찾기</button>
+		<a href="searchpage.htm" style="color: rgba(255, 255, 255, 0.58); text-decoration: underline;"> ID/Password를 잊어버리셨나요?</a>
 
 	</div>
 	
@@ -111,7 +109,6 @@
 		<img src="assets/img/backgrounds/1.jpg"
 			style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1082.67px; height: 609px; max-height: none; max-width: none; z-index: -999999; top: 0px; left: -55.3333px;">
 	</div>
-
 
 	<!-- What we do -->
 	<div class="what-we-do-container section-container">
@@ -158,14 +155,12 @@
 				<div
 					class="col-sm-12 portfolio section-description wow fadeIn animated"
 					style="visibility: visible; animation-name: fadeIn;">
-					<h2>Portfolio</h2>
+					<h2>Preview</h2>
 					<div class="divider-1 wow fadeInUp animated"
 						style="visibility: visible; animation-name: fadeInUp;">
 						<span></span>
 					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Ut enim ad minim veniam, quis nostrud exercitation.</p>
+					
 				</div>
 			</div>
 			<div class="row">
@@ -182,12 +177,12 @@
 					style="position: relative; height: 700px;">
 					<div class="portfolio-box design"
 						style="position: absolute; left: 15px; top: 0px;">
-						<img src="assets/img/portfolio/1.jpg" alt=""
+						<img src="assets/img/portfolio/indexImage.JPG" alt=""
 							data-at2x="assets/img/portfolio/1.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Lorem website</a>
+									<a href="#">Main 화면</a>
 								</p>
 							</div>
 						</div>
@@ -252,6 +247,8 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- 
 					<div class="portfolio-box design"
 						style="position: absolute; left: 15px; top: 350px;">
 						<img src="assets/img/portfolio/7.jpg" alt=""
@@ -324,6 +321,7 @@
 							</div>
 						</div>
 					</div>
+					 -->
 				</div>
 			</div>
 		</div>
@@ -347,38 +345,47 @@
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
-					<div class="team-photo">
-						<img src="assets/img/about/1.jpg" alt=""
-							data-at2x="assets/img/about/1.jpg">
-					</div>
-					<h3>John Doe</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod.</p>
+					<h3><font color="black">이성준</font><h3>
+					<p></p>
 					
 				</div>
-				<div class="col-sm-4 team-box wow fadeInDown animated"
-					style="visibility: visible; animation-name: fadeInDown;">
-					<div class="team-photo">
-						<img src="assets/img/about/2.jpg" alt=""
-							data-at2x="assets/img/about/2.jpg">
-					</div>
-					<h3>Tim Brown</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod.</p>
+				<div class="col-sm-4 team-box wow fadeInUp animated"
+					style="visibility: visible; animation-name: fadeInUp;">
+					<h3><font color="black">김지율</font></h3>
+					<p></p>
 				
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
-					<div class="team-photo">
-						<img src="assets/img/about/3.jpg" alt=""
-							data-at2x="assets/img/about/3.jpg">
-					</div>
-					<h3>Sarah Red</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod.</p>
-				
+					<h3><font color="black">이명철</font></h3>
+					<p></p>		
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-sm-4 team-box wow fadeInUp animated"
+					style="visibility: visible; animation-name: fadeInUp;">
+					<h3><font color="black">김중완</font></h3>
+					<p></p>		
+				</div>
+				<div class="col-sm-4 team-box wow fadeInUp animated"
+					style="visibility: visible; animation-name: fadeInUp;">
+					<h3><font color="black">이예지</font></h3>
+					<p></p>		
+				</div>
+				<div class="col-sm-4 team-box wow fadeInUp animated"
+					style="visibility: visible; animation-name: fadeInUp;">
+					<h3><font color="black">김지현</font></h3>
+					<p></p>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4 team-box wow fadeInUp animated"
+					style="visibility: visible; animation-name: fadeInUp;">
+					<h3><font color="black">이승훈</font></h3>
+					<p></p>		
+				</div>
+			</div>	
+			
 		</div>
 	</div>
 
@@ -412,8 +419,7 @@
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
-	<script src="assets/js/wow.min.js"></script>
-
+	<script src="assets/js/wow.min.js"></script>	
 	<script src="assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="assets/js/masonry.pkgd.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
@@ -430,6 +436,7 @@
 	
 
 	function joins() {
+		
 		location.href="sign.htm";
 	}
 	
@@ -437,7 +444,7 @@
 		var message1 = <%=message%>;
 		
 		if(message1 == 1){
-			alert('권한이 없습니다.');
+			swal('권한이 없습니다.');
 		}
 	});
 	</script>

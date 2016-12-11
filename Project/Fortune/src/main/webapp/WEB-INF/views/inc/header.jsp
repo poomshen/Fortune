@@ -13,7 +13,7 @@ var msg
 function connect() {
 	/* alert("소켓연결!"); */
 	
-	wsocket = new WebSocket("ws://192.168.0.4:8090/fortune/chat-ws.htm");
+	wsocket = new WebSocket("ws://sasystem.iptime.org:8081/Fortune//chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -91,7 +91,7 @@ $(document).ready(function() {
  	/* 2016.12.07 김지현 
  	로딩 이미지 돌아가는동안 비활성화/화면 어둡게 하는 코드 추가*/
  	
- 	background-color :  rgba(0,0,0,0.3);
+ 	background-color :  rgba(0,0,0,0.5);
 	z-index : 100;
 
 	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#08212121', endColorstr='#08212121');    /* ie */
@@ -109,7 +109,7 @@ $(document).ready(function() {
 </style>
 <!-- 로딩 gif화면 -->
 <div class="wrap-loading display-none">
-    <div><img src="./images/default.gif" style="width: 50; height: 50px;" /></div>
+    <div><img src="./images/spin (3).gif" style="width: 100px; height: 100px;" /></div>
 </div>
 
 
@@ -131,90 +131,86 @@ $(document).ready(function() {
             <ul class="nav navbar-top-links navbar-right">
             <span>${sessionScope.info.user_name} 님 환영합니다</span>
                  <!-- /.dropdown -->
-                <li id="alarm" class="dropdown">
-   <a class="dropdown-toggle" style="color:#194f89" data-toggle="dropdown" href="#">
-                       <i class="fa fa-bell fa-fw hvr-pop">
-                       <span id="blink"  
-                       	<c:if test="${sessionScope.alarm.size()>0}">class="blink_me notification_count"</c:if> > 
-                       	<c:if test="${sessionScope.totalCount>0}">${sessionScope.totalCount}</c:if></span></i>  
-                       	<i class="fa fa-caret-down"></i>
-                    </a>
+                
+                
+                
+                
+             <li id="alarm" class="dropdown">
+   				<a class="dropdown-toggle" style="color:#194f89" data-toggle="dropdown" href="#">
+                	<i class="fa fa-bell fa-fw hvr-pop">
+                       <span id="blink" <c:if test="${sessionScope.alarm.size()>0}">class="blink_me notification_count"</c:if> > 
+                       		<c:if test="${sessionScope.totalCount>0}">${sessionScope.totalCount}</c:if></span>
+                   	</i>  
+                    
+                    <i class="fa fa-caret-down"></i>
+                </a>
           
-                  <c:if test="${sessionScope.alarm.size()>0}">
+				<c:if test="${sessionScope.alarm.size()>0}">
               
-                   <ul id="alarmList" class="dropdown-menu dropdown-alerts">
-                   	   <c:forEach var="alarm" items="${sessionScope.alarm}"> 
-                  		
-                        <li id="${alarm.work_type}">
-                       
-                            <a href="requestList.htm">
-                                <div> 
+                <ul id="alarmList" class="dropdown-menu dropdown-alerts">
+               	
+               	<c:forEach var="alarm" items="${sessionScope.alarm}"> 
+                        
+                	<li id="${alarm.work_type}">
+                    	
                                 
-                   <c:choose>
-                   <c:when test="${alarm.work_type==1}">
-                    	<i class="fa fa-file-o fa-fw"></i>	새 프로젝트 요청               
-                    	<span class="pull-right text-muted small" 
-                    		  style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
+                   		<c:choose>
+                   			<c:when test="${alarm.work_type==1}">
+                     			<a href="requestList.htm">
+                    				<i class="fa fa-file-o fa-fw"></i>	프로젝트[받은 요청]               
+                    					<span class="pull-right text-muted small" style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
  										${alarm.count}</span>
-                   </c:when>                 
-                   <c:when test="${alarm.work_type==2}">
-                  	     <i class="fa fa-file-text-o fa-fw"></i>  기존 프로젝트 요청             
-                  	     <span class="pull-right text-muted small" 
-                  	     		style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
+ 								</a>
+ 								   <li class="divider"></li>
+                   			</c:when>
+                   			
+                   			                 
+                   			<c:when test="${alarm.work_type==2}">
+                   				<a href="responseList_ver1.htm">
+                  	     			<i class="fa fa-file-text-o fa-fw"></i> MY 프로젝트
+                  	     				<span class="pull-right text-muted small" style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
  										${alarm.count}</span>
-                  	     
-                   </c:when>               
-                   <c:when test="${alarm.work_type==3}">
+                  	 			</a>
+                  	 			     <li class="divider"></li>
+                   			</c:when>               
                    
-                      <i class="fa fa-file-word-o fa-fw"></i>	새로운 업무 요청              
-                      <span class="pull-right text-muted small" 
-                      		style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
+                   			<c:when test="${alarm.work_type==3}">
+                   				<a>
+                      			<i class="fa fa-file-word-o fa-fw"></i>	새로운 일정              
+                      				<span class="pull-right text-muted small"style="padding: 3px 7px 3px 7px;background: #cc0000;color: #ffffff;font-weight: bold;border-radius: 9px;">
  										${alarm.count}</span>
- 										
+ 								</a>		
  										
             
-                        <c:forEach var="scheduleAlarmList" items="${sessionScope.sch_alist}"> 
-                   		
-                   		 <li id="${scheduleAlarmList.collabo_no}">  
-                   			 <a href="schedule.htm?collabo_no=${scheduleAlarmList.collabo_no}">프로젝트${scheduleAlarmList.collabo_no}
-                   		 
-                   		      	<span class="pull-right text-muted small" 
-                                    style="padding: 3px 7px 3px 7px;background:#ffff;color: #cc0000;font-weight: bold;border-radius: 9px;">
+                    		    <c:forEach var="scheduleAlarmList" items="${sessionScope.sch_alist}"> 
+                   					 <li id="${scheduleAlarmList.collabo_no}">  
+                   			 			<a href="schedule.htm?collabo_no=${scheduleAlarmList.collabo_no}">프로젝트[${scheduleAlarmList.collabo_req_title}]
+                   		 			     	<span class="pull-right text-muted small" style="padding: 3px 7px 3px 7px;background:#ffff;color: #cc0000;font-weight: bold;border-radius: 9px;">
  										${scheduleAlarmList.total_collabo}건</span>
-                   			 </a>
-                   		 </li>
+                   			 			</a>
+                   		 			</li>
                     		
-                   	 	</c:forEach>
+                   	 			</c:forEach>
          
-                   </c:when>                 
+                   			</c:when>                 
                         
                       </c:choose>
                       
-                                </div>
-                             </a>
-                      
-                        </li>
-                        
-                        
-                            <li class="divider"></li>
+                       
+                      	</li>
                             
-             			</c:forEach>	
-             			
-
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    
+             		</c:forEach>	
+             	
                
                     </ul>
-                    </c:if>
-    
-           
-                    <!-- /.dropdown-alerts -->
-                </li>
+                 </c:if>
+               </li>
+            
+               <!-- /.dropdown-alerts -->    
+                
+                
+                
+                
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" style="color:#194f89;;" data-toggle="dropdown" href="#">

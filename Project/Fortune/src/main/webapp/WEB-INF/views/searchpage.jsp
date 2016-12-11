@@ -1,3 +1,9 @@
+<!-- 
+작성자  : 김지현
+최초작업일 : 2016/12/10
+최종수정일 : 2016/12/10
+작업내용 : ID/PWD를 찾을 수 있다
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -33,6 +39,7 @@
 	href="assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
+	
 <script src="alert_style/js/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="alert_style/css/sweetalert.css">
 <style type="text/css">
@@ -80,7 +87,7 @@
 	<!-- Top content -->
 	<div class="top-content" style="position: relative; z-index: 0; background: none;">
 		<div class="top-content-text wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"><br>
-			<h3><a href="" style="color: rgba(255, 255, 255, 0.58);">ID/Password 찾기</a></h3>
+			<h3><a href="" style="color: rgba(255, 255, 255, 0.58);font-size: 60px;">ID/Password 찾기</a></h3>
 
 			<div style="padding: 40px 0px; text-align: center; margin: auto;">
 				<table style="margin: auto;">
@@ -93,9 +100,11 @@
 								<span class="addon"><i class="glyphicon glyphicon-font"
 									aria-hidden="true"></i></span>
 								<div class="form-group">
-									<label class="sr-only" for="r-form-1-email">이름</label> 
+								<span class="field">
 									<input type="text" id="search_name" name="search_name" style="background-color: transparent; color: white;"
-										class="form-control hvr-glow" placeholder="이름을 입력하세요"><br>
+										class="form-control hvr-glow"><br>
+									<label id="idselect" class="col-md-4 control-label" style="width:150px;text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
+								</span>
 								</div>
 							</div>
 							
@@ -103,35 +112,44 @@
 								<span class="addon"><i class="glyphicon glyphicon-phone"
 									aria-hidden="true"></i></span>
 								<div class="form-group">
-									<label class="sr-only" for="r-form-1-email">전화번호</label><input
-										type="text" id="search_phone" name="search_phone"
-										style="background-color: transparent; color: white;"
-										class="form-control hvr-glow" placeholder="ex)01x-xxxx-xxxx"><br>
+								<span class="field">
+									<input type="text" id="search_phone" name="search_phone" style="background-color: transparent; color: white;" class="form-control hvr-glow"><br>
+								
+									<label id="idselect" class="col-md-4 control-label" style="width:150px;text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">ex)01x-xxxx-xxxx</label>
+								</span>	
 								</div>
 							</div>
 							<div class="input-group">
 								<span class="addon"><i
 									class="glyphicon glyphicon-calendar" aria-hidden="true"></i></span>
 								<div class="form-group">
-									<label class="sr-only" for="r-form-1-email">생년월일</label><input
+								<span class="field">	<input
 										type="text" id="search_birth" name="search_birth"
 										style="background-color: transparent; color: white;"
-										class="form-control hvr-glow" placeholder="생년월일 ex)2016-11-11"><br>
+										class="form-control hvr-glow"><br>
+									<label id="idselect" class="col-md-4 control-label" style="width:200px;text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">생년월일 ex)2016-11-11</label>
+								</span>
 								</div>
 							</div>
 						</td>
 						<td style="width: 300px; padding-left: 20px; text-align: justify">
+							
 							<h3 style="color: rgba(255, 255, 255, 0.6); text-align: center;">PWD 찾기</h3>
+							
 							<br>
 
 							<div class="input-group">
 								<span class="addon"><i class="glyphicon glyphicon-user"
 									aria-hidden="true"></i></span>
 								<div class="form-group">
-									<label class="sr-only" for="r-form-1-email">아이디</label><input
+								<span class="field">
+									<input
 										type="text" id="search_id" name="search_id"
 										style="background-color: transparent; color: white;"
-										class="form-control hvr-glow" placeholder="아이디를 입력하세요"><br>
+										class="form-control hvr-glow" ><br>
+										<label id="idselect" class="col-md-4 control-label" style="width:150px;text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">아이디 입력</label>
+							
+								</span>
 								</div>
 							</div>
 
@@ -139,10 +157,13 @@
 								<span class="addon"><i class="glyphicon glyphicon-font"
 									aria-hidden="true"></i></span>
 								<div class="form-group">
-									<label class="sr-only" for="r-form-1-email">이름</label><input
+									<span class="field">
+									<input
 										type="text" id="search_name2" name="search_name2"
 										style="background-color: transparent; color: white;"
-										class="form-control hvr-glow" placeholder="이름을 입력하세요"><br>
+										class="form-control hvr-glow" ><br>
+										<label id="idselect" class="col-md-4 control-label" style="width:150px;text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id2">이름을 입력하세요</label>
+									</span>
 								</div>
 							</div>
 
@@ -150,10 +171,14 @@
 								<span class="addon"><i class="glyphicon glyphicon-phone"
 									aria-hidden="true"></i></span>
 								<div class="form-group">
-									<label class="sr-only" for="r-form-1-email">전화번호</label><input
+								<span class="field">
+									<input
 										type="text" id="search_phone2" name="search_phone2"
 										style="background-color: transparent; color: white;"
-										class="form-control hvr-glow" placeholder="ex)01x-xxxx-xxxx"><br>
+										class="form-control hvr-glow" ><br>
+									<label id="idselect" class="col-md-4 control-label" style="width:150px;text-align:center;margin-left:38px;color: rgba(255, 255, 255, 0.53);" for="id">ex)01x-xxxx-xxxx</label>
+									
+								</span>
 								</div>
 							</div>
 						</td>

@@ -88,6 +88,12 @@
 			return false;
 			
 
+		} else if ($('#collabo_req_text').val() == "") {
+			alert("내용 입력바랍니다 ");
+			$('#collabo_req_text').focus();
+			return false;
+			
+
 		} else {
 			
 			
@@ -110,53 +116,82 @@
 
 </head>
 <body>
-
-	
-	<h3 style=" margin-top: 20px;">프로젝트 생성</h3>
+<div class="col-lg-12">
+	<h1 class="page-header">[프로젝트 생성]</h1>
+</div>
 	<hr>
-	<div class="col-lg-12">
-	<div class="panel panel-default" style=" margin-left:10%; margin-right:10%; width: 80%">
-	<div class="panel-heading">프로젝트를 요청 합니다</div>
-	<div class="panel-body" style="width: 100%;">
-		<form action="" method="post" name="promodifyform"
-			enctype="multipart/form-data">
+	<div class="col-lg-12" align="left">
+	<div class="panel-body" style="width: 80%;">
+		<form action="" method="post" name="promodifyform" enctype="multipart/form-data">
+			<!-- 새로운 요청 -->
 			<div style="width: 100%;" >
-				<div class="form-group">
-				<label>새로운 요청 </label> 
-				<select name="collabo_req_no" id="collabo_req_no" class="form-control">
-					<option value="${collabo_req_no}">새로운 요청</option>
-				 	<c:forEach var="pname" items="${pList}">
-						<option value="${pname.collabo_req_no }">${pname.project_name}</option>
-					</c:forEach> 
-				</select>
+				<div class="row" style="margin-top: 5px;">
+					<div class="col-sm-3" style="margin-top: 10px;">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>신규 / 기존 프로젝트 </label>
+					</div>
+					<div class="col-sm-9">
+						<select name="collabo_req_no" id="collabo_req_no" class="form-control" style="color:#666;">
+							<option value="${collabo_req_no}">신규 프로젝트</option>
+				 			<c:forEach var="pname" items="${pList}">
+								<option value="${pname.collabo_req_no }">${pname.project_name}</option>
+							</c:forEach> 
+						</select>
+					</div>
+				</div>
 			</div>
-					
-				<div class="form-group">
-
-					<div>
-						<label>프로젝트 제목 </label> <input type="text"
-							name="collabo_req_title" id="collabo_req_title"
-							class="form-control" placeholder="제목을 입력하세요">
+			
+			<!-- 프로젝트 명 -->
+			<div style="width: 100%;" >
+				<div class="row" style="margin-top: 5px;">
+					<div class="col-sm-3" style="margin-top: 10px;">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>프로젝트명</label>
+					</div>
+					<div class="col-sm-9">
+						<input style="color:#666;" type="text" name="collabo_req_title" id="collabo_req_title"
+							class="form-control" placeholder="프로젝트 명을 입력하세요">
 					</div>
 				</div>
-				<div class="form-group">
-					<div>
-						<label>첨부파일 </label> <input type="file" name="files[0]"
-							id="collabo_req_filesrc" class="form-control">
+			</div>
+			
+			<!-- 첨부파일 -->
+			<div style="width: 100%;" >
+				<div class="row" style="margin-top: 5px;">
+					<div class="col-sm-3" style="margin-top: 10px;">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>첨부파일 </label>
+					</div>
+					<div class="col-sm-9">
+						<input style="color:#666;" type="file" name="files[0]" id="collabo_req_filesrc" class="form-control">
 					</div>
 				</div>
-
-				<div class="form-group">
-
-					<label>프로젝트 내용 </label>
-					<textarea rows="4" cols="50" class="form-control"
-						name="collabo_req_text" id="collabo_req_text"></textarea>
-					<script>
-                
-                CKEDITOR.replace( 'collabo_req_text' );
-            </script>
+			</div>
+			
+			<!-- 프로젝트 내용 -->
+			<div style="width: 100%;" >
+				<div class="row" style="margin-top: 5px;">
+					<div class="col-sm-3" style="margin-top: 10px;">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>프로젝트 내용 </label>
+					</div>
+					<div class="col-sm-9">
+						<textarea style="color:#666;" rows="4" cols="50" class="form-control" name="collabo_req_text" id="collabo_req_text"></textarea>
+					</div>
 				</div>
-				<br>
+			</div>
+			
+			<!-- 수신자 -->
+			<div style="width: 100%;" >
+				<div class="row" style="margin-top: 5px;">
+					<div class="col-sm-3" style="margin-top: 10px;">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>수신자</label>
+					</div>
+					<div class="col-sm-9">
+						<select style="color:#666;" id="collabo_req_ID" name="collabo_req_ID" class="form-control">
+						<c:forEach items="${list}" var="list">
+							<option value="${list.user_id}">[${list.dept_name}] 부장:${list.user_name}</option>
+						</c:forEach> 
+					</select>
+					</div>
+				</div>
+			</div>
 
 				<!-- 작성자 -->
 				<input type="hidden" name="user_ID" id="user_ID" class="form-control"
@@ -169,29 +204,14 @@
 					class="form-control" readonly>
 
 
-				<div class="form-group">
-					<label>수신자 :</label> <select id="collabo_req_ID"
-						name="collabo_req_ID" class="form-control">
-						<c:forEach items="${list}" var="list">
-							<option value="${list.user_id}">[${list.dept_name}]
-								부장:${list.user_name}</option>
-						</c:forEach> 
-					</select>
-				</div>
-
-			</div>
-
 			<div class="col-sm-1"></div>
-			<div class="col-sm-6" style="text-align: right">
-
-				<button type="button" class="btn hvr-grow-shadow"
-					onclick="promodify()">저장</button>
-				&nbsp;&nbsp; <a href="FortuneMain.htm"
-					class="btn btn-default hvr-grow-shadow">취소하기</a>
+			<div class="col-sm-6" style="text-align: right; margin-top: 5px;">
+				<input type="button" class="btn btn-primary" onclick="promodify()" value="등록">
+				&nbsp;&nbsp; <a href="FortuneMain.htm"><input type="button" class="btn btn-primary" value="취소"></a>
 			<br> <br>
-		</div>
+			</div>
+			
 		</form>
-	</div>
 		</div>
 	</div>
 

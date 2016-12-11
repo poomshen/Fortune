@@ -1,30 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">[공지사항 목록]</h1>
+		<h1 class="page-header">[공지사항]</h1>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 <div class="row">
 	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">안녕하세요, 관리자의 공지사항공간이랍니다~</div>
+		<!-- <div class="panel panel-default"> -->
+			<!-- <div class="panel-heading">안녕하세요, 관리자의 공지사항공간이랍니다~</div> -->
 			<!-- 검색폼 추가 -->
 			<div style="margin-top: 10px; margin-left: 15px;">
 				<form name="searchform" id="searchform" action="noticeSearch.htm" method="get">
-					<select name="selectvalue" id="selectvalue" class="cd-select">
+					<select name="selectvalue" id="selectvalue" class="cd-select form-control" style="width: 7%; display: inline; font-size: 12px; color: #666;">
 						<option style="text-align: center" value="notice_title">제목</option>
 						<option style="text-align: center" value="notice_text">내용</option>
 					</select> 
-					<input type="text" name="searchvalue"> 
+					<input type="text" name="searchvalue" class="form-control" style="width: 20%; display: inline; font-size: 12px; color: #666;"> 
 					<input type="submit" class="btn btn-primary" id="search_btn" value="검색">
-					<div style="float: right; margin-right: 15px;">
-						<a href="noticeInsert.htm"><input type="button" class="btn btn-primary" value="글쓰기"></a>
-					</div>
+					<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+						<div style="float: right; margin-right: 15px;">
+							<a href="noticeInsert.htm"><input type="button" class="btn btn-primary" value="글쓰기"></a>
+						</div>
+					</security:authorize>
 				</form>
 			</div>
 			<!-- /.panel-heading -->
@@ -88,7 +91,7 @@
 
 			</div>
 			<!-- /.panel-body -->
-		</div>
+	
 		<!-- /.panel -->
 	</div>
 	<!-- /.col-lg-12 -->
