@@ -24,7 +24,8 @@ public class WebSocketHandshakeInterceptor extends HttpSessionHandshakeIntercept
         ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
         HttpServletRequest req =  ssreq.getServletRequest();
          
-        //로그인한 사람 아이디 뽑기
+        //로그인한 사람 아이디 뽑기 
+        //"userId"->key 로그인한 사용자 아이디->value
 		Join_DTO dto = (Join_DTO) req.getSession().getAttribute("info");
         attributes.put("userId", dto.getUser_id());
         return super.beforeHandshake(request, response, wsHandler, attributes);

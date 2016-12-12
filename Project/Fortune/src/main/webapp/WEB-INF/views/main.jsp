@@ -202,6 +202,10 @@
 		     	           tooltip: {
 		     	        	   dataFormat:'{series.name}: <b>{point.percentage:f}원</b>'
 		     	           },
+		     	          credits: {
+		     	             enabled: false
+		     	         },
+		     	           
 		     	           plotOptions: {
 		     	               pie: {
 		     	                   allowPointSelect: true,
