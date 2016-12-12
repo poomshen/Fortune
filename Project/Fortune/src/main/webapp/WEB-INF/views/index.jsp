@@ -175,7 +175,17 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12 portfolio-masonry" style="position: relative; height: 700px;">
-			
+			<!-- Power Point 1 -->
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 0px;">
+						<img src="assets/img/portfolio/pt1.png" alt="" data-at2x="assets/img/portfolio/3.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">주제 선정 배경</a>
+								</p>
+							</div>
+						</div>
+					</div>
 			<!-- 일정 처음 들어간 부분 -->
 					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 0px;">
 						<img src="assets/img/portfolio/fortune1-1.png" alt="" data-at2x="assets/img/portfolio/3.jpg">
@@ -253,7 +263,17 @@
 							</div>
 						</div>
 					</div>
-			
+			<!-- Power Point 2  -->		
+					<div class="portfolio-box design" style="position: absolute; left: 15px; top: 350px;">
+						<img src="assets/img/portfolio/pt2.png" alt="" data-at2x="assets/img/portfolio/7.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">작업 환경</a>
+								</p>
+							</div>
+						</div>
+					</div>
 			<!-- 에센스  -->		
 					<div class="portfolio-box design" style="position: absolute; left: 15px; top: 350px;">
 						<img src="assets/img/portfolio/fortune4.png" alt="" data-at2x="assets/img/portfolio/7.jpg">
@@ -287,7 +307,17 @@
 							</div>
 						</div>
 					</div>	
-								
+			<!-- log -->		
+					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
+						<img src="assets/img/portfolio/log.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">로그 코드</a>
+								</p>
+							</div>
+						</div>
+					</div>						
 			<!-- 유즈케이스(admin) -->		
 					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
 						<img src="assets/img/portfolio/admin_use.PNG" alt="" data-at2x="assets/img/portfolio/6.jpg">
@@ -323,7 +353,7 @@
 					</div>
 			<!-- 유즈케이스(user) -->		
 					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
-						<img src="assets/img/portfolio/user_use.PNG" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<img src="assets/img/portfolio/user_use.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
@@ -365,7 +395,17 @@
 							</div>
 						</div>
 					</div>
-			
+			<!-- transaction code -->		
+					<div class="portfolio-box development" style="position: absolute; left: 255px; top: 525px;">
+						<img src="assets/img/portfolio/tranCode.png" alt="" data-at2x="assets/img/portfolio/11.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">Transaction Code</a>
+								</p>
+							</div>
+						</div>
+					</div>
 			<!-- 플로우차트1 -->		
 					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 525px;">
 						<img src="assets/img/portfolio/flowchart1.png" alt="" data-at2x="assets/img/portfolio/12.jpg">
@@ -377,6 +417,28 @@
 							</div>
 						</div>
 					</div>
+			<!-- 코드 1 -->		
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 525px;">
+						<img src="assets/img/portfolio/code1.png" alt="" data-at2x="assets/img/portfolio/12.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">웹소켓 Code 1</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- 코드 2 -->		
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 525px;">
+						<img src="assets/img/portfolio/code2.png" alt="" data-at2x="assets/img/portfolio/12.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">웹소켓 Code 2</a>
+								</p>
+							</div>
+						</div>
+					</div>				
 			<!-- 플로우차트2 -->		
 					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 525px;">
 						<img src="assets/img/portfolio/flowchart2.png" alt="" data-at2x="assets/img/portfolio/12.jpg">
@@ -399,7 +461,17 @@
 							</div>
 						</div>
 					</div>
-	
+			<!-- Power Point 3  -->		
+					<div class="portfolio-box design" style="position: absolute; left: 15px; top: 350px;">
+						<img src="assets/img/portfolio/pt3.png" alt="" data-at2x="assets/img/portfolio/7.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">시연</a>
+								</p>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -78,25 +78,25 @@
 							<div class="drag" style="position: relative;">
 								<c:choose>
 									<c:when test="${flist.file_room_ext == '.docx'}">
-										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/docx.jpg" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
+										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/docx.png" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
 									</c:when>
 									<c:when test="${flist.file_room_ext == '.xlsx'}">
-										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/xlsx.jpg" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
+										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/xlsx.png" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
 									</c:when>
 									<c:when test="${flist.file_room_ext == '.hwp'}">
-										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/hwp.jpg" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
+										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/hwp.png" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
 									</c:when>
 									<c:when test="${flist.file_room_ext == '.pptx'}">
-										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/pptx.jpg" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
+										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/pptx.png" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
 									</c:when>
 									<c:when test="${flist.file_room_ext == '.zip'}">
-										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/zip.jpg" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
+										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/zip.png" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
 									</c:when>
 									<c:when test="${flist.file_room_ext == '.jpg' || flist.file_room_ext == '.png' || flist.file_room_ext == '.bmp' || flist.file_room_ext == '.gif'}">
 										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="upload/${flist.file_room_rename}" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
 									</c:when>
 									<c:otherwise>
-										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/file.jpg" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
+										<input type="hidden" id="deletefilename${status.index}" name="deletefilename${status.index}" value="${flist.file_room_rename}"><img class=lazy src="images/txt.png" onmousedown="indexselect(${status.index})" style="width: 100px; height: 50px">
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -303,19 +303,19 @@ function output(data) {
 		$('#divrow1').append("<input type=hidden id=deletename>");
 		$.each(data.file, function(index, item) {
 			if(item.file_room_ext == ".docx"){
-				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/docx.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
+				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/docx.png onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 			}else if(item.file_room_ext == ".hwp"){
-				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/hwp.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
+				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/hwp.png onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 			}else if(item.file_room_ext == ".xlsx"){
-				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/xlsx.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
+				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/xlsx.png onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 			}else if(item.file_room_ext == ".pptx"){
-				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/pptx.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
+				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/pptx.png onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 			}else if(item.file_room_ext == ".zip"){
-				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/zip.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
+				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/zip.png onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 			}else if(item.file_room_ext == ".jpg" || item.file_room_ext == ".png" || item.file_room_ext == ".bmp" || item.file_room_ext == ".gif"){
 				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=upload/"+ item.file_room_rename +" onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 			}else{
-				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/file.jpg onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
+				var result = "<input type=hidden id=deletefilename"+index+" name=deletefilename"+index+" value="+item.file_room_rename+">" + "<img class=lazy src=images/txt.png onmousedown=indexselect("+index+") style=width:100px;height:50px></div></div></div>";
 			}
 		
 			$("#divrow1").append("<div class=col-lg-2 style=float:left>"+
