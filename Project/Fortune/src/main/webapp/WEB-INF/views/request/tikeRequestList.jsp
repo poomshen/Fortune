@@ -77,15 +77,12 @@ $(function(){
 	$("#states").val('${state}');
     Profile.load();
     
-   console.log('<%=selectId%>');
-  
    var select = '<%=selectId%>';
    
     if(select!='null'){
     
     	setTimeout(function(){
     		
-    		console.log("setTimeout / "+select)
     		send(select)
     			
     	
@@ -136,8 +133,6 @@ Profile = {
 
 
 function detail(req,collabo_no){
-	
-	console.log("req"+req);
 	
 	
 	if(collabo_no=="null"){
@@ -206,8 +201,6 @@ function detail(req,collabo_no){
     			 		    			  data:{"newAlarm": "상세 삭제"},
     			 		    			  success:function(data){
     			 		    				  
-    			 		    				  console.log("헤더 업데이트 성공");
-    			 		    				  console.log(data);
     			 		    				  $('#alarm').empty();  
     			 		    				  $('#alarm').html(data);
     			 		    				  
@@ -243,7 +236,6 @@ function detail(req,collabo_no){
 	 				  "dept_no":${sessionScope.info.dept_no}},
 	 		    success:function(data){ //callback  
 	 		    	//alert(a);
-	 		    	console.log(data);
 	 		    	
 	 		    	$("#meneview").html(data); 
 	 		   		$("#myModal2").modal("show");
@@ -319,7 +311,6 @@ function detail(req,collabo_no){
    	}
      //검색 기능 비동기 처리로 하였습니다.
    	function searchBtn(){
-   		console.log()
    		$.ajax({
  	   		 
 	 			type: "get",
@@ -328,9 +319,6 @@ function detail(req,collabo_no){
 	 			data:{me : $("#memoselect").val(),
 	 				se:$("#search").val()},
 	 		    success:function(data){ //callback  
-	 		    	console.log($("#search").val());
-	 		    	console.log($("#memoselect").val());
-	 		    
 	 		    	
 	 		    	$(".requestpage").html(data);
 	 		    	$("#전체").addClass('active');
@@ -345,7 +333,6 @@ function detail(req,collabo_no){
    		
    	}
    	function linkdetail(index){
-   		console.log(index);
    		detailReqCollabo(index);
     }
   
@@ -404,8 +391,6 @@ $.ajax({
 			$(".requestpage").html(data);
 			$("#${state}").addClass('active');
 			$("#states").val('${state}');
-			console.log($("#states").val())
-			
 
 		},
 			error: function(){						

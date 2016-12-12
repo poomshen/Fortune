@@ -158,8 +158,6 @@ function detail(id, title, text, start, end, userids, progress_or_place){
 				    			  data:{"newAlarm": "상세 삭제"},
 				    			  success:function(data){
 				    				  
-				    				  console.log("헤더 업데이트 성공");
-				    				  console.log(data);
 				    				  $('#alarm').empty();  
 				    				  $('#alarm').html(data);
 				    			  }
@@ -185,10 +183,6 @@ function detail2(id, title, text, start, end, userids, progress_or_place){
 		data : 'schedule_no='+ id,
 		success : function(data){
 			
-			  console.log("헤더 업데이트 성공");
-			  
-			  
-			  console.log(data);
 			  $('#alarm').empty();  
 			  $('#alarm').html(data);
 			  
@@ -297,7 +291,6 @@ function insert_comment(){
 				},
 		success : function(data) {
 			var comment_text = "";
-			console.log('comment 등록 성공')
  			$.each(data, function(index, obj) {
 				//obj.color = 0 ~ i값임 
  				if(index%2==0){
@@ -329,7 +322,6 @@ function delete_comment(commend_id){
 				"work_comment_no" : commend_id},
 		success : function(data) {
 			var comment_text = "";
-			console.log(' cocmment 삭제 성공')
  			$.each(data, function(index, obj) {
 				//obj.color = 0 ~ i값임 
  				if(index%2==0){
@@ -400,7 +392,6 @@ function fcontent() {
 			"month" : $('#month').val()
         },
 		success : function(data) {
-			console.log(data)
 			$.each(data.schedulelist, function(index, obj) {
 				if(obj.progress_or_place<10){
 					if(obj.progress_or_place==1){
@@ -652,7 +643,6 @@ function loadCalendar(role1,role2) {
 		        	"schedule_end" : calevent.end.format('YYYY-MM-DD')
 		        	},
 		        	success : function(data) {
-		        		console.log("날짜이동성공");
 		        	fcontent();
 		           }
 		        });
@@ -713,7 +703,6 @@ function loadCalendar(role1,role2) {
 		                "schedule_end" : calevent.end.format('YYYY-MM-DD')
 		            },
 		            success : function(data) {
-		            console.log("날짜 길이 조정 성공");
 		            fcontent();
 		            }
 			     });
@@ -756,7 +745,6 @@ function loadCalendar(role1,role2) {
 		            				  url: 'deleteSchedule.ajax',
 		            				  data: {"id" : id},
 		            				  success : function(data) {
-		            					  console.log("삭제성공");
 		            					  fcontent();
 		            					  setTimeout(function(){
 		            						  swal("삭제 성공!", "선택된 일정이 삭제되었습니다.", "success");
@@ -799,7 +787,6 @@ function loadCalendar(role1,role2) {
 		            				  url: 'deleteMeetingSchedule.ajax',
 		            				  data: {"id" : id},
 		            				  success : function(data) {
-		            					  console.log("삭제성공");
 		            					  fcontent();
 		            					  setTimeout(function(){
 		            						  swal("삭제 성공!", "선택된 일정이 삭제되었습니다.", "success");
@@ -862,7 +849,6 @@ function loadCalendar(role1,role2) {
 		            			  url: 'work_update.ajax',
 		            			  data: updateschedule,
 		            			  success : function(data) {
-		            				  console.log('업데이트 성공');
 		            			  }
 		            		  });
 		            		  
@@ -918,7 +904,6 @@ function loadCalendar(role1,role2) {
 									url: 'meeting_update.ajax',
 									data: updateschedule,
 									success : function(data) {
-										console.log('업데이트 성공');
 									}
 								});
 		            		}else{
@@ -1033,7 +1018,6 @@ function loadCalendar(role1,role2) {
 							url: 'select.ajax',
 							data: newschedule,
 							success : function(data) {
-								console.log(data);
 								eventData = {
 										id: data.schedule.schedule_no,
 										title: data.schedule.work_title,
@@ -1044,20 +1028,14 @@ function loadCalendar(role1,role2) {
 								
 								calendar.fullCalendar('renderEvent', eventData , true);
 								fcontent();
-								console.log('insert 성공')
 								
 								
 							      $.each(data.alarm, function (i, item) {
-		                                console.log(item.count);
 		                                count+=item.count+"/";
 		                                work_type=item.work_type;
 							      
 							      });
 								
-								console.log(data.alarm); 
-								//var count =","+data.count.join(' / ');
-								
-								console.log(count);
 								
 								send(scheduleusers+count+","+work_type);
 								
@@ -1107,9 +1085,6 @@ function loadCalendar(role1,role2) {
     			
     			if( $('#check').val() ){ 
     			
-	    			console.log( $('#modal_start_ms').val() )
-	    			console.log( $('#modal_end_ms').val() )
-	    			
 	    			if( $('#modal_start_ms').val() != $('#modal_end_ms').val() ){
 	    				swal('회의 일정은 1일만 가능합니다.','기간을 1일로 설정해 주세요.')
 	    			}else{
@@ -1147,20 +1122,12 @@ function loadCalendar(role1,role2) {
 								calendar.fullCalendar('renderEvent', eventData , true);
 								
 								fcontent();
-								console.log('회의업무 insert 성공')
-								
 								
 							      $.each(data.alarm, function (i, item) {
-		                                console.log(item.count);
 		                                count+=item.count+"/";
 		                                work_type=item.work_type;
 							      
 							      });
-								
-								console.log(data.alarm); 
-								//var count =","+data.count.join(' / ');
-								
-								console.log(count);
 								
 								send(scheduleusers+count+","+work_type);
 								

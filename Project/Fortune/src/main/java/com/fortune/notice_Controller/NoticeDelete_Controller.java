@@ -23,7 +23,9 @@ public class NoticeDelete_Controller {
 	// 공지사항글 삭제하기
 	@RequestMapping("noticeDelete.htm")
 	public String noticeDelete(int notice_no){
-		System.out.println("notice_no : " + notice_no);
+
+
+		System.out.println("NoticeDelete_Controller/noticeDelete함수");
 
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
 		noticeDao.deleteNotice(notice_no);

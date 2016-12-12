@@ -43,7 +43,6 @@
 	}
 	
 	function ctionQuestion(collabo){
-		console.log(collabo);
 		$("#modaldivs").html("<button type='button' class='btn btn-default'"
 				+"onclick='collaboComplete("+collabo+")' >수락</button>"
 				+"<button type='button' class='btn btn-default' data-dismiss='modal'>취소</button>"		
@@ -59,7 +58,6 @@
 	
 	//스크롤 페이지 처리 하기 
  	function selectListForm()  {
-		console.log($(".responseFrom:last").attr("id"));
  		 $("div#lastPostsLoader").html("<div  class='btn btn-primary btn-lg btn-block'><h1style='color: white;'>로딩중..</h1></div>");
  		 $.get("responseListFrom.htm?pg="+ $(".responseFrom:last").attr("id"), function(data, textStatus, req) {
  		        if (data != "") {  

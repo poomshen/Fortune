@@ -30,7 +30,8 @@ public class AlarmAjax_Controller {
 	
 	@RequestMapping(value="/totalChart.ajax")
 	public @ResponseBody List<Chart_Data_DTO> totalChart(HttpServletRequest request, Model model){
-		System.out.println("totalChart.ajax");
+	
+		System.out.println("AlarmAjax_Controller/totalChart함수");
 		
 		//메뉴에 차트 가져오기(추가작업 : 이예지)
 		
@@ -38,7 +39,7 @@ public class AlarmAjax_Controller {
 		List<Chart_Data_DTO> clist = new ArrayList<Chart_Data_DTO>();
 		
 		clist=cdao.selectChartAll();
-		System.out.println("clist"+clist.size());
+	
 		
 	
 		
@@ -48,7 +49,8 @@ public class AlarmAjax_Controller {
 	
 	@RequestMapping(value="/pieChart.ajax")
 	public @ResponseBody List<Pie_Data_DTO> pieChart(HttpServletRequest request, Model model){
-		System.out.println("pieChart.ajax");
+		
+		System.out.println("AlarmAjax_Controller/pieChart함수");
 
 		
 		
@@ -58,12 +60,7 @@ public class AlarmAjax_Controller {
 		plist = cdao.selectSumSal();
 		
 		model.addAttribute("plist",plist);
-		
-		System.out.println("pieChart controller");
-		
-	
-	
-		
+				
 		return plist;
 	}
 	

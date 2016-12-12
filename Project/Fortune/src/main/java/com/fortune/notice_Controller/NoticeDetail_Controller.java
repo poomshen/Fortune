@@ -26,8 +26,8 @@ public class NoticeDetail_Controller {
 	@RequestMapping("noticeDetail.htm")
 	public String noticeDetail(int notice_no, Model model){
 
-		System.out.println("NoticeController의 noticeDetail을 탑니다~");
-		
+		System.out.println("NoticeDelete_Controller/noticeDetail함수");
+
 		INotice noticeDetailDao = sqlSession.getMapper(INotice.class);
 		noticeDetailDao.updateHits(notice_no);
 		Notice_DTO noticeDetailDto = noticeDetailDao.detailNotice(notice_no);

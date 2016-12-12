@@ -251,7 +251,6 @@
 					  "search_phone":$('#search_phone').val(),
 					  "search_birth":$('#search_birth').val()},
 				success:function(data){
-					//console.log('>'+data+'<');
 				
 					
 					if(data != null && data != ""){
@@ -315,9 +314,7 @@
 					  "search_phone2":$('#search_phone2').val()},
 				
 				success:function(data){
-					//console.log("result 뭐야!?!?!?!?!!??"+data);
 					if(data!=null && data!=""){
-						//console.log(data);					
 						
 					}else if(data == 0){
 						swal('해당 정보에 맞는 계정이 없습니다. 정보를 확인해주세요');
@@ -358,10 +355,8 @@
 	 	
 		 if(phoneRex.test($('#search_phone').val())){
 			 idsearch1 = true;
-			 console.log(idsearch1);
 	 	}else{     
 	 		 idsearch1 = false;
-	 		 console.log(idsearch1);
 	 	}
 	});
 	 
@@ -370,10 +365,8 @@
 	 	
 		 if(phoneRex.test($('#search_phone2').val())){
 			 idsearch2 = true;
-			 console.log(idsearch2);
 	 	}else{     
 	 		idsearch2 = false;
-	 		 console.log(idsearch2);
 	 	}
 	});
 	

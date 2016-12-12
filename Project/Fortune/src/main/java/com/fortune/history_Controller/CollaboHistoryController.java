@@ -70,20 +70,5 @@ public class CollaboHistoryController {
 		
 		return mv;
 	}
-	
-/*	@RequestMapping("responseListFrom.htm")
-	public String collaboselectList(String pg, String f, String q,HttpSession session ,Model model){
-		try {
-			System.out.println("성준이 :::"+pg);
-			List<With_DTO> list = proservice.listResponse(pg, f, q, session);
-			model.addAttribute("list", list); 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return "cen.responseList_From";
-	}*/
+
 }

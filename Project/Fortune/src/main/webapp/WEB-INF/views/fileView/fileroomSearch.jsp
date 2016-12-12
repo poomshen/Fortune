@@ -179,7 +179,6 @@ function dargtest() {
 					data : {"deletefilename": deletefilename, "collabo_no" : $('#collabo_no').val()},
 					dataType : "json",
 					success : function(data, statusText) {
-						console.log("success");
 						output(data);
 						dargtest();
 					},
@@ -190,7 +189,6 @@ function dargtest() {
 				        $('.wrap-loading').addClass('display-none');
 				    },
 					error : function(e) {
-						console.log("error");
 						console.log(e);
 					}
 				});
@@ -251,7 +249,6 @@ $(function() {
 			dataType : "json",
 			data : {"collabo_no" : $('#collabo_no').val()},
 			success : function(data, statusText) {
-				console.log("success");
 				output(data);
 				dargtest();
 			},
@@ -262,7 +259,6 @@ $(function() {
 		        $('.wrap-loading').addClass('display-none');
 		    },
 			error : function(e) {
-				console.log("error");
 				console.log(e);
 			}
 		});
@@ -281,7 +277,6 @@ $(function() {
 			data : {"checkArray": checkboxValues, "collabo_no" : $('#collabo_no').val()},
 			dataType : "json",
 			success : function(data, statusText) {
-				console.log("success");
 				output(data);
 				dargtest();
 			},
@@ -292,7 +287,6 @@ $(function() {
 		        $('.wrap-loading').addClass('display-none');
 		    },
 			error : function(e) {
-				console.log("error");
 				console.log(e);
 			}
 		});

@@ -1,7 +1,7 @@
 /*
 작성자 : 이예지
 최초 작업일 : 2016/11/24
-최종 수정일  : 2016/11/24
+최종 수정일  : 2016/12/08
 
 로그인 했을시 뜨는 알림 리스트를 클릭했을때 이용
 */
@@ -40,7 +40,7 @@ public class Alarm_Controller {
 	public String alarmCheck(HttpServletRequest request,HttpSession session){
 		
 		
-		System.out.println("alarmCheck 컨트롤러");
+		System.out.println("Alarm_Controller/alarmCheck함수");
 		
 		String work_type=request.getParameter("work_type");
 		
@@ -51,13 +51,9 @@ public class Alarm_Controller {
 		alarm_dto.setWork_type(work_type);
 		
 		
-		//System.out.println("work_type"+work_type);
-		
 		IAlarm alarm_DAO = sqlsession.getMapper(IAlarm.class);
 		
 		int result=alarm_DAO.deleteAlarm(alarm_dto);
-		
-		System.out.println("지운 결과 : "+result);
 		
 		
 		List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
@@ -84,8 +80,7 @@ public class Alarm_Controller {
             throws ClassNotFoundException, SQLException{
 	
 		
-			System.out.println("newAlarm.htm");
-			System.out.println("newAlarm : "+newAlarm);
+			System.out.println("Alarm_Controller/newAlarm함수");
 			
 			List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
 			Join_DTO dto = (Join_DTO)session.getAttribute("info");
@@ -99,8 +94,6 @@ public class Alarm_Controller {
 			
 			sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
 			
-			System.out.println("size:"+alist.size());
-			System.out.println("newAlarm totalcount:"+totalCount.getTotal_count());
 			
 			session.setAttribute("alarm", alist);
 			session.setAttribute("totalCount", totalCount.getTotal_count());
@@ -115,10 +108,9 @@ public class Alarm_Controller {
     						  @RequestParam(value="collabo_req_no") int collabo_req_no,
     						  HttpSession session)throws ClassNotFoundException, SQLException{
 
-		  System.out.println("-------updateAlarm.ajax-------");
-	      System.out.println("updateAlarm할 아이디: "+selectId);
-	      System.out.println("");
-	     				
+
+			System.out.println("Alarm_Controller/updateAlarm함수");
+					
 			Alarm_DTO alarm_dto = new Alarm_DTO();
 		
 			IAlarm alarmDAO =  sqlsession.getMapper(IAlarm.class);
@@ -139,18 +131,15 @@ public class Alarm_Controller {
     @RequestMapping(value="select_comment_alarm.htm", method = RequestMethod.POST)
     public String select_Comment_alarm(@RequestParam(value="schedule_no") int schedule_no,HttpSession session) 
     		throws ClassNotFoundException, SQLException{
-        System.out.println("위치 : CommentController // 작업자: 이예지 // 내용 :회의 상세보기 클릭시 알림 삭제");        
-         
+          
         //알림 삭제하기
-        System.out.println("일정클릭시 알림삭제"+schedule_no);
+        System.out.println("Alarm_Controller/select_Comment_alarm함수");
 				
 		Join_DTO dto = (Join_DTO)session.getAttribute("info");
 	
 		IScheduleAlarm sche_alarm_DAO = sqlsession.getMapper(IScheduleAlarm.class);
 		
 		int result=sche_alarm_DAO.deleteScheAlarm(dto.getUser_id(),schedule_no);
-		
-		System.out.println("지운 결과 : "+result);
 		
 		IAlarm alarm_DAO = sqlsession.getMapper(IAlarm.class);
 		

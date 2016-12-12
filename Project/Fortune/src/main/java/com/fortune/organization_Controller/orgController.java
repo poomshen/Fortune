@@ -28,7 +28,8 @@ public class orgController {
 	@Transactional
 	@RequestMapping("/dept.htm")
 	public String deptshow(HttpSession session,Model model){
-		System.out.println("부서 view단 이동");
+		
+		System.out.println("orgController/deptshow함수");
 		
 		Join_DTO dto = (Join_DTO) session.getAttribute("info");
 		int dept_no = dto.getDept_no();

@@ -1,3 +1,6 @@
+/*작성자 : 이예지
+알림에 대한 모든 정보를 담는 DTO*/
+
 package com.fortune.function_DTO;
 
 public class All_Alarm_DTO {

@@ -35,7 +35,7 @@ public class Upload_Controller {
 	@RequestMapping(value="/uploadfile.ajax", method=RequestMethod.POST ,produces="application/json")
 	@ResponseBody
 	public HashMap<String, Object> uploadFile(HttpSession session, MultipartHttpServletRequest request) throws Exception {
-		System.out.println("uploadFile 컨트롤러");
+		System.out.println("Upload_Controller/uploadFile함수");
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		MultipartFile mf = request.getFile("file");												//파일
 		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));					//협업번호
@@ -121,6 +121,9 @@ public class Upload_Controller {
 	
 	//파일 이름 중복 검사
 	public boolean overlapName(IFileRoom fileromm_DAO, String file_new_name, int collabo_no){
+		
+		System.out.println("Upload_Controller/overlapName함수");
+		
 		int overlapname = fileromm_DAO.selectOverlapNameFile(file_new_name, collabo_no);
 		
 		if(overlapname == 1){

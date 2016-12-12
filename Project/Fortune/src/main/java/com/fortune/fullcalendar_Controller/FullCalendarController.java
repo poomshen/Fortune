@@ -227,7 +227,6 @@ public class FullCalendarController {
         fullcalendarDAO.deleteMeeting(id);
         IScheduleAlarm.deleteScheAll(id);
         fullcalendarDAO.deleteSchedule(id);
-        System.out.println("삭제성공");
 		return 1;
 	}
 	

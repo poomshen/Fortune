@@ -32,8 +32,8 @@ public class OrganizationAjax_Controller {
 
 	@RequestMapping(value="/deptsearch.ajax", method=RequestMethod.GET)
 	public String deptsearch(int dept_no, int team_no, Model model){
-		//System.out.println("같은 부서 리스트 쫙 뽑을거");
-		//System.out.println("teamSelect value : "+team_no);
+	
+		System.out.println("OrganizationAjax_Controller/deptsearch함수");
 		
 		ArrayList<Join_DTO> dto = new ArrayList<Join_DTO>();
 		IOrganization dao = sqlsession.getMapper(IOrganization.class);
@@ -69,7 +69,9 @@ public class OrganizationAjax_Controller {
 	
 	@RequestMapping(value="/deptsearch2.ajax")
 	public String deptsearch2(int dept_no, int team_no,Model model){
-		//System.out.println("우앙!!!!!!teamSelect value!!!!! : "+team_no);
+	
+		System.out.println("OrganizationAjax_Controller/deptsearch2함수");
+		
 		
 		if(team_no == 0){
 			team_no = 999;
@@ -109,6 +111,9 @@ public class OrganizationAjax_Controller {
 	
 	@RequestMapping(value="/getteam.ajax")
 	public @ResponseBody ArrayList<Team_DTO> getteam(int dept_no){
+		
+		System.out.println("OrganizationAjax_Controller/getteam함수");
+		
 		ArrayList<Team_DTO> tdto = new ArrayList<Team_DTO>();
 		IOrganization dao = sqlsession.getMapper(IOrganization.class);
 		tdto = dao.showteam(dept_no);
@@ -119,7 +124,8 @@ public class OrganizationAjax_Controller {
 	//관리자 부서 검색 컨트롤러 함수 (추가작업 : 김중완)
 	@RequestMapping(value="/deptsearchadmin.ajax", method=RequestMethod.GET)
 	public String deptsearch(int dept_no, Model model){
-		System.out.println("deptsearch 컨트롤러");
+		
+		System.out.println("OrganizationAjax_Controller/deptsearch함수");
 		
 		ArrayList<Join_DTO> dto = new ArrayList<Join_DTO>();
 		IOrganization dao = sqlsession.getMapper(IOrganization.class);
@@ -144,7 +150,8 @@ public class OrganizationAjax_Controller {
 	//사원 정보 가져오기 컨트롤러 함수 (추가작업 : 김중완)
 	@RequestMapping(value="/userinfoadmin.ajax", method=RequestMethod.GET)
 	public String userInfoAdmin(HttpServletRequest request, Model model){
-		System.out.println("userinfoadmin 컨트롤러");
+		
+		System.out.println("OrganizationAjax_Controller/userInfoAdmin함수");
 		
 		String user_id = request.getParameter("user_id");
 		IJoin dao = sqlsession.getMapper(IJoin.class);
@@ -176,10 +183,8 @@ public class OrganizationAjax_Controller {
 	//관리자 사원 수정 컨트롤러 함수 (추가작업 : 김중완)
 	@RequestMapping(value="/userupdateadmin.ajax")
 	public String userUpdateAdmin(Join_DTO dto, Model model){
-		System.out.println("userUpdateAdmin 컨트롤러");
+		System.out.println("OrganizationAjax_Controller/userUpdateAdmin함수");
 		
-		/*PassWord_Service passWord_Service = new PassWord_Service();
-		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));*/
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		dao.updateMemberAdmin(dto);
 

@@ -27,6 +27,9 @@ public class FileRoom_Controller {
 	//자료실 메인 화면 컨트롤러 함수
 	@RequestMapping(value="/mainfile.htm")
 	public ModelAndView mainFile(HttpServletRequest request){
+		
+		System.out.println("FileRoom_Controller/mainFile함수");
+		
 		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));
 		String pg = request.getParameter("pg");
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);

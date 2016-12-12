@@ -182,7 +182,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">하루에 하나만의 일정</a>
+									<a href="#">공유 캘린더</a>
 								</p>
 							</div>
 						</div>
@@ -193,7 +193,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Mirum est notare</a>
+									<a href="#">공유 캘린더에서의 의사소통</a>
 								</p>
 							</div>
 						</div>
@@ -204,7 +204,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">조잡한 UI</a>
+									<a href="#">차트화</a>
 								</p>
 							</div>
 						</div>
@@ -215,7 +215,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">여러일에 걸친 일정</a>
+									<a href="#">업무 히스토리</a>
 								</p>
 							</div>
 						</div>
@@ -226,7 +226,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Processus dynamicus logo</a>
+									<a href="#">벤치마킹한 와이브릿지 메인</a>
 								</p>
 							</div>
 						</div>
@@ -237,7 +237,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Processus dynamicus logo</a>
+									<a href="#">화면을 나눔으로써 시각적 불편함 개선</a>
 								</p>
 							</div>
 						</div>
@@ -248,7 +248,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Processus dynamicus logo</a>
+									<a href="#">와이브릿지 일정</a>
 								</p>
 							</div>
 						</div>
@@ -260,7 +260,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">March notare site</a>
+									<a href="#">수정을 고려한 에센스 구성</a>
 								</p>
 							</div>
 						</div>
@@ -271,29 +271,18 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Sit amet logo</a>
+									<a href="#">시스템 구성</a>
 								</p>
 							</div>
 						</div>
 					</div>
 			<!-- 사용기술1 -->		
 					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
-						<img src="assets/img/portfolio/usedskills1.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<img src="assets/img/portfolio/usedskills.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Mirum est notare</a>
-								</p>
-							</div>
-						</div>
-					</div>	
-			<!-- 사용기술2 -->		
-					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
-						<img src="assets/img/portfolio/usedskills2.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">Mirum est notare</a>
+									<a href="#">사용 기술</a>
 								</p>
 							</div>
 						</div>
@@ -305,7 +294,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Mirum est notare</a>
+									<a href="#">관리자 UseCase</a>
 								</p>
 							</div>
 						</div>
@@ -316,7 +305,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Mirum est notare</a>
+									<a href="#">부장 UseCase</a>
 								</p>
 							</div>
 						</div>
@@ -327,7 +316,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Mirum est notare</a>
+									<a href="#">팀장 UseCase</a>
 								</p>
 							</div>
 						</div>
@@ -338,7 +327,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Mirum est notare</a>
+									<a href="#">일반 사용자 UseCase</a>
 								</p>
 							</div>
 						</div>
@@ -349,7 +338,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Lorem website</a>
+									<a href="#">사용자 테이블</a>
 								</p>
 							</div>
 						</div>
@@ -360,7 +349,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Mirum est notare</a>
+									<a href="#">알림 테이블</a>
 								</p>
 							</div>
 						</div>
@@ -371,7 +360,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Etiam processus social</a>
+									<a href="#">업무/회의 테이블</a>
 								</p>
 							</div>
 						</div>
@@ -383,7 +372,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Sit website logo</a>
+									<a href="#">웹소켓 Flow chart</a>
 								</p>
 							</div>
 						</div>
@@ -394,7 +383,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Sit website logo</a>
+									<a href="#">일정/차트 Flow chart</a>
 								</p>
 							</div>
 						</div>
@@ -405,7 +394,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Sit website logo</a>
+									<a href="#">일정 관리</a>
 								</p>
 							</div>
 						</div>
@@ -436,45 +425,39 @@
 					<h3><font color="black">이성준</font></h3>
 					<p>Project Manager</p>				
 				</div>
-	
-				<!-- <div class="col-sm-4 team-box wow fadeInUp animated"
-					style="visibility: visible; animation-name: fadeInUp;">
-					<h3><font color="black">이성준</font><h3>
-					<p>Project Manager</p>	
-				</div> -->
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">김지율</font></h3>
-					<p>Admin Manager</p>				
+					<p>Admin / Notice</p>				
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">이명철</font></h3>
-					<p>DataBase Manager</p>		
+					<p>DB Modeling / Calendar</p>		
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">김중완</font></h3>
-					<p>Server Client</p>		
+					<p>DB Modeling / File Room</p>		
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">김지현</font></h3>
-					<p>UI Client</p>		
+					<p>User Info / UI</p>		
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">이예지</font></h3>
-					<p>UI Manager</p>		
+					<p>Web Socket / Chart</p>		
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">이승훈</font></h3>
-					<p>Server Manager</p>		
+					<p>Project Request/Response</p>		
 				</div>
 			</div>	
 			

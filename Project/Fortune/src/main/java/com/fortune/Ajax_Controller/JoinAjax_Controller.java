@@ -32,8 +32,7 @@ public class JoinAjax_Controller {
 	@RequestMapping("/idchk.ajax")
 	public @ResponseBody String idchk(Join_DTO dto){
 		
-		System.out.println("id 중복체크할겨");
-		System.out.println(dto.getUser_id());
+		System.out.println("JoinAjax_Contoroller/idchk함수");
 		
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		Join_DTO join = dao.idchk(dto.getUser_id());
@@ -47,9 +46,8 @@ public class JoinAjax_Controller {
 	
 	@RequestMapping("/pwdchk.ajax")
 	public @ResponseBody String pwdchk(@RequestParam(value="user_password") String user_password, @RequestParam(value="user_password_chk") String user_password_chk){
-		System.out.println("pwd 중복 체크");
-		System.out.println("user_password :" + user_password);
-		System.out.println("user_password 두번째값 : " + user_password_chk);
+			
+		System.out.println("JoinAjax_Contoroller/pwdchk함수");
 		
 		if(user_password.equals(user_password_chk)){
 			return "ok";

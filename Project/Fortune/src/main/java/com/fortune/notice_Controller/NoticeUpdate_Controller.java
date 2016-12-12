@@ -30,13 +30,12 @@ public class NoticeUpdate_Controller {
 	@RequestMapping(value="noticeUpdate.htm", method=RequestMethod.GET)
 	public String noticeUpdate(int notice_no, Model model) {
 
-		System.out.println("NoticeController의 noticeUpdate를  GET방식으로 탑니다~");
+		System.out.println("NoticeUpdate_Controller/noticeUpdate함수");
 
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
 		Notice_DTO noticeUpdate = noticeDao.detailNotice(notice_no);
 		model.addAttribute("noticeUpdate", noticeUpdate);
 
-		System.out.println(noticeUpdate.getNotice_title());
 		return "notice.noticeUpdate";
 	}
 
@@ -44,8 +43,8 @@ public class NoticeUpdate_Controller {
 	@RequestMapping(value="noticeUpdate.htm", method=RequestMethod.POST)
 	public String noticeUpdate(Notice_DTO ndto) {
 
-		System.out.println("NoticeController의 noticeUpdate를  POST방식으로 타서 실제수정 할꺼지롱~");
-		
+		System.out.println("NoticeUpdate_Controller/noticeUpdate함수");
+
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
 		noticeDao.updateNotice(ndto);
 		return "redirect:noticeDetail.htm?notice_no=" + ndto.getNotice_no();

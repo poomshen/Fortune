@@ -31,7 +31,7 @@ public class Delete_Controller {
 	@RequestMapping(value = "/deletefile.ajax", produces = "application/json")
 	@ResponseBody
 	public HashMap<String, Object> deleteFile(@RequestParam(value="checkArray[]") List<String> arrayParams, HttpServletRequest request){
-		System.out.println("deleteFile 다중 삭제 컨트롤러");
+		System.out.println("Delete_Controller/deleteFile함수");
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		FileRoom_DTO fileroom_DTO = new FileRoom_DTO();
@@ -81,7 +81,8 @@ public class Delete_Controller {
 	@RequestMapping(value = "/deletefiles.ajax", produces = "application/json")
 	@ResponseBody
 	public HashMap<String, Object> deleteFiles(@RequestParam(value="deletefilename") String deletefilename, HttpServletRequest request){
-		System.out.println("deleteFile 드래그 삭제 컨트롤러");
+		
+		System.out.println("Delete_Controller/deleteFiles함수");
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		IFileRoom fileromm_DAO = sqlsession.getMapper(IFileRoom.class);
 		FileRoom_DTO fileroom_DTO = new FileRoom_DTO();

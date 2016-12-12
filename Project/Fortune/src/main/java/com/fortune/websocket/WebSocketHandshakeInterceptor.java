@@ -20,26 +20,13 @@ public class WebSocketHandshakeInterceptor extends HttpSessionHandshakeIntercept
     public boolean beforeHandshake(ServerHttpRequest request,ServerHttpResponse response, WebSocketHandler wsHandler,
          Map<String, Object> attributes) throws Exception {     
     
-        System.out.println("beforehandshake 시작");
-          
           
         ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
-        System.out.println("URI:"+request.getURI());
-  
         HttpServletRequest req =  ssreq.getServletRequest();
-        
-
-        
-        
+         
         //로그인한 사람 아이디 뽑기
 		Join_DTO dto = (Join_DTO) req.getSession().getAttribute("info");
-		
         attributes.put("userId", dto.getUser_id());
-  
-      
-        System.out.println("인터셉터 id:"+ dto.getUser_id());
-
- 
         return super.beforeHandshake(request, response, wsHandler, attributes);
     }
   
@@ -47,7 +34,6 @@ public class WebSocketHandshakeInterceptor extends HttpSessionHandshakeIntercept
     public void afterHandshake(ServerHttpRequest request,
             ServerHttpResponse response, WebSocketHandler wsHandler,
             Exception ex) {
-        System.out.println("After Handshake");
   
         super.afterHandshake(request, response, wsHandler, ex);
     }

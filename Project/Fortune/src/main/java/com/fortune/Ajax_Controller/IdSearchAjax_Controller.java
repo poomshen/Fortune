@@ -39,7 +39,8 @@ public class IdSearchAjax_Controller {
 	
 	@RequestMapping(value="/idsearch.ajax", method=RequestMethod.GET)
 	public @ResponseBody String geId(HttpServletRequest request, Model model){
-		System.out.println("id search controller왔음~!~!~!~!~!");
+	
+		System.out.println("IdSearchAjax_Controller/geId함수");
 		
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		String search_name = request.getParameter("search_name");
@@ -53,7 +54,9 @@ public class IdSearchAjax_Controller {
 	}
 	@RequestMapping("/pwdsearch.ajax")
 	public @ResponseBody int getpwd(HttpServletRequest request) throws MessagingException{
-		//System.out.println("컨트롤러 오긴 오냐?ㅅㅂ");
+	
+		System.out.println("IdSearchAjax_Controller/getpwd함수");
+		
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		PassWord_Service passWord_Service = new PassWord_Service();
 		Random random = new Random();
@@ -61,7 +64,7 @@ public class IdSearchAjax_Controller {
 		
 		int ranNum = random.nextInt(9000)+1000;
 		String ranNum2 = Integer.toString(ranNum);	
-		//System.out.println("랜덤 숫자 : " + ranNum);
+		
 		
 		String search_id = request.getParameter("search_id");
 		String search_name2 = request.getParameter("search_name2");
@@ -71,7 +74,7 @@ public class IdSearchAjax_Controller {
 		dto.setUser_password(pwa);
 		int result = dao.searchpwd(pwa, search_id, search_name2, search_phone2);
 		
-		/*return ranNum;*/
+
 		if(result!=0){
 			//update 성공
 			result=ranNum;
