@@ -319,7 +319,7 @@ $(document).ready(function() {
                                 <div class="row">
                                 	<div class="col-sm-3">
                                 		<input type="radio" id="meeting_place_10" name="place_radio" value="10">
-                                		<label for="meeting_place_10" style="cursor: pointer;"><div id="div_place_10" class="dplace" title="회의실1의 설명" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실1</div></label>
+                                		<label for="meeting_place_10" style="cursor: pointer;"><div id="div_place_10" class="dplace" title="회의실1" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실1</div></label>
                                 	</div>
                                 	<div class="col-sm-3">
                                 		<input type="radio" id="meeting_place_20" name="place_radio" value="20">
