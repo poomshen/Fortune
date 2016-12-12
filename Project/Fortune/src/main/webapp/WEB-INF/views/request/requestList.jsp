@@ -77,8 +77,6 @@
 	 			data:{"collabo_req_index" : a,
 	 				  "dept_no":${sessionScope.info.dept_no}},
 	 		    success:function(data){ //callback  
-	 		    	//alert(a);
-	 		    	//console.log(data);
 	 		    	
 	 		    	$("#meneview").append($('#meneview').html(data)); 
 	 		    

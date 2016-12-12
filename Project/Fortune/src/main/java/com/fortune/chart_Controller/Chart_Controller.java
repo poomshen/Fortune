@@ -37,15 +37,13 @@ public class Chart_Controller {
             throws ClassNotFoundException, SQLException{
 	
 		
-	      System.out.println("selectChart.htm");
-	      System.out.println("chart_type : "+project_num);
+	      System.out.println("Chart_Controller/selectChart함수");
 	      
 			//메뉴에 비동기 차트 가져오기
 			IChart cdao = sqlsession.getMapper(IChart.class);
 			List<Chart_Data_DTO> each_clist = new ArrayList<Chart_Data_DTO>();
 			
 			each_clist=cdao.selectChart(project_num);
-			System.out.println("clist"+each_clist.size());
 			ArrayList<String> chart_x =new ArrayList<String>();
 			ArrayList<Float> chart_y =new ArrayList<Float>();
 		

@@ -175,7 +175,6 @@ function dragtest() {
 					data : {"deletefilename": deletefilename, "collabo_no" : $('#collabo_no').val()},
 					dataType : "json",
 					success : function(data, statusText) {
-						console.log("success");
 						output(data);
 						dragtest();
 					},
@@ -186,7 +185,6 @@ function dragtest() {
 				        $('.wrap-loading').addClass('display-none');
 				    },
 					error : function(e) {
-						console.log("error");
 						console.log(e);
 					}
 				});
@@ -248,7 +246,6 @@ $(function() {
 			dataType : "json",
 			data : {"collabo_no" : $('#collabo_no').val()},
 			success : function(data, statusText) {
-				console.log("success");
 				output(data);
 				dragtest();
 			},
@@ -259,7 +256,6 @@ $(function() {
 		        $('.wrap-loading').addClass('display-none');
 		    },
 			error : function(e) {
-				console.log("error");
 				console.log(e);
 			}
 		});
@@ -278,7 +274,6 @@ $(function() {
 			data : {"checkArray": checkboxValues, "collabo_no" : $('#collabo_no').val()},
 			dataType : "json",
 			success : function(data, statusText) {
-				console.log("success");
 				output(data);
 				dragtest();
 			},
@@ -289,7 +284,6 @@ $(function() {
 		        $('.wrap-loading').addClass('display-none');
 		    },
 			error : function(e) {
-				console.log("error");
 				console.log(e);
 			}
 		});

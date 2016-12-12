@@ -27,7 +27,7 @@ public class Search_Controller {
 	//파일 검색 컨트롤러 함수
 	@RequestMapping(value="/searchfile.htm")
 	public ModelAndView searchFile(HttpServletRequest request){
-		System.out.println("searchFile 컨트롤러");
+		System.out.println("Search_Controller/searchFile함수");
 		
 		String selectvalue = request.getParameter("selectvalue");
 		String searchvalue = request.getParameter("searchvalue");

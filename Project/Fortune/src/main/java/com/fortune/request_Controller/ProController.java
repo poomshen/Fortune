@@ -52,6 +52,9 @@ public class ProController {
 	@RequestMapping(value = "/writerequest.htm")
 	public String writeForm(Model model) throws ClassNotFoundException, SQLException {
 			//성준 추가 16-11-30 초기 헙업 가져오기
+		
+			System.out.println("ProController/writeForm함수");
+			
 			List<ProgectName_DTO> pList = historyService.progetctNameList();
 			model.addAttribute("pList", pList);
 			int collabo_req_no = historyService.maxReqNo();
@@ -70,8 +73,8 @@ public class ProController {
 	   public String regRequest(Request_DTO n, HttpServletRequest request,HttpSession session)
 	         throws IOException, ClassNotFoundException, SQLException {
 	         
-	      System.out.println("writeRequest.htm 컨트롤러 start");
-	      try {
+		   System.out.println("ProController/regRequest함수");
+			 try {
 	         //추가 사항 req_no 바꿔주기
 	         
 	         
@@ -96,10 +99,12 @@ public class ProController {
 	@RequestMapping("requestList.htm") // /customer/notice.htm
 	public ModelAndView requestList(Search_Page_DTO search_Page_DTO, HttpSession session ,String collabo_req_date,Model model) throws ClassNotFoundException, SQLException {
 		 
+		
+		System.out.println("ProController/requestList함수");
+			
 		String rs = "request";
 		search_Page_DTO.setRs(rs);
 		search_Page_DTO.setCollabo_req_index(collabo_req_date);
-		System.out.println("처음 타는곳???");
 		ModelAndView mv = proservice.getRequest(sqlSession,search_Page_DTO, session);
 		mv.addObject("state", "전체");
 
@@ -114,12 +119,13 @@ public class ProController {
 	 @RequestMapping("requestList2.htm") // /customer/notice.htm
 	 public ModelAndView requestList2(Search_Page_DTO search_Page_DTO,HttpSession session,Model model) throws ClassNotFoundException, SQLException {
 		 
+		 System.out.println("ProController/requestList2함수");
+			
 		
 		 String rs = "cen";
 		 search_Page_DTO.setRs(rs);
 
 		 ModelAndView mv =proservice.getRequest(sqlSession,search_Page_DTO, session);
- System.out.println(search_Page_DTO.getState());
 		 
 		 mv.addObject("state", search_Page_DTO.getState());
 		 return mv;
@@ -132,6 +138,8 @@ public class ProController {
 	@RequestMapping("listReplyRequest.htm") // /customer/notice.htm
 	public ModelAndView listReplyRequest( Search_Page_DTO search_Page_DTO, HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 		
+		System.out.println("ProController/listReplyRequest함수");
+			
 		String rs = "request";
 		search_Page_DTO.setRs(rs);
 		ModelAndView mv = proservice.listReplyRequest((String)session.getAttribute("req_selectId"),search_Page_DTO, session);
@@ -142,17 +150,16 @@ public class ProController {
 		return mv;
 
 	}
-	 // ajax 태울 곳
+	 //ajax 태울 곳
 	 @Transactional
 	 @RequestMapping("listReplyRequest2.htm") // /customer/notice.htm
 	 public ModelAndView listReplyRequest2(Search_Page_DTO search_Page_DTO, HttpSession session, Model model) throws ClassNotFoundException, SQLException {
-		 System.out.println("컨트롤러 : " + search_Page_DTO);
+		
+		 System.out.println("ProController/listReplyRequest2함수");
 		 String rs = "cen";
 		 search_Page_DTO.setRs(rs);
 		 ModelAndView mv = proservice.listReplyRequest((String)session.getAttribute("req_selectId"), search_Page_DTO, session);
 		  // 자동 forward
-		 System.out.println("상태  : " + search_Page_DTO.getState());
-		 
 		 mv.addObject("state", search_Page_DTO.getState());
 		 
 		 return mv;
@@ -163,6 +170,8 @@ public class ProController {
 	@RequestMapping("listallRequest.htm") // /customer/notice.htm
 	public String listallRequest( Search_Page_DTO search_Page_DTO, HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 		
+		System.out.println("ProController/listallRequest함수");
+			
 		List<Request_DTO> list = proservice.listallRequest(search_Page_DTO, session);
 		model.addAttribute("list", list); // 자동 forward
 		
@@ -171,24 +180,15 @@ public class ProController {
 
 	}
 	
-	/*//test 대기 수락 거절 클래스
-	@RequestMapping("kindState.htm")
-	public String kindState(String collabo_req_state, String pg, String f, String q,HttpSession session , Model model) throws ClassNotFoundException, SQLException {
 
-		 proservice.listallRequest(pg, f, q, session); //전체
-		 proservice.kindState(collabo_req_state);
 
-		// Tiles
-		return "request.requestList";
-		// View
-
-	}*/
-
-	// 글상세보기
+	 	// 글상세보기
 		// 추가) 알림 db지워주기
-		@RequestMapping("ProDetail.htm")
+	@RequestMapping("ProDetail.htm")
 		public String ProDetail(String collabo_req_index, Model model,HttpSession session) throws ClassNotFoundException, SQLException {
 
+			System.out.println("ProController/ProDetail함수");
+			
 			Request_DTO proDto = proservice.ProDetail(collabo_req_index);
 			model.addAttribute("list", proDto);
 			
@@ -203,18 +203,13 @@ public class ProController {
 			model.addAttribute("requestuser_info", sndto);
 			
 			
-			System.out.println(proDto.toString());
-			
 	        //알림 삭제하기
-	        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
 	        Join_DTO dto = (Join_DTO)session.getAttribute("info");
 					
 		
 			IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
 			
 			int result=req_alarm_DAO.deleteReqAlarm(collabo_req_index);
-			
-			System.out.println("지운 결과 : "+result);
 			
 			IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
 			
@@ -224,8 +219,6 @@ public class ProController {
 			
 			All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
 			
-		
-			
 			session.setAttribute("alarm", alist);
 			
 			session.setAttribute("totalCount",tatalCount.getTotal_count());
@@ -234,8 +227,6 @@ public class ProController {
 			List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
 			sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
 			session.setAttribute("sch_alist", sch_alist);
-			
-			
 
 			// Tiles
 			return "cen.proDetail";
@@ -245,12 +236,13 @@ public class ProController {
 		
 		// 글상세보기
 		// 추가) 알림 db지워주기
-		@RequestMapping("ProDetail2.htm")
+	@RequestMapping("ProDetail2.htm")
 		public String ProDetail2(String collabo_req_index, String dept_no, Model model,HttpSession session) throws ClassNotFoundException, SQLException {
 
+			System.out.println("ProController/ProDetail2함수");
+			
 			Request_DTO proDto = proservice.ProDetail(collabo_req_index);
 			model.addAttribute("list", proDto);
-			System.out.println(proDto.toString());
 			
 			ProDao proDao = sqlSession.getMapper(ProDao.class);
 			
@@ -263,15 +255,12 @@ public class ProController {
 			model.addAttribute("requestuser_info", sndto);
 			
 	        //알림 삭제하기
-	        System.out.println("요청함 상세 클릭시 알림삭제"+collabo_req_index);
 	        Join_DTO dto = (Join_DTO)session.getAttribute("info");
 					
 		
 			IReqAlarm req_alarm_DAO = sqlSession.getMapper(IReqAlarm.class);
 			
 			int result=req_alarm_DAO.deleteReqAlarm(collabo_req_index);
-			
-			System.out.println("지운 결과 : "+result);
 			
 			IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
 			
@@ -281,10 +270,7 @@ public class ProController {
 			
 			All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
 			
-		
-			
 			session.setAttribute("alarm", alist);
-			
 			session.setAttribute("totalCount",tatalCount.getTotal_count());
 	        
 			//추가 작업
@@ -308,72 +294,54 @@ public class ProController {
 	@RequestMapping("MyProDetail.htm")
 	public String MyProDetail(String collabo_req_index,String collabo_no,Model model,HttpSession session) throws ClassNotFoundException, SQLException {
 
-		Request_DTO proDto = proservice.ProDetail(collabo_req_index);
-		model.addAttribute("list", proDto);
-		System.out.println(proDto.toString());
-		ProDao prodao = sqlSession.getMapper(ProDao.class);
-		With_DTO withDto = prodao.myProDetail(collabo_no);
+			System.out.println("ProController/MyProDetail함수");
 		
-		//요청받은 user의 정보를 receiveuser_info에 담음
-		Select_name_DTO sndto = prodao.searchName(proDto.getCollabo_req_ID());
-		model.addAttribute("receiveuser_info", sndto);
+			Request_DTO proDto = proservice.ProDetail(collabo_req_index);
+			model.addAttribute("list", proDto);
+			ProDao prodao = sqlSession.getMapper(ProDao.class);
+			With_DTO withDto = prodao.myProDetail(collabo_no);
+		
+			//요청받은 user의 정보를 receiveuser_info에 담음
+			Select_name_DTO sndto = prodao.searchName(proDto.getCollabo_req_ID());
+			model.addAttribute("receiveuser_info", sndto);
 
-		//요청한 user의 정보를 receiveuser_info에 담음
-		sndto = prodao.searchName(proDto.getUser_ID());
-		model.addAttribute("requestuser_info", sndto);
+			//요청한 user의 정보를 receiveuser_info에 담음	
+			sndto = prodao.searchName(proDto.getUser_ID());
+			model.addAttribute("requestuser_info", sndto);
 		
-		
-		model.addAttribute("mylist",withDto);
-		// Tiles
-		
-		//알림 지워주기 추가)2016.12.09 예지
-		
-        //알림 삭제하기
-        System.out.println("my프로젝트 상세 클릭시 알림삭제"+collabo_req_index);
-				
-		Join_DTO dto = (Join_DTO)session.getAttribute("info");
-	
-		IAcceptAlarm accept_alarm_DAO = sqlSession.getMapper(IAcceptAlarm.class);
-		
-		int result=accept_alarm_DAO.deleteAcceptAlarm(collabo_no);
-		
-		System.out.println("지운 결과 : "+result);
-		
-		IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
-		
-		List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
-		
-		alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
-		
-		All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
 			
-		session.setAttribute("alarm", alist);
+			model.addAttribute("mylist",withDto);
+			// Tiles
 		
-		session.setAttribute("totalCount",tatalCount.getTotal_count());
+			//알림 지워주기 추가)2016.12.09 예지
+		
+			//알림 삭제하기
+				
+			Join_DTO dto = (Join_DTO)session.getAttribute("info");
+	
+			IAcceptAlarm accept_alarm_DAO = sqlSession.getMapper(IAcceptAlarm.class);
+		
+			int result=accept_alarm_DAO.deleteAcceptAlarm(collabo_no);
+		
+			IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
+		
+			List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();
+		
+			alist = alarm_DAO.checkAlarmAll(dto.getUser_id());
+		
+			All_Alarm_DTO tatalCount = alarm_DAO.totalCount(dto.getUser_id());
+			
+			session.setAttribute("alarm", alist);
+			session.setAttribute("totalCount",tatalCount.getTotal_count());
         
-		//추가 작업
-		List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
-		sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
-		session.setAttribute("sch_alist", sch_alist);
+			//추가 작업
+			List<Schedule_AlarmList_DTO> sch_alist=new ArrayList<Schedule_AlarmList_DTO>();
+			sch_alist  = alarm_DAO.checkScheduleAlarm(dto.getUser_id());
+			session.setAttribute("sch_alist", sch_alist);
 		
 		
-		return "cen.myproDetail";
-		// View
-
+			return "cen.myproDetail";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -381,11 +349,11 @@ public class ProController {
 	
 	//글삭제 하기
 	 @RequestMapping("proDel.htm")
-	 public String ProDel(String collabo_req_index) throws ClassNotFoundException,
-	   SQLException {
-	 proservice.ProDel(collabo_req_index);
+	 	public String ProDel(String collabo_req_index) throws ClassNotFoundException,
+	 	SQLException {
+		 	proservice.ProDel(collabo_req_index);
 	 
-	  return "request.requestList"; //리스트 화면 (controller 타서 데이터 출력)
+		 	return "request.requestList"; //리스트 화면 (controller 타서 데이터 출력)
 	 }
 	 
 	//수락 하기 눌렀을 경우 화면 출력
@@ -393,20 +361,19 @@ public class ProController {
 	@RequestMapping("accept.htm")
 		 public String Accept(String collabo_req_index,String dept_no, Model model) throws ClassNotFoundException,
 		   SQLException {
-		 Request_DTO proDto = proservice.DetailResponse(collabo_req_index);
-		 model.addAttribute("list", proDto);
-		 model.addAttribute("acceptlist", proDto);
-		 System.out.println("수락 창");
-		 System.out.println(proDto.toString());
+		
+			System.out.println("ProController/Accept함수");
+			Request_DTO proDto = proservice.DetailResponse(collabo_req_index);
+			model.addAttribute("list", proDto);
+			model.addAttribute("acceptlist", proDto);
 		 
-		 List<Join_DTO> listmanager = proservice.listManager(dept_no); 
-		 model.addAttribute("listmanager", listmanager); // 담당자 리스트 
-		 
-		  return "cen.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
+			List<Join_DTO> listmanager = proservice.listManager(dept_no); 
+			model.addAttribute("listmanager", listmanager); // 담당자 리스트 
+			return "cen.writeResponse"; //리스트 화면 (controller 타서 데이터 출력)
 		 }	
 		
 	//거절 하기 했을 경우 화면 출력
-		 @RequestMapping("refuse.htm")
+	@RequestMapping("refuse.htm")
 		 public ModelAndView Refuse(String collabo_req_text,Search_Page_DTO search_Page_DTO,HttpSession session) throws ClassNotFoundException,
 		   SQLException {
 			 proservice.Refuse(search_Page_DTO.getCollabo_req_index(),collabo_req_text);
@@ -416,118 +383,99 @@ public class ProController {
 
 			 ModelAndView mv =proservice.getRequest(sqlSession,search_Page_DTO, session);
 			 
-		  return mv; //리스트 화면 (controller 타서 데이터 출력)
+			 return mv; //리스트 화면 (controller 타서 데이터 출력)
 		 }	 	
 		 
 		
 	//협업 요청 게시판 수정화면 보여주는 클래스입니다.
-		 @RequestMapping(value = "proEdit.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "proEdit.htm", method = RequestMethod.GET)
 		 public String proEdit(String collabo_req_index, Model model)
 		   throws ClassNotFoundException, SQLException {
 		 
-			 
-			 
-			 Request_DTO req_Dto =  proservice.proEdit(collabo_req_index);
+			  Request_DTO req_Dto =  proservice.proEdit(collabo_req_index);
 			  model.addAttribute("list", req_Dto);	
 		 
-		  return "cen.proEdit";
+			  return "cen.proEdit";
 		 }
 
 	//게시판 실제 수정처리
-		 @RequestMapping(value = "proEdit.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "proEdit.htm", method = RequestMethod.POST)
 		 public String proEdit(Request_DTO n,HttpServletRequest request) throws ClassNotFoundException,
 		   SQLException, IOException {
-			System.out.println(n.toString());
+			
+			System.out.println("ProController/proEdit함수");
 			proservice.proEdit(n,request);
-		  return "redirect:listReplyRequest.htm";
+			
+			return "redirect:listReplyRequest.htm";
 	    	 
 		 }
 		 
-		 
-		 
-	/////////////////////////////////////////////////////////////////////////
-		 
-		// 프로젝트를 요청해주는 클래스 이다.
-			@RequestMapping("writeresponse.htm")
-			public String writeResponse() {
+	// 프로젝트를 요청해주는 클래스 이다.
+	@RequestMapping("writeresponse.htm")
+		public String writeResponse() {
 				
-				return "cen.writeResponse";
+			return "cen.writeResponse";
 
 			}
 		 
 		 
-		// 프로젝트를 요청해주는 클래스 이다.
-		// 추가) 팀장에게 알림 띄워주기
+	// 프로젝트를 요청해주는 클래스 이다.
+	// 추가) 팀장에게 알림 띄워주기
 			
 		
-			@RequestMapping(value = "writeresponse.htm", method = RequestMethod.POST)
-			public String regResponse(With_DTO n, String collabo_req_index,HttpSession session)
-					throws IOException, ClassNotFoundException, SQLException {
+	@RequestMapping(value = "writeresponse.htm", method = RequestMethod.POST)
+		public String regResponse(With_DTO n, String collabo_req_index,HttpSession session)
+			throws IOException, ClassNotFoundException, SQLException {
 					
-				System.out.println("계산중 :"+ n.getCollabo_sal());
+			System.out.println("ProController/regResponse함수");
 				    
-				    //가지고 있는 콤마를 잘라서 집어넣었습니다 00,00 -> 0000
+			//가지고 있는 콤마를 잘라서 집어넣었습니다 00,00 -> 0000
 				    
-				    System.out.println("계산오류잡는중..."+ n.getCollabo_sal().replaceAll(",", ""));
-				    n.setCollabo_sal(n.getCollabo_sal().replaceAll(",", ""));
-				    System.out.println("계산완료 :"+n.getCollabo_sal());
-					/*System.out.println(n.toString());*/
-					 proservice.regResponse(n, collabo_req_index,session);
-					 proservice.Accept(collabo_req_index);
-					// 실DB저장
+			n.setCollabo_sal(n.getCollabo_sal().replaceAll(",", ""));
+			proservice.regResponse(n, collabo_req_index,session);
+			proservice.Accept(collabo_req_index);
+			// 실DB저장
+			//알림 DB에 insert 해주기(트리거에서 저장)					 
+		    session.setAttribute("accept_selectId",n.getUser_ID());
 				
-					 //알림 DB에 insert 해주기(트리거에서 저장)					 
-					 System.out.println("//////프로젝트 요청 팀장 id///////"+n.getCollabo_req_ID());
-					 session.setAttribute("accept_selectId",n.getUser_ID());
-				
-				return "redirect:responseList.htm";
+			return "redirect:responseList.htm";
 
 			}
 		 
 		
-			// 프로젝트의 협업상태를 보여주는 클래스이다.
+// 프로젝트의 협업상태를 보여주는 클래스이다.
 			
 
-			@RequestMapping("responseList_ver1.htm") // /customer/notice.htm
-			public ModelAndView listResponse_ver1(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
+	@RequestMapping("responseList_ver1.htm") // /customer/notice.htm
+		public ModelAndView listResponse_ver1(String pg, String f, String q,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 				
 				//성준이 협업 리스트 코드
-				ModelAndView mv = new ModelAndView();
-				mv = proservice.listResponse( pg, f, q, session);
+			ModelAndView mv = new ModelAndView();
+			mv = proservice.listResponse( pg, f, q, session);
 				
-				mv.setViewName("request.collaboList");
+			mv.setViewName("request.collaboList");
 				
-				
-				
-				return mv;
+			return mv;
 				
 				
 			}
 			
 		
-			
-			
-			
-			
-			
-			
-			@RequestMapping("responseList.htm") // /customer/notice.htm
-			public ModelAndView listResponse(Search_Page_DTO search_Page_DTO,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
-
+	@RequestMapping("responseList.htm") // /customer/notice.htm
+		public ModelAndView listResponse(Search_Page_DTO search_Page_DTO,HttpSession session ,Model model) throws ClassNotFoundException, SQLException {
 				
+			String st=null;
+			search_Page_DTO.setSt(st);
+			String me=null;
+			search_Page_DTO.setMe(me);
+			String se=null;
+			search_Page_DTO.setSe(se);
+			String collabo_req_date=null;
+			search_Page_DTO.setCollabo_req_index(collabo_req_date);
 				
-				String st=null;
-				search_Page_DTO.setSt(st);
-				String me=null;
-				search_Page_DTO.setMe(me);
-				String se=null;
-				search_Page_DTO.setSe(se);
-				String collabo_req_date=null;
-				search_Page_DTO.setCollabo_req_index(collabo_req_date);
-				
-				String rs = "request";
-				search_Page_DTO.setRs(rs);
-				ModelAndView mv = proservice.getRequest(sqlSession,search_Page_DTO, session);
+			String rs = "request";
+			search_Page_DTO.setRs(rs);
+			ModelAndView mv = proservice.getRequest(sqlSession,search_Page_DTO, session);
 				
 
 				
@@ -547,7 +495,7 @@ public class ProController {
 				return mv;
 
 			}	
-			@RequestMapping("responseList2.htm") // /customer/notice.htm
+	@RequestMapping("responseList2.htm") // /customer/notice.htm
 			public ModelAndView listResponse2( String pg, String f, String q,HttpSession session ) throws ClassNotFoundException, SQLException {
 				ModelAndView mv = new ModelAndView();
 				mv = proservice.listResponse( pg, f, q, session);
@@ -560,66 +508,32 @@ public class ProController {
 				
 			}	
 			
-			//담당자 선택역할을 하는 클래스입니다.
-			 @RequestMapping(value = "insertmanager.htm", method= RequestMethod.GET)
+//담당자 선택역할을 하는 클래스입니다.
+		@RequestMapping(value = "insertmanager.htm", method= RequestMethod.GET)
 			 public String InsertManager(String collabo_req_index,String dept_no ,Model model)
 			   throws ClassNotFoundException, SQLException {
 			 
 			
 				 
-				 With_DTO req_Dto =  proservice.managerDto(collabo_req_index);
-					List<Join_DTO> listmanager = proservice.listManager(dept_no); 
+				With_DTO req_Dto =  proservice.managerDto(collabo_req_index);
+				List<Join_DTO> listmanager = proservice.listManager(dept_no); 
 				 
-					model.addAttribute("listmanager", listmanager); // 담당자 리스트 
-				  model.addAttribute("list", req_Dto);	//협업상태 보여준다.
+				model.addAttribute("listmanager", listmanager); // 담당자 리스트 
+				model.addAttribute("list", req_Dto);	//협업상태 보여준다.
 		
-			  return "cen.proManager";
+				return "cen.proManager";
 			 }
 			
+
 			
-			
-			
-			/*//담당자 선택역할을 한다.
-			@RequestMapping( value="insertmanager.htm", method = RequestMethod.POST)
-			 public String InsertManager(With_DTO m, String collabo_req_index) throws ClassNotFoundException,
-			   SQLException {
-				// proservice.ProManager(collabo_req_index);
-				 proservice.InsertManager(m);
-				 System.out.println(m.toString()+"흠냐");
-				 
-				  return "redirect:responseList.htm"; //리스트 화면 (controller 타서 데이터 출력)
-				
-			 }*/
-			
-			
-			//사용 목적: 다운로드 하는 부분인데 요청 상태에서 제안서나 그런것을 받을 때 사용 되는 클래스이다.	
-			// 날짜 일자 :2016-11-25
-			 @RequestMapping("download.htm")
+//사용 목적: 다운로드 하는 부분인데 요청 상태에서 제안서나 그런것을 받을 때 사용 되는 클래스이다.	
+// 날짜 일자 :2016-11-25
+		@RequestMapping("download.htm")
 			 public void download(String p, String f, HttpServletRequest request,
 			   HttpServletResponse response) throws IOException {
 				 	
-				 proservice.download(p, f, request, response);
+				proservice.download(p, f, request, response);
 				 
 			 }
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 /*@RequestMapping(value="/noticeList.htm")
-				
-			 //만든 목적: 페이징 처리할때 사용하는데 협업 요청 하는데 많은 리스트를 뽑는다 그것을 페이징 처리하기 위해서 위한 클래스입니다.
-			 //날짜 일자 :2016-11-26
-			 public ModelAndView noticeList(String pg) throws ClassNotFoundException, SQLException {
-				
-				 
-				 
-				 return null;
-	
-				 
-			 }*/
+
 }

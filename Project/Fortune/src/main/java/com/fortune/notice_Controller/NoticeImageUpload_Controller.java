@@ -18,8 +18,8 @@ public class NoticeImageUpload_Controller {
 	@RequestMapping(value="/noticeImageUpload")
 	public String NoticeImageUpload(final HttpServletRequest request, NoticeFileUpload_DTO nfdto, Model model) {
 
-		System.out.println("noticeImageUpload를 탑니다 탔습니다 탔구요~~");
-		
+		System.out.println("NoticeFileImageUpload_Controller/NoticeImageUpload함수");
+
 		Date date = new Date();
 		int year = date.getYear() + 1900;
 		int month = date.getMonth();

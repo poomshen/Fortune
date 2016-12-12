@@ -116,8 +116,6 @@ Profile = {
              data:{"collabo_req_index" : a,
                   "dept_no":${sessionScope.info.dept_no}},
               success:function(data){ //callback  
-                 //alert(a);
-                 //console.log(data);
                  
                  $("#meneview").append($('#meneview').html(data)); 
               
@@ -136,16 +134,13 @@ Profile = {
 }
      //대기 수락 거절을 비동기 처리로 사용하였다.
       function selectState(state){
-         console.log(state)
          
          $.get("requestList2.htm",{st :state}, function(data, textStatus, req) {
             $('#requestlist').html(data);
-            //console.log(data);
          });
       }
      //검색 기능 비동기 처리로 하였습니다.
       function searchBtn(){
-         console.log()
          $.ajax({
               
              type: "get",
@@ -154,9 +149,6 @@ Profile = {
              data:{me : $('#memoselect').val(),
                   se:$('#search').val()},
               success:function(data){ //callback  
-                 console.log($('#search').val());
-                 console.log($('#memoselect').val());
-              
                  
                  $("#requestlist").html(data); 
               
@@ -184,11 +176,6 @@ $.ajax({
             me: "${memo}", 
             se: "${search}"},
          success:function(data){ //callback  
-            console.log('${st_query}');
-            console.log('${memo}');
-            console.log('${search}');
-
-
 
          $("#requestlist").html(data); 
 
@@ -213,11 +200,6 @@ $.ajax({
             me: "${memo}", 
             se: "${search}"},
          success:function(data){ //callback  
-            console.log('${st_query}');
-            console.log('${memo}');
-            console.log('${search}');
-
-
 
          $("#requestlist").html(data); 
 
@@ -242,9 +224,6 @@ $.ajax({
             me: "${memo}", 
             se: "${search}"},
          success:function(data){ //callback  
-            console.log('${st_query}');
-            console.log('${memo}');
-            console.log('${search}');
 
 
 
@@ -271,11 +250,6 @@ $.ajax({
          me: "${memo}", 
          se: "${search}"},
       success:function(data){ //callback  
-         console.log('${st_query}');
-         console.log('${memo}');
-         console.log('${search}');
-
-
 
       $("#requestlist").html(data); 
 
@@ -300,10 +274,6 @@ function pazing5Btn(){
             me: "${memo}", 
             se: "${search}"},
          success:function(data){ //callback  
-            console.log('${st_query}');
-            console.log('${memo}');
-            console.log('${search}');
-
 
 
 $("#requestlist").html(data); 
@@ -317,11 +287,6 @@ alert('Error while request..'   );
 
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-     
- 
-   
 
 </script>
 

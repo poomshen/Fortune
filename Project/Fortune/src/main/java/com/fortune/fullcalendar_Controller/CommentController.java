@@ -67,15 +67,12 @@ public class CommentController {
         
         
         //알림 삭제하기
-        System.out.println("일정클릭시 알림삭제"+schedule_no);
 				
 	
 		IScheduleAlarm sche_alarm_DAO = sqlSession.getMapper(IScheduleAlarm.class);
 		
 		int result=sche_alarm_DAO.deleteScheAlarm(dto.getUser_id(),schedule_no);
-		
-		System.out.println("지운 결과 : "+result);
-		
+
 		IAlarm alarm_DAO = sqlSession.getMapper(IAlarm.class);
 		
 		List<Select_Alarm_DTO> alist = new ArrayList<Select_Alarm_DTO>();

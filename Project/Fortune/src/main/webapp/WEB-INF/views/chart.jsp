@@ -14,8 +14,6 @@
 <script>
 $(function () {
 	
-	console.log(<%=(String)each_chart_x.get(0)%>);
-
     Highcharts.chart('kk', {
         title: {
             text: '각 프로젝트 날짜별 진척률',

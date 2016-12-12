@@ -49,13 +49,11 @@ $(function(){
 
     Profile.load();
 
-   	console.log('<%=selectId%>');
    	var select = '<%=selectId%>';
     if(select!='null')
     {
     	setTimeout(function(){
     		
-    		console.log("setTimeout / "+select)
     		send(select)
     			
     	
@@ -143,8 +141,6 @@ Profile = {
  	 			data:"collabo_req_index="+a,
  	 		    success:function(data){ //callback  
  	 		    	
- 	 		    	console.log(data);
- 	 		    	
  	 		    	
  	 		    	//modal body 부분에 ajax로 부른 상세 테이블 붙이고 modal 띄우기
  					$("#detail").html(data); 
@@ -209,10 +205,6 @@ Profile = {
      
     	//페이징 처리를 비동기 처리로 처리 하였습니다. << 버튼으로 처리하였습니다.
     	function pazingBtn(page,searchval,memoval){
-    		console.log('페이지 :' + searchval);
-		    console.log('페이지 :' + memoval);
-		    console.log("상태 : " + '${st_query}');
-		    console.log("상태 : " + $("#states").val());
     		if($("#states").val() == '전체'){
         	 	$.get("listReplyRequest2.htm",{pg:page,
 	 				  st: '${st_query}',

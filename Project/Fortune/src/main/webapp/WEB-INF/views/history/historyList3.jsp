@@ -25,9 +25,7 @@
 </style>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script type="text/javascript">
-	console.log("dkdkdkdk");
 		function lastPostFunc(){
-			console.log("스크롤 끝");
 			 $("div#pageListLoader").html("<div  class='btn btn-primary btn-lg btn-block'><h1style='color: white;'>로딩중..</h1></div>");  
 			 $.get("historyAllList2.ajax",{collabo_req_no:${req_no} ,page :$(".wrdLatest:last").attr("id")}, function(data, textStatus, req) {
 				  if (data != "") {  
@@ -40,8 +38,6 @@
 	
 	
 	$(window).scroll(function(){  
-		console.log($(document).height() - $(window).height());
-		console.log($(window).scrollTop());
         if  (($(window).scrollTop()+1) > $(document).height() - $(window).height()){  
            lastPostFunc();  
         }  

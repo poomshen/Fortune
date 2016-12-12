@@ -49,8 +49,8 @@ public class NoticeInsert_Controller {
 	// 공지사항등록 화면처리
 	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.GET)
 	public String noticeInsert() {
-		System.out.println("NoticeController의 noticeInsert를 탑니다~");
-		
+		System.out.println("NoticeInsert_Controller/noticeInsert함수");
+
 		return "notice.noticeInsert";		
 		
 	}
@@ -59,11 +59,10 @@ public class NoticeInsert_Controller {
 	@RequestMapping(value="noticeInsert.htm", method=RequestMethod.POST)
 	public ModelAndView noticeInsert(@Valid Notice_DTO ndto, Errors errors, HttpServletRequest request, HttpSession session) throws Exception {
 
-		System.out.println("NoticeController의 noticeInsert를 타서, 실제로 글작성을 할꺼지롱!");		
-		
+		System.out.println("NoticeInsert_Controller/noticeInsert함수");
+
 		ModelAndView view = new ModelAndView();
 		if(errors.hasErrors()){
-			System.out.println("에러타서 모델타고 인서트로 다시온거다");
 			view.addObject("ndto",ndto);
 			view.setViewName("notice.noticeInsert");
 			return view;
@@ -86,20 +85,12 @@ public class NoticeInsert_Controller {
             storedFileName = NoticeFile_Utils.getRandomString() + originalFileExtension;
              
             
-            System.out.println("Notice_title : " + ndto.getNotice_title());
-    		System.out.println("Notice_text: " + ndto.getNotice_text());
-    		System.out.println("Name : " + ndto.getFile().getName());
-    		System.out.println("OriginalFilename : " + ndto.getFile().getOriginalFilename());
-    		System.out.println("storedFileName : " + ndto.getNotice_filename_re());
             file = new File(filePath + storedFileName);
             //multipartFile.transferTo(file);
             
-           System.out.println("file :" + file);
             if (!originalFileName.equals("")) {
 				// 서버에 파일 쓰기 작업
-            	  System.out.println("originalFileName :" + originalFileName);
 				FileOutputStream fs = new FileOutputStream(filePath + storedFileName);
-				System.out.println(multipartFile.getBytes());
 				fs.write(multipartFile.getBytes());
 				fs.close();
 			}    		

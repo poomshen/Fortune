@@ -26,10 +26,9 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		
 	      log("접속 성공" + session.getId() + "웹소켓 세션 아이디");
 	      String userid = (String) session.getAttributes().get("userId");
-
-	      System.out.println("userID"+userid);
-	      
+	      //접속한 아이디를->key session->value에 저장 
 	      users.put(userid, session);
+	      //0,1,2..(session의 ID)->key userid->value에 저장
 	      ids.put(session.getId(), userid);
 		
 
@@ -40,74 +39,52 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(
 			WebSocketSession session, CloseStatus status) throws Exception {
-		log((String) session.getAttributes().get("userId"));
+		  log((String) session.getAttributes().get("userId"));
 	
-		users.remove("parammsg");
+		  users.remove("parammsg");
 	}
 
 	@Override
 	protected void handleTextMessage(
 			WebSocketSession session, TextMessage message) throws Exception {
 	     
-		System.out.println("---------------------------------");
 	
 		 String[] selectedId ={};
 		 String[] selectedCount={};
-		  System.out.println("받은 메세지 : "+message.getPayload());
 		  
-		  String msg = message.getPayload();
+		 String msg = message.getPayload();
 		  
-		  if(msg.contains(",")){
+		 //일정업무시 ( 선택자가 여러명일때)
+		 if(msg.contains(",")){
 			  
 			  
-			  String[] id_count_type = msg.split(",");
+		 String[] id_count_type = msg.split(",");
 			  
-			  selectedId=id_count_type[0].split("/");
-			  selectedCount=id_count_type[1].split("/");
+	     selectedId=id_count_type[0].split("/");
+		 selectedCount=id_count_type[1].split("/");
 			  
 			   
-		        for (WebSocketSession s : users.values()) {          
-		           for(int i =0; i < selectedId.length; i++){
-		        	   System.out.println("--------선택받은사람-----------");
-		        	   System.out.println("아이디>"+selectedId[i]+"<");
-		        	   
-		        	   System.out.println("---------------------");
-		              if( ids.get(s.getId()).equals(selectedId[i]) ){
-		                 System.out.println(selectedId[i]);
-		                 System.out.println(selectedId[i]+"에게 메세지 전송!");
-		                 s.sendMessage(new TextMessage("알림 발생") );
+		 for (WebSocketSession s : users.values()) {          
+		    for(int i =0; i < selectedId.length; i++){
+		 //접속한 아이디가 선택된 아이디와 같을때 sendMessage 실행
+		       if( ids.get(s.getId()).equals(selectedId[i]) ){
+		 s.sendMessage(new TextMessage("알림 발생") );
 		              }
 		           }
-		           
-		       
-		        }
-			  
-		  }else{
+		       }
+		//프로젝트 생성 및 요청시 (선택자가 한명일때)	  
+		 }else{
 		        
-		        for (WebSocketSession s : users.values()) {          
-			       
-			        	   System.out.println("--------선택받은사람-----------");
-			        	   System.out.println("아이디>"+msg+"<");
-			        	   System.out.println("---------------------");
-			              if( ids.get(s.getId()).equals(msg) ){
-			                 System.out.println(msg+"에게 메세지 전송!");
-			                 s.sendMessage(new TextMessage("알림 발생") );
+		 for (WebSocketSession s : users.values()) {          
+		
+		//접속한 아이디가 선택된 아이디와 같을때 sendMessage 실행
+			   if( ids.get(s.getId()).equals(msg) ){
+	     s.sendMessage(new TextMessage("알림 발생") );
 			              
 			           }
-			           
-			       
 			        }
-			
-	
-	     
-		  }
-
-	       
-	    
-	
-		
-		
-	}
+		 		}
+			}
 
 	@Override
 	public void handleTransportError(

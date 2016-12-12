@@ -27,10 +27,8 @@ public class Update_Controller {
 	@ResponseBody
 	public HashMap<String, Object> updateAuthority(@RequestParam(value="user_id") String user_id,
 			@RequestParam(value="role_no") int role_no) throws Exception {
-		System.out.println("updateAuthority 컨트롤러");
+		System.out.println("Update_Controller/updateAuthority함수");
 		HashMap<String, Object> result = new HashMap<String, Object>();
-		System.out.println("user_id : " + user_id);
-		System.out.println("role_no : " + role_no);
 		
 		try{
 			IAuthority authority_DAO = sqlsession.getMapper(IAuthority.class);
@@ -38,8 +36,6 @@ public class Update_Controller {
 			
 			IRole role_DAO = sqlsession.getMapper(IRole.class);
 			List<Role_DTO> roleList = role_DAO.listRole();
-			System.out.println(roleList);
-			
 			List<Join_DTO> authorityList = authority_DAO.listUsersAuthority();
 			result.put("authorityList", authorityList);
 			result.put("roleList", roleList);

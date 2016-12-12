@@ -89,7 +89,7 @@ $(function() {
 			$("#deptshowDiv").append($('#deptshowDiv').html(data)); 		
 		},
 		error:function(){
-			alert('처음 띄우는데에서 에러남!');
+			alert('error');
 		},
 	      beforeSend:function(){
            $('.wrap-loading').removeClass('display-none');
@@ -120,7 +120,7 @@ function deptshow(){
 			}
 		},
 		error:function(){
-			alert('검색 에러! 관리자에게 문의하세요');
+			alert('검색 에러 관리자에게 문의하세요');
 		},
 	      beforeSend:function(){
 	           $('.wrap-loading').removeClass('display-none');

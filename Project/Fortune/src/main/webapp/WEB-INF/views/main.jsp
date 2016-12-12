@@ -59,21 +59,15 @@
 	        dataType: "json",
 	        url:"totalChart.ajax",
 	        success:function(data){
-	        console.log(data);
-
 	            
 	               $.each(data,function(){ 
 	                  
-	            	  console.log(data);
 	            	  chart_x.push(this.project_name);
 	                  chart_y.push(this.chart_progress);
 	                  chart_id.push(this.collabo_no);
 	                  
 	               });
 	          
-	              console.log(chart_x);
-	              console.log(chart_y);
-	         	 
 	               chart=Highcharts.chart('gg',{
 	   	           chart: {
 	   	               type: 'column'
@@ -128,20 +122,6 @@
 	   	        
 	   	       });
 	               
-	               
-	               
-	               
-<%-- 	       
-	                --%>
-	               
-	               
-	               
-	               
-	               
-	               
-	               
-	               
-	               
 	        	    $.ajax({
 	        	        
 	        	        type:"post",
@@ -162,8 +142,6 @@
 	               
 	          	 $('.highcharts-xaxis-labels text').click(function(){
 	          		 
-	          		 console.log($(this).index());
-	          		 console.log(chart.series[0].name[$(this).index()]);
 	    	          $.ajax({
 	    	 	           
 	    	 	           type:"post",
@@ -175,8 +153,6 @@
 	    	 	           },
 	    	 	           success:function(data){
 	    	 	           
-	    	 	              
-	    	 	              console.log("차트 종류 보내기");
 	    	 	              
 	    	 	              $('#kk').empty();
 	    	 	              $('#kk').html(data);
@@ -198,9 +174,8 @@
 	        url:"pieChart.ajax",
 	        success:function(data){
 	        	
-	   var pie=new Array();
+	 			    var pie=new Array();
 
-	            console.log(data);
 	               $.each(data,function(){ 
 	                  
 	            	   

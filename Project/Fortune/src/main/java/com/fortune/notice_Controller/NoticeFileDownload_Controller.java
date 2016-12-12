@@ -35,8 +35,8 @@ public class NoticeFileDownload_Controller {
 	@RequestMapping(value="noticeFileDownload.htm")
 	public void fileDownloadNotice(int notice_no, Model model, HttpServletResponse response) throws Exception {
 	    
-		System.out.println("NoticeController의 fileDownloadNotice를 탑니다~");
-		
+		System.out.println("NoticeFileDownload_Controller/fileDownloadNotice함수");
+
 		INotice noticeDao = sqlSession.getMapper(INotice.class);
 		Notice_DTO fileDownloadNotice = noticeDao.fileDownloadNotice(notice_no);
 		model.addAttribute("fileDownloadNotice", fileDownloadNotice);
