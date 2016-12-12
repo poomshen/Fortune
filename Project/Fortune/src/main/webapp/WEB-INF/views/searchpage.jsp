@@ -332,8 +332,7 @@
 			       complete:function(){
 			           $('.wrap-loading').addClass('display-none');
 			           swal({
-			        	   title: "메일로 임시 비밀번호를 보냈습니다",
-
+			        	   title: "　메일로 임시 비밀번호를 　　발송했습니다",
 			        	   type: "success",
 			        	   showCancelButton: false,
 			        	   confirmButtonColor: "#194f89",
