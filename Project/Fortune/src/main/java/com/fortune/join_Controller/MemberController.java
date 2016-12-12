@@ -53,6 +53,8 @@ public class MemberController {
 	@RequestMapping("/JoinSubmit.htm")
 	public String addMember(Join_DTO dto){
 		
+		System.out.println("MemberController/addMember함수");
+		
 		PassWord_Service passWord_Service = new PassWord_Service();
 		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
 		IJoin dao = sqlsession.getMapper(IJoin.class);
@@ -68,10 +70,11 @@ public class MemberController {
 	최초작업일 : 2016/11/17
 	최종수정일 : 2016/12/10
 	작업내용 : 로그인 후 첫 화면으로 이동
-	수정 : 이예지 2016-11-24 로그인했을시 알림 db 체크 
+	수정추가 : 이예지 2016-11-24 로그인했을시 알림 db 체크 
 	수정추가 : 이성준 2016-11-26 로그인 했을시 자신 참조 프로젝트*/
 	@RequestMapping(value="/FortuneMain.htm", method=RequestMethod.GET)
 	public String loginSubmit(HttpSession session ,Authentication authentication,Model model){
+		System.out.println("MemberController/loginSubmit함수");
 		
 		UserDetails details = (UserDetails)authentication.getPrincipal();
 		String user_id = details.getUsername();
@@ -135,6 +138,7 @@ public class MemberController {
 	
 	@RequestMapping("/logOut.htm")
 	public String logOut(HttpSession session){
+		System.out.println("MemberController/logOut함수");
 		
 		session.invalidate();
 		//System.out.println("로그아웃 성공");
@@ -144,6 +148,7 @@ public class MemberController {
 	
 	@RequestMapping("/deleteMemember.htm")
 	public String deleteMemberView(HttpServletRequest request){
+		System.out.println("MemberController/deleteMemberView함수");
 		
 		IJoin dao = sqlsession.getMapper(IJoin.class);
 		String user_id = request.getParameter("user_id");
@@ -155,7 +160,7 @@ public class MemberController {
 	@RequestMapping("/updateMember.htm")
 	public String updateMemberView(HttpSession session, Model model){
 		
-		System.out.println("id값 받아서 edit view단 보여줄거임");
+		System.out.println("MemberController/updateMemberView함수");
 		Join_DTO dto = (Join_DTO) session.getAttribute("info");
 		
 		// 부서 리스트 보여주는 부분
@@ -184,7 +189,7 @@ public class MemberController {
 	@RequestMapping(value="/updateConfirm.htm", method=RequestMethod.POST)
 	public String updateMemberSubmit(Join_DTO dto, Model model, HttpSession session){
 		
-		System.out.println("update Controller 왔음~!~!~!");
+		System.out.println("MemberController/updateMemberSubmit함수");
 		PassWord_Service passWord_Service = new PassWord_Service();
 		dto.setUser_password(passWord_Service.encode(dto.getUser_password()));
 		IJoin dao = sqlsession.getMapper(IJoin.class);
@@ -224,7 +229,7 @@ public class MemberController {
 	//id search page이동 컨트롤러
 	@RequestMapping("/searchpage.htm")
 	public String idSearchpage(){
-		System.out.println("searchpage 이동!");
+		System.out.println("MemberController/idSearchpage함수");
 		
 		return "searchpage";
 	}

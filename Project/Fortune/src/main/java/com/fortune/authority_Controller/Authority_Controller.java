@@ -21,7 +21,7 @@ public class Authority_Controller {
 	
 	@RequestMapping(value="/authority.htm")
 	public ModelAndView mainAuthority(){
-		System.out.println("mainAuthority 컨트롤러");
+		System.out.println("Authority_Controller/mainAuthority함수");
 		
 		IAuthority authority_DAO = sqlsession.getMapper(IAuthority.class);
 		List<Join_DTO> authorityList = authority_DAO.listUsersAuthority();

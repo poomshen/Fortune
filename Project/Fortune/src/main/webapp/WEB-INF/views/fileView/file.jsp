@@ -18,12 +18,9 @@
 				cache : false,
 				dataType : "json",
 				success : function(data, statusText) {
-					console.log("success");
-					console.log(data);
 					output(data);
 				},
 				error : function(e) {
-					console.log("error");
 					console.log(e);
 				}
 			});
@@ -41,12 +38,9 @@
 				data : {"checkArray": checkboxValues},
 				dataType : "json",
 				success : function(data, statusText) {
-					console.log("success");
-					console.log(data);
 					output(data);
 				},
 				error : function(e) {
-					console.log("error");
 					console.log(e);
 				}
 			});

@@ -28,7 +28,8 @@ public class AdminUsers_Controller {
 	//관리자 사원 정보
 	@RequestMapping(value="/adminusers.htm")
 	public String adminUsers(Model model){
-		System.out.println("userUpdate 컨트롤러");
+		
+		System.out.println("AdminUsers_Contorller/adminUsers함수 ");
 		
 		ArrayList<Dept_DTO> ddto = new ArrayList<Dept_DTO>();
 		IJoin join_dao = sqlsession.getMapper(IJoin.class);

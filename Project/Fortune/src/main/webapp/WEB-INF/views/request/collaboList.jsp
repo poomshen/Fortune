@@ -69,7 +69,6 @@ h6 {
          },
          links : function() {
             $('a[href="#"]').click(function(e) {
-               console.log("link함수 실행?");
                e.preventDefault();
             });
          },
@@ -86,7 +85,6 @@ h6 {
 
          },
          accordion : function() {
-            console.log("accordian");
             var subMenus = $('.accordion .sub-nav').hide();
             $('.accordion > a').each(function() {
                if ($(this).hasClass('active')) {
@@ -143,8 +141,6 @@ h6 {
   	          		  data:{"newAlarm": "상세 삭제"},
   	          		  success:function(data){
   	          			  
-  	          			  console.log("헤더 업데이트 성공");
-  	          			  console.log(data);
   	          			  $('#alarm').empty();  
   	          			  $('#alarm').html(data);  
   	                  
@@ -177,7 +173,6 @@ h6 {
       
       //비동기 상세 보기를 위한 함수   
       function detailReqCollabo(a){
-      console.log(a);
       
       
           $.ajax({
@@ -230,7 +225,6 @@ h6 {
       
       //페이징 처리를 비동기 처리로 처리 하였습니다. 
       function pazingBtn(pg){
-         console.log(pg);
 
       $.ajax({
 
@@ -239,7 +233,6 @@ h6 {
                cache: false,            
                data:{pg:pg},
                success:function(data){ //callback  
-               console.log("dasfsd")
                $(".requestpage").html(data); 
 
             },
@@ -269,7 +262,6 @@ h6 {
             $('.requestpage').html(data);
             $('#'+state).addClass('active');
             
-            //console.log(data);
          });
          }
           }

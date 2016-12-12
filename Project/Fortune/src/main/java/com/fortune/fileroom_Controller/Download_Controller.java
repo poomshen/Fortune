@@ -29,7 +29,7 @@ public class Download_Controller {
 	//파일 다운로드 컨트롤러 함수
 	@RequestMapping(value="/downloadfile.htm")
 	public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("downloadFile 컨트롤러");
+		System.out.println("Download_Controller/downloadFile함수");
 		String filename = request.getParameter("filename");
 		int collabo_no = Integer.parseInt(request.getParameter("collabo_no"));
 		String path = request.getServletContext().getRealPath("upload");

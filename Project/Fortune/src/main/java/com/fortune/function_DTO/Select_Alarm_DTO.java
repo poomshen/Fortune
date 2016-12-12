@@ -1,3 +1,5 @@
+/*작성자 : 이예지
+작업내용: 알림 선택시 담는 DTO*/
 package com.fortune.function_DTO;
 
 import java.util.ArrayList;

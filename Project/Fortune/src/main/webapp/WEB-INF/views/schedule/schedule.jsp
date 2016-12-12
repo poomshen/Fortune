@@ -82,7 +82,6 @@ $(document).ready(function() {
 			"month" : $('#month').val()
         },
 		success : function(data) {
-			console.log(data)
 			$.each(data.schedulelist, function(index, obj) {
 				if(obj.progress_or_place<10){
 					if(obj.progress_or_place==1){

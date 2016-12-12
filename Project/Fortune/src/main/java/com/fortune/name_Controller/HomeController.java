@@ -41,7 +41,7 @@ public class HomeController {
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String index(Model model) {
 		
-		System.out.println("index 컨트롤러");
+		System.out.println("HomeController/index함수");
 		//권한이 ROLE_NOUSER이면 로그인 막기(추가작업 : 김중완)
 		if(homeindex == 0){
 			model.addAttribute("msg", 0);
@@ -56,7 +56,7 @@ public class HomeController {
 	@RequestMapping(value = "/sign.htm")
 	public String sign(Model m) {
 	
-		System.out.println("joinform 보여줌");
+		System.out.println("HomeController/sign함수");
 		//부서 리스트 보여주는 부분
 		ArrayList<Dept_DTO> dto = new ArrayList<Dept_DTO>();
 		IJoin dao = sqlsession.getMapper(IJoin.class);
@@ -89,7 +89,8 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/main.htm", method = RequestMethod.GET)
 	public String main(Model model) {
-
+		System.out.println("HomeController/main함수");
+		
 	
 		
 		return "home.main";
@@ -99,38 +100,30 @@ public class HomeController {
 	public String test() {
 
 		
-		System.out.println("alarm jsp 보여주기 컨트롤러");
+		System.out.println("HomeController/test함수");
 		return "home.alarm";
 	}
 	
 	@RequestMapping(value = "/send.htm", method = RequestMethod.POST)
 	public String send(HttpServletRequest request,Model model) {
 
+		System.out.println("HomeController/send함수");
 		
 	
 		String[] selector = request.getParameterValues("selector");
 	
 		
 		model.addAttribute("selector",selector);
-		
-		/*값 넘어오는지 확인*/
 	
-	/*	for(int i=0;i<selectors.length;i++)
-		{System.out.println("selector : "+selectors[i]);}*/
-		
-		/*세션에 값을 저장*/
-	   
-	/*	 session.setAttribute("selector", selectors);*/
-		
-		System.out.println("selector 컨트롤러 끝");
 		return "home.alarm";
 	}
 	
 	//아이디 패스워드 찾기 화면이동
 	@RequestMapping("/SearchIdPage.htm")
 	public String getIdpage(){		
-		System.out.println("아이디/패스워드 찾기 view 보냄");
-		
+
+		System.out.println("HomeController/getIdpage함수");
+	
 		return "searchpage";
 	}
 
