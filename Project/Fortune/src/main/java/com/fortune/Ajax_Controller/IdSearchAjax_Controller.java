@@ -79,11 +79,16 @@ public class IdSearchAjax_Controller {
 			//update 성공
 			result=ranNum;
 			MimeMessage mimemessage = mailSender.createMimeMessage();
-			mimemessage.setSubject("변경된 비밀번호는.", "utf-8");
+			mimemessage.setSubject("[for春] 비밀번호 변경내역을 알려드립니다.", "utf-8");
 			
 			String htmlContent = "<div align='center'>";
-			htmlContent += "<img alt='fortune' src='http://cfile9.uf.tistory.com/image/21432B4D5203839212F543'>";
-			htmlContent+= "<br><strong>[임시 비밀번호 를 발송하였습니다.]</strong><br>" + ranNum;
+			/*htmlContent += "<img alt='fortune' src='http://cfile9.uf.tistory.com/image/21432B4D5203839212F543'>";*/
+			/*htmlContent+= "<br><strong>[임시 비밀번호 를 발송하였습니다.]</strong><br>" + ranNum;	*/		
+			htmlContent += "<img alt='fortune' src='http://i67.tinypic.com/2upx074.png'>";
+			htmlContent+= "<br><br>";
+			htmlContent+= "변경된 비밀번호는 " + "<strong>[" +ranNum+"]</strong>" + "입니다.";
+			htmlContent+= "<br><br>";			
+			htmlContent+= "로그인 후, 비밀번호를 변경하고 사용해주세요 *^^*<br><br>";
 			htmlContent +="</div>";
 			 
 			mimemessage.setText(htmlContent, "utf-8", "html");
