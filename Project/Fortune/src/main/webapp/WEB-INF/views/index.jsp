@@ -278,18 +278,7 @@
 					</div>
 			<!-- 사용기술1 -->		
 					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
-						<img src="assets/img/portfolio/usedskills1.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">Mirum est notare</a>
-								</p>
-							</div>
-						</div>
-					</div>	
-			<!-- 사용기술2 -->		
-					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
-						<img src="assets/img/portfolio/usedskills2.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<img src="assets/img/portfolio/usedskills.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>

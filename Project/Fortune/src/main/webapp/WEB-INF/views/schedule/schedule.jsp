@@ -319,19 +319,19 @@ $(document).ready(function() {
                                 <div class="row">
                                 	<div class="col-sm-3">
                                 		<input type="radio" id="meeting_place_10" name="place_radio" value="10">
-                                		<label for="meeting_place_10" style="cursor: pointer;"><div id="div_place_10" class="dplace" title="회의실1" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실1</div></label>
+                                		<label for="meeting_place_10" style="cursor: pointer;"><div id="div_place_10" class="dplace" title="위치:101호 최대 수용인원:12명" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실1</div></label>
                                 	</div>
                                 	<div class="col-sm-3">
                                 		<input type="radio" id="meeting_place_20" name="place_radio" value="20">
-                                		<label for="meeting_place_20" style="cursor: pointer;"><div id="div_place_20" class="dplace" title="회의실2의 설명" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실2</div></label>
+                                		<label for="meeting_place_20" style="cursor: pointer;"><div id="div_place_20" class="dplace" title="위치:105호 최대 수용인원:20명" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실2</div></label>
                                 	</div>
                                 	<div class="col-sm-3">
                                 		<input type="radio" id="meeting_place_30" name="place_radio" value="30">
-                                		<label for="meeting_place_30" style="cursor: pointer;"><div id="div_place_30" class="dplace" title="회의실3의 설명" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실3</div></label>
+                                		<label for="meeting_place_30" style="cursor: pointer;"><div id="div_place_30" class="dplace" title="위치:202호 최대 수용인원:8명" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실3</div></label>
                                 	</div>
                                 	<div class="col-sm-3">
                                 		<input type="radio" id="meeting_place_40" name="place_radio" value="40">
-                                		<label for="meeting_place_40" style="cursor: pointer;"><div id="div_place_40" class="dplace" title="회의실4의 설명" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실4</div></label>
+                                		<label for="meeting_place_40" style="cursor: pointer;"><div id="div_place_40" class="dplace" title="위치:204호 최대 수용인원:15명" data-toggle="tooltip" data-placement="bottom" style="text-decoration:underline;">회의실4</div></label>
                                 	</div>
                                 </div>
                                 <div class="row">
