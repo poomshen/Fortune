@@ -349,7 +349,7 @@
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">프로젝트 테이블</a>
+									<a href="#">알림 테이블</a>
 								</p>
 							</div>
 						</div>
