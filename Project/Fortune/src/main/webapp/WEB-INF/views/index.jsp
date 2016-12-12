@@ -55,7 +55,7 @@
 
 	<!-- Top content -->
 	<div class="top-content"
-		style="position: relative; z-index: 0; background: none;">
+		style="position: relative;z-index: 0;background: none;padding-top: 150px;">
 		<div class="top-content-text wow fadeInUp animated"
 			style="visibility: visible; animation-name: fadeInUp;">
 

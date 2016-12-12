@@ -199,13 +199,9 @@ $(document).ready(function() {
                     </ul>
                  </c:if>
                </li>
-            
+           
                <!-- /.dropdown-alerts -->    
-                
-                
-                
-                
-                <!-- /.dropdown -->
+                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" style="color:#194f89;;" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw hvr-pop"></i>  <i class="fa fa-caret-down"></i>

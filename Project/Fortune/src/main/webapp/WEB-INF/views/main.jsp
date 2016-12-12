@@ -89,6 +89,8 @@
 	   	               },
 	   	        
 	   	           yAxis: {
+	   	        	   min: 0, 
+	   	        	   max: 100,
 	   	               title: {
 	   	                   text: '프로젝트 총 진척률%'
 	   	               }
@@ -202,6 +204,10 @@
 		     	           tooltip: {
 		     	        	   dataFormat:'{series.name}: <b>{point.percentage:f}원</b>'
 		     	           },
+		     	          credits: {
+		     	             enabled: false
+		     	         },
+		     	           
 		     	           plotOptions: {
 		     	               pie: {
 		     	                   allowPointSelect: true,

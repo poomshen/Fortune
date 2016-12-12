@@ -42,7 +42,7 @@
                             	<security:authorize access="hasAnyRole('ROLE_MGR','ROLE_USER')">
                                 <li>
 
-                                 <a class="hvr-grow-shadow" href="responseList_ver1.htm"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>MY 프로젝트</span></a>
+                                 <a class="hvr-grow-shadow" href="responseList_ver1.htm"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> MY 프로젝트</span></a>
 
                                 </li>
                                 </security:authorize>
@@ -79,7 +79,7 @@
                         </li>
                         <li>
                         <security:authorize access="hasAnyRole('ROLE_MGR','ROLE_USER','ROLE_SUPERMGR')">
-                        <a class="hvr-grow-shadow" href="#" style="text-decoration:line-through;"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>완료된프로젝트<span class="fa arrow"></span></a>
+                        <a class="hvr-grow-shadow" href="#" style="text-decoration:line-through;"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> 완료된프로젝트<span class="fa arrow"></span></a>
                           </security:authorize>
                           <ul class="nav nav-second-level">
                                 <c:forEach var="n" items="${sessionScope.finishCollabo}">

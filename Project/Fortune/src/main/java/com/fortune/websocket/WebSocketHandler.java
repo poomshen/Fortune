@@ -25,16 +25,13 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			WebSocketSession session) throws Exception {
 		
 	      log("접속 성공" + session.getId() + "웹소켓 세션 아이디");
+	      //Interceptor에서 userId에 저장한 로그인한 아이디를 가져오기
 	      String userid = (String) session.getAttributes().get("userId");
 	      //접속한 아이디를->key session->value에 저장 
 	      users.put(userid, session);
 	      //0,1,2..(session의 ID)->key userid->value에 저장
 	      ids.put(session.getId(), userid);
-		
-
-	
-		
-	}
+		}
 
 	@Override
 	public void afterConnectionClosed(
