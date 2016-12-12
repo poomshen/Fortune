@@ -347,17 +347,17 @@ h6 {
                    
                           <div class="col-sm-2" style="margin-left: 4px;">
                           
-                          <input type="button" style="color:#194f89;background-color: #fff;width: 41px;height: 24px;padding-left: 5px;padding-top: 3px;padding-right: 5px;"class="btn btn-primary hvr-ripple-out" onclick="goSchedule('${collabo_no}')" value="일정">
+                          <input type="button" style="color:#194f89;background-color: #f8f8f8;width: 41px;height: 24px;padding-left: 5px;padding-top: 3px;padding-right: 5px;"class="btn btn-primary hvr-ripple-out" onclick="goSchedule('${collabo_no}')" value="일정">
                           </div>
                        
                           <div class="col-sm-3" style="margin-left: 4px;">
                           
-                          <input type="button" style="color:#194f89;background-color: #fff;width: 60px;height: 24px;padding-left: 5px;padding-top: 3px;padding-right: 5px;"class="btn btn-primary hvr-ripple-out" onclick="goHistory(${n.collabo_req_no})" value="history">
+                          <input type="button" style="color:#194f89;background-color: #f8f8f8;width: 60px;height: 24px;padding-left: 5px;padding-top: 3px;padding-right: 5px;"class="btn btn-primary hvr-ripple-out" onclick="goHistory(${n.collabo_req_no})" value="history">
                           </div>
                          
                          <div class="col-sm-1" style="margin-left:4px">
                           <security:authorize access="hasAnyRole('ROLE_SUPERMGR')">
-                          <input type="button" style="color:#194f89;background-color: #fff;width: 41px;height: 24px;padding-left: 5px;padding-top: 3px;padding-right: 5px;"class="btn btn-primary hvr-ripple-out"  onclick="ctionQuestion(${collabo_no})" value="완료">
+                          <input type="button" style="color:#194f89;background-color: #f8f8f8;width: 41px;height: 24px;padding-left: 5px;padding-top: 3px;padding-right: 5px;"class="btn btn-primary hvr-ripple-out"  onclick="ctionQuestion(${collabo_no})" value="완료">
                         
                          </security:authorize>
                    		 </div>
