@@ -174,143 +174,232 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-12 portfolio-masonry"
-					style="position: relative; height: 700px;">
-					<div class="portfolio-box design" style="position: absolute; top: 0px;">
-						<img src="assets/img/portfolio/Ybridge1.png" alt="" data-at2x="assets/img/portfolio/1.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">조잡한 UI</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="portfolio-box development" style="position: absolute; left: 255px; top: 0px;">
-						<img src="assets/img/portfolio/fortune1.png" alt="" data-at2x="assets/img/portfolio/2.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">chart화된 UI</a>
-								</p>
-							</div>
-						</div>
-					</div>
+				<div class="col-sm-12 portfolio-masonry" style="position: relative; height: 700px;">
+			
+			<!-- 일정 처음 들어간 부분 -->
 					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 0px;">
-						<img src="assets/img/portfolio/Ybridge2.png" alt="" data-at2x="assets/img/portfolio/3.jpg">
+						<img src="assets/img/portfolio/fortune1-1.png" alt="" data-at2x="assets/img/portfolio/3.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">하루에 하나만의 일정</a>
+									<a href="#">공유 캘린더</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box development" style="position: absolute; left: 15px; top: 175px;">
-						<img src="assets/img/portfolio/fortune2.png" alt="" data-at2x="assets/img/portfolio/4.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">여러일에 걸친 일정</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
-						<img src="assets/img/portfolio/5.jpg" alt="" data-at2x="assets/img/portfolio/5.jpg">
-						<div class="portfolio-box-text-container">
-							<div class="portfolio-box-text">
-								<p>
-									<a href="#">Processus dynamicus logo</a>
-								</p>
-							</div>
-						</div>
-					</div>
+			<!-- 일정 상세 페이지 -->
 					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
-						<img src="assets/img/portfolio/6.jpg" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<img src="assets/img/portfolio/fortune3-4.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Mirum est notare</a>
+									<a href="#">공유 캘린더에서의 의사소통</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					
-					<!-- 
-					<div class="portfolio-box design"
-						style="position: absolute; left: 15px; top: 350px;">
-						<img src="assets/img/portfolio/7.jpg" alt=""
-							data-at2x="assets/img/portfolio/7.jpg">
+			<!-- 차트 이미지 -->
+					<div class="portfolio-box design" style="position: absolute; top: 0px;">
+						<img src="assets/img/portfolio/fortune2-1.png" alt="" data-at2x="assets/img/portfolio/1.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">March notare site</a>
+									<a href="#">차트화</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box development"
-						style="position: absolute; left: 255px; top: 350px;">
-						<img src="assets/img/portfolio/8.jpg" alt=""
-							data-at2x="assets/img/portfolio/8.jpg">
+			<!-- 히스토리 이미지 -->		
+					<div class="portfolio-box development" style="position: absolute; left: 15px; top: 175px;">
+						<img src="assets/img/portfolio/fortune2-2.png" alt="" data-at2x="assets/img/portfolio/4.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Sit amet logo</a>
+									<a href="#">업무 히스토리</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box branding"
-						style="position: absolute; left: 495px; top: 350px;">
-						<img src="assets/img/portfolio/9.jpg" alt=""
-							data-at2x="assets/img/portfolio/9.jpg">
+			<!-- 와이브릿지 처음 화면 -->		
+					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
+						<img src="assets/img/portfolio/Ybridge3-1.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Lorem website</a>
+									<a href="#">벤치마킹한 와이브릿지 메인</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box design"
-						style="position: absolute; left: 15px; top: 525px;">
-						<img src="assets/img/portfolio/10.jpg" alt=""
-							data-at2x="assets/img/portfolio/10.jpg">
+			<!-- 공지사항  -->		
+					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
+						<img src="assets/img/portfolio/fortune3-2.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Mirum est notare</a>
+									<a href="#">화면을 나눔으로써 시각적 불편함 개선</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box development"
-						style="position: absolute; left: 255px; top: 525px;">
-						<img src="assets/img/portfolio/11.jpg" alt=""
-							data-at2x="assets/img/portfolio/11.jpg">
+			<!-- 와이브릿지 일정 -->		
+					<div class="portfolio-box design" style="position: absolute; left: 255px; top: 175px;">
+						<img src="assets/img/portfolio/Ybridge3-3.png" alt="" data-at2x="assets/img/portfolio/5.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Etiam processus social</a>
+									<a href="#">와이브릿지 일정</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="portfolio-box branding"
-						style="position: absolute; left: 495px; top: 525px;">
-						<img src="assets/img/portfolio/12.jpg" alt=""
-							data-at2x="assets/img/portfolio/12.jpg">
+			
+			<!-- 에센스  -->		
+					<div class="portfolio-box design" style="position: absolute; left: 15px; top: 350px;">
+						<img src="assets/img/portfolio/fortune4.png" alt="" data-at2x="assets/img/portfolio/7.jpg">
 						<div class="portfolio-box-text-container">
 							<div class="portfolio-box-text">
 								<p>
-									<a href="#">Sit website logo</a>
+									<a href="#">수정을 고려한 에센스 구성</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					 -->
+			<!-- 사용 시스템 환경 -->		
+					<div class="portfolio-box development" style="position: absolute; left: 255px; top: 350px;">
+						<img src="assets/img/portfolio/fortune5.png" alt="" data-at2x="assets/img/portfolio/8.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">시스템 구성</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- 사용기술1 -->		
+					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
+						<img src="assets/img/portfolio/usedskills.png" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">사용 기술</a>
+								</p>
+							</div>
+						</div>
+					</div>	
+								
+			<!-- 유즈케이스(admin) -->		
+					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
+						<img src="assets/img/portfolio/admin_use.PNG" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">관리자 UseCase</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- 유즈케이스(super mgr) -->		
+					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
+						<img src="assets/img/portfolio/smgr_use.PNG" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">부장 UseCase</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- 유즈케이스(mgr) -->		
+					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
+						<img src="assets/img/portfolio/mgr_use.PNG" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">팀장 UseCase</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- 유즈케이스(user) -->		
+					<div class="portfolio-box development" style="position: absolute; left: 495px; top: 175px;">
+						<img src="assets/img/portfolio/user_use.PNG" alt="" data-at2x="assets/img/portfolio/6.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">일반 사용자 UseCase</a>
+								</p>
+							</div>
+						</div>
+					</div>																		
+			<!-- db1 -->		
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 350px;">
+						<img src="assets/img/portfolio/fortune6-1.png" alt="" data-at2x="assets/img/portfolio/9.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">사용자 테이블</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- db2 -->		
+					<div class="portfolio-box design" style="position: absolute; left: 15px; top: 525px;">
+						<img src="assets/img/portfolio/fortune6-2.png" alt="" data-at2x="assets/img/portfolio/10.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">알림 테이블</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- db3 -->		
+					<div class="portfolio-box development" style="position: absolute; left: 255px; top: 525px;">
+						<img src="assets/img/portfolio/fortune6-3.png" alt="" data-at2x="assets/img/portfolio/11.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">업무/회의 테이블</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			
+			<!-- 플로우차트1 -->		
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 525px;">
+						<img src="assets/img/portfolio/flowchart1.png" alt="" data-at2x="assets/img/portfolio/12.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">웹소켓 Flow chart</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			<!-- 플로우차트2 -->		
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 525px;">
+						<img src="assets/img/portfolio/flowchart2.png" alt="" data-at2x="assets/img/portfolio/12.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">일정/차트 Flow chart</a>
+								</p>
+							</div>
+						</div>
+					</div>		
+			<!-- 일정 -->		
+					<div class="portfolio-box branding" style="position: absolute; left: 495px; top: 525px;">
+						<img src="assets/img/portfolio/fortune8.png" alt="" data-at2x="assets/img/portfolio/12.jpg">
+						<div class="portfolio-box-text-container">
+							<div class="portfolio-box-text">
+								<p>
+									<a href="#">일정 관리</a>
+								</p>
+							</div>
+						</div>
+					</div>
+	
 				</div>
 			</div>
 		</div>
@@ -336,45 +425,39 @@
 					<h3><font color="black">이성준</font></h3>
 					<p>Project Manager</p>				
 				</div>
-	
-				<!-- <div class="col-sm-4 team-box wow fadeInUp animated"
-					style="visibility: visible; animation-name: fadeInUp;">
-					<h3><font color="black">이성준</font><h3>
-					<p>Project Manager</p>	
-				</div> -->
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">김지율</font></h3>
-					<p>Admin Manager</p>				
+					<p>Admin / Notice</p>				
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">이명철</font></h3>
-					<p>DataBase Manager</p>		
+					<p>DB Modeling / Calendar</p>		
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">김중완</font></h3>
-					<p>Server Client</p>		
+					<p>DB Modeling / File Room</p>		
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">김지현</font></h3>
-					<p>UI Client</p>		
+					<p>User Info / UI</p>		
 				</div>
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">이예지</font></h3>
-					<p>UI Manager</p>		
+					<p>Web Socket / Chart</p>		
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-4 team-box wow fadeInUp animated"
 					style="visibility: visible; animation-name: fadeInUp;">
 					<h3><font color="black">이승훈</font></h3>
-					<p>Server Manager</p>		
+					<p>Project Request/Response</p>		
 				</div>
 			</div>	
 			
